@@ -14,20 +14,22 @@
       <div class="headline-source" v-else>
         <img :src="bannerProperties.source.logo" :alt="bannerProperties.source.name" />
       </div>
-      <div class="headline-text" contenteditable>
+      <div class="headline-text" contenteditable @input="(e) => updateProperties('headline', e.target.innerText)">
         {{ bannerProperties.headline }}
       </div>
     </div>
-    <div class="logo">
+    <div :class="{ 'logo': true, 'logo-has-text': bannerProperties.hasLocalLabel }">
       <img :src="logo" alt="Compromís" />
+      <span class="logo-text" v-if="bannerProperties.localLabel">{{ bannerProperties.localLabel }}</span>
     </div>
-    <div class="hashtag" v-if="bannerProperties.hashtag">
+    <div class="hashtag" v-if="bannerProperties.hashtag" contenteditable @input="(e) => updateProperties('hashtag', e.target.innerText)">
       {{ bannerProperties.hashtag }}
     </div>
   </div>
 </template>
 
 <script>
+import { EventBus } from '../../../event-bus.js'
 import Logo from '../../../assets/logo-compromis.svg'
 
 export default {
@@ -52,6 +54,12 @@ export default {
         'headline': true,
         [name]: true
       }
+    }
+  },
+
+  methods: {
+    updateProperties (name, value) {
+      EventBus.$emit('updateProperties', name, value)
     }
   }
 }
@@ -93,6 +101,9 @@ export default {
     z-index: 100;
     padding: 0 40px;
     font-family: 'Tiempos Headline', serif;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
 
     &-source {
       img {
