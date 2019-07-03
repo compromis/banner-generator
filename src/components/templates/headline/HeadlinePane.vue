@@ -90,7 +90,8 @@ export default {
         disposition: 0,
         picture: null,
         picturePreview: '',
-        picturePos: '',
+        pictureWidth: 0,
+        pictureHeight: 0,
         headline: '',
         hashtag: '',
         hasLocalLabel: false,
@@ -134,6 +135,12 @@ export default {
     updateImage (image) {
       this.properties.picture = image
       this.properties.picturePreview = URL.createObjectURL(image)
+      const img = new Image
+      img.onload = () => {
+        this.properties.pictureWidth = img.width
+        this.properties.pictureHeight = img.height
+      }
+      img.src = this.properties.picturePreview
     },
 
     updateHashtag (hashtag) {

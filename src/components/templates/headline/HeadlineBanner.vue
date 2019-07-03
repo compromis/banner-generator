@@ -10,9 +10,9 @@
     ]"
     v-if="bannerProperties">
     <div class="blob blob-image">
-      <div class="blob-image-wrapper" v-if="bannerProperties">
-        <img :src="bannerProperties.picturePreview" alt="Imatge" v-if="bannerProperties.picturePreview" />
-      </div>
+      <vue-draggable-resizable class="blob-image-wrapper" :w="bannerProperties.pictureWidth" :h="bannerProperties.pictureHeight" :parent="false" v-if="bannerProperties">
+        <img :src="bannerProperties.picturePreview" alt="Imatge" v-if="bannerProperties.picturePreview" ref="image" />
+      </vue-draggable-resizable>
     </div>
     <div class="blob blob-1"></div>
     <div class="blob blob-2"></div>
@@ -38,10 +38,15 @@
 </template>
 
 <script>
+import VueDraggableResizable from 'vue-draggable-resizable'
 import Logo from '../../../assets/logo-compromis.svg'
 
 export default {
   name: 'HeadlineBanner',
+
+  components: {
+    VueDraggableResizable
+  },
 
   props: {
     bannerProperties: Object,
@@ -151,12 +156,22 @@ export default {
 
       &-wrapper {
         margin: -10px;
-        transform: rotate(-$rotation);
+        transform: rotate(-$rotation) scale(1.1);
+        cursor: move;
+
+        &:hover {
+          background: $blue;
+
+          img {
+            opacity: .75;
+          }
+        }
 
         img {
           width: 100%;
           height: 100%;
           object-fit: cover;
+          transition: .25s ease-in-out;
         }
       }
     }
