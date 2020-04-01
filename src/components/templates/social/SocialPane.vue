@@ -4,6 +4,7 @@
     <picture-upload
       :picture="properties.picture"
       :display-errors="displayErrors"
+      :errors="errors"
       @upload="updateImage"
       @delete="properties.picture = null; properties.picturePreview = null" />
 
@@ -45,15 +46,9 @@ export default {
     CaretaSelector
   },
 
-  // Emit state to parent component
-  watch: {
-    properties: {
-      handler: function (properties) {
-        this.isDownloadable = (
-          properties.picture !== null
-        )
-      },
-      deep: true
+  methods: {
+    validate () {
+      this.pictureRequired()
     }
   }
 }
