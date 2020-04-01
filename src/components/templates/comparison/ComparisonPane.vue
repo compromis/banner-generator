@@ -148,10 +148,10 @@ export default {
         textAfter: '',
         textBefore: '',
         pictureBefore: null,
-        pictureBeforePreview: '',
+        pictureBeforePreview: null,
         pictureBeforePos: 50,
         pictureAfter: null,
-        pictureAfterPreview: '',
+        pictureAfterPreview: null,
         pictureAfterPos: 50
       },
       presets: presets
@@ -160,24 +160,18 @@ export default {
 
   methods: {
     validate () {
+      const sourceField = (this.properties.source === 'other')
+        ? { customSource: "Has d'escriure el nom d'un partit" }
+        : { source: 'Has de seleccionar un partit' }
+
       this.fieldRequired({
         textBefore: "Has d'escirure una cita",
         textAfter: "Has d'escriure un autor",
         pictureBefore: 'Has de seleccionar una foto',
-        pictureAfter: 'Has de seleccionar una foto'
+        pictureAfter: 'Has de seleccionar una foto',
+        ...sourceField
       })
       this.allCapsDisallowed('textBefore', 'textAfter')
-
-      // Source
-      if (this.source === 'other') {
-        this.fieldRequired({
-          customSource: "Has d'escriure el nom d'un partit"
-        })
-      } else {
-        this.fieldRequired({
-          source: 'Has de seleccionar un partit'
-        })
-      }
     },
 
     updateImageComparison (which, image) {
