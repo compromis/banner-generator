@@ -50,6 +50,8 @@ export default {
     box-shadow: $raised-shadow;
     border-radius: $card-radius;
     padding: 24px 24px;
+    max-height: 515px;
+    overflow: hidden;
   }
 
   .blob {
