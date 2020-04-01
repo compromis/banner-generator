@@ -27,6 +27,6 @@
 
 <script>
 export default {
-  name: 'event-help'
+  name: 'comparison-help'
 }
 </script>

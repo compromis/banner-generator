@@ -2,8 +2,8 @@
   <b-field
       label="Foto"
       class="image-upload-field"
-      :type="picture ? '' : displayErrors ? 'is-danger' : ''"
-      :message="picture ? '' : displayErrors ? `Has de seleccionar una foto` : ''">
+      :type="fieldName in errors && displayErrors ? 'is-danger' : ''"
+      :message="fieldName in errors && displayErrors ? errors[fieldName].join('. ') : ''">
       <b-upload
         @input="(picture) => $emit('upload', picture)"
         drag-drop
@@ -35,7 +35,12 @@ export default {
 
   props: {
     picture: File,
-    displayErrors: Boolean
+    displayErrors: Boolean,
+    errors: Object,
+    fieldName: {
+      type: String,
+      default: 'picture'
+    }
   },
 
   computed: {

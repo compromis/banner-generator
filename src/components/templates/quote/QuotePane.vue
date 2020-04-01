@@ -27,23 +27,35 @@
     <!-- Quote -->
     <b-field
       label="Frase"
-      :type="properties.quote ? '' : displayErrors ? 'is-danger' : ''"
-      :message="properties.quote ? '' : displayErrors ? `Has d'omplir la frase` : ''">
-      <b-input type="textarea" placeholder="Tenim de 30 a 50 ciclistes passant cada segon pel carril bici." v-model="properties.quote" maxlength="140"></b-input>
+      :type="setFieldType('quote')"
+      :message="setFieldMessage('quote')">
+      <b-input
+        type="textarea"
+        placeholder="Tenim de 30 a 50 ciclistes passant cada segon pel carril bici."
+        v-model="properties.quote"
+        maxlength="140">
+      </b-input>
     </b-field>
 
     <!-- Author -->
     <b-field
       label="Autor i/o mitjà"
-      :type="properties.author ? '' : displayErrors ? 'is-danger' : ''"
-      :message="properties.author ? '' : displayErrors ? `Has d'omplir la frase` : ''">
-      <b-input type="textarea" class="textarea-small" placeholder="Giuseppe Grezzi a l'entrevista de La Sexta" v-model="properties.author" maxlength="70"></b-input>
+      :type="setFieldType('author')"
+      :message="setFieldMessage('author')">
+      <b-input
+        type="textarea"
+        class="textarea-small"
+        placeholder="Giuseppe Grezzi a l'entrevista de La Sexta"
+        v-model="properties.author"
+        maxlength="70">
+      </b-input>
     </b-field>
 
     <!-- Picture -->
     <picture-upload
       :picture="properties.picture"
       :display-errors="displayErrors"
+      :errors="errors"
       @upload="updateImage"
       @delete="properties.picture = null; properties.picturePreview = null" />
 
@@ -93,17 +105,14 @@ export default {
     }
   },
 
-  watch: {
-    properties: {
-      handler: function (properties) {
-        // Check if canvas can be downloaded
-        this.isDownloadable = (
-          properties.quote !== '' &&
-          properties.author !== '' &&
-          properties.picture !== null
-        )
-      },
-      deep: true
+  methods: {
+    validate () {
+      this.fieldRequired({
+        quote: "Has d'escirure una cita",
+        author: "Has d'escriure un autor"
+      })
+      this.pictureRequired()
+      this.allCapsDisallowed('quote', 'author')
     }
   }
 }

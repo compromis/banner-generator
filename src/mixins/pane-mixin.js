@@ -22,6 +22,7 @@ export default {
         hasLocalLabel: false,
         localLabel: ''
       },
+      errors: {},
       aspect: 0,
       isDownloadable: false,
       displayErrors: false,
@@ -39,7 +40,8 @@ export default {
     // Display errors
     EventBus.$on('checkForErrors', (check) => {
       this.displayErrors = check
-
+      this.errors = {}
+      this.validate()
       if (check && !this.isDownloadable) {
         window.scrollTo({
           top: 400,
@@ -58,6 +60,9 @@ export default {
     properties: {
       handler: function (properties) {
         this.$emit('updated', properties)
+        this.errors = {}
+        this.validate()
+        this.isDownloadable = Object.keys(this.errors).length === 0
       },
       deep: true
     },
@@ -97,6 +102,45 @@ export default {
 
     dimPane (dimmed) {
       this.paneDimmed = dimmed
+    },
+
+    fieldRequired (fields) {
+      Object.keys(fields).forEach(field => {
+        if (!this.properties[field]) {
+          if (field in this.errors) {
+            this.errors[field].push(fields[field])
+          } else {
+            this.errors[field] = [fields[field]]
+          }
+        }
+      })
+    },
+
+    pictureRequired () {
+      if (!this.properties.picture) {
+        this.errors.picture = ['Has de seleccionar una foro']
+      }
+    },
+
+    allCapsDisallowed (...fields) {
+      const errorMessage = 'Recomanem no escriure tot el text en majúscules'
+      fields.forEach(field => {
+        if (this.properties[field].toUpperCase() === this.properties[field] && this.properties[field]) {
+          if (field in this.errors) {
+            this.errors[field].push(errorMessage)
+          } else {
+            this.errors[field] = [errorMessage]
+          }
+        }
+      })
+    },
+
+    setFieldType (field) {
+      return field in this.errors && this.displayErrors ? 'is-danger' : ''
+    },
+
+    setFieldMessage (field) {
+      return field in this.errors && this.displayErrors ? this.errors[field].join('. ') : ''
     }
   }
 }

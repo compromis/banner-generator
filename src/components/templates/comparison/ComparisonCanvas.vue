@@ -50,7 +50,7 @@
 import CanvasMixin from '@/mixins/canvas-mixin.js'
 
 export default {
-  name: 'headline-canvas',
+  name: 'comparison-canvas',
 
   mixins: [CanvasMixin],
 
