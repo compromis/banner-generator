@@ -8,6 +8,7 @@
     <picture-upload
       :picture="properties.picture"
       :display-errors="displayErrors"
+      :errors="errors"
       @upload="updateImage"
       @delete="properties.picture = null; properties.picturePreview = null" />
 
@@ -76,15 +77,9 @@ export default {
     }
   },
 
-  watch: {
-    properties: {
-      handler: function (properties) {
-        // Check if canvas can be downloaded
-        this.isDownloadable = (
-          properties.picture !== null
-        )
-      },
-      deep: true
+  methods: {
+    validate () {
+      this.pictureRequired()
     }
   }
 }
