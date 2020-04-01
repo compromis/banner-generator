@@ -206,7 +206,7 @@ export default {
       font-size: 20px;
     }
 
-    ol, ul {
+    ul {
       li {
         padding-left: 28px;
 
