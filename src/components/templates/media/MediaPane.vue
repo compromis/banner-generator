@@ -3,8 +3,8 @@
     <!-- Title -->
     <b-field
       label="Titol"
-      :type="properties.title ? '' : displayErrors ? 'is-danger' : ''"
-      :message="properties.title ? '' : displayErrors ? `Has d'omplir el títol` : ''">
+      :type="setFieldType('title')"
+      :message="setFieldMessage('title')">
       <b-input
         placeholder="Mónica Oltra"
         v-model="properties.title"
@@ -33,8 +33,8 @@
     <!-- Channel -->
     <b-field
       label="Canal"
-      :type="properties.source ? '' : displayErrors ? 'is-danger' : ''"
-      :message="properties.source ? '' : displayErrors ? `Has de seleccionar un canal` : ''">
+      :type="setFieldType('source')"
+      :message="setFieldMessage('source')">
       <b-select placeholder="Selecciona un canal" @input="updateSource" expanded>
         <optgroup v-for="(category, i) in presets" :label="category.name" :key="i">
           <option
@@ -57,8 +57,8 @@
     <transition name="slide">
       <b-field
         label="Programa" v-if="properties.source && properties.source !== 'other' && properties.source.programmes.length > 0"
-        :type="properties.programme ? '' : displayErrors ? 'is-danger' : ''"
-        :message="properties.programme ? '' : displayErrors ? `Has de seleccionar un programa` : ''">
+        :type="setFieldType('programme')"
+        :message="setFieldMessage('programme')">
         <b-select placeholder="Selecciona un programa" expanded @input="updateProgramme">
           <option
             v-for="programme in properties.source.programmes"
@@ -78,7 +78,11 @@
 
     <transition name="slide">
       <div v-if="properties.source === 'other'" class="media-input-group">
-        <b-field label="Nom del canal" class="media-input-name">
+        <b-field
+          label="Nom del canal"
+          class="media-input-name"
+          :type="setFieldType('customSource')"
+          :message="setFieldMessage('customSource')">
           <b-input
             placeholder="TeleElx"
             v-model="properties.customSource"
@@ -93,7 +97,11 @@
 
     <transition name="slide">
       <div v-if="properties.programme === 'other'" class="media-input-group">
-        <b-field label="Nom del programa" class="media-input-name">
+        <b-field
+          label="Nom del programa"
+          class="media-input-name"
+          :type="setFieldType('customProgramme')"
+          :message="setFieldMessage('customProgramme')">
           <b-input
             placeholder="El Análisis"
             v-model="properties.customProgramme"
@@ -126,6 +134,7 @@
     <picture-upload
       :picture="properties.picture"
       :display-errors="displayErrors"
+      :errors="errors"
       @upload="updateImage"
       @delete="properties.picture = null; properties.picturePreview = null" />
 
@@ -193,21 +202,6 @@ export default {
     }
   },
 
-  watch: {
-    properties: {
-      handler: function (properties) {
-        // Check if canvas can be downloaded
-        this.isDownloadable = (
-          properties.title !== '' &&
-          properties.source !== null &&
-          properties.programme !== null &&
-          properties.picture !== null
-        )
-      },
-      deep: true
-    }
-  },
-
   created () {
     // Set a default time
     this.properties.time.setHours(10)
@@ -215,6 +209,23 @@ export default {
   },
 
   methods: {
+    validate () {
+      const sourceField = this.properties.source === 'other'
+        ? { customSource: "Has d'escriure un canal" }
+        : { source: 'Has de seleccionar un canal' }
+      const programmeField = this.properties.programme === 'other'
+        ? { customProgramme: "Has d'escriure un programa" }
+        : { programme: 'Has de seleccionar un programa' }
+
+      this.fieldRequired({
+        title: "Has d'escriure el títol",
+        ...sourceField,
+        ...programmeField
+      })
+      this.pictureRequired()
+      this.allCapsDisallowed('title')
+    },
+
     updateSource (source) {
       if (source === 'other') {
         this.properties.source = 'other'
