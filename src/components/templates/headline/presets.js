@@ -252,9 +252,9 @@ const sources = [
     id: 'nouhorta',
     name: 'Nou Horta',
     logo: NouHortaSVG,
-    logoHeight: 22,
+    logoHeight: 28,
     fontFamily: 'Roboto',
-    color: '#1b75bc'
+    color: '#1D1D1B'
   }
 ]
 
