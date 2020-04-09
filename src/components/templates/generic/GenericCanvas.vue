@@ -16,7 +16,7 @@
     <div class="blob blob-2"></div>
     <div class="text" v-if="banner.text" :style="{ alignItems: banner.textPos, textAlign: banner.textAlign }">
       <div class="text-holder" contenteditable>
-        <div class="text-lines" :style="{ fontSize: aspect === '11' ? fontSize('text', 80, 35, 110) : fontSize('text', 70, 25, 110) }">{{ banner.text | formatString }}</div>
+        <div class="text-lines" :style="{ fontSize: aspect === '11' ? fontSize('text', 80, 35, 110, banner.textSize) : fontSize('text', 70, 25, 110, banner.textSize) }">{{ banner.text | formatString }}</div>
       </div>
     </div>
     <div class="logo">

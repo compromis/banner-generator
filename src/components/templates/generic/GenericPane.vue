@@ -22,6 +22,17 @@
         </b-tabs>
       </b-field>
 
+      <!-- Text size -->
+      <b-field label="Tamany del text" class="range">
+        <range-slider
+          name="points"
+          :min="75"
+          :max="125"
+          v-model="properties.textSize"
+          @touchstart="dimPane(true)"
+          @touchend="dimPane(false)" />
+      </b-field>
+
       <article class="message is-info is-small" v-if="aspect === 1">
         <div class="message-body">
           Es recomana utilitzar la ferramenta de text nativa d'Instragram per a afegir text en aquest model de tarja.
@@ -93,7 +104,8 @@ export default {
         textPos: 'center',
         textAlign: 'center',
         textPosI: 1,
-        textAlignI: 1
+        textAlignI: 1,
+        textSize: 100
       }
     }
   },
