@@ -41,13 +41,20 @@ export default {
         .replace(/'/g, '’')
         .replace(/Mònica Oltra/gi, 'Mónica Oltra')
         .replace(/Monica Oltra/gi, 'Mónica Oltra')
+    },
+
+    formatLocal (local) {
+      return local
+        .replace(/^per/gi, '')
+        .replace(/#/g, '')
     }
   },
 
   methods: {
-    fontSize (prop, maxFontSize, minFontSize, maxLength) {
+    fontSize (prop, maxFontSize, minFontSize, maxLength, multiplier) {
+      const adjust = multiplier ? multiplier / 100 : 1
       const propLength = this.banner[prop].length / maxLength
-      const fontSize = maxFontSize + propLength * (minFontSize - maxFontSize)
+      const fontSize = (maxFontSize * adjust) + propLength * ((minFontSize * adjust) - (maxFontSize * adjust))
       return `${fontSize}px`
     }
   }

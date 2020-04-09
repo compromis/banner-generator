@@ -19,7 +19,9 @@
     </div>
     <div class="logo">
       <compromis-logo :mono="true" />
-      <div :class="{ 'logo-local-label': true, 'logo-local-label--long': banner.localLabel.length > 18 }" v-if="banner.localLabel && banner.hasLocalLabel">{{ banner.localLabel }}</div>
+      <div :class="{ 'logo-local-label': true, 'logo-local-label--long': banner.localLabel.length > 18 }" v-if="banner.localLabel && banner.hasLocalLabel">
+        {{ banner.localLabel | formatLocal }}
+      </div>
     </div>
     <div class="hashtag" v-if="aspect === '11'">
       {{ banner.hashtag }}
@@ -142,11 +144,19 @@ export default {
   .text-wysiwyg {
     font-size: 20px;
 
+    & > div > *:first-child {
+      margin-top: 0;
+    }
+
+    & > div > *:last-child {
+      margin-bottom: 0;
+    }
+
     h1 {
       font-size: 40px;
       letter-spacing: -1px;
       font-weight: bold;
-      margin: 0;
+      margin: 16px 0;
       line-height: 1.1;
     }
 
@@ -161,10 +171,12 @@ export default {
 
     p {
       line-height: 1.1;
-      margin: 8px 0;
+      margin: 16px 0;
     }
 
     ol {
+      margin: 16px 0;
+
       li {
         margin-left: 30px;
         line-height: 1;
@@ -173,6 +185,8 @@ export default {
     }
 
     ul {
+      margin: 16px 0;
+
       li {
         padding-left: 30px;
         line-height: 1;
