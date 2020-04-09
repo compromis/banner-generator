@@ -41,6 +41,12 @@ export default {
         .replace(/'/g, '’')
         .replace(/Mònica Oltra/gi, 'Mónica Oltra')
         .replace(/Monica Oltra/gi, 'Mónica Oltra')
+    },
+
+    formatLocal (local) {
+      return local
+        .replace(/^per/gi, '')
+        .replace(/#/g, '')
     }
   },
 

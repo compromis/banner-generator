@@ -23,7 +23,9 @@
     </div>
     <div class="logo">
       <compromis-logo :mono="true" />
-      <div :class="{ 'logo-local-label': true, 'logo-local-label--long': banner.localLabel.length > 18 }" v-if="banner.localLabel && banner.hasLocalLabel">{{ banner.localLabel }}</div>
+      <div :class="{ 'logo-local-label': true, 'logo-local-label--long': banner.localLabel.length > 18 }" v-if="banner.localLabel && banner.hasLocalLabel">
+        {{ banner.localLabel | formatLocal }}
+      </div>
     </div>
     <div class="hashtag" v-if="aspect === '11'">
       {{ banner.hashtag }}
@@ -50,7 +52,7 @@ export default {
     bottom: 175px;
     left: 60px;
     right: 60px;
-    z-index: 30;
+    z-index: 10;
     transition: all .5s ease-in-out;
     letter-spacing: -.03em;
     line-height: 1.25;
