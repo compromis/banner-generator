@@ -136,6 +136,14 @@ export default {
       display: none;
     }
   }
+
+  // Card on top
+  .disposition-1 {
+    .text {
+      bottom: auto;
+      top: 80px;
+    }
+  }
 </style>
 
 <style lang="scss">
