@@ -152,6 +152,14 @@ export default {
       margin-bottom: 0;
     }
 
+    & > div > h2:first-child {
+      margin-top: -24px;
+    }
+
+    & > div > h2:last-child {
+      margin-bottom: -24px;
+    }
+
     h1 {
       font-size: 40px;
       letter-spacing: -1px;

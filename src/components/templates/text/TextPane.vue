@@ -30,7 +30,7 @@
           placeholder="#"
           @input="updateHashtag"
           :value="properties.hashtag"
-          :maxlength="25">
+          :maxlength="20">
         </b-input>
       </b-field>
     </transition>
