@@ -222,18 +222,28 @@ export default {
   }
 
   .aspect-916 {
-    h2 {
-      padding: 16px;
-      margin: 16px -16px;
-      font-size: 20px;
-    }
+    .text-wysiwyg {
+      & > div > h2:first-child {
+        margin-top: -16px;
+      }
 
-    ul {
-      li {
-        padding-left: 28px;
+      & > div > h2:last-child {
+        margin-bottom: -16px;
+      }
 
-        &::before {
-          left: 16px;
+      h2 {
+        padding: 16px;
+        margin: 16px -16px;
+        font-size: 20px;
+      }
+
+      ul {
+        li {
+          padding-left: 28px;
+
+          &::before {
+            left: 16px;
+          }
         }
       }
     }
