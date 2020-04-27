@@ -27,6 +27,7 @@ import CastellonPlazaPNG from './logos/castellon-plaza.png'
 import AlicantePlazaPNG from './logos/alicante-plaza.png'
 import CastelloTVPNG from './logos/castello-tv.png'
 import MediterraneoCsPNG from './logos/mediterraneo-cs.png'
+import ElMeridianoPNG from './logos/el-meridiano.png'
 
 const sources = [
   {
@@ -255,6 +256,14 @@ const sources = [
     logoHeight: 28,
     fontFamily: 'Roboto',
     color: '#1D1D1B'
+  },
+  {
+    id: 'elmeridiano',
+    name: 'El Meridiano Horta',
+    logo: ElMeridianoPNG,
+    logoHeight: 20,
+    fontFamily: 'Roboto',
+    color: '#00849e'
   }
 ]
 
