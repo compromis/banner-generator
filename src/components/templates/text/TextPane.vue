@@ -1,5 +1,21 @@
 <template>
   <div :class="{ 'pane generic-pane': true, 'pane-dimmed': paneDimmed, 'pane-916': aspect === 1 }">
+    <!-- Disposition -->
+    <transition name="slide">
+      <b-field label="Posició de la targeta">
+        <b-tabs
+          id="disposition-tabs"
+          type="is-toggle"
+          size="is-small"
+          v-model="properties.disposition"
+          class="tabs-field"
+          expanded>
+          <b-tab-item label="Baix"></b-tab-item>
+          <b-tab-item label="Dalt"></b-tab-item>
+        </b-tabs>
+      </b-field>
+    </transition>
+
     <b-field label="Contingut">
       <vue-editor v-model="properties.text" :editor-toolbar="customToolbar" />
     </b-field>
