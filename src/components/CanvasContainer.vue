@@ -8,7 +8,7 @@
         <component :is="canvasComponent" :banner="banner" :aspect="template.aspects[aspect]" :color="color" />
       </div>
       <div class="hidden-canvas">
-        <div id="downloadCanvas" :style="{transform: `scale(${downloadScale})`}"></div>
+        <div id="downloadCanvas" :style="{transform: `scale(${downloadScale})`, transformOrigin: 'top left'}"></div>
       </div>
     </b-tabs>
     <careta-selector v-model="color" is-rounded v-if="!['FakeNews', 'Social', 'Comparison', 'Headline', 'Media'].includes(template.id)" />
@@ -165,10 +165,6 @@ export default {
 <style lang="scss">
   @import "../sass/variables";
   @import "../sass/banner";
-
-  #downloadCanvas {
-    transform-origin: top left;
-  }
 
   .banner-canvas {
     box-sizing: content-box;

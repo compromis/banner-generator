@@ -26,7 +26,15 @@
       <div class="speakers-overtitle">
         {{ banner.overtitle | formatString }}
       </div>
-      <div class="speakers-title" :style="{ fontSize: aspect === '11' ? fontSize('title', 50, 35 , 60) : aspect === 'event' ? fontSize('title', 110, 80 , 60) : fontSize('title', 40, 27 , 60) }">
+      <div
+        class="speakers-title"
+        :style="{
+          fontSize: aspect === '11'
+            ? fontSize('title', 50, 35 , 60)
+            : aspect === 'event'
+            ? fontSize('title', 45, 28 , 60)
+            : fontSize('title', 40, 27 , 60)
+        }">
         {{ banner.title | formatString }}
       </div>
     </div>
@@ -200,7 +208,6 @@ export default {
   }
 
   .has-2-speakers {
-
     .blob-1 {
       top: -42%;
       left: 69%;
@@ -351,38 +358,30 @@ export default {
     // Event aspect
   .aspect-event {
     .blob {
-      border-radius: 144px;
-
       &-1 {
-        top: -50%;
-        left: 70%;
+        top: 81%;
+        left: -64%;
         z-index: 20;
       }
 
       &-2 {
         left: auto;
-        bottom: -50%;
-        right: 70%;
+        bottom: 81%;
+        right: -61%;
         z-index: 20;
       }
     }
 
     .speakers {
       top: 0;
-      padding: 80px;
+      padding: 30px;
 
       &-items {
-        --image-size: 415px;
-        grid-column-gap: 35px;
-        left: 60px;
-        right: 60px;
-        top: 35%;
-        justify-content: center;
-      }
-
-      &-image {
-        height: 415px;
-        border-radius: 48px;
+        left: 30px;
+        right: 30px;
+        justify-content: end;
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        margin-top: 18px;
       }
 
       &-name, &-description {
@@ -390,22 +389,37 @@ export default {
       }
 
       &-title {
-        width: 1200px;
+        width: 400px;
       }
 
       &-overtitle {
-        font-size: 48px;
+        margin-bottom: 6px;
+        font-size: 20px;
+      }
+    }
+
+    &.has-3-speakers {
+      .blob-1 {
+        top: 87%;
+      }
+
+      .speakers-image {
+        height: 170px;
+      }
+    }
+
+    &.has-2-speakers {
+      .speakers-items {
+        left: 260px;
+      }
+
+      .speakers-title {
+        width: 200px;
       }
     }
 
     .logo {
       display: none;
-    }
-
-    &.has-2-speakers {
-      .speakers-items {
-        transform: scale(1.2);
-      }
     }
   }
 </style>
