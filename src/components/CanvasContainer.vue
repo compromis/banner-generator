@@ -4,8 +4,11 @@
       <b-tab-item id="aspect-tabs" v-if="template.aspects.includes('11')" label="1:1" icon="square"></b-tab-item>
       <b-tab-item v-if="template.aspects.includes('916')" label="9:16" icon="mobile-android"></b-tab-item>
       <b-tab-item v-if="template.aspects.includes('event')" label="Portada" icon="rectangle-landscape"></b-tab-item>
-      <div :class="['canvas-wrapper', `template-${template.id.toLowerCase()}`]" :style="{transform: `scale(${scale})`, margin: `${margin}rem`}">
+      <div id="previewCanvas" :class="['canvas-wrapper', `template-${template.id.toLowerCase()}`]" :style="{transform: `scale(${scale})`, margin: `${margin}rem`}">
         <component :is="canvasComponent" :banner="banner" :aspect="template.aspects[aspect]" :color="color" />
+      </div>
+      <div class="hidden-canvas">
+        <div id="downloadCanvas" :style="{transform: `scale(${downloadScale})`}"></div>
       </div>
     </b-tabs>
     <careta-selector v-model="color" is-rounded v-if="!['FakeNews', 'Social', 'Comparison', 'Headline', 'Media'].includes(template.id)" />
@@ -49,11 +52,12 @@ export default {
       displayTooltip: false,
       downloading: false,
       scale: 1,
+      downloadScale: 2,
       margin: 0,
       aspects: {
-        '11': { width: 720, height: 720, minScale: 0.35, maxScale: 1, minMargin: -15, maxMargin: 0 },
-        '916': { width: 405, height: 720, minScale: 0.35, maxScale: 1, minMargin: -15, maxMargin: 0 },
-        'event': { width: 1920, height: 1080, minScale: 0.25, maxScale: 0.5, minMargin: -25, maxMargin: -17 }
+        '11': { width: 720, height: 720, downloadScale: 2, minScale: 0.35, maxScale: 1, minMargin: -15, maxMargin: 0 },
+        '916': { width: 405, height: 720, downloadScale: 2, minScale: 0.35, maxScale: 1, minMargin: -15, maxMargin: 0 },
+        'event': { width: 720, height: 405, downloadScale: 3, minScale: 0.35, maxScale: 1, minMargin: -15, maxMargin: 0 }
       }
     }
   },
@@ -108,14 +112,22 @@ export default {
       EventBus.$emit('checkForErrors', true)
 
       const aspect = this.template.aspects[this.aspect]
-      const dimensions = this.aspects[aspect]
+      const { width, height, downloadScale } = this.aspects[aspect]
+      const bannerWidth = width * downloadScale
+      const bannerHeight = height * downloadScale
+      this.downloadScale = downloadScale
 
       if (this.isDownloadable) {
         this.downloading = true
 
+        /* Create an upscaled clone */
+        const previewCanvas = document.getElementById('previewCanvas')
+        const downloadCanvas = document.getElementById('downloadCanvas')
+        downloadCanvas.innerHTML = previewCanvas.cloneNode(true).innerHTML
+
         domtoimage.toPng(
-          document.getElementById('bannerCanvas' + aspect),
-          { bgcolor: '#fff', ...dimensions }
+          downloadCanvas,
+          { bgcolor: '#fff', width: bannerWidth, height: bannerHeight }
         ).then((blob) => {
           saveAs(blob, 'banner.png')
           this.saveToServer(blob)
@@ -154,6 +166,10 @@ export default {
   @import "../sass/variables";
   @import "../sass/banner";
 
+  #downloadCanvas {
+    transform-origin: top left;
+  }
+
   .banner-canvas {
     box-sizing: content-box;
     position: relative;
@@ -172,13 +188,19 @@ export default {
     outline: 1px $gray-900 solid;
   }
 
+  .hidden-canvas {
+    width: 0;
+    height: 0;
+    overflow: hidden;
+  }
+
   .banner-aspect-916 .banner-canvas {
     width: 405px;
   }
 
   .banner-aspect-event .banner-canvas {
-    width: 1920px;
-    height: 1080px;
+    width: 720px;
+    height: 405px;
   }
 
   .primary-download-button {
@@ -221,8 +243,8 @@ export default {
 
     .banner-aspect-event {
       .canvas-wrapper {
-        transform: scale(0.1871) !important;
-        margin: -24.49rem !important;
+        transform: scale(0.4321) !important;
+        margin: -5.49rem !important;
       }
     }
 
