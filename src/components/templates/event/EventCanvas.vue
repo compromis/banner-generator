@@ -19,7 +19,7 @@
       <div class="event-overtitle">
         <span>{{ banner.overtitle | formatString }}</span>
       </div>
-      <div v-if="banner.title" class="event-title" :style="{fontSize: aspect === 'event' ? fontSize('title', 155, 130, 60) : fontSize('title', 45, 30, 60)}">
+      <div v-if="banner.title" class="event-title" :style="{fontSize: aspect === 'event' ? fontSize('title', 75, 40, 60) : fontSize('title', 45, 30, 60)}">
         <span>{{ banner.title | formatString }}</span>
       </div>
       <div class="event-details-wrapper" v-if="aspect !== 'event'">
@@ -242,52 +242,50 @@ export default {
     .event {
       display: flex;
       align-items: center;
-      top: 200px;
-      bottom: 200px;
+      top: 100px;
+      bottom: 100px;
       width: 100%;
       height: auto;
-      padding: 0 100px;
+      padding: 0 60px;
       box-sizing: border-box;
 
       &-title {
         span {
           background: $white;
           color: $gray-900;
-          padding: 4px 32px;
-          border-radius: 6px;
+          padding: 6px 15px;
+          border-radius: 4px;
           line-height: 1.42;
           -webkit-box-decoration-break: clone;
           -webkit-line-break: normal;
-          letter-spacing: -4px;
+          letter-spacing: -0.04em;
         }
       }
 
       &-overtitle {
         position: absolute;
         color: $white;
-        font-size: 48px;
+        font-size: 23;
         letter-spacing: -1px;
         font-weight: bold;
-        top: -150px;
-        left: 60px;
+        top: -170px;
+        left: 30px;
         z-index: 20;
       }
     }
 
     .blob {
-      border-radius: 144px;
-
       &-1 {
-        top: -50%;
-        left: -3%;
+        top: -149%;
+        left: -67%;
         z-index: 20;
         border-bottom-left-radius: 0;
       }
 
       &-2 {
         left: auto;
-        bottom: -50%;
-        right: -4%;
+        bottom: -146%;
+        right: -66%;
         z-index: 20;
         border-top-right-radius: 0;
         --gradient-orientation: -45deg;
