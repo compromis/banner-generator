@@ -275,7 +275,7 @@ export default {
     }
 
     .blob {
-      border-radius: 16px;
+      border-radius: 144px;
 
       &-1 {
         top: -50%;
