@@ -54,6 +54,7 @@
 import domtoimage from 'dom-to-image'
 import { saveAs } from 'file-saver'
 import { EventBus } from '@/event-bus'
+import API from '@/api'
 import aspects from '@/components/templates/aspects'
 import CaretaSelector from '@/utils/CaretaSelector'
 
@@ -150,7 +151,7 @@ export default {
           }
         ).then((blob) => {
           saveAs(blob, 'banner.png')
-          this.saveToServer(blob)
+          API.saveToServer({ blob })
           this.downloading = false
           // eslint-disable-next-line
           gtag('event', 'banner_download', {
@@ -159,24 +160,6 @@ export default {
           })
         })
       }
-    },
-
-    saveToServer (blob) {
-      fetch('https://compromis.net/espai/targes/save', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: this.encode({ blob })
-      })
-    },
-
-    encode (data) {
-      return Object.keys(data)
-        .map(
-          key => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`
-        )
-        .join('&')
     }
   }
 }
