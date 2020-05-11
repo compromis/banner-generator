@@ -64,6 +64,12 @@
   }
 }
 
+.vue-swatches__trigger {
+  height: 2.25rem !important;
+  width: 2.25rem !important;
+  border-radius: 4px !important;
+}
+
 @media (max-width: $xs-breakpoint) {
   .pane {
     transition: background .25s ease-in-out;

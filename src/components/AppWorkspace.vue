@@ -173,6 +173,8 @@ export default {
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      max-height: 100%;
+      overflow: hidden;
     }
 
     .help-block {

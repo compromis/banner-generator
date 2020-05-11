@@ -5,7 +5,7 @@
       <ul>
         <li v-for="template in templates" :key="template.id">
           <router-link :to="`/${template.id.toLowerCase()}`" :class="['template-item', `template-item-${template.id.toLowerCase()}`, template['isNew'] ? 'template-item-new' : '']">
-            <span class="template-item-label" v-if="template['isNew']">✨Nou</span>
+            <span class="template-item-label" v-if="'label' in template">{{ template.label }}</span>
             <span class="template-item-icon">
               <b-icon :icon="template.icon" size="is-large" />
             </span>

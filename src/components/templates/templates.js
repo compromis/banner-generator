@@ -1,4 +1,4 @@
-const templates = [
+export default [
   {
     id: 'Headline',
     name: 'Titular de premsa',
@@ -14,6 +14,7 @@ const templates = [
     id: 'Generic',
     name: 'Frase',
     aspects: ['11', '916'],
+    supports: ['multicolor-blobs'],
     icon: 'font',
     components: {
       pane: () => import(/* webpackChunkName: "generic" */ './generic/GenericPane'),
@@ -25,6 +26,7 @@ const templates = [
     id: 'Text',
     name: 'Text lliure',
     aspects: ['11', '916'],
+    supports: ['multicolor-blobs'],
     icon: 'align-left',
     components: {
       pane: () => import(/* webpackChunkName: "text" */ './text/TextPane'),
@@ -36,6 +38,7 @@ const templates = [
     id: 'Quote',
     name: 'Cita',
     aspects: ['11', '916'],
+    supports: ['multicolor-blobs'],
     icon: 'quote-left',
     components: {
       pane: () => import(/* webpackChunkName: "quote" */ './quote/QuotePane'),
@@ -59,7 +62,7 @@ const templates = [
     name: 'Bulo',
     aspects: ['11', '916'],
     icon: 'ban',
-    isNew: true,
+    label: '✨Nou',
     components: {
       pane: () => import(/* webpackChunkName: "fakenews" */ './fakenews/FakeNewsPane'),
       canvas: () => import(/* webpackChunkName: "fakenews" */ './fakenews/FakeNewsCanvas'),
@@ -81,6 +84,7 @@ const templates = [
     id: 'Event',
     name: 'Acte amb foto',
     aspects: ['11', '916', 'event'],
+    supports: ['multicolor-blobs'],
     icon: 'portrait',
     components: {
       pane: () => import(/* webpackChunkName: "event" */ './event/EventPane'),
@@ -92,6 +96,7 @@ const templates = [
     id: 'Speakers',
     name: 'Acte amb ponents',
     aspects: ['11', '916', 'event'],
+    supports: ['multicolor-blobs'],
     icon: 'keynote',
     components: {
       pane: () => import(/* webpackChunkName: "speakers" */ './speakers/SpeakersPane'),
@@ -111,5 +116,3 @@ const templates = [
     }
   }
 ]
-
-export default templates

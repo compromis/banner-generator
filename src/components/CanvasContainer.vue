@@ -1,21 +1,46 @@
 <template>
   <div class="banner-workspace" v-if="banner">
-    <b-tabs :class="['banner-aspect', `banner-aspect-${template.aspects[aspect]}`]" type="is-toggle-rounded" position="is-centered" v-model="aspect" @change="resize">
-      <b-tab-item id="aspect-tabs" v-if="template.aspects.includes('11')" label="1:1" icon="square"></b-tab-item>
-      <b-tab-item v-if="template.aspects.includes('916')" label="9:16" icon="mobile-android"></b-tab-item>
-      <b-tab-item v-if="template.aspects.includes('event')" label="Portada" icon="rectangle-landscape"></b-tab-item>
-      <div id="previewCanvas" :class="['canvas-wrapper', `template-${template.id.toLowerCase()}`]" :style="{transform: `scale(${scale})`, margin: `${margin}rem`}">
-        <component :is="canvasComponent" :banner="banner" :aspect="template.aspects[aspect]" :color="color" />
-      </div>
-      <div class="hidden-canvas">
-        <div id="downloadCanvas" :style="{transform: `scale(${downloadScale})`, transformOrigin: 'top left'}"></div>
+    <b-tabs
+      id="aspect-tabs"
+      :class="['banner-aspect', `banner-aspect-${template.aspects[aspect]}`]"
+      type="is-toggle-rounded"
+      position="is-centered"
+      v-model="aspect"
+      @change="resize">
+      <template v-for="(aspect, id) in aspects">
+        <b-tab-item
+          :key="id"
+          v-if="template.aspects.includes(id)"
+          :label="aspect.name"
+          :icon="aspect.icon" />
+      </template>
+      <div
+        :class="['canvas-wrapper', `template-${template.id.toLowerCase()}`]"
+        :style="{transform: `scale(${scale})`, margin: `${margin}px`}">
+        <component
+          :is="canvasComponent"
+          :banner="banner"
+          :aspect="template.aspects[aspect]"
+          :color="color" />
       </div>
     </b-tabs>
-    <careta-selector v-model="color" is-rounded v-if="!['FakeNews', 'Social', 'Comparison', 'Headline', 'Media'].includes(template.id)" />
+
+      <careta-selector
+        v-model="color"
+        is-rounded
+        v-if="'supports' in template && template.supports.includes('multicolor-blobs')" />
 
     <div id="download-button" class="primary-download-button">
-      <b-tooltip label="Has d'emplenar tots els camps necessaris" position="is-left" type="is-dark" :active="!isDownloadable && displayTooltip">
-        <b-button type="is-primary" size="is-large" rounded @click="download" :disabled="downloading">
+      <b-tooltip
+        label="Has d'emplenar tots els camps necessaris"
+        position="is-left"
+        type="is-dark"
+        :active="!isDownloadable && displayTooltip">
+        <b-button
+          type="is-primary"
+          size="is-large"
+          rounded @click="download"
+          :disabled="downloading">
           <b-icon v-if="!downloading" icon="arrow-to-bottom" />
           <b-icon v-else icon="circle-notch" custom-class="fa-spin" />
           <span class="button-label">Descarrega</span>
@@ -26,9 +51,10 @@
 </template>
 
 <script>
-import { EventBus } from '@/event-bus.js'
 import domtoimage from 'dom-to-image'
 import { saveAs } from 'file-saver'
+import { EventBus } from '@/event-bus'
+import aspects from '@/components/templates/aspects'
 import CaretaSelector from '@/utils/CaretaSelector'
 
 export default {
@@ -52,13 +78,8 @@ export default {
       displayTooltip: false,
       downloading: false,
       scale: 1,
-      downloadScale: 2,
       margin: 0,
-      aspects: {
-        '11': { width: 720, height: 720, downloadScale: 2, minScale: 0.35, maxScale: 1, minMargin: -15, maxMargin: 0 },
-        '916': { width: 405, height: 720, downloadScale: 2, minScale: 0.35, maxScale: 1, minMargin: -15, maxMargin: 0 },
-        'event': { width: 720, height: 405, downloadScale: 3, minScale: 0.35, maxScale: 1, minMargin: -15, maxMargin: 0 }
-      }
+      aspects
     }
   },
 
@@ -87,10 +108,7 @@ export default {
       const aspect = this.template.aspects[this.aspect]
       const minHeight = 450
       const maxHeight = 950
-      const minScale = this.aspects[aspect].minScale
-      const maxScale = this.aspects[aspect].maxScale
-      const minMargin = this.aspects[aspect].minMargin
-      const maxMargin = this.aspects[aspect].maxMargin
+      const { minScale, maxScale, minMargin, maxMargin } = this.aspects[aspect]
       const height = e.srcElement.innerHeight
       const propHeight = (height - minHeight) / (maxHeight - minHeight)
 
@@ -115,19 +133,21 @@ export default {
       const { width, height, downloadScale } = this.aspects[aspect]
       const bannerWidth = width * downloadScale
       const bannerHeight = height * downloadScale
-      this.downloadScale = downloadScale
 
       if (this.isDownloadable) {
         this.downloading = true
 
-        /* Create an upscaled clone */
-        const previewCanvas = document.getElementById('previewCanvas')
-        const downloadCanvas = document.getElementById('downloadCanvas')
-        downloadCanvas.innerHTML = previewCanvas.cloneNode(true).innerHTML
-
         domtoimage.toPng(
-          downloadCanvas,
-          { bgcolor: '#fff', width: bannerWidth, height: bannerHeight }
+          document.getElementById('bannerCanvas' + aspect),
+          {
+            bgcolor: '#fff',
+            width: bannerWidth,
+            height: bannerHeight,
+            style: {
+              transform: `scale(${downloadScale})`,
+              transformOrigin: 'top left'
+            }
+          }
         ).then((blob) => {
           saveAs(blob, 'banner.png')
           this.saveToServer(blob)
@@ -184,10 +204,8 @@ export default {
     outline: 1px $gray-900 solid;
   }
 
-  .hidden-canvas {
-    width: 0;
-    height: 0;
-    overflow: hidden;
+  .banner-aspect {
+    margin-bottom: 0 !important;
   }
 
   .banner-aspect-916 .banner-canvas {
@@ -229,6 +247,10 @@ export default {
     overflow: hidden;
     outline: 0;
     border-color: $gray-900;
+  }
+
+  .banner-workspace .careta-selector {
+    margin: 0 auto;
   }
 
   @media (max-width: $xs-breakpoint) {
