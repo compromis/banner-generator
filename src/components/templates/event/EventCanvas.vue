@@ -265,10 +265,10 @@ export default {
       &-overtitle {
         position: absolute;
         color: $white;
-        font-size: 23;
+        font-size: 22px;
         letter-spacing: -1px;
         font-weight: bold;
-        top: -170px;
+        top: -80px;
         left: 30px;
         z-index: 20;
       }
