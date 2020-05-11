@@ -212,7 +212,7 @@ export default {
     validate () {
       const sourceField = this.properties.source === 'other'
         ? { customSource: "Has d'escriure un canal" }
-        : { source: 'Has de seleccionar un canal' }
+        : { source: 'Has de seleccionar un canal' }
       const programmeField = this.properties.programme === 'other'
         ? { customProgramme: "Has d'escriure un programa" }
         : { programme: 'Has de seleccionar un programa' }

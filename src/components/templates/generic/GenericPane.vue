@@ -40,6 +40,9 @@
       </article>
     </div>
 
+    <!-- Emoji picker -->
+    <emoji-picker v-model="properties.emojis" />
+
     <!-- Picture -->
     <picture-upload
       :picture="properties.picture"
@@ -90,12 +93,17 @@
 </template>
 
 <script>
-import PaneMixin from '@/mixins/pane-mixin.js'
+import PaneMixin from '@/mixins/pane-mixin'
+import EmojiPicker from '@/utils/EmojiPicker'
 
 export default {
   name: 'generic-pane',
 
   mixins: [PaneMixin],
+
+  components: {
+    EmojiPicker
+  },
 
   data () {
     return {
@@ -105,7 +113,8 @@ export default {
         textAlign: 'center',
         textPosI: 1,
         textAlignI: 1,
-        textSize: 100
+        textSize: 100,
+        emojis: []
       }
     }
   },

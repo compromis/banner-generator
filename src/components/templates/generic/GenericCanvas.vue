@@ -19,6 +19,7 @@
         <div class="text-lines" :style="{ fontSize: aspect === '11' ? fontSize('text', 80, 35, 110, banner.textSize) : fontSize('text', 70, 25, 110, banner.textSize) }">{{ banner.text | formatString }}</div>
       </div>
     </div>
+    <emojis-in-canvas v-model="banner.emojis" />
     <div class="logo">
       <compromis-logo :mono="true" />
       <div :class="{ 'logo-local-label': true, 'logo-local-label--long': banner.localLabel.length > 18 }" v-if="banner.localLabel && banner.hasLocalLabel">
@@ -32,12 +33,17 @@
 </template>
 
 <script>
-import CanvasMixin from '@/mixins/canvas-mixin.js'
+import CanvasMixin from '@/mixins/canvas-mixin'
+import EmojisInCanvas from '@/utils/EmojisInCanvas'
 
 export default {
   name: 'generic-canvas',
 
-  mixins: [CanvasMixin]
+  mixins: [CanvasMixin],
+
+  components: {
+    EmojisInCanvas
+  }
 }
 </script>
 
