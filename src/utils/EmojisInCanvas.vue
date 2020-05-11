@@ -13,12 +13,8 @@
       :class="{ 'emoji-front': emoji.pos === 'front', 'emoji-back': emoji.pos === 'back' }">
       <span v-html="emoji.tag"></span>
       <div class="emoji-tools">
-        <b-tooltip label="Darrere del text" type="is-dark">
-          <b-button @click="position('back', i)" size="is-small" icon-right="send-backward" :type="emoji.pos === 'back' ? 'is-primary' : ''"></b-button>
-        </b-tooltip>
-        <b-tooltip label="Davant del text" type="is-dark">
-          <b-button @click="position('front', i)" size="is-small" icon-right="bring-forward" :type="emoji.pos === 'front' ? 'is-primary' : ''"></b-button>
-        </b-tooltip>
+        <b-button @click="position('back', i)" size="is-small" icon-right="send-backward" :type="emoji.pos === 'back' ? 'is-primary' : ''"></b-button>
+        <b-button @click="position('front', i)" size="is-small" icon-right="bring-forward" :type="emoji.pos === 'front' ? 'is-primary' : ''"></b-button>
         <b-button @click="remove(i)" size="is-small" type="is-danger" icon-right="times"></b-button>
       </div>
   </drr>
@@ -72,5 +68,9 @@ export default {
     .button {
       margin-right: .25rem;
     }
+  }
+
+  .inactive .emoji-tools {
+    display: none;
   }
 </style>
