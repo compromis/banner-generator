@@ -5,7 +5,7 @@ import {
   faCalendarAlt, faAngleLeft, faAngleRight, faExclamationCircle, faUser,
   faCreditCardBlank, faKeynote, faRectangleLandscape, faAlignLeft, faAlignCenter, faAlignRight,
   faArrowToTop, faGripLines, faBroadcastTower, faFont, faQuoteLeft, faNewspaper, faPortrait, faUserCircle,
-  faQuestionCircle, faCheckCircle, faColumns, faCircleNotch, faBan
+  faQuestionCircle, faCheckCircle, faColumns, faCircleNotch, faBan, faBringForward, faSendBackward
 } from '@fortawesome/pro-regular-svg-icons'
 
 library.add(
@@ -14,5 +14,5 @@ library.add(
   faCalendarAlt, faAngleLeft, faAngleRight, faExclamationCircle, faUser,
   faCreditCardBlank, faKeynote, faRectangleLandscape, faAlignLeft, faAlignCenter, faAlignRight,
   faArrowToTop, faGripLines, faBroadcastTower, faFont, faQuoteLeft, faNewspaper, faPortrait, faUserCircle,
-  faQuestionCircle, faCheckCircle, faColumns, faCircleNotch, faBan
+  faQuestionCircle, faCheckCircle, faColumns, faCircleNotch, faBan, faBringForward, faSendBackward
 )

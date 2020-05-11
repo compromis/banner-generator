@@ -149,21 +149,7 @@ export default {
       overflow-y: scroll;
       align-self: stretch;
 
-      &::-webkit-scrollbar {
-        width: 1rem;
-        background-color: $white;
-      }
-
-      &::-webkit-scrollbar-thumb {
-        background-color: $gray-400;
-        border-radius: 4rem;
-        transition: .25s ease-in-out;
-        border: .25rem $white solid;
-      }
-
-      &::-webkit-scrollbar-thumb:hover {
-        background-color: $gray-600;
-      }
+      @include scrollbar();
     }
 
     .canvas {
