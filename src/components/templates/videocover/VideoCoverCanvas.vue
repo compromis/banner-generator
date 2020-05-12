@@ -117,22 +117,30 @@ export default {
     bottom: 0;
     right: 0;
     z-index: 5;
-    border: 30px solid white;
-    box-sizing: border-box;
     z-index: 40;
     pointer-events: none;
+    mix-blend-mode: multiply;
 
     &.frame-black {
-      border-color: $gray-darkest;
+      background: $gray-darkest;
     }
 
     &.frame-orange {
-      border-image-slice: 1;
-      border-image-source: $gradient;
+      background: $gradient;
     }
 
     &.frame-white {
-      border-color:  $white;
+      background:  $white;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 30px;
+      left: 30px;
+      bottom: 30px;
+      right: 30px;
+      background: white;
     }
   }
 
