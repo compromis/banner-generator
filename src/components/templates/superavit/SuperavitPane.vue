@@ -51,7 +51,7 @@
     <picture-upload
       :picture="properties.picture"
       :display-errors="false"
-      :errors="[]"
+      :errors="{}"
       @upload="updateImage"
       @delete="properties.picture = null; properties.picturePreview = null" />
 

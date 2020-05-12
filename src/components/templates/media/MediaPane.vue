@@ -259,8 +259,6 @@ export default {
   @import "../../../sass/variables";
 
   .media-pane {
-    padding-bottom: 12rem !important;
-
     .local-label {
       margin-top: .75rem;
     }

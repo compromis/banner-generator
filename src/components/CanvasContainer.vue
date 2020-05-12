@@ -177,6 +177,7 @@ export default {
     overflow: hidden;
     transition: all .5s ease-in-out;
     background: $white;
+    user-select: none;
   }
 
   .canvas-wrapper {
