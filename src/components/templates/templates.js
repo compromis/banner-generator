@@ -114,5 +114,16 @@ export default [
       canvas: () => import(/* webpackChunkName: "social" */ './social/SocialCanvas'),
       help: () => import(/* webpackChunkName: "social" */ './social/SocialHelp')
     }
+  },
+  {
+    id: 'Video',
+    name: 'Portada de vídeo',
+    aspects: ['11, 169'],
+    icon: 'play',
+    components: {
+      pane: () => import(/* webpackChunkName: "videocover" */ './videocover/VideoCoverPane'),
+      canvas: () => import(/* webpackChunkName: "videocover" */ './videocover/VideoCoverCanvas'),
+      help: () => import(/* webpackChunkName: "videocover" */ './videocover/VideoCoverHelp')
+    }
   }
 ]
