@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ 'pane video-cover-pane': true, 'pane-dimmed': paneDimmed, 'pane-916': aspect === 1 }">
+  <div :class="{ 'pane video-cover-pane': true, 'pane-dimmed': paneDimmed }">
     <!-- Text -->
     <div class="text-wrapper">
       <!-- Secondary Text  -->
