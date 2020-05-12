@@ -103,6 +103,8 @@ export default {
     font-weight: bold;
     letter-spacing: -0.02em;
     line-height: 1.2;
+    max-height: 570px;
+    overflow: hidden;
 
     .big-number {
       display: inline-block;
@@ -121,6 +123,9 @@ export default {
       em {
         font-style: normal;
         color: #f74249;
+        background: rgba($gray-900, 1);
+        padding: 0 8px;
+        border-radius: 4px;
       }
 
       img {
