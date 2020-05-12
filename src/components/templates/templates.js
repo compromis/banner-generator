@@ -116,11 +116,23 @@ export default [
     }
   },
   {
+    id: 'Video',
+    name: 'Portada de vídeo',
+    aspects: ['11', 'event'],
+    icon: 'play',
+    label: '✨Nou',
+    components: {
+      pane: () => import(/* webpackChunkName: "videocover" */ './videocover/VideoCoverPane'),
+      canvas: () => import(/* webpackChunkName: "videocover" */ './videocover/VideoCoverCanvas'),
+      help: () => import(/* webpackChunkName: "videocover" */ './videocover/VideoCoverHelp')
+    }
+  },
+  {
     id: 'Superavit',
     name: 'Superàvit local',
     aspects: ['11'],
     icon: 'euro-sign',
-    label: '🦠 COVID-19',
+    label: '🦠 Covid-19',
     components: {
       pane: () => import(/* webpackChunkName: "superavit" */ './superavit/SuperavitPane'),
       canvas: () => import(/* webpackChunkName: "superavit" */ './superavit/SuperavitCanvas'),

@@ -22,7 +22,7 @@ export default {
     maxMargin: 0
   },
   'event': {
-    name: 'Portada',
+    name: '16:9',
     icon: 'rectangle-landscape',
     width: 720,
     height: 405,
