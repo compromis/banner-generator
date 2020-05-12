@@ -3,15 +3,16 @@
     <!-- Text -->
     <div class="text-wrapper">
       <!-- Secondary Text  -->
-      <b-field label="Text Superior">
+      <b-field label="Text superior">
         <b-input placeholder="Baldoví" v-model="properties.textSecondary" maxlength="25"></b-input>
       </b-field>
 
       <!-- Secondary Text Color  -->
       <color-selector v-model="properties.textSecondaryColor" />
+
       <!-- Main Text  -->
-      <b-field label="Text Principal">
-        <b-input type="textarea" placeholder="Cinc tipus de tila que des de Compromís recomanem a Abascal" v-model="properties.text" maxlength="100"></b-input>
+      <b-field label="Text principal">
+        <b-input type="textarea" placeholder="Cinc tipus de tila que des de Compromís recomanem a Abascal" v-model="properties.text" maxlength="70"></b-input>
       </b-field>
 
       <!-- Text Color  -->
@@ -19,14 +20,14 @@
 
       <!-- Text align -->
       <b-field label="Alineació del text" class="text-align-group">
-        <b-tabs @change="updateTextAlign" :value="1" class="text-align" type="is-toggle" size="is-small" expanded>
+        <b-tabs @change="updateTextAlign" :value="0" class="text-align" type="is-toggle" size="is-small" expanded>
           <b-tab-item icon="align-left"></b-tab-item>
           <b-tab-item icon="align-center"></b-tab-item>
           <b-tab-item icon="align-right"></b-tab-item>
         </b-tabs>
 
         <!-- Text position -->
-        <b-tabs @change="updateTextPosition" :value="1" class="text-position" type="is-toggle" size="is-small" expanded>
+        <b-tabs @change="updateTextPosition" :value="2" class="text-position" type="is-toggle" size="is-small" expanded>
           <b-tab-item icon="arrow-to-top"></b-tab-item>
           <b-tab-item icon="grip-lines"></b-tab-item>
           <b-tab-item icon="arrow-to-bottom"></b-tab-item>
@@ -86,15 +87,15 @@ export default {
     return {
       properties: {
         text: '',
-        textPos: 'center',
-        textAlign: 'center',
+        textPos: 'flex-end',
+        textAlign: 'left',
         textPosI: 1,
         textAlignI: 1,
         textSize: 100,
-        textColor: 'black',
-        textSecondaryColor: 'black',
+        textColor: 'orange',
+        textSecondaryColor: 'white',
         textSecondary: '',
-        frameColor: 'black',
+        frameColor: 'orange',
         emojis: []
       }
     }
@@ -129,27 +130,6 @@ export default {
 
     .b-tabs {
       margin-bottom: .25rem;
-    }
-  }
-
-  .hashtag {
-    margin-top: .25rem;
-  }
-
-  .local-label {
-    margin-top: .75rem;
-  }
-
-  .message-body {
-    font-size: .85rem;
-  }
-
-  .pane-916 {
-    display: flex;
-    flex-direction: column;
-
-    .text-wrapper {
-      order: 1;
     }
   }
 </style>

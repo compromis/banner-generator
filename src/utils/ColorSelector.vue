@@ -41,8 +41,7 @@ export default {
 
   li {
     cursor: pointer;
-    border-color: $white;
-    border: .2rem solid;
+    border: .2rem $white solid;
     border-radius: .5rem;
     box-shadow: 0 0 0 2px $gray-200;
     transition: .25s ease-in-out;
@@ -75,10 +74,8 @@ export default {
   }
 
   .white-bg {
-    color: $white;
-    background: $gradient;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: $gray-900;
+    background: $white;
   }
 }
 

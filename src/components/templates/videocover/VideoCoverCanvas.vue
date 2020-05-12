@@ -3,34 +3,37 @@
     :id="'bannerCanvas' + aspect"
     :class="[
       'banner-canvas',
-      'aspect-' + aspect,
-      aspect === '11' ? 'disposition-' + banner.disposition : '',
-      banner.localLabel && banner.hasLocalLabel ? 'has-local-label' : '',
-      'blobs-' + color,
-      'border-' + banner.frameColor
+      'aspect-' + aspect
     ]"
     v-if="banner">
-    <div class="blob blob-image">
+    <div :class="['background-frame', `frame-${banner.frameColor}`]"></div>
+    <div class="background-image">
       <img :src="banner.picturePreview" alt="Imatge" v-if="banner.picturePreview" :style="objectPosition" />
     </div>
-    <div class="text" :style="{ alignItems: banner.textPos, textAlign: banner.textAlign }">
-      <div class="text-wrapper">
-        <div class="text-holder text-holder-secondary" contenteditable v-if="banner.textSecondary">
-          <div :class="['text-lines', 'text-lines-' + banner.textSecondaryColor]" :style="{ fontSize: aspect === '11' ? fontSize('text', 60, 35, 80, banner.textSize) : fontSize('text', 70, 25, 110, banner.textSize) }"><span>{{ banner.textSecondary | formatString }}</span></div>
-        </div>
-        <div class="text-holder" contenteditable v-if="banner.text">
-          <div :class="['text-lines', 'text-lines-' + banner.textColor]" :style="{ fontSize: aspect === '11' ? fontSize('text', 80, 35, 110, banner.textSize) : fontSize('text', 70, 25, 110, banner.textSize) }"><span>{{ banner.text | formatString }}</span></div>
-        </div>
+    <div class="text" :style="{ alignItems: banner.textPos, justifyContent, textAlign: banner.textAlign }">
+      <div class="text-wrapper" :style="{ fontSize: fontSizeSecondary }">
+        <text-in-pills
+          class="text-secondary"
+          v-if="banner.textSecondary"
+          :text="banner.textSecondary"
+          :font-size="fontSizeSecondary"
+          :pill-style="banner.textSecondaryColor"
+          :text-align="banner.textAlign" />
+        <text-in-pills
+          v-if="banner.text"
+          :text="banner.text"
+          :font-size="fontSizePrimary"
+          :pill-style="banner.textColor"
+          :text-align="banner.textAlign" />
       </div>
     </div>
     <emojis-in-canvas v-model="banner.emojis" />
-    <goo-filter />
   </div>
 </template>
 
 <script>
 import CanvasMixin from '@/mixins/canvas-mixin.js'
-import GooFilter from '@/utils/GooFilter'
+import TextInPills from '@/utils/TextInPills'
 import EmojisInCanvas from '@/utils/EmojisInCanvas'
 
 export default {
@@ -39,8 +42,29 @@ export default {
   mixins: [CanvasMixin],
 
   components: {
-    GooFilter,
+    TextInPills,
     EmojisInCanvas
+  },
+
+  computed: {
+    justifyContent () {
+      const values = { left: 'flex-start', center: 'center', right: 'flex-end' }
+      return values[this.banner.textAlign]
+    },
+
+    fontSizePrimary () {
+      const { aspect, banner, fontSize } = this
+      return aspect === '11'
+        ? fontSize('text', 80, 40, 70, banner.textSize)
+        : fontSize('text', 70, 30, 70, banner.textSize)
+    },
+
+    fontSizeSecondary () {
+      const { aspect, banner, fontSize } = this
+      return aspect === '11'
+        ? fontSize('text', 40, 30, 70, banner.textSize)
+        : fontSize('text', 35, 25, 70, banner.textSize)
+    }
   }
 }
 
@@ -49,139 +73,86 @@ export default {
 <style lang="scss" scoped>
   @import "../../../sass/variables";
 
-  .banner-canvas {
-    border: 20px solid white;
-    box-sizing: border-box;
-  }
-
-  .border {
-    &-black {
-      border-color: $gray-darkest;
-    }
-
-    &-orange {
-      border-image-slice: 1;
-      border-image-source: $gradient;
-    }
-
-    &-white {
-      border-color:  $white;
-    }
-  }
-
   .text {
     display: flex;
     position: absolute;
     top: 80px;
     bottom: 80px;
-    left: 0;
-    z-index: 30;
-    width: 100%;
+    left: 65px;
+    right: 65px;
     transition: all .5s ease-in-out;
 
     &-wrapper {
-      width: 100%;
+      position: relative;
+      z-index: 30;
+      max-width: 80%;
     }
 
-    &-holder {
-      width: 100%;
-      padding: 0 45px;
-      -webkit-line-break: normal;
-
-      &-secondary {
-        margin-bottom: 1rem;
-      }
-    }
-
-    &-lines {
-      font-size: 45px;
-      line-height: 1.25;
-      padding: 0 10px;
-      letter-spacing: -1px;
-      display: inline;
-      white-space: pre-wrap;
-      word-wrap: break-word;
-      font-family: $family-primary;
-      font-weight: bold;
-      box-decoration-break: clone;
-      -webkit-box-decoration-break: clone;
-      -webkit-line-break: normal;
-      filter: url('#goo');
-
-      &-black {
-        background: $gray-darkest;
-        color: $white;
-      }
-
-      &-orange {
-        background: $gradient;
-        color: $white;
-        background-attachment:fixed;
-      }
-
-      &-white {
-        background-color:  $white;
-
-        span {
-          background: $gradient;
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-
-        }
-      }
+    &-secondary {
+      margin-bottom: 0.5em;
     }
   }
 
-  .blob {
-    &-image {
-      top: 0;
-      left: 0;
-      bottom: 0;
-      right: 0;
+  .background-image {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    bottom: 30px;
+    right: 30px;
+    z-index: 10;
+    background: $gray-300;
+    pointer-events: none;
+
+    img {
+      width: 100%;
       height: 100%;
-      width: 100%;
-      z-index: 10;
-      background: $gray-300;
-      transform: rotate(0);
-      border-radius: 0;
-
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transform: rotate(0);
-      }
+      object-fit: cover;
     }
   }
 
-  .logo {
-    color: $white;
-    z-index: 20;
+  .background-frame {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 5;
+    border: 30px solid white;
+    box-sizing: border-box;
+    z-index: 40;
+    pointer-events: none;
 
-    &-local-label {
-      color: $white;
+    &.frame-black {
+      border-color: $gray-darkest;
+    }
+
+    &.frame-orange {
+      border-image-slice: 1;
+      border-image-source: $gradient;
+    }
+
+    &.frame-white {
+      border-color:  $white;
     }
   }
 
-  .hashtag {
-    top: 20px;
-    left: 35px;
-    bottom: auto;
-  }
+  .banner-aspect-event {
+    .text {
+      top: 55px;
+      bottom: 55px;
+      left: 50px;
+      right: 50px;
+    }
 
-  // Story aspect
-  .aspect-916 {
-    .quote {
-      top: 370px;
+    .background-frame {
+      border-width: 25px;
+    }
 
-      &-glyph {
-        top: -105px;
-        font-size: 140px;
-      }
-
-      &-text {
-        font-size: 28px;
-      }
+    .background-image {
+      top: 25px;
+      bottom: 25px;
+      left: 25px;
+      right: 25px;
     }
   }
 </style>

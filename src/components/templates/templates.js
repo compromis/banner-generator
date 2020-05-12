@@ -120,6 +120,7 @@ export default [
     name: 'Portada de vídeo',
     aspects: ['11', 'event'],
     icon: 'play',
+    label: '✨Nou',
     components: {
       pane: () => import(/* webpackChunkName: "videocover" */ './videocover/VideoCoverPane'),
       canvas: () => import(/* webpackChunkName: "videocover" */ './videocover/VideoCoverCanvas'),
