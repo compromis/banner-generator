@@ -114,5 +114,17 @@ export default [
       canvas: () => import(/* webpackChunkName: "social" */ './social/SocialCanvas'),
       help: () => import(/* webpackChunkName: "social" */ './social/SocialHelp')
     }
+  },
+  {
+    id: 'Superavit',
+    name: 'Superàvit local',
+    aspects: ['11'],
+    icon: 'euro-sign',
+    label: '🦠 COVID-19',
+    components: {
+      pane: () => import(/* webpackChunkName: "superavit" */ './superavit/SuperavitPane'),
+      canvas: () => import(/* webpackChunkName: "superavit" */ './superavit/SuperavitCanvas'),
+      help: () => import(/* webpackChunkName: "superavit" */ './superavit/SuperavitHelp')
+    }
   }
 ]

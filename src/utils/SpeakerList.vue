@@ -1,20 +1,21 @@
 <template>
   <div :class="{
+    'speaker-list': true,
     'accepts-description': acceptsDescription,
     'accepts-picture': acceptsPicture
   }">
-    <label class="label">Ponents</label>
+    <label class="label">{{ label }}</label>
     <ul class="speakers">
       <li v-for="(speaker, i) in speakers" :key="i" class="speaker-item">
         <b-field class="speaker-name" :type="speaker.name ? '' : displayErrors ? 'is-danger' : ''">
           <b-input
-            placeholder="Nom del ponent"
+            :placeholder="placeholder"
             :ref="`speaker${i}`"
             :name="`speaker${i}`"
             v-model="speaker.name"
             @keyup.enter.native="addSpeaker"
             size="is-small"
-            icon="user"
+            :icon="icon"
             :maxlength="maxLengthName">
           </b-input>
         </b-field>
@@ -55,7 +56,7 @@
       </li>
     </ul>
     <div v-if="speakers.length < maxSpeakers" class="speakers-add">
-      <b-button @click="addSpeaker" size="is-small" rounded icon-left="plus">Afegeix ponent</b-button>
+      <b-button @click="addSpeaker" size="is-small" rounded icon-left="plus">{{ labelAdd }}</b-button>
     </div>
   </div>
 </template>
@@ -96,6 +97,22 @@ export default {
     displayErrors: {
       type: Boolean,
       default: false
+    },
+    label: {
+      type: String,
+      default: 'Ponents'
+    },
+    labelAdd: {
+      type: String,
+      default: 'Afegeix ponent'
+    },
+    placeholder: {
+      type: String,
+      default: 'Nom del ponent'
+    },
+    icon: {
+      type: String,
+      default: 'user'
     }
   },
 
@@ -143,6 +160,10 @@ export default {
 
 <style lang="scss">
   @import "../sass/variables";
+
+  .speaker-list {
+    margin-bottom: 1rem;
+  }
 
   .speakers {
     margin-bottom: .75rem;
