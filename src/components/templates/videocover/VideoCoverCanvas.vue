@@ -3,10 +3,10 @@
     :id="'bannerCanvas' + aspect"
     :class="[
       'banner-canvas',
-      'aspect-' + aspect
+      'aspect-' + aspect,
+      'border-' + banner.frameColor
     ]"
     v-if="banner">
-    <div :class="['background-frame', `frame-${banner.frameColor}`]"></div>
     <div class="background-image">
       <img :src="banner.picturePreview" alt="Imatge" v-if="banner.picturePreview" :style="objectPosition" />
     </div>
@@ -102,6 +102,9 @@ export default {
     z-index: 10;
     background: $gray-300;
     pointer-events: none;
+    border-radius: 20px;
+    overflow: hidden;
+    transition: .15s ease-in-out;
 
     img {
       width: 100%;
@@ -110,38 +113,16 @@ export default {
     }
   }
 
-  .background-frame {
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    z-index: 5;
-    z-index: 40;
-    pointer-events: none;
-    mix-blend-mode: multiply;
+  .border-black {
+    background: $gray-darkest;
+  }
 
-    &.frame-black {
-      background: $gray-darkest;
-    }
+  .border-orange {
+    background: $gradient;
+  }
 
-    &.frame-orange {
-      background: $gradient;
-    }
-
-    &.frame-white {
-      background:  $white;
-    }
-
-    &::after {
-      content: '';
-      position: absolute;
-      top: 30px;
-      left: 30px;
-      bottom: 30px;
-      right: 30px;
-      background: white;
-    }
+  .border-white {
+    background:  $white;
   }
 
   .banner-aspect-event {
@@ -152,15 +133,12 @@ export default {
       right: 50px;
     }
 
-    .background-frame {
-      border-width: 25px;
-    }
-
     .background-image {
       top: 25px;
       bottom: 25px;
       left: 25px;
       right: 25px;
+      border-radius: 15px;
     }
   }
 </style>
