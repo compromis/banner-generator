@@ -1,6 +1,6 @@
 <template>
   <div v-if="text" :class="['text-holder', `text-${pillStyle}`, `text-align-${textAlign}`]" contenteditable>
-    <span class="text-lines" :style="{ fontSize, textAlign }">{{ text }}</span>
+    <span class="text-lines" :style="{ fontSize, textAlign, '--bg-width': `${width}px` }">{{ text }}</span>
     <svg style="visibility: hidden; position: absolute;" width="0" height="0" xmlns="http://www.w3.org/2000/svg" version="1.1">
       <defs>
           <filter id="goo">
@@ -30,6 +30,10 @@ export default {
     pillStyle: {
       type: String,
       default: 'white'
+    },
+    width: {
+      type: Number,
+      default: 600
     }
   }
 }
@@ -67,9 +71,9 @@ export default {
       color: white;
       padding: .05em .25em;
       border-radius: 4px;
-      background: linear-gradient(to right, $gradient-start 0, $gradient-end 600px);
+      background: linear-gradient(to right, $gradient-start 0, $gradient-end var(--bg-width, 600px));
       background-position: left;
-      background-size: 600px;
+      background-size: var(--bg-width, 600px);
       background-blend-mode: lighten;
       letter-spacing: -0.03em;
       line-height: 1.2;

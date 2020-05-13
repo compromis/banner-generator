@@ -18,13 +18,15 @@
           :text="banner.textSecondary"
           :font-size="fontSizeSecondary"
           :pill-style="banner.textSecondaryColor"
-          :text-align="banner.textAlign" />
+          :text-align="banner.textAlign"
+          :width="450" />
         <text-in-pills
           v-if="banner.text"
           :text="banner.text"
           :font-size="fontSizePrimary"
           :pill-style="banner.textColor"
-          :text-align="banner.textAlign" />
+          :text-align="banner.textAlign"
+          :width="450" />
       </div>
     </div>
     <emojis-in-canvas v-model="banner.emojis" />
@@ -85,7 +87,7 @@ export default {
     &-wrapper {
       position: relative;
       z-index: 30;
-      max-width: 80%;
+      max-width: 450px;
     }
 
     &-secondary {
