@@ -1,37 +1,11 @@
-@font-face {
-  font-family: "Compromis";
-  src:
-    url("../assets/fonts/manrope-medium.woff2") format("woff2"),
-    url("../assets/fonts/manrope-medium.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Compromis";
-  src:
-    url("../assets/fonts/manrope-extrabold.woff2") format("woff2"),
-    url("../assets/fonts/manrope-extrabold.ttf") format("truetype");
-  font-weight: bold;
-  font-style: normal;
-}
-
-
 @import "variables";
+@import "fonts";
 @import "animations";
 @import "~bulma";
 @import "~buefy/src/scss/buefy";
 @import "pane";
 @import "easteregg";
 
-.banner {
-  position: fixed;
-  z-index: 10000;
-  border: 2px black solid;
-}
-
-@media (max-width: $xl-breakpoint + 150) and (min-width: $xs-breakpoint) {
-  html {
-    font-size: 14px;
-  }
+html {
+  font-size: 14px;
 }

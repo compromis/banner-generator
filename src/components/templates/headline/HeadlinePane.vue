@@ -214,11 +214,5 @@ export default {
         margin-right: .5rem;
       }
     }
-
-    .vue-swatches__trigger {
-      height: 36px !important;
-      width: 36px !important;
-      border-radius: 4px !important;
-    }
   }
 </style>
