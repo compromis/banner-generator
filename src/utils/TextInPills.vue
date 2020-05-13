@@ -85,4 +85,10 @@ export default {
       filter: url('#goo');
     }
   }
+
+ @supports (-moz-appearance:none) {
+    .text-lines {
+      line-height: 1.33;
+    }
+  }
 </style>
