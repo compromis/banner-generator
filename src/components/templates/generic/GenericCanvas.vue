@@ -14,16 +14,16 @@
     </div>
     <div class="blob blob-1"></div>
     <div class="blob blob-2"></div>
-    <div class="text" v-if="banner.text" :style="{ alignItems: banner.textPos, justifyContent, textAlign: banner.textAlign }">
+    <div class="text" v-if="banner.text" :style="{ alignItems: banner.textPos, textAlign: banner.textAlign }">
       <text-in-pills
         v-if="banner.text"
-        :text="banner.text"
+        :text="$options.filters.formatString(banner.text)"
         :pill-style="banner.textColor"
         :text-align="banner.textAlign"
         :font-size="fontSizePrimary"
-        :width="1000" />
+        :width="720" />
     </div>
-    <emojis-in-canvas v-model="banner.emojis" />
+    <emojis-on-canvas v-model="banner.emojis" />
     <div class="logo">
       <compromis-logo :mono="true" />
       <div :class="{ 'logo-local-label': true, 'logo-local-label--long': banner.localLabel.length > 18 }" v-if="banner.localLabel && banner.hasLocalLabel">
@@ -38,7 +38,7 @@
 
 <script>
 import CanvasMixin from '@/mixins/canvas-mixin'
-import EmojisInCanvas from '@/utils/EmojisInCanvas'
+import EmojisOnCanvas from '@/utils/EmojisOnCanvas'
 import TextInPills from '@/utils/TextInPills'
 
 export default {
@@ -47,7 +47,7 @@ export default {
   mixins: [CanvasMixin],
 
   components: {
-    EmojisInCanvas,
+    EmojisOnCanvas,
     TextInPills
   },
 
@@ -70,14 +70,10 @@ export default {
     position: absolute;
     top: 155px;
     bottom: 175px;
-    left: 0;
+    left: 45px;
+    right: 45px;
     z-index: 30;
-    width: 100%;
     transition: all .5s ease-in-out;
-
-    &-holder {
-      padding: 0 45px;
-    }
   }
 
   .blob {

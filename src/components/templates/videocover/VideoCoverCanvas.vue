@@ -15,28 +15,28 @@
         <text-in-pills
           class="text-secondary"
           v-if="banner.textSecondary"
-          :text="banner.textSecondary"
+          :text="$options.filters.formatString(banner.textSecondary)"
           :font-size="fontSizeSecondary"
           :pill-style="banner.textSecondaryColor"
           :text-align="banner.textAlign"
           :width="450" />
         <text-in-pills
           v-if="banner.text"
-          :text="banner.text"
+          :text="$options.filters.formatString(banner.text)"
           :font-size="fontSizePrimary"
           :pill-style="banner.textColor"
           :text-align="banner.textAlign"
           :width="450" />
       </div>
     </div>
-    <emojis-in-canvas v-model="banner.emojis" />
+    <emojis-on-canvas v-model="banner.emojis" />
   </div>
 </template>
 
 <script>
 import CanvasMixin from '@/mixins/canvas-mixin.js'
 import TextInPills from '@/utils/TextInPills'
-import EmojisInCanvas from '@/utils/EmojisInCanvas'
+import EmojisOnCanvas from '@/utils/EmojisOnCanvas'
 
 export default {
   name: 'video-cover-canvas',
@@ -45,7 +45,7 @@ export default {
 
   components: {
     TextInPills,
-    EmojisInCanvas
+    EmojisOnCanvas
   },
 
   computed: {
