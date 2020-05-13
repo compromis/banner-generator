@@ -14,10 +14,14 @@
     </div>
     <div class="blob blob-1"></div>
     <div class="blob blob-2"></div>
-    <div class="text" v-if="banner.text" :style="{ alignItems: banner.textPos, textAlign: banner.textAlign }">
-      <div class="text-holder" contenteditable>
-        <div class="text-lines" :style="{ fontSize: aspect === '11' ? fontSize('text', 80, 35, 110, banner.textSize) : fontSize('text', 70, 25, 110, banner.textSize) }">{{ banner.text | formatString }}</div>
-      </div>
+    <div class="text" v-if="banner.text" :style="{ alignItems: banner.textPos, justifyContent, textAlign: banner.textAlign }">
+      <text-in-pills
+        v-if="banner.text"
+        :text="banner.text"
+        :pill-style="banner.textColor"
+        :text-align="banner.textAlign"
+        :font-size="fontSizePrimary"
+        :width="1000" />
     </div>
     <emojis-in-canvas v-model="banner.emojis" />
     <div class="logo">
@@ -35,6 +39,7 @@
 <script>
 import CanvasMixin from '@/mixins/canvas-mixin'
 import EmojisInCanvas from '@/utils/EmojisInCanvas'
+import TextInPills from '@/utils/TextInPills'
 
 export default {
   name: 'generic-canvas',
@@ -42,7 +47,17 @@ export default {
   mixins: [CanvasMixin],
 
   components: {
-    EmojisInCanvas
+    EmojisInCanvas,
+    TextInPills
+  },
+
+  computed: {
+    fontSizePrimary () {
+      const { aspect, banner, fontSize } = this
+      return aspect === '11'
+        ? fontSize('text', 80, 35, 110, banner.textSize)
+        : fontSize('text', 70, 25, 110, banner.textSize)
+    }
   }
 }
 </script>
@@ -61,27 +76,7 @@ export default {
     transition: all .5s ease-in-out;
 
     &-holder {
-      width: 100%;
       padding: 0 45px;
-      -webkit-line-break: normal;
-    }
-
-    &-lines {
-      font-size: 45px;
-      line-height: 1.42;
-      color: white;
-      padding: 0 10px;
-      border-radius: 2px;
-      background: linear-gradient(45deg,$gradient-start,$gradient-end);
-      letter-spacing: -1px;
-      display: inline;
-      white-space: pre-wrap;
-      word-wrap: break-word;
-      font-family: $family-primary;
-      font-weight: bold;
-      box-decoration-break: clone;
-      -webkit-box-decoration-break: clone;
-      -webkit-line-break: normal;
     }
   }
 

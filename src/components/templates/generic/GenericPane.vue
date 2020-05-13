@@ -6,6 +6,9 @@
         <b-input type="textarea" placeholder="48152342 usuaris de bicicleta en 2023" v-model="properties.text" maxlength="100"></b-input>
       </b-field>
 
+      <!-- Text Color -->
+      <color-selector v-model="properties.textColor" />
+
       <!-- Text align -->
       <b-field label="Alineació del text" class="text-align-group">
         <b-tabs @change="updateTextAlign" :value="1" class="text-align" type="is-toggle" size="is-small" expanded>
@@ -95,6 +98,7 @@
 <script>
 import PaneMixin from '@/mixins/pane-mixin'
 import EmojiPicker from '@/utils/EmojiPicker'
+import ColorSelector from '@/utils/ColorSelector'
 
 export default {
   name: 'generic-pane',
@@ -102,7 +106,8 @@ export default {
   mixins: [PaneMixin],
 
   components: {
-    EmojiPicker
+    EmojiPicker,
+    ColorSelector
   },
 
   data () {
@@ -114,7 +119,8 @@ export default {
         textPosI: 1,
         textAlignI: 1,
         textSize: 100,
-        emojis: []
+        emojis: [],
+        textColor: 'black'
       }
     }
   },
