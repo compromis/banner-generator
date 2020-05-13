@@ -2,7 +2,7 @@
   <div class="field emoji-picker">
     <label class="label">Emojis</label>
     <twemoji-picker
-      :pickerWidth="320"
+      :pickerWidth="260"
       :pickerHeight="220"
       :emojiData="emojiAllData"
       :emojiGroups="emojiGroups"
