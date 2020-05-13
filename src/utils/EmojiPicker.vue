@@ -1,5 +1,5 @@
 <template>
-  <div class="emoji-picker">
+  <div class="field emoji-picker">
     <label class="label">Emojis</label>
     <twemoji-picker
       :pickerWidth="320"

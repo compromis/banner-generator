@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="field">
     <label class="label" v-show="label">{{ label }}</label>
     <ul :class="{'color-selector': true, 'rounded' : isRounded }">
       <li :class="{'black-bg' : true, 'active': value === 'black' }" @click="$emit('input', 'black')"><span v-if="!isRounded">Aa</span></li>
