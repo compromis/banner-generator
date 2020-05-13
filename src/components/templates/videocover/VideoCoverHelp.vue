@@ -1,26 +1,25 @@
 <template>
   <div>
     <p>
-      Aquesta tarja serveix per a <strong>difondre un missatge genèric a xarxes</strong>,
-      que no puga ser difós amb la resta de models de tarja.
+      Aquesta tarja serveix per a <strong>crear una portada</strong> per a vídeos a compartir en xarxes socials.
     </p>
     <p>
-      Recomanem usar una <strong>foto representativa</strong> de la temàtica del missatge, i una frase curta i directa.
+      Recomanem usar com a foto un <strong>fotograma representatiu</strong> del vídeo.
     </p>
     <p>
-      És pot afegir, si és adient, un hashtag relacionat amb la temàtica, així com el nom del col·lectiu al costat del logo, utilizant els camps "hashtag" i "afegir text al logo".
+      És pot afegir, si és adient, un títol que capte l'atenció i emojis per transmetre emoció.
     </p>
     <p>
       Aquest model de tarja accepta els següents formats:
     </p>
     <ul>
-      <li><strong>1:1</strong>: model genèric per a compartir en la majoria de xarxes socials (Facebook, Instagram, Twitter, canals de Telegram i Whatsapp, etc.).</li>
-      <li><strong>9:16</strong>: model per a stories (Instagram, Facebook, Whatsapp). Aquest model no inclou el logo de Comporomís perquè ja és mostra a la part superior esquerra quan es comparteix en l'aplicació. Per favor, no l'afegiu. Recomanem no posar text a aquest model, i fer-ho amb les ferramentes natives de cada apliació.</li>
+      <li><strong>1:1</strong>: Portada per a videos quadrats (Facebook, Instagram, canals de Telegram i Whatsapp, etc.).</li>
+      <li><strong>16:9</strong>: Portada per a videos panoràmics (Instagram, Twitter).</li>
     </ul>
 
     <div class="help-examples">
       <img src="./examples/11.png" alt="Exemple 1:1" />
-      <img src="./examples/916.png" alt="Exemple 9:16" />
+      <img src="./examples/169.png" alt="Exemple 16:9" />
     </div>
   </div>
 </template>
