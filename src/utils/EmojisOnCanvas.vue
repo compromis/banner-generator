@@ -25,7 +25,7 @@
 import drr from '@minogin/vue-drag-resize-rotate'
 
 export default {
-  name: 'emojis-in-canvas',
+  name: 'emojis-on-canvas',
 
   components: {
     drr
