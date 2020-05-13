@@ -121,6 +121,7 @@ export default [
     aspects: ['11', 'event'],
     icon: 'play',
     label: '✨Nou',
+    hidden: true,
     components: {
       pane: () => import(/* webpackChunkName: "videocover" */ './videocover/VideoCoverPane'),
       canvas: () => import(/* webpackChunkName: "videocover" */ './videocover/VideoCoverCanvas'),
