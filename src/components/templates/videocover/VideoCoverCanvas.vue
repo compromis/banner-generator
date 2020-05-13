@@ -76,10 +76,10 @@ export default {
   .text {
     display: flex;
     position: absolute;
-    top: 80px;
-    bottom: 80px;
-    left: 65px;
-    right: 65px;
+    top: 85px;
+    bottom: 85px;
+    left: 70px;
+    right: 70px;
     transition: all .5s ease-in-out;
 
     &-wrapper {
@@ -95,10 +95,10 @@ export default {
 
   .background-image {
     position: absolute;
-    top: 30px;
-    left: 30px;
-    bottom: 30px;
-    right: 30px;
+    top: 35px;
+    left: 35px;
+    bottom: 35px;
+    right: 35px;
     z-index: 10;
     background: $gray-300;
     pointer-events: none;
@@ -127,17 +127,17 @@ export default {
 
   .banner-aspect-event {
     .text {
-      top: 55px;
-      bottom: 55px;
-      left: 50px;
-      right: 50px;
+      top: 60px;
+      bottom: 60px;
+      left: 55px;
+      right: 55px;
     }
 
     .background-image {
-      top: 25px;
-      bottom: 25px;
-      left: 25px;
-      right: 25px;
+      top: 30px;
+      bottom: 30px;
+      left: 30px;
+      right: 30px;
       border-radius: 15px;
     }
   }
