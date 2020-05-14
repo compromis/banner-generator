@@ -3,7 +3,7 @@
     <label class="label" v-show="label">{{ label }}</label>
     <ul :class="{'color-selector': true, 'rounded' : isRounded }">
       <li :class="{'black-bg' : true, 'active': value === 'black' }" @click="$emit('input', 'black')"><span v-if="!isRounded">Aa</span></li>
-      <li :class="{'white-bg' : true, 'active': value === 'white' }" @click="$emit('input', 'white')"><span v-if="!isRounded">Aa</span></li>
+      <li v-if="!disableWhite" :class="{'white-bg' : true, 'active': value === 'white' }" @click="$emit('input', 'white')"><span v-if="!isRounded">Aa</span></li>
       <li :class="{'orange-bg' : true, 'active': value === 'orange' }" @click="$emit('input', 'orange')"><span v-if="!isRounded">Aa</span></li>
     </ul>
   </div>
@@ -23,6 +23,10 @@ export default {
       default: ''
     },
     isRounded: {
+      type: Boolean,
+      default: false
+    },
+    disableWhite: {
       type: Boolean,
       default: false
     }

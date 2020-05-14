@@ -16,11 +16,15 @@
     <div class="blob blob-1"></div>
     <div class="blob blob-2"></div>
     <div class="quote">
-      <div class="quote-glyph">“</div>
+      <div :class="['quote-glyph', 'quote-glyph-' + banner.textColor ]" >“</div>
       <div class="quote-text-wrapper">
-        <div class="quote-text" :style="{fontSize: aspect === '11' ? fontSize('quote', 47, 30, 140) : fontSize('quote', 47, 20, 140)}">
-          {{ banner.quote | formatString }}<span v-if="!['?','!','.'].includes(banner.quote.substring(banner.quote.length - 1, banner.quote.length))">.</span><span>”</span>
-        </div>
+        <text-in-pills
+        v-if="banner.quote"
+        :text="$options.filters.formatString($options.filters.formatQuote(banner.quote))"
+        :pill-style="banner.textColor"
+        :font-size="fontSizePrimary"
+        :text-align="textAlign"
+        :width="700" />
       </div>
       <div class="quote-author">{{ banner.author | formatString }}</div>
     </div>
@@ -35,11 +39,30 @@
 
 <script>
 import CanvasMixin from '@/mixins/canvas-mixin.js'
+import TextInPills from '@/utils/TextInPills'
 
 export default {
   name: 'quote-canvas',
 
-  mixins: [CanvasMixin]
+  mixins: [CanvasMixin],
+
+  components: {
+    TextInPills
+  },
+
+  computed: {
+    fontSizePrimary () {
+      const { aspect, banner, fontSize } = this
+      return aspect === '11'
+        ? fontSize('quote', 80, 35, 110, banner.textSize)
+        : fontSize('quote', 70, 25, 110, banner.textSize)
+    },
+    textAlign () {
+      return this.banner.disposition === 0
+        ? 'left'
+        : 'right'
+    }
+  }
 }
 </script>
 
@@ -84,11 +107,22 @@ export default {
 
     &-glyph {
       font-size: 170px;
-      color: $gradient-start;
       font-weight: bold;
       margin-bottom: -134px;
-      margin-left: -10px;
+      margin-left: -24px;
       margin-top: -58px;
+
+      &-black {
+        color: $gray-darkest;
+      }
+
+      &-white {
+        color: $white;
+      }
+
+      &-orange {
+        color: $gradient-start;
+      }
     }
 
     &-author {
@@ -196,8 +230,11 @@ export default {
       }
 
       &-glyph {
-        margin-right: -20px;
-        color: #eb7a24;
+        margin-right: -12px;
+
+        &-orange {
+          color: $gradient-end;
+        }
       }
 
       &-author {
@@ -247,10 +284,6 @@ export default {
       &-text {
         background: $white;
         color: $gray-900;
-      }
-
-      &-glyph {
-        color: $white;
       }
 
       &-author {

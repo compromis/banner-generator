@@ -31,6 +31,14 @@ export default {
       return moment(time).format('H:mm')
     },
 
+    formatQuote (quote) {
+      if (!['?', '!', '.'].includes(quote.substring(quote.length - 1, quote.length))) {
+        return quote + '.”'
+      } else {
+        return quote + '”'
+      }
+    },
+
     formatString (string) {
       if (string.includes('graphic design is my passion')) {
         const body = document.getElementsByTagName('body')[0]

@@ -37,6 +37,8 @@
       </b-input>
     </b-field>
 
+    <color-selector v-model="properties.textColor" :disableWhite="!properties.card" />
+
     <!-- Author -->
     <b-field
       label="Autor i/o mitjà"
@@ -90,6 +92,7 @@
 
 <script>
 import PaneMixin from '@/mixins/pane-mixin.js'
+import ColorSelector from '@/utils/ColorSelector'
 
 export default {
   name: 'quote-pane',
@@ -100,7 +103,8 @@ export default {
     return {
       properties: {
         quote: '',
-        author: ''
+        author: '',
+        textColor: 'black'
       }
     }
   },
@@ -114,6 +118,10 @@ export default {
       this.pictureRequired()
       this.allCapsDisallowed('quote', 'author')
     }
+  },
+
+  components: {
+    ColorSelector
   }
 }
 </script>
