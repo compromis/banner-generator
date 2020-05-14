@@ -24,7 +24,7 @@
         :pill-style="banner.textColor"
         :font-size="fontSizePrimary"
         :text-align="textAlign"
-        :width="700" />
+        :width="500" />
       </div>
       <div class="quote-author">{{ banner.author | formatString }}</div>
     </div>
@@ -54,11 +54,11 @@ export default {
     fontSizePrimary () {
       const { aspect, banner, fontSize } = this
       return aspect === '11'
-        ? fontSize('quote', 80, 35, 110, banner.textSize)
-        : fontSize('quote', 70, 25, 110, banner.textSize)
+        ? fontSize('quote', 60, 35, 110, banner.textSize)
+        : fontSize('quote', 50, 25, 110, banner.textSize)
     },
     textAlign () {
-      return this.banner.disposition === 0
+      return this.banner.disposition === 0 || this.aspect === '916'
         ? 'left'
         : 'right'
     }
@@ -342,6 +342,11 @@ export default {
     }
 
     &.aspect-916 {
+      .cards .quote {
+        bottom: 115px;
+        top: auto;
+      }
+
       .blob {
         &-1 {
           left: -118%;

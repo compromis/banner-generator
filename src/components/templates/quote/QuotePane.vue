@@ -37,7 +37,7 @@
       </b-input>
     </b-field>
 
-    <color-selector v-model="properties.textColor" :disableWhite="!properties.card" />
+    <color-selector v-model="properties.textColor" :disable-white="!properties.card" />
 
     <!-- Author -->
     <b-field
@@ -104,8 +104,21 @@ export default {
       properties: {
         quote: '',
         author: '',
-        textColor: 'black'
+        textColor: 'white'
       }
+    }
+  },
+
+  // Prevent white text on no-cards
+  // when user transitions from white text on cards to no-cards
+  watch: {
+    properties: {
+      handler: function (props) {
+        if (props.card === 0 && props.textColor === 'white') {
+          this.properties.textColor = 'orange'
+        }
+      },
+      deep: true
     }
   },
 
