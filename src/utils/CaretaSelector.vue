@@ -10,6 +10,9 @@
       <li :class="{'lgtb' : true, 'active': value === 'lgtb'}" @click="$emit('input', 'lgtb')">
           <careta v-if="!isRounded" logo-style="lgtb"></careta>
       </li>
+      <li v-if="!isRounded" :class="{'mono' : true, 'active': value === 'mono'}" @click="$emit('input', 'mono')">
+          <careta logo-style="mono"></careta>
+      </li>
     </ul>
     <b-message v-if="value === 'feminista' && isRounded === false" type="is-warning" size="is-small">
       El logo Compromís Feminista està pensat per ser utilitzat a les xarxes únicament
@@ -18,6 +21,9 @@
     <b-message v-if="value === 'lgtb' && isRounded === false" type="is-warning" size="is-small">
       El logo Compromís LGTB està pensat per ser utilitzat a les xarxes únicament
       durant el mes de l'orgull o altres dates simbòliques del moviment LGTB.
+    </b-message>
+    <b-message v-if="value === 'dol' && isRounded === false" type="is-warning" size="is-small">
+      Aquesta versió del logo està reservada per a dies de dol.
     </b-message>
   </div>
 </template>
@@ -56,7 +62,6 @@ export default {
   li {
     border: .25rem solid $gray-200;
     border-radius: .5rem;
-    background: $gray-200;
     transition: .25s ease-in-out;
 
     svg {
