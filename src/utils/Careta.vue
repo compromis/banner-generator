@@ -29,7 +29,8 @@
         c21.4,0,34.5-5.2,50.5-16.6l6.2,7.9C128.1,115.8,109.9,122.7,87.5,122.7z"
       />
     </g>
-    <g v-if="logoStyle === 'mono'">
+    <g v-if="logoStyle === 'mono' || logoStyle === 'dol'">
+      <rect v-if="logoStyle === 'dol'" x="20.5" y="17.5" class="st0" width="133" height="128" />
       <path
         fill="currentColor"
         d="M150.5,0.3H24.5c-9.4,0-17,7.6-17,17v126.1c0,9.4,7.6,17,17,17h126.1c9.4,0,17-7.6,17-17V17.3
@@ -96,7 +97,7 @@ export default {
       type: String,
       default: 'normal',
       validator: (value) => {
-        return ['mono', 'normal', 'feminista', 'lgtb'].includes(value)
+        return ['mono', 'normal', 'feminista', 'lgtb', 'dol'].includes(value)
       }
     }
   }
