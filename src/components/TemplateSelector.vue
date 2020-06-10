@@ -8,7 +8,7 @@
             <router-link :to="`/${template.id.toLowerCase()}`" :class="['template-item', `template-item-${template.id.toLowerCase()}`, template['isNew'] ? 'template-item-new' : '']">
               <span class="template-item-label" v-if="'label' in template">{{ template.label }}</span>
               <span class="template-item-icon">
-                <b-icon :icon="template.icon" size="is-large" />
+                <b-icon :icon="template.icon" :pack="'iconPack' in template ? template.iconPack : 'far'" size="is-large" />
               </span>
               <span class="template-item-name">{{ template.name }}</span>
             </router-link>

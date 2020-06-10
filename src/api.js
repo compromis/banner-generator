@@ -36,5 +36,23 @@ export default {
         reject(new Error(error.statusText))
       })
     })
+  },
+
+  fetchTweet: (id) => {
+    return new Promise((resolve, reject) => {
+      fetch('https://services.compromis.net/api/tweet/' + id)
+        .then(response => {
+          if (!response.ok) {
+            throw Error(response.statusText)
+          }
+          return response.json()
+        })
+        .then(data => {
+          resolve(data)
+        })
+        .catch(error => {
+          reject(new Error(error.statusText))
+        })
+    })
   }
 }

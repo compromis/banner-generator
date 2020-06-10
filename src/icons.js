@@ -8,6 +8,9 @@ import {
   faQuestionCircle, faCheckCircle, faColumns, faCircleNotch, faBan, faBringForward, faSendBackward,
   faEuroSign, faHandPointRight, faPlay
 } from '@fortawesome/pro-regular-svg-icons'
+import {
+  faTwitter
+} from '@fortawesome/free-brands-svg-icons'
 
 library.add(
   faUpload, faMobileAndroid, faSquare, faTimes, faPlus, faArrowToBottom,
@@ -16,5 +19,5 @@ library.add(
   faCreditCardBlank, faKeynote, faRectangleLandscape, faAlignLeft, faAlignCenter, faAlignRight,
   faArrowToTop, faGripLines, faBroadcastTower, faFont, faQuoteLeft, faNewspaper, faPortrait, faUserCircle,
   faQuestionCircle, faCheckCircle, faColumns, faCircleNotch, faBan, faBringForward, faSendBackward,
-  faEuroSign, faHandPointRight, faPlay
+  faEuroSign, faHandPointRight, faPlay, faTwitter
 )

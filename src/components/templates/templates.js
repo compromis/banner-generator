@@ -121,7 +121,6 @@ export default [
     aspects: ['11', 'event'],
     icon: 'play',
     label: '✨Nou',
-    hidden: true,
     components: {
       pane: () => import(/* webpackChunkName: "videocover" */ './videocover/VideoCoverPane'),
       canvas: () => import(/* webpackChunkName: "videocover" */ './videocover/VideoCoverCanvas'),
@@ -134,10 +133,24 @@ export default [
     aspects: ['11'],
     icon: 'euro-sign',
     label: '🦠 Covid-19',
+    hidden: true,
     components: {
       pane: () => import(/* webpackChunkName: "superavit" */ './superavit/SuperavitPane'),
       canvas: () => import(/* webpackChunkName: "superavit" */ './superavit/SuperavitCanvas'),
       help: () => import(/* webpackChunkName: "superavit" */ './superavit/SuperavitHelp')
+    }
+  },
+  {
+    id: 'Tweet',
+    name: 'Tweet',
+    aspects: ['11'],
+    icon: 'twitter',
+    iconPack: 'fab',
+    label: 'Nou',
+    components: {
+      pane: () => import(/* webpackChunkName: "tweet" */ './tweet/TweetPane'),
+      canvas: () => import(/* webpackChunkName: "tweet" */ './tweet/TweetCanvas'),
+      help: () => import(/* webpackChunkName: "tweet" */ './tweet/TweetHelp')
     }
   }
 ]
