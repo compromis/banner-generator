@@ -16,52 +16,61 @@
     <div v-if="fetching" class="fetching">Carregant tweet...</div>
 
     <!-- Tweet card -->
-    <div v-if="properties.tweetEmbed" class="tweet-embed mini-card">
-      <div class="tweet-embed-pic"><img :src="properties.tweetEmbed.user.profile_image_url_https" /></div>
-      <div class="tweet-embed-user">
-        <strong>{{ properties.tweetEmbed.user.name }}</strong>
-        <div>@{{ properties.tweetEmbed.user.screen_name }}</div>
-      </div>
-      <div class="tweet-embed-text">{{ properties.tweetEmbed.full_text }}</div>
-      <div class="tweet-embed-remove">
-        <b-button
-          @click="clearTweet"
-          class="remove-image"
-          type="is-danger"
-          size="is-small"
-          icon-right="times">
-        </b-button>
-      </div>
-    </div>
-
-    <!-- Tweet media -->
     <transition name="slide">
-      <div v-if="properties.tweetEmbed && properties.tweetEmbed.entities['media']">
-        <b-switch v-model="properties.showMedia" style="margin-bottom: 1rem">
-          Mostra imatge del tweet
-        </b-switch>
+      <div v-if="properties.tweetEmbed">
+        <!-- Tweet card -->
+        <div class="tweet-embed mini-card">
+          <div class="tweet-embed-pic"><img :src="properties.tweetEmbed.user.profile_image_url_https" /></div>
+          <div class="tweet-embed-user">
+            <strong>{{ properties.tweetEmbed.user.name }}</strong>
+            <div>@{{ properties.tweetEmbed.user.screen_name }}</div>
+          </div>
+          <div class="tweet-embed-text">{{ properties.tweetEmbed.full_text }}</div>
+          <div class="tweet-embed-remove">
+            <b-button
+              @click="clearTweet"
+              class="remove-image"
+              type="is-danger"
+              size="is-small"
+              icon-right="times">
+            </b-button>
+          </div>
+        </div>
 
+        <!-- Tweet media -->
         <transition name="slide">
-          <div v-if="properties.showMedia">
-            <!-- Pictures -->
-            <div class="twitter-media mini-card">
-              <div v-for="(media, i) in properties.tweetEmbed.entities.media" :key="i" class="twitter-media-item">
-                <img :src="media.media_url_https" />
-              </div>
-            </div>
+          <div v-if="properties.tweetEmbed && properties.tweetEmbed.entities['media']">
+            <b-switch v-model="properties.showMedia" style="margin-bottom: 1rem">
+              Mostra imatge del tweet
+            </b-switch>
 
-            <!-- Picture position -->
-            <b-field label="Posició de la imatge" class="range">
-              <range-slider
-                name="points"
-                :min="0"
-                :max="100"
-                v-model="properties.picturePos"
-                @touchstart="dimPane(true)"
-                @touchend="dimPane(false)" />
-            </b-field>
+            <transition name="slide">
+              <div v-if="properties.showMedia">
+                <!-- Pictures -->
+                <div class="twitter-media mini-card">
+                  <div v-for="(media, i) in properties.tweetEmbed.entities.media" :key="i" class="twitter-media-item">
+                    <img :src="media.media_url_https" />
+                  </div>
+                </div>
+
+                <!-- Picture position -->
+                <b-field label="Posició de la imatge" class="range">
+                  <range-slider
+                    name="points"
+                    :min="0"
+                    :max="100"
+                    v-model="properties.picturePos"
+                    @touchstart="dimPane(true)"
+                    @touchend="dimPane(false)" />
+                </b-field>
+              </div>
+            </transition>
           </div>
         </transition>
+
+        <b-switch v-model="properties.showCounts" style="margin-bottom: 1rem">
+            Inclou compte de RTs i Favs
+        </b-switch>
       </div>
     </transition>
 
@@ -106,6 +115,7 @@ export default {
         tweetId: null,
         tweetEmbed: null,
         showMedia: true,
+        showCounts: true,
         backgroundColor: 'orange'
       },
       fetching: false
@@ -143,6 +153,11 @@ export default {
             this.fetching = false
             this.properties.tweetId = id
             this.properties.tweetEmbed = response
+
+            // Default to hide counts if either of them is under 20
+            if (response.retweet_count < 20 || response.favorite_count < 20) {
+              this.properties.showCounts = false
+            }
           })
           .catch(() => {
             this.displayErrors = true

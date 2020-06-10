@@ -3,7 +3,6 @@
     :id="'bannerCanvas' + aspect"
     :class="[
       'banner-canvas',
-      'banner-tweet',
       banner.localLabel && banner.hasLocalLabel ? 'has-local-label' : '',
     ]"
     v-if="banner">
@@ -39,9 +38,9 @@
         <div class="tweet-quote" v-if="banner.tweetEmbed.is_quote_status">
           <div class="tweet-quote-user">
             <img :src="banner.tweetEmbed.quoted_status.user.profile_image_url_https" />
-            {{ banner.tweetEmbed.user.name }}
-            <span v-if="banner.tweetEmbed.quoted_status.user.verified" class="verified"><b-icon icon="badge-check" /> </span>
-            <span class="tweet-user-screen_name">@{{ banner.tweetEmbed.quoted_status.user.screen_name }}</span>
+            <strong>{{ banner.tweetEmbed.quoted_status.user.name }}</strong>
+            <b-icon icon="badge-check" pack="fas" size="is-small" v-if="banner.tweetEmbed.quoted_status.user.verified" />
+            <span class="tweet-quote-user-screen_name">@{{ banner.tweetEmbed.quoted_status.user.screen_name }}</span>
           </div>
           <div class="tweet-quote-text">{{ banner.tweetEmbed.quoted_status.full_text }}</div>
         </div>
@@ -51,11 +50,11 @@
         <div class="tweet-counts">
           <div class="tweet-counts-rts">
             <b-icon icon="retweet" />
-            {{ banner.tweetEmbed.retweet_count }}
+            <span v-if="banner.showCounts">{{ banner.tweetEmbed.retweet_count }}</span>
           </div>
           <div class="tweet-counts-faves">
             <b-icon icon="heart" />
-            {{ banner.tweetEmbed.favorite_count }}
+            <span v-if="banner.showCounts">{{ banner.tweetEmbed.favorite_count }}</span>
           </div>
         </div>
       </div>
@@ -86,7 +85,7 @@ export default {
 
   filters: {
     formatFullDate (date) {
-      return moment(date).format('dddd, D MMMM [a les] H:mm')
+      return moment(date).format('D MMMM [a les] H:mm')
     },
 
     removeUrls (value) {
@@ -99,6 +98,11 @@ export default {
 
 <style lang="scss" scoped>
   @import "../../../sass/variables";
+
+  .banner-canvas {
+    --base-color: #{$white};
+    --quote-border-color: #{rgba($white, .75)};
+  }
 
   .background {
     background-color: $gray-900;
@@ -117,16 +121,17 @@ export default {
   }
 
   .tweet {
-    color: $white;
+    color: var(--base-color);
     border: 2px $white solid;
     border-radius: $card-radius;
     padding: 26px;
+    width: 100%;
 
     &-wrapper {
       position: absolute;
       display: flex;
       align-items: center;
-      top: 70px;
+      top: 40px;
       left: 70px;
       right: 70px;
       bottom: 80px;
@@ -171,6 +176,36 @@ export default {
       font-size: 28px;
       line-height: 1.25;
       white-space: pre-wrap;
+    }
+
+    &-quote {
+      border: 1px var(--quote-border-color) solid;
+      border-radius: .5rem;
+      margin-top: 16px;
+      padding: 12px;
+
+      &-user {
+        display: flex;
+        align-items: center;
+        margin-bottom: 6px;
+
+        img {
+          border-radius: 50%;
+          width: 25px;
+          height: 25px;
+          margin-right: 8px;
+        }
+
+        strong {
+          color: var(--base-color);
+          margin-right: 6px;
+        }
+
+        &-screen_name {
+          margin-left: 8px;
+          opacity: .5;
+        }
+      }
     }
 
     &-date {
