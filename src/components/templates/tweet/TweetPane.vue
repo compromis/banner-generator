@@ -18,7 +18,7 @@
       <ul>
         <li>{{ properties.tweetEmbed.user.name }}</li>
         <li>@{{ properties.tweetEmbed.user.screen_name }}</li>
-        <li>{{ properties.tweetEmbed.text }}</li>
+        <li>{{ properties.tweetEmbed.full_text }}</li>
       </ul>
     </div>
 
@@ -28,18 +28,25 @@
         <b-switch v-model="properties.showMedia">
           Mostra imatge del tweet
         </b-switch>
+
         <!-- Picture position -->
-        <b-field label="Posició de la imatge" class="range">
-          <range-slider
-            name="points"
-            :min="0"
-            :max="100"
-            v-model="properties.picturePos"
-            @touchstart="dimPane(true)"
-            @touchend="dimPane(false)" />
-        </b-field>
+        <transition name="slide">
+          <div v-if="properties.showMedia">
+            <b-field label="Posició de la imatge" class="range">
+              <range-slider
+                name="points"
+                :min="0"
+                :max="100"
+                v-model="properties.picturePos"
+                @touchstart="dimPane(true)"
+                @touchend="dimPane(false)" />
+            </b-field>
+          </div>
+        </transition>
       </div>
     </transition>
+
+    <color-selector is-rounded v-model="properties.backgroundColor" />
 
     <!-- Local label -->
     <transition name="slide">
@@ -62,11 +69,16 @@
 <script>
 import API from '@/api'
 import PaneMixin from '@/mixins/pane-mixin.js'
+import ColorSelector from '@/utils/ColorSelector'
 
 export default {
   name: 'tweet-pane',
 
   mixins: [PaneMixin],
+
+  components: {
+    ColorSelector
+  },
 
   data () {
     return {
@@ -74,7 +86,8 @@ export default {
         tweetUrl: '',
         tweetId: null,
         tweetEmbed: null,
-        showMedia: true
+        showMedia: true,
+        backgroundColor: 'orange'
       },
       fetching: false
     }

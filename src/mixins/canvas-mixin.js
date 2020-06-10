@@ -59,9 +59,9 @@ export default {
   },
 
   methods: {
-    fontSize (prop, maxFontSize, minFontSize, maxLength, multiplier) {
+    fontSize (text, maxFontSize, minFontSize, maxLength, multiplier) {
       const adjust = multiplier ? multiplier / 100 : 1
-      const propLength = this.banner[prop].length / maxLength
+      const propLength = text.length / maxLength
       const fontSize = (maxFontSize * adjust) + propLength * ((minFontSize * adjust) - (maxFontSize * adjust))
       return `${fontSize}px`
     }
