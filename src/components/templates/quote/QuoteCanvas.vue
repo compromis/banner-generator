@@ -54,8 +54,8 @@ export default {
     fontSizePrimary () {
       const { aspect, banner, fontSize } = this
       return aspect === '11'
-        ? fontSize('quote', 60, 35, 110, banner.textSize)
-        : fontSize('quote', 50, 25, 110, banner.textSize)
+        ? fontSize(banner.quote, 60, 35, 110, banner.textSize)
+        : fontSize(banner.quote, 50, 25, 110, banner.textSize)
     },
     textAlign () {
       return this.banner.disposition === 0 || this.aspect === '916'

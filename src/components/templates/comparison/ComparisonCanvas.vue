@@ -25,13 +25,13 @@
     <div class="comparison">
       <div class="comparison-text comparison-text-before"
         :style="{
-          fontSize: fontSize('textBefore', 45, 30, 160),
+          fontSize: fontSize(banner.textBefore, 45, 30, 160),
         }">
         {{ banner.textBefore | formatString }}
       </div>
       <div class="comparison-text comparison-text-after"
         :style="{
-          fontSize: fontSize('textAfter', 45, 30, 160),
+          fontSize: fontSize(banner.textAfter, 45, 30, 160),
         }">
         {{ banner.textAfter | formatString }}
       </div>

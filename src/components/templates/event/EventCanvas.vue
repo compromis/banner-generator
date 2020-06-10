@@ -19,7 +19,7 @@
       <div class="event-overtitle">
         <span>{{ banner.overtitle | formatString }}</span>
       </div>
-      <div v-if="banner.title" class="event-title" :style="{fontSize: aspect === 'event' ? fontSize('title', 75, 40, 60) : fontSize('title', 45, 30, 60)}">
+      <div v-if="banner.title" class="event-title" :style="{fontSize: aspect === 'event' ? fontSize(banner.title, 75, 40, 60) : fontSize(banner.title, 45, 30, 60)}">
         <span>{{ banner.title | formatString }}</span>
       </div>
       <div class="event-details-wrapper" v-if="aspect !== 'event'">

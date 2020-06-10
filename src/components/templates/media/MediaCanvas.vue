@@ -17,7 +17,7 @@
       <div class="medium-overtitle">
         <span>{{ banner.overtitle | formatString }}</span>
       </div>
-      <div class="medium-title" :style="{fontSize: fontSize('title', 60, 40, 30)}">
+      <div class="medium-title" :style="{fontSize: fontSize(banner.title, 60, 40, 30)}">
         <span>{{ banner.title | formatString }}</span>
       </div>
       <div class="medium-subtitle">

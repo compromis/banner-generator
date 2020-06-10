@@ -30,10 +30,10 @@
         class="speakers-title"
         :style="{
           fontSize: aspect === '11'
-            ? fontSize('title', 50, 35 , 60)
+            ? fontSize(banner.title, 50, 35 , 60)
             : aspect === 'event'
-            ? fontSize('title', 45, 28 , 60)
-            : fontSize('title', 40, 27 , 60)
+            ? fontSize(banner.title, 45, 28 , 60)
+            : fontSize(banner.title, 40, 27 , 60)
         }">
         {{ banner.title | formatString }}
       </div>

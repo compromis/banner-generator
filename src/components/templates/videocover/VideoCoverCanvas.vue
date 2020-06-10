@@ -57,15 +57,15 @@ export default {
     fontSizePrimary () {
       const { aspect, banner, fontSize } = this
       return aspect === '11'
-        ? fontSize('text', 80, 40, 70, banner.textSize)
-        : fontSize('text', 70, 30, 70, banner.textSize)
+        ? fontSize(banner.text, 80, 40, 70, banner.textSize)
+        : fontSize(banner.text, 70, 30, 70, banner.textSize)
     },
 
     fontSizeSecondary () {
       const { aspect, banner, fontSize } = this
       return aspect === '11'
-        ? fontSize('text', 40, 30, 70, banner.textSize)
-        : fontSize('text', 35, 25, 70, banner.textSize)
+        ? fontSize(banner.text, 40, 30, 70, banner.textSize)
+        : fontSize(banner.text, 35, 25, 70, banner.textSize)
     }
   }
 }

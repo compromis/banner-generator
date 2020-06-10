@@ -80,7 +80,7 @@ export default {
 
   computed: {
     textFontSize () {
-      return this.fontSize(this.banner.tweetEmbed.full_text, 40, 20, 280)
+      return this.fontSize(this.banner.tweetEmbed.full_text, 40, 24, 280)
     }
   },
 
@@ -111,7 +111,7 @@ export default {
     img {
       width: 100%;
       height: 100%;
-      opacity: .25;
+      opacity: .15;
       object-fit: cover;
     }
   }

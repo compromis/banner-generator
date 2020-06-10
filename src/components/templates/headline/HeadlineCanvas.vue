@@ -26,7 +26,7 @@
       <div class="headline-text"
         :style="{
           fontFamily: banner.source ? banner.source.fontFamily : false,
-          fontSize: aspect === '11' ? fontSize('headline', 50, 30, 160) : fontSize('headline', 35, 23.5, 160),
+          fontSize: aspect === '11' ? fontSize(banner.headline, 50, 30, 160) : fontSize(banner.headline, 35, 23.5, 160),
           letterSpacing: banner.source ? banner.source['letterSpacing'] : false
         }">
         {{ banner.headline | formatString }}
