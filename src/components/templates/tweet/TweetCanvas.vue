@@ -264,6 +264,7 @@ export default {
 
   .card-1 {
     --base-color: #{$gray-900};
+    --twitter-color: #1DA1F2;
 
     .tweet {
       border: 0;
