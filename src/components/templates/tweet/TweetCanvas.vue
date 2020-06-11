@@ -3,6 +3,8 @@
     :id="'bannerCanvas' + aspect"
     :class="[
       'banner-canvas',
+      `card-${banner.card}`,
+      `background-${banner.backgroundColor}`,
       banner.localLabel && banner.hasLocalLabel ? 'has-local-label' : '',
     ]"
     v-if="banner">
@@ -100,12 +102,25 @@ export default {
   @import "../../../sass/variables";
 
   .banner-canvas {
+    --background: #{$gray-900};
     --base-color: #{$white};
     --quote-border-color: #{rgba($white, .75)};
+    --twitter-color: #{$white};
+
+    &.background-white {
+      --background: #{$white};
+      --base-color: #{$gray-900};
+      --quote-border-color: #{rgba($gray-900, .5)};
+      --twitter-color: #1DA1F2;
+    }
+
+    &.background-orange {
+      --background: #{$gradient};
+    }
   }
 
   .background {
-    background-color: $gray-900;
+    background: var(--background);
     position: absolute;
     top: 0;
     left: 0;
@@ -122,7 +137,7 @@ export default {
 
   .tweet {
     color: var(--base-color);
-    border: 2px $white solid;
+    border: 2px var(--base-color) solid;
     border-radius: $card-radius;
     padding: 26px;
     width: 100%;
@@ -215,6 +230,7 @@ export default {
 
     &-icon {
       margin-left: auto;
+      color: var(--twitter-color);
     }
 
     &-counts {
@@ -239,6 +255,16 @@ export default {
 
     &-local-label {
       color: $white;
+    }
+  }
+
+  .card-1 {
+    --base-color: #{$gray-900};
+
+    .tweet {
+      border: 0;
+      background: $white;
+      box-shadow: $raised-shadow;
     }
   }
 </style>

@@ -1,5 +1,23 @@
 <template>
   <div :class="{ 'pane tweet-pane': true, 'pane-dimmed': paneDimmed, 'pane-916': aspect === 1 }">
+    <!-- Style -->
+    <b-field label="Estil">
+      <b-tabs
+        id="style-tabs"
+        type="is-toggle"
+        size="is-small"
+        v-model="properties.card"
+        class="tabs-field"
+        expanded>
+        <b-tab-item label="Transparent"></b-tab-item>
+        <b-tab-item label="Targeta"></b-tab-item>
+      </b-tabs>
+    </b-field>
+
+    <!-- Color -->
+    <b-field label="Color">
+      <color-selector is-rounded v-model="properties.backgroundColor" />
+    </b-field>
 
     <!-- Text -->
     <b-field
@@ -13,6 +31,9 @@
         @keydown.native="(e) => handleKeyStrokes(e)">
       </b-input>
     </b-field>
+
+    <b-button size="is-small">Engantxa</b-button>
+
     <div v-if="fetching" class="fetching">Carregant tweet...</div>
 
     <!-- Tweet card -->
@@ -74,8 +95,6 @@
       </div>
     </transition>
 
-    <color-selector is-rounded v-model="properties.backgroundColor" />
-
     <!-- Local label -->
     <transition name="slide">
       <div v-if="!aspect" class="field">
@@ -116,7 +135,8 @@ export default {
         tweetEmbed: null,
         showMedia: true,
         showCounts: true,
-        backgroundColor: 'orange'
+        backgroundColor: 'black',
+        card: 0
       },
       fetching: false
     }

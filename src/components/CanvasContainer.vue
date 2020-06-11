@@ -220,7 +220,7 @@ export default {
 
       &-label {
         position: relative;
-        top: -4px;
+        top: -.15rem;
         overflow: hidden;
       }
     }
@@ -273,7 +273,7 @@ export default {
 
         .icon {
           position: relative;
-          top: 3px;
+          top: .25rem;
           height: .85rem;
           width: .85rem;
           margin-right: .35rem !important;

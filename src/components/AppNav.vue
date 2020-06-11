@@ -77,7 +77,7 @@ export default {
     .button {
       &-text {
         position: relative;
-        top: -6px;
+        top: -.25rem;
       }
 
       &.is-text {
@@ -101,6 +101,8 @@ export default {
 
       .icon {
         transition: .2s ease-in-out;
+        position: relative;
+        top: .2rem;
       }
 
       &:hover {

@@ -41,8 +41,6 @@ export default {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: .5rem;
-  margin-bottom: 1.5rem;
-  margin-top: 2rem;
 
   li {
     cursor: pointer;

@@ -143,4 +143,9 @@ export default {
   .local-label {
     margin-top: .75rem;
   }
+
+  .color-selector {
+    margin-bottom: 1.5rem;
+    margin-top: 2rem;
+  }
 </style>

@@ -164,6 +164,11 @@ export default {
     font-size: .85rem;
   }
 
+  .color-selector {
+    margin-bottom: 1.5rem;
+    margin-top: 2rem;
+  }
+
   .pane-916 {
     display: flex;
     flex-direction: column;
