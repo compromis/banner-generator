@@ -41,7 +41,7 @@
           <div class="tweet-quote-user">
             <img :src="banner.tweetEmbed.quoted_status.user.profile_image_url_https" />
             <strong>{{ banner.tweetEmbed.quoted_status.user.name }}</strong>
-            <b-icon icon="badge-check" pack="fas" size="is-small" v-if="banner.tweetEmbed.quoted_status.user.verified" />
+            <b-icon icon="badge-check" pack="fas" size="is-small" v-if="banner.tweetEmbed.quoted_status.user.verified" class="verified" />
             <span class="tweet-quote-user-screen_name">@{{ banner.tweetEmbed.quoted_status.user.screen_name }}</span>
           </div>
           <div class="tweet-quote-text">{{ banner.tweetEmbed.quoted_status.full_text }}</div>
@@ -123,6 +123,19 @@ export default {
     &.background-orange {
       --background: #{$gradient};
     }
+
+    &.background-lgbt {
+      --background: #{$gradient-lgtb};
+      --gradient-orientation: 135deg;
+    }
+
+    &.background-feminism {
+      --background: #{$gradient-feminista};
+    }
+
+    &.background-green {
+      --background: #{$gradient-green};
+    }
   }
 
   .background {
@@ -179,11 +192,13 @@ export default {
       &-full_name {
         display: flex;
         align-items: center;
+        font-size: 17px;
 
         .verified {
           display: flex;
           align-items: center;
           margin-left: 6px;
+          color: var(--twitter-color);
         }
       }
 
@@ -225,6 +240,10 @@ export default {
         &-screen_name {
           margin-left: 8px;
           opacity: .5;
+        }
+
+        .verified {
+          color: var(--twitter-color);
         }
       }
     }
@@ -303,11 +322,20 @@ export default {
   .card-1 {
     --base-color: #{$gray-900};
     --twitter-color: #1DA1F2;
+    --quote-border-color: #{$gray-300};
 
     .tweet {
       border: 0;
       background: $white;
       box-shadow: $raised-shadow;
+    }
+
+    .cta {
+      color: $white;
+    }
+
+    &.background-white .cta {
+      color: $gray-900;
     }
   }
 </style>

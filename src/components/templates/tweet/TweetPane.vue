@@ -15,8 +15,8 @@
     </b-field>
 
     <!-- Color -->
-    <b-field label="Color">
-      <color-selector is-rounded v-model="properties.backgroundColor" />
+    <b-field label="Color de fons">
+      <color-selector is-rounded v-model="properties.backgroundColor" :colors="['black', 'white', 'orange', 'lgbt', 'feminism', 'green']" />
     </b-field>
 
     <!-- Tweet URL -->

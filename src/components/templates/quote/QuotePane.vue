@@ -37,7 +37,7 @@
       </b-input>
     </b-field>
 
-    <color-selector v-model="properties.textColor" :disable-white="!properties.card" />
+    <color-selector v-model="properties.textColor" :colors="properties.card ? ['black', 'white', 'orange'] : ['black', 'orange']" />
 
     <!-- Author -->
     <b-field

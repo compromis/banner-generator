@@ -2,9 +2,12 @@
   <div class="field">
     <label class="label" v-show="label">{{ label }}</label>
     <ul :class="{'color-selector': true, 'rounded' : isRounded }">
-      <li :class="{'black-bg' : true, 'active': value === 'black' }" @click="$emit('input', 'black')"><span v-if="!isRounded">Aa</span></li>
-      <li v-if="!disableWhite" :class="{'white-bg' : true, 'active': value === 'white' }" @click="$emit('input', 'white')"><span v-if="!isRounded">Aa</span></li>
-      <li :class="{'orange-bg' : true, 'active': value === 'orange' }" @click="$emit('input', 'orange')"><span v-if="!isRounded">Aa</span></li>
+      <li v-if="colors.includes('black')" :class="{'black-bg' : true, 'active': value === 'black' }" @click="$emit('input', 'black')"><span v-if="!isRounded">Aa</span></li>
+      <li v-if="colors.includes('white')" :class="{'white-bg' : true, 'active': value === 'white' }" @click="$emit('input', 'white')"><span v-if="!isRounded">Aa</span></li>
+      <li v-if="colors.includes('orange')" :class="{'orange-bg' : true, 'active': value === 'orange' }" @click="$emit('input', 'orange')"><span v-if="!isRounded">Aa</span></li>
+      <li v-if="colors.includes('lgbt')" :class="{'lgbt-bg' : true, 'active': value === 'lgbt' }" @click="$emit('input', 'lgbt')"><span v-if="!isRounded">Aa</span></li>
+      <li v-if="colors.includes('feminism')" :class="{'feminism-bg' : true, 'active': value === 'feminism' }" @click="$emit('input', 'feminism')"><span v-if="!isRounded">Aa</span></li>
+      <li v-if="colors.includes('green')" :class="{'green-bg' : true, 'active': value === 'green' }" @click="$emit('input', 'green')"><span v-if="!isRounded">Aa</span></li>
     </ul>
   </div>
 </template>
@@ -22,11 +25,11 @@ export default {
       type: String,
       default: ''
     },
-    isRounded: {
-      type: Boolean,
-      default: false
+    colors: {
+      type: Array,
+      default: () => ['black', 'white', 'orange']
     },
-    disableWhite: {
+    isRounded: {
       type: Boolean,
       default: false
     }
@@ -79,6 +82,20 @@ export default {
   .white-bg {
     color: $gray-900;
     background: $white;
+  }
+
+  .lgbt-bg {
+    background: $gradient-lgtb;
+    color: $white;
+  }
+
+  .feminism-bg {
+    background: $gradient-feminista;
+    color: $white;
+  }
+
+  .green-bg {
+    background: $gradient-green;
   }
 }
 
