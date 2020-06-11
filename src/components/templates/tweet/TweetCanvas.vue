@@ -118,6 +118,7 @@ export default {
     --base-color: #{$white};
     --quote-border-color: #{rgba($white, .75)};
     --twitter-color: #{$white};
+    --link-color: #{$primary};
 
     &.background-white {
       --background: #{$white};
@@ -128,19 +129,27 @@ export default {
 
     &.background-orange {
       --background: #{$gradient};
+      --link-color: #{$white};
+      --link-decoration: underline;
     }
 
     &.background-lgbt {
       --background: #{$gradient-lgtb};
       --gradient-orientation: 135deg;
+      --link-color: #{$white};
+      --link-decoration: underline;
     }
 
     &.background-feminism {
       --background: #{$gradient-feminista};
+      --link-color: #{$white};
+      --link-decoration: underline;
     }
 
     &.background-green {
       --background: #{$gradient-green};
+      --link-color: #{$white};
+      --link-decoration: underline;
     }
   }
 
@@ -329,6 +338,8 @@ export default {
     --base-color: #{$gray-900};
     --twitter-color: #1DA1F2;
     --quote-border-color: #{$gray-300};
+    --link-color: #{$primary} !important;
+    --link-decoration: none !important;
 
     .tweet {
       border: 0;
@@ -346,8 +357,6 @@ export default {
   }
 </style>
 <style lang="scss">
-@import "../../../sass/variables";
-
 .tweet {
   &-icon svg {
     width: 28px !important;
@@ -355,7 +364,8 @@ export default {
   }
 
   .ht {
-    color: $primary;
+    color: var(--link-color);
+    text-decoration: var(--link-decoration, none);
   }
 }
 </style>
