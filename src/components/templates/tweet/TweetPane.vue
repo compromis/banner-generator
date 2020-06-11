@@ -19,20 +19,22 @@
       <color-selector is-rounded v-model="properties.backgroundColor" />
     </b-field>
 
-    <!-- Text -->
-    <b-field
+    <!-- Tweet URL -->
+    <div class="tweet-input">
+      <b-field
       label="Tweet"
       :type="setFieldType('tweetId')"
       :message="setFieldMessage('tweetId')">
-      <b-input
-        v-model="properties.tweetUrl"
-        placeholder="https://"
-        :disabled="fetching || properties.tweetId"
-        @keydown.native="(e) => handleKeyStrokes(e)">
-      </b-input>
-    </b-field>
+        <b-input
+          v-model="properties.tweetUrl"
+          placeholder="https://"
+          :disabled="fetching || properties.tweetId"
+          @keydown.native="(e) => handleKeyStrokes(e)">
+        </b-input>
+      </b-field>
 
-    <b-button size="is-small">Engantxa</b-button>
+      <b-button size="is-small" rounded @click="pasteUrl" icon-left="paste">Engantxa</b-button>
+    </div>
 
     <div v-if="fetching" class="fetching">Carregant tweet...</div>
 
@@ -202,6 +204,12 @@ export default {
       this.properties.tweetId = null
       this.properties.tweetEmbed = null
       this.displayErrors = false
+    },
+
+    pasteUrl () {
+      navigator.clipboard.readText().then(text => {
+        this.properties.tweetUrl = text
+      })
     }
   }
 }
@@ -212,6 +220,16 @@ export default {
 
   .local-label {
     margin-top: .75rem;
+  }
+
+  .tweet-input {
+    position: relative;
+
+    .button {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
   }
 
   .fetching {
