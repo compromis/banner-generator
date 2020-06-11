@@ -28,7 +28,7 @@
         <b-input
           v-model="properties.tweetUrl"
           placeholder="https://"
-          :disabled="fetching || properties.tweetId"
+          :disabled="fetching || properties.tweetEmbed"
           @keydown.native="(e) => handleKeyStrokes(e)">
         </b-input>
       </b-field>
@@ -193,9 +193,7 @@ export default {
 
     handleKeyStrokes (e) {
       if (e.code === 'Backspace') {
-        this.properties.tweetUrl = ''
-        this.properties.tweetId = ''
-        this.properties.tweetEmbed = ''
+        this.clearTweet()
       }
     },
 
