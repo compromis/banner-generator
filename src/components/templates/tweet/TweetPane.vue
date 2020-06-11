@@ -64,7 +64,7 @@
         <transition name="slide">
           <div v-if="properties.tweetEmbed && properties.tweetEmbed.entities['media']">
             <b-switch v-model="properties.showMedia" style="margin-bottom: 1rem">
-              Mostra imatge del tweet
+              Mostrar imatge del tweet
             </b-switch>
 
             <transition name="slide">
@@ -92,8 +92,19 @@
         </transition>
 
         <b-switch v-model="properties.showCounts" style="margin-bottom: 1rem">
-            Inclou compte de RTs i Favs
+            Mostrar compte de RTs i Favs
         </b-switch>
+      </div>
+    </transition>
+
+    <b-switch v-model="properties.showCta" style="margin-bottom: 1rem">
+        Afegir cridada a l'acció
+    </b-switch>
+    <transition name="slide">
+      <div v-if="properties.showCta">
+        <b-field>
+          <b-input placeholder="Passa-ho" v-model="properties.cta" maxlength="24"></b-input>
+        </b-field>
       </div>
     </transition>
 
@@ -137,8 +148,10 @@ export default {
         tweetEmbed: null,
         showMedia: true,
         showCounts: true,
+        showCta: false,
         backgroundColor: 'black',
-        card: 0
+        card: 0,
+        cta: 'Passa-ho!'
       },
       fetching: false
     }

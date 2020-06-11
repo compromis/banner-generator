@@ -67,6 +67,12 @@
         {{ banner.localLabel | formatLocal }}
       </div>
     </div>
+    <div class="cta" v-if="banner.showCta && banner.cta">
+      <span>{{ banner.cta }}</span>
+      <div>
+        <img src="./images/point-down.png" alt="" />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -246,6 +252,38 @@ export default {
           margin-right: 6px;
         }
       }
+    }
+  }
+
+  .cta {
+    display: flex;
+    position: absolute;
+    bottom: 18px;
+    right: 490px;
+    color: var(--base-color);
+    font-size: 25px;
+    align-items: center;
+    font-weight: bold;
+    letter-spacing: -.02em;
+
+    img {
+      display: block;
+      width: 45px;
+      height: 45px;
+      margin-right: 10px;
+    }
+
+    div {
+      display: flex;
+      align-items: flex-end;
+      height: 100%;
+    }
+
+    span {
+      display: block;
+      max-width: 130px;
+      line-height: 1;
+      text-align: right;
     }
   }
 
