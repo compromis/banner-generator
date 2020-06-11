@@ -36,7 +36,7 @@
             <b-icon icon="twitter" pack="fab" />
           </div>
         </div>
-        <div class="tweet-text" :style="{ fontSize: textFontSize }" contenteditable>{{ banner.tweetEmbed.full_text | removeUrls }}</div>
+        <div class="tweet-text" :style="{ fontSize: textFontSize }" contenteditable v-html="tweetText"></div>
         <div class="tweet-quote" v-if="banner.tweetEmbed.is_quote_status">
           <div class="tweet-quote-user">
             <img :src="banner.tweetEmbed.quoted_status.user.profile_image_url_https" />
@@ -88,17 +88,23 @@ export default {
   computed: {
     textFontSize () {
       return this.fontSize(this.banner.tweetEmbed.full_text, 40, 24, 280)
+    },
+
+    tweetText () {
+      const text = this.banner.tweetEmbed.full_text
+      const urlRegex = /(https?:\/\/[^\s]+)/g
+      const hashtagRegex = /(^|\B)#(?![0-9_]+\b)([a-zA-Z0-9_]{1,30})(\b|\r)/g
+      const mentionRegex = /^(?!.*\bRT\b)(?:.+\s)?@\w+/i
+      return text
+        .replace(urlRegex, '')
+        .replace(hashtagRegex, (text) => `<span class="ht">${text}</span>`)
+        .replace(mentionRegex, (text) => `<span class="ht">${text}</span>`)
     }
   },
 
   filters: {
     formatFullDate (date) {
       return moment(date).format('D MMMM [a les] H:mm')
-    },
-
-    removeUrls (value) {
-      var urlRegex = /(https?:\/\/[^\s]+)/g
-      return value.replace(urlRegex, '')
     }
   }
 }
@@ -340,10 +346,16 @@ export default {
   }
 </style>
 <style lang="scss">
+@import "../../../sass/variables";
+
 .tweet {
   &-icon svg {
     width: 28px !important;
     height: 28px !important;
+  }
+
+  .ht {
+    color: $primary;
   }
 }
 </style>
