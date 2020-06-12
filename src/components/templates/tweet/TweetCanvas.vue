@@ -52,11 +52,11 @@
         <div class="tweet-counts">
           <div class="tweet-counts-rts">
             <b-icon icon="retweet" />
-            <span v-if="banner.showCounts">{{ banner.tweetEmbed.retweet_count }}</span>
+            <span v-if="banner.showCounts">{{ banner.tweetEmbed.retweet_count | formatNumber }}</span>
           </div>
           <div class="tweet-counts-faves">
             <b-icon icon="heart" />
-            <span v-if="banner.showCounts">{{ banner.tweetEmbed.favorite_count }}</span>
+            <span v-if="banner.showCounts">{{ banner.tweetEmbed.favorite_count | formatNumber }}</span>
           </div>
         </div>
       </div>
@@ -93,8 +93,8 @@ export default {
     tweetText () {
       const text = this.banner.tweetEmbed.full_text
       const urlRegex = /(https?:\/\/[^\s]+)/g
-      const hashtagRegex = /(^|\B)#(?![0-9_]+\b)([a-zA-Z0-9_]{1,30})(\b|\r)/g
-      const mentionRegex = /^(?!.*\bRT\b)(?:.+\s)?@\w+/i
+      const hashtagRegex = /(^|\B)#(?![0-9_]+\b)([A-Za-zÀ-ÖØ-öø-ÿñ0-9_]{1,30})(\b|\r)/g
+      const mentionRegex = /@[A-Za-z0-9_-]*/g
       return text
         .replace(urlRegex, '')
         .replace(hashtagRegex, (text) => `<span class="ht">${text}</span>`)
@@ -119,6 +119,11 @@ export default {
     --quote-border-color: #{rgba($white, .75)};
     --twitter-color: #{$white};
     --link-color: #{$primary};
+    --card-background: transparent;
+
+    &.background-black {
+      --shadow-color: rgba(0, 0, 0, .15);
+    }
 
     &.background-white {
       --background: #{$white};
@@ -135,7 +140,7 @@ export default {
 
     &.background-lgbt {
       --background: #{$gradient-lgtb};
-      --gradient-orientation: 135deg;
+      --gradient-orientation: 153.5deg;
       --link-color: #{$white};
       --link-decoration: underline;
     }
@@ -150,6 +155,24 @@ export default {
       --background: #{$gradient-green};
       --link-color: #{$white};
       --link-decoration: underline;
+    }
+
+    &.card-1 {
+      --base-color: #{$gray-900};
+      --twitter-color: #1DA1F2;
+      --quote-border-color: #{$gray-300};
+      --link-color: #{$primary};
+      --link-decoration: none;
+      --card-background: #{$white};
+    }
+
+    &.card-2 {
+      --base-color: #{$white};
+      --twitter-color: #{$white};
+      --quote-border-color: #{$gray-600};
+      --link-color: #{$primary};
+      --link-decoration: none;
+      --card-background: #{$gray-900};
     }
   }
 
@@ -172,6 +195,7 @@ export default {
   .tweet {
     color: var(--base-color);
     border: 2px var(--base-color) solid;
+    background-color: var(--card-background);
     border-radius: $card-radius;
     padding: 26px;
     width: 100%;
@@ -334,16 +358,10 @@ export default {
     color: $gray-600;
   }
 
-  .card-1 {
-    --base-color: #{$gray-900};
-    --twitter-color: #1DA1F2;
-    --quote-border-color: #{$gray-300};
-    --link-color: #{$primary} !important;
-    --link-decoration: none !important;
-
+  .card-1,
+  .card-2 {
     .tweet {
       border: 0;
-      background: $white;
       box-shadow: $raised-shadow;
     }
 

@@ -11,6 +11,7 @@
         expanded>
         <b-tab-item label="Transparent"></b-tab-item>
         <b-tab-item label="Targeta"></b-tab-item>
+        <b-tab-item label="Fosc"></b-tab-item>
       </b-tabs>
     </b-field>
 
