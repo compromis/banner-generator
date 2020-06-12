@@ -62,11 +62,23 @@ export default [
     name: 'Bulo',
     aspects: ['11', '916'],
     icon: 'ban',
-    label: '✨Nou',
     components: {
       pane: () => import(/* webpackChunkName: "fakenews" */ './fakenews/FakeNewsPane'),
       canvas: () => import(/* webpackChunkName: "fakenews" */ './fakenews/FakeNewsCanvas'),
       help: () => import(/* webpackChunkName: "fakenews" */ './fakenews/FakeNewsHelp')
+    }
+  },
+  {
+    id: 'Tweet',
+    name: 'Tweet',
+    aspects: ['11'],
+    icon: 'twitter',
+    iconPack: 'fab',
+    label: '✨Nou',
+    components: {
+      pane: () => import(/* webpackChunkName: "tweet" */ './tweet/TweetPane'),
+      canvas: () => import(/* webpackChunkName: "tweet" */ './tweet/TweetCanvas'),
+      help: () => import(/* webpackChunkName: "tweet" */ './tweet/TweetHelp')
     }
   },
   {
@@ -120,7 +132,6 @@ export default [
     name: 'Portada de vídeo',
     aspects: ['11', 'event'],
     icon: 'play',
-    label: '✨Nou',
     components: {
       pane: () => import(/* webpackChunkName: "videocover" */ './videocover/VideoCoverPane'),
       canvas: () => import(/* webpackChunkName: "videocover" */ './videocover/VideoCoverCanvas'),
@@ -132,25 +143,12 @@ export default [
     name: 'Superàvit local',
     aspects: ['11'],
     icon: 'euro-sign',
-    label: '🦠 Covid-19',
-    hidden: true,
+    label: '🦠Covid-19',
+    archived: true,
     components: {
-      pane: () => import(/* webpackChunkName: "superavit" */ './superavit/SuperavitPane'),
-      canvas: () => import(/* webpackChunkName: "superavit" */ './superavit/SuperavitCanvas'),
-      help: () => import(/* webpackChunkName: "superavit" */ './superavit/SuperavitHelp')
-    }
-  },
-  {
-    id: 'Tweet',
-    name: 'Tweet',
-    aspects: ['11'],
-    icon: 'twitter',
-    iconPack: 'fab',
-    label: 'Nou',
-    components: {
-      pane: () => import(/* webpackChunkName: "tweet" */ './tweet/TweetPane'),
-      canvas: () => import(/* webpackChunkName: "tweet" */ './tweet/TweetCanvas'),
-      help: () => import(/* webpackChunkName: "tweet" */ './tweet/TweetHelp')
+      pane: () => import(/* webpackChunkName: "archived" */ './archived/superavit/SuperavitPane'),
+      canvas: () => import(/* webpackChunkName: "archived" */ './archived/superavit/SuperavitCanvas'),
+      help: () => import(/* webpackChunkName: "archived" */ './archived/superavit/SuperavitHelp')
     }
   }
 ]

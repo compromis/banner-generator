@@ -1,8 +1,11 @@
 <template>
-  <footer :class="{ 'modal-open': modalIsOpen }">
-    <help is-text @modalOpen="(open) => modalIsOpen = open" />
-    <div>
-      <strong>Generador de Targes</strong> <em>beta</em> és una aplicació desenvolupada pel <strong>Departament de Comunicació</strong> de <strong>Compromís</strong>.
+  <footer :class="{ 'modal-open': modalIsOpen, 'columns': true }">
+    <div class="column is-four-fifths">
+      <help is-text @modalOpen="(open) => modalIsOpen = open" />
+      <strong>Generador de Targes</strong> és una aplicació desenvolupada pel <strong>Departament de Comunicació</strong> de <strong>Compromís</strong>.
+    </div>
+    <div class="column is-one-fifths has-text-right">
+      <b-switch size="is-small" @input="(show) => $emit('archive', show)">Arxiu</b-switch>
     </div>
   </footer>
 </template>
