@@ -21,7 +21,7 @@
         :pill-style="banner.textColor"
         :text-align="banner.textAlign"
         :font-size="fontSizePrimary"
-        :width="720" />
+        :width="820" />
     </div>
     <emojis-on-canvas v-model="banner.emojis" />
     <div class="logo">

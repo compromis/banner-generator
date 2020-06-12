@@ -19,14 +19,14 @@
           :font-size="fontSizeSecondary"
           :pill-style="banner.textSecondaryColor"
           :text-align="banner.textAlign"
-          :width="450" />
+          :width="550" />
         <text-in-pills
           v-if="banner.text"
           :text="$options.filters.formatString(banner.text)"
           :font-size="fontSizePrimary"
           :pill-style="banner.textColor"
           :text-align="banner.textAlign"
-          :width="450" />
+          :width="550" />
       </div>
     </div>
     <emojis-on-canvas v-model="banner.emojis" />

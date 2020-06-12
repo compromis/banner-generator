@@ -24,7 +24,7 @@
         :pill-style="banner.textColor"
         :font-size="fontSizePrimary"
         :text-align="textAlign"
-        :width="500" />
+        :width="700" />
       </div>
       <div class="quote-author">{{ banner.author | formatString }}</div>
     </div>
