@@ -13,8 +13,9 @@
     }
     &-lgtb {
       .blob-1, .blob-2 {
-        background: $gradient-lgtb;
-        background-size: 100% 33.4%;
+        background: $gradient-lgtb !important;
+        background-size: 50% 33.4% !important;
+        --gradient-orientation: 90deg !important;
       }
     }
   }
