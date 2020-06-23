@@ -24,7 +24,7 @@
         :pill-style="banner.textColor"
         :font-size="fontSizePrimary"
         :text-align="textAlign"
-        :width="700" />
+        :width="600" />
       </div>
       <div class="quote-author">{{ banner.author | formatString }}</div>
     </div>
@@ -54,7 +54,7 @@ export default {
     fontSizePrimary () {
       const { aspect, banner, fontSize } = this
       return aspect === '11'
-        ? fontSize(banner.quote, 60, 35, 110, banner.textSize)
+        ? fontSize(banner.quote, 60, 38, 110, banner.textSize)
         : fontSize(banner.quote, 50, 33, 110, banner.textSize)
     },
     textAlign () {
