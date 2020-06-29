@@ -1,13 +1,11 @@
 <template>
   <div class="nav">
     <div class="nav-back">
-      <b-button ref="close" type="is-text" @click="$emit('back', false)" class="back-button">
-        <b-icon icon="chevron-left" />
-        <span class="button-text">Enrere</span>
+      <b-button ref="close" icon-left="chevron-left" type="is-text" @click="$emit('back', false)" class="back-button">
+        Enrere
       </b-button>
-      <b-button ref="download" type="is-primary" @click="download" class="download-button is-hidden-tablet">
-        <b-icon icon="arrow-to-bottom" />
-        <span class="button-text">Descarrega</span>
+      <b-button ref="download" icon-left="arrow-to-bottom" type="is-primary" @click="download" class="download-button is-hidden-tablet">
+        Descarrega
       </b-button>
     </div>
     <p class="nav-centered">{{ templateName }}</p>
@@ -57,7 +55,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   @import "../sass/variables";
 
   .nav {
@@ -75,11 +73,6 @@ export default {
     }
 
     .button {
-      &-text {
-        position: relative;
-        top: -.25rem;
-      }
-
       &.is-text {
         color: $white;
         text-decoration: none;
@@ -101,8 +94,6 @@ export default {
 
       .icon {
         transition: .2s ease-in-out;
-        position: relative;
-        top: .2rem;
       }
 
       &:hover {

@@ -5,9 +5,7 @@
     </div>
     <div v-else>
     <b-tooltip label="Ajuda i suggeriments" position="is-left" type="is-dark">
-      <b-button type="is-text" class="help-block-button" @click="toggleForm">
-        <b-icon icon="question-circle" size="is-large" />
-      </b-button>
+      <b-button type="is-text" icon-left="question-circle" size="is-large" class="help-block-button" @click="toggleForm"></b-button>
     </b-tooltip>
     </div>
 
@@ -78,11 +76,16 @@ export default {
     }
 
     &-button {
+      display: flex;
+      align-items: center;
       opacity: .5;
       transition: .25s ease-in-out;
+      padding: 0 .5rem !important;
+      font-size: 1rem !important;
 
       &:hover {
         opacity: 1;
+        background: transparent !important;
       }
     }
 
