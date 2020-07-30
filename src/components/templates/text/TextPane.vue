@@ -20,6 +20,9 @@
       <vue-editor v-model="properties.text" :editor-toolbar="customToolbar" />
     </b-field>
 
+    <!-- Emoji picker -->
+    <emoji-picker v-model="properties.emojis" />
+
     <!-- Picture -->
     <picture-upload
       :picture="properties.picture"
@@ -72,18 +75,20 @@
 <script>
 import { VueEditor } from 'vue2-editor'
 import PaneMixin from '@/mixins/pane-mixin.js'
+import EmojiPicker from '@/utils/EmojiPicker'
 
 export default {
   name: 'text-pane',
 
   mixins: [PaneMixin],
 
-  components: { VueEditor },
+  components: { VueEditor, EmojiPicker },
 
   data () {
     return {
       properties: {
-        text: ''
+        text: '',
+        emojis: []
       },
       customToolbar: [
         [{ header: 1 }, { header: 2 }],

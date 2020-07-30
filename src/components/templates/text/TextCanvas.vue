@@ -17,6 +17,7 @@
     <div class="text text-wysiwyg" v-if="banner.text">
       <div v-html="banner.text"></div>
     </div>
+    <emojis-on-canvas v-model="banner.emojis" />
     <div class="logo">
       <compromis-logo :mono="true" />
       <div :class="{ 'logo-local-label': true, 'logo-local-label--long': banner.localLabel.length > 18 }" v-if="banner.localLabel && banner.hasLocalLabel">
@@ -31,11 +32,16 @@
 
 <script>
 import CanvasMixin from '@/mixins/canvas-mixin.js'
+import EmojisOnCanvas from '@/utils/EmojisOnCanvas'
 
 export default {
   name: 'text-canvas',
 
-  mixins: [CanvasMixin]
+  mixins: [CanvasMixin],
+
+  components: {
+    EmojisOnCanvas
+  }
 }
 </script>
 
