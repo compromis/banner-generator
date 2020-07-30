@@ -107,6 +107,17 @@
         @touchend="dimPane(false)" />
     </b-field>
 
+    <!-- Text size -->
+    <b-field label="Tamany del text" class="range">
+      <range-slider
+        name="points"
+        :min="50"
+        :max="150"
+        v-model="properties.textSize"
+        @touchstart="dimPane(true)"
+        @touchend="dimPane(false)" />
+    </b-field>
+
     <!-- Local label -->
     <transition name="slide">
       <div v-if="!aspect" class="field" id="local-label-field">
@@ -147,6 +158,7 @@ export default {
         customSourceColor: '#1CA085',
         textAfter: '',
         textBefore: '',
+        textSize: 100,
         pictureBefore: null,
         pictureBeforePreview: null,
         pictureBeforePos: 50,
