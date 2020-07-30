@@ -106,7 +106,8 @@ export default {
     height: 2.25rem;
     width: 2.25rem;
     border-radius: 50%;
-    margin-right: .5rem;
+    margin-right: .25rem;
+    flex-shrink: 0;
   }
 }
 </style>
