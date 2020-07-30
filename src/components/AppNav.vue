@@ -80,14 +80,13 @@ export default {
 
         &:hover {
           background-color: rgba($white, 0.15);
+          color: $white;
           text-decoration: none;
         }
 
-        &:active {
-          background-color: rgba($white, 0.35);
-        }
-
+        &:active,
         &:focus {
+          color: $white;
           background-color: rgba($white, 0.35);
         }
       }

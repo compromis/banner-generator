@@ -2,7 +2,7 @@
   <div class="template-selector">
     <div class="template-selector-templates">
       <h2 class="template-selector-header">Selecciona un model de tarja</h2>
-      <ul>
+      <transition-group tag="ul" name="fade">
         <template v-for="template in templates">
           <li v-if="!(template['hidden'] || (template['archived'] && !showArchive))" :key="template.id">
             <router-link :to="`/${template.id.toLowerCase()}`" :class="['template-item', `template-item-${template.id.toLowerCase()}`, template['isNew'] ? 'template-item-new' : '', template['archived'] ? 'template-archived' : '']">
@@ -14,7 +14,7 @@
             </router-link>
           </li>
         </template>
-      </ul>
+      </transition-group>
     </div>
     <app-footer @archive="(show) => showArchive = show" />
     <v-tour name="selectorTour" :steps="selectorSteps" :callbacks="tourCallbacks" :options="{ labels }"></v-tour>
