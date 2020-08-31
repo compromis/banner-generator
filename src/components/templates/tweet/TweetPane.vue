@@ -61,6 +61,17 @@
           </div>
         </div>
 
+        <!-- Text size -->
+        <b-field label="Tamany del text" class="range">
+          <range-slider
+            name="points"
+            :min="75"
+            :max="125"
+            v-model="properties.textSize"
+            @touchstart="dimPane(true)"
+            @touchend="dimPane(false)" />
+        </b-field>
+
         <!-- Tweet media -->
         <transition name="slide">
           <div v-if="properties.tweetEmbed && properties.tweetEmbed.entities['media']">
@@ -147,6 +158,7 @@ export default {
         tweetUrl: '',
         tweetId: null,
         tweetEmbed: null,
+        textSize: 100,
         showMedia: true,
         showCounts: true,
         showCta: false,

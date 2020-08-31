@@ -32,6 +32,7 @@
         {{ banner.headline | formatString }}
       </div>
     </div>
+    <emojis-on-canvas v-model="banner.emojis" />
     <div class="logo">
       <compromis-logo :mono="banner.card ? true : false" />
       <div :class="{ 'logo-local-label': true, 'logo-local-label--long': banner.localLabel.length > 18 }" v-if="banner.localLabel && banner.hasLocalLabel">
@@ -46,11 +47,16 @@
 
 <script>
 import CanvasMixin from '@/mixins/canvas-mixin.js'
+import EmojisOnCanvas from '@/utils/EmojisOnCanvas'
 
 export default {
   name: 'headline-canvas',
 
-  mixins: [CanvasMixin]
+  mixins: [CanvasMixin],
+
+  components: {
+    EmojisOnCanvas
+  }
 }
 </script>
 
@@ -342,5 +348,9 @@ export default {
         }
       }
     }
+  }
+
+  .no-cards .drr {
+    display: none;
   }
 </style>
