@@ -25,13 +25,13 @@
     <div class="comparison">
       <div class="comparison-text comparison-text-before"
         :style="{
-          fontSize: fontSize(banner.textBefore, 45, 30, 160, banner.textSize),
+          fontSize: smallestFontSize
         }">
         {{ banner.textBefore | formatString }}
       </div>
       <div class="comparison-text comparison-text-after"
         :style="{
-          fontSize: fontSize(banner.textAfter, 45, 30, 160, banner.textSize),
+          fontSize: smallestFontSize
         }">
         {{ banner.textAfter | formatString }}
       </div>
@@ -64,6 +64,11 @@ export default {
     objectPositionBefore: function () {
       const objectPosition = (100 - this.banner.pictureBeforePos) + '% 0%'
       return { objectPosition }
+    },
+    smallestFontSize () {
+      const before = this.fontSize(this.banner.textBefore, 45, 30, 160, this.banner.textSize)
+      const after = this.fontSize(this.banner.textAfter, 45, 30, 160, this.banner.textSize)
+      return before < after ? before : after
     }
   }
 }
