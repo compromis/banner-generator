@@ -81,6 +81,11 @@
       </b-input>
     </b-field>
 
+    <!-- Emoji picker -->
+    <transition name="slide">
+      <emoji-picker v-model="properties.emojis" v-if="properties.card === 1" />
+    </transition>
+
     <!-- Picture -->
     <picture-upload
       id="picture-field"
@@ -136,12 +141,14 @@
 import PaneMixin from '@/mixins/pane-mixin.js'
 import presets from './presets'
 import Swatches from 'vue-swatches'
+import EmojiPicker from '@/utils/EmojiPicker'
 
 export default {
   name: 'headline-pane',
 
   components: {
-    Swatches
+    Swatches,
+    EmojiPicker
   },
 
   mixins: [PaneMixin],
@@ -152,7 +159,8 @@ export default {
         headline: '',
         source: null,
         customSource: '',
-        customSourceColor: '#1CA085'
+        customSourceColor: '#1CA085',
+        emojis: []
       },
       presets: presets
     }
