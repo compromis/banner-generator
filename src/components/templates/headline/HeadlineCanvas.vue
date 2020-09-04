@@ -16,22 +16,13 @@
     </div>
     <div class="blob blob-1"></div>
     <div class="blob blob-2"></div>
-    <div class="headline">
-      <div class="headline-source headline-source--custom" v-if="banner.source === 'other'" :style="banner.card ? { backgroundColor: banner.customSourceColor } : null">
-        <span :style="banner.card ? { color: 'white' } : { color: banner.customSourceColor }">{{ banner.customSource }}</span>
-      </div>
-      <div class="headline-source" v-else-if="banner.source" :style="banner.card ? { backgroundColor: banner.source.color } : null">
-        <img :src="banner.source.hasOwnProperty('logoCard') && banner.card ? banner.source.logoCard : banner.source.logo" :alt="banner.source.name" :style="{ height: banner.source.logoHeight + 'px' }" />
-      </div>
-      <div class="headline-text"
-        :style="{
-          fontFamily: banner.source ? banner.source.fontFamily : false,
-          fontSize: aspect === '11' ? fontSize(banner.headline, 50, 30, 160) : fontSize(banner.headline, 35, 23.5, 160),
-          letterSpacing: banner.source ? banner.source['letterSpacing'] : false
-        }">
-        {{ banner.headline | formatString }}
-      </div>
-    </div>
+    <headline-card
+    :headline="banner.headline"
+    :card="banner.card"
+    :source="banner.source"
+    :customSource="banner.customSource"
+    :customSourceColor="banner.customSourceColor"
+    :fontSize="aspect === '11' ? fontSize(banner.headline, 50, 30, 160) : fontSize(banner.headline, 35, 23.5, 160)"/>
     <emojis-on-canvas v-model="banner.emojis" />
     <div class="logo">
       <compromis-logo :mono="banner.card ? true : false" />
@@ -48,6 +39,7 @@
 <script>
 import CanvasMixin from '@/mixins/canvas-mixin.js'
 import EmojisOnCanvas from '@/utils/EmojisOnCanvas'
+import HeadlineCard from './HeadlineCard'
 
 export default {
   name: 'headline-canvas',
@@ -55,7 +47,8 @@ export default {
   mixins: [CanvasMixin],
 
   components: {
-    EmojisOnCanvas
+    EmojisOnCanvas,
+    HeadlineCard
   }
 }
 </script>
@@ -63,36 +56,6 @@ export default {
 <style lang="scss" scoped>
   @import "../../../sass/variables";
   @import "./fonts";
-
-  .headline {
-    display: flex;
-    position: absolute;
-    top: 425px;
-    left: 0;
-    z-index: 30;
-    height: 200px;
-    padding: 0 40px;
-    font-family: 'Tiempos Headline', serif;
-    font-weight: 700;
-    transition: all .5s ease-in-out;
-    flex-direction: column;
-    justify-content: center;
-
-    &-source {
-      margin-bottom: 4px;
-
-      &--custom {
-        margin-bottom: 4px;
-        font-size: 22px;
-      }
-    }
-
-    &-text {
-      font-size: 27px;
-      line-height: 1.1;
-      word-wrap: break-word;
-    }
-  }
 
   .blob {
     &-1 {
@@ -164,14 +127,6 @@ export default {
       }
     }
 
-    .headline {
-      top: 430px;
-
-      &-text {
-        font-size: 20px;
-      }
-    }
-
     .logo {
       display: none;
     }
@@ -228,38 +183,6 @@ export default {
 
   /* Card style */
   .cards {
-    .headline {
-      z-index: 30;
-      left: 40px;
-      right: 40px;
-      bottom: 90px;
-      top: auto;
-      background: $white;
-      box-shadow: $raised-shadow;
-      border-radius: $card-radius;
-      height: auto;
-      padding: 26px;
-      overflow: hidden;
-
-      &-source {
-        background: $green;
-        margin: -26px -26px 26px -26px;
-        padding: 8px 26px;
-
-        img {
-          position: relative;
-          top: 3px;
-          filter: grayscale(100%) brightness(0) invert(1);
-        }
-
-        &--custom {
-          font-size: 22px;
-          color: $white;
-          font-family: Compromis, sans-serif;
-        }
-      }
-    }
-
     .blob {
       &-1 {
         left: -58%;
@@ -309,27 +232,8 @@ export default {
       }
     }
 
-    /* Cards with headline on top */
-    &.disposition-1 {
-      .headline {
-        top: 88px;
-        bottom: auto;
-      }
-    }
-
     /* Cards in story aspect */
     &.aspect-916 {
-      .headline {
-        left: 16px;
-        right: 16px;
-        padding: 18px;
-
-        &-source {
-          margin: -18px -18px 18px -18px;
-          padding: 8px 18px;
-        }
-      }
-
       .blob {
         &-1 {
           left: -118%;
@@ -337,14 +241,6 @@ export default {
 
         &-2 {
           right: -104%;
-        }
-      }
-
-      /* Cards in story aspect with headline on top */
-      &.disposition-1 {
-        .headline {
-          top: 88px;
-          bottom: auto;
         }
       }
     }
