@@ -1,6 +1,12 @@
 <template>
   <div
-    :class="['glowy-blob', `gradient-${gradient}`, `position-${position}`, { 'is-wide': wide }]"
+    :class="[
+      'glowy-blob',
+      `gradient-${gradient}`,
+      `position-${position}`,
+      `aspect-${aspect}`,
+      { 'is-wide': wide }
+    ]"
     :style="offset ? { '--translate-x': offset.x, '--translate-y': offset.y } : false"
   >
     <div class="glowy-subject"></div>
@@ -25,6 +31,10 @@ export default {
       type: Boolean,
       default: false
     },
+    aspect: {
+      type: String,
+      default: '11'
+    },
     gradient: {
       type: String,
       default: 'orange',
@@ -44,7 +54,7 @@ export default {
 
   .glowy-blob {
     position: absolute;
-    transform: rotate($rotation) translate(var(--translate-x), var(--translate-y));
+    transform: rotate($rotation) translate(var(--translate-x, 0), var(--translate-y, 0));
     transition: all .5s ease-in-out;
     z-index: 20;
 
@@ -55,6 +65,10 @@ export default {
       &.is-wide {
         left: -46%;
       }
+
+      &.aspect-916 {
+        left: -118% !important;
+      }
     }
 
     &.position-bottom {
@@ -64,6 +78,10 @@ export default {
 
       &.is-wide {
         right: -46%;
+      }
+
+      &.aspect-916 {
+        right: -104% !important;
       }
     }
 
