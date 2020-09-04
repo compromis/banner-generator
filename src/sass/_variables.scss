@@ -59,7 +59,7 @@ $link-focus-border: $primary;
 // Inputs
 $input-shadow: 0;
 
-// Banners
+// Gradients
 $gradient-start: #d23517;
 $gradient-end: #f39128;
 $gradient: linear-gradient(var(--gradient-orientation, 45deg), $gradient-start, $gradient-end);
@@ -78,10 +78,18 @@ $gradient-lgtb: linear-gradient(var(--gradient-orientation, 180deg),
   rgba(85,164,219,1) 83%,
   rgba(161,74,156,1) 83%,
   rgba(161,74,156,1) 100%);
+// Translucent gradients
+$trans-gradient: linear-gradient(var(--gradient-orientation, 110deg), rgba($gradient-start, .9), rgba($gradient-end, .6), rgba($gradient-end, 0));
+$trans-gradient-feminism: linear-gradient(var(--gradient-orientation, 110deg), rgba(#7D3A81, .9), rgba(#C54687, .6), rgba(#C54687, 0));
+$trans-gradient-green: linear-gradient(var(--gradient-orientation, 110deg), rgba(#38B34A, .9), rgba(#8CC949, .6), rgba(#8CC949, 0));
+$trans-gradients: ('orange': $trans-gradient, 'feminism': $trans-gradient-feminism, 'green': $trans-gradient-green);
+
+// Other settings
 $fake-color: $gradient-start;
 $rotation: -5deg;
-$border-radius: 5rem;
-$card-radius: 1rem;
+$border-radius: 80px;
+$card-radius: 16px;
+$glowy-card-radius: 16px;
 
 // Shadows
 $default-shadow: 0 .8rem 1.7rem -.3rem var(--shadow-color, rgba($gray-900, .15)),
