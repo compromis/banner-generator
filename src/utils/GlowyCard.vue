@@ -31,8 +31,8 @@ export default {
     gradient: {
       type: String,
       default: 'orange',
-      validator: function (value) {
-        return ['orange', 'feminism', 'green', 'none'].indexOf(value) !== -1
+      validator (value) {
+        return ['orange', 'feminism', 'green', 'lgtb', 'none'].indexOf(value) !== -1
       }
     },
     edge: {
@@ -58,14 +58,15 @@ export default {
 
     &-ghost {
       position: absolute;
-      top: 5px;
+      top: 20px;
       left: 0;
       right: 0;
-      bottom: 0;
+      bottom: -4px;
       z-index: 1;
       filter: blur(34px);
 
       &.second {
+        bottom: -1px;
         filter: blur(8px);
       }
     }
@@ -106,5 +107,25 @@ export default {
         }
       }
     }
+
+    &-lgtb {
+      .glowy-subject::before,
+      .glowy-ghost::before {
+        --gradient-orientation: 90deg;
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 20px;
+        background: $gradient-lgtb;
+      }
+    }
+  }
+
+  .placeholder {
+    background: $gray-200;
+    min-height: 400px;
+    min-width: 400px;
   }
 </style>
