@@ -18,7 +18,6 @@
     <div class="blob blob-2"></div>
     <headline-card
     :headline="banner.headline"
-    :card="banner.card"
     :source="banner.source"
     :customSource="banner.customSource"
     :customSourceColor="banner.customSourceColor"

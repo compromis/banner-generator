@@ -29,13 +29,43 @@ import CastelloTVPNG from './logos/castello-tv.png'
 import MediterraneoCsPNG from './logos/mediterraneo-cs.png'
 import ElMeridianoPNG from './logos/el-meridiano.png'
 
+const fonts = {
+  tiemposHeadline: {
+    fontFamily: 'Tiempos Headline',
+    lineHeight: 1,
+    padding: '0.75rem 0.75rem 0.5rem'
+  },
+  robotoSlab: {
+    fontFamily: 'Roboto Slab',
+    lineHeight: 1.25
+  },
+  roboto: {
+    fontFamily: 'Roboto'
+  },
+  robotoCondensed: {
+    fontFamily: 'Roboto Condensed'
+  },
+  gotham: {
+    fontFamily: 'Gotham'
+  },
+  helvetica: {
+    fontFamily: 'Helvetica, Arial'
+  },
+  georgia: {
+    fontFamily: 'Georgia'
+  },
+  titillium: {
+    fontFamily: 'Titillium Web'
+  }
+}
+
 const sources = [
   {
     id: 'eldiario',
     name: 'eldiario.es',
     logo: EldiarioSVG,
     logoHeight: 24,
-    fontFamily: 'Roboto Slab',
+    font: fonts.roboto,
     color: '#235690'
   },
   {
@@ -43,7 +73,7 @@ const sources = [
     name: 'La Vanguardia',
     logo: LaVanguardiaSVG,
     logoHeight: 18,
-    fontFamily: 'Tiempos Headline',
+    font: fonts.tiemposHeadline,
     color: '#071C49'
   },
   {
@@ -51,7 +81,7 @@ const sources = [
     name: 'Antena 3',
     logo: Antena3SVG,
     logoHeight: 22,
-    fontFamily: 'Roboto',
+    font: fonts.roboto,
     color: '#ED7B38'
   },
   {
@@ -59,7 +89,7 @@ const sources = [
     name: 'ABC',
     logo: AbcSVG,
     logoHeight: 20,
-    fontFamily: 'Tiempos Headline',
+    font: fonts.tiemposHeadline,
     color: '#000'
   },
   {
@@ -67,7 +97,7 @@ const sources = [
     name: 'Las Provincias',
     logo: LasprovinciasSVG,
     logoHeight: 18,
-    fontFamily: 'Roboto',
+    font: fonts.roboto,
     color: '#000'
   },
   {
@@ -75,7 +105,7 @@ const sources = [
     name: 'Levante',
     logo: LevanteSVG,
     logoHeight: 20,
-    fontFamily: 'Roboto Condensed',
+    font: fonts.robotoCondensed,
     color: '#386998'
   },
   {
@@ -83,7 +113,7 @@ const sources = [
     name: 'À punt',
     logo: ApuntSVG,
     logoHeight: 28,
-    fontFamily: 'Gotham',
+    font: fonts.gotham,
     letterSpacing: '-0.5px',
     color: '#000'
   },
@@ -92,7 +122,7 @@ const sources = [
     name: 'El País',
     logo: ElpaisSVG,
     logoHeight: 22,
-    fontFamily: 'Tiempos Headline',
+    font: fonts.tiemposHeadline,
     color: '#1F4D80'
   },
   {
@@ -100,7 +130,7 @@ const sources = [
     name: 'La Sexta',
     logo: LasextaSVG,
     logoHeight: 26,
-    fontFamily: 'Roboto',
+    font: fonts.roboto,
     color: '#63AB54'
   },
   {
@@ -108,7 +138,7 @@ const sources = [
     name: 'Cadena Ser',
     logo: SerSVG,
     logoHeight: 24,
-    fontFamily: 'Gotham',
+    font: fonts.gotham,
     letterSpacing: '-0.5px',
     color: '#000'
   },
@@ -117,7 +147,7 @@ const sources = [
     name: 'Valencia Plaza',
     logo: ValenciaplazaSVG,
     logoHeight: 26,
-    fontFamily: 'Tiempos Headline',
+    font: fonts.tiemposHeadline,
     color: '#5881B4'
   },
   {
@@ -125,7 +155,7 @@ const sources = [
     name: 'Diario Información',
     logo: InformacionSVG,
     logoHeight: 24,
-    fontFamily: 'Tiempos Headline',
+    font: fonts.tiemposHeadline,
     color: '#306E9B'
   },
   {
@@ -134,7 +164,7 @@ const sources = [
     logo: VeinteMinutosSVG,
     logoCard: VeinteMinutosCardSVG,
     logoHeight: 34,
-    fontFamily: 'Helvetica, Arial',
+    font: fonts.helvetica,
     color: '#1C4295'
   },
   {
@@ -142,7 +172,7 @@ const sources = [
     name: 'La Veu',
     logo: LaVeuSVG,
     logoHeight: 24,
-    fontFamily: 'Gotham',
+    font: fonts.gotham,
     color: '#E83334'
   },
   {
@@ -150,7 +180,7 @@ const sources = [
     name: 'EuropaPress',
     logo: EuropaPressSVG,
     logoHeight: 18,
-    fontFamily: 'Roboto Slab',
+    font: fonts.roboto,
     color: '#BA261A'
   },
   {
@@ -158,7 +188,7 @@ const sources = [
     name: 'El Mundo',
     logo: ElMundoSVG,
     logoHeight: 18,
-    fontFamily: 'Tiempos Headline',
+    font: fonts.tiemposHeadline,
     color: '#6887A6'
   },
   {
@@ -166,7 +196,7 @@ const sources = [
     name: 'InfoLibre',
     logo: InfoLibreSVG,
     logoHeight: 22,
-    fontFamily: 'Georgia',
+    font: fonts.georgia,
     color: '#B22726'
   },
   {
@@ -174,7 +204,7 @@ const sources = [
     name: 'El Periódico de Aquí',
     logo: ElPeriodicoDeAquiPNG,
     logoHeight: 28,
-    fontFamily: 'Tiempos Headline',
+    font: fonts.tiemposHeadline,
     color: '#AA3D3A'
   },
   {
@@ -182,7 +212,7 @@ const sources = [
     name: 'La Marina Plaça',
     logo: LaMarinaPlazaSVG,
     logoHeight: 28,
-    fontFamily: 'Tiempos Headline',
+    font: fonts.tiemposHeadline,
     color: '#146f9C'
   },
   {
@@ -190,7 +220,7 @@ const sources = [
     name: 'El Confidencial',
     logo: ElConfidencialSVG,
     logoHeight: 24,
-    fontFamily: 'Tiempos Headline',
+    font: fonts.tiemposHeadline,
     color: '#163A4D'
   },
   {
@@ -198,7 +228,7 @@ const sources = [
     name: 'elperiòdic.com',
     logo: ElPeriodicSVG,
     logoHeight: 24,
-    fontFamily: 'Roboto Slab',
+    font: fonts.roboto,
     color: '#364E79'
   },
   {
@@ -206,7 +236,7 @@ const sources = [
     name: 'València Extra',
     logo: ValenciaExtraPNG,
     logoHeight: 24,
-    fontFamily: 'Titillium Web',
+    font: fonts.titillium,
     color: '#E3803B'
   },
   {
@@ -214,7 +244,7 @@ const sources = [
     name: 'Castellón Información',
     logo: CSInfoPNG,
     logoHeight: 28,
-    fontFamily: 'Gotham',
+    font: fonts.gotham,
     color: '#ED9A3E'
   },
   {
@@ -222,7 +252,7 @@ const sources = [
     name: 'Televisó de Castelló',
     logo: CastelloTVPNG,
     logoHeight: 28,
-    fontFamily: 'Gotham',
+    font: fonts.gotham,
     color: '#0d8a50'
   },
   {
@@ -230,7 +260,7 @@ const sources = [
     name: 'Alicante Plaza',
     logo: AlicantePlazaPNG,
     logoHeight: 26,
-    fontFamily: 'Tiempos Headline',
+    font: fonts.tiemposHeadline,
     color: '#5881B4'
   },
   {
@@ -238,7 +268,7 @@ const sources = [
     name: 'Castellón Plaza',
     logo: CastellonPlazaPNG,
     logoHeight: 26,
-    fontFamily: 'Tiempos Headline',
+    font: fonts.tiemposHeadline,
     color: '#5881B4'
   },
   {
@@ -246,7 +276,7 @@ const sources = [
     name: 'El Periódico Mediterráneo',
     logo: MediterraneoCsPNG,
     logoHeight: 22,
-    fontFamily: 'Roboto',
+    font: fonts.roboto,
     color: '#104277'
   },
   {
@@ -254,7 +284,7 @@ const sources = [
     name: 'Nou Horta',
     logo: NouHortaSVG,
     logoHeight: 28,
-    fontFamily: 'Roboto',
+    font: fonts.roboto,
     color: '#1D1D1B'
   },
   {
@@ -262,7 +292,7 @@ const sources = [
     name: 'El Meridiano Horta',
     logo: ElMeridianoPNG,
     logoHeight: 20,
-    fontFamily: 'Roboto',
+    font: fonts.roboto,
     color: '#00849e'
   }
 ]

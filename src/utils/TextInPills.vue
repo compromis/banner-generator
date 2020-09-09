@@ -1,6 +1,6 @@
 <template>
   <div v-if="text" :class="['text-holder', `text-${pillStyle}`, `text-align-${textAlign}`]" contenteditable>
-    <span class="text-lines" :style="{ fontSize, textAlign, '--bg-width': `${width}px` }">{{ text }}</span>
+    <span class="text-lines" :style="{ fontSize, textAlign, lineHeight, padding, '--bg-width': `${width}px` }">{{ text }}</span>
     <svg style="visibility: hidden; position: absolute;" width="0" height="0" xmlns="http://www.w3.org/2000/svg" version="1.1">
       <defs>
           <filter id="goo">
@@ -34,6 +34,14 @@ export default {
     width: {
       type: Number,
       default: 600
+    },
+    padding: {
+      type: String,
+      default: '0.05em 0.25em'
+    },
+    lineHeight: {
+      type: Number,
+      default: 1.2
     }
   }
 }

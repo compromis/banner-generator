@@ -11,7 +11,7 @@
     </div>
     <div class="headline-text"
       :style="{
-        fontFamily: source ? source.fontFamily : false,
+        fontFamily: source ? source.font.fontFamily : false,
         fontSize: fontSize,
         letterSpacing: source ? source['letterSpacing'] : false
       }">
@@ -20,6 +20,8 @@
         v-else
         :text="headline"
         :font-size="fontSize"
+        :line-height="source.font.lineHeight"
+        :padding="source.font.padding"
         :width="820" />
     </div>
   </div>
