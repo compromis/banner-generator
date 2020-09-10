@@ -55,6 +55,7 @@ export default {
       return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
     },
 
+    // deprecated
     formatLocal (local) {
       return local
         .replace(/^per/gi, '')
