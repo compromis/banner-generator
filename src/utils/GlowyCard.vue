@@ -84,6 +84,7 @@ export default {
       overflow: hidden;
 
       img {
+        width: 100%;
         height: 100%;
         display: block;
         margin: 0;

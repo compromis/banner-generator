@@ -89,8 +89,7 @@ export default {
   justify-content: center;
 
   &-source {
-    margin: -26px -26px 0 -26px;
-    padding: 20px 26px;
+    margin-bottom: 12px;
 
     &--custom {
       margin-bottom: 4px;
