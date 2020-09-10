@@ -118,36 +118,6 @@ export default {
       color: $gray-700;
     }
 
-    &-channel, &-programme {
-      display: inline-flex;
-      margin: 8px 8px 0 0;
-      background-color: $gray-800;
-      border-radius: 5px;
-      width: 50px;
-      height: 50px;
-      overflow: hidden;
-      box-sizing: border-box;
-      flex-shrink: 0;
-
-      &-custom {
-        padding: 8px 16px;
-        color: $white;
-        font-weight: bold;
-        width: 170px;
-        align-items: center;
-        height: auto;
-        max-height: 50px;
-        line-height: 1.1;
-      }
-    }
-
-    &-broadcast {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: stretch;
-      margin-top: 8px;
-    }
-
     .icon {
       padding-right: 5px;
     }
@@ -224,11 +194,6 @@ export default {
         padding-top: 24px;
       }
 
-      &-channel-custom, &-programme-custom {
-        width: auto;
-        flex-grow: 1;
-      }
-
       &-title, &-subtitle, &-overtitle {
         span {
           box-decoration-break: clone;
@@ -249,11 +214,6 @@ export default {
           background: $white;
           color: $gray-800;
         }
-      }
-
-      &-channel-custom ~ .medium-programme-custom,
-      &-channel-custom {
-        width: 47%;
       }
     }
 
