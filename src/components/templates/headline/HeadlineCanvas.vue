@@ -1,5 +1,12 @@
 <template>
-  <div :id="'bannerCanvas' + aspect" :class="['banner-canvas', 'aspect-' + aspect, 'theme-glowy']" v-if="banner">
+  <div :id="'bannerCanvas' + aspect"
+    :class="[
+      'banner-canvas',
+      'aspect-' + aspect,
+      'disposition-' + banner.disposition,
+      { 'theme-glowy': banner.card },
+      { 'theme-blobs': !banner.card }
+    ]" v-if="banner">
     <banner-picture
       :picture="banner.picturePreview"
       :picture-position="objectPosition"
@@ -48,16 +55,59 @@ export default {
   .headline {
     position: absolute;
     z-index: 30;
-    left: 40px;
-    right: 40px;
-    bottom: 90px;
-    top: auto;
   }
 
+  /* Blobs theme */
+  .theme-blobs {
+    .headline {
+      left: 40px;
+      right: 40px;
+    }
+
+    /* Banner on bottom */
+    &.disposition-0 {
+      .headline {
+        bottom: 90px;
+        top: auto;
+      }
+    }
+
+    /* Banner on bottom */
+    &.disposition-1 {
+      .headline {
+        top: 90px;
+        bottom: auto;
+      }
+    }
+  }
+
+  /* Glowy theme */
   .theme-glowy {
+    .headline {
+      left: 40px;
+      right: 40px;
+    }
+
+    /* Banner on bottom */
+    &.disposition-0 {
+      .headline {
+        bottom: 120px;
+        top: auto;
+      }
+    }
+
+    /* Banner on top */
+    &.disposition-1 {
+      .headline {
+        top: 55px;
+        bottom: auto;
+      }
+    }
+
+    /* Glowy card */
     .banner-picture {
       position: absolute;
-      z-index: 30;
+      z-index: 20;
       left: 40px;
       right: 40px;
       top: 90px;

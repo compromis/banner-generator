@@ -47,6 +47,8 @@ export default {
     right: 0;
     bottom: 0;
     z-index: 10;
+    height: 100%;
+    width: 100%;
     background: $gray-200;
 
     img {
