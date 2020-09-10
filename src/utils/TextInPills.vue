@@ -1,7 +1,9 @@
 <template>
-  <div v-if="text" :class="['text-holder', `text-${pillStyle}`, `text-align-${textAlign}`]" contenteditable>
-    <span class="text-lines" :style="{ fontSize, textAlign, lineHeight, padding, '--bg-width': `${width}px` }">{{ text }}</span>
-    <span v-if="shadow" class="text-lines shadow" :style="{ fontSize, textAlign, lineHeight, padding, '--bg-width': `${width}px` }">{{ text }}</span>
+  <div v-if="text" :class="['text-holder', `text-${pillStyle}`, `text-align-${textAlign}`]">
+    <span class="text-lines on-top" :style="{ fontSize, textAlign, lineHeight, padding, '--bg-width': `${width}px` }">{{ text }}</span>
+    <div class="shadow" v-if="shadow">
+      <span class="text-lines" :style="{ fontSize, textAlign, lineHeight, padding, '--bg-width': `${width}px` }">{{ text }}</span>
+    </div>
     <svg style="visibility: hidden; position: absolute;" width="0" height="0" xmlns="http://www.w3.org/2000/svg" version="1.1">
       <defs>
           <filter id="goo">
@@ -100,12 +102,22 @@ export default {
     }
   }
 
+  .on-top {
+    position: relative;
+    z-index: 20;
+  }
+
   .shadow {
     position: absolute;
     top: 0;
     left: 0;
-    box-shadow: $raised-shadow;
-    filter: none;
+    right: 0;
+    z-index: 19;
+
+    span {
+      box-shadow: $raised-shadow;
+      filter: none;
+    }
   }
 
  @supports (-moz-appearance:none) {
