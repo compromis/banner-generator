@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="banner-picture">
     <glowy-card v-if="theme === 'glowy'" :picture="picture" :picture-position="picturePosition" v-bind="$attrs" />
     <div v-else class="background-picture">
       <img v-if="picture" :src="picture" :style="picturePosition" />

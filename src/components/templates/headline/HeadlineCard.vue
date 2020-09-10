@@ -1,5 +1,5 @@
 <template>
-  <div :class="{'headline': true, 'headline--pills': pills}">
+  <div :class="{'headline': true, 'headline--pills': theme === 'glowy'}">
     <div class="headline-source headline-source--custom" v-if="source === 'other'">
       <span :style="{ color: customSourceColor }">{{ customSource }}</span>
     </div>
@@ -10,12 +10,12 @@
       :style="{ height: source.logoHeight + 'px' }" />
     </div>
     <div class="headline-text"
-      :style="{
-        fontFamily: source ? source.font.fontFamily : false,
+      :style="source && source !== 'other' ? {
+        fontFamily: source.font.fontFamily,
         fontSize,
-        letterSpacing: source ? source['letterSpacing'] : false
-      }">
-      <template v-if="!pills">
+        letterSpacing: source['letterSpacing']
+      } : { fontSize }">
+      <template v-if="theme === 'blobs'">
         {{ headline }}
       </template>
       <text-in-pills
@@ -23,8 +23,8 @@
         shadow
         :text="headline"
         :font-size="fontSize"
-        :line-height="source.font.lineHeight"
-        :padding="source.font.padding"
+        :line-height="source && source !== 'other' ? source.font.lineHeight : null"
+        :padding="source && source !== 'other' ? source.font.padding : null"
         :width="720" />
     </div>
   </div>
@@ -41,6 +41,13 @@ export default {
   },
 
   props: {
+    theme: {
+      type: String,
+      default: 'blobs',
+      validator (value) {
+        return ['blobs', 'glowy'].indexOf(value) !== -1
+      }
+    },
     source: {
       type: Object,
       default: null
@@ -57,10 +64,6 @@ export default {
       type: String,
       default: ''
     },
-    pills: {
-      type: Boolean,
-      default: true
-    },
     fontSize: {
       type: String,
       default: ''
@@ -74,12 +77,6 @@ export default {
 
 .headline {
   display: flex;
-  position: absolute;
-  z-index: 30;
-  left: 40px;
-  right: 40px;
-  bottom: 90px;
-  top: auto;
   height: auto;
   padding: 16px;
   background: $white;
