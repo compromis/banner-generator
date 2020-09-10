@@ -1,15 +1,15 @@
 <template>
   <div :class="['glowy-card', `gradient-${gradient}`, {'edge': edge}]">
     <div class="glowy-subject">
-      <img v-if="image" :src="image" :style="imagePosition" />
+      <img v-if="picture" :src="picture" :style="picturePosition" />
       <div v-else class="placeholder"></div>
     </div>
     <div class="glowy-ghost first">
-      <img v-if="image" :src="image" :style="imagePosition" />
+      <img v-if="picture" :src="picture" :style="picturePosition" />
       <div v-else class="placeholder"></div>
     </div>
     <div class="glowy-ghost second">
-      <img v-if="image" :src="image" :style="imagePosition" />
+      <img v-if="picture" :src="picture" :style="picturePosition" />
       <div v-else class="placeholder"></div>
     </div>
   </div>
@@ -20,11 +20,11 @@ export default {
   name: 'glowy-card',
 
   props: {
-    image: {
+    picture: {
       type: [File, String],
       default: null
     },
-    imagePosition: {
+    picturePosition: {
       type: Object,
       default: null
     },
@@ -67,7 +67,7 @@ export default {
 
       &.second {
         bottom: -1px;
-        filter: blur(8px);
+        filter: blur(8px) brightness(.85);
       }
     }
 

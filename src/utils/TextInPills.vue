@@ -1,6 +1,9 @@
 <template>
-  <div v-if="text" :class="['text-holder', `text-${pillStyle}`, `text-align-${textAlign}`]" contenteditable>
-    <span class="text-lines" :style="{ fontSize, textAlign, lineHeight, padding, '--bg-width': `${width}px` }">{{ text }}</span>
+  <div v-if="text" :class="['text-holder', `text-${pillStyle}`, `text-align-${textAlign}`]">
+    <span class="text-lines on-top" :style="{ fontSize, textAlign, lineHeight, padding, '--bg-width': `${width}px` }">{{ text }}</span>
+    <div class="shadow" v-if="shadow">
+      <span class="text-lines" :style="{ fontSize, textAlign, lineHeight, padding, '--bg-width': `${width}px` }">{{ text }}</span>
+    </div>
     <svg style="visibility: hidden; position: absolute;" width="0" height="0" xmlns="http://www.w3.org/2000/svg" version="1.1">
       <defs>
           <filter id="goo">
@@ -42,6 +45,10 @@ export default {
     lineHeight: {
       type: Number,
       default: 1.2
+    },
+    shadow: {
+      type: Boolean,
+      default: false
     }
   }
 }
@@ -52,6 +59,7 @@ export default {
 
   .text {
     &-holder {
+      position: relative;
       width: 100%;
       -webkit-line-break: normal;
 
@@ -91,6 +99,24 @@ export default {
       box-decoration-break: clone;
       -webkit-box-decoration-break: clone;
       filter: url('#goo');
+    }
+  }
+
+  .on-top {
+    position: relative;
+    z-index: 20;
+  }
+
+  .shadow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 19;
+
+    span {
+      box-shadow: $raised-shadow;
+      filter: none;
     }
   }
 
