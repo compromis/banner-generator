@@ -12,23 +12,27 @@
     <div class="headline-text"
       :style="{
         fontFamily: source ? source.font.fontFamily : false,
-        fontSize: fontSize,
+        fontSize,
         letterSpacing: source ? source['letterSpacing'] : false
       }">
-      <template v-if="!pills">{{ headline | formatString }}</template>
+      <template v-if="!pills">
+        {{ headline }}
+      </template>
       <text-in-pills
         v-else
+        shadow
         :text="headline"
         :font-size="fontSize"
         :line-height="source.font.lineHeight"
         :padding="source.font.padding"
-        :width="820" />
+        :width="720" />
     </div>
   </div>
 </template>
 
 <script>
 import TextInPills from '@/utils/TextInPills'
+
 export default {
   name: 'HeadlineCard',
 
@@ -69,19 +73,18 @@ export default {
 @import "../../../sass/variables";
 
 .headline {
+  display: flex;
+  position: absolute;
   z-index: 30;
   left: 40px;
   right: 40px;
   bottom: 90px;
   top: auto;
+  height: auto;
+  padding: 16px;
   background: $white;
   box-shadow: $raised-shadow;
   border-radius: $card-radius;
-  height: auto;
-  padding: 26px;
-  overflow: hidden;
-  display: flex;
-  position: absolute;
   font-family: 'Tiempos Headline', serif;
   font-weight: 700;
   transition: all .5s ease-in-out;
@@ -122,33 +125,4 @@ export default {
     }
   }
 }
-
-.disposition-1 {
-  .headline {
-    top: 88px;
-    bottom: auto;
-  }
-}
-
-  /* Cards in story aspect */
-.aspect-916 {
-  .headline {
-    left: 16px;
-    right: 16px;
-    padding: 18px;
-
-    &-source {
-      margin: -18px -18px 0 -18px;
-      padding: 14px 20px;
-    }
-  }
-    /* Cards in story aspect with headline on top */
-    &.disposition-1 {
-      .headline {
-        top: 88px;
-        bottom: auto;
-      }
-    }
-  }
-
 </style>
