@@ -40,7 +40,7 @@ export default {
     },
     padding: {
       type: String,
-      default: '0.05em 0.25em'
+      default: ''
     },
     lineHeight: {
       type: Number,

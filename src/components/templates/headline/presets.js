@@ -33,29 +33,37 @@ const fonts = {
   tiemposHeadline: {
     fontFamily: 'Tiempos Headline',
     lineHeight: 1,
-    padding: '0.75rem 0.75rem 0.5rem'
+    padding: '15px 12px 6px'
   },
   robotoSlab: {
     fontFamily: 'Roboto Slab',
-    lineHeight: 1.25
+    lineHeight: 1.25,
+    padding: '10px 10px 4px'
   },
   roboto: {
-    fontFamily: 'Roboto'
+    fontFamily: 'Roboto',
+    padding: '10px 10px 4px'
   },
   robotoCondensed: {
-    fontFamily: 'Roboto Condensed'
+    fontFamily: 'Roboto Condensed',
+    padding: '10px 10px 4px'
   },
   gotham: {
-    fontFamily: 'Gotham'
+    fontFamily: 'Gotham',
+    letterSpacing: '-0.5px',
+    padding: '10px 10px 4px'
   },
   helvetica: {
-    fontFamily: 'Helvetica, Arial'
+    fontFamily: 'Helvetica, Arial',
+    padding: '10px 10px 4px'
   },
   georgia: {
-    fontFamily: 'Georgia'
+    fontFamily: 'Georgia',
+    padding: '10px 10px 4px'
   },
   titillium: {
-    fontFamily: 'Titillium Web'
+    fontFamily: 'Titillium Web',
+    padding: '10px 10px 4px'
   }
 }
 
@@ -114,7 +122,6 @@ const sources = [
     logo: ApuntSVG,
     logoHeight: 28,
     font: fonts.gotham,
-    letterSpacing: '-0.5px',
     color: '#000'
   },
   {
@@ -139,7 +146,6 @@ const sources = [
     logo: SerSVG,
     logoHeight: 24,
     font: fonts.gotham,
-    letterSpacing: '-0.5px',
     color: '#000'
   },
   {

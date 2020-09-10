@@ -49,11 +49,18 @@ export default {
   .glowy {
     &-card {
       position: relative;
+      min-height: 400px;
+      min-width: 400px;
     }
 
     &-subject {
-      position: relative;
+      display: flex;
+      position: absolute;
       z-index: 2;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
     }
 
     &-ghost {
@@ -77,8 +84,10 @@ export default {
       overflow: hidden;
 
       img {
+        height: 100%;
         display: block;
         margin: 0;
+        object-fit: cover;
       }
 
       @at-root .edge > div {
@@ -125,7 +134,7 @@ export default {
 
   .placeholder {
     background: $gray-200;
-    min-height: 400px;
-    min-width: 400px;
+    width: 100%;
+    height: 100%;
   }
 </style>

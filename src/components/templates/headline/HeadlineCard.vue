@@ -13,7 +13,7 @@
       :style="source && source !== 'other' ? {
         fontFamily: source.font.fontFamily,
         fontSize,
-        letterSpacing: source['letterSpacing']
+        letterSpacing: source.font['letterSpacing']
       } : { fontSize }">
       <template v-if="theme === 'blobs'">
         {{ headline }}
@@ -24,7 +24,7 @@
         :text="headline"
         :font-size="fontSize"
         :line-height="source && source !== 'other' ? source.font.lineHeight : null"
-        :padding="source && source !== 'other' ? source.font.padding : null"
+        :padding="source && source !== 'other' ? source.font.padding : '15px 12px 6px'"
         :width="720" />
     </div>
   </div>
@@ -117,8 +117,8 @@ export default {
     .headline-source img {
       background: $white;
       box-shadow: $raised-shadow;
-      border-radius: .5rem;
-      padding: 1rem;
+      border-radius: 8px;
+      padding: 10px;
     }
   }
 }

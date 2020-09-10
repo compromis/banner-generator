@@ -5,10 +5,10 @@
         id="style-tabs"
         type="is-toggle"
         size="is-small"
-        v-model="properties.card"
+        v-model="properties.theme"
         class="tabs-field"
         expanded>
-        <b-tab-item label="Fons blanc"></b-tab-item>
+        <b-tab-item label="Fons imatge"></b-tab-item>
         <b-tab-item label="Targeta"></b-tab-item>
       </b-tabs>
     </b-field>

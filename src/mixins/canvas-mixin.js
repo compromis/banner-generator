@@ -14,11 +14,15 @@ export default {
   },
 
   computed: {
-    objectPosition: function () {
+    objectPosition () {
       const objectPosition = (this.banner.pictureAspect === 'vertical')
         ? '0% ' + (100 - this.banner.picturePos) + '%'
         : (100 - this.banner.picturePos) + '% 0%'
       return { objectPosition }
+    },
+
+    theme () {
+      return this.banner.theme === 0 ? 'blobs' : 'glowy'
     }
   },
 
