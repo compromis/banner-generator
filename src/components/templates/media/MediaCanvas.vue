@@ -30,33 +30,7 @@
         <div class="medium-time" contenteditable>
           <b-icon icon="clock"/>{{ banner.time | formatTime }}
         </div>
-        <div class="medium-broadcast">
-          <div v-if="banner.source"
-            :class="{
-              'medium-channel': true,
-              'medium-channel-custom': banner.source === 'other'
-            }"
-            :style="{
-              backgroundColor: banner.source === 'other' ? banner.customSourceColor : banner.source['color'],
-              padding: banner.source['padding']
-            }">
-            <img v-if="banner.source !== 'other'" :src="banner.source.logo" />
-            <span v-else>{{ banner.customSource }}</span>
-          </div>
-          <div v-if="banner.programme || (banner.programme === 'other' && banner.customProgramme)"
-            :class="{
-              'medium-programme': true,
-              'medium-programme-custom': banner.programme === 'other'
-            }"
-            :style="{
-              backgroundColor: banner.programme === 'other' ? banner.customProgrammeColor : banner.programme['color'],
-              padding: banner.programme !== 'other' ? banner.programme['padding'] : null,
-              width: banner.programme !== 'other' ? banner.programme['width'] : null,
-            }">
-            <img v-if="banner.programme !== 'other'" :src="banner.programme.logo" />
-            <span v-else>{{ banner.customProgramme }}</span>
-          </div>
-        </div>
+        <media-source :source="banner.source" :customSource="banner.customSource" :customSourceColor="banner.customSourceColor" :programme="banner.programme" :customProgramme="banner.customProgramme" :customProgrammeColor="banner.customProgrammeColor"/>
       </div>
     </div>
     <div class="logo">
@@ -70,11 +44,16 @@
 
 <script>
 import CanvasMixin from '@/mixins/canvas-mixin.js'
+import MediaSource from '@/utils/MediaSource'
 
 export default {
   name: 'quote-canvas',
 
-  mixins: [CanvasMixin]
+  mixins: [CanvasMixin],
+
+  components: {
+    MediaSource
+  }
 }
 </script>
 
