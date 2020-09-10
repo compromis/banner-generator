@@ -39,15 +39,9 @@
       </div>
     </div>
     <div class="speakers-details-wrapper" v-if="aspect !== 'event'">
-      <div class="speakers-details speakers-date" contenteditable>
-        <font-awesome-icon :icon="['far', 'calendar-day']" fixed-width /> {{ banner.date | formatDate }}
-      </div>
-      <div class="speakers-details" contenteditable>
-        <font-awesome-icon :icon="['far', 'clock']" fixed-width /> {{ banner.time | formatTime }}
-      </div>
-      <div class="speakers-details" contenteditable>
-        <font-awesome-icon :icon="['far', 'map-marker-alt']" fixed-width /> {{ banner.place }}
-      </div>
+      <event-info color="gradient" icon="calendar-day">{{ banner.date | formatDate }}</event-info>
+      <event-info color="gradient" icon="clock">{{ banner.time | formatTime }}</event-info>
+      <event-info color="gradient" icon="map-marker-alt">{{ banner.place }}</event-info>
     </div>
     <div class="logo">
       <compromis-logo />
@@ -66,11 +60,16 @@
 
 <script>
 import CanvasMixin from '@/mixins/canvas-mixin.js'
+import EventInfo from '@/utils/EventInfo'
 
 export default {
   name: 'quote-canvas',
 
-  mixins: [CanvasMixin]
+  mixins: [CanvasMixin],
+
+  components: {
+    EventInfo
+  }
 }
 </script>
 
