@@ -19,6 +19,8 @@ export default {
         picture: null,
         picturePreview: '',
         picturePos: 50,
+        pictureAspect: 'horizontal',
+        pictureDimensions: null,
         hashtag: '',
         hasLocalLabel: false,
         localLabel: ''
@@ -81,7 +83,9 @@ export default {
 
       const img = new Image()
       img.onload = () => {
-        this.properties.pictureAspect = (img.width / img.height > 1) ? 'horizontal' : 'vertical'
+        const { width, height } = img
+        this.properties.pictureAspect = (width / height > 1) ? 'horizontal' : 'vertical'
+        this.properties.pictureDimensions = { width, height }
       }
       img.src = this.properties.picturePreview
     },

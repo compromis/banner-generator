@@ -12,6 +12,8 @@
     <banner-picture
       :picture="banner.picturePreview"
       :picture-position="objectPosition"
+      :picture-dimensions="banner.pictureDimensions"
+      :height="aspect === '11' ? 500 : 600"
       :theme="theme"
       :edge="aspect === '916'" />
     <headline-card
@@ -88,6 +90,15 @@ export default {
 
   /* Glowy theme */
   .theme-glowy {
+    /* Glowy card */
+    .banner-picture::v-deep .glowy-card {
+      position: absolute;
+      z-index: 20;
+      left: 40px;
+      right: 40px;
+      top: 70px;
+    }
+
     /* Banner on bottom */
     &.disposition-0 {
       .headline {
@@ -98,14 +109,23 @@ export default {
 
     /* Banner on top */
     &.disposition-1 {
+      .banner-picture::v-deep .glowy-card {
+        top: 120px;
+      }
+
       .headline {
-        top: 35px;
+        top: 25px;
         bottom: auto;
       }
     }
 
     /* Story */
     &.aspect-916 {
+      .headline {
+        left: 5px;
+        right: 25px;
+      }
+
       .banner-picture::v-deep .glowy-card {
         top: 0;
         left: 0;
@@ -113,16 +133,20 @@ export default {
         width: 100%;
         height: 540px;
       }
-    }
 
-    /* Glowy card */
-    .banner-picture::v-deep .glowy-card {
-      position: absolute;
-      z-index: 20;
-      left: 40px;
-      right: 40px;
-      top: 70px;
-      bottom: 150px;
+      .headline::v-deep .headline-source {
+        padding: 5px 8px;
+
+        img {
+          height: 20px;
+        }
+      }
+
+      &.disposition-1 {
+        .headline {
+          top: 55px;
+        }
+      }
     }
   }
 </style>

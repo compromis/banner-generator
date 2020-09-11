@@ -92,8 +92,7 @@ export default {
     margin-bottom: 12px;
 
     &--custom {
-      margin-bottom: 4px;
-      font-size: 22px;
+      font-size: 18px;
       font-family: Compromis, sans-serif;
     }
 
@@ -113,11 +112,13 @@ export default {
     background: none;
     box-shadow: none;
 
-    .headline-source img {
+    .headline-source {
+      width: fit-content;
+      margin-bottom: 22px;
       background: $white;
       box-shadow: $raised-shadow;
       border-radius: 8px;
-      padding: 10px;
+      padding: 8px 10px;
     }
   }
 }
