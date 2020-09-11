@@ -113,11 +113,15 @@ export default {
     background: none;
     box-shadow: none;
 
-    .headline-source img {
-      background: $white;
-      box-shadow: $raised-shadow;
-      border-radius: 8px;
-      padding: 10px;
+    .headline-source {
+      margin-bottom: 22px;
+
+      img {
+        background: $white;
+        box-shadow: $raised-shadow;
+        border-radius: 8px;
+        padding: 10px;
+      }
     }
   }
 }

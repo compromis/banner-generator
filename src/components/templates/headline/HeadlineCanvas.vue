@@ -13,7 +13,7 @@
       :picture="banner.picturePreview"
       :picture-position="objectPosition"
       :picture-dimensions="banner.pictureDimensions"
-      :height="500"
+      :height="aspect === '11' ? 500 : 600"
       :theme="theme"
       :edge="aspect === '916'" />
     <headline-card

@@ -1,5 +1,5 @@
 <template>
-  <div :class="['glowy-card', `gradient-${gradient}`, {'edge': edge}]" :style="{ '--width': width + 'px', '--height': height + 'px' }">
+  <div :class="['glowy-card', `gradient-${gradient}`, {'edge': edge}, {'full-width': !width}]" :style="{ '--width': width + 'px', '--height': height + 'px' }">
     <div class="glowy-subject">
       <img v-if="picture" :src="picture" :style="picturePosition" />
       <div v-else class="placeholder"></div>
@@ -34,7 +34,7 @@ export default {
     },
     height: {
       type: Number,
-      default: null
+      required: true
     },
     gradient: {
       type: String,
@@ -51,7 +51,9 @@ export default {
 
   computed: {
     width () {
-      return this.pictureDimensions ? this.pictureDimensions.width * this.height / this.pictureDimensions.height : null
+      return this.pictureDimensions && !this.edge
+        ? this.pictureDimensions.width * this.height / this.pictureDimensions.height
+        : null
     }
   }
 }
@@ -68,26 +70,14 @@ export default {
     }
 
     &-subject {
-      position: absolute;
-      display: flex;
       top: 0;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
       z-index: 20;
-      width: var(--width);
-      height: var(--height);
     }
 
     &-ghost {
-      position: absolute;
       top: 5px;
-      left: 50%;
       z-index: 1;
-      transform: translateX(-50%);
       filter: blur(34px);
-      width: var(--width);
-      height: var(--height);
 
       &.second {
         filter: blur(8px) brightness(.85);
@@ -96,12 +86,19 @@ export default {
 
     &-subject,
     &-ghost {
+      position: absolute;
       border-radius: $glowy-card-radius;
       overflow: hidden;
+      max-width: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: var(--width, 100%);
+      height: var(--height);
 
       img {
-        width: var(--width);
+        width: var(--width, 100%);
         height: var(--height);
+        max-width: 100%;
         display: block;
         margin: 0;
         object-fit: cover;
@@ -110,9 +107,18 @@ export default {
       @at-root .edge > div {
         border-top-left-radius: 0;
         border-top-right-radius: 0;
+      }
 
-        img {
-          width: 100%;
+      @at-root .full-width {
+        .glowy-subject,
+        .glowy-ghost {
+          left: 0;
+          right: 0;
+          transform: none;
+
+          img {
+            width: 100%;
+          }
         }
       }
     }
