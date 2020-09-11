@@ -1,5 +1,5 @@
 <template>
-  <div :class="['glowy-card', `gradient-${gradient}`, {'edge': edge}]">
+  <div :class="['glowy-card', `gradient-${gradient}`, {'edge': edge}]" :style="{ '--width': width + 'px', '--height': height + 'px' }">
     <div class="glowy-subject">
       <img v-if="picture" :src="picture" :style="picturePosition" />
       <div v-else class="placeholder"></div>
@@ -28,6 +28,14 @@ export default {
       type: Object,
       default: null
     },
+    pictureDimensions: {
+      type: Object,
+      default: null
+    },
+    height: {
+      type: Number,
+      default: null
+    },
     gradient: {
       type: String,
       default: 'orange',
@@ -38,6 +46,12 @@ export default {
     edge: {
       type: Boolean,
       default: false
+    }
+  },
+
+  computed: {
+    width () {
+      return this.pictureDimensions ? this.pictureDimensions.width * this.height / this.pictureDimensions.height : null
     }
   }
 }
@@ -54,26 +68,28 @@ export default {
     }
 
     &-subject {
-      display: flex;
       position: absolute;
-      z-index: 2;
+      display: flex;
       top: 0;
       bottom: 0;
-      left: 0;
-      right: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 20;
+      width: var(--width);
+      height: var(--height);
     }
 
     &-ghost {
       position: absolute;
-      top: 20px;
-      left: 0;
-      right: 0;
-      bottom: -4px;
+      top: 5px;
+      left: 50%;
       z-index: 1;
+      transform: translateX(-50%);
       filter: blur(34px);
+      width: var(--width);
+      height: var(--height);
 
       &.second {
-        bottom: -1px;
         filter: blur(8px) brightness(.85);
       }
     }
@@ -84,8 +100,8 @@ export default {
       overflow: hidden;
 
       img {
-        width: 100%;
-        height: 100%;
+        width: var(--width);
+        height: var(--height);
         display: block;
         margin: 0;
         object-fit: cover;
