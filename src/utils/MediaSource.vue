@@ -1,29 +1,38 @@
 <template>
   <div class="media-source">
-    <div v-if="source"
-      :class="{
-        'media-source-channel': true,
-        'media-source-channel-custom': source === 'other'
-      }"
-      :style="{
-        backgroundColor: source === 'other' ? customSourceColor : source['color'],
-        padding: source['padding']
-      }">
-      <img v-if="source !== 'other'" :src="source.logo" />
-      <span v-else>{{ customSource }}</span>
+    <div class="channel-wrapper">
+      <div v-if="source"
+        :class="{
+          'media-source-channel': true,
+          'media-source-channel-custom': source === 'other'
+        }"
+        :style="{
+          backgroundColor: source === 'other' ? customSourceColor : source['color'],
+          color: source['color'] === 'white' ? '#353949' : 'white'
+        }">
+        <img v-if="source !== 'other'" :src="source.logo" />
+        <span v-if="source !== 'other'">{{ source['name'] }}</span>
+        <span v-else>{{ customSource }}</span>
+      </div>
+      <div class="glowy-ghost first" :style="{ background: source === 'other' ? customSourceColor : source['color'] }"></div>
+      <div class="glowy-ghost second" :style="{ background: source === 'other' ? customSourceColor : source['color'] }"></div>
     </div>
-    <div v-if="programme || (programme === 'other' && customProgramme)"
-      :class="{
-        'media-source-programme': true,
-        'media-source-programme-custom': programme === 'other'
-      }"
-      :style="{
-        backgroundColor: programme === 'other' ? customProgrammeColor : programme['color'],
-        padding: programme !== 'other' ? programme['padding'] : null,
-        width: programme !== 'other' ? programme['width'] : null,
-      }">
-      <img v-if="programme !== 'other'" :src="programme.logo" />
-      <span v-else>{{ customProgramme }}</span>
+    <div class="programme-wrapper">
+      <div v-if="programme || (programme === 'other' && customProgramme)"
+        :class="{
+          'media-source-programme': true,
+          'media-source-programme-custom': programme === 'other'
+        }"
+        :style="{
+          backgroundColor: programme === 'other' ? customProgrammeColor : programme['color'],
+          color: programme['color'] === 'white' ? '#353949' : 'white'
+        }">
+        <img v-if="programme !== 'other'" :src="programme.logo" />
+        <span v-if="programme !== 'other'">{{ programme['name'] }}</span>
+        <span v-else>{{ customProgramme }}</span>
+      </div>
+      <div class="glowy-ghost first" :style="{ background: programme === 'other' ? customProgrammeColor : programme['color'] }"></div>
+      <div class="glowy-ghost second" :style="{ background: programme === 'other' ? customProgrammeColor : programme['color'] }"></div>
     </div>
   </div>
 </template>
@@ -75,22 +84,24 @@ export default {
     margin: 8px 8px 0 0;
     background-color: $gray-800;
     border-radius: 5px;
-    width: 50px;
-    height: 50px;
+    height: 55px;
     overflow: hidden;
     box-sizing: border-box;
     flex-shrink: 0;
+    padding: 8px 16px;
+    color: $white;
+    font-weight: bold;
+    align-items: center;
+    line-height: 1.1;
 
-    &-custom {
-      padding: 8px 16px;
-      color: $white;
-      font-weight: bold;
-      width: 170px;
-      align-items: center;
-      height: auto;
-      max-height: 50px;
-      line-height: 1.1;
+    span {
+      margin: 0 8px;
     }
+  }
+
+  img {
+    width: 55px;
+    height: 55px;
   }
 }
 
@@ -105,6 +116,28 @@ export default {
     &-channel-custom {
       width: 47%;
     }
+  }
+}
+
+.channel-wrapper, .programme-wrapper {
+  position: relative;
+}
+
+.glowy-ghost {
+  position: absolute;
+  top: 5px;
+  left: 0;
+  bottom: 0;
+  right: 7px;
+  height: 60px;
+  border-radius: 10px;
+  filter: blur(30px);
+  z-index: -10;
+  opacity: .6;
+
+  &.second {
+    bottom: 0;
+    filter: blur(6px) brightness(.85);;
   }
 }
 
