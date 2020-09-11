@@ -73,7 +73,7 @@ const sources = [
             id: 'desayunos',
             name: 'Los desayunos de TVE',
             logo: desayunos,
-            color: 'black',
+            color: 'white',
             width: '100px'
           }
         ]
@@ -82,7 +82,7 @@ const sources = [
         id: 'la2',
         name: 'La 2 TVE',
         logo: la2,
-        color: 'black',
+        color: 'white',
         programmes: []
       },
       {

@@ -25,9 +25,9 @@
         }"
         :style="{
           backgroundColor: programme === 'other' ? customProgrammeColor : programme['color'],
-          color: programme['color'] === 'white' ? '#353949' : 'white'
+          color: programme['color'] === 'white' ? '#353949' : 'white',
         }">
-        <img v-if="programme !== 'other'" :src="programme.logo" />
+        <img v-if="programme !== 'other'" :src="programme.logo" :style="{ width: programme['width']}"/>
         <span v-if="programme !== 'other'">{{ programme['name'] }}</span>
         <span v-else>{{ customProgramme }}</span>
       </div>
@@ -84,7 +84,8 @@ export default {
     margin: 8px 8px 0 0;
     background-color: $gray-800;
     border-radius: 5px;
-    height: 55px;
+    min-width: 150px;
+    height: 47px;
     overflow: hidden;
     box-sizing: border-box;
     flex-shrink: 0;
@@ -100,8 +101,8 @@ export default {
   }
 
   img {
-    width: 55px;
-    height: 55px;
+    width: 42px;
+    height: 42px;
   }
 }
 
@@ -129,7 +130,7 @@ export default {
   left: 0;
   bottom: 0;
   right: 7px;
-  height: 60px;
+  height: 50px;
   border-radius: 10px;
   filter: blur(30px);
   z-index: -10;

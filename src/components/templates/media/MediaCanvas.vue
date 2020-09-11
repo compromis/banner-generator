@@ -4,47 +4,61 @@
     :class="[
       'banner-canvas',
       'aspect-' + aspect,
-      aspect === '11' ? 'disposition-' + banner.disposition : '',
-      'blobs-' + color
+      'disposition-' + banner.disposition,
     ]"
     v-if="banner">
-    <div class="blob blob-image">
-      <img :src="banner.picturePreview" alt="Imatge" v-if="banner.picturePreview" :style="objectPosition" />
-    </div>
-    <div class="blob blob-1"></div>
-    <div class="blob blob-2"></div>
+    <banner-picture
+      :picture="banner.picturePreview"
+      :picture-position="objectPosition"
+      :theme="theme"
+      :edge="true" />
     <div class="medium">
+      <span>{{ banner.aspect }}</span>
       <div class="medium-overtitle">
-        <span>{{ banner.overtitle | formatString }}</span>
+        <span v-if="aspect === '11'">{{ banner.overtitle | formatString }}</span>
+        <text-in-pills
+        v-else
+        :text="banner.overtitle"
+        fontSize="20px"
+        />
       </div>
       <div class="medium-title" :style="{fontSize: fontSize(banner.title, 60, 40, 30)}">
-        <span>{{ banner.title | formatString }}</span>
+        <span v-if="aspect === '11'">{{ banner.title | formatString }}</span>
+        <text-in-pills
+        v-else
+        :text="banner.title"
+        :fontSize="fontSize(banner.title, 50, 35, 30)"
+        />
       </div>
       <div class="medium-subtitle">
-        <span>{{ banner.subtitle | formatString }}</span>
+        <span v-if="aspect === '11'">{{ banner.subtitle | formatString }}</span>
+        <text-in-pills
+        v-else
+        :text="banner.subtitle"
+        fontSize="20px"
+        />
       </div>
+      <media-source :source="banner.source" :customSource="banner.customSource" :customSourceColor="banner.customSourceColor" :programme="banner.programme" :customProgramme="banner.customProgramme" :customProgrammeColor="banner.customProgrammeColor"/>
       <div class="medium-details">
-        <div class="medium-day" contenteditable>
-          <b-icon icon="calendar-day"/>{{ banner.date | formatDate }}
-        </div>
-        <div class="medium-time" contenteditable>
-          <b-icon icon="clock"/>{{ banner.time | formatTime }}
-        </div>
-        <media-source :source="banner.source" :customSource="banner.customSource" :customSourceColor="banner.customSourceColor" :programme="banner.programme" :customProgramme="banner.customProgramme" :customProgrammeColor="banner.customProgrammeColor"/>
+        <event-info color="gradient" icon="calendar-day">{{ banner.date | formatDate }}</event-info>
+        <event-info color="gradient" icon="clock">{{ banner.time | formatTime }}</event-info>
       </div>
     </div>
-    <div class="logo">
-      <compromis-logo />
-      <div :class="{ 'logo-local-label': true, 'logo-local-label--long': banner.localLabel.length > 18 }" v-if="banner.localLabel && banner.hasLocalLabel">
-        {{ banner.localLabel | formatLocal }}
-      </div>
-    </div>
+    <banner-frame
+      theme="glowy"
+      :hashtag="banner.hashtag"
+      :localLabel="banner.localLabel"
+      :aspect="aspect" />
   </div>
 </template>
 
 <script>
 import CanvasMixin from '@/mixins/canvas-mixin.js'
 import MediaSource from '@/utils/MediaSource'
+import BannerPicture from '@/utils/BannerPicture'
+import BannerFrame from '@/utils/BannerFrame'
+import EventInfo from '@/utils/EventInfo'
+import TextInPills from '@/utils/TextInPills'
 
 export default {
   name: 'quote-canvas',
@@ -52,7 +66,11 @@ export default {
   mixins: [CanvasMixin],
 
   components: {
-    MediaSource
+    MediaSource,
+    BannerPicture,
+    BannerFrame,
+    EventInfo,
+    TextInPills
   }
 }
 </script>
@@ -65,19 +83,17 @@ export default {
     flex-direction: column;
     justify-content: center;
     position: absolute;
-    top: 100px;
+    bottom: 85px;
     left: 0;
     z-index: 40;
     padding: 0 35px;
-    width: 265px;
-    height: 400px;
     z-index: 20;
     transition: all .5s ease-in-out;
     font-family: $family-primary;
 
     &-title {
       display: block;
-      font-size: 33px;
+      font-size: 32px;
       line-height: 1;
       color: $gray-900;
       letter-spacing: -1px;
@@ -94,6 +110,7 @@ export default {
       letter-spacing: -0.5px;
       color: $gray-700;
       line-height: 1.1;
+      margin-bottom: 12px;
     }
 
     &-overtitle {
@@ -106,7 +123,8 @@ export default {
     }
 
     &-details {
-      padding-top: 48px;
+      margin-top: 16px;
+      display: flex;
       font-size: 18px;
       letter-spacing: -0.5px;
     }
@@ -123,102 +141,18 @@ export default {
     }
   }
 
-  .blob {
-    &-1 {
-      top: -87%;
-      left: -74%;
-    }
-
-    &-2 {
-      left: -63%;
-      bottom: -74%;
-      z-index: 10;
-    }
-
-    &-image {
-      top: -5%;
-      right: -4%;
-      height: 618px;
-      z-index: 20;
-      width: 414px;
-      border-radius: 0;
-      border-bottom-left-radius: $border-radius;
-
-      img {
-        transform: rotate(-$rotation);
-        width: 100%;
-        height: 98%;
-        margin: 28px -28px;
-      }
-    }
-  }
-
   // Story aspect
   .aspect-916 {
-    .blob {
-      &-1 {
-        display: none;
-      }
-
-      &-2 {
-        left: -110%;
-        bottom: -94%;
-      }
-
-      &-image {
-        height: 404px;
-        width: 431px;
-        top: -23px;
-        left: -3px;
-        border-bottom-right-radius: 0;
-
-        img {
-          margin: 21px -5px;
-          width: 98%;
-        }
-      }
-    }
-
     .medium {
       display: flex;
-      top: 245px;
+      bottom: 75px;
       align-content: center;
       width: 100%;
       box-sizing: border-box;
 
-      &-title {
-        font-size: 34px;
-      }
-
       &-details {
-        padding-top: 24px;
+        padding-top: 12px;
       }
-
-      &-title, &-subtitle, &-overtitle {
-        span {
-          box-decoration-break: clone;
-          -webkit-box-decoration-break: clone;
-          color: white;
-          border-radius: 2px;
-          background: $gradient;
-          letter-spacing: -1px;
-          display: inline;
-          line-height: 1.42;
-          padding: 0 10px;
-        }
-      }
-
-      &-overtitle,
-      &-subtitle {
-        span {
-          background: $white;
-          color: $gray-800;
-        }
-      }
-    }
-
-    .logo {
-      display: none;
     }
   }
 </style>
