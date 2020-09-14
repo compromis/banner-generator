@@ -31,7 +31,7 @@
     <banner-picture
       :picture="banner.picturePreview"
       :picture-position="objectPosition"
-      :height="aspect === '11' ? 570 : 600"
+      :height="aspect === '11' ? 570 : 730"
       :theme="theme"
       :edge="aspect === '916'" />
   </div>
@@ -125,12 +125,36 @@ export default {
       right: 45px;
       top: 45px;
     }
+
+    &.aspect-916 {
+      .banner-picture::v-deep .glowy-card {
+        top: 0;
+        left: 0;
+        right: 0;
+      }
+
+      .quote {
+        top: 80px;
+        left: 35px;
+        right: 35px;
+        bottom: 80px;
+      }
+    }
   }
 
   .theme-blobs {
     .quote {
       left: 40px;
       right: 40px;
+    }
+
+    &.aspect-916 {
+      .quote {
+        top: 120px;
+        left: 35px;
+        right: 35px;
+        bottom: 120px;
+      }
     }
   }
 </style>

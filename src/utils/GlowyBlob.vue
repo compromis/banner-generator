@@ -68,6 +68,7 @@ export default {
 
       &.aspect-916 {
         left: -118% !important;
+        top: -84%;
       }
     }
 
@@ -82,6 +83,7 @@ export default {
 
       &.aspect-916 {
         right: -104% !important;
+        bottom: -84%;
       }
     }
 
