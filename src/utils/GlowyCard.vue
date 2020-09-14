@@ -1,5 +1,5 @@
 <template>
-  <div :class="['glowy-card', `gradient-${gradient}`, {'edge': edge}, {'full-width': !width}]" :style="{ '--width': width + 'px', '--height': height + 'px' }">
+  <div :class="['glowy-card', `gradient-${gradient}`, {'edge': edge}, {'full-width': width === '100%'}]" :style="{ '--width': width, '--height': height ? height + 'px' : '100%' }">
     <div class="glowy-subject">
       <img v-if="picture" :src="picture" :style="picturePosition" />
       <div v-else class="placeholder"></div>
@@ -34,7 +34,7 @@ export default {
     },
     height: {
       type: Number,
-      required: true
+      default: null
     },
     gradient: {
       type: String,
@@ -51,9 +51,9 @@ export default {
 
   computed: {
     width () {
-      return this.pictureDimensions && !this.edge
-        ? this.pictureDimensions.width * this.height / this.pictureDimensions.height
-        : null
+      return this.pictureDimensions && !this.edge && this.height
+        ? `${this.pictureDimensions.width * this.height / this.pictureDimensions.height}px`
+        : '100%'
     }
   }
 }
@@ -65,7 +65,7 @@ export default {
   .glowy {
     &-card {
       position: relative;
-      min-height: 400px;
+      min-height: 350px;
       min-width: 400px;
     }
 
@@ -104,9 +104,14 @@ export default {
         object-fit: cover;
       }
 
-      @at-root .edge > div {
-        border-top-left-radius: 0;
-        border-top-right-radius: 0;
+      @at-root .edge {
+          width: 100%;
+
+         .glowy-subject,
+         .glowy-ghost {
+          border-top-left-radius: 0;
+          border-top-right-radius: 0;
+        }
       }
 
       @at-root .full-width {

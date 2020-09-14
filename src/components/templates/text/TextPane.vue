@@ -1,5 +1,18 @@
 <template>
   <div :class="{ 'pane generic-pane': true, 'pane-dimmed': paneDimmed, 'pane-916': aspect === 1 }">
+    <b-field label="Estil">
+      <b-tabs
+        id="style-tabs"
+        type="is-toggle"
+        size="is-small"
+        v-model="properties.theme"
+        class="tabs-field"
+        expanded>
+        <b-tab-item label="Fons imatge"></b-tab-item>
+        <b-tab-item label="Targeta"></b-tab-item>
+      </b-tabs>
+    </b-field>
+
     <!-- Disposition -->
     <transition name="slide">
       <b-field label="Posició de la targeta">
