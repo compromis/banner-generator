@@ -6,8 +6,7 @@
       'banner-canvas',
       'aspect-' + aspect,
       'disposition-' + banner.disposition,
-      { 'theme-glowy': theme === 'glowy' },
-      { 'theme-blobs': theme === 'blobs' }
+      'theme-' + theme
     ]">
     <banner-picture
       :picture="banner.picturePreview"
@@ -20,14 +19,14 @@
       :theme="theme"
       :headline="banner.headline"
       :source="banner.source"
-      :customSource="banner.customSource"
-      :customSourceColor="banner.customSourceColor"
-      :fontSize="aspect === '11' ? fontSize(banner.headline, 50, 30, 160) : fontSize(banner.headline, 35, 23.5, 160)"/>
+      :custom-cource="banner.customSource"
+      :custom-cource-color="banner.customSourceColor"
+      :font-size="aspect === '11' ? fontSize(banner.headline, 50, 30, 160) : fontSize(banner.headline, 35, 23.5, 160)"/>
     <emojis-on-canvas v-model="banner.emojis" />
     <banner-frame
       :theme="theme"
       :hashtag="banner.hashtag"
-      :localLabel="banner.localLabel"
+      :local-label="banner.localLabel"
       :aspect="aspect" />
   </div>
 </template>

@@ -22,7 +22,7 @@
     <banner-frame
       :theme="theme"
       :hashtag="banner.hashtag"
-      :localLabel="banner.localLabel"
+      :local-label="banner.localLabel"
       :aspect="aspect" />
   </div>
 </template>

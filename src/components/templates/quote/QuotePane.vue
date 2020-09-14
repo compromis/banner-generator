@@ -6,7 +6,7 @@
         id="style-tabs"
         type="is-toggle"
         size="is-small"
-        v-model="properties.card"
+        v-model="properties.theme"
         class="tabs-field"
         expanded>
         <b-tab-item label="Fons blanc"></b-tab-item>
@@ -37,7 +37,7 @@
       </b-input>
     </b-field>
 
-    <color-selector v-model="properties.textColor" :colors="properties.card ? ['black', 'white', 'orange'] : ['black', 'orange']" />
+    <color-selector v-model="properties.textColor" :colors="['black', 'white', 'orange']" />
 
     <!-- Author -->
     <b-field

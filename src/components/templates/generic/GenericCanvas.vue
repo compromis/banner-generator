@@ -5,8 +5,7 @@
       'banner-canvas',
       'aspect-' + aspect,
       'disposition-' + banner.disposition,
-      { 'theme-glowy': theme === 'glowy' },
-      { 'theme-blobs': theme === 'blobs' }
+      'theme-' + theme
     ]"
     v-if="banner">
     <div class="text" v-if="banner.text" :style="{ alignItems: banner.textPos, textAlign: banner.textAlign }">
@@ -23,7 +22,7 @@
     <banner-frame
       :theme="theme"
       :hashtag="banner.hashtag"
-      :localLabel="banner.localLabel"
+      :local-label="banner.localLabel"
       :aspect="aspect" />
     <banner-picture
       :picture="banner.picturePreview"
