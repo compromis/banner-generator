@@ -66,7 +66,7 @@ export default {
     &-card {
       position: relative;
       min-height: 350px;
-      min-width: 400px;
+      // min-width: 400px;
     }
 
     &-subject {
@@ -164,5 +164,6 @@ export default {
     background: $gray-200;
     width: 100%;
     height: 100%;
+    min-width: 200px;
   }
 </style>

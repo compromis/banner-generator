@@ -7,41 +7,43 @@
       'disposition-' + banner.disposition,
     ]"
     v-if="banner">
-    <banner-picture
-      :picture="banner.picturePreview"
-      :picture-position="objectPosition"
-      :theme="theme"
-      :edge="true" />
-    <div class="medium">
-      <span>{{ banner.aspect }}</span>
-      <div class="medium-overtitle">
-        <span v-if="aspect === '11'">{{ banner.overtitle | formatString }}</span>
-        <text-in-pills
-        v-else
-        :text="banner.overtitle"
-        fontSize="20px"
-        />
-      </div>
-      <div class="medium-title" :style="{fontSize: fontSize(banner.title, 60, 40, 30)}">
-        <span v-if="aspect === '11'">{{ banner.title | formatString }}</span>
-        <text-in-pills
-        v-else
-        :text="banner.title"
-        :fontSize="fontSize(banner.title, 50, 35, 30)"
-        />
-      </div>
-      <div class="medium-subtitle">
-        <span v-if="aspect === '11'">{{ banner.subtitle | formatString }}</span>
-        <text-in-pills
-        v-else
-        :text="banner.subtitle"
-        fontSize="20px"
-        />
-      </div>
-      <media-source :source="banner.source" :customSource="banner.customSource" :customSourceColor="banner.customSourceColor" :programme="banner.programme" :customProgramme="banner.customProgramme" :customProgrammeColor="banner.customProgrammeColor"/>
-      <div class="medium-details">
-        <event-info color="gradient" icon="calendar-day">{{ banner.date | formatDate }}</event-info>
-        <event-info color="gradient" icon="clock">{{ banner.time | formatTime }}</event-info>
+    <div class="media-grid">
+      <banner-picture
+        :picture="banner.picturePreview"
+        :picture-position="objectPosition"
+        :theme="theme"
+        :edge="true" />
+      <div class="medium">
+        <span>{{ banner.aspect }}</span>
+        <div class="medium-overtitle">
+          <span v-if="aspect === '11'">{{ banner.overtitle | formatString }}</span>
+          <text-in-pills
+          v-else
+          :text="banner.overtitle"
+          fontSize="20px"
+          />
+        </div>
+        <div class="medium-title" :style="{fontSize: fontSize(banner.title, 60, 40, 30)}">
+          <span v-if="aspect === '11'">{{ banner.title | formatString }}</span>
+          <text-in-pills
+          v-else
+          :text="banner.title"
+          :fontSize="fontSize(banner.title, 50, 35, 30)"
+          />
+        </div>
+        <div class="medium-subtitle">
+          <span v-if="aspect === '11'">{{ banner.subtitle | formatString }}</span>
+          <text-in-pills
+          v-else
+          :text="banner.subtitle"
+          fontSize="20px"
+          />
+        </div>
+        <media-source :source="banner.source" :customSource="banner.customSource" :customSourceColor="banner.customSourceColor" :programme="banner.programme" :customProgramme="banner.customProgramme" :customProgrammeColor="banner.customProgrammeColor"/>
+        <div class="medium-details">
+          <event-info color="gradient" icon="calendar-day">{{ banner.date | formatDate }}</event-info>
+          <event-info color="gradient" icon="clock">{{ banner.time | formatTime }}</event-info>
+        </div>
       </div>
     </div>
     <banner-frame
@@ -54,7 +56,7 @@
 
 <script>
 import CanvasMixin from '@/mixins/canvas-mixin.js'
-import MediaSource from '@/utils/MediaSource'
+import MediaSource from './MediaSource'
 import BannerPicture from '@/utils/BannerPicture'
 import BannerFrame from '@/utils/BannerFrame'
 import EventInfo from '@/utils/EventInfo'
@@ -82,11 +84,9 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    position: absolute;
-    bottom: 85px;
     left: 0;
     z-index: 40;
-    padding: 0 35px;
+    padding: 35px 35px 0 35px;
     z-index: 20;
     transition: all .5s ease-in-out;
     font-family: $family-primary;
@@ -141,14 +141,31 @@ export default {
     }
   }
 
+  .media-grid {
+      display: grid;
+      grid-template-rows: 1fr auto;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 80px;
+
+      .banner-picture {
+        display: flex;
+      }
+
+      .banner-picture::v-deep .glowy-card {
+        min-height: 300px;
+      }
+    }
+
   // Story aspect
   .aspect-916 {
     .medium {
       display: flex;
-      bottom: 75px;
       align-content: center;
       width: 100%;
-      box-sizing: border-box;
+      margin-top: 105px;
 
       &-details {
         padding-top: 12px;
