@@ -5,21 +5,29 @@
       'banner-canvas',
       'aspect-' + aspect,
       aspect === '11' || banner.card ? 'disposition-' + banner.disposition : '',
-      banner.card ? 'cards' : 'no-cards',
       banner.localLabel && banner.hasLocalLabel ? 'has-local-label' : '',
-      'blobs-' + color
     ]"
     v-if="banner">
     <div class="comparison-images">
-      <img :src="banner.pictureBeforePreview" alt="Imatge" v-if="banner.pictureBeforePreview" :style="objectPositionBefore" />
-      <img :src="banner.pictureAfterPreview" alt="Imatge" v-if="banner.pictureAfterPreview" :style="objectPositionAfter" />
+      <banner-picture
+      :picture="banner.pictureBeforePreview"
+      :picture-position="objectPosition"
+      v-if="banner.pictureBeforePreview"
+      :style="objectPositionBefore"
+      :height="500"
+      theme="glowy" />
+      <banner-picture
+      :picture="banner.pictureAfterPreview"
+      :picture-position="objectPosition"
+      v-if="banner.pictureAfterPreview"
+      :style="objectPositionAfter"
+      :height="500"
+      theme="glowy" />
     </div>
-    <div class="blob blob-1"  :style="banner.source === 'other' ? { background: banner.customSourceColor } : banner.source ? { background: banner.source.color } : { background: 'gray' }"></div>
-    <div class="blob blob-2"></div>
-    <div class="before-party before-party--custom" v-if="banner.source === 'other'" >
+    <div :class="['before-party--left', 'before-party--custom']" v-if="banner.source === 'other'" >
       {{ banner.customSource }}
     </div>
-    <div class="before-party" v-else-if="banner.source" >
+    <div :class="['before-party--left']" v-else-if="banner.source" >
       <img :src="banner.source.logo" :alt="banner.source.name" :style="{ height: banner.source.logoHeight + 'px' }" />
     </div>
     <div class="comparison">
@@ -36,25 +44,28 @@
         {{ banner.textAfter | formatString }}
       </div>
     </div>
-    <div class="logo">
-      <compromis-logo :mono="banner.card ? true : false" />
-      <div :class="{ 'logo-local-label': true, 'logo-local-label--long': banner.localLabel.length > 18 }" v-if="banner.localLabel && banner.hasLocalLabel">
-        {{ banner.localLabel | formatLocal }}
-      </div>
-    </div>
-    <div class="hashtag" v-if="banner.hashtag && aspect === '11'">
-      {{ banner.hashtag }}
-    </div>
+    <banner-frame
+      theme="glowy"
+      :hashtag="banner.hashtag"
+      :local-label="banner.localLabel"
+       />
   </div>
 </template>
 
 <script>
 import CanvasMixin from '@/mixins/canvas-mixin.js'
+import BannerPicture from '@/utils/BannerPicture'
+import BannerFrame from '@/utils/BannerFrame'
 
 export default {
   name: 'comparison-canvas',
 
   mixins: [CanvasMixin],
+
+  components: {
+    BannerFrame,
+    BannerPicture
+  },
 
   computed: {
     objectPositionAfter: function () {
@@ -92,27 +103,21 @@ export default {
     &-images {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      grid-column-gap: 12px;
+      grid-column-gap: 30px;
       align-items: stretch;
       position: absolute;
+      padding: 30px;
       top: 0;
       right: 0;
       left: 0;
       bottom: 0;
-
-      img {
-        object-fit: cover;
-      }
     }
 
     &-text {
       line-height: 1.1;
       word-wrap: break-word;
-      background: $white;
       width: 265px;
       padding: 16px;
-      border-radius: $card-radius;
-      box-shadow: $raised-shadow;
       position: absolute;
       letter-spacing: -.5px;
 
@@ -128,38 +133,24 @@ export default {
     }
   }
 
-  .blob {
-    &-1 {
-      top: -82%;
-      right: 58%;
-      z-index: 10;
-    }
-
-    &-2 {
-      left: 58%;
-      bottom: -83%;
-      z-index: 10;
-    }
-  }
-
   .before-party {
     z-index: 20;
     position: absolute;
-    left: 35px;
     top: 25px;
+
+    &--left {
+      left: 35px;
+    }
+
+    &--right {
+      right: 35px;
+    }
 
     &--custom {
       margin-bottom: 4px;
       font-size: 24px;
       color: $white;
       font-weight: bold;
-    }
-  }
-
-  .has-local-label {
-    .blob-2 {
-      left: 42%;
-      bottom: -81%;
     }
   }
 

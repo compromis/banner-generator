@@ -3,7 +3,7 @@
     <glowy-blob position="top" :aspect="aspect" v-if="theme === 'blobs'" :gradient="blobColor" :wide="hashtag.length > 18" />
     <glowy-blob position="bottom" :aspect="aspect" v-if="theme === 'blobs'" :gradient="blobColor" :wide="localLabel.length > 6" />
     <div class="hashtag" v-if="aspect !== '916'">{{ hashtag }}</div>
-    <div class="logo" v-if="aspect !== '916'">
+    <div :class="['logo', `logo--align-${logoAlign}`]" v-if="aspect !== '916'">
       <compromis-logo :mono="theme === 'blobs' ? true : false" />
       <div :class="{ 'logo-local-label': true, 'logo-local-label--long': localLabel.length > 18 }" v-if="localLabel">
         {{ localLabel | formatLocal  }}
@@ -47,6 +47,10 @@ export default {
     blobColor: {
       type: String,
       default: 'orange'
+    },
+    logoAlign: {
+      type: String,
+      default: 'right'
     }
   },
 
@@ -68,14 +72,21 @@ export default {
   .logo {
     display: flex;
     position: absolute;
-    right: 35px;
-    bottom: 30px;
     align-items: center;
     z-index: 30;
+    bottom: 30px;
     color: $white;
 
     svg {
       height: 30px;
+    }
+
+    &--align-right {
+      right: 35px;
+    }
+
+    &--align-left {
+      left: 35px;
     }
 
     &-local-label {
