@@ -7,7 +7,7 @@
           'media-source-channel-custom': source === 'other'
         }"
         :style="{
-          backgroundColor: source === 'other' ? customSourceColor : source['color'],
+          background: source === 'other' ? customSourceColor : source['color'],
           color: source['color'] === 'white' ? '#353949' : 'white'
         }">
         <img v-if="source !== 'other'" :src="source.logo" />
@@ -24,7 +24,7 @@
           'media-source-programme-custom': programme === 'other'
         }"
         :style="{
-          backgroundColor: programme === 'other' ? customProgrammeColor : programme['color'],
+          background: programme === 'other' ? customProgrammeColor : programme['color'],
           color: programme['color'] === 'white' ? '#353949' : 'white',
         }">
         <img v-if="programme !== 'other'" :src="programme.logo" :style="{ width: programme['width']}"/>

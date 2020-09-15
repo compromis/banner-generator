@@ -23,7 +23,7 @@ import teleSafor from './logos/channels/telesafor.jpg'
 import teleSagunto from './logos/channels/telesagunto.jpg'
 
 import cadenaSer from '../headline/logos/ser.svg'
-import rne from './logos/channels/rne.jpg'
+import rne from './logos/channels/rne.svg'
 import ondaCero from './logos/channels/ondacero.png'
 
 import radioPego from './logos/channels/radiopego.png'
@@ -32,6 +32,11 @@ import desayunos from './logos/programme/desayunos.jpeg'
 import apuntNtc from './logos/programme/apuntntc.png'
 import docs from './logos/programme/docs.jpg'
 import espejoPublico from './logos/programme/espejopublico.svg'
+
+import twitter from './logos/channels/twitter.svg'
+import facebook from './logos/channels/facebook.svg'
+import youtube from './logos/channels/youtube.svg'
+import instagram from './logos/channels/instagram.svg'
 
 const sources = [
   {
@@ -51,9 +56,9 @@ const sources = [
           },
           {
             id: 'apuntntc',
-            name: 'À punt Notícies',
+            name: 'Notícies',
             logo: apuntNtc,
-            width: '88px',
+            width: '105px',
             color: 'white'
           }
         ]
@@ -65,7 +70,7 @@ const sources = [
     channels: [
       {
         id: 'la1',
-        name: 'La 1 TVE',
+        name: 'La 1',
         logo: la1,
         color: 'white',
         programmes: [
@@ -74,13 +79,13 @@ const sources = [
             name: 'Los desayunos de TVE',
             logo: desayunos,
             color: 'white',
-            width: '100px'
+            width: '90px'
           }
         ]
       },
       {
         id: 'la2',
-        name: 'La 2 TVE',
+        name: 'La 2',
         logo: la2,
         color: 'white',
         programmes: []
@@ -168,12 +173,46 @@ const sources = [
         id: 'rne',
         name: 'Ràdio Nacional',
         logo: rne,
-        color: 'red',
+        color: 'linear-gradient(45deg, #97233f 0%, #ff0000 100%)',
         programmes: []
       }
     ]
   },
 
+  // xarxes socials
+  {
+    name: 'Xarxes Socials',
+    channels: [
+      {
+        id: 'twitter',
+        name: 'Twitter',
+        logo: twitter,
+        color: '#1da1f2',
+        programmes: []
+      },
+      {
+        id: 'instagram',
+        name: 'Instagram',
+        logo: instagram,
+        color: 'linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%)',
+        programmes: []
+      },
+      {
+        id: 'youtube',
+        name: 'Youtube',
+        logo: youtube,
+        color: 'red',
+        programmes: []
+      },
+      {
+        id: 'facebook',
+        name: 'Facebook',
+        logo: facebook,
+        color: '#1778F2',
+        programmes: []
+      }
+    ]
+  },
   // televisions locals
   {
     name: 'Televisions Locals',
@@ -203,6 +242,7 @@ const sources = [
         id: 'levantetv',
         name: 'Levante TV',
         logo: levanteTv,
+        color: 'white',
         programmes: []
       },
       {
