@@ -191,6 +191,5 @@ export default {
     background: $gray-200;
     width: 100%;
     height: 100%;
-    min-width: 200px;
   }
 </style>

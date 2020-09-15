@@ -4,24 +4,21 @@
     :class="[
       'banner-canvas',
       'aspect-' + aspect,
-      aspect === '11' ? 'disposition-' + banner.disposition : '',
-      banner.localLabel && banner.hasLocalLabel ? 'has-local-label' : '',
-      banner.title.length > 30 && banner.speakers.length !== 2 ? 'has-long-title' : 'has-short-title',
       `has-${banner.speakers.length}-speakers`,
-      'blobs-' + color
     ]"
+    :style="{
+      '--speakers': banner.speakers.length
+    }"
     v-if="banner">
     <div class="speakers-items">
       <div v-for="(speaker, i) in banner.speakers" :key="i" class="speakers-item">
         <div class="speakers-image">
-          <img :src="speaker.picture" :alt="`Imatge de ${speaker.name}`" v-if="speaker.picture" />
+          <glowy-card :picture="speaker.picture" :height="250" gradient="none" />
         </div>
         <div class="speakers-name">{{ speaker.name }}</div>
         <div class="speakers-description">{{ speaker.description }}</div>
       </div>
     </div>
-    <div class="blob blob-1"></div>
-    <div class="blob blob-2"></div>
     <div class="speakers">
       <div class="speakers-overtitle">
         {{ banner.overtitle | formatString }}
@@ -32,8 +29,8 @@
           fontSize: aspect === '11'
             ? fontSize(banner.title, 50, 35 , 60)
             : aspect === 'event'
-            ? fontSize(banner.title, 45, 28 , 60)
-            : fontSize(banner.title, 40, 27 , 60)
+              ? fontSize(banner.title, 45, 28 , 60)
+              : fontSize(banner.title, 40, 27 , 60)
         }">
         {{ banner.title | formatString }}
       </div>
@@ -43,23 +40,18 @@
       <event-info color="gradient" icon="clock">{{ banner.time | formatTime }}</event-info>
       <event-info color="gradient" icon="map-marker-alt">{{ banner.place }}</event-info>
     </div>
-    <div class="logo">
-      <compromis-logo />
-      <div :class="{ 'logo-local-label': true, 'logo-local-label--long': banner.localLabel.length > 18 }" v-if="banner.localLabel && banner.hasLocalLabel">
-        {{ banner.localLabel | formatLocal }}
-      </div>
-    </div>
-    <svg width="0" height="0">
-      <radialGradient id="compromisGradient" r="150%" cx="30%" cy="107%">
-        <stop class="gradient-start" offset="0" />
-        <stop class="gradient-end" offset="1" />
-      </radialGradient>
-    </svg>
+    <banner-frame
+      theme="glowy"
+      :hashtag="banner.hashtag"
+      :local-label="banner.localLabel"
+      :aspect="aspect" />
   </div>
 </template>
 
 <script>
 import CanvasMixin from '@/mixins/canvas-mixin.js'
+import GlowyCard from '@/utils/GlowyCard'
+import BannerFrame from '@/utils/BannerFrame'
 import EventInfo from '@/utils/EventInfo'
 
 export default {
@@ -68,6 +60,8 @@ export default {
   mixins: [CanvasMixin],
 
   components: {
+    BannerFrame,
+    GlowyCard,
     EventInfo
   }
 }
@@ -79,9 +73,8 @@ export default {
   .speakers {
     position: absolute;
     top: 45px;
-    left: 0;
-    z-index: 40;
-    padding: 0 45px;
+    left: 45px;
+    right: 45px;
     z-index: 20;
     transition: all .5s ease-in-out;
     font-family: $family-primary;
@@ -101,12 +94,11 @@ export default {
       letter-spacing: -1px;
       word-wrap: break-word;
       font-weight: bold;
-      width: 325px;
     }
 
     &-name {
-      padding-top: 12px;
-      font-size: 18px;
+      padding-top: 22px;
+      font-size: 19px;
       line-height: 1;
       color: $gray-900;
       font-weight: bold;
@@ -114,36 +106,39 @@ export default {
     }
 
     &-description {
-      padding-top: 4px;
-      font-size: 14px;
+      padding-top: 5px;
+      font-size: 15px;
       line-height: 1;
       letter-spacing: -0.5px;
       color: $gray-700;
     }
 
     &-image {
-      height: 200px;
-      border-radius: 16px;
-      overflow: hidden;
-      background: $gray-200;
+      .glowy-card {
+        width: var(--width);
+        height: var(--height);
+      }
 
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
+      .glowy-card,
+      &::v-deep .glowy-subject,
+      &::v-deep .glowy-ghost,
+      &::v-deep .glowy-subject img,
+      &::v-deep .glowy-ghost img {
+        min-height: unset;
+        min-width: unset;
       }
     }
 
     &-items {
       position: absolute;
-      top: 30%;
+      top: 22%;
       left: 45px;
       right: 45px;
       display: grid;
       margin-top: 16px;
-      grid-column-gap: 15px;
+      grid-column-gap: 24px;
       justify-content: start;
-      grid-template-columns: repeat(auto-fit, var(--image-size, 200px));
+      grid-template-columns: repeat(var(--speakers), 1fr);
     }
 
     &-details-wrapper {
@@ -152,87 +147,6 @@ export default {
       bottom: 18%;
       padding: 0 45px;
     }
-
-    &-details {
-      display: flex;
-      align-items: center;
-      font-size: 18px;
-      letter-spacing: -1px;
-      width: auto;
-      color: $gray-700;
-      padding-right: 20px;
-      line-height: 1.1;
-
-      svg {
-        padding-right: 8px;
-        font-size: 28px;
-
-        * {
-          fill: url(#compromisGradient) !important;
-        }
-      }
-    }
-
-    &-date {
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-  }
-
-  .blob {
-    &-1 {
-      top: -83%;
-      left: 50%;
-    }
-
-    &-2 {
-      left: -50%;
-      bottom: -90%;
-      z-index: 10;
-    }
-  }
-
-  .has-long-title {
-    .blob-1 {
-      top: -93%;
-    }
-
-    .speakers {
-      top: 80px;
-
-      &-title {
-        width: auto;
-      }
-    }
-  }
-
-  .has-2-speakers {
-    .blob-1 {
-      top: -42%;
-      left: 69%;
-    }
-  }
-
-  .has-4-speakers {
-    .speakers {
-      &-items {
-        --image-size: 145px;
-      }
-
-      &-image {
-        height: 145px;
-      }
-    }
-  }
-
-  .has-local-label {
-    .blob-2 {
-      left: -60%;
-    }
-  }
-
-  .blobs-lgtb.has-2-speakers .blob-1 {
-    background-size: 100% 68%;
   }
 
   // Story aspect

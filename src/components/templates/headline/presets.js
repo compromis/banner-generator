@@ -63,7 +63,7 @@ const fonts = {
   },
   titillium: {
     fontFamily: 'Titillium Web',
-    padding: '10px 10px 4px'
+    padding: '1px 10px 4px'
   }
 }
 

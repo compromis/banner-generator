@@ -126,19 +126,18 @@ export default {
 
 .glowy-ghost {
   position: absolute;
-  top: 5px;
+  top: 8px;
   left: 0;
   bottom: -3px;
   right: 7px;
-  height: 50px;
   border-radius: 10px;
-  filter: blur(30px);
+  filter: blur(20px);
   z-index: -10;
   opacity: .6;
 
   &.second {
     bottom: -1px;
-    filter: blur(6px) brightness(.85);;
+    filter: blur(5px) brightness(.85);
   }
 }
 

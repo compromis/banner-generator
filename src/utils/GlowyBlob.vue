@@ -109,7 +109,7 @@ export default {
 
       &.second {
         bottom: -1px;
-        filter: blur(6px) brightness(.85);;
+        filter: blur(6px) brightness(.85);
       }
     }
 

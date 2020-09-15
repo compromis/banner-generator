@@ -1,6 +1,7 @@
 <template>
   <div :class="['event-info', `event-info-${color}`]" contenteditable>
-    <font-awesome-icon :icon="['far', icon]" fixed-width /><slot></slot>
+    <font-awesome-icon :icon="['far', icon]" fixed-width />
+    <slot></slot>
     <svg width="0" height="0">
       <radialGradient id="compromisGradient" r="150%" cx="30%" cy="107%">
         <stop class="gradient-start" offset="0" />
@@ -45,11 +46,12 @@ export default {
   svg {
     padding-right: 8px;
     font-size: 28px;
+    margin-top: -1px;
   }
 
   &-gradient {
     svg {
-    * {
+      * {
         fill: url(#compromisGradient) !important;
       }
     }
