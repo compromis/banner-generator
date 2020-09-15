@@ -17,7 +17,6 @@
           :text="$options.filters.formatString($options.filters.formatQuote(banner.quote))"
           :pill-style="banner.textColor"
           :font-size="fontSizePrimary"
-          :text-align="textAlign"
           :width="600" />
         </div>
         <div class="quote-author">{{ banner.author | formatString }}</div>
@@ -58,14 +57,8 @@ export default {
     fontSizePrimary () {
       const { aspect, banner, fontSize } = this
       return aspect === '11'
-        ? fontSize(banner.quote, 60, 38, 110, banner.textSize)
-        : fontSize(banner.quote, 50, 33, 110, banner.textSize)
-    },
-
-    textAlign () {
-      return this.banner.disposition === 0 || this.aspect === '916'
-        ? 'left'
-        : 'right'
+        ? fontSize(banner.quote, 43, 33, 110, banner.textSize)
+        : fontSize(banner.quote, 38, 30, 110, banner.textSize)
     }
   }
 }
@@ -82,13 +75,13 @@ export default {
     left: 90px;
     bottom: 160px;
     align-items: flex-end;
+    width: 325px;
 
     &-glyph {
-      font-size: 170px;
+      font-size: 150px;
       font-weight: bold;
-      margin-bottom: -134px;
-      margin-left: -24px;
-      margin-top: -58px;
+      margin-bottom: -115px;
+      margin-left: -22px;
 
       &-black {
         color: $gray-darkest;
@@ -117,6 +110,14 @@ export default {
     }
   }
 
+  .aspect-916 {
+    .quote-glyph {
+      font-size: 140px;
+      margin-bottom: -110px;
+      margin-left: -20px;
+    }
+  }
+
   .theme-glowy {
     .banner-picture::v-deep .glowy-card {
       position: absolute;
@@ -134,18 +135,20 @@ export default {
       }
 
       .quote {
-        top: 80px;
+        top: 90px;
         left: 35px;
         right: 35px;
-        bottom: 80px;
+        bottom: 90px;
       }
     }
   }
 
   .theme-blobs {
     .quote {
+      top: 160px;
       left: 40px;
       right: 40px;
+      bottom: 120px;
     }
 
     &.aspect-916 {

@@ -12,7 +12,7 @@
       :picture="banner.picturePreview"
       :picture-position="objectPosition"
       :picture-dimensions="banner.pictureDimensions"
-      :height="aspect === '11' ? 500 : 600"
+      :height="aspect === '11' ? 500 : 730"
       :theme="theme"
       :edge="aspect === '916'" />
     <headline-card
@@ -143,7 +143,7 @@ export default {
 
       &.disposition-1 {
         .headline {
-          top: 55px;
+          top: 75px;
         }
       }
     }
