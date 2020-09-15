@@ -28,9 +28,9 @@
       :picture="banner.picturePreview"
       :picture-position="objectPosition"
       :picture-dimensions="banner.pictureDimensions"
-      :height="aspect === '11' ? 500 : 600"
-      :theme="theme"
-      :edge="aspect === '916'" />
+      :height="aspect === '11' ? 500 : null"
+      :width="aspect === '916' ? 405 : null"
+      :theme="theme" />
   </div>
 </template>
 
@@ -112,12 +112,20 @@ export default {
         bottom: 90px;
       }
 
-      .banner-picture::v-deep .glowy-card {
+      .banner-picture {
+        position: absolute;
         top: 0;
         left: 0;
+        right: 0;
         bottom: 0;
-        width: 100%;
-        height: 540px;
+      }
+
+      .banner-picture::v-deep .glowy-card {
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        width: var(--width);
+        height: var(--height);
       }
 
       &.disposition-1 {

@@ -1,5 +1,15 @@
 <template>
-  <div :class="['glowy-card', `gradient-${gradient}`, {'edge': edge}, {'full-width': width === '100%'}]" :style="{ '--width': width, '--height': height ? height + 'px' : '100%' }">
+  <div
+    :class="[
+      'glowy-card',
+      `gradient-${gradient}`,
+      {'edge': edge},
+      {'full-width': width === '100%'}
+    ]"
+    :style="{
+      '--width': proportionalWidth,
+      '--height': proportionalHeight
+    }">
     <div class="glowy-subject">
       <img v-if="picture" :src="picture" :style="picturePosition" />
       <div v-else class="placeholder"></div>
@@ -36,6 +46,10 @@ export default {
       type: Number,
       default: null
     },
+    width: {
+      type: Number,
+      default: null
+    },
     gradient: {
       type: String,
       default: 'orange',
@@ -50,10 +64,19 @@ export default {
   },
 
   computed: {
-    width () {
-      return this.pictureDimensions && !this.edge && this.height
-        ? `${this.pictureDimensions.width * this.height / this.pictureDimensions.height}px`
-        : '100%'
+    proportionalWidth () {
+      return this.width
+        ? `${this.width}px`
+        : this.pictureDimensions && !this.edge && this.height
+          ? `${this.pictureDimensions.width * this.height / this.pictureDimensions.height}px`
+          : '100%'
+    },
+    proportionalHeight () {
+      return this.height
+        ? `${this.height}px`
+        : this.pictureDimensions && !this.edge && this.width
+          ? `${this.pictureDimensions.height * this.width / this.pictureDimensions.width}px`
+          : '100%'
     }
   }
 }
@@ -94,11 +117,15 @@ export default {
       transform: translateX(-50%);
       width: var(--width, 100%);
       height: var(--height);
+      min-height: 350px;
+      min-width: 350px;
 
       img {
         width: var(--width, 100%);
         height: var(--height);
         max-width: 100%;
+        min-height: 350px;
+        min-width: 350px;
         display: block;
         margin: 0;
         object-fit: cover;
