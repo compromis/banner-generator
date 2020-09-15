@@ -53,6 +53,7 @@ export default {
     .grid {
       display: grid;
       grid-template-rows: 1fr auto;
+      gap: 35px;
       position: absolute;
       top: 0;
       left: 0;
@@ -61,7 +62,7 @@ export default {
     }
 
     .text {
-      padding: 35px;
+      padding: 0 35px 0 35px;
       overflow: hidden;
     }
 
@@ -75,7 +76,7 @@ export default {
 
     &.aspect-916 {
       .text {
-        padding: 30px;
+        padding: 0 30px;
       }
     }
   }
@@ -185,7 +186,7 @@ export default {
           content: '➡️';
           color: $orange;
           font-weight: bold;
-          left: 24px;
+          left: 36px;
         }
       }
 
@@ -222,7 +223,7 @@ export default {
           padding-left: 28px;
 
           &::before {
-            left: 16px;
+            left: 30px;
           }
         }
       }

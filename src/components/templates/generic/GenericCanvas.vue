@@ -57,8 +57,8 @@ export default {
     fontSizePrimary () {
       const { aspect, banner, fontSize } = this
       return aspect === '11'
-        ? fontSize(banner.text, 80, 35, 110, banner.textSize)
-        : fontSize(banner.text, 70, 25, 110, banner.textSize)
+        ? fontSize(banner.text, 60, 35, 110, banner.textSize)
+        : fontSize(banner.text, 50, 25, 110, banner.textSize)
     }
   }
 }
@@ -106,8 +106,10 @@ export default {
     /* Story */
     &.aspect-916 {
       .text {
-        left: 5px;
+        top: 90px;
+        left: 25px;
         right: 25px;
+        bottom: 90px;
       }
 
       .banner-picture::v-deep .glowy-card {

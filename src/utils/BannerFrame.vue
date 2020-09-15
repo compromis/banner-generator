@@ -53,6 +53,7 @@ export default {
   filters: {
     formatLocal (local) {
       return local
+        .trim()
         .replace(/^per/gi, '')
         .replace(/#/g, '')
     }
