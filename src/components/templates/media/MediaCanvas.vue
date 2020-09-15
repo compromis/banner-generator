@@ -18,10 +18,9 @@
         <div class="medium-overtitle">
           <span v-if="aspect === '11'">{{ banner.overtitle | formatString }}</span>
           <text-in-pills
-          v-else
-          :text="banner.overtitle"
-          fontSize="20px"
-          />
+            v-else
+            :text="banner.overtitle"
+            fontSize="20px" />
         </div>
         <div class="medium-title" :style="{fontSize: fontSize(banner.title, 60, 40, 30)}">
           <span v-if="aspect === '11'">{{ banner.title | formatString }}</span>
@@ -39,7 +38,13 @@
           fontSize="20px"
           />
         </div>
-        <media-source :source="banner.source" :customSource="banner.customSource" :customSourceColor="banner.customSourceColor" :programme="banner.programme" :customProgramme="banner.customProgramme" :customProgrammeColor="banner.customProgrammeColor"/>
+        <media-source
+          :source="banner.source"
+          :custom-cource="banner.customSource"
+          :custom-source-color="banner.customSourceColor"
+          :programme="banner.programme"
+          :custom-programme="banner.customProgramme"
+          :custom-programme-color="banner.customProgrammeColor"/>
         <div class="medium-details">
           <event-info color="gradient" icon="calendar-day">{{ banner.date | formatDate }}</event-info>
           <event-info color="gradient" icon="clock">{{ banner.time | formatTime }}</event-info>
@@ -49,7 +54,7 @@
     <banner-frame
       theme="glowy"
       :hashtag="banner.hashtag"
-      :localLabel="banner.localLabel"
+      :local-label="banner.localLabel"
       :aspect="aspect" />
   </div>
 </template>
@@ -165,7 +170,7 @@ export default {
       display: flex;
       align-content: center;
       width: 100%;
-      margin-top: 105px;
+      margin-top: -105px;
 
       &-details {
         padding-top: 12px;

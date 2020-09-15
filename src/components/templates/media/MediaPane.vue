@@ -284,8 +284,8 @@ export default {
     }
 
     .vue-swatches__trigger {
-      height: 36px !important;
-      width: 36px !important;
+      height: 31px !important;
+      width: 31px !important;
       border-radius: 4px !important;
     }
   }

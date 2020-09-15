@@ -1,14 +1,14 @@
 <template>
   <div class="media-source">
-    <div class="channel-wrapper">
-      <div v-if="source"
+    <div class="channel-wrapper" v-if="source">
+      <div
         :class="{
           'media-source-channel': true,
           'media-source-channel-custom': source === 'other'
         }"
         :style="{
           background: source === 'other' ? customSourceColor : source['color'],
-          color: source['color'] === 'white' ? '#353949' : 'white'
+          color: source !== 'other' && source['color'] === 'white' ? '#353949' : 'white'
         }">
         <img v-if="source !== 'other'" :src="source.logo" />
         <span v-if="source !== 'other'">{{ source['name'] }}</span>
@@ -17,15 +17,15 @@
       <div class="glowy-ghost first" :style="{ background: source === 'other' ? customSourceColor : source['color'] }"></div>
       <div class="glowy-ghost second" :style="{ background: source === 'other' ? customSourceColor : source['color'] }"></div>
     </div>
-    <div class="programme-wrapper">
-      <div v-if="programme || (programme === 'other' && customProgramme)"
+    <div class="programme-wrapper" v-if="programme">
+      <div
         :class="{
           'media-source-programme': true,
           'media-source-programme-custom': programme === 'other'
         }"
         :style="{
           background: programme === 'other' ? customProgrammeColor : programme['color'],
-          color: programme['color'] === 'white' ? '#353949' : 'white',
+          color: programme !== 'other' && programme['color'] === 'white' ? '#353949' : 'white',
         }">
         <img v-if="programme !== 'other'" :src="programme.logo" :style="{ width: programme['width']}"/>
         <span v-if="programme !== 'other'">{{ programme['name'] }}</span>
@@ -43,7 +43,7 @@ export default {
 
   props: {
     source: {
-      type: Object,
+      type: [Object, String],
       default: null
     },
     customSource: {
@@ -55,7 +55,7 @@ export default {
       default: ''
     },
     programme: {
-      type: Object,
+      type: [Object, String],
       default: null
     },
     customProgramme: {
@@ -128,7 +128,7 @@ export default {
   position: absolute;
   top: 5px;
   left: 0;
-  bottom: 0;
+  bottom: -3px;
   right: 7px;
   height: 50px;
   border-radius: 10px;
@@ -137,7 +137,7 @@ export default {
   opacity: .6;
 
   &.second {
-    bottom: 0;
+    bottom: -1px;
     filter: blur(6px) brightness(.85);;
   }
 }
