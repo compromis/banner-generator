@@ -3,6 +3,7 @@
     :class="[
       'glowy-card',
       `gradient-${gradient}`,
+      `glow-size-${glowSize}`,
       {'edge': edge},
       {'full-width': width === '100%'}
     ]"
@@ -60,6 +61,10 @@ export default {
     edge: {
       type: Boolean,
       default: false
+    },
+    glowSize: {
+      type: String,
+      default: 'lg'
     }
   },
 
@@ -100,7 +105,7 @@ export default {
     &-ghost {
       top: 5px;
       z-index: 1;
-      filter: blur(34px);
+      filter: blur(34px) brightness(.85);
 
       &.second {
         filter: blur(8px) brightness(.85);
@@ -151,6 +156,17 @@ export default {
           img {
             width: 100%;
           }
+        }
+      }
+
+      @at-root .glow-size-sm {
+        .glowy-ghost.first {
+          filter: blur(16px) brightness(.85);
+        }
+
+        .glowy-ghost.second {
+          filter: blur(4px) brightness(.85);
+          opacity: .5;
         }
       }
     }
