@@ -5,7 +5,7 @@
       `gradient-${gradient}`,
       `glow-size-${glowSize}`,
       {'edge': edge},
-      {'full-width': width === '100%'}
+      {'full-width': proportionalWidth === '100%'}
     ]"
     :style="{
       '--width': proportionalWidth,
@@ -95,7 +95,6 @@ export default {
       position: relative;
       min-height: 350px;
       height: var(--height);
-      width: var(--width);
       // min-width: 400px;
     }
 

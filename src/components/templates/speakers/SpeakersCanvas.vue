@@ -13,7 +13,11 @@
     <div class="speakers-items">
       <div v-for="(speaker, i) in banner.speakers" :key="i" class="speakers-item">
         <div class="speakers-image">
-          <glowy-card :picture="speaker.picture" :height="250" gradient="none" />
+          <glowy-card
+            :picture="speaker.picture"
+            :height="cardSize"
+            gradient="none"
+            glow-size="sm" />
         </div>
         <div class="speakers-name">{{ speaker.name }}</div>
         <div class="speakers-description">{{ speaker.description }}</div>
@@ -63,6 +67,19 @@ export default {
     BannerFrame,
     GlowyCard,
     EventInfo
+  },
+
+  computed: {
+    cardSize () {
+      const { aspect, banner } = this
+      if (aspect === '11') {
+        return banner.speakers.length === 2 ? 300 : 275
+      } else if (aspect === '916') {
+        return banner.speakers.length === 2 ? 120 : 70
+      } else {
+        return 180
+      }
+    }
   }
 }
 </script>
@@ -131,11 +148,10 @@ export default {
 
     &-items {
       position: absolute;
-      top: 22%;
+      top: 25%;
       left: 45px;
       right: 45px;
       display: grid;
-      margin-top: 16px;
       grid-column-gap: 24px;
       justify-content: start;
       grid-template-columns: repeat(var(--speakers), 1fr);
@@ -144,52 +160,31 @@ export default {
     &-details-wrapper {
       display: flex;
       position: absolute;
-      bottom: 18%;
-      padding: 0 45px;
+      bottom: 16%;
+      padding: 0 40px;
     }
   }
 
   // Story aspect
   .aspect-916 {
-    .blob {
-      &-1 {
-        left: -125%;
-        top: -88%;
-      }
-
-      &-2 {
-        left: 60%;
-        bottom: -88%;
-        --gradient-orientation: -45deg;
-      }
-
-      &-image {
-        height: 540px;
-        top: -160px;
-        left: -12px;
-        border-bottom-right-radius: 0;
-      }
-    }
-
     .speakers {
-      padding: 0 30px;
-      box-sizing: border-box;
-      width: 100%;
-      top: 98px;
+      top: 65px;
+      left: 30px;
+      right: 30px;
 
       &-overtitle{
         font-size: 20px;
       }
 
       &-items {
-        top: 30%;
+        top: 195px;
         left: 30px;
         right: 30px;
         grid-row-gap: 10px;
         grid-column-gap: 0;
-        justify-content: start;
+        justify-content: center;
         grid-template-columns: 1fr;
-        height: 250px;
+        height: 312px;
         align-content: center;
       }
 
@@ -200,23 +195,24 @@ export default {
         grid-template-areas:
           "image name"
           "image description";
-        grid-column-gap: 10px;
+        grid-column-gap: 16px;
         grid-row-gap: 5px;
       }
 
       &-name {
         grid-area: name;
         align-self: end;
+        padding-top: 0;
       }
 
       &-description {
         grid-area: description;
         align-self: start;
+        padding-top: 0;
       }
 
       &-image {
         grid-area: image;
-        height: 75px;
         border-radius: 100%;
       }
 
@@ -226,113 +222,46 @@ export default {
         box-sizing: border-box;
         flex-direction: column;
         bottom: 10%;
+
+        .event-info {
+          margin-top: 16px;
+        }
       }
 
       &-details {
         margin: 7px 0;
         font-size: 19px;
-
-        svg {
-          margin-right: 4px;
-        }
       }
     }
 
     &.has-2-speakers {
-      .speakers {
-        &-item {
-          --image-size: 90px;
-        }
-
-        &-image {
-          height: 90px;
-        }
+      .speakers-item {
+        --image-size: 120px;
       }
     }
 
-    &.has-4-speakers {
-      .speakers {
-        &-item {
-          --image-size: 60px;
-          grid-row-gap: 0;
-        }
-
-        &-image {
-          height: 60px;
-        }
-      }
-    }
-
-    .logo {
-      display: none;
+    .glowy-card::v-deep .glowy-subject,
+    .glowy-card::v-deep .glowy-ghost {
+      border-radius: 8px;
     }
   }
 
     // Event aspect
-  .aspect-event {
-    .blob {
-      &-1 {
-        top: 81%;
-        left: -64%;
-        z-index: 20;
-      }
+    .aspect-event {
+      .speakers {
+        top: 25px;
 
-      &-2 {
-        left: auto;
-        bottom: 81%;
-        right: -61%;
-        z-index: 20;
-      }
-    }
+        &-items {
+          top: 135px;
+        }
 
-    .speakers {
-      top: 0;
-      padding: 30px;
+        &-name {
+          font-size: 16px;
+        }
 
-      &-items {
-        left: 30px;
-        right: 30px;
-        justify-content: end;
-        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-        margin-top: 18px;
-      }
-
-      &-name, &-description {
-        display: none;
-      }
-
-      &-title {
-        width: 400px;
-      }
-
-      &-overtitle {
-        margin-bottom: 6px;
-        font-size: 20px;
+        &-description {
+          font-size: 13px;
+        }
       }
     }
-
-    &.has-3-speakers {
-      .blob-1 {
-        top: 87%;
-      }
-
-      .speakers-image {
-        height: 170px;
-      }
-    }
-
-    &.has-2-speakers {
-      .speakers-items {
-        left: 260px;
-      }
-
-      .speakers-title {
-        width: 200px;
-      }
-    }
-
-    .logo {
-      display: none;
-    }
-  }
 </style>
