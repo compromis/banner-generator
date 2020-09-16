@@ -55,7 +55,7 @@ export default {
       type: String,
       default: 'orange',
       validator (value) {
-        return ['orange', 'feminism', 'green', 'lgtb', 'none'].indexOf(value) !== -1
+        return ['orange', 'feminism', 'green', 'lgtb', 'custom', 'none'].indexOf(value) !== -1
       }
     },
     edge: {
@@ -94,6 +94,8 @@ export default {
     &-card {
       position: relative;
       min-height: 350px;
+      height: var(--height);
+      width: var(--width);
       // min-width: 400px;
     }
 
@@ -161,11 +163,11 @@ export default {
 
       @at-root .glow-size-sm {
         .glowy-ghost.first {
-          filter: blur(16px) brightness(.85);
+          filter: blur(16px) brightness(1.1);
         }
 
         .glowy-ghost.second {
-          filter: blur(4px) brightness(.85);
+          filter: blur(4px) brightness(1.1);
           opacity: .5;
         }
       }

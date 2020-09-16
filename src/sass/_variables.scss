@@ -78,6 +78,8 @@ $gradient-lgtb: linear-gradient(var(--gradient-orientation, 180deg),
   rgba(85,164,219,1) 83%,
   rgba(161,74,156,1) 83%,
   rgba(161,74,156,1) 100%);
+$gradient-custom: linear-gradient(var(--gradient-orientation, 180deg), var(--gradient-color, $gradient-start), transparent);
+
 // Blob gradients
 $blob-gradients: ('orange': $gradient, 'feminism': $gradient-feminista, 'green': $gradient-green, 'lgtb': $gradient-lgtb);
 
@@ -85,7 +87,7 @@ $blob-gradients: ('orange': $gradient, 'feminism': $gradient-feminista, 'green':
 $trans-gradient: linear-gradient(var(--gradient-orientation, 110deg), rgba($gradient-start, .9), rgba($gradient-end, .6), rgba($gradient-end, 0));
 $trans-gradient-feminism: linear-gradient(var(--gradient-orientation, 110deg), rgba(#7D3A81, .9), rgba(#C54687, .6), rgba(#C54687, 0));
 $trans-gradient-green: linear-gradient(var(--gradient-orientation, 110deg), rgba(#38B34A, .9), rgba(#8CC949, .6), rgba(#8CC949, 0));
-$trans-gradients: ('orange': $trans-gradient, 'feminism': $trans-gradient-feminism, 'green': $trans-gradient-green);
+$trans-gradients: ('orange': $trans-gradient, 'feminism': $trans-gradient-feminism, 'green': $trans-gradient-green, 'custom': $gradient-custom);
 
 // Other settings
 $fake-color: $gradient-start;

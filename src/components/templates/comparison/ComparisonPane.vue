@@ -111,12 +111,17 @@
     <b-field label="Tamany del text" class="range">
       <range-slider
         name="points"
-        :min="50"
-        :max="150"
+        :min="75"
+        :max="125"
         v-model="properties.textSize"
         @touchstart="dimPane(true)"
         @touchend="dimPane(false)" />
     </b-field>
+
+    <!-- Local label -->
+    <b-switch v-model="properties.invertOrder">
+      Invertir Ordre
+    </b-switch>
 
     <!-- Local label -->
     <transition name="slide">
@@ -164,7 +169,8 @@ export default {
         pictureBeforePos: 50,
         pictureAfter: null,
         pictureAfterPreview: null,
-        pictureAfterPos: 50
+        pictureAfterPos: 50,
+        invertOrder: false
       },
       presets: presets
     }

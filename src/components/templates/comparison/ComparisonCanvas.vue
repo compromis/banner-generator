@@ -5,29 +5,33 @@
       'banner-canvas',
       'aspect-' + aspect,
       aspect === '11' || banner.card ? 'disposition-' + banner.disposition : '',
-      banner.localLabel && banner.hasLocalLabel ? 'has-local-label' : '',
+      banner.invertOrder ? 'comparison--inverted' : ''
     ]"
     v-if="banner">
-    <div class="comparison-images">
+    <div :class="['comparison-images', banner.invertOrder ? 'comparison-images--inverted' : '']">
       <banner-picture
-      :picture="banner.pictureBeforePreview"
-      :picture-position="objectPosition"
-      v-if="banner.pictureBeforePreview"
-      :style="objectPositionBefore"
-      :height="500"
-      theme="glowy" />
+        :picture="banner.pictureBeforePreview"
+        :picture-position="objectPositionBefore"
+        :style="beforeGradientColor"
+        :height="600"
+        theme="glowy"
+        gradient="custom"
+        class="banner-picture-before"
+        glow-size="sm" />
       <banner-picture
-      :picture="banner.pictureAfterPreview"
-      :picture-position="objectPosition"
-      v-if="banner.pictureAfterPreview"
-      :style="objectPositionAfter"
-      :height="500"
-      theme="glowy" />
+        :picture="banner.pictureAfterPreview"
+        :picture-position="objectPositionAfter"
+        :style="{'--gradient-orientation' : '0deg'}"
+        :height="600"
+        theme="glowy"
+        gradient="orange"
+        class="banner-picture-after"
+        glow-size="sm" />
     </div>
-    <div :class="['before-party--left', 'before-party--custom']" v-if="banner.source === 'other'" >
+    <div :class="['before-party', 'before-party--custom']" v-if="banner.source === 'other'" :style="{color: banner.customSourceColor}">
       {{ banner.customSource }}
     </div>
-    <div :class="['before-party--left']" v-else-if="banner.source" >
+    <div class="before-party" v-else-if="banner.source" >
       <img :src="banner.source.logo" :alt="banner.source.name" :style="{ height: banner.source.logoHeight + 'px' }" />
     </div>
     <div class="comparison">
@@ -48,6 +52,7 @@
       theme="glowy"
       :hashtag="banner.hashtag"
       :local-label="banner.localLabel"
+      :logo-align="banner.invertOrder ? 'left' : 'right' "
        />
   </div>
 </template>
@@ -77,9 +82,18 @@ export default {
       return { objectPosition }
     },
     smallestFontSize () {
-      const before = this.fontSize(this.banner.textBefore, 45, 30, 160, this.banner.textSize)
-      const after = this.fontSize(this.banner.textAfter, 45, 30, 160, this.banner.textSize)
+      const before = this.fontSize(this.banner.textBefore, 40, 25, 160, this.banner.textSize)
+      const after = this.fontSize(this.banner.textAfter, 40, 25, 160, this.banner.textSize)
       return before < after ? before : after
+    },
+    beforeGradientColor () {
+      const { banner } = this
+      if (!banner.source) return
+      return {
+        '--gradient-color': banner.source === 'other'
+          ? banner.customSourceColor
+          : banner.source['color']
+      }
     }
   }
 }
@@ -111,6 +125,10 @@ export default {
       right: 0;
       left: 0;
       bottom: 0;
+
+      .banner-picture-before {
+        align-self: end;
+      }
     }
 
     &-text {
@@ -120,31 +138,65 @@ export default {
       padding: 16px;
       position: absolute;
       letter-spacing: -.5px;
+      color: $white;
 
       &-before {
         top: 90px;
-        left: 30px;
+        left: 35px;
       }
 
       &-after {
         bottom: 90px;
-        right: 30px;
+        right: 45px;
       }
     }
+
+    &--inverted {
+      .banner-picture-before {
+        grid-row: 1;
+        grid-column: 2;
+        --gradient-orientation: 180deg;
+      }
+
+      .banner-picture-after {
+        grid-row: 1;
+        grid-column: 1;
+        --gradient-orientation: 180deg;
+      }
+
+      .before-party {
+        right: 35px;
+        left: unset;
+      }
+
+      .comparison-text {
+        &-after {
+          bottom: 90px;
+          left: 35px;
+          right: auto;
+          top: auto;
+        }
+
+        &-before {
+          top: 90px;
+          right: 45px;
+          bottom: auto;
+          left: auto;
+        }
+      }
+    }
+  }
+
+  .banner-picture::v-deep .glowy-subject,
+  .banner-picture::v-deep .glowy-ghost  {
+    min-width: unset;
   }
 
   .before-party {
     z-index: 20;
     position: absolute;
     top: 25px;
-
-    &--left {
-      left: 35px;
-    }
-
-    &--right {
-      right: 35px;
-    }
+    left: 35px;
 
     &--custom {
       margin-bottom: 4px;
@@ -153,10 +205,4 @@ export default {
       font-weight: bold;
     }
   }
-
-  .logo {
-   color: white;
-    z-index: 20;
-  }
-
 </style>
