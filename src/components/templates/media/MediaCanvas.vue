@@ -171,9 +171,14 @@ export default {
       align-content: center;
       width: 100%;
       margin-top: -105px;
+      padding: 20px 20px 0 20px;
 
       &-details {
         padding-top: 12px;
+      }
+
+      &-subtitle {
+        margin-top: 6px;
       }
     }
   }

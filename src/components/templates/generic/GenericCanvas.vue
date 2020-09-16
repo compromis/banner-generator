@@ -107,8 +107,8 @@ export default {
     &.aspect-916 {
       .text {
         top: 90px;
-        left: 25px;
-        right: 25px;
+        left: 20px;
+        right: 20px;
         bottom: 90px;
       }
 

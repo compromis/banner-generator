@@ -136,8 +136,8 @@ export default {
 
       .quote {
         top: 90px;
-        left: 35px;
-        right: 35px;
+        left: 25px;
+        right: 25px;
         bottom: 90px;
       }
     }
@@ -154,8 +154,8 @@ export default {
     &.aspect-916 {
       .quote {
         top: 120px;
-        left: 35px;
-        right: 35px;
+        left: 25px;
+        right: 25px;
         bottom: 120px;
       }
     }

@@ -77,7 +77,6 @@ export default {
   display: flex;
   flex-wrap: wrap;
   align-items: stretch;
-  margin-top: 8px;
 
   &-channel, &-programme {
     display: inline-flex;
@@ -117,6 +116,11 @@ export default {
     &-channel-custom {
       width: 47%;
     }
+
+    &-channel,
+    &-programme {
+      padding: 0 8px;
+    }
   }
 }
 
@@ -131,13 +135,14 @@ export default {
   bottom: -3px;
   right: 7px;
   border-radius: 10px;
-  filter: blur(20px);
+  filter: blur(15px);
   z-index: -10;
-  opacity: .6;
+  opacity: .5;
 
   &.second {
     bottom: -1px;
-    filter: blur(5px) brightness(.85);
+    filter: blur(5px);
+    opacity: .5;
   }
 }
 
