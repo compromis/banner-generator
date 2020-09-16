@@ -51,7 +51,7 @@
     <!-- Speakers -->
     <transition name="slide">
       <speaker-list
-        v-show="!aspect"
+        v-show="aspect !== 2"
         :accepts-picture="false"
         :accepts-description="false"
         :min-speakers="0"
@@ -104,7 +104,7 @@ import DatePicker from '@/utils/DatePicker'
 import SpeakerList from '@/utils/SpeakerList'
 
 export default {
-  name: 'quote-pane',
+  name: 'event-pane',
 
   mixins: [PaneMixin],
 
