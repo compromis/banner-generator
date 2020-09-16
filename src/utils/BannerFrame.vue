@@ -34,15 +34,15 @@ export default {
     },
     aspect: {
       type: String,
-      default: 'blobs'
+      default: '11'
     },
     hashtag: {
       type: String,
-      default: 'blobs'
+      default: ''
     },
     localLabel: {
       type: String,
-      default: 'blobs'
+      default: ''
     },
     blobColor: {
       type: String,
