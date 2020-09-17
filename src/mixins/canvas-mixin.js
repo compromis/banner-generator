@@ -9,8 +9,7 @@ export default {
 
   props: {
     banner: Object,
-    aspect: String,
-    color: String
+    aspect: String
   },
 
   computed: {

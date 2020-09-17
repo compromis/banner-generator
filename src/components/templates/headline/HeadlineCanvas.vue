@@ -19,8 +19,8 @@
       :theme="theme"
       :headline="banner.headline"
       :source="banner.source"
-      :custom-cource="banner.customSource"
-      :custom-cource-color="banner.customSourceColor"
+      :custom-source="banner.customSource"
+      :custom-source-color="banner.customSourceColor"
       :font-size="aspect === '11' ? fontSize(banner.headline, 50, 30, 160) : fontSize(banner.headline, 35, 23.5, 160)"/>
     <emojis-on-canvas v-model="banner.emojis" />
     <banner-frame

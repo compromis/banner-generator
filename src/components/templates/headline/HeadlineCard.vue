@@ -49,7 +49,7 @@ export default {
       }
     },
     source: {
-      type: Object,
+      type: [Object, String],
       default: null
     },
     customSource: {
