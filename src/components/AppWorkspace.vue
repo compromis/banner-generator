@@ -171,7 +171,6 @@ export default {
       .pane {
         width: 100%;
         overflow-y: auto;
-        padding: 1.5rem;
 
         @include scrollbar();
       }

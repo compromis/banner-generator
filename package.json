@@ -17,7 +17,7 @@
     "@kevinfaguiar/vue-twemoji-picker": "^5.7.4",
     "@minogin/vue-drag-resize-rotate": "^1.0.5",
     "browser-detect": "^0.2.28",
-    "buefy": "^0.7.8",
+    "buefy": "^0.9.3",
     "core-js": "^2.6.5",
     "dom-to-image": "^2.6.0",
     "file-saver": "^2.0.2",

@@ -1,6 +1,6 @@
 <template>
   <div :class="{ 'pane headline-pane': true, 'pane-dimmed': paneDimmed }">
-    <b-field label="Estil">
+    <b-field>
       <b-tabs
         id="style-tabs"
         type="is-toggle"
@@ -15,7 +15,7 @@
 
     <!-- Disposition -->
     <transition name="slide">
-      <b-field label="Posició del titular" v-if="(!aspect && !properties.card) || (properties.card)">
+      <b-field v-if="(!aspect && !properties.card) || (properties.card)">
         <b-tabs
           id="disposition-tabs"
           type="is-toggle"
@@ -32,7 +32,9 @@
     <!-- Source -->
     <b-field
       id="source-field"
+      label-position="inside"
       label="Font"
+      label-for="font"
       :type="setFieldType('source')"
       :message="setFieldMessage('source')">
       <b-select placeholder="Selecciona un diari" @input="updateSource" expanded>
@@ -69,6 +71,8 @@
 
     <!-- Headline -->
     <b-field
+      label-position="inside"
+      label-for="headline-input"
       id="headline-field"
       label="Titular"
       :type="setFieldType('headline')"
@@ -77,7 +81,8 @@
         type="textarea"
         placeholder="L'ús de la bici està per damunt de 9000..."
         v-model="properties.headline"
-        maxlength="160">
+        maxlength="160"
+        id="headline-input">
       </b-input>
     </b-field>
 
@@ -108,7 +113,7 @@
 
     <!-- Hashtag -->
     <transition name="slide">
-      <b-field label="Hashtag" v-if="!aspect">
+      <b-field label="Hashtag" v-if="!aspect" label-position="inside" lable-for="hashtag-field">
         <b-input
           id="hashtag-field"
           placeholder="#"
