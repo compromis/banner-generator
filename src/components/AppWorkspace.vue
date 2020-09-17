@@ -1,16 +1,12 @@
 <template>
   <div class="workspace">
-    <app-nav
-      class="nav"
-      :is-card-modal-active="isCardModalActive"
-      :template-name="selectedTemplate.name"
-      @back="back"
-      @hide="isCardModalActive = false" />
-    <component
-      class="pane"
-      :is="selectedTemplate.components.pane"
-      @updated="(props) => bannerProperties = props"
-      @updateIsDownloadable="setIsDownloadable" />
+    <div class="pane-wrapper">
+      <component
+        class="pane"
+        :is="selectedTemplate.components.pane"
+        @updated="(props) => bannerProperties = props"
+        @updateIsDownloadable="setIsDownloadable" />
+    </div>
     <canvas-container
       class="canvas"
       :canvas-component="selectedTemplate.components.canvas"
@@ -21,6 +17,18 @@
       id="help-button"
       class="help-block"
       :template="selectedTemplate" />
+    <b-modal :active="isCardModalActive" @close="isCardModalActive = false" :width="640" scroll="keep">
+      <div class="card content">
+        <b-icon icon="exclamation-triangle" size="is-large" />
+        <h2>Atenció</h2>
+        <p>
+          Vols tancar l'editor i tornar a la pantalla d'escollir tarja?
+          Es perdran tots els canvis.
+        </p>
+        <b-button ref="confirm" type="is-primary" @click="back">Si, tanca</b-button>
+        <b-button type="is-light" @click="isCardModalActive = false">No, continua editant</b-button>
+      </div>
+    </b-modal>
     <v-tour name="workspaceTour" :steps="workspaceSteps" :callbacks="tourCallbacks" :options="{ startTimeout: 500, labels }"></v-tour>
     <loading :active.sync="loadingTemplate" :is-full-page="true" color="#ff6600"></loading>
   </div>
@@ -28,7 +36,6 @@
 
 <script>
 import Cookies from 'js-cookie'
-import AppNav from './AppNav'
 import CanvasContainer from './CanvasContainer'
 import Help from './Help'
 import Loading from 'vue-loading-overlay'
@@ -41,7 +48,6 @@ export default {
   name: 'app-workspace',
 
   components: {
-    AppNav,
     CanvasContainer,
     Help,
     Loading
@@ -82,6 +88,17 @@ export default {
   watch: {
     '$route': function (newRoute) {
       this.selectedTemplate = this.templates.find(template => template.id.toLowerCase() === newRoute.params.pathMatch)
+    },
+    // Autofocus default button on modal shown
+    // Bring focus back to opener button on modal closed
+    watch: {
+      isCardModalActive: function (isActive) {
+        const button = isActive ? 'confirm' : 'close'
+
+        this.$nextTick(() => {
+          this.$refs[button].$el.focus()
+        })
+      }
     }
   },
 
@@ -124,7 +141,7 @@ export default {
 
  .workspace {
     display: grid;
-    grid-template-columns: 21rem 1fr;
+    grid-template-columns: 22rem 1fr;
     grid-template-rows: auto 1fr;
     grid-template-areas:
       "nav nav"
@@ -141,15 +158,23 @@ export default {
       grid-area: nav;
     }
 
-    .pane {
+    .pane-wrapper {
+      display: flex;
       grid-area: pane;
-      padding: 2rem 1rem 2rem 2rem;
+      margin: 1.5rem 0 1.5rem 1.5rem;
       background-color: $white;
       box-shadow: 0 7px 25px -16px;
-      overflow-y: scroll;
       align-self: stretch;
+      border-radius: 1rem;
+      overflow: hidden;
 
-      @include scrollbar();
+      .pane {
+        width: 100%;
+        overflow-y: auto;
+        padding: 1.5rem;
+
+        @include scrollbar();
+      }
     }
 
     .canvas {
@@ -165,10 +190,32 @@ export default {
 
     .help-block {
       position: absolute;
-      top: 4rem;
+      top: 1rem;
       right: 1.5rem;
     }
  }
+
+ .card {
+    padding: 2rem;
+    border-radius: 1rem;
+
+    .button {
+      margin-right: 1rem;
+    }
+
+    p {
+      display: block;
+    }
+
+    h2 {
+      display: inline;
+    }
+
+    .icon.is-large {
+      margin-left: -.75rem;
+      margin-top: -.75rem;
+    }
+  }
 
   @media (max-width: $xs-breakpoint) {
     .workspace {
@@ -195,7 +242,7 @@ export default {
         width: 100%;
       }
 
-      .pane {
+      .pane-wrapper {
         position: relative;
         z-index: 15;
         box-shadow: 0 -.4rem 1.7rem -.3rem rgba($gray-900, .15),
@@ -203,8 +250,12 @@ export default {
           0 .4rem 1rem -.4rem rgba($gray-900, .015);
         border-radius: 1.5rem 1.5rem 0 0;
         overflow: visible;
-        padding: 1.5rem 1rem;
         width: 100vw;
+        margin: 0;
+
+        .pane {
+          padding: 1.5rem 1rem;
+        }
       }
 
       .help-block {

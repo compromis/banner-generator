@@ -2,7 +2,6 @@
   <div class="banner-workspace" v-if="banner">
     <b-tabs
       id="aspect-tabs"
-      :class="['banner-aspect', `banner-aspect-${template.aspects[aspect]}`]"
       type="is-toggle-rounded"
       position="is-centered"
       v-model="aspect"
@@ -14,21 +13,18 @@
           :label="aspect.name"
           :icon="aspect.icon" />
       </template>
+    </b-tabs>
+
+    <div :class="['banner-aspect', `banner-aspect-${template.aspects[aspect]}`]">
       <div
         :class="['canvas-wrapper', `template-${template.id.toLowerCase()}`]"
         :style="{transform: `scale(${scale})`, margin: `${margin}px`}">
         <component
           :is="canvasComponent"
           :banner="banner"
-          :aspect="template.aspects[aspect]"
-          :color="color" />
+          :aspect="template.aspects[aspect]" />
       </div>
-    </b-tabs>
-
-      <careta-selector
-        v-model="color"
-        is-rounded
-        v-if="'supports' in template && template.supports.includes('multicolor-blobs')" />
+    </div>
 
     <div id="download-button" class="primary-download-button">
       <b-tooltip
@@ -38,8 +34,7 @@
         :active="!isDownloadable && displayTooltip">
         <b-button
           type="is-primary"
-          size="is-large"
-          rounded @click="download"
+          @click="download"
           :disabled="downloading">
           <b-icon v-if="!downloading" icon="arrow-to-bottom" />
           <b-icon v-else icon="circle-notch" custom-class="fa-spin" />
@@ -75,7 +70,6 @@ export default {
   data () {
     return {
       aspect: 0,
-      color: 'normal',
       displayTooltip: false,
       downloading: false,
       scale: 1,
@@ -188,6 +182,10 @@ export default {
     outline: 1px $gray-900 solid;
   }
 
+  .tab-content {
+    display: none !important;
+  }
+
   .banner-aspect {
     margin-bottom: 0 !important;
   }
@@ -203,20 +201,11 @@ export default {
 
   .primary-download-button {
     position: fixed;
-    right: 2rem;
-    bottom: 2rem;
+    right: 0;
+    top: 0;
 
     .button {
       transition: .25s ease-in-out;
-
-      &:hover {
-        transform: translateY(-4px);
-        box-shadow: $raised-shadow;
-      }
-
-      &:active {
-        transform: translateY(2px);
-      }
 
       &-label {
         position: relative;
