@@ -147,6 +147,7 @@ export default {
       "nav nav"
       "pane canvas";
     align-items: center;
+    background: $gray-lightest;
     position: fixed;
     top: $navbar-height;
     left: 0;

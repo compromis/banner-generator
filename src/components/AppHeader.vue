@@ -50,7 +50,7 @@ export default {
     top: 0;
     left: 0;
     right: 0;
-    background-color: $white;
+    background-color: transparent;
     padding: .75rem 2rem;
     height: $navbar-height;
     transition: .25s ease-in-out;
