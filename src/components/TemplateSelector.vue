@@ -117,7 +117,7 @@ export default {
       letter-spacing: -1px;
       width: 15rem;
       height: 15rem;
-      border-radius: 1rem;
+      border-radius: 1.5rem;
       box-shadow: $default-shadow;
       transition: .2s ease-in-out;
 
@@ -162,7 +162,7 @@ export default {
         color: $gray-500;
         width: 6rem;
         height: 6rem;
-        border-radius: .5rem;
+        border-radius: 1rem;
 
         .icon {
           transform: scale(1.5);
@@ -174,7 +174,7 @@ export default {
         position: absolute;
         bottom: 0;
         left: 0;
-        padding: 1rem;
+        padding: 1rem 1.25rem;
       }
 
       &-label {

@@ -34,6 +34,8 @@
         :active="!isDownloadable && displayTooltip">
         <b-button
           type="is-primary"
+          size="is-large"
+          rounded
           @click="download"
           :disabled="downloading">
           <b-icon v-if="!downloading" icon="arrow-to-bottom" />
@@ -201,8 +203,8 @@ export default {
 
   .primary-download-button {
     position: fixed;
-    right: 0;
-    top: 0;
+    right: 2rem;
+    bottom: 2rem;
 
     .button {
       transition: .25s ease-in-out;
@@ -211,6 +213,15 @@ export default {
         position: relative;
         top: -.15rem;
         overflow: hidden;
+      }
+
+      &:hover {
+        transform: translateY(-4px);
+        box-shadow: $raised-shadow;
+      }
+
+      &:active {
+        transform: translateY(2px);
       }
     }
   }
