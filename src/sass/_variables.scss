@@ -108,6 +108,10 @@ $raised-shadow: 0 1.25rem 2.1rem -.3rem var(--shadow-color, rgba($gray-900, .15)
 $xs-breakpoint: 750px;
 $xl-breakpoint: 1400px;
 
+// Pane forms
+$field-padding: 1rem;
+
+// Scrollbar
 @mixin scrollbar {
     &::-webkit-scrollbar {
         width: 1rem;

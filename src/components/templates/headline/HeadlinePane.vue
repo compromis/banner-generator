@@ -65,6 +65,15 @@
     </transition>
 
     <!-- Headline -->
+    <c-input-text
+      label="Titular"
+      name="headline"
+      type="textarea"
+      placeholder="L'ús de la bici està per damunt de 9000..."
+      v-model="properties.headline"
+      maxlength="160"
+      :message="setFieldMessage('headline')" />
+
     <b-field
       label-position="inside"
       label-for="headline-input"
@@ -108,15 +117,15 @@
 
     <!-- Hashtag -->
     <transition name="slide">
-      <b-field label="Hashtag" v-if="!aspect" label-position="inside" lable-for="hashtag-field">
-        <b-input
-          id="hashtag-field"
-          placeholder="#"
-          @input="updateHashtag"
-          :value="properties.hashtag"
-          :maxlength="properties.hasLocalLabel ? 18 : 32">
-        </b-input>
-      </b-field>
+      <c-input-text
+        v-if="!aspect"
+        label="Hashtag"
+        name="hashtag"
+        placeholder="#"
+        @input="updateHashtag"
+        :value="properties.hashtag"
+        :maxlength="properties.hasLocalLabel ? 18 : 32"
+        :message="setFieldMessage('hashtag')" />
     </transition>
 
     <!-- Local label -->
