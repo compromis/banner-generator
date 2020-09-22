@@ -52,7 +52,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../sass/variables";
+@import "../../sass/variables";
 
 .image-upload-field {
   .content {

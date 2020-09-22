@@ -98,7 +98,7 @@
 
 <script>
 import PaneMixin from '@/mixins/pane-mixin.js'
-import SpeakerList from '@/utils/SpeakerList'
+import SpeakerList from '@/components/pane/SpeakerList'
 
 export default {
   name: 'superavit-pane',

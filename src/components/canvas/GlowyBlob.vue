@@ -50,7 +50,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import '../sass/variables';
+  @import '../../sass/variables';
 
   .glowy-blob {
     position: absolute;

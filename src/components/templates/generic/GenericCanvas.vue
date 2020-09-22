@@ -36,10 +36,10 @@
 
 <script>
 import CanvasMixin from '@/mixins/canvas-mixin'
-import BannerPicture from '@/utils/BannerPicture'
-import BannerFrame from '@/utils/BannerFrame'
-import EmojisOnCanvas from '@/utils/EmojisOnCanvas'
-import TextInPills from '@/utils/TextInPills'
+import BannerPicture from '@/components/canvas/BannerPicture'
+import BannerFrame from '@/components/canvas/BannerFrame'
+import EmojisOnCanvas from '@/components/canvas/EmojisOnCanvas'
+import TextInPills from '@/components/canvas/TextInPills'
 
 export default {
   name: 'generic-canvas',

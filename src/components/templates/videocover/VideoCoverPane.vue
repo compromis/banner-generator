@@ -75,8 +75,8 @@
 
 <script>
 import PaneMixin from '@/mixins/pane-mixin.js'
-import ColorSelector from '@/utils/ColorSelector'
-import EmojiPicker from '@/utils/EmojiPicker'
+import ColorSelector from '@/components/pane/ColorSelector'
+import EmojiPicker from '@/components/pane/EmojiPicker'
 
 export default {
   name: 'video-cover-pane',

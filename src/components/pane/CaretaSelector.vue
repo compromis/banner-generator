@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import Careta from './Careta'
+import Careta from '@/components/canvas/Careta'
 
 export default {
   name: 'careta-selector',
@@ -52,7 +52,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../sass/variables";
+@import "../../sass/variables";
 
 .careta-selector {
   display: grid;

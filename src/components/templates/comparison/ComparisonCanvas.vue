@@ -59,8 +59,8 @@
 
 <script>
 import CanvasMixin from '@/mixins/canvas-mixin.js'
-import BannerPicture from '@/utils/BannerPicture'
-import BannerFrame from '@/utils/BannerFrame'
+import BannerPicture from '@/components/canvas/BannerPicture'
+import BannerFrame from '@/components/canvas/BannerFrame'
 
 export default {
   name: 'comparison-canvas',

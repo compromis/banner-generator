@@ -54,9 +54,9 @@
 
 <script>
 import CanvasMixin from '@/mixins/canvas-mixin.js'
-import GlowyCard from '@/utils/GlowyCard'
-import BannerFrame from '@/utils/BannerFrame'
-import EventInfo from '@/utils/EventInfo'
+import GlowyCard from '@/components/canvas/GlowyCard'
+import BannerFrame from '@/components/canvas/BannerFrame'
+import EventInfo from '@/components/canvas/EventInfo'
 
 export default {
   name: 'quote-canvas',

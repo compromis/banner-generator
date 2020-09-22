@@ -88,7 +88,7 @@
 <script>
 import { VueEditor } from 'vue2-editor'
 import PaneMixin from '@/mixins/pane-mixin.js'
-import EmojiPicker from '@/utils/EmojiPicker'
+import EmojiPicker from '@/components/pane/EmojiPicker'
 
 export default {
   name: 'text-pane',

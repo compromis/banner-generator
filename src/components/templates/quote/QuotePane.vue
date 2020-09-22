@@ -92,7 +92,7 @@
 
 <script>
 import PaneMixin from '@/mixins/pane-mixin.js'
-import ColorSelector from '@/utils/ColorSelector'
+import ColorSelector from '@/components/pane/ColorSelector'
 
 export default {
   name: 'quote-pane',

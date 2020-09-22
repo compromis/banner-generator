@@ -14,7 +14,7 @@
 
 <script>
 import templates from './templates/templates'
-import Careta from '@/utils/Careta'
+import Careta from '@/components/canvas/Careta'
 
 export default {
   name: 'app-header',

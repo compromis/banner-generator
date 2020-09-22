@@ -33,9 +33,9 @@
 
 <script>
 import CanvasMixin from '@/mixins/canvas-mixin.js'
-import BannerPicture from '@/utils/BannerPicture'
-import BannerFrame from '@/utils/BannerFrame'
-import EmojisOnCanvas from '@/utils/EmojisOnCanvas'
+import BannerPicture from '@/components/canvas/BannerPicture'
+import BannerFrame from '@/components/canvas/BannerFrame'
+import EmojisOnCanvas from '@/components/canvas/EmojisOnCanvas'
 import HeadlineCard from './HeadlineCard'
 
 export default {

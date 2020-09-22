@@ -141,7 +141,7 @@
 <script>
 import API from '@/api'
 import PaneMixin from '@/mixins/pane-mixin.js'
-import ColorSelector from '@/utils/ColorSelector'
+import ColorSelector from '@/components/pane/ColorSelector'
 
 export default {
   name: 'tweet-pane',

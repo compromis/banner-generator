@@ -110,8 +110,8 @@
 
 <script>
 import PaneMixin from '@/mixins/pane-mixin'
-import EmojiPicker from '@/utils/EmojiPicker'
-import ColorSelector from '@/utils/ColorSelector'
+import EmojiPicker from '@/components/pane/EmojiPicker'
+import ColorSelector from '@/components/pane/ColorSelector'
 
 export default {
   name: 'generic-pane',

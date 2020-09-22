@@ -146,7 +146,7 @@
 import PaneMixin from '@/mixins/pane-mixin.js'
 import presets from './presets'
 import Swatches from 'vue-swatches'
-import EmojiPicker from '@/utils/EmojiPicker'
+import EmojiPicker from '@/components/pane/EmojiPicker'
 
 export default {
   name: 'headline-pane',

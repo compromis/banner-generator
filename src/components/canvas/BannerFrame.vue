@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import CompromisLogo from './CompromisLogo'
+import CompromisLogo from '@/components/utils/CompromisLogo'
 import GlowyBlob from './GlowyBlob'
 
 export default {
@@ -66,7 +66,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../sass/variables";
+@import "../../sass/variables";
 
 .banner-frame {
   .logo {

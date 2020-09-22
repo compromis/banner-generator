@@ -28,7 +28,7 @@
 
 <script>
 import PaneMixin from '@/mixins/pane-mixin'
-import CaretaSelector from '@/utils/CaretaSelector'
+import CaretaSelector from '@/components/pane/CaretaSelector'
 
 export default {
   name: 'social-pane',

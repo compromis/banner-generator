@@ -53,7 +53,7 @@ import { saveAs } from 'file-saver'
 import { EventBus } from '@/event-bus'
 import API from '@/api'
 import aspects from '@/components/templates/aspects'
-import CaretaSelector from '@/utils/CaretaSelector'
+import CaretaSelector from '@/components/pane/CaretaSelector'
 
 export default {
   name: 'canvas-container',

@@ -34,7 +34,7 @@ import browser from 'browser-detect'
 import templates from './templates/templates'
 import AppFooter from './AppFooter'
 import { selectorSteps, labels } from '../tour'
-import BrowserWarning from '../utils/BrowserWarning'
+import BrowserWarning from '@/components/utils/BrowserWarning'
 
 export default {
   name: 'template-selector',

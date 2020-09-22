@@ -28,10 +28,10 @@
 </template>
 
 <script>
-import BannerPicture from '@/utils/BannerPicture'
-import BannerFrame from '@/utils/BannerFrame'
 import CanvasMixin from '@/mixins/canvas-mixin.js'
-import EmojisOnCanvas from '@/utils/EmojisOnCanvas'
+import BannerPicture from '@/components/canvas/BannerPicture'
+import BannerFrame from '@/components/canvas/BannerFrame'
+import EmojisOnCanvas from '@/components/canvas/EmojisOnCanvas'
 
 export default {
   name: 'text-canvas',

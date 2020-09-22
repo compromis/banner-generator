@@ -62,10 +62,10 @@
 <script>
 import CanvasMixin from '@/mixins/canvas-mixin.js'
 import MediaSource from './MediaSource'
-import BannerPicture from '@/utils/BannerPicture'
-import BannerFrame from '@/utils/BannerFrame'
-import EventInfo from '@/utils/EventInfo'
-import TextInPills from '@/utils/TextInPills'
+import BannerPicture from '@/components/canvas/BannerPicture'
+import BannerFrame from '@/components/canvas/BannerFrame'
+import EventInfo from '@/components/canvas/EventInfo'
+import TextInPills from '@/components/canvas/TextInPills'
 
 export default {
   name: 'quote-canvas',

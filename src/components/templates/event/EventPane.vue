@@ -100,8 +100,8 @@
 
 <script>
 import PaneMixin from '@/mixins/pane-mixin'
-import DatePicker from '@/utils/DatePicker'
-import SpeakerList from '@/utils/SpeakerList'
+import DatePicker from '@/components/pane/DatePicker'
+import SpeakerList from '@/components/pane/SpeakerList'
 
 export default {
   name: 'event-pane',

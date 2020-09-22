@@ -37,10 +37,10 @@
 </template>
 
 <script>
-import BannerPicture from '@/utils/BannerPicture'
-import BannerFrame from '@/utils/BannerFrame'
 import CanvasMixin from '@/mixins/canvas-mixin.js'
-import TextInPills from '@/utils/TextInPills'
+import BannerPicture from '@/components/canvas/BannerPicture'
+import BannerFrame from '@/components/canvas/BannerFrame'
+import TextInPills from '@/components/canvas/TextInPills'
 
 export default {
   name: 'quote-canvas',

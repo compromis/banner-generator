@@ -38,7 +38,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../sass/variables";
+@import "../../sass/variables";
 
 .color-selector {
   display: grid;

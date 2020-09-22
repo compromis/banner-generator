@@ -1,4 +1,4 @@
-import CompromisLogo from '@/utils/CompromisLogo'
+import CompromisLogo from '@/components/utils/CompromisLogo'
 import moment from 'moment'
 moment.locale('ca')
 

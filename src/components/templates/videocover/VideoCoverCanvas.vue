@@ -35,8 +35,8 @@
 
 <script>
 import CanvasMixin from '@/mixins/canvas-mixin.js'
-import TextInPills from '@/utils/TextInPills'
-import EmojisOnCanvas from '@/utils/EmojisOnCanvas'
+import TextInPills from '@/components/canvas/TextInPills'
+import EmojisOnCanvas from '@/components/canvas/EmojisOnCanvas'
 
 export default {
   name: 'video-cover-canvas',

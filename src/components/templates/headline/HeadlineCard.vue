@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import TextInPills from '@/utils/TextInPills'
+import TextInPills from '@/components/canvas/TextInPills'
 
 export default {
   name: 'HeadlineCard',
