@@ -15,18 +15,13 @@
 
     <!-- Disposition -->
     <transition name="slide">
-      <b-field v-if="(!aspect && !properties.card) || (properties.card)">
-        <b-tabs
-          id="disposition-tabs"
-          type="is-toggle"
-          size="is-small"
-          v-model="properties.disposition"
-          class="tabs-field"
-          expanded>
-          <b-tab-item label="Titular baix"></b-tab-item>
-          <b-tab-item label="Titular dalt"></b-tab-item>
-        </b-tabs>
-      </b-field>
+      <div v-if="(!aspect && !properties.card) || (properties.card)">
+        <c-tab-group>
+          <c-tab v-model="properties.disposition" value="dalt" name="disposicio">dalt</c-tab>
+          <c-tab v-model="properties.disposition" value="baix" name="disposicio">baix</c-tab>
+          <c-tab v-model="properties.disposition" value="centre" name="disposicio">centre</c-tab>
+        </c-tab-group>
+      </div>
     </transition>
 
     <!-- Source -->
@@ -147,13 +142,17 @@ import PaneMixin from '@/mixins/pane-mixin.js'
 import presets from './presets'
 import Swatches from 'vue-swatches'
 import EmojiPicker from '@/components/pane/EmojiPicker'
+import CTab from '@/components/pane/CTab'
+import CTabGroup from '@/components/pane/CTabGroup'
 
 export default {
   name: 'headline-pane',
 
   components: {
     Swatches,
-    EmojiPicker
+    EmojiPicker,
+    CTab,
+    CTabGroup
   },
 
   mixins: [PaneMixin],
@@ -167,7 +166,8 @@ export default {
         customSourceColor: '#1CA085',
         emojis: []
       },
-      presets: presets
+      presets: presets,
+      tabp: ''
     }
   },
 
