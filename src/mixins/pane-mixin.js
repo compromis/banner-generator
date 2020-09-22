@@ -1,12 +1,14 @@
 import { EventBus } from '@/event-bus.js'
 import PictureUpload from '@/components/pane/PictureUpload.vue'
 import RangeSlider from '@/components/pane/RangeSlider.vue'
+import CInputText from '@/components/pane/CInputText'
 
 export default {
   // Shared components across templates
   components: {
     RangeSlider,
-    PictureUpload
+    PictureUpload,
+    CInputText
   },
 
   // Shared data across templates
