@@ -6,17 +6,17 @@
       'banner-canvas',
       'aspect-' + aspect,
       'disposition-' + banner.disposition,
-      'theme-' + theme
+      'theme-' + banner.theme
     ]">
     <banner-picture
       :picture="banner.picturePreview"
       :picture-position="objectPosition"
       :picture-dimensions="banner.pictureDimensions"
       :height="aspect === '11' ? 500 : 730"
-      :theme="theme"
+      :theme="banner.theme"
       :edge="aspect === '916'" />
     <headline-card
-      :theme="theme"
+      :theme="banner.theme"
       :headline="banner.headline"
       :source="banner.source"
       :custom-source="banner.customSource"
@@ -24,7 +24,7 @@
       :font-size="aspect === '11' ? fontSize(banner.headline, 50, 30, 160) : fontSize(banner.headline, 35, 23.5, 160)"/>
     <emojis-on-canvas v-model="banner.emojis" />
     <banner-frame
-      :theme="theme"
+      :theme="banner.theme"
       :hashtag="banner.hashtag"
       :local-label="banner.localLabel"
       :aspect="aspect" />

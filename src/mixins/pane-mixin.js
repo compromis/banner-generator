@@ -18,7 +18,7 @@ export default {
     return {
       properties: {
         card: 1, // deprecated
-        theme: 1,
+        theme: 'glowy',
         picture: null,
         picturePreview: '',
         picturePos: 50,

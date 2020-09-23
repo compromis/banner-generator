@@ -1,5 +1,6 @@
 <template>
   <div :class="{ 'pane headline-pane': true, 'pane-dimmed': paneDimmed }">
+    <theme-selector v-model="properties.theme"/>
     <!-- Source -->
     <c-select
       name="source"
@@ -24,7 +25,7 @@
 
     <!-- Other source -->
     <transition name="slide">
-      <div v-if="properties.source !== 'other'" class="source-input-group">
+      <div v-if="properties.source === 'other'" class="source-input-group">
         <div class="c-field">
           <div class="c-field-info">
             <label>Color</label>
@@ -119,6 +120,7 @@ import Swatches from 'vue-swatches'
 import EmojiPicker from '@/components/pane/EmojiPicker'
 import CTab from '@/components/pane/CTab'
 import CTabGroup from '@/components/pane/CTabGroup'
+import ThemeSelector from '@/components/pane/ThemeSelector'
 
 export default {
   name: 'headline-pane',
@@ -127,7 +129,8 @@ export default {
     Swatches,
     EmojiPicker,
     CTab,
-    CTabGroup
+    CTabGroup,
+    ThemeSelector
   },
 
   mixins: [PaneMixin],

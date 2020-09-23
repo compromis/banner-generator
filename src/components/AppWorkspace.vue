@@ -165,9 +165,9 @@ export default {
       margin: 1.5rem 0 1.5rem 1.5rem;
       background-color: $white;
       box-shadow: 0 7px 25px -16px;
-      align-self: stretch;
       border-radius: 1rem;
       overflow: hidden;
+      max-height: 80vh;
 
       .pane {
         width: 100%;
