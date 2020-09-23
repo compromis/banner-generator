@@ -1,7 +1,7 @@
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
   faUpload, faMobileAndroid, faSquare, faTimes, faPlus, faArrowToBottom,
-  faExclamationTriangle, faChevronLeft, faClock, faCalendarDay, faMapMarkerAlt,
+  faExclamationTriangle, faChevronLeft, faChevronDown, faClock, faCalendarDay, faMapMarkerAlt,
   faCalendarAlt, faAngleLeft, faAngleRight, faExclamationCircle, faUser,
   faCreditCardBlank, faKeynote, faRectangleLandscape, faAlignLeft, faAlignCenter, faAlignRight,
   faArrowToTop, faGripLines, faBroadcastTower, faFont, faQuoteLeft, faNewspaper, faPortrait, faUserCircle,
@@ -17,7 +17,7 @@ import {
 
 library.add(
   faUpload, faMobileAndroid, faSquare, faTimes, faPlus, faArrowToBottom,
-  faExclamationTriangle, faChevronLeft, faClock, faCalendarDay, faMapMarkerAlt,
+  faExclamationTriangle, faChevronLeft, faChevronDown, faClock, faCalendarDay, faMapMarkerAlt,
   faCalendarAlt, faAngleLeft, faAngleRight, faExclamationCircle, faUser,
   faCreditCardBlank, faKeynote, faRectangleLandscape, faAlignLeft, faAlignCenter, faAlignRight,
   faArrowToTop, faGripLines, faBroadcastTower, faFont, faQuoteLeft, faNewspaper, faPortrait, faUserCircle,

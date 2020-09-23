@@ -7,29 +7,17 @@
           v-if="message"
           :icon="['far', 'exclamation-circle']" />
       </label>
-      <span v-if="maxlength" class="char-count">
-        {{ value.length }} / {{ maxlength }}
-      </span>
     </div>
-    <input
-      v-if="type !== 'textarea'"
-      :type="type"
-      :name="name"
+    <select
       :id="name"
-      :maxlength="maxlength"
-      :placeholder="placeholder"
-      :value="value"
-      @input="$emit('input', $event.target.value)"
-      v-bind="$attrs">
-    <textarea
-      v-else
       :name="name"
-      :id="name"
-      :maxlength="maxlength"
-      :placeholder="placeholder"
-      :value="value"
-      @input="$emit('input', $event.target.value)"
-      v-bind="$attrs" />
+      @change="$emit('input', $event.target.value)"
+      :class="{'has-value': value}">
+      <option disabled hidden :selected="!value">{{ placeholder }}</option>
+      <slot></slot>
+    </select>
+    <font-awesome-icon
+      :icon="['far', 'chevron-down']" />
     <div v-if="message" class="c-field-error">
       {{ message }}
     </div>
@@ -38,7 +26,7 @@
 
 <script>
 export default {
-  name: 'c-input-text',
+  name: 'c-select',
 
   props: {
     label: {
@@ -50,20 +38,12 @@ export default {
       required: true
     },
     value: {
-      type: String,
+      type: [String, Object],
       default: ''
-    },
-    type: {
-      type: String,
-      default: 'text'
     },
     placeholder: {
       type: String,
       default: ''
-    },
-    maxlength: {
-      type: Number,
-      default: null
     },
     message: {
       type: String,
@@ -76,8 +56,7 @@ export default {
 <style lang="scss" scoped>
   @import "../../sass/variables";
 
-  input,
-  textarea {
+  select {
     font-size: 1rem;
     width: 100%;
     border: 0;
@@ -85,15 +64,20 @@ export default {
     min-width: 100%;
     background: transparent;
     outline: 0;
-    padding: .5rem $field-padding;
-    color: $gray-900;
+    padding: .75rem $field-padding;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    color: $gray-600;
 
-    &::placeholder {
-      color: $gray-600;
+    &.has-value {
+      color: $gray-900;
     }
   }
 
-  textarea {
-    min-height: 6rem;
+  .fa-chevron-down {
+    position: absolute;
+    top: 2.75rem;
+    right: 1rem;
   }
 </style>

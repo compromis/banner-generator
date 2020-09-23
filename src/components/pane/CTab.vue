@@ -7,6 +7,7 @@
       :value="value"
       :checked="shouldBeChecked"
       @change="$emit('change', value)"
+      class="sr-only"
     >
     <slot></slot>
   </label>
@@ -46,13 +47,9 @@ export default {
 <style lang="scss" scoped>
 @import "../../sass/variables";
 
-input {
-  display: none;
-}
-
 label {
   cursor: pointer;
-  padding: .25rem 0;
+  padding: .75rem 0;
   transition: .15s ease-in-out;
 
   &.checked {

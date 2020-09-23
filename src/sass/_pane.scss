@@ -31,11 +31,68 @@
   }
 }
 
-.field {
+.c-field {
   position: relative;
+  border-bottom: 1px $gray-300 solid;
 
-  &:last-child {
-    margin-bottom: 1.5rem;
+  label {
+    font-weight: normal;
+    color: $gray-800;
+    font-size: .85rem;
+  }
+
+  &-info {
+    display: flex;
+    padding: .75rem $field-padding 0 $field-padding;
+    align-items: center;
+    font-size: .85rem;
+    color: $gray-800;
+
+    label {
+      flex-grow: 1;
+    }
+
+    .char-count {
+      display: none;
+      font-size: .75rem;
+    }
+  }
+
+  &-content {
+    padding: 0 $field-padding;
+  }
+
+  &:focus-within {
+    background: $gray-100;
+
+    .char-count {
+      display: block;
+    }
+  }
+
+  &-error {
+    color: $red;
+    font-size: .75rem;
+    padding: 0 $field-padding .5rem $field-padding;
+  }
+
+  &.has-errors {
+    background: rgba($red, .1);
+
+    &:focus-within {
+      background: rgba($red, .15);
+    }
+
+    label {
+      color: $red;
+    }
+  }
+
+  .vue-swatches__trigger {
+    height: 1.75rem !important;
+    width: 1.75rem !important;
+    border-radius: 4px !important;
+    margin: .25rem 0;
   }
 }
 
@@ -47,10 +104,6 @@
   position: absolute;
   bottom: -25px;
   right: 0;
-}
-
-.field:not(:last-child) {
-  margin-bottom: 1.5rem;
 }
 
 .dropdown-item .field {

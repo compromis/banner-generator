@@ -17,50 +17,53 @@
     <transition name="slide">
       <div v-if="(!aspect && !properties.card) || (properties.card)">
         <c-tab-group>
-          <c-tab v-model="properties.disposition" value="dalt" name="disposicio">dalt</c-tab>
-          <c-tab v-model="properties.disposition" value="baix" name="disposicio">baix</c-tab>
-          <c-tab v-model="properties.disposition" value="centre" name="disposicio">centre</c-tab>
+          <c-tab v-model="properties.disposition" value="top" name="disposition">Titular dalt</c-tab>
+          <c-tab v-model="properties.disposition" value="bottom" name="disposition">Titular baix</c-tab>
         </c-tab-group>
       </div>
     </transition>
 
     <!-- Source -->
-    <b-field
-      id="source-field"
-      label-position="inside"
+    <c-select
+      name="source"
       label="Font"
-      label-for="font"
-      :type="setFieldType('source')"
-      :message="setFieldMessage('source')">
-      <b-select placeholder="Selecciona un diari" @input="updateSource" expanded>
-        <option
-          v-for="source in presets"
-          :value="source.id"
-          :key="source.id"
-          :selected="properties.source === source.id">
-          {{ source.name }}
-        </option>
-        <option
-          value="other"
-          :selected="properties.source === 'other'">
-          Altre...
-        </option>
-      </b-select>
-    </b-field>
+      :message="setFieldMessage('source')"
+      placeholder="Selecciona una font"
+      @input="updateSource"
+      :value="properties.source">
+      <option
+        v-for="source in presets"
+        :value="source.id"
+        :key="source.id"
+        :selected="properties.source === source.id">
+        {{ source.name }}
+      </option>
+      <option
+        value="other"
+        :selected="properties.source === 'other'">
+        Altre...
+      </option>
+    </c-select>
 
     <!-- Other source -->
     <transition name="slide">
-      <div v-if="properties.source === 'other'" class="source-input-group">
-        <b-field
-          class="source-input-name"
+      <div v-if="properties.source !== 'other'" class="source-input-group">
+        <div class="c-field">
+          <div class="c-field-info">
+            <label>Color</label>
+          </div>
+          <div class="c-field-content">
+            <swatches v-model="properties.customSourceColor"></swatches>
+          </div>
+        </div>
+        <c-input-text
           label="Mitjà de comunicació"
-          :type="setFieldType('customSource')"
-          :message="setFieldMessage('customSource')">
-          <b-input placeholder="La Veu" v-model="properties.customSource"></b-input>
-        </b-field>
-        <b-field label="Color" class="source-input-color">
-          <swatches v-model="properties.customSourceColor"></swatches>
-        </b-field>
+          name="customSource"
+          placeholder="La Veu"
+          v-model="properties.customSource"
+          :maxlength="30"
+          :message="setFieldMessage('customSource')"
+          class="source-input-name" />
       </div>
     </transition>
 
@@ -71,24 +74,8 @@
       type="textarea"
       placeholder="L'ús de la bici està per damunt de 9000..."
       v-model="properties.headline"
-      maxlength="160"
+      :maxlength="160"
       :message="setFieldMessage('headline')" />
-
-    <b-field
-      label-position="inside"
-      label-for="headline-input"
-      id="headline-field"
-      label="Titular"
-      :type="setFieldType('headline')"
-      :message="setFieldMessage('headline')">
-      <b-input
-        type="textarea"
-        placeholder="L'ús de la bici està per damunt de 9000..."
-        v-model="properties.headline"
-        maxlength="160"
-        id="headline-input">
-      </b-input>
-    </b-field>
 
     <!-- Emoji picker -->
     <transition name="slide">
@@ -220,20 +207,11 @@ export default {
     .source-input {
       &-group {
         display: flex;
-
-        label {
-          font-size: .85rem;
-          color: $gray-600;
-        }
       }
 
       &-name {
         flex-grow: 1;
         order: 1;
-      }
-
-      &-color {
-        margin-right: .5rem;
       }
     }
   }

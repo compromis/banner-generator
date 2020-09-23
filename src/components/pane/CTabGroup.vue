@@ -1,5 +1,5 @@
 <template>
-  <div class="c-tab-group">
+  <div class="c-field c-tab-group">
     <slot></slot>
   </div>
 </template>
