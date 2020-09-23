@@ -42,6 +42,7 @@ export default {
   outline: none;
   opacity: 1;
   transition: opacity .2s;
+  margin: 1.75rem 0 1rem;
 }
 
 .slider::-webkit-slider-thumb {

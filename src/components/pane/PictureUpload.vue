@@ -1,32 +1,36 @@
 <template>
-  <b-field
-      label="Foto"
-      class="image-upload-field"
-      :type="fieldName in errors && displayErrors ? 'is-danger' : ''"
+  <div
+    class="c-field image-upload-field"
       :message="fieldName in errors && displayErrors ? errors[fieldName].join('. ') : ''">
-      <b-upload
-        @input="(picture) => $emit('upload', picture)"
-        drag-drop
-        accept="image/*"
-        :type="picture ? '' : displayErrors ? 'is-danger' : ''">
-        <div class="content has-text-centered" v-if="!picture">
-          <b-icon icon="upload" size="is-large" />
-          <p>Arrosega la foto</p>
-        </div>
-        <div class="picture-preview has-text-centered" v-else>
-          <img :src="preview" alt="Imatge" />
-          <span>{{ picture.name }}</span>
-        </div>
-      </b-upload>
-      <b-button
-        v-if="picture"
-        @click="$emit('delete')"
-        class="remove-image"
-        type="is-danger"
-        size="is-small"
-        icon-right="times">
-      </b-button>
-    </b-field>
+      <div class="c-field-info">
+        <label>Foto</label>
+      </div>
+      <div class="c-field-content">
+        <b-upload
+          @input="(picture) => $emit('upload', picture)"
+          drag-drop
+          accept="image/*"
+          :type="picture ? '' : displayErrors ? 'is-danger' : ''">
+          <div class="content has-text-centered" v-if="!picture">
+            <b-icon icon="upload" size="is-large" />
+            <p>Arrosega la foto</p>
+          </div>
+          <div class="picture-preview has-text-centered" v-else>
+            <img :src="preview" alt="Imatge" />
+            <span>{{ picture.name }}</span>
+          </div>
+        </b-upload>
+        <b-button
+          v-if="picture"
+          @click="$emit('delete')"
+          class="remove-image"
+          type="is-danger"
+          size="is-small"
+          icon-right="times">
+        </b-button>
+        <slot></slot>
+      </div>
+    </div>
 </template>
 
 <script>

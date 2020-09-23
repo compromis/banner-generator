@@ -64,7 +64,7 @@ export default {
     min-width: 100%;
     background: transparent;
     outline: 0;
-    padding: .75rem $field-padding;
+    padding: .5rem $field-padding .75rem $field-padding;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;

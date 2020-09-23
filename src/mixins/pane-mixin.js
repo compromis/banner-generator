@@ -17,7 +17,6 @@ export default {
   data () {
     return {
       properties: {
-        disposition: 0,
         card: 1, // deprecated
         theme: 1,
         picture: null,

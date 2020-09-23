@@ -1,19 +1,19 @@
 <template>
-  <div class="emoji-picker">
-    <label class="label">Emojis</label>
+  <div class="c-field emoji-picker">
     <twemoji-picker
-      :pickerWidth="320"
+      :pickerWidth="260"
       :pickerHeight="220"
       :emojiData="emojiAllData"
       :emojiGroups="emojiGroups"
       :skinsSelection="true"
+      :searchEmojisFeat="true"
       :recentEmojisFeat="true"
       recentEmojisStorage="local"
       twemojiExtension=".svg"
       twemojiFolder="svg"
       @emojiImgAdded="addEmoji">
       <template v-slot:twemoji-picker-button>
-        <b-button extended>😉Afegeix emojis</b-button>
+        <button extended>😉Afegeix emojis</button>
       </template>
     </twemoji-picker>
     <ul class="emojis">
@@ -77,17 +77,21 @@ export default {
   @import "../../sass/variables";
 
   .emoji-picker {
-    margin-bottom: 1rem;
+    button {
+      margin-bottom: -7px;
+      background: $white;
+    }
 
     .emojis {
       margin-top: .5rem;
+      background: $white;
 
       li {
         display: grid;
         grid-template-columns: 22px 1fr auto auto;
         gap: .25rem;
-        border-bottom: 1px $gray-200 solid;
-        padding: .5rem 0;
+        border-top: 1px $gray-200 solid;
+        padding: .75rem $field-padding;
         align-content: center;
 
         img {

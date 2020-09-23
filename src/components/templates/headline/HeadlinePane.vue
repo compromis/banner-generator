@@ -1,28 +1,5 @@
 <template>
   <div :class="{ 'pane headline-pane': true, 'pane-dimmed': paneDimmed }">
-    <b-field>
-      <b-tabs
-        id="style-tabs"
-        type="is-toggle"
-        size="is-small"
-        v-model="properties.theme"
-        class="tabs-field"
-        expanded>
-        <b-tab-item label="Fons imatge"></b-tab-item>
-        <b-tab-item label="Targeta"></b-tab-item>
-      </b-tabs>
-    </b-field>
-
-    <!-- Disposition -->
-    <transition name="slide">
-      <div v-if="(!aspect && !properties.card) || (properties.card)">
-        <c-tab-group>
-          <c-tab v-model="properties.disposition" value="top" name="disposition">Titular dalt</c-tab>
-          <c-tab v-model="properties.disposition" value="bottom" name="disposition">Titular baix</c-tab>
-        </c-tab-group>
-      </div>
-    </transition>
-
     <!-- Source -->
     <c-select
       name="source"
@@ -52,7 +29,7 @@
           <div class="c-field-info">
             <label>Color</label>
           </div>
-          <div class="c-field-content">
+          <div class="c-field-content-sm">
             <swatches v-model="properties.customSourceColor"></swatches>
           </div>
         </div>
@@ -77,6 +54,16 @@
       :maxlength="160"
       :message="setFieldMessage('headline')" />
 
+    <!-- Disposition -->
+    <transition name="slide">
+      <div v-if="(!aspect && !properties.card) || (properties.card)">
+        <c-tab-group>
+          <c-tab v-model="properties.disposition" value="top" name="disposition">Titular dalt</c-tab>
+          <c-tab v-model="properties.disposition" value="bottom" name="disposition">Titular baix</c-tab>
+        </c-tab-group>
+      </div>
+    </transition>
+
     <!-- Emoji picker -->
     <transition name="slide">
       <emoji-picker v-model="properties.emojis" v-if="properties.card === 1" />
@@ -89,10 +76,7 @@
       :display-errors="displayErrors"
       :errors="errors"
       @upload="updateImage"
-      @delete="properties.picture = null; properties.picturePreview = null" />
-
-    <!-- Picture position -->
-    <b-field id="picture-position-field" label="Posició de la imatge" class="range">
+      @delete="properties.picture = null; properties.picturePreview = null">
       <range-slider
         name="points"
         :min="0"
@@ -100,7 +84,7 @@
         v-model="properties.picturePos"
         @touchstart="dimPane(true)"
         @touchend="dimPane(false)" />
-    </b-field>
+    </picture-upload>
 
     <!-- Hashtag -->
     <transition name="slide">
@@ -117,18 +101,13 @@
 
     <!-- Local label -->
     <transition name="slide">
-      <div v-if="!aspect" class="field" id="local-label-field">
-        <b-switch v-model="properties.hasLocalLabel" @input="properties.hashtag = properties.hashtag.substring(0, 18)">
-          Afegir text al logo
-        </b-switch>
-        <transition name="slide">
-          <div v-if="properties.hasLocalLabel" class="local-label">
-            <b-field>
-              <b-input placeholder="Alacant" v-model="properties.localLabel" maxlength="48"></b-input>
-            </b-field>
-          </div>
-        </transition>
-      </div>
+      <c-input-text
+        v-if="!aspect"
+        label="Text logo"
+        name="localLabel"
+        placeholder="Alacant"
+        v-model="properties.localLabel"
+        :maxlength="48" />
     </transition>
   </div>
 </template>
@@ -156,6 +135,7 @@ export default {
   data () {
     return {
       properties: {
+        disposition: 'bottom',
         headline: '',
         source: null,
         customSource: '',

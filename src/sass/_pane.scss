@@ -59,7 +59,28 @@
   }
 
   &-content {
-    padding: 0 $field-padding;
+    padding: .75rem $field-padding;
+
+    &-sm {
+      padding: .25rem $field-padding;
+    }
+  }
+
+  button {
+    display: block;
+    background: transparent;
+    border: 0;
+    width: 100%;
+    text-align: left;
+    color: $gray-900;
+    padding: $field-padding;
+    font-size: 1rem;
+    transition: .2s ease;
+
+    &:hover {
+      background: $gray-200;
+      cursor: pointer;
+    }
   }
 
   &:focus-within {
@@ -92,7 +113,6 @@
     height: 1.75rem !important;
     width: 1.75rem !important;
     border-radius: 4px !important;
-    margin: .25rem 0;
   }
 }
 

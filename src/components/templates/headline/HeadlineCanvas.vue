@@ -71,15 +71,15 @@ export default {
   /* Blobs theme */
   .theme-blobs {
     /* Banner on bottom */
-    &.disposition-0 {
+    &.disposition-bottom {
       .headline {
         bottom: 90px;
         top: auto;
       }
     }
 
-    /* Banner on bottom */
-    &.disposition-1 {
+    /* Banner on top */
+    &.disposition-top {
       .headline {
         top: 90px;
         bottom: auto;
@@ -99,7 +99,7 @@ export default {
     }
 
     /* Banner on bottom */
-    &.disposition-0 {
+    &.disposition-bottom {
       .headline {
         bottom: 90px;
         top: auto;
@@ -107,7 +107,7 @@ export default {
     }
 
     /* Banner on top */
-    &.disposition-1 {
+    &.disposition-top {
       .banner-picture::v-deep .glowy-card {
         top: 120px;
       }
@@ -141,7 +141,7 @@ export default {
         }
       }
 
-      &.disposition-1 {
+      &.disposition-bottom {
         .headline {
           top: 75px;
         }
