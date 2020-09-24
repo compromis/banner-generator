@@ -102,7 +102,8 @@ export default {
 
   @media (max-width: $xs-breakpoint) {
     .blob {
-      &-2 {
+      &-2,
+      &-3 {
         display: none;
       }
     }

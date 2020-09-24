@@ -205,23 +205,42 @@ export default {
     .template-selector {
       h2 {
         font-size: 2.25rem;
-        margin-top: 4rem;
-        width: 18rem;
+        max-width: 18rem;
       }
 
       ul {
         justify-content: center;
+        padding: 1rem;
+
+        li {
+          width: 100%;
+        }
       }
 
       .template-item {
-        width: 10rem;
-        height: 10rem;
+        width: auto;
+        height: 8rem;
         margin: .5rem;
         border-radius: .5rem;
 
+        &-icon {
+          top: 1rem;
+          bottom: 1rem;
+          left: 1rem;
+          margin: 0;
+
+          .icon {
+            transform: scale(0.75);
+          }
+        }
+
         &-name {
-          font-size: 1rem;
-          padding: .75rem;
+          font-size: 1.25rem;
+          padding: 0;
+          left: 8rem;
+          top: 50%;
+          bottom: unset;
+          transform: translateY(-50%);
         }
       }
     }

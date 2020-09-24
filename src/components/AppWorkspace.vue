@@ -163,13 +163,13 @@ export default {
       display: flex;
       grid-area: pane;
       margin: 1.5rem 0 1.5rem 1.5rem;
-      background-color: $white;
       box-shadow: 0 7px 25px -16px;
       border-radius: 1rem;
       overflow: hidden;
-      max-height: 80vh;
+      transition: .2s ease;
 
       .pane {
+        background-color: $white;
         width: 100%;
         overflow-y: auto;
 
@@ -233,6 +233,11 @@ export default {
         top: 100px;
         z-index: 10;
         width: 100%;
+        padding: 0;
+
+        .b-tabs {
+          margin: 0 !important;
+        }
       }
 
       .nav {
@@ -248,14 +253,10 @@ export default {
         box-shadow: 0 -.4rem 1.7rem -.3rem rgba($gray-900, .15),
           0 -.2rem 1rem -.5rem rgba($gray-900, .2),
           0 .4rem 1rem -.4rem rgba($gray-900, .015);
-        border-radius: 1.5rem 1.5rem 0 0;
-        overflow: visible;
+        border-radius: 1rem 1rem 0 0;
         width: 100vw;
         margin: 0;
-
-        .pane {
-          padding: 1.5rem 1rem;
-        }
+        max-height: unset;
       }
 
       .help-block {

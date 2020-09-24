@@ -34,6 +34,7 @@
 .c-field {
   position: relative;
   border-bottom: 1px $gray-300 solid;
+  transition: .2s ease;
 
   &:last-child {
     border-bottom: 0;
@@ -177,13 +178,24 @@
       box-shadow: none !important;
 
       .field,
+      .c-field,
       .emoji-picker {
         opacity: 0;
 
-        &.range {
+        &.image-upload-field {
           opacity: 1;
-          background: white;
-          box-shadow: $default-shadow;
+          background: transparent !important;
+          border-color: transparent;
+
+          .upload,
+          label {
+            opacity: 0;
+          }
+
+          .range-slider {
+            background: white;
+            box-shadow: $default-shadow;
+          }
         }
       }
     }

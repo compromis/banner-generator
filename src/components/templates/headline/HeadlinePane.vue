@@ -86,7 +86,7 @@
     </picture-upload>
 
     <!-- Frame color  -->
-    <color-selector v-model="properties.color" :colors="['orange', 'lgbt', 'feminism', 'green']" label="Color" is-rounded />
+    <color-selector v-model="properties.color" :colors="properties.theme === 'glowy' ? ['none', 'orange', 'lgbt', 'feminism', 'green'] : ['orange', 'lgbt', 'feminism', 'green']" label="Color" is-rounded />
 
     <!-- Hashtag -->
     <transition name="slide">

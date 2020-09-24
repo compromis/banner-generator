@@ -2,11 +2,12 @@
   <div :class="{ 'navbar': true, 'navbar--dark': inWorkspace }">
     <router-link to="/" class="logo">
       <careta class="logo-careta" :logo-style="inWorkspace ? 'mono' : 'normal'" />
-      <div class="nav-label logo-label">Generador de targes</div>
+      <div :class="['nav-label logo-label', { 'is-hidden-mobile': inWorkspace }]">Generador de targes</div>
     </router-link>
     <transition name="fade">
       <div v-if="template" class="nav-label template-label">
-        &gt; {{ template.name }}
+        <span :class="{ 'is-hidden-mobile': inWorkspace }">&gt;</span>
+        {{ template.name }}
       </div>
     </transition>
   </div>
@@ -109,6 +110,10 @@ export default {
     .navbar {
       z-index: 100;
       padding: .75rem 1rem;
+    }
+
+    .navbar:not(.navbar--dark) {
+      background: $white;
     }
   }
 </style>
