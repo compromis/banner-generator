@@ -55,7 +55,7 @@ export default {
       type: String,
       default: 'orange',
       validator (value) {
-        return ['orange', 'feminism', 'green', 'lgtb', 'custom', 'none'].indexOf(value) !== -1
+        return ['orange', 'feminism', 'green', 'lgbt', 'custom', 'none'].indexOf(value) !== -1
       }
     },
     edge: {
@@ -189,7 +189,7 @@ export default {
       }
     }
 
-    &-lgtb {
+    &-lgbt {
       .glowy-subject::before,
       .glowy-ghost::before {
         --gradient-orientation: 90deg;

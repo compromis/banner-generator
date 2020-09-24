@@ -81,7 +81,7 @@ $gradient-lgtb: linear-gradient(var(--gradient-orientation, 180deg),
 $gradient-custom: linear-gradient(var(--gradient-orientation, 180deg), var(--gradient-color, $gradient-start), transparent);
 
 // Blob gradients
-$blob-gradients: ('orange': $gradient, 'feminism': $gradient-feminista, 'green': $gradient-green, 'lgtb': $gradient-lgtb);
+$blob-gradients: ('orange': $gradient, 'feminism': $gradient-feminista, 'green': $gradient-green, 'lgbt': $gradient-lgtb);
 
 // Translucent gradients
 $trans-gradient: linear-gradient(var(--gradient-orientation, 110deg), rgba($gradient-start, .9), rgba($gradient-end, .6), rgba($gradient-end, 0));

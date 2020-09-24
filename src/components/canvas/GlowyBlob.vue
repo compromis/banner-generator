@@ -39,7 +39,7 @@ export default {
       type: String,
       default: 'orange',
       validator (value) {
-        return ['orange', 'feminism', 'lgtb'].indexOf(value) !== -1
+        return ['orange', 'feminism', 'lgbt'].indexOf(value) !== -1
       }
     },
     offset: {
@@ -120,8 +120,8 @@ export default {
       }
     }
 
-    &.gradient-lgtb .glowy-subject,
-    &.gradient-lgtb .glowy-ghost {
+    &.gradient-lgbt .glowy-subject,
+    &.gradient-lgbt .glowy-ghost {
       --gradient-orientation: 180deg !important;
       background-size: 100% 144px;
     }

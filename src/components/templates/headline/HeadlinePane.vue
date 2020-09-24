@@ -85,6 +85,9 @@
         @touchend="dimPane(false)" />
     </picture-upload>
 
+    <!-- Frame color  -->
+    <color-selector v-model="properties.color" :colors="['orange', 'lgbt', 'feminism', 'green']" label="Color" is-rounded />
+
     <!-- Hashtag -->
     <transition name="slide">
       <c-input-text
@@ -119,6 +122,7 @@ import EmojiPicker from '@/components/pane/EmojiPicker'
 import CTab from '@/components/pane/CTab'
 import CTabGroup from '@/components/pane/CTabGroup'
 import ThemeSelector from '@/components/pane/ThemeSelector'
+import ColorSelector from '@/components/pane/ColorSelector'
 
 export default {
   name: 'headline-pane',
@@ -128,7 +132,8 @@ export default {
     EmojiPicker,
     CTab,
     CTabGroup,
-    ThemeSelector
+    ThemeSelector,
+    ColorSelector
   },
 
   mixins: [PaneMixin],
@@ -141,7 +146,8 @@ export default {
         source: null,
         customSource: '',
         customSourceColor: '#1CA085',
-        emojis: []
+        emojis: [],
+        color: 'orange'
       },
       presets: presets,
       tabp: ''

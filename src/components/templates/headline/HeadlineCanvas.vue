@@ -14,7 +14,8 @@
       :picture-dimensions="banner.pictureDimensions"
       :height="aspect === '11' ? 500 : 730"
       :theme="banner.theme"
-      :edge="aspect === '916'" />
+      :edge="aspect === '916'"
+      :gradient="banner.color" />
     <headline-card
       :theme="banner.theme"
       :headline="banner.headline"
@@ -27,7 +28,8 @@
       :theme="banner.theme"
       :hashtag="banner.hashtag"
       :local-label="banner.localLabel"
-      :aspect="aspect" />
+      :aspect="aspect"
+      :blob-color="banner.color" />
   </div>
 </template>
 
