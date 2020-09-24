@@ -13,7 +13,7 @@
       twemojiFolder="svg"
       @emojiImgAdded="addEmoji">
       <template v-slot:twemoji-picker-button>
-        <button extended>😉Afegeix emojis</button>
+        <button class="c-button">😉Afegeix emojis</button>
       </template>
     </twemoji-picker>
     <ul class="emojis">
@@ -153,5 +153,24 @@ export default {
     border: 0;
     border-top: 1px $gray-200 solid;
     border-left: 1px $gray-200 solid;
+  }
+
+  #emoji-popover-search {
+    background-color: white;
+    border-radius: 0;
+    margin: 0;
+  }
+
+  #emoji-container > #emoji-popup #emoji-popover-search > #search-header {
+    border-bottom: 1px solid $gray-200;
+    border-radius: 0;
+  }
+
+  #emoji-container > #emoji-popup #emoji-popover-search > #search-header > span {
+    padding: 8px 10px;
+  }
+
+  #emoji-container > #emoji-popup #emoji-popover-search > #search-header > input {
+    margin: 0;
   }
 </style>

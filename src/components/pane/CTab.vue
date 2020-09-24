@@ -62,6 +62,10 @@ label {
   }
 
   &:hover {
+    background: $gray-100;
+  }
+
+  &:active {
     background: $gray-200;
   }
 }

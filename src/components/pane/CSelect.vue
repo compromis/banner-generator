@@ -1,5 +1,5 @@
 <template>
-  <div :class="['c-field', {'has-errors': message}]">
+  <div :class="['c-field c-field-focusable', {'has-errors': message}]">
     <div class="c-field-info">
       <label :for="name">
         {{ label }}

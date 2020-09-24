@@ -163,10 +163,6 @@ export default {
         width: 6rem;
         height: 6rem;
         border-radius: 1rem;
-
-        .icon {
-          transform: scale(1.5);
-        }
       }
 
       &-name {

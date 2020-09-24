@@ -57,12 +57,10 @@
 
     <!-- Disposition -->
     <transition name="slide">
-      <div v-if="(!aspect && !properties.card) || (properties.card)">
-        <c-tab-group>
-          <c-tab v-model="properties.disposition" value="top" name="disposition">Titular dalt</c-tab>
-          <c-tab v-model="properties.disposition" value="bottom" name="disposition">Titular baix</c-tab>
-        </c-tab-group>
-      </div>
+      <c-tab-group v-if="(!aspect && !properties.card) || (properties.card)">
+        <c-tab v-model="properties.disposition" value="top" name="disposition">Titular dalt</c-tab>
+        <c-tab v-model="properties.disposition" value="bottom" name="disposition">Titular baix</c-tab>
+      </c-tab-group>
     </transition>
 
     <!-- Emoji picker -->
