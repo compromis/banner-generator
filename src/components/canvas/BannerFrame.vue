@@ -73,7 +73,7 @@ export default {
     display: flex;
     position: absolute;
     align-items: center;
-    z-index: 30;
+    z-index: 10;
     bottom: 30px;
     color: $white;
 
@@ -106,7 +106,7 @@ export default {
 
   .hashtag {
     position: absolute;
-    z-index: 30;
+    z-index: 10;
     font-weight: bold;
     font-size: 20px;
     letter-spacing: -.3px;

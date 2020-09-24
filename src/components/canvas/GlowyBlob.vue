@@ -56,7 +56,7 @@ export default {
     position: absolute;
     transform: rotate($rotation) translate(var(--translate-x, 0), var(--translate-y, 0));
     transition: all .5s ease-in-out;
-    z-index: 20;
+    z-index: 29;
 
     &.position-top {
       left: -58%;
