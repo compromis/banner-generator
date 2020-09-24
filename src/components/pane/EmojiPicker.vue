@@ -78,8 +78,11 @@ export default {
 
   .emoji-picker {
     button {
-      margin-bottom: -7px;
       background: $white;
+    }
+
+    .c-button {
+      margin-bottom: -7px;
     }
 
     .emojis {
@@ -93,6 +96,11 @@ export default {
         border-top: 1px $gray-200 solid;
         padding: .75rem $field-padding;
         align-content: center;
+
+        .emoji-img {
+          display: flex;
+          align-content: center;
+        }
 
         img {
           display: block;

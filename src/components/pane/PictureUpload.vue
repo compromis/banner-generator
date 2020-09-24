@@ -66,10 +66,14 @@ export default {
     padding: .75rem;
   }
 
+  .c-field-content {
+    position: relative;
+  }
+
   .remove-image {
     position: absolute;
-    right: 0;
-    top: 2rem;
+    right: 1rem;
+    top: .75rem;
     border-top-right-radius: 6px;
   }
 
