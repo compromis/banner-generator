@@ -118,6 +118,11 @@ export default {
       left: 35px;
       bottom: auto;
       color: $white;
+      z-index: 30;
+    }
+
+    .logo {
+      z-index: 30;
     }
   }
 

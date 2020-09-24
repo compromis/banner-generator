@@ -76,11 +76,11 @@ export default {
     &::before {
       content: '';
       height: 2px;
-      width: 2rem;
+      width: 23px;
       background: $red;
       position: absolute;
-      top: 15px;
-      left: -5px;
+      top: 13px;
+      left: 1px;
       transform: rotate(-45deg);
     }
   }
