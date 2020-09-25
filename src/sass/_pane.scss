@@ -125,8 +125,8 @@
   }
 }
 
-.textarea-small .textarea {
-  min-height: 4.3rem;
+.textarea-small textarea {
+  min-height: 4rem !important;
 }
 
 .control .help.counter {

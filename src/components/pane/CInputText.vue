@@ -94,6 +94,6 @@ export default {
   }
 
   textarea {
-    min-height: 6rem;
+    min-height: 6.5rem;
   }
 </style>

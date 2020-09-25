@@ -1,57 +1,36 @@
 <template>
   <div :class="{ 'pane': true, 'pane-dimmed': paneDimmed }">
-    <!-- Style -->
-    <b-field label="Estil">
-      <b-tabs
-        id="style-tabs"
-        type="is-toggle"
-        size="is-small"
-        v-model="properties.theme"
-        class="tabs-field"
-        expanded>
-        <b-tab-item label="Fons blanc"></b-tab-item>
-        <b-tab-item label="Fons imatge"></b-tab-item>
-      </b-tabs>
-    </b-field>
-
-    <!-- Disposition -->
-    <transition name="slide">
-      <b-field label="Posició de la frase" v-if="!aspect">
-        <b-tabs type="is-toggle" size="is-small" v-model="properties.disposition" class="tabs-field" expanded>
-          <b-tab-item label="Frase esquerra"></b-tab-item>
-          <b-tab-item label="Frase dreta"></b-tab-item>
-        </b-tabs>
-      </b-field>
-    </transition>
+    <!-- Theme selector -->
+    <theme-selector v-model="properties.theme" />
 
     <!-- Quote -->
-    <b-field
-      label="Frase"
-      :type="setFieldType('quote')"
-      :message="setFieldMessage('quote')">
-      <b-input
-        type="textarea"
-        placeholder="Tenim de 30 a 50 ciclistes passant cada segon pel carril bici."
-        v-model="properties.quote"
-        maxlength="140">
-      </b-input>
-    </b-field>
+    <c-input-text
+      label="Cita"
+      name="quote"
+      type="textarea"
+      placeholder="Tenim de 30 a 50 ciclistes passant cada segon pel carril bici."
+      v-model="properties.quote"
+      :maxlength="140"
+      :message="setFieldMessage('quote')" />
 
-    <color-selector v-model="properties.textColor" :colors="['black', 'white', 'orange']" />
+    <c-tab-group>
+      <c-tab v-model="properties.disposition" value="left" name="disposition" icon="align-left"></c-tab>
+      <c-tab v-model="properties.disposition" value="right" name="disposition" icon="align-right"></c-tab>
+    </c-tab-group>
+
+    <!-- Text color -->
+    <color-selector label="Color del text" v-model="properties.textColor" :colors="['black', 'white', 'orange']" />
 
     <!-- Author -->
-    <b-field
+    <c-input-text
       label="Autor i/o mitjà"
-      :type="setFieldType('author')"
-      :message="setFieldMessage('author')">
-      <b-input
-        type="textarea"
-        class="textarea-small"
-        placeholder="Giuseppe Grezzi a l'entrevista de La Sexta"
-        v-model="properties.author"
-        maxlength="70">
-      </b-input>
-    </b-field>
+      name="author"
+      type="textarea"
+      class="textarea-small"
+      placeholder="Giuseppe Grezzi a l'entrevista de La Sexta"
+      v-model="properties.author"
+      :maxlength="70"
+      :message="setFieldMessage('author')" />
 
     <!-- Picture -->
     <picture-upload
@@ -59,10 +38,7 @@
       :display-errors="displayErrors"
       :errors="errors"
       @upload="updateImage"
-      @delete="properties.picture = null; properties.picturePreview = null" />
-
-    <!-- Picture position -->
-    <b-field label="Posició de la imatge" class="range">
+      @delete="properties.picture = null; properties.picturePreview = null">
       <range-slider
         name="points"
         :min="0"
@@ -70,41 +46,64 @@
         v-model="properties.picturePos"
         @touchstart="dimPane(true)"
         @touchend="dimPane(false)" />
-    </b-field>
+    </picture-upload>
+
+    <!-- Frame color  -->
+    <color-selector v-model="properties.color" :colors="properties.theme === 'glowy' ? ['none', 'orange', 'lgbt', 'feminism', 'green'] : ['orange', 'lgbt', 'feminism', 'green']" label="Color" is-rounded />
+
+    <!-- Hashtag -->
+    <transition name="slide">
+      <c-input-text
+        v-if="!aspect"
+        label="Hashtag"
+        name="hashtag"
+        placeholder="#"
+        @input="updateHashtag"
+        :value="properties.hashtag"
+        :maxlength="properties.localLabel ? 18 : 32"
+        :message="setFieldMessage('hashtag')" />
+    </transition>
 
     <!-- Local label -->
     <transition name="slide">
-      <div v-if="!aspect" class="field">
-        <b-switch v-model="properties.hasLocalLabel">
-          Afegir text al logo
-        </b-switch>
-        <transition name="slide">
-          <div v-if="properties.hasLocalLabel" class="local-label">
-            <b-field>
-              <b-input placeholder="Alacant" v-model="properties.localLabel" maxlength="48"></b-input>
-            </b-field>
-          </div>
-        </transition>
-      </div>
+      <c-input-text
+        v-if="!aspect"
+        label="Text logo"
+        name="localLabel"
+        placeholder="Alacant"
+        v-model="properties.localLabel"
+        :maxlength="48" />
     </transition>
   </div>
 </template>
 
 <script>
 import PaneMixin from '@/mixins/pane-mixin.js'
+import ThemeSelector from '@/components/pane/ThemeSelector'
 import ColorSelector from '@/components/pane/ColorSelector'
+import CTabGroup from '@/components/pane/CTabGroup'
+import CTab from '@/components/pane/CTab'
 
 export default {
   name: 'quote-pane',
 
   mixins: [PaneMixin],
 
+  components: {
+    ThemeSelector,
+    ColorSelector,
+    CTabGroup,
+    CTab
+  },
+
   data () {
     return {
       properties: {
         quote: '',
         author: '',
-        textColor: 'white'
+        textColor: 'white',
+        color: 'orange',
+        disposition: 'left'
       }
     }
   },
@@ -131,10 +130,6 @@ export default {
       this.pictureRequired()
       this.allCapsDisallowed('quote', 'author')
     }
-  },
-
-  components: {
-    ColorSelector
   }
 }
 </script>

@@ -22,7 +22,7 @@ export default {
       type: String,
       default: 'blobs',
       validator (value) {
-        return ['blobs', 'glowy'].indexOf(value) !== -1
+        return ['blobs', 'glowy', 'blobless'].includes(value)
       }
     },
     picture: {

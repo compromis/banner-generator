@@ -5,25 +5,28 @@
       'banner-canvas',
       'aspect-' + aspect,
       'disposition-' + banner.disposition,
-      'theme-' + theme
+      'theme-' + banner.theme
     ]"
     v-if="banner">
     <div class="quote">
-      <div>
+      <div :style="{ textAlign: banner.disposition }">
         <div :class="['quote-glyph', 'quote-glyph-' + banner.textColor ]" >“</div>
         <div class="quote-text-wrapper">
           <text-in-pills
-          v-if="banner.quote"
-          :text="$options.filters.formatString($options.filters.formatQuote(banner.quote))"
-          :pill-style="banner.textColor"
-          :font-size="fontSizePrimary"
-          :width="600" />
+            v-if="banner.quote"
+            :text="$options.filters.formatString($options.filters.formatQuote(banner.quote))"
+            :text-align="banner.disposition"
+            :pill-style="banner.textColor"
+            :font-size="fontSizePrimary"
+            :width="600"
+            shadow />
         </div>
         <div class="quote-author">{{ banner.author | formatString }}</div>
       </div>
     </div>
     <banner-frame
-      :theme="theme"
+      :theme="banner.theme"
+      :color="banner.color"
       :hashtag="banner.hashtag"
       :local-label="banner.localLabel"
       :aspect="aspect" />
@@ -31,7 +34,8 @@
       :picture="banner.picturePreview"
       :picture-position="objectPosition"
       :height="aspect === '11' ? 570 : 730"
-      :theme="theme"
+      :theme="banner.theme"
+      :color="banner.color"
       :edge="aspect === '916'" />
   </div>
 </template>
@@ -82,6 +86,7 @@ export default {
       font-weight: bold;
       margin-bottom: -115px;
       margin-left: -22px;
+      margin-right: -16px;
 
       &-black {
         color: $gray-darkest;
@@ -107,6 +112,15 @@ export default {
       white-space: pre-line;
       max-height: 90px;
       text-shadow: 0 2px 6px rgba(0, 0, 0, .5);
+    }
+  }
+
+  .disposition-right {
+    .quote {
+      left: auto;
+      right: 90px;
+      justify-content: flex-end;
+      align-items: flex-start;
     }
   }
 
@@ -146,8 +160,8 @@ export default {
   .theme-blobs {
     .quote {
       top: 160px;
-      left: 40px;
-      right: 40px;
+      left: 50px;
+      right: 50px;
       bottom: 120px;
     }
 
@@ -157,6 +171,15 @@ export default {
         left: 25px;
         right: 25px;
         bottom: 120px;
+      }
+    }
+
+    &.disposition-right {
+      .quote {
+        top: 60px;
+        left: auto;
+        right: 50px;
+        bottom: 160px;
       }
     }
   }
