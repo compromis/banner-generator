@@ -67,6 +67,9 @@
           @touchend="dimPane(false)" />
       </picture-upload>
 
+    <!-- Frame color  -->
+    <color-selector v-model="properties.color" :colors="properties.theme === 'glowy' ? ['none', 'orange', 'lgbt', 'feminism', 'green'] : ['orange', 'lgbt', 'feminism', 'green']" label="Color" is-rounded />
+
     <!-- Hashtag -->
     <transition name="slide">
       <c-input-text
@@ -126,7 +129,8 @@ export default {
         textAlignI: 1,
         textSize: 100,
         emojis: [],
-        textColor: 'black'
+        textColor: 'black',
+        color: 'orange'
       }
     }
   },

@@ -2,7 +2,7 @@
   <div
     :class="[
       'glowy-blob',
-      `gradient-${gradient}`,
+      `gradient-${color}`,
       `position-${position}`,
       `aspect-${aspect}`,
       { 'is-wide': wide }
@@ -35,7 +35,7 @@ export default {
       type: String,
       default: '11'
     },
-    gradient: {
+    color: {
       type: String,
       default: 'orange',
       validator (value) {

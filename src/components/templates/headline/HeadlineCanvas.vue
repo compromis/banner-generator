@@ -15,7 +15,7 @@
       :height="aspect === '11' ? 500 : 730"
       :theme="banner.theme"
       :edge="aspect === '916'"
-      :gradient="banner.color" />
+      :color="banner.color" />
     <headline-card
       :theme="banner.theme"
       :headline="banner.headline"
@@ -29,7 +29,7 @@
       :hashtag="banner.hashtag"
       :local-label="banner.localLabel"
       :aspect="aspect"
-      :blob-color="banner.color" />
+      :color="banner.color" />
   </div>
 </template>
 

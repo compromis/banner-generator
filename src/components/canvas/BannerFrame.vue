@@ -1,7 +1,7 @@
 <template>
   <div :class="['banner-frame', `banner-frame--${theme}`]">
-    <glowy-blob position="top" :aspect="aspect" v-if="theme === 'blobs'" :gradient="blobColor" :wide="hashtag.length > 18" />
-    <glowy-blob position="bottom" :aspect="aspect" v-if="theme === 'blobs'" :gradient="blobColor" :wide="localLabel.length > 6" />
+    <glowy-blob position="top" :aspect="aspect" v-if="theme === 'blobs'" :color="color" :wide="hashtag.length > 18" />
+    <glowy-blob position="bottom" :aspect="aspect" v-if="theme === 'blobs'" :color="color" :wide="localLabel.length > 6" />
     <div class="hashtag" v-if="aspect !== '916'">{{ hashtag }}</div>
     <div :class="['logo', `logo--align-${logoAlign}`]" v-if="aspect === '11'">
       <compromis-logo :mono="theme === 'blobs' ? true : false" />
@@ -44,7 +44,7 @@ export default {
       type: String,
       default: ''
     },
-    blobColor: {
+    color: {
       type: String,
       default: 'orange'
     },

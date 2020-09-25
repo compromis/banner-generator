@@ -23,14 +23,16 @@
       :theme="banner.theme"
       :hashtag="banner.hashtag"
       :local-label="banner.localLabel"
-      :aspect="aspect" />
+      :aspect="aspect"
+      :color="banner.color" />
     <banner-picture
       :picture="banner.picturePreview"
       :picture-position="objectPosition"
       :picture-dimensions="banner.pictureDimensions"
       :height="aspect === '11' ? 500 : null"
       :width="aspect === '916' ? 405 : null"
-      :theme="banner.theme" />
+      :theme="banner.theme"
+      :color="banner.color" />
   </div>
 </template>
 

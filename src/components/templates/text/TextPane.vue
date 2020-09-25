@@ -34,6 +34,9 @@
         @touchend="dimPane(false)" />
     </picture-upload>
 
+    <!-- Frame color  -->
+    <color-selector v-model="properties.color" :colors="properties.theme === 'glowy' ? ['none', 'orange', 'lgbt', 'feminism', 'green'] : ['orange', 'lgbt', 'feminism', 'green']" label="Color" is-rounded />
+
     <!-- Hashtag -->
     <transition name="slide">
       <c-input-text
@@ -65,6 +68,7 @@ import { VueEditor } from 'vue2-editor'
 import PaneMixin from '@/mixins/pane-mixin.js'
 import EmojiPicker from '@/components/pane/EmojiPicker'
 import ThemeSelector from '@/components/pane/ThemeSelector'
+import ColorSelector from '@/components/pane/ColorSelector'
 import CTabGroup from '@/components/pane/CTabGroup'
 import CTab from '@/components/pane/CTab'
 import CField from '@/components/pane/CField'
@@ -78,6 +82,7 @@ export default {
     VueEditor,
     EmojiPicker,
     ThemeSelector,
+    ColorSelector,
     CTabGroup,
     CTab,
     CField
@@ -88,7 +93,8 @@ export default {
       properties: {
         text: '',
         emojis: [],
-        disposition: 'bottom'
+        disposition: 'bottom',
+        color: 'orange'
       },
       customToolbar: [
         [{ header: 1 }, { header: 2 }],

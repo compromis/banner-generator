@@ -13,6 +13,7 @@
         :picture="banner.picturePreview"
         :picture-position="objectPosition"
         :theme="banner.theme"
+        :color="banner.color"
         edge/>
       <div class="text text-wysiwyg" v-if="banner.text">
         <div v-html="banner.text"></div>
@@ -23,7 +24,8 @@
       :theme="banner.theme"
       :hashtag="banner.hashtag"
       :local-label="banner.localLabel"
-      :aspect="aspect" />
+      :aspect="aspect"
+      :color="banner.color" />
   </div>
 </template>
 

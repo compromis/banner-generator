@@ -2,7 +2,7 @@
   <div
     :class="[
       'glowy-card',
-      `gradient-${gradient}`,
+      `gradient-${color}`,
       `glow-size-${glowSize}`,
       {'edge': edge},
       {'full-width': proportionalWidth === '100%'}
@@ -51,7 +51,7 @@ export default {
       type: Number,
       default: null
     },
-    gradient: {
+    color: {
       type: String,
       default: 'orange',
       validator (value) {
