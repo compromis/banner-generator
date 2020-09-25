@@ -3,7 +3,7 @@
     <div class="c-field-info" v-if="label">
       <label>{{ label }}</label>
     </div>
-    <div class="c-field-content">
+    <div :class="{ 'c-field-content': !edge }">
       <slot></slot>
     </div>
   </div>
@@ -17,6 +17,11 @@ export default {
     label: {
       type: String,
       default: null
+    },
+
+    edge: {
+      type: Boolean,
+      default: false
     }
   }
 }

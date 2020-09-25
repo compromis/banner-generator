@@ -4,7 +4,7 @@
     :class="[
       'banner-canvas',
       'aspect-' + aspect,
-      'theme-' + theme,
+      'theme-' + banner.theme,
       'disposition-' + banner.disposition
     ]"
     v-if="banner">
@@ -12,7 +12,7 @@
       <banner-picture
         :picture="banner.picturePreview"
         :picture-position="objectPosition"
-        :theme="theme"
+        :theme="banner.theme"
         edge/>
       <div class="text text-wysiwyg" v-if="banner.text">
         <div v-html="banner.text"></div>
@@ -20,7 +20,7 @@
     </div>
     <emojis-on-canvas v-model="banner.emojis" />
     <banner-frame
-      :theme="theme"
+      :theme="banner.theme"
       :hashtag="banner.hashtag"
       :local-label="banner.localLabel"
       :aspect="aspect" />
@@ -104,7 +104,7 @@ export default {
       }
     }
 
-    &.disposition-1 {
+    &.disposition-top {
       .text {
         top: 80px;
         bottom: auto;

@@ -1,37 +1,19 @@
 <template>
   <div :class="{ 'pane generic-pane': true, 'pane-dimmed': paneDimmed, 'pane-916': aspect === 1 }">
-    <b-field label="Estil">
-      <b-tabs
-        id="style-tabs"
-        type="is-toggle"
-        size="is-small"
-        v-model="properties.theme"
-        class="tabs-field"
-        expanded>
-        <b-tab-item label="Fons imatge"></b-tab-item>
-        <b-tab-item label="Targeta"></b-tab-item>
-      </b-tabs>
-    </b-field>
+    <!-- Theme selector -->
+    <theme-selector v-model="properties.theme" />
 
-    <!-- Disposition -->
-    <transition name="slide">
-      <b-field label="Posició de la targeta">
-        <b-tabs
-          id="disposition-tabs"
-          type="is-toggle"
-          size="is-small"
-          v-model="properties.disposition"
-          class="tabs-field"
-          expanded>
-          <b-tab-item label="Baix"></b-tab-item>
-          <b-tab-item label="Dalt"></b-tab-item>
-        </b-tabs>
-      </b-field>
-    </transition>
-
-    <b-field label="Contingut">
+    <c-field label="Contingut" edge>
       <vue-editor v-model="properties.text" :editor-toolbar="customToolbar" />
-    </b-field>
+    </c-field>
+
+     <!-- Disposition -->
+    <transition name="slide">
+      <c-tab-group v-if="properties.theme !== 'glowy'">
+        <c-tab v-model="properties.disposition" value="top" name="disposition">Text dalt</c-tab>
+        <c-tab v-model="properties.disposition" value="bottom" name="disposition">Text baix</c-tab>
+      </c-tab-group>
+    </transition>
 
     <!-- Emoji picker -->
     <emoji-picker v-model="properties.emojis" />
@@ -42,10 +24,7 @@
       :display-errors="displayErrors"
       :errors="errors"
       @upload="updateImage"
-      @delete="properties.picture = null; properties.picturePreview = null" />
-
-    <!-- Picture position -->
-    <b-field label="Posició de la imatge" class="range">
+      @delete="properties.picture = null; properties.picturePreview = null">
       <range-slider
         name="points"
         :min="0"
@@ -53,34 +32,30 @@
         v-model="properties.picturePos"
         @touchstart="dimPane(true)"
         @touchend="dimPane(false)" />
-    </b-field>
+    </picture-upload>
 
     <!-- Hashtag -->
     <transition name="slide">
-      <b-field label="Hashtag" v-if="!aspect">
-        <b-input
-          placeholder="#"
-          @input="updateHashtag"
-          :value="properties.hashtag"
-          :maxlength="20">
-        </b-input>
-      </b-field>
+      <c-input-text
+        v-if="!aspect"
+        label="Hashtag"
+        name="hashtag"
+        placeholder="#"
+        @input="updateHashtag"
+        :value="properties.hashtag"
+        :maxlength="properties.localLabel ? 18 : 32"
+        :message="setFieldMessage('hashtag')" />
     </transition>
 
     <!-- Local label -->
     <transition name="slide">
-      <div v-if="!aspect" class="field">
-        <b-switch v-model="properties.hasLocalLabel">
-          Afegir text al logo
-        </b-switch>
-        <transition name="slide">
-          <div v-if="properties.hasLocalLabel" class="local-label">
-            <b-field>
-              <b-input placeholder="Alacant" v-model="properties.localLabel" maxlength="48"></b-input>
-            </b-field>
-          </div>
-        </transition>
-      </div>
+      <c-input-text
+        v-if="!aspect"
+        label="Text logo"
+        name="localLabel"
+        placeholder="Alacant"
+        v-model="properties.localLabel"
+        :maxlength="48" />
     </transition>
   </div>
 </template>
@@ -89,19 +64,31 @@
 import { VueEditor } from 'vue2-editor'
 import PaneMixin from '@/mixins/pane-mixin.js'
 import EmojiPicker from '@/components/pane/EmojiPicker'
+import ThemeSelector from '@/components/pane/ThemeSelector'
+import CTabGroup from '@/components/pane/CTabGroup'
+import CTab from '@/components/pane/CTab'
+import CField from '@/components/pane/CField'
 
 export default {
   name: 'text-pane',
 
   mixins: [PaneMixin],
 
-  components: { VueEditor, EmojiPicker },
+  components: {
+    VueEditor,
+    EmojiPicker,
+    ThemeSelector,
+    CTabGroup,
+    CTab,
+    CField
+  },
 
   data () {
     return {
       properties: {
         text: '',
-        emojis: []
+        emojis: [],
+        disposition: 'bottom'
       },
       customToolbar: [
         [{ header: 1 }, { header: 2 }],
@@ -119,40 +106,17 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-  .text-align-group {
-    flex-direction: column;
-
-    .b-tabs {
-      margin-bottom: .25rem;
-    }
-  }
-
-  .hashtag {
-    margin-top: .25rem;
-  }
-
-  .local-label {
-    margin-top: .75rem;
-  }
-
-  .message-body {
-    font-size: .85rem;
-  }
-
-  .pane-916 {
-    display: flex;
-    flex-direction: column;
-
-    .text-wrapper {
-      order: 1;
-    }
-  }
-</style>
-
 <style lang="scss">
-  .text-align-group .tab-content {
-    height: 0;
-    padding: 0;
+  @import "../../../sass/variables";
+
+  .pane {
+    .ql-toolbar.ql-snow,
+    .ql-container.ql-snow {
+      border: 0;
+    }
+
+    .ql-editor {
+      border-top: 1px solid $gray-200;
+    }
   }
 </style>

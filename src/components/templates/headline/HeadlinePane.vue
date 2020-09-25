@@ -58,12 +58,10 @@
       :message="setFieldMessage('headline')" />
 
     <!-- Disposition -->
-    <transition name="slide">
-      <c-tab-group v-if="(!aspect && !properties.card) || (properties.card)">
-        <c-tab v-model="properties.disposition" value="top" name="disposition">Titular dalt</c-tab>
-        <c-tab v-model="properties.disposition" value="bottom" name="disposition">Titular baix</c-tab>
-      </c-tab-group>
-    </transition>
+    <c-tab-group>
+      <c-tab v-model="properties.disposition" value="top" name="disposition">Titular dalt</c-tab>
+      <c-tab v-model="properties.disposition" value="bottom" name="disposition">Titular baix</c-tab>
+    </c-tab-group>
 
     <!-- Emoji picker -->
     <transition name="slide">
@@ -185,14 +183,6 @@ export default {
   @import "../../../sass/variables";
 
   .headline-pane {
-    .hashtag {
-      margin-top: .25rem;
-    }
-
-    .local-label {
-      margin-top: .75rem;
-    }
-
     .source-input {
       &-group {
         display: flex;
@@ -201,6 +191,7 @@ export default {
       &-name {
         flex-grow: 1;
         order: 1;
+        border-bottom: 1px $gray-300 solid !important;
       }
     }
   }

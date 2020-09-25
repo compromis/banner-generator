@@ -85,6 +85,10 @@ export default {
       margin-left: .4rem;
       opacity: .75;
       color: $white;
+
+      span {
+        margin-right: .4rem;
+      }
     }
 
     &--dark {

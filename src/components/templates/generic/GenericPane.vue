@@ -140,44 +140,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .text-align-group {
-    flex-direction: column;
-
-    .b-tabs {
-      margin-bottom: .25rem;
-    }
-  }
-
-  .hashtag {
-    margin-top: .25rem;
-  }
-
-  .local-label {
-    margin-top: .75rem;
-  }
-
   .message-body {
     font-size: .85rem;
-  }
-
-  .color-selector {
-    margin-bottom: 1.5rem;
-    margin-top: 2rem;
-  }
-
-  .pane-916 {
-    display: flex;
-    flex-direction: column;
-
-    .text-wrapper {
-      order: 1;
-    }
-  }
-</style>
-
-<style lang="scss">
-  .text-align-group .tab-content {
-    height: 0;
-    padding: 0;
   }
 </style>
