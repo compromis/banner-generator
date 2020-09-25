@@ -7,8 +7,10 @@
       :value="value"
       :checked="shouldBeChecked"
       @change="$emit('change', value)"
-      class="sr-only"
-    >
+      class="sr-only">
+    <font-awesome-icon
+      v-if="icon"
+      :icon="['far', icon]" />
     <slot></slot>
   </label>
 </template>
@@ -22,12 +24,6 @@ export default {
     event: 'change'
   },
 
-  computed: {
-    shouldBeChecked () {
-      return this.modelValue === this.value
-    }
-  },
-
   props: {
     name: {
       type: String,
@@ -39,6 +35,16 @@ export default {
     },
     modelValue: {
       default: ''
+    },
+    icon: {
+      type: String,
+      default: null
+    }
+  },
+
+  computed: {
+    shouldBeChecked () {
+      return this.modelValue === this.value
     }
   }
 }

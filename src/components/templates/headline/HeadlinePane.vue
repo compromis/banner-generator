@@ -1,6 +1,8 @@
 <template>
   <div :class="{ 'pane headline-pane': true, 'pane-dimmed': paneDimmed }">
+    <!-- Theme selector -->
     <theme-selector v-model="properties.theme"/>
+
     <!-- Source -->
     <c-select
       name="source"
@@ -97,7 +99,7 @@
         placeholder="#"
         @input="updateHashtag"
         :value="properties.hashtag"
-        :maxlength="properties.hasLocalLabel ? 18 : 32"
+        :maxlength="properties.localLabel ? 18 : 32"
         :message="setFieldMessage('hashtag')" />
     </transition>
 

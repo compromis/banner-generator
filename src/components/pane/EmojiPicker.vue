@@ -6,7 +6,6 @@
       :emojiData="emojiAllData"
       :emojiGroups="emojiGroups"
       :skinsSelection="true"
-      :searchEmojisFeat="true"
       :recentEmojisFeat="true"
       recentEmojisStorage="local"
       twemojiExtension=".svg"
