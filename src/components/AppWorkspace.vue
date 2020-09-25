@@ -167,6 +167,7 @@ export default {
       border-radius: 1rem;
       overflow: hidden;
       transition: .2s ease;
+      max-height: 80vh;
 
       .pane {
         background-color: $white;
