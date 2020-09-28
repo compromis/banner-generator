@@ -3,9 +3,9 @@
     :id="'bannerCanvas' + aspect"
     :class="[
       'banner-canvas',
-      `card-${banner.card}`,
+      `style-${banner.style}`,
       `background-${banner.backgroundColor}`,
-      banner.localLabel && banner.hasLocalLabel ? 'has-local-label' : '',
+      banner.localLabel ? 'has-local-label' : '',
     ]"
     v-if="banner">
     <div class="background">
@@ -61,22 +61,18 @@
         </div>
       </div>
     </div>
-    <div class="logo">
-      <compromis-logo :mono="banner.backgroundColor === 'white' ? false : true" />
-      <div :class="{ 'logo-local-label': true, 'logo-local-label--long': banner.localLabel.length > 18 }" v-if="banner.localLabel && banner.hasLocalLabel">
-        {{ banner.localLabel | formatLocal }}
-      </div>
-    </div>
     <div class="cta" v-if="banner.showCta && banner.cta">
       <span>{{ banner.cta }}</span>
       <div>
         <img src="./images/point-down.png" alt="" />
       </div>
     </div>
+    <banner-frame theme="glowy" mono-logo />
   </div>
 </template>
 
 <script>
+import BannerFrame from '@/components/canvas/BannerFrame.vue'
 import moment from 'moment'
 import CanvasMixin from '@/mixins/canvas-mixin.js'
 
@@ -84,6 +80,10 @@ export default {
   name: 'tweet-canvas',
 
   mixins: [CanvasMixin],
+
+  components: {
+    BannerFrame
+  },
 
   computed: {
     textFontSize () {
@@ -157,7 +157,7 @@ export default {
       --link-decoration: underline;
     }
 
-    &.card-1 {
+    &.style-card {
       --base-color: #{$gray-900};
       --twitter-color: #1DA1F2;
       --quote-border-color: #{$gray-300};
@@ -166,7 +166,7 @@ export default {
       --card-background: #{$white};
     }
 
-    &.card-2 {
+    &.style-dark {
       --base-color: #{$white};
       --twitter-color: #{$white};
       --quote-border-color: #{$gray-600};
@@ -358,8 +358,8 @@ export default {
     color: $gray-600;
   }
 
-  .card-1,
-  .card-2 {
+  .style-card,
+  .style-dark {
     .tweet {
       border: 0;
       box-shadow: $raised-shadow;
