@@ -1,6 +1,6 @@
 <template>
   <div class="c-field">
-    <div class="c-field-info">
+    <div v-if="label" class="c-field-info">
       <label v-show="label">{{ label }}</label>
     </div>
     <ul :class="{'color-selector c-field-content': true, 'rounded' : isRounded }">
