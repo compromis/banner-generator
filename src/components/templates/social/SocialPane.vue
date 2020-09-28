@@ -6,10 +6,7 @@
       :display-errors="displayErrors"
       :errors="errors"
       @upload="updateImage"
-      @delete="properties.picture = null; properties.picturePreview = null" />
-
-    <!-- Picture position -->
-    <b-field label="Posició de la imatge" class="range">
+      @delete="properties.picture = null; properties.picturePreview = null" >
       <range-slider
         name="points"
         :min="0"
@@ -17,18 +14,19 @@
         v-model="properties.picturePos"
         @touchstart="dimPane(true)"
         @touchend="dimPane(false)" />
-    </b-field>
+    </picture-upload>
 
     <!-- Logo Style -->
-    <b-field label="Logo">
+    <c-field label="Logo">
       <careta-selector v-model="properties.logoStyle" />
-    </b-field>
+    </c-field>
   </div>
 </template>
 
 <script>
 import PaneMixin from '@/mixins/pane-mixin'
 import CaretaSelector from '@/components/pane/CaretaSelector'
+import CField from '@/components/pane/CField'
 
 export default {
   name: 'social-pane',
@@ -43,7 +41,8 @@ export default {
   },
 
   components: {
-    CaretaSelector
+    CaretaSelector,
+    CField
   },
 
   methods: {
