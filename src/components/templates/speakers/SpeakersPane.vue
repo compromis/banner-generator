@@ -3,19 +3,20 @@
     <!-- Title -->
     <c-input-text
       label="Titol"
-      :type="setFieldType('title')"
+      name="title"
       :message="setFieldMessage('title')"
       placeholder="Acte Central a València"
       v-model="properties.title"
-      max-length="60"
+      :maxlength="60"
     />
 
     <!-- Overtitle -->
     <c-input-text
       label="Tipus d'acte"
+      name="overtitle"
       :message="setFieldMessage('overtitle')"
       placeholder="Debat"
-      max-length="30"
+      :maxlength="30"
       v-model="properties.overtitle"
     />
 
@@ -53,12 +54,12 @@
     <transition name="slide">
       <c-input-text
         label="Lloc"
+        name="place"
         v-if="aspect !== 2"
-        :type="setFieldType('place')"
         :message="setFieldMessage('place')"
         placeholder="Riu Túria"
         v-model="properties.place"
-        maxlength="60"
+        :maxlength="60"
       />
     </transition>
 

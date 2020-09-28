@@ -3,6 +3,7 @@
     <!-- Secondary Text  -->
     <c-input-text
       label="Text superior"
+      name="textSecondary"
       placeholder="Baldoví"
       v-model="properties.textSecondary"
       :max-length="25"
@@ -14,6 +15,7 @@
     <!-- Main Text  -->
     <c-input-text
       label="Text principal"
+      name="text"
       type="textarea"
       placeholder="Cinc tipus de tila que des de Compromís recomanem a Abascal"
       v-model="properties.text"

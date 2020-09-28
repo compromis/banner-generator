@@ -57,7 +57,10 @@
       </li>
     </ul>
     <div v-if="speakers.length < maxSpeakers" class="speakers-add">
-      <b-button @click="addSpeaker" size="is-small" rounded icon-left="plus">{{ labelAdd }}</b-button>
+      <button @click="addSpeaker" class="c-button">
+        <font-awesome-icon :icon="['far', 'plus']" />
+        {{ labelAdd }}
+      </button>
     </div>
   </div>
 </template>
@@ -162,14 +165,8 @@ export default {
 <style lang="scss">
   @import "../../sass/variables";
 
-  .speaker-list {
-    margin-bottom: 1rem;
-  }
-
-  .speakers {
-    &-add {
-      padding: $field-padding;
-    }
+  .speakers-add .c-button {
+    font-size: .85rem;
   }
 
   .speaker {
