@@ -15,7 +15,7 @@
         :style="beforeGradientColor"
         :height="600"
         theme="glowy"
-        gradient="custom"
+        color="custom"
         class="banner-picture-before"
         glow-size="sm" />
       <banner-picture
@@ -24,7 +24,7 @@
         :style="{'--gradient-orientation' : '0deg'}"
         :height="600"
         theme="glowy"
-        gradient="orange"
+        color="orange"
         class="banner-picture-after"
         glow-size="sm" />
     </div>
@@ -128,6 +128,7 @@ export default {
 
       .banner-picture-before {
         align-self: end;
+        --gradient-orientation: 180deg;
       }
     }
 

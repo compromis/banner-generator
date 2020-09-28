@@ -1,26 +1,21 @@
 <template>
   <div :class="{ 'pane generic-pane': true, 'pane-dimmed': paneDimmed, 'pane-916': aspect === 1 }">
     <!-- Text -->
-    <b-field
+    <c-input-text
       label="Realitat"
-      :type="setFieldType('text')"
-      :message="setFieldMessage('text')">
-      <b-input
-        type="textarea"
-        placeholder="Açò és fals perquè..."
-        v-model="properties.text"
-        maxlength="140">
-      </b-input>
-    </b-field>
+      name="text"
+      type="textarea"
+      placeholder="Açò és fals perquè..."
+      v-model="properties.text"
+      :maxlength="140"
+      :message="setFieldMessage('text')" />
 
-    <b-field label="Segell">
-        <b-select placeholder="Segells" v-model="properties.stamp" expanded>
-            <option value="FALS">FALS</option>
-            <option value="FALSO">FALSO</option>
-            <option value="BULO">BULO</option>
-            <option value="FAKE">FAKE</option>
-        </b-select>
-    </b-field>
+      <c-select label="Segell" placeholder="Segells" name="stamp" v-model="properties.stamp" expanded>
+        <option value="FALS">FALS</option>
+        <option value="FALSO">FALSO</option>
+        <option value="BULO">BULO</option>
+        <option value="FAKE">FAKE</option>
+      </c-select>
 
     <!-- Picture -->
     <picture-upload
@@ -28,10 +23,7 @@
       :display-errors="displayErrors"
       :errors="errors"
       @upload="updateImage"
-      @delete="properties.picture = null; properties.picturePreview = null" />
-
-    <!-- Picture position -->
-    <b-field label="Posició de la imatge" class="range">
+      @delete="properties.picture = null; properties.picturePreview = null">
       <range-slider
         name="points"
         :min="0"
@@ -39,34 +31,17 @@
         v-model="properties.picturePos"
         @touchstart="dimPane(true)"
         @touchend="dimPane(false)" />
-    </b-field>
-
-    <!-- Hashtag -->
-    <transition name="slide">
-      <b-field label="Hashtag" v-if="!aspect">
-        <b-input
-          placeholder="#"
-          @input="updateHashtag"
-          :value="properties.hashtag"
-          :maxlength="25">
-        </b-input>
-      </b-field>
-    </transition>
+    </picture-upload>
 
     <!-- Local label -->
     <transition name="slide">
-      <div v-if="!aspect" class="field">
-        <b-switch v-model="properties.hasLocalLabel">
-          Afegir text al logo
-        </b-switch>
-        <transition name="slide">
-          <div v-if="properties.hasLocalLabel" class="local-label">
-            <b-field>
-              <b-input placeholder="Alacant" v-model="properties.localLabel" maxlength="48"></b-input>
-            </b-field>
-          </div>
-        </transition>
-      </div>
+      <c-input-text
+        v-if="!aspect"
+        label="Text logo"
+        name="localLabel"
+        placeholder="Alacant"
+        v-model="properties.localLabel"
+        :maxlength="48" />
     </transition>
   </div>
 </template>
