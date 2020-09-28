@@ -1,28 +1,33 @@
 <template>
   <div :class="{ 'pane': true, 'pane-dimmed': paneDimmed }">
     <!-- Title -->
-    <b-field
+    <c-input-text
       label="Titol"
       :type="setFieldType('title')"
-      :message="setFieldMessage('title')">
-      <b-input placeholder="Acte Central a València" v-model="properties.title" maxlength="60"></b-input>
-    </b-field>
+      :message="setFieldMessage('title')"
+      placeholder="Acte Central a València"
+      v-model="properties.title"
+      max-length="60"
+    />
 
     <!-- Overtitle -->
-    <b-field label="Tipus d'acte">
-      <b-input placeholder="Debat" maxlength="20" v-model="properties.overtitle"></b-input>
-    </b-field>
+    <c-input-text
+    label="Tipus d'acte"
+     placeholder="Debat"
+     max-length="20"
+     v-model="properties.overtitle"
+    />
 
     <!-- Date -->
     <transition name="slide">
-      <b-field label="Data" v-if="aspect !== 2">
+      <c-field label="Data" v-if="aspect !== 2">
         <date-picker v-model="properties.date" />
-      </b-field>
+      </c-field>
     </transition>
 
     <!-- Time -->
     <transition name="slide">
-      <b-field label="Hora" v-if="aspect !== 2">
+      <c-field label="Hora" v-if="aspect !== 2">
         <b-timepicker
           rounded
           inline
@@ -30,22 +35,20 @@
           v-model="properties.time"
           icon="clock">
         </b-timepicker>
-      </b-field>
+      </c-field>
     </transition>
 
     <!-- Venue -->
     <transition name="slide">
-      <b-field
+      <c-text-input
         label="Lloc"
         v-if="aspect !== 2"
         :type="setFieldType('place')"
-        :message="setFieldMessage('place')">
-        <b-input
-          placeholder="Riu Túria"
-          v-model="properties.place"
-          maxlength="60">
-        </b-input>
-      </b-field>
+        :message="setFieldMessage('place')"
+        placeholder="Riu Túria"
+        v-model="properties.place"
+        maxlength="60"
+      />
     </transition>
 
     <!-- Speakers -->
@@ -67,10 +70,7 @@
       :display-errors="displayErrors"
       :errors="errors"
       @upload="updateImage"
-      @delete="properties.picture = null; properties.picturePreview = null" />
-
-    <!-- Picture position -->
-    <b-field label="Posició de la imatge" class="range">
+      @delete="properties.picture = null; properties.picturePreview = null" >
       <range-slider
         name="points"
         :min="0"
@@ -78,22 +78,17 @@
         v-model="properties.picturePos"
         @touchstart="dimPane(true)"
         @touchend="dimPane(false)" />
-    </b-field>
+    </picture-upload>
 
     <!-- Local label -->
     <transition name="slide">
-      <div v-if="!aspect" class="field">
-        <b-switch v-model="properties.hasLocalLabel">
-          Afegir text al logo
-        </b-switch>
-        <transition name="slide">
-          <div v-if="properties.hasLocalLabel" class="local-label">
-            <b-field>
-              <b-input placeholder="Alacant" v-model="properties.localLabel" maxlength="48"></b-input>
-            </b-field>
-          </div>
-        </transition>
-      </div>
+      <c-input-text
+        v-if="!aspect"
+        label="Text logo"
+        name="localLabel"
+        placeholder="Alacant"
+        v-model="properties.localLabel"
+        :maxlength="48" />
     </transition>
   </div>
 </template>
@@ -102,6 +97,7 @@
 import PaneMixin from '@/mixins/pane-mixin'
 import DatePicker from '@/components/pane/DatePicker'
 import SpeakerList from '@/components/pane/SpeakerList'
+import CField from '@/components/pane/CField'
 
 export default {
   name: 'event-pane',
@@ -110,7 +106,8 @@ export default {
 
   components: {
     DatePicker,
-    SpeakerList
+    SpeakerList,
+    CField
   },
 
   data () {
