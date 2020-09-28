@@ -1,126 +1,132 @@
 <template>
   <div :class="{ 'pane media-pane': true, 'pane-dimmed': paneDimmed }">
     <!-- Title -->
-    <b-field
-      label="Titol"
-      :type="setFieldType('title')"
-      :message="setFieldMessage('title')">
-      <b-input
-        placeholder="Mónica Oltra"
-        v-model="properties.title"
-        maxlength="30">
-      </b-input>
-    </b-field>
+    <c-input-text
+      label="Títol"
+      name="title"
+      :message="setFieldMessage('title')"
+      placeholder="Mónica Oltra"
+      v-model="properties.title"
+      :maxlength="30" />
 
     <!-- Overtitle -->
-    <b-field label="Tipus d'acte">
-      <b-input
-        placeholder="Entrevista"
-        v-model="properties.overtitle"
-        maxlength="30">
-      </b-input>
-    </b-field>
+    <c-input-text
+      label="Tipus d'acte"
+      name="overtitle"
+      :message="setFieldMessage('overtitle')"
+      placeholder="Entrevista"
+      v-model="properties.overtitle"
+      :maxlength="30" />
 
     <!-- Subtitle -->
-    <b-field label="Subtítol">
-      <b-input
-        placeholder="a Assumptes Interns"
-        v-model="properties.subtitle"
-        maxlength="40">
-      </b-input>
-    </b-field>
+    <c-input-text
+      label="Subtítol"
+      name="subtitle"
+      :message="setFieldMessage('subtitle')"
+      placeholder="Vicepresidenta de la Generalitat"
+      v-model="properties.overtitle"
+      :maxlength="40" />
 
     <!-- Channel -->
-    <b-field
+    <c-select
+      name="source"
       label="Canal"
-      :type="setFieldType('source')"
-      :message="setFieldMessage('source')">
-      <b-select placeholder="Selecciona un canal" @input="updateSource" expanded>
-        <optgroup v-for="(category, i) in presets" :label="category.name" :key="i">
-          <option
-            v-for="source in category.channels"
-            :value="source"
-            :key="source.id"
-            :selected="properties.source === source.id">
-            {{ source.name }}
-          </option>
-        </optgroup>
+      :message="setFieldMessage('source')"
+      placeholder="Selecciona un canal"
+      @input="updateSource"
+      :value="properties.source">
+      <optgroup v-for="(category, i) in presets" :label="category.name" :key="i">
         <option
-          value="other"
-          :selected="properties.source === 'other'">
-          Altre...
+          v-for="source in category.channels"
+          :value="source"
+          :key="source.id"
+          :selected="properties.source === source.id">
+          {{ source.name }}
         </option>
-      </b-select>
-    </b-field>
+      </optgroup>
+      <option
+        value="other"
+        :selected="properties.source === 'other'">
+        Altre...
+      </option>
+    </c-select>
 
     <!-- Programme -->
     <transition name="slide">
-      <b-field
-        label="Programa" v-if="properties.source && properties.source !== 'other' && properties.source.programmes.length > 0"
-        :type="setFieldType('programme')"
-        :message="setFieldMessage('programme')">
-        <b-select placeholder="Selecciona un programa" expanded @input="updateProgramme">
-          <option
-            v-for="programme in properties.source.programmes"
-            :value="programme.id"
-            :key="programme.id"
-            :selected="properties.programme === programme.id">
-            {{ programme.name }}
-          </option>
-          <option
-            value="other"
-            :selected="properties.programme === 'other'">
-            Altre...
-          </option>
-        </b-select>
-      </b-field>
+      <c-select
+        v-if="properties.source && properties.source !== 'other' && properties.source.programmes.length > 0"
+        name="programme"
+        label="Programa"
+        :message="setFieldMessage('programme')"
+        placeholder="Selecciona un programa"
+        @input="updateProgramme"
+        :value="properties.programme">
+        <option
+          v-for="programme in properties.source.programmes"
+          :value="programme.id"
+          :key="programme.id"
+          :selected="properties.programme === programme.id">
+          {{ programme.name }}
+        </option>
+        <option
+          value="other"
+          :selected="properties.programme === 'other'">
+          Altre...
+        </option>
+      </c-select>
     </transition>
 
+    <!-- Other source -->
     <transition name="slide">
-      <div v-if="properties.source === 'other'" class="media-input-group">
-        <b-field
+      <div v-if="properties.source === 'other'" class="source-input-group">
+        <div class="c-field">
+          <div class="c-field-info">
+            <label>Color</label>
+          </div>
+          <div class="c-field-content-sm">
+            <swatches v-model="properties.customSourceColor"></swatches>
+          </div>
+        </div>
+        <c-input-text
           label="Nom del canal"
-          class="media-input-name"
-          :type="setFieldType('customSource')"
-          :message="setFieldMessage('customSource')">
-          <b-input
-            placeholder="TeleElx"
-            v-model="properties.customSource"
-            maxlength="20">
-          </b-input>
-        </b-field>
-        <b-field label="Color" class="media-input-color">
-          <swatches v-model="properties.customSourceColor"></swatches>
-        </b-field>
+          name="customSource"
+          placeholder="TeleElx"
+          v-model="properties.customSource"
+          :maxlength="20"
+          :message="setFieldMessage('customSource')"
+          class="source-input-name" />
       </div>
     </transition>
 
+    <!-- Other programme -->
     <transition name="slide">
-      <div v-if="properties.programme === 'other'" class="media-input-group">
-        <b-field
+      <div v-if="properties.programme === 'other'" class="source-input-group">
+        <div class="c-field">
+          <div class="c-field-info">
+            <label>Color</label>
+          </div>
+          <div class="c-field-content-sm">
+            <swatches v-model="properties.customProgrammeColor"></swatches>
+          </div>
+        </div>
+        <c-input-text
           label="Nom del programa"
-          class="media-input-name"
-          :type="setFieldType('customProgramme')"
-          :message="setFieldMessage('customProgramme')">
-          <b-input
-            placeholder="El Análisis"
-            v-model="properties.customProgramme"
-            maxlength="30">
-          </b-input>
-        </b-field>
-        <b-field label="Color" class="media-input-color">
-          <swatches v-model="properties.customProgrammeColor"></swatches>
-        </b-field>
+          name="customProgramme"
+          placeholder="En Análisis"
+          v-model="properties.customProgramme"
+          :maxlength="30"
+          :message="setFieldMessage('customProgramme')"
+          class="source-input-name" />
       </div>
     </transition>
 
     <!-- Date -->
-    <b-field label="Data">
-       <date-picker v-model="properties.date" />
-    </b-field>
+    <c-field label="Data">
+      <date-picker v-model="properties.date" />
+    </c-field>
 
     <!-- Time -->
-    <b-field label="Hora">
+    <c-field label="Hora">
       <b-timepicker
         rounded
         inline
@@ -128,7 +134,7 @@
         v-model="properties.time"
         icon="clock">
       </b-timepicker>
-    </b-field>
+    </c-field>
 
     <!-- Picture -->
     <picture-upload
@@ -136,10 +142,7 @@
       :display-errors="displayErrors"
       :errors="errors"
       @upload="updateImage"
-      @delete="properties.picture = null; properties.picturePreview = null" />
-
-    <!-- Picture position -->
-    <b-field label="Posició de la imatge" class="range">
+      @delete="properties.picture = null; properties.picturePreview = null">
       <range-slider
         name="points"
         :min="0"
@@ -147,22 +150,17 @@
         v-model="properties.picturePos"
         @touchstart="dimPane(true)"
         @touchend="dimPane(false)" />
-    </b-field>
+    </picture-upload>
 
     <!-- Local label -->
     <transition name="slide">
-      <div v-if="!aspect" class="field">
-        <b-switch v-model="properties.hasLocalLabel">
-          Afegir text al logo
-        </b-switch>
-        <transition name="slide">
-          <div v-if="properties.hasLocalLabel" class="local-label">
-            <b-field>
-              <b-input placeholder="Alacant" v-model="properties.localLabel" maxlength="48"></b-input>
-            </b-field>
-          </div>
-        </transition>
-      </div>
+      <c-input-text
+        v-if="!aspect"
+        label="Text logo"
+        name="localLabel"
+        placeholder="Alacant"
+        v-model="properties.localLabel"
+        :maxlength="48" />
     </transition>
   </div>
 </template>
@@ -172,13 +170,15 @@ import PaneMixin from '@/mixins/pane-mixin.js'
 import presets from './presets'
 import Swatches from 'vue-swatches'
 import DatePicker from '@/components/pane/DatePicker'
+import CField from '@/components/pane/CField'
 
 export default {
   name: 'media-pane',
 
   components: {
     Swatches,
-    DatePicker
+    DatePicker,
+    CField
   },
 
   mixins: [PaneMixin],
@@ -198,7 +198,7 @@ export default {
         customProgramme: '',
         customProgrammeColor: '#1CA085'
       },
-      presets: presets
+      presets
     }
   },
 
@@ -233,7 +233,6 @@ export default {
         return
       }
 
-      // const channel = this.presets.find(preset => preset.id === source)
       this.properties.source = source
 
       if (!source.programmes.length) {
@@ -259,34 +258,16 @@ export default {
   @import "../../../sass/variables";
 
   .media-pane {
-    .local-label {
-      margin-top: .75rem;
-    }
-
-    .media-input {
+    .source-input {
       &-group {
         display: flex;
-
-        label {
-          font-size: .85rem;
-          color: $gray-600;
-        }
       }
 
       &-name {
         flex-grow: 1;
         order: 1;
+        border-bottom: 1px $gray-300 solid !important;
       }
-
-      &-color {
-        margin-right: .5rem;
-      }
-    }
-
-    .vue-swatches__trigger {
-      height: 31px !important;
-      width: 31px !important;
-      border-radius: 4px !important;
     }
   }
 </style>

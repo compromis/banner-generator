@@ -2,13 +2,12 @@
   <div :class="{ 'pane': true, 'pane-dimmed': paneDimmed }">
     <!-- Title -->
     <c-input-text
-      label="Titol"
+      label="Títol"
       name="title"
       :message="setFieldMessage('title')"
       placeholder="Acte Central a València"
       v-model="properties.title"
-      :maxlength="60"
-    />
+      :maxlength="60" />
 
     <!-- Overtitle -->
     <c-input-text
@@ -17,8 +16,7 @@
       :message="setFieldMessage('overtitle')"
       placeholder="Debat"
       :maxlength="30"
-      v-model="properties.overtitle"
-    />
+      v-model="properties.overtitle" />
 
     <!-- Speakers -->
     <speaker-list
@@ -27,8 +25,7 @@
       :display-errors="displayErrors"
       :errors="errors"
       :min-speakers="2"
-      :max-speakers="4"
-    />
+      :max-speakers="4" />
 
     <!-- Date -->
     <transition name="slide">
@@ -59,8 +56,7 @@
         :message="setFieldMessage('place')"
         placeholder="Riu Túria"
         v-model="properties.place"
-        :maxlength="60"
-      />
+        :maxlength="60" />
     </transition>
 
     <!-- Local label -->

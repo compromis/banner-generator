@@ -3,17 +3,23 @@
     <div class="c-field-info">
       <label :for="name">
         {{ label }}
-         <font-awesome-icon
+        <font-awesome-icon
           v-if="message"
           :icon="['far', 'exclamation-circle']" />
       </label>
     </div>
     <select
+      v-model="computedValue"
       :id="name"
       :name="name"
-      @change="$emit('input', $event.target.value)"
       :class="{'has-value': value}">
-      <option disabled hidden :selected="!value">{{ placeholder }}</option>
+      <option
+          v-if="computedValue == null"
+          :value="null"
+          disabled
+          hidden>
+          {{ placeholder }}
+      </option>
       <slot></slot>
     </select>
     <font-awesome-icon
@@ -38,8 +44,8 @@ export default {
       required: true
     },
     value: {
-      type: [String, Object],
-      default: ''
+      type: [String, Number, Boolean, Object, Array, Function],
+      default: null
     },
     placeholder: {
       type: String,
@@ -48,6 +54,24 @@ export default {
     message: {
       type: String,
       default: ''
+    }
+  },
+
+  data () {
+    return {
+      selected: this.value
+    }
+  },
+
+  computed: {
+    computedValue: {
+      get () {
+        return this.selected
+      },
+      set (value) {
+        this.selected = value
+        this.$emit('input', value)
+      }
     }
   }
 }
