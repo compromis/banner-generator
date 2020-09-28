@@ -44,7 +44,7 @@ export default {
 .slider {
   appearance: none;
   width: 100%;
-  height: .3rem;
+  height: 5px;
   background: $gray-300;
   border-radius: 3rem;
   outline: none;

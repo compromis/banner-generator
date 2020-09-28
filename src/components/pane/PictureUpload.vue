@@ -3,7 +3,7 @@
     class="c-field image-upload-field"
       :message="fieldName in errors && displayErrors ? errors[fieldName].join('. ') : ''">
       <div class="c-field-info">
-        <label>Foto</label>
+        <label>{{ label }}</label>
       </div>
       <div class="c-field-content">
         <b-upload
@@ -44,6 +44,10 @@ export default {
     fieldName: {
       type: String,
       default: 'picture'
+    },
+    label: {
+      type: String,
+      default: 'Foto'
     }
   },
 
