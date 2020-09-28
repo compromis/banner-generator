@@ -1,10 +1,11 @@
 <template>
   <div :class="{
     'speaker-list': true,
+    'c-field' : true,
     'accepts-description': acceptsDescription,
     'accepts-picture': acceptsPicture
   }">
-    <label class="label">{{ label }}</label>
+    <label class="label c-field-info">{{ label }}</label>
     <ul class="speakers">
       <li v-for="(speaker, i) in speakers" :key="i" class="speaker-item">
         <b-field class="speaker-name" :type="speaker.name ? '' : displayErrors ? 'is-danger' : ''">
@@ -166,10 +167,8 @@ export default {
   }
 
   .speakers {
-    margin-bottom: .75rem;
-
     &-add {
-      margin-bottom: .75rem;
+      padding: $field-padding;
     }
   }
 
@@ -180,10 +179,14 @@ export default {
       grid-template-areas: "name remove";
       grid-gap: .75rem;
       border-bottom: 1px $gray-200 solid;
-      padding: .75rem 0;
+      padding: $field-padding;
 
       .field {
         margin-bottom: 0;
+      }
+
+      &:first-child {
+        padding-top: .25rem;
       }
     }
 

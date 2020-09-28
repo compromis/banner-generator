@@ -8,6 +8,10 @@
     text-overflow: ellipsis;
     width: 100%;
   }
+
+  .is-danger {
+    background: rgba($red, .1);
+  }
 }
 
 .banner-disposition .tab-content {
@@ -157,6 +161,12 @@
   height: 2.25rem !important;
   width: 2.25rem !important;
   border-radius: 4px !important;
+}
+
+//properly fix this and remove
+.dropdown-content {
+  box-shadow: none;
+  border: 1px solid $gray-300;
 }
 
 @media (max-width: $xs-breakpoint) {
