@@ -3,7 +3,7 @@
     <div class="c-field-info">
       <label :for="name">
         {{ label }}
-         <font-awesome-icon
+        <font-awesome-icon
           v-if="message"
           :icon="['far', 'exclamation-circle']" />
       </label>
@@ -20,6 +20,8 @@
       :placeholder="placeholder"
       :value="value"
       @input="$emit('input', $event.target.value)"
+      :disabled="disabled"
+      @keydown="$emit('keydown', $event)"
       v-bind="$attrs">
     <textarea
       v-else
@@ -28,7 +30,9 @@
       :maxlength="maxlength"
       :placeholder="placeholder"
       :value="value"
+      :disabled="disabled"
       @input="$emit('input', $event.target.value)"
+      @keydown="$emit('keydown', $event)"
       v-bind="$attrs" />
     <div v-if="message" class="c-field-error">
       {{ message }}
@@ -68,6 +72,10 @@ export default {
     message: {
       type: String,
       default: ''
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     }
   }
 }
@@ -89,6 +97,10 @@ export default {
     color: $gray-900;
 
     &::placeholder {
+      color: $gray-600;
+    }
+
+    &:disabled {
       color: $gray-600;
     }
   }

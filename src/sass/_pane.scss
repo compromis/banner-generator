@@ -104,6 +104,10 @@
     }
   }
 
+  &.c-field-force-border {
+    border-bottom: 1px $gray-300 solid !important;
+  }
+
   &-error {
     color: $red;
     font-size: .75rem;
