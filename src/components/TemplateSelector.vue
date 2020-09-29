@@ -46,12 +46,12 @@ export default {
 
   data () {
     return {
-      templates: templates,
-      selectorSteps: selectorSteps,
+      templates,
+      selectorSteps,
+      labels,
       tourCallbacks: {
         onStop: this.onTourStop
       },
-      labels: labels,
       showArchive: false
     }
   },
@@ -125,25 +125,6 @@ export default {
         transition: color .5s ease-in-out;
       }
 
-      &:hover {
-        box-shadow: $raised-shadow;
-        transform: rotate($rotation) scale(1.05);
-
-        .template-item {
-          &-name,
-          &-icon .icon {
-            background: linear-gradient(45deg, $gradient-start, $gradient-end);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-
-            svg * {
-              fill: url(#compromisGradient) !important;
-            }
-          }
-        }
-      }
-
       &:active {
         transform: rotate(0) scale(.95);
         opacity: .75;
@@ -197,6 +178,31 @@ export default {
 
       &:hover {
         opacity: 1;
+      }
+    }
+  }
+
+  @media (min-width: $xs-breakpoint) {
+    .template-selector {
+      .template-item {
+        &:hover {
+          box-shadow: $raised-shadow;
+          transform: rotate($rotation) scale(1.05);
+
+          .template-item {
+            &-name,
+            &-icon .icon {
+              background: linear-gradient(45deg, $gradient-start, $gradient-end);
+              background-clip: text;
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;
+
+              svg * {
+                fill: url(#compromisGradient) !important;
+              }
+            }
+          }
+        }
       }
     }
   }
