@@ -3,6 +3,7 @@
     <!-- Title -->
     <c-input-text
       label="Titol"
+      name="title"
       :type="setFieldType('title')"
       :message="setFieldMessage('title')"
       placeholder="Acte Central a València"
@@ -12,10 +13,11 @@
 
     <!-- Overtitle -->
     <c-input-text
-    label="Tipus d'acte"
-     placeholder="Debat"
-     max-length="20"
-     v-model="properties.overtitle"
+      label="Tipus d'acte"
+      name="event-type"
+      placeholder="Debat"
+      max-length="20"
+      v-model="properties.overtitle"
     />
 
     <!-- Date -->
@@ -40,14 +42,15 @@
 
     <!-- Venue -->
     <transition name="slide">
-      <c-text-input
+      <c-input-text
         label="Lloc"
+        name="venue"
         v-if="aspect !== 2"
         :type="setFieldType('place')"
         :message="setFieldMessage('place')"
         placeholder="Riu Túria"
         v-model="properties.place"
-        maxlength="60"
+        max-length="60"
       />
     </transition>
 
