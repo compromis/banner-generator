@@ -4,7 +4,7 @@
     <glowy-blob position="bottom" :aspect="aspect" v-if="theme === 'blobs'" :color="color" :wide="localLabel.length > 6" />
     <div class="hashtag" v-if="aspect !== '916'">{{ hashtag }}</div>
     <div :class="['logo', `logo--align-${logoAlign}`]" v-if="aspect === '11'">
-      <compromis-logo :mono="monoLogo || theme === 'blobs' ? true : false" />
+      <compromis-logo :mono="monoLogo || theme === 'glowy' ? false : true" />
       <div :class="{ 'logo-local-label': true, 'logo-local-label--long': localLabel.length > 18 }" v-if="localLabel">
         {{ localLabel | formatLocal  }}
       </div>
@@ -138,6 +138,14 @@ export default {
 
     .logo-local-label {
       color: $gray-600;
+    }
+  }
+
+  &--blobless {
+    .hashtag {
+      color: $white;
+      bottom: 30px;
+      left: 35px;
     }
   }
 }
