@@ -57,7 +57,7 @@ import EventInfo from '@/components/canvas/EventInfo'
 import TextInPills from '@/components/canvas/TextInPills'
 
 export default {
-  name: 'quote-canvas',
+  name: 'event-canvas',
 
   mixins: [CanvasMixin],
 
