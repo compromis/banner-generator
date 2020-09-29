@@ -259,7 +259,8 @@ export default {
 
   @media (max-width: $xl-breakpoint) {
     .primary-download-button {
-      top: 3.65rem;
+      top: 3.75rem;
+      right: 1rem;
       bottom: auto;
 
       .button {

@@ -1,5 +1,8 @@
 <template>
   <div class="workspace">
+    <div class="toolbar">
+      <b-button to="/" tag="router-link" icon-left="chevron-left" type="is-text">Enrere</b-button>
+    </div>
     <div class="pane-wrapper">
       <component
         class="pane"
@@ -196,7 +199,7 @@ export default {
     }
  }
 
- .card {
+  .card {
     padding: 2rem;
     border-radius: 1rem;
 
@@ -216,6 +219,10 @@ export default {
       margin-left: -.75rem;
       margin-top: -.75rem;
     }
+  }
+
+  .toolbar {
+    display: none;
   }
 
   @media (max-width: $xs-breakpoint) {
@@ -262,12 +269,38 @@ export default {
 
       .help-block {
         position: fixed;
-        top: 3.5rem;
-        right: 10rem;
+        top: 3.65rem;
+        right: 9rem;
         z-index: 35;
 
         .button.is-text {
           color: $white;
+        }
+      }
+
+      .toolbar {
+        display: flex;
+        position: fixed;
+        top: 3.25rem;
+        left: 0;
+        right: 0;
+        height: 3rem;
+        background: $gray-800;
+        align-items: center;
+        padding: 0 1rem;
+
+        .button {
+          &.is-text {
+            color: $white;
+            text-decoration: none;
+            margin-left: -.75rem;
+
+            &:active,
+            &:focus {
+              color: $white;
+              background-color: rgba($white, 0.35);
+            }
+          }
         }
       }
     }
