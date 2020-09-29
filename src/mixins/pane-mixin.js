@@ -3,6 +3,7 @@ import PictureUpload from '@/components/pane/PictureUpload.vue'
 import RangeSlider from '@/components/pane/RangeSlider.vue'
 import CInputText from '@/components/pane/CInputText'
 import CSelect from '@/components/pane/CSelect'
+import CField from '@/components/pane/CField'
 
 export default {
   // Shared components across templates
@@ -10,7 +11,8 @@ export default {
     RangeSlider,
     PictureUpload,
     CInputText,
-    CSelect
+    CSelect,
+    CField
   },
 
   // Shared data across templates

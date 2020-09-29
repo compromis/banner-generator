@@ -1,5 +1,5 @@
 <template>
-  <div :class="{'headline': true, 'headline--pills': theme === 'glowy'}">
+  <div :class="{'headline': true, 'headline--pills': theme !== 'blobs'}">
     <div class="headline-source headline-source--custom" v-if="source === 'other'">
       <span :style="{ color: customSourceColor }">{{ customSource }}</span>
     </div>
@@ -45,7 +45,7 @@ export default {
       type: String,
       default: 'blobs',
       validator (value) {
-        return ['blobs', 'glowy'].indexOf(value) !== -1
+        return ['blobs', 'glowy', 'blobless'].indexOf(value) !== -1
       }
     },
     source: {

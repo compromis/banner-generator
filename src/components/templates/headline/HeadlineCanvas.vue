@@ -15,7 +15,8 @@
       :height="aspect === '11' ? 500 : 730"
       :theme="banner.theme"
       :edge="aspect === '916'"
-      :color="banner.color" />
+      :color="banner.color"
+      :full-gradient="banner.fullGradient" />
     <headline-card
       :theme="banner.theme"
       :headline="banner.headline"

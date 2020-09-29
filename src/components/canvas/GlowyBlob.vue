@@ -39,7 +39,7 @@ export default {
       type: String,
       default: 'orange',
       validator (value) {
-        return ['orange', 'feminism', 'lgbt'].indexOf(value) !== -1
+        return ['none', 'orange', 'feminism', 'lgbt', 'green'].includes(value)
       }
     },
     offset: {
