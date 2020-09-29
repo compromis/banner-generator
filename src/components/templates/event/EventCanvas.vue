@@ -11,9 +11,9 @@
       <banner-picture
         :picture="banner.picturePreview"
         :picture-position="objectPosition"
-        :theme="theme"
+        theme="glowy"
         edge
-        :height="aspect === 'event' ? 420 : null"/>
+        :height="aspect === 'event' ? 420 : null" />
       <div class="event">
         <span>{{ banner.aspect }}</span>
         <div class="event-overtitle">
