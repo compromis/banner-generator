@@ -8,30 +8,32 @@
     <label class="label c-field-info">{{ label }}</label>
     <ul class="speakers">
       <li v-for="(speaker, i) in speakers" :key="i" class="speaker-item">
-        <b-field class="speaker-name" :type="speaker.name ? '' : displayErrors ? 'is-danger' : ''">
-          <b-input
-            :placeholder="placeholder"
-            :ref="`speaker${i}`"
-            :name="`speaker${i}`"
-            v-model="speaker.name"
-            @keyup.enter.native="addSpeaker"
-            size="is-small"
-            :icon="icon"
-            :maxlength="maxLengthName">
-          </b-input>
-        </b-field>
-        <b-field class="speaker-description" v-if="acceptsDescription">
-          <b-input
-            placeholder="Càrrec"
-            v-model="speaker.description"
-            @keyup.enter.native="addSpeaker"
-            :name="`speaker_desc${i}`"
-            size="is-small"
-            icon="credit-card-blank"
-            :maxlength="maxLengthDescription">
-          </b-input>
-        </b-field>
-        <b-field class="speaker-picture" v-if="acceptsPicture">
+        <c-input-text
+          class="speaker-name"
+          :type="speaker.name ? '' : displayErrors ? 'is-danger' : ''"
+          :label="placeholder"
+          :ref="`speaker${i}`"
+          :name="`speaker${i}`"
+          v-model="speaker.name"
+          @keyup.enter.native="addSpeaker"
+          size="is-small"
+          :icon="icon"
+          :maxlength="maxLengthName"
+          small
+        />
+        <c-input-text
+          class="speaker-description"
+          v-if="acceptsDescription"
+          label="Càrrec"
+          v-model="speaker.description"
+          @keyup.enter.native="addSpeaker"
+          :name="`speaker_desc${i}`"
+          size="is-small"
+          icon="credit-card-blank"
+          :maxlength="maxLengthDescription"
+          small
+        />
+        <c-field class="speaker-picture" v-if="acceptsPicture">
           <b-upload
             @input="(image) => updateSpeakerPicture(image, i)"
             drag-drop
@@ -44,7 +46,7 @@
               <img :src="speaker.picture" alt="Imatge" />
             </div>
           </b-upload>
-        </b-field>
+        </c-field>
         <div class="speaker-remove">
           <b-button
             @click="deleteSpeaker(i)"
@@ -66,8 +68,14 @@
 </template>
 
 <script>
+import CInputText from '@/components/pane/CInputText'
+
 export default {
   name: 'speaker-list',
+
+  components: {
+    CInputText
+  },
 
   props: {
     defaultSpeakers: {
@@ -173,10 +181,9 @@ export default {
     &-item {
       display: grid;
       grid-template-columns: 1fr auto;
-      grid-template-areas: "name remove";
-      grid-gap: .75rem;
-      border-bottom: 1px $gray-200 solid;
-      padding: $field-padding;
+      grid-template-areas: "name";
+      padding: 0;
+      position: relative;
 
       .field {
         margin-bottom: 0;
@@ -215,6 +222,9 @@ export default {
       align-self: stretch;
       display: grid;
       align-items: stretch;
+      padding: $field-padding;
+      border-right: 1px solid $gray-300;
+      border-bottom: 1px solid $gray-300;
 
       .control {
         display: flex;
@@ -240,16 +250,37 @@ export default {
     }
 
     &-remove {
-      grid-area: remove;
+      position: absolute;
+      top: 0;
+      left: 0;
+      padding: .25rem;
+
+      .button {
+        border-radius: 100%;
+      }
+    }
+  }
+
+  :not(.accepts-picture) {
+    .speaker-item {
+      grid-template-columns: 3rem 1fr;
+      grid-template-areas:
+        "remove name"
+        "remove description";
+    }
+
+    .speaker-remove {
+      position: relative;
+      grid-area: "remove";
     }
   }
 
   .accepts-picture.accepts-description {
     .speaker-item {
-      grid-template-columns: 4.35rem 1fr auto;
+      grid-template-columns: 6rem 1fr auto;
       grid-template-areas:
-        "picture name remove"
-        "picture description remove";
+        "picture name"
+        "picture description";
     }
   }
 
@@ -257,8 +288,8 @@ export default {
     .speaker-item {
       grid-template-columns: 1fr auto;
       grid-template-areas:
-        "name remove"
-        "description remove";
+        "name"
+        "description";
     }
   }
 
@@ -266,8 +297,8 @@ export default {
     .speaker-item {
       grid-template-columns: 4.35rem 1fr auto;
       grid-template-areas:
-        "picture name remove"
-        "picture description remove";
+        "picture name"
+        "picture description";
     }
   }
 

@@ -1,5 +1,5 @@
 <template>
-  <div :class="['c-field c-field-focusable', {'has-errors': message}]">
+  <div :class="['c-field c-field-focusable', {'has-errors': message, 'c-field-small': small}]">
     <div class="c-field-info">
       <label :for="name">
         {{ label }}
@@ -76,6 +76,10 @@ export default {
     disabled: {
       type: Boolean,
       default: false
+    },
+    small: {
+      type: Boolean,
+      default: false
     }
   }
 }
@@ -107,5 +111,21 @@ export default {
 
   textarea {
     min-height: 6.5rem;
+  }
+
+  .c-field-small {
+    input,
+    textarea {
+      font-size: .85rem;
+      padding: 0 1rem 0.25rem .75rem;
+    }
+
+    label {
+      font-size: .75rem;
+    }
+
+    .c-field-info {
+      padding: 0.25rem 1rem 0 .75rem;
+    }
   }
 </style>
