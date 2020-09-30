@@ -156,12 +156,7 @@ export default {
         color: 'orange',
         fullGradient: true
       },
-      presets: presets,
-      availableColors: {
-        glowy: ['none', 'orange', 'lgbt', 'feminism', 'green'],
-        blobs: ['orange', 'lgbt', 'feminism', 'green'],
-        blobless: ['orange', 'black', 'lgbt', 'feminism', 'green']
-      }
+      presets: presets
     }
   },
 

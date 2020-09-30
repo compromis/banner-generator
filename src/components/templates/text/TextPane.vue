@@ -35,7 +35,13 @@
     </picture-upload>
 
     <!-- Frame color  -->
-    <color-selector v-model="properties.color" :colors="properties.theme === 'glowy' ? ['none', 'orange', 'lgbt', 'feminism', 'green'] : ['orange', 'lgbt', 'feminism', 'green']" label="Color" is-rounded />
+    <color-selector v-model="properties.color" :colors="availableColors[properties.theme]" label="Color" is-rounded />
+
+    <c-field v-if="properties.theme === 'blobless'" class="blobless-gradient-option">
+      <b-switch v-model="properties.fullGradient">
+        Degradat sobre tota la imatge
+      </b-switch>
+    </c-field>
 
     <!-- Hashtag -->
     <transition name="slide">
@@ -94,7 +100,8 @@ export default {
         text: '',
         emojis: [],
         disposition: 'bottom',
-        color: 'orange'
+        color: 'orange',
+        fullGradient: true
       },
       customToolbar: [
         [{ header: 1 }, { header: 2 }],

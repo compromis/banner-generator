@@ -14,7 +14,8 @@
         :picture-position="objectPosition"
         :theme="banner.theme"
         :color="banner.color"
-        edge/>
+        edge
+        :full-gradient="banner.fullGradient" />
       <div class="text text-wysiwyg" v-if="banner.text">
         <div v-html="banner.text"></div>
       </div>
@@ -111,6 +112,12 @@ export default {
         top: 80px;
         bottom: auto;
       }
+    }
+  }
+
+  .theme-blobless {
+    .text {
+      bottom: 120px;
     }
   }
 </style>

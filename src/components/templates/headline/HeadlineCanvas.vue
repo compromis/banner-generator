@@ -157,7 +157,7 @@ export default {
     /* Banner on bottom */
     &.disposition-bottom {
       .headline {
-        bottom: 90px;
+        bottom: 100px;
         top: auto;
       }
     }
