@@ -16,7 +16,7 @@
         :text-align="banner.textAlign"
         :font-size="fontSizePrimary"
         :width="820"
-        :transparent="banner.fullGradient"
+        :transparent="banner.theme === 'blobless' && banner.fullGradient"
         shadow />
     </div>
     <emojis-on-canvas v-model="banner.emojis" />
