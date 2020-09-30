@@ -151,4 +151,23 @@ export default {
       }
     }
   }
+
+  /* Blobless theme */
+  .theme-blobless {
+    /* Banner on bottom */
+    &.disposition-bottom {
+      .headline {
+        bottom: 90px;
+        top: auto;
+      }
+    }
+
+    /* Banner on top */
+    &.disposition-top {
+      .headline {
+        top: 45px;
+        bottom: auto;
+      }
+    }
+  }
 </style>

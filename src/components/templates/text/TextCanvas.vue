@@ -83,7 +83,7 @@ export default {
     }
   }
 
-  .theme-blobs {
+  .theme-blobs, .theme-blobless {
     .text {
       position: absolute;
       background: $white;
