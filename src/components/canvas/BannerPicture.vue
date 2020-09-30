@@ -4,7 +4,7 @@
     <div v-else class="background-picture">
       <img v-if="picture" :src="picture" :style="picturePosition" />
     </div>
-    <div v-if="theme === 'blobless'" :class="['banner-gradient', `gradient-${color}`, { 'gradient-partial': !fullGradient }]"></div>
+    <div v-if="theme === 'blobless'" :class="['banner-gradient', `gradient-${color}`, { 'gradient-partial': !fullGradient, 'gradient-full': fullGradient }]"></div>
   </div>
 </template>
 
@@ -110,6 +110,12 @@ export default {
         &.gradient-lgbt {
           --gradient-orientation: 90deg;
           top: 87%;
+        }
+      }
+
+      &-full {
+        &.gradient-black {
+          background: rgba($gray-800, .65);
         }
       }
     }

@@ -29,7 +29,12 @@
     </c-tab-group>
 
     <!-- Text Color -->
-    <color-selector label="Color del text" v-model="properties.textColor" />
+    <transition name="slide">
+      <color-selector
+        v-if="properties.theme !== 'blobless' || !properties.fullGradient"
+        label="Color del text"
+        v-model="properties.textColor" />
+    </transition>
 
     <!-- Text size -->
     <c-field label="Tamany del text">
@@ -40,13 +45,12 @@
         v-model="properties.textSize"
         @touchstart="dimPane(true)"
         @touchend="dimPane(false)" />
+      <article class="message is-info is-small" v-if="aspect === 1">
+        <div class="message-body">
+          Es recomana utilitzar la ferramenta de text nativa d'Instragram per a afegir text en aquest model de tarja.
+        </div>
+      </article>
     </c-field>
-
-    <article class="message is-info is-small" v-if="aspect === 1">
-      <div class="message-body">
-        Es recomana utilitzar la ferramenta de text nativa d'Instragram per a afegir text en aquest model de tarja.
-      </div>
-    </article>
 
     <!-- Emoji picker -->
     <emoji-picker v-model="properties.emojis" />
@@ -109,7 +113,6 @@ import ColorSelector from '@/components/pane/ColorSelector'
 import ThemeSelector from '@/components/pane/ThemeSelector'
 import CTabGroup from '@/components/pane/CTabGroup'
 import CTab from '@/components/pane/CTab'
-import CField from '@/components/pane/CField'
 
 export default {
   name: 'generic-pane',
@@ -121,8 +124,7 @@ export default {
     ColorSelector,
     ThemeSelector,
     CTabGroup,
-    CTab,
-    CField
+    CTab
   },
 
   data () {
@@ -136,12 +138,8 @@ export default {
         textSize: 100,
         emojis: [],
         textColor: 'black',
-        color: 'orange'
-      },
-      availableColors: {
-        glowy: ['none', 'orange', 'lgbt', 'feminism', 'green'],
-        blobs: ['orange', 'lgbt', 'feminism', 'green'],
-        blobless: ['orange', 'black', 'lgbt', 'feminism', 'green']
+        color: 'orange',
+        fullGradient: true
       }
     }
   },

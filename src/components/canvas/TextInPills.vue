@@ -1,5 +1,5 @@
 <template>
-  <div v-if="text" :class="['text-holder', `text-${pillStyle}`, `text-align-${textAlign}`]">
+  <div v-if="text" :class="['text-holder', `text-${pillStyle}`, `text-align-${textAlign}`, { transparent }]">
     <span class="text-lines on-top" :style="{ fontSize, textAlign, lineHeight, padding, '--bg-width': `${width}px` }">{{ text }}</span>
     <div class="shadow" v-if="shadow">
       <span class="text-lines" :style="{ fontSize, textAlign, lineHeight, padding, '--bg-width': `${width}px` }">{{ text }}</span>
@@ -47,6 +47,10 @@ export default {
       default: 1.2
     },
     shadow: {
+      type: Boolean,
+      default: false
+    },
+    transparent: {
       type: Boolean,
       default: false
     }
@@ -116,6 +120,15 @@ export default {
 
     span {
       box-shadow: $raised-shadow;
+      filter: none;
+    }
+  }
+
+  .transparent {
+    .text-lines {
+      background: transparent !important;
+      color: $white !important;
+      box-shadow: none;
       filter: none;
     }
   }

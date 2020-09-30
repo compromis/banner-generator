@@ -34,7 +34,12 @@ export default {
       aspect: 0,
       isDownloadable: false,
       displayErrors: false,
-      paneDimmed: false
+      paneDimmed: false,
+      availableColors: {
+        glowy: ['none', 'orange', 'lgbt', 'feminism', 'green'],
+        blobs: ['orange', 'lgbt', 'feminism', 'green'],
+        blobless: ['orange', 'black', 'lgbt', 'feminism', 'green']
+      }
     }
   },
 
@@ -71,6 +76,10 @@ export default {
         this.errors = {}
         this.validate()
         this.isDownloadable = Object.keys(this.errors).length === 0
+
+        if ('color' in properties && !this.availableColors[properties.theme].includes(properties.color)) {
+          this.properties.color = 'orange'
+        }
       },
       deep: true
     },

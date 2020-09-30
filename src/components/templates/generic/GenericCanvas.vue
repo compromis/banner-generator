@@ -16,6 +16,7 @@
         :text-align="banner.textAlign"
         :font-size="fontSizePrimary"
         :width="820"
+        :transparent="banner.fullGradient"
         shadow />
     </div>
     <emojis-on-canvas v-model="banner.emojis" />
@@ -32,7 +33,8 @@
       :height="aspect === '11' ? 500 : null"
       :width="aspect === '916' ? 405 : null"
       :theme="banner.theme"
-      :color="banner.color" />
+      :color="banner.color"
+      :full-gradient="banner.fullGradient" />
   </div>
 </template>
 
@@ -134,6 +136,23 @@ export default {
         .text {
           top: 55px;
         }
+      }
+    }
+  }
+
+  /* Blobless theme */
+  .theme-blobless {
+    .text {
+      top: 80px;
+      left: 40px;
+      right: 40px;
+      bottom: 130px;
+    }
+
+    &.aspect-916 {
+      .text {
+        left: 20px;
+        right: 20px;
       }
     }
   }
