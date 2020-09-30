@@ -130,6 +130,7 @@ export default {
       color: $white !important;
       box-shadow: none;
       filter: none;
+      padding: 0;
     }
   }
 

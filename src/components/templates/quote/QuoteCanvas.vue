@@ -5,7 +5,8 @@
       'banner-canvas',
       'aspect-' + aspect,
       'disposition-' + banner.disposition,
-      'theme-' + banner.theme
+      'theme-' + banner.theme,
+      { 'full-gradient': banner.fullGradient }
     ]"
     v-if="banner">
     <div class="quote">
@@ -19,7 +20,8 @@
             :pill-style="banner.textColor"
             :font-size="fontSizePrimary"
             :width="600"
-            shadow />
+            shadow
+            :transparent="banner.theme === 'blobless' && banner.fullGradient" />
         </div>
         <div class="quote-author">{{ banner.author | formatString }}</div>
       </div>
@@ -36,7 +38,8 @@
       :height="aspect === '11' ? 570 : 730"
       :theme="banner.theme"
       :color="banner.color"
-      :edge="aspect === '916'" />
+      :edge="aspect === '916'"
+      :full-gradient="banner.theme === 'blobless' && banner.fullGradient" />
   </div>
 </template>
 
@@ -121,6 +124,10 @@ export default {
       right: 90px;
       justify-content: flex-end;
       align-items: flex-start;
+
+      &-author {
+        margin-left: auto;
+      }
     }
   }
 
@@ -180,6 +187,36 @@ export default {
         left: auto;
         right: 50px;
         bottom: 160px;
+      }
+    }
+  }
+
+  .theme-blobless {
+    .quote {
+      top: 80px;
+      left: 60px;
+      right: auto;
+      bottom: 130px;
+    }
+
+    &.full-gradient {
+      .quote-author {
+        text-shadow: none;
+        opacity: .6;
+      }
+    }
+
+    &.disposition-right {
+      .quote {
+        left: auto;
+        right: 60px;
+      }
+    }
+
+    &.aspect-916 {
+      .quote {
+        left: 25px;
+        right: 25px;
       }
     }
   }

@@ -144,15 +144,15 @@ export default {
   .theme-blobless {
     .text {
       top: 80px;
-      left: 40px;
-      right: 40px;
+      left: 60px;
+      right: 60px;
       bottom: 130px;
     }
 
     &.aspect-916 {
       .text {
-        left: 20px;
-        right: 20px;
+        left: 25px;
+        right: 25px;
       }
     }
   }
