@@ -20,24 +20,21 @@
       v-model="properties.overtitle"
     />
 
-    <!-- Date -->
+    <!-- Date and time -->
     <transition name="slide">
-      <c-field label="Data" v-if="aspect !== 2">
-        <date-picker v-model="properties.date" />
-      </c-field>
-    </transition>
-
-    <!-- Time -->
-    <transition name="slide">
-      <c-field label="Hora" v-if="aspect !== 2">
-        <b-timepicker
-          rounded
-          inline
-          :increment-minutes="15"
-          v-model="properties.time"
-          icon="clock">
-        </b-timepicker>
-      </c-field>
+      <div class="date-time-grid">
+        <c-field label="Data" v-if="aspect !== 2" edge focusable label-for="date">
+          <date-picker v-model="properties.date" id="date"/>
+        </c-field>
+        <c-field label="Hora" v-if="aspect !== 2" edge focusable>
+          <b-timepicker
+            rounded
+            inline
+            :increment-minutes="15"
+            v-model="properties.time" >
+          </b-timepicker>
+        </c-field>
+      </div>
     </transition>
 
     <!-- Venue -->

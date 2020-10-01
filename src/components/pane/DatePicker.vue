@@ -3,6 +3,7 @@
     :value="value"
     @input="(date) => $emit('input', date)"
     :placeholder="placeholder"
+    :id="id"
     icon="calendar-alt"
     :min-date="new Date()"
     :max-date="maxDate"
@@ -18,7 +19,8 @@ export default {
 
   props: {
     value: Date,
-    placeholder: String
+    placeholder: String,
+    id: String
   },
 
   computed: {

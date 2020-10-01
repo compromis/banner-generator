@@ -120,21 +120,22 @@
       </div>
     </transition>
 
-    <!-- Date -->
-    <c-field label="Data">
-      <date-picker v-model="properties.date" />
-    </c-field>
-
-    <!-- Time -->
-    <c-field label="Hora">
-      <b-timepicker
-        rounded
-        inline
-        :increment-minutes="15"
-        v-model="properties.time"
-        icon="clock">
-      </b-timepicker>
-    </c-field>
+    <!-- Date and time -->
+    <transition name="slide">
+      <div class="date-time-grid">
+        <c-field label="Data" v-if="aspect !== 2" edge focusable label-for="date">
+          <date-picker v-model="properties.date" id="date"/>
+        </c-field>
+        <c-field label="Hora" v-if="aspect !== 2" edge focusable>
+          <b-timepicker
+            rounded
+            inline
+            :increment-minutes="15"
+            v-model="properties.time" >
+          </b-timepicker>
+        </c-field>
+      </div>
+    </transition>
 
     <!-- Picture -->
     <picture-upload

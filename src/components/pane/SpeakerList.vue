@@ -177,6 +177,15 @@ export default {
     font-size: .85rem;
   }
 
+  .speakers-add {
+    border-top: 1px solid $gray-200;
+  }
+
+  .speakers {
+    border-top: 1px solid $gray-200;
+    margin-top: .75rem;
+  }
+
   .speaker {
     &-item {
       display: grid;
@@ -189,8 +198,10 @@ export default {
         margin-bottom: 0;
       }
 
-      &:first-child {
-        padding-top: .25rem;
+      &:last-child {
+        .speaker-picture, .speaker-description, .speaker-name {
+          border-bottom: 0;
+        }
       }
     }
 
@@ -223,8 +234,8 @@ export default {
       display: grid;
       align-items: stretch;
       padding: $field-padding;
-      border-right: 1px solid $gray-300;
-      border-bottom: 1px solid $gray-300;
+      border-right: 1px solid $gray-200;
+      border-bottom: 1px solid $gray-200;
 
       .control {
         display: flex;
@@ -253,25 +264,27 @@ export default {
       position: absolute;
       top: 0;
       left: 0;
-      padding: .25rem;
+      padding: .5rem;
 
       .button {
         border-radius: 100%;
+        width: 1.25rem;
+        padding: 0;
+        height: 1.25rem !important;
       }
     }
   }
 
-  :not(.accepts-picture) {
+  .c-field:not(.accepts-picture) {
     .speaker-item {
-      grid-template-columns: 3rem 1fr;
-      grid-template-areas:
-        "remove name"
-        "remove description";
+      .c-field-small {
+        padding-left: 1.75rem;
+      }
     }
 
     .speaker-remove {
-      position: relative;
-      grid-area: "remove";
+      top: 50%;
+      transform: translateY(-50%);
     }
   }
 

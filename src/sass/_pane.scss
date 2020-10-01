@@ -172,6 +172,56 @@
   border-radius: 4px !important;
 }
 
+//date and time inputs
+.datepicker {
+  .input {
+    border: 0;
+    background: transparent;
+    border-radius: 0;
+    border-width: 0;
+
+    &:focus, &:active {
+      box-shadow: none !important;
+    }
+  }
+}
+
+.timepicker {
+  padding: 6px 14px;
+  border-bottom: 1px solid $gray-300;
+
+  select, .dropdown-content {
+    padding: 0 !important;
+    background: transparent;
+    font-size: 1rem;
+    font-weight: normal;
+    font-weight: 400 !important;
+    height: auto !important;
+    border: 0;
+
+    .control {
+      font-size: 1rem !important;
+    }
+  }
+
+  select:focus {
+    box-shadow: none;
+  }
+
+  .select {
+    height: auto !important;
+  }
+}
+
+.date-time-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+
+  .c-field:last-child {
+    border-left: 1px solid $gray-200;
+  }
+}
+
 //properly fix this and remove
 .dropdown-content {
   box-shadow: none;

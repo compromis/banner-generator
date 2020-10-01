@@ -114,6 +114,8 @@ export default {
   }
 
   .c-field-small {
+    border-color: $gray-200;
+
     input,
     textarea {
       font-size: .85rem;
@@ -125,6 +127,7 @@ export default {
     }
 
     .c-field-info {
+      margin-bottom: -2px;
       padding: 0.25rem 1rem 0 .75rem;
     }
   }
