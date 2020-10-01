@@ -65,8 +65,9 @@ export default {
     }
 
     .text {
-      padding: 0 35px 0 35px;
+      padding: 35px 35px 0 35px;
       overflow: hidden;
+      font-size: 1.25rem;
     }
 
     .banner-picture {
@@ -79,7 +80,7 @@ export default {
 
     &.aspect-916 {
       .text {
-        padding: 0 30px;
+        padding: 30px 30px 0 30px;
       }
     }
   }
@@ -236,6 +237,12 @@ export default {
           }
         }
       }
+    }
+  }
+
+  .theme-blobs, .theme-blobless {
+    .text-wysiwyg ul li::before {
+      left: 18px;
     }
   }
 </style>

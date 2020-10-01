@@ -91,7 +91,9 @@
       cursor: pointer;
     }
 
-    &:active {
+    &:active,
+    &:focus {
+      outline: 0;
       background: $gray-200;
     }
   }

@@ -8,7 +8,8 @@
         }"
         :style="{
           background: source === 'other' ? customSourceColor : source['color'],
-          color: source !== 'other' && source['color'] === 'white' ? '#353949' : 'white'
+          color: source !== 'other' && source['color'] === 'white' ? '#353949' : 'white',
+          boxShadow: source['color'] === 'white' ? '0 2px 20px #ccc' : ''
         }">
         <img v-if="source !== 'other'" :src="source.logo" />
         <span v-if="source !== 'other'">{{ source['name'] }}</span>
@@ -26,6 +27,7 @@
         :style="{
           background: programme === 'other' ? customProgrammeColor : programme['color'],
           color: programme !== 'other' && programme['color'] === 'white' ? '#353949' : 'white',
+          boxShadow: programme['color'] === 'white' ? '0 2px 20px #ccc' : ''
         }">
         <img v-if="programme !== 'other'" :src="programme.logo" :style="{ width: programme['width']}"/>
         <span v-if="programme !== 'other'">{{ programme['name'] }}</span>

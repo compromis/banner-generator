@@ -67,8 +67,8 @@ export default {
   }
 
   .aspect-916 .headline {
-      left: 20px;
-      right: 20px;
+      left: 10px;
+      right: 10px;
   }
 
   /* Blobs theme */
@@ -144,7 +144,7 @@ export default {
         }
       }
 
-      &.disposition-bottom {
+      &.disposition-top {
         .headline {
           top: 75px;
         }

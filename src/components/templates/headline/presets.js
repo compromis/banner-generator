@@ -73,7 +73,7 @@ const sources = [
     name: 'eldiario.es',
     logo: EldiarioSVG,
     logoHeight: 24,
-    font: fonts.roboto,
+    font: fonts.tiemposHeadline,
     color: '#235690'
   },
   {
@@ -113,7 +113,7 @@ const sources = [
     name: 'Levante',
     logo: LevanteSVG,
     logoHeight: 20,
-    font: fonts.robotoCondensed,
+    font: fonts.gotham,
     color: '#386998'
   },
   {

@@ -24,7 +24,7 @@
       name="subtitle"
       :message="setFieldMessage('subtitle')"
       placeholder="Vicepresidenta de la Generalitat"
-      v-model="properties.overtitle"
+      v-model="properties.subtitle"
       :maxlength="40" />
 
     <!-- Channel -->
@@ -152,6 +152,19 @@
         @touchstart="dimPane(true)"
         @touchend="dimPane(false)" />
     </picture-upload>
+
+    <!-- Hashtag -->
+    <transition name="slide">
+      <c-input-text
+        v-if="!aspect"
+        label="Hashtag"
+        name="hashtag"
+        placeholder="#"
+        @input="updateHashtag"
+        :value="properties.hashtag"
+        :maxlength="properties.localLabel ? 18 : 32"
+        :message="setFieldMessage('hashtag')" />
+    </transition>
 
     <!-- Local label -->
     <transition name="slide">

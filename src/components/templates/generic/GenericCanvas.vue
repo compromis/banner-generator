@@ -94,6 +94,11 @@ export default {
       left: 70px;
       right: 70px;
     }
+
+    &.aspect-916 .text {
+      left: 25px;
+      right: 25px;
+    }
   }
 
   /* Glowy theme */
@@ -110,10 +115,10 @@ export default {
     /* Story */
     &.aspect-916 {
       .text {
-        top: 90px;
+        top: 100px;
         left: 20px;
         right: 20px;
-        bottom: 90px;
+        bottom: 100px;
       }
 
       .banner-picture {

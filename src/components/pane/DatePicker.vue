@@ -8,7 +8,7 @@
     :min-date="new Date()"
     :max-date="maxDate"
     :first-day-of-week="1"
-    :month-names="['Gener', 'Febrer', 'Març', 'Abril', 'Maig', 'Juny', 'Juliol', 'Augost', 'Setembre', 'Octobre', 'Novembre', 'Desembre']"
+    :month-names="['Gener', 'Febrer', 'Març', 'Abril', 'Maig', 'Juny', 'Juliol', 'Augost', 'Setembre', 'Octubre', 'Novembre', 'Desembre']"
     :day-names="['dg', 'dl', 'dt', 'dc', 'dj', 'dv', 'ds']">
   </b-datepicker>
 </template>
