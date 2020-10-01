@@ -38,7 +38,7 @@ export default {
       type: String,
       default: 'orange',
       validator (value) {
-        return ['none', 'black', 'orange', 'feminism', 'lgbt', 'green'].includes(value)
+        return ['custom', 'none', 'black', 'orange', 'feminism', 'lgbt', 'green'].includes(value)
       }
     },
     fullGradient: {

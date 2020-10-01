@@ -199,6 +199,10 @@ export default {
       bottom: 130px;
     }
 
+    &.full-gradient .quote-glyph {
+      color: $white !important;
+    }
+
     &.full-gradient {
       .quote-author {
         text-shadow: none;
