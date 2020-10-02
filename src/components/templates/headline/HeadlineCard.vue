@@ -118,7 +118,7 @@ export default {
       background: $white;
       box-shadow: $raised-shadow;
       border-radius: 8px;
-      padding: 8px 10px;
+      padding: 6px 10px;
     }
   }
 }

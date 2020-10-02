@@ -165,7 +165,7 @@ export default {
     /* Banner on top */
     &.disposition-top {
       .headline {
-        top: 45px;
+        top: 85px;
         bottom: auto;
       }
     }

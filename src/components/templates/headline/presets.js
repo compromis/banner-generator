@@ -72,7 +72,7 @@ const sources = [
     id: 'eldiario',
     name: 'eldiario.es',
     logo: EldiarioSVG,
-    logoHeight: 24,
+    logoHeight: 18,
     font: fonts.tiemposHeadline,
     color: '#235690'
   },
@@ -144,7 +144,7 @@ const sources = [
     id: 'ser',
     name: 'Cadena Ser',
     logo: SerSVG,
-    logoHeight: 24,
+    logoHeight: 20,
     font: fonts.gotham,
     color: '#000'
   },

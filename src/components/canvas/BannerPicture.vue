@@ -114,6 +114,9 @@ export default {
       }
 
       &-full {
+        &.gradient-orange {
+          background: linear-gradient(var(--gradient-orientation, 110deg), rgba($gradient-start, .9), rgba($gradient-end, .8), rgba($gradient-end, .3));
+        }
         &.gradient-black {
           background: rgba($gray-800, .65);
         }
