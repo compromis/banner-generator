@@ -140,7 +140,6 @@ import PaneMixin from '@/mixins/pane-mixin.js'
 import ColorSelector from '@/components/pane/ColorSelector'
 import CTabGroup from '@/components/pane/CTabGroup'
 import CTab from '@/components/pane/CTab'
-import CField from '@/components/pane/CField'
 
 export default {
   name: 'tweet-pane',
@@ -150,8 +149,7 @@ export default {
   components: {
     ColorSelector,
     CTabGroup,
-    CTab,
-    CField
+    CTab
   },
 
   data () {

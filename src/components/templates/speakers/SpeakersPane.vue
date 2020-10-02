@@ -73,7 +73,6 @@
 import PaneMixin from '@/mixins/pane-mixin'
 import DatePicker from '@/components/pane/DatePicker'
 import SpeakerList from '@/components/pane/SpeakerList'
-import CField from '@/components/pane/CField'
 
 export default {
   name: 'speakers-pane',
@@ -82,8 +81,7 @@ export default {
 
   components: {
     DatePicker,
-    SpeakerList,
-    CField
+    SpeakerList
   },
 
   data () {

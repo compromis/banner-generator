@@ -26,11 +26,14 @@
 <script>
 import PaneMixin from '@/mixins/pane-mixin'
 import CaretaSelector from '@/components/pane/CaretaSelector'
-import CField from '@/components/pane/CField'
 
 export default {
   name: 'social-pane',
   mixins: [PaneMixin],
+
+  components: {
+    CaretaSelector
+  },
 
   data () {
     return {
@@ -38,11 +41,6 @@ export default {
         logoStyle: 'normal'
       }
     }
-  },
-
-  components: {
-    CaretaSelector,
-    CField
   },
 
   methods: {

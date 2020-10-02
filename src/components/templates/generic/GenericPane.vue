@@ -74,11 +74,13 @@
     <!-- Frame color  -->
     <color-selector v-model="properties.color" :colors="availableColors[properties.theme]" label="Color" is-rounded />
 
-    <c-field v-if="properties.theme === 'blobless'" class="blobless-gradient-option">
-      <b-switch v-model="properties.fullGradient">
-        Degradat sobre tota la imatge
-      </b-switch>
-    </c-field>
+    <transition name="slide">
+      <c-field v-if="properties.theme === 'blobless'" class="blobless-gradient-option">
+        <b-switch v-model="properties.fullGradient">
+          Degradat sobre tota la imatge
+        </b-switch>
+      </c-field>
+    </transition>
 
     <!-- Hashtag -->
     <transition name="slide">

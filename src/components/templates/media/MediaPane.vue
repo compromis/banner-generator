@@ -184,15 +184,13 @@ import PaneMixin from '@/mixins/pane-mixin.js'
 import presets from './presets'
 import Swatches from 'vue-swatches'
 import DatePicker from '@/components/pane/DatePicker'
-import CField from '@/components/pane/CField'
 
 export default {
   name: 'media-pane',
 
   components: {
     Swatches,
-    DatePicker,
-    CField
+    DatePicker
   },
 
   mixins: [PaneMixin],

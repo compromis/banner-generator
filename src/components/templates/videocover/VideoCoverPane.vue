@@ -80,7 +80,6 @@ import ColorSelector from '@/components/pane/ColorSelector'
 import EmojiPicker from '@/components/pane/EmojiPicker'
 import CTab from '@/components/pane/CTab'
 import CTabGroup from '@/components/pane/CTabGroup'
-import CField from '@/components/pane/CField'
 
 export default {
   name: 'video-cover-pane',
@@ -109,8 +108,7 @@ export default {
     ColorSelector,
     EmojiPicker,
     CTab,
-    CTabGroup,
-    CField
+    CTabGroup
   },
 
   methods: {

@@ -77,7 +77,6 @@ import ThemeSelector from '@/components/pane/ThemeSelector'
 import ColorSelector from '@/components/pane/ColorSelector'
 import CTabGroup from '@/components/pane/CTabGroup'
 import CTab from '@/components/pane/CTab'
-import CField from '@/components/pane/CField'
 
 export default {
   name: 'text-pane',
@@ -90,8 +89,7 @@ export default {
     ThemeSelector,
     ColorSelector,
     CTabGroup,
-    CTab,
-    CField
+    CTab
   },
 
   data () {
