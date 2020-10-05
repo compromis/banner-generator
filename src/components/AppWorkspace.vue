@@ -30,18 +30,15 @@
         <b-button type="is-light" @click="isCardModalActive = false">No, continua editant</b-button>
       </div>
     </b-modal>
-    <v-tour name="workspaceTour" :steps="workspaceSteps" :callbacks="tourCallbacks" :options="{ startTimeout: 500, labels }"></v-tour>
     <loading :active.sync="loadingTemplate" :is-full-page="true" color="#ff6600"></loading>
   </div>
 </template>
 
 <script>
-import Cookies from 'js-cookie'
 import CanvasContainer from './CanvasContainer'
 import Help from './Help'
 import Loading from 'vue-loading-overlay'
 import templates from './templates/templates'
-import { workspaceSteps, labels } from '@/tour'
 import { EventBus } from '@/event-bus'
 import 'vue-loading-overlay/dist/vue-loading.css'
 
@@ -61,12 +58,7 @@ export default {
       selectedTemplate: null,
       loadingTemplate: true,
       isCardModalActive: false,
-      isDownloadable: false,
-      workspaceSteps: workspaceSteps,
-      tourCallbacks: {
-        onStop: this.onTourStop
-      },
-      labels: labels
+      isDownloadable: false
     }
   },
 
@@ -76,10 +68,6 @@ export default {
 
     // Hide loading indicator when template finishes loading
     EventBus.$on('paneLoaded', () => { this.loadingTemplate = false })
-  },
-
-  mounted () {
-    this.startTour()
   },
 
   destroyed () {
@@ -110,18 +98,6 @@ export default {
 
     setIsDownloadable (isDownloadable) {
       this.isDownloadable = isDownloadable
-    },
-
-    onTourStop () {
-      Cookies.set('visited_workspace_tour', 'true', { expires: 365 })
-    },
-
-    startTour () {
-      EventBus.$on('paneLoaded', () => {
-        if (!Cookies.get('visited_workspace_tour') && this.selectedTemplate.id === 'Headline') {
-          this.$tours['workspaceTour'].start()
-        }
-      })
     }
   },
 

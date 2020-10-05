@@ -29,11 +29,8 @@
 </template>
 
 <script>
-import Cookies from 'js-cookie'
-import browser from 'browser-detect'
 import templates from './templates/templates'
 import AppFooter from './AppFooter'
-import { selectorSteps, labels } from '../tour'
 import BrowserWarning from '@/components/utils/BrowserWarning'
 
 export default {
@@ -47,23 +44,7 @@ export default {
   data () {
     return {
       templates,
-      selectorSteps,
-      labels,
-      tourCallbacks: {
-        onStop: this.onTourStop
-      },
       showArchive: false
-    }
-  },
-
-  mounted () {
-    const result = browser()
-    if (!Cookies.get('visited_selector_tour') && !result.mobile) this.$tours['selectorTour'].start()
-  },
-
-  methods: {
-    onTourStop () {
-      Cookies.set('visited_selector_tour', 'true', { expires: 365 })
     }
   }
 }
