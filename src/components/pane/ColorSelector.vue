@@ -1,13 +1,12 @@
 <template>
-  <div class="field">
-    <label class="label" v-show="label">{{ label }}</label>
-    <ul :class="{'color-selector': true, 'rounded' : isRounded }">
-      <li v-if="colors.includes('black')" :class="{'black-bg' : true, 'active': value === 'black' }" @click="$emit('input', 'black')"><span v-if="!isRounded">Aa</span></li>
-      <li v-if="colors.includes('white')" :class="{'white-bg' : true, 'active': value === 'white' }" @click="$emit('input', 'white')"><span v-if="!isRounded">Aa</span></li>
-      <li v-if="colors.includes('orange')" :class="{'orange-bg' : true, 'active': value === 'orange' }" @click="$emit('input', 'orange')"><span v-if="!isRounded">Aa</span></li>
-      <li v-if="colors.includes('lgbt')" :class="{'lgbt-bg' : true, 'active': value === 'lgbt' }" @click="$emit('input', 'lgbt')"><span v-if="!isRounded">Aa</span></li>
-      <li v-if="colors.includes('feminism')" :class="{'feminism-bg' : true, 'active': value === 'feminism' }" @click="$emit('input', 'feminism')"><span v-if="!isRounded">Aa</span></li>
-      <li v-if="colors.includes('green')" :class="{'green-bg' : true, 'active': value === 'green' }" @click="$emit('input', 'green')"><span v-if="!isRounded">Aa</span></li>
+  <div class="c-field">
+    <div v-if="label" class="c-field-info">
+      <label v-show="label">{{ label }}</label>
+    </div>
+    <ul :class="{'color-selector c-field-content': true, 'rounded' : isRounded }">
+      <li v-for="color in colors" :key="color" :class="[`${color}-bg`, { active: value === color }]" @click="$emit('input', color)">
+        <span v-if="!isRounded">Aa</span>
+      </li>
     </ul>
   </div>
 </template>
@@ -38,7 +37,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../sass/variables";
+@import "../../sass/variables";
 
 .color-selector {
   display: grid;
@@ -66,6 +65,23 @@ export default {
 
     &.active {
       box-shadow: 0 0 0 2px $primary;
+    }
+  }
+
+  .none-bg {
+    position: relative;
+    background: $gray-100;
+    color: $white;
+
+    &::before {
+      content: '';
+      height: 2px;
+      width: 23px;
+      background: $red;
+      position: absolute;
+      top: 13px;
+      left: 1px;
+      transform: rotate(-45deg);
     }
   }
 

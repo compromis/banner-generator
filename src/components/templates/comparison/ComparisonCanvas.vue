@@ -5,18 +5,30 @@
       'banner-canvas',
       'aspect-' + aspect,
       aspect === '11' || banner.card ? 'disposition-' + banner.disposition : '',
-      banner.card ? 'cards' : 'no-cards',
-      banner.localLabel && banner.hasLocalLabel ? 'has-local-label' : '',
-      'blobs-' + color
+      banner.invertOrder ? 'comparison--inverted' : ''
     ]"
     v-if="banner">
-    <div class="comparison-images">
-      <img :src="banner.pictureBeforePreview" alt="Imatge" v-if="banner.pictureBeforePreview" :style="objectPositionBefore" />
-      <img :src="banner.pictureAfterPreview" alt="Imatge" v-if="banner.pictureAfterPreview" :style="objectPositionAfter" />
+    <div :class="['comparison-images', banner.invertOrder ? 'comparison-images--inverted' : '']">
+      <banner-picture
+        :picture="banner.pictureBeforePreview"
+        :picture-position="objectPositionBefore"
+        :style="beforeGradientColor"
+        :height="600"
+        theme="glowy"
+        color="custom"
+        class="banner-picture-before"
+        glow-size="sm" />
+      <banner-picture
+        :picture="banner.pictureAfterPreview"
+        :picture-position="objectPositionAfter"
+        :style="{'--gradient-orientation' : '0deg'}"
+        :height="600"
+        theme="glowy"
+        color="orange"
+        class="banner-picture-after"
+        glow-size="sm" />
     </div>
-    <div class="blob blob-1"  :style="banner.source === 'other' ? { background: banner.customSourceColor } : banner.source ? { background: banner.source.color } : { background: 'gray' }"></div>
-    <div class="blob blob-2"></div>
-    <div class="before-party before-party--custom" v-if="banner.source === 'other'" >
+    <div :class="['before-party', 'before-party--custom']" v-if="banner.source === 'other'" :style="{color: banner.customSourceColor}">
       {{ banner.customSource }}
     </div>
     <div class="before-party" v-else-if="banner.source" >
@@ -36,25 +48,29 @@
         {{ banner.textAfter | formatString }}
       </div>
     </div>
-    <div class="logo">
-      <compromis-logo :mono="banner.card ? true : false" />
-      <div :class="{ 'logo-local-label': true, 'logo-local-label--long': banner.localLabel.length > 18 }" v-if="banner.localLabel && banner.hasLocalLabel">
-        {{ banner.localLabel | formatLocal }}
-      </div>
-    </div>
-    <div class="hashtag" v-if="banner.hashtag && aspect === '11'">
-      {{ banner.hashtag }}
-    </div>
+    <banner-frame
+      theme="glowy"
+      :hashtag="banner.hashtag"
+      :local-label="banner.localLabel"
+      :logo-align="banner.invertOrder ? 'left' : 'right' "
+       />
   </div>
 </template>
 
 <script>
 import CanvasMixin from '@/mixins/canvas-mixin.js'
+import BannerPicture from '@/components/canvas/BannerPicture'
+import BannerFrame from '@/components/canvas/BannerFrame'
 
 export default {
   name: 'comparison-canvas',
 
   mixins: [CanvasMixin],
+
+  components: {
+    BannerFrame,
+    BannerPicture
+  },
 
   computed: {
     objectPositionAfter: function () {
@@ -66,9 +82,18 @@ export default {
       return { objectPosition }
     },
     smallestFontSize () {
-      const before = this.fontSize(this.banner.textBefore, 45, 30, 160, this.banner.textSize)
-      const after = this.fontSize(this.banner.textAfter, 45, 30, 160, this.banner.textSize)
+      const before = this.fontSize(this.banner.textBefore, 40, 25, 160, this.banner.textSize)
+      const after = this.fontSize(this.banner.textAfter, 40, 25, 160, this.banner.textSize)
       return before < after ? before : after
+    },
+    beforeGradientColor () {
+      const { banner } = this
+      if (!banner.source) return
+      return {
+        '--gradient-color': banner.source === 'other'
+          ? banner.customSourceColor
+          : banner.source['color']
+      }
     }
   }
 }
@@ -92,61 +117,87 @@ export default {
     &-images {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      grid-column-gap: 12px;
+      grid-column-gap: 30px;
       align-items: stretch;
       position: absolute;
+      padding: 30px;
       top: 0;
       right: 0;
       left: 0;
       bottom: 0;
 
-      img {
-        object-fit: cover;
+      .banner-picture-before {
+        align-self: end;
+        --gradient-orientation: 180deg;
       }
     }
 
     &-text {
       line-height: 1.1;
       word-wrap: break-word;
-      background: $white;
       width: 265px;
       padding: 16px;
-      border-radius: $card-radius;
-      box-shadow: $raised-shadow;
       position: absolute;
       letter-spacing: -.5px;
+      color: $white;
 
       &-before {
         top: 90px;
-        left: 30px;
+        left: 35px;
       }
 
       &-after {
         bottom: 90px;
-        right: 30px;
+        right: 45px;
+      }
+    }
+
+    &--inverted {
+      .banner-picture-before {
+        grid-row: 1;
+        grid-column: 2;
+        --gradient-orientation: 180deg;
+      }
+
+      .banner-picture-after {
+        grid-row: 1;
+        grid-column: 1;
+        --gradient-orientation: 180deg;
+      }
+
+      .before-party {
+        right: 35px;
+        left: unset;
+      }
+
+      .comparison-text {
+        &-after {
+          bottom: 90px;
+          left: 35px;
+          right: auto;
+          top: auto;
+        }
+
+        &-before {
+          top: 90px;
+          right: 45px;
+          bottom: auto;
+          left: auto;
+        }
       }
     }
   }
 
-  .blob {
-    &-1 {
-      top: -82%;
-      right: 58%;
-      z-index: 10;
-    }
-
-    &-2 {
-      left: 58%;
-      bottom: -83%;
-      z-index: 10;
-    }
+  .banner-picture::v-deep .glowy-subject,
+  .banner-picture::v-deep .glowy-ghost  {
+    min-width: unset;
   }
 
   .before-party {
     z-index: 20;
     position: absolute;
-    left: 35px;
     top: 25px;
+    left: 35px;
 
     &--custom {
       margin-bottom: 4px;
@@ -155,17 +206,4 @@ export default {
       font-weight: bold;
     }
   }
-
-  .has-local-label {
-    .blob-2 {
-      left: 42%;
-      bottom: -81%;
-    }
-  }
-
-  .logo {
-   color: white;
-    z-index: 20;
-  }
-
 </style>

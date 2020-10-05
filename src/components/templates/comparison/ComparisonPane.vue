@@ -2,68 +2,69 @@
   <div :class="{ 'pane comparison-pane': true, 'pane-dimmed': paneDimmed }">
 
     <!-- Party -->
-    <b-field
-      id="source-field"
-      label="Partit Abans"
-      :type="setFieldType('source')"
-      :message="setFieldMessage('source')">
-      <b-select placeholder="Selecciona un partit" @input="updateSource" expanded>
-        <option
-          v-for="source in presets"
-          :value="source.id"
-          :key="source.id"
-          :selected="properties.source === source.id">
-          {{ source.name }}
-        </option>
-        <option
-          value="other"
-          :selected="properties.source === 'other'">
-          Altre...
-        </option>
-      </b-select>
-    </b-field>
+    <c-select
+      name="source"
+      label="Partit a comparar"
+      :message="setFieldMessage('source')"
+      placeholder="Selecciona un partit"
+      @input="updateSource"
+      :value="properties.source">
+      <option
+        v-for="source in presets"
+        :value="source.id"
+        :key="source.id"
+        :selected="properties.source === source.id">
+        {{ source.name }}
+      </option>
+      <option
+        value="other"
+        :selected="properties.source === 'other'">
+        Altre...
+      </option>
+    </c-select>
 
     <!-- Other party -->
     <transition name="slide">
       <div v-if="properties.source === 'other'" class="source-input-group">
-        <b-field
-          class="source-input-name"
+        <div class="c-field">
+          <div class="c-field-info">
+            <label>Color</label>
+          </div>
+          <div class="c-field-content-sm">
+            <swatches v-model="properties.customSourceColor"></swatches>
+          </div>
+        </div>
+        <c-input-text
           label="Formació política"
-          :type="setFieldType('customSource')"
-          :message="setFieldMessage('customSource')">
-          <b-input placeholder="Partit local" v-model="properties.customSource" maxlength="23"></b-input>
-        </b-field>
-        <b-field label="Color" class="source-input-color">
-          <swatches v-model="properties.customSourceColor"></swatches>
-        </b-field>
+          name="customSource"
+          placeholder="Partit local"
+          v-model="properties.customSource"
+          :maxlength="30"
+          :message="setFieldMessage('customSource')"
+          class="source-input-name" />
       </div>
     </transition>
 
     <!-- Before Text  -->
-    <b-field
-      label="Text Abans"
-      :type="setFieldType('textBefore')"
-      :message="setFieldMessage('textBefore')">
-      <b-input
-        type="textarea"
-        placeholder="L'ús de la bici està per damunt de 9000..."
-        v-model="properties.textBefore"
-        maxlength="160">
-      </b-input>
-    </b-field>
+    <c-input-text
+      label="Text de l'altre partit"
+      name="textBefore"
+      type="textarea"
+      placeholder="Mireu què mal ho han fet..."
+      v-model="properties.textBefore"
+      :maxlength="160"
+      :message="setFieldMessage('textBefore')" />
 
     <!-- Before Picture -->
     <picture-upload
       id="picture-field"
       field-name="pictureBefore"
+      label="Foto de l'altre partit"
       :picture="properties.pictureBefore"
       :display-errors="displayErrors"
       :errors="errors"
       @upload="(image) => updateImageComparison('Before', image)"
-      @delete="properties.pictureBefore = null; properties.pictureBeforePreview = null" />
-
-    <!-- Before Picture position -->
-    <b-field id="picture-position-field" label="Posició de la imatge" class="range">
+      @delete="properties.pictureBefore = null; properties.pictureBeforePreview = null">
       <range-slider
         name="points"
         :min="0"
@@ -71,33 +72,28 @@
         v-model="properties.pictureBeforePos"
         @touchstart="dimPane(true)"
         @touchend="dimPane(false)" />
-    </b-field>
+    </picture-upload>
 
     <!-- After Text  -->
-    <b-field
-      label="Text Després"
-      :type="setFieldType('textAfter')"
-      :message="setFieldMessage('textAfter')">
-      <b-input
-        type="textarea"
-        placeholder="L'ús de la bici està per damunt de 9000..."
-        v-model="properties.textAfter"
-        maxlength="160">
-      </b-input>
-    </b-field>
+    <c-input-text
+      label="Text de Compromís"
+      name="textAfter"
+      type="textarea"
+      placeholder="I què bé ho fem"
+      v-model="properties.textAfter"
+      :maxlength="160"
+      :message="setFieldMessage('textAfter')" />
 
     <!-- After Picture -->
     <picture-upload
       id="picture-field"
       field-name="pictureAfter"
+      label="Foto de Compromís"
       :picture="properties.pictureAfter"
       :display-errors="displayErrors"
       :errors="errors"
       @upload="(image) => updateImageComparison('After', image)"
-      @delete="properties.pictureAfter = null; properties.pictureAfterPreview = null" />
-
-    <!-- After Picture position -->
-    <b-field id="picture-position-field" label="Posició de la imatge" class="range">
+      @delete="properties.pictureAfter = null; properties.pictureAfterPreview = null">
       <range-slider
         name="points"
         :min="0"
@@ -105,33 +101,35 @@
         v-model="properties.pictureAfterPos"
         @touchstart="dimPane(true)"
         @touchend="dimPane(false)" />
-    </b-field>
+    </picture-upload>
 
     <!-- Text size -->
-    <b-field label="Tamany del text" class="range">
+    <c-field label="Tamany del text" class="range-field" compact>
       <range-slider
         name="points"
-        :min="50"
-        :max="150"
+        :min="75"
+        :max="125"
         v-model="properties.textSize"
         @touchstart="dimPane(true)"
         @touchend="dimPane(false)" />
-    </b-field>
+    </c-field>
 
     <!-- Local label -->
-    <transition name="slide">
-      <div v-if="!aspect" class="field" id="local-label-field">
-        <b-switch v-model="properties.hasLocalLabel" @input="properties.hashtag = properties.hashtag.substring(0, 18)">
-          Afegir text al logo
-        </b-switch>
-        <transition name="slide">
-          <div v-if="properties.hasLocalLabel" class="local-label">
-            <b-field>
-              <b-input placeholder="Alacant" v-model="properties.localLabel" maxlength="48"></b-input>
-            </b-field>
-          </div>
-        </transition>
-      </div>
+    <c-field>
+      <b-switch v-model="properties.invertOrder">
+        Invertir ordre de partits
+      </b-switch>
+    </c-field>
+
+    <!-- Local label -->
+     <transition name="slide">
+      <c-input-text
+        v-if="!aspect"
+        label="Text logo"
+        name="localLabel"
+        placeholder="Alacant"
+        v-model="properties.localLabel"
+        :maxlength="48" />
     </transition>
   </div>
 </template>
@@ -164,7 +162,8 @@ export default {
         pictureBeforePos: 50,
         pictureAfter: null,
         pictureAfterPreview: null,
-        pictureAfterPos: 50
+        pictureAfterPos: 50,
+        invertOrder: false
       },
       presets: presets
     }
@@ -210,38 +209,16 @@ export default {
   @import "../../../sass/variables";
 
   .comparison-pane {
-    .hashtag {
-      margin-top: .25rem;
-    }
-
-    .local-label {
-      margin-top: .75rem;
-    }
-
     .source-input {
       &-group {
         display: flex;
-
-        label {
-          font-size: .85rem;
-          color: $gray-600;
-        }
       }
 
       &-name {
         flex-grow: 1;
         order: 1;
+        border-bottom: 1px $gray-300 solid !important;
       }
-
-      &-color {
-        margin-right: .5rem;
-      }
-    }
-
-    .vue-swatches__trigger {
-      height: 36px !important;
-      width: 36px !important;
-      border-radius: 4px !important;
     }
   }
 </style>

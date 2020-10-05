@@ -34,7 +34,7 @@ import browser from 'browser-detect'
 import templates from './templates/templates'
 import AppFooter from './AppFooter'
 import { selectorSteps, labels } from '../tour'
-import BrowserWarning from '../utils/BrowserWarning'
+import BrowserWarning from '@/components/utils/BrowserWarning'
 
 export default {
   name: 'template-selector',
@@ -46,12 +46,12 @@ export default {
 
   data () {
     return {
-      templates: templates,
-      selectorSteps: selectorSteps,
+      templates,
+      selectorSteps,
+      labels,
       tourCallbacks: {
         onStop: this.onTourStop
       },
-      labels: labels,
       showArchive: false
     }
   },
@@ -117,31 +117,12 @@ export default {
       letter-spacing: -1px;
       width: 15rem;
       height: 15rem;
-      border-radius: 1rem;
+      border-radius: 1.5rem;
       box-shadow: $default-shadow;
       transition: .2s ease-in-out;
 
       .icon {
         transition: color .5s ease-in-out;
-      }
-
-      &:hover {
-        box-shadow: $raised-shadow;
-        transform: rotate($rotation) scale(1.05);
-
-        .template-item {
-          &-name,
-          &-icon .icon {
-            background: linear-gradient(45deg, $gradient-start, $gradient-end);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-
-            svg * {
-              fill: url(#compromisGradient) !important;
-            }
-          }
-        }
       }
 
       &:active {
@@ -162,11 +143,7 @@ export default {
         color: $gray-500;
         width: 6rem;
         height: 6rem;
-        border-radius: .5rem;
-
-        .icon {
-          transform: scale(1.5);
-        }
+        border-radius: 1rem;
       }
 
       &-name {
@@ -174,7 +151,7 @@ export default {
         position: absolute;
         bottom: 0;
         left: 0;
-        padding: 1rem;
+        padding: 1rem 1.25rem;
       }
 
       &-label {
@@ -205,27 +182,71 @@ export default {
     }
   }
 
+  @media (min-width: $xs-breakpoint) {
+    .template-selector {
+      .template-item {
+        &:hover {
+          box-shadow: $raised-shadow;
+          transform: rotate($rotation) scale(1.05);
+
+          .template-item {
+            &-name,
+            &-icon .icon {
+              background: linear-gradient(45deg, $gradient-start, $gradient-end);
+              background-clip: text;
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;
+
+              svg * {
+                fill: url(#compromisGradient) !important;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
   @media (max-width: $xs-breakpoint) {
     .template-selector {
       h2 {
         font-size: 2.25rem;
-        margin-top: 4rem;
-        width: 18rem;
+        max-width: 18rem;
       }
 
       ul {
         justify-content: center;
+        padding: 1rem;
+
+        li {
+          width: 100%;
+        }
       }
 
       .template-item {
-        width: 10rem;
-        height: 10rem;
+        width: auto;
+        height: 8rem;
         margin: .5rem;
         border-radius: .5rem;
 
+        &-icon {
+          top: 1rem;
+          bottom: 1rem;
+          left: 1rem;
+          margin: 0;
+
+          .icon {
+            transform: scale(0.75);
+          }
+        }
+
         &-name {
-          font-size: 1rem;
-          padding: .75rem;
+          font-size: 1.25rem;
+          padding: 0;
+          left: 8rem;
+          top: 50%;
+          bottom: unset;
+          transform: translateY(-50%);
         }
       }
     }

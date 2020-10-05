@@ -1,14 +1,16 @@
 <template>
-  <input
-    class="slider"
-    type="range"
-    :name="name"
-    :min="min"
-    :max="max"
-    :value="value"
-    @input="updateValue"
-    @touchstart="$emit('touchstart')"
-    @touchend="$emit('touchend')" />
+  <div class="range-slider">
+    <input
+      class="slider"
+      type="range"
+      :name="name"
+      :min="min"
+      :max="max"
+      :value="value"
+      @input="updateValue"
+      @touchstart="$emit('touchstart')"
+      @touchend="$emit('touchend')" />
+  </div>
 </template>
 
 <script>
@@ -31,17 +33,24 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../sass/variables";
+@import "../../sass/variables";
+
+.range-slider {
+  margin: 0 -.5rem;
+  padding: 0 .5rem;
+  border-radius: .5rem;
+}
 
 .slider {
   appearance: none;
   width: 100%;
-  height: .3rem;
+  height: 5px;
   background: $gray-300;
   border-radius: 3rem;
   outline: none;
   opacity: 1;
   transition: opacity .2s;
+  margin: 1.75rem 0 1rem;
 }
 
 .slider::-webkit-slider-thumb {

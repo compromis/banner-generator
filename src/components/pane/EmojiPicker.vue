@@ -1,21 +1,5 @@
 <template>
-  <div class="emoji-picker">
-    <label class="label">Emojis</label>
-    <twemoji-picker
-      :pickerWidth="320"
-      :pickerHeight="220"
-      :emojiData="emojiAllData"
-      :emojiGroups="emojiGroups"
-      :skinsSelection="true"
-      :recentEmojisFeat="true"
-      recentEmojisStorage="local"
-      twemojiExtension=".svg"
-      twemojiFolder="svg"
-      @emojiImgAdded="addEmoji">
-      <template v-slot:twemoji-picker-button>
-        <b-button extended>😉Afegeix emojis</b-button>
-      </template>
-    </twemoji-picker>
+  <div class="c-field emoji-picker">
     <ul class="emojis">
       <li v-for="(emoji, i) in value" :key="i">
         <span v-html="emoji.tag" class="emoji-img"></span>
@@ -28,6 +12,21 @@
         <b-button @click="remove(i)" size="is-small" type="is-danger" icon-right="times"></b-button>
       </li>
     </ul>
+    <twemoji-picker
+      :pickerWidth="260"
+      :pickerHeight="220"
+      :emojiData="emojiAllData"
+      :emojiGroups="emojiGroups"
+      :skinsSelection="true"
+      :recentEmojisFeat="true"
+      recentEmojisStorage="local"
+      twemojiExtension=".svg"
+      twemojiFolder="svg"
+      @emojiImgAdded="addEmoji">
+      <template v-slot:twemoji-picker-button>
+        <button class="c-button">😉Afegeix emojis</button>
+      </template>
+    </twemoji-picker>
   </div>
 </template>
 
@@ -74,29 +73,32 @@ export default {
 </script>
 
 <style lang="scss">
-  @import "../sass/variables";
+  @import "../../sass/variables";
 
   .emoji-picker {
-    margin-bottom: 1rem;
+    button {
+      background: $white;
+    }
 
     .emojis {
-      margin-top: .5rem;
+      background: $white;
 
       li {
         display: grid;
         grid-template-columns: 22px 1fr auto auto;
         gap: .25rem;
         border-bottom: 1px $gray-200 solid;
-        padding: .5rem 0;
+        padding: .75rem $field-padding;
         align-content: center;
+
+        .emoji-img {
+          display: flex;
+          align-content: center;
+        }
 
         img {
           display: block;
           margin: 0;
-        }
-
-        &:last-child {
-          border-bottom: 0;
         }
       }
     }
@@ -149,5 +151,24 @@ export default {
     border: 0;
     border-top: 1px $gray-200 solid;
     border-left: 1px $gray-200 solid;
+  }
+
+  #emoji-popover-search {
+    background-color: white;
+    border-radius: 0;
+    margin: 0;
+  }
+
+  #emoji-container > #emoji-popup #emoji-popover-search > #search-header {
+    border-bottom: 1px solid $gray-200;
+    border-radius: 0;
+  }
+
+  #emoji-container > #emoji-popup #emoji-popover-search > #search-header > span {
+    padding: 8px 10px;
+  }
+
+  #emoji-container > #emoji-popup #emoji-popover-search > #search-header > input {
+    margin: 0;
   }
 </style>

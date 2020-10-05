@@ -1,11 +1,8 @@
 <template>
   <div class="workspace">
-    <app-nav
-      class="nav"
-      :is-card-modal-active="isCardModalActive"
-      :template-name="selectedTemplate.name"
-      @back="back"
-      @hide="isCardModalActive = false" />
+    <div class="toolbar">
+      <b-button to="/" tag="router-link" icon-left="chevron-left" type="is-text">Enrere</b-button>
+    </div>
     <component
       class="pane"
       :is="selectedTemplate.components.pane"
@@ -21,6 +18,18 @@
       id="help-button"
       class="help-block"
       :template="selectedTemplate" />
+    <b-modal :active="isCardModalActive" @close="isCardModalActive = false" :width="640" scroll="keep">
+      <div class="card content">
+        <b-icon icon="exclamation-triangle" size="is-large" />
+        <h2>Atenció</h2>
+        <p>
+          Vols tancar l'editor i tornar a la pantalla d'escollir tarja?
+          Es perdran tots els canvis.
+        </p>
+        <b-button ref="confirm" type="is-primary" @click="back">Si, tanca</b-button>
+        <b-button type="is-light" @click="isCardModalActive = false">No, continua editant</b-button>
+      </div>
+    </b-modal>
     <v-tour name="workspaceTour" :steps="workspaceSteps" :callbacks="tourCallbacks" :options="{ startTimeout: 500, labels }"></v-tour>
     <loading :active.sync="loadingTemplate" :is-full-page="true" color="#ff6600"></loading>
   </div>
@@ -28,7 +37,6 @@
 
 <script>
 import Cookies from 'js-cookie'
-import AppNav from './AppNav'
 import CanvasContainer from './CanvasContainer'
 import Help from './Help'
 import Loading from 'vue-loading-overlay'
@@ -41,7 +49,6 @@ export default {
   name: 'app-workspace',
 
   components: {
-    AppNav,
     CanvasContainer,
     Help,
     Loading
@@ -82,6 +89,17 @@ export default {
   watch: {
     '$route': function (newRoute) {
       this.selectedTemplate = this.templates.find(template => template.id.toLowerCase() === newRoute.params.pathMatch)
+    },
+    // Autofocus default button on modal shown
+    // Bring focus back to opener button on modal closed
+    watch: {
+      isCardModalActive: function (isActive) {
+        const button = isActive ? 'confirm' : 'close'
+
+        this.$nextTick(() => {
+          this.$refs[button].$el.focus()
+        })
+      }
     }
   },
 
@@ -124,12 +142,13 @@ export default {
 
  .workspace {
     display: grid;
-    grid-template-columns: 21rem 1fr;
+    grid-template-columns: 22rem 1fr;
     grid-template-rows: auto 1fr;
     grid-template-areas:
       "nav nav"
       "pane canvas";
-    align-items: center;
+    align-items: stretch;
+    background: $gray-lightest;
     position: fixed;
     top: $navbar-height;
     left: 0;
@@ -142,12 +161,13 @@ export default {
     }
 
     .pane {
+      display: flex;
       grid-area: pane;
-      padding: 2rem 1rem 2rem 2rem;
       background-color: $white;
-      box-shadow: 0 7px 25px -16px;
-      overflow-y: scroll;
-      align-self: stretch;
+      border-right: 1px $gray-300 solid;
+      width: 100%;
+      overflow-y: auto;
+      flex-direction: column;
 
       @include scrollbar();
     }
@@ -165,10 +185,36 @@ export default {
 
     .help-block {
       position: absolute;
-      top: 4rem;
+      top: 1rem;
       right: 1.5rem;
     }
  }
+
+  .card {
+    padding: 2rem;
+    border-radius: 1rem;
+
+    .button {
+      margin-right: 1rem;
+    }
+
+    p {
+      display: block;
+    }
+
+    h2 {
+      display: inline;
+    }
+
+    .icon.is-large {
+      margin-left: -.75rem;
+      margin-top: -.75rem;
+    }
+  }
+
+  .toolbar {
+    display: none;
+  }
 
   @media (max-width: $xs-breakpoint) {
     .workspace {
@@ -186,6 +232,11 @@ export default {
         top: 100px;
         z-index: 10;
         width: 100%;
+        padding: 0;
+
+        .b-tabs {
+          margin: 0 !important;
+        }
       }
 
       .nav {
@@ -201,20 +252,47 @@ export default {
         box-shadow: 0 -.4rem 1.7rem -.3rem rgba($gray-900, .15),
           0 -.2rem 1rem -.5rem rgba($gray-900, .2),
           0 .4rem 1rem -.4rem rgba($gray-900, .015);
-        border-radius: 1.5rem 1.5rem 0 0;
-        overflow: visible;
-        padding: 1.5rem 1rem;
+        border-radius: 1rem 1rem 0 0;
         width: 100vw;
+        margin: 0;
+        max-height: unset;
+        overflow: hidden;
       }
 
       .help-block {
         position: fixed;
         top: 3.5rem;
-        right: 10rem;
+        right: 9rem;
         z-index: 35;
 
         .button.is-text {
           color: $white;
+        }
+      }
+
+      .toolbar {
+        display: flex;
+        position: fixed;
+        top: 3.25rem;
+        left: 0;
+        right: 0;
+        height: 3rem;
+        background: $gray-800;
+        align-items: center;
+        padding: 0 1rem;
+
+        .button {
+          &.is-text {
+            color: $white;
+            text-decoration: none;
+            margin-left: -.75rem;
+
+            &:active,
+            &:focus {
+              color: $white;
+              background-color: rgba($white, 0.35);
+            }
+          }
         }
       }
     }

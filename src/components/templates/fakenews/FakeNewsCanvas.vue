@@ -6,7 +6,6 @@
       'aspect-' + aspect,
       aspect === '11' ? 'disposition-' + banner.disposition : '',
       banner.localLabel && banner.hasLocalLabel ? 'has-local-label' : '',
-      'blobs-' + color
     ]"
     v-if="banner">
     <div class="blob-image">
@@ -14,32 +13,30 @@
       <span class="stamp stamp-over">{{ banner.stamp }}</span>
       <img :src="banner.picturePreview" alt="Imatge" v-if="banner.picturePreview" :style="objectPosition" />
     </div>
-    <div class="blob blob-1"></div>
-    <div class="blob blob-2"></div>
     <div class="text" v-if="banner.text">
       <div class="text-holder" contenteditable>
         <div class="text-lines" :style="{ fontSize: aspect === '11' ? fontSize(banner.text, 50, 30, 140) : fontSize(banner.text, 50, 22, 140) }">{{ banner.text | formatString }}</div>
       </div>
     </div>
-    <div class="logo">
-      <compromis-logo :mono="true" />
-      <div :class="{ 'logo-local-label': true, 'logo-local-label--long': banner.localLabel.length > 18 }" v-if="banner.localLabel && banner.hasLocalLabel">
-        {{ banner.localLabel | formatLocal }}
-      </div>
-    </div>
-    <div class="hashtag" v-if="aspect === '11'">
-      {{ banner.hashtag }}
-    </div>
+    <banner-frame
+      theme="blobs"
+      :local-label="banner.localLabel"
+      :aspect="aspect" />
   </div>
 </template>
 
 <script>
 import CanvasMixin from '@/mixins/canvas-mixin.js'
+import BannerFrame from '@/components/canvas/BannerFrame'
 
 export default {
-  name: 'generic-canvas',
+  name: 'fake-news-canvas',
 
-  mixins: [CanvasMixin]
+  mixins: [CanvasMixin],
+
+  components: {
+    BannerFrame
+  }
 }
 </script>
 

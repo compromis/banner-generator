@@ -7,7 +7,7 @@ import la2 from './logos/channels/la2.png'
 import alacantiTv from './logos/channels/alacantitv.jpg'
 import horas24 from './logos/channels/24h.jpg'
 import antena3 from './logos/channels/antena3.jpg'
-import apunt from './logos/channels/apunt.jpg'
+import apunt from './logos/channels/apunt.png'
 import cuatro from './logos/channels/cuatro.png'
 import la8mediterraneo from './logos/channels/la8mediterraneo.jpg'
 import laPoblaTv from './logos/channels/lapoblatv.jpg'
@@ -23,16 +23,20 @@ import teleSafor from './logos/channels/telesafor.jpg'
 import teleSagunto from './logos/channels/telesagunto.jpg'
 
 import cadenaSer from '../headline/logos/ser.svg'
-import rne from './logos/channels/rne.jpg'
+import rne from './logos/channels/rne.svg'
 import ondaCero from './logos/channels/ondacero.png'
 
 import radioPego from './logos/channels/radiopego.png'
 
 import desayunos from './logos/programme/desayunos.jpeg'
 import apuntNtc from './logos/programme/apuntntc.png'
-import assumptesInterms from './logos/programme/assumptesinterns.jpg'
 import docs from './logos/programme/docs.jpg'
 import espejoPublico from './logos/programme/espejopublico.svg'
+
+import twitter from './logos/channels/twitter.svg'
+import facebook from './logos/channels/facebook.svg'
+import youtube from './logos/channels/youtube.svg'
+import instagram from './logos/channels/instagram.svg'
 
 const sources = [
   {
@@ -42,23 +46,20 @@ const sources = [
         id: 'apunt',
         name: 'À Punt',
         logo: apunt,
+        color: 'black',
         programmes: [
-          {
-            id: 'assumptesinterns',
-            name: 'Assumptes Interns',
-            logo: assumptesInterms,
-            width: '100px'
-          },
           {
             id: 'docs',
             name: 'Docs',
-            logo: docs
+            logo: docs,
+            color: 'white'
           },
           {
             id: 'apuntntc',
-            name: 'À punt Notícies',
+            name: 'Notícies',
             logo: apuntNtc,
-            width: '88px'
+            width: '105px',
+            color: 'white'
           }
         ]
       }
@@ -69,7 +70,7 @@ const sources = [
     channels: [
       {
         id: 'la1',
-        name: 'La 1 TVE',
+        name: 'La 1',
         logo: la1,
         color: 'white',
         programmes: [
@@ -77,27 +78,29 @@ const sources = [
             id: 'desayunos',
             name: 'Los desayunos de TVE',
             logo: desayunos,
-            color: 'black',
-            width: '100px'
+            color: 'white',
+            width: '90px'
           }
         ]
       },
       {
         id: 'la2',
-        name: 'La 2 TVE',
+        name: 'La 2',
         logo: la2,
+        color: 'white',
         programmes: []
       },
       {
         id: 'antena3',
         name: 'Antena 3',
         logo: antena3,
+        color: '#ff7328',
         programmes: [
           {
             id: 'espejopublico',
             name: 'Espejo Público',
             logo: espejoPublico,
-            color: '#ddd',
+            color: 'white',
             padding: '5px'
           }
         ]
@@ -107,18 +110,20 @@ const sources = [
         name: 'Cuatro',
         logo: cuatro,
         programmes: [],
-        color: 'white'
+        color: '#ff0000'
       },
       {
         id: 'telecinco',
         name: 'Telecinco',
         logo: telecinco,
+        color: '#00a5db',
         programmes: []
       },
       {
         id: 'lasexta',
         name: 'laSexta',
         logo: laSexta,
+        color: '#293b47',
         programmes: [
           {
             id: 'noche',
@@ -139,6 +144,7 @@ const sources = [
         id: '24h',
         name: '24h tve',
         logo: horas24,
+        color: 'white',
         programmes: []
       }
     ]
@@ -153,23 +159,60 @@ const sources = [
         name: 'Cadena SER',
         logo: cadenaSer,
         padding: '5px',
+        color: '#293b47',
         programmes: []
       },
       {
         id: 'ondacero',
         name: 'Onda Cero',
         logo: ondaCero,
+        color: '#293b47',
         programmes: []
       },
       {
         id: 'rne',
         name: 'Ràdio Nacional',
         logo: rne,
+        color: 'linear-gradient(45deg, #97233f 0%, #ff0000 100%)',
         programmes: []
       }
     ]
   },
 
+  // xarxes socials
+  {
+    name: 'Xarxes Socials',
+    channels: [
+      {
+        id: 'twitter',
+        name: 'Twitter',
+        logo: twitter,
+        color: '#1da1f2',
+        programmes: []
+      },
+      {
+        id: 'instagram',
+        name: 'Instagram',
+        logo: instagram,
+        color: 'linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%)',
+        programmes: []
+      },
+      {
+        id: 'youtube',
+        name: 'Youtube',
+        logo: youtube,
+        color: 'red',
+        programmes: []
+      },
+      {
+        id: 'facebook',
+        name: 'Facebook',
+        logo: facebook,
+        color: '#1778F2',
+        programmes: []
+      }
+    ]
+  },
   // televisions locals
   {
     name: 'Televisions Locals',
@@ -178,24 +221,28 @@ const sources = [
         id: 'alacantitv',
         name: 'Alacantí Tv',
         logo: alacantiTv,
+        color: 'white',
         programmes: []
       },
       {
         id: 'la8mediterraneo',
         name: 'la8 Mediterráneo',
         logo: la8mediterraneo,
+        color: 'white',
         programmes: []
       },
       {
         id: 'lapoblatv',
         name: 'La Pobla TV',
         logo: laPoblaTv,
+        color: 'white',
         programmes: []
       },
       {
         id: 'levantetv',
         name: 'Levante TV',
         logo: levanteTv,
+        color: 'white',
         programmes: []
       },
       {
@@ -209,37 +256,42 @@ const sources = [
         id: 'tele7',
         name: 'Tele 7 València',
         logo: tele7,
+        color: '#eb7201',
         programmes: []
       },
       {
         id: 'teleelx',
         name: 'TeleElx',
         logo: teleElx,
+        color: '#d13138',
         programmes: []
       },
       {
         id: 'teleorihuela',
         name: 'Tele Orihuela',
         logo: teleOrihuela,
+        color: 'black',
         programmes: []
       },
       {
         id: 'telesafor',
         name: 'TeleSafor',
         logo: teleSafor,
+        color: '#51209e',
         programmes: []
       },
       {
         id: 'telesagunto',
         name: 'Tele Sagunt',
         logo: teleSagunto,
+        color: 'white',
         programmes: []
       },
       {
         id: 'castellotv',
         name: 'Castelló TV',
         logo: castelloTv,
-        color: '#fff',
+        color: 'white',
         programmes: []
       }
     ]

@@ -1,23 +1,31 @@
 import { EventBus } from '@/event-bus.js'
-import PictureUpload from '@/utils/PictureUpload.vue'
-import RangeSlider from '@/utils/RangeSlider.vue'
+import PictureUpload from '@/components/pane/PictureUpload.vue'
+import RangeSlider from '@/components/pane/RangeSlider.vue'
+import CInputText from '@/components/pane/CInputText'
+import CSelect from '@/components/pane/CSelect'
+import CField from '@/components/pane/CField'
 
 export default {
   // Shared components across templates
   components: {
     RangeSlider,
-    PictureUpload
+    PictureUpload,
+    CInputText,
+    CSelect,
+    CField
   },
 
   // Shared data across templates
   data () {
     return {
       properties: {
-        disposition: 0,
-        card: 1,
+        card: 1, // deprecated
+        theme: 'glowy',
         picture: null,
         picturePreview: '',
         picturePos: 50,
+        pictureAspect: 'horizontal',
+        pictureDimensions: null,
         hashtag: '',
         hasLocalLabel: false,
         localLabel: ''
@@ -26,7 +34,12 @@ export default {
       aspect: 0,
       isDownloadable: false,
       displayErrors: false,
-      paneDimmed: false
+      paneDimmed: false,
+      availableColors: {
+        glowy: ['none', 'orange', 'lgbt', 'feminism', 'green'],
+        blobs: ['orange', 'lgbt', 'feminism', 'green'],
+        blobless: ['orange', 'black', 'lgbt', 'feminism', 'green']
+      }
     }
   },
 
@@ -63,6 +76,10 @@ export default {
         this.errors = {}
         this.validate()
         this.isDownloadable = Object.keys(this.errors).length === 0
+
+        if ('color' in properties && !this.availableColors[properties.theme].includes(properties.color)) {
+          this.properties.color = 'orange'
+        }
       },
       deep: true
     },
@@ -80,7 +97,9 @@ export default {
 
       const img = new Image()
       img.onload = () => {
-        this.properties.pictureAspect = (img.width / img.height > 1) ? 'horizontal' : 'vertical'
+        const { width, height } = img
+        this.properties.pictureAspect = (width / height > 1) ? 'horizontal' : 'vertical'
+        this.properties.pictureDimensions = { width, height }
       }
       img.src = this.properties.picturePreview
     },

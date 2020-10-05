@@ -5,20 +5,6 @@
 }
 
 .banner-canvas {
-  &.blobs {
-    &-feminista {
-      .blob-1, .blob-2 {
-        background: $gradient-feminista;
-      }
-    }
-    &-lgtb {
-      .blob-1, .blob-2 {
-        background: $gradient-lgtb !important;
-        background-size: 50% 33.4% !important;
-        --gradient-orientation: 90deg !important;
-      }
-    }
-  }
   .blob {
     position: absolute;
     width: 720px;
@@ -39,43 +25,6 @@
         object-fit: cover;
       }
     }
-  }
-
-  .logo {
-    display: flex;
-    position: absolute;
-    right: 35px;
-    bottom: 25px;
-    align-items: center;
-
-    svg {
-      height: 30px;
-    }
-
-    &-local-label {
-      margin-left: .75rem;
-      font-size: 20px;
-      letter-spacing: -.3px;
-      line-height: 1;
-      white-space: nowrap;
-
-      &--long {
-        font-size: .95rem;
-        white-space: normal;
-        width: 90px;
-      }
-    }
-  }
-
-  .hashtag {
-    position: absolute;
-    z-index: 30;
-    bottom: 20px;
-    left: 35px;
-    color: $white;
-    font-weight: bold;
-    font-size: 20px;
-    letter-spacing: -.3px;
   }
 
   [contenteditable]:hover {

@@ -25,7 +25,7 @@
 
 <script>
 import ChristmasBackground from './ChristmasBackground'
-import Careta from '@/utils/Careta'
+import Careta from '@/components/canvas/Careta'
 import CanvasMixin from '@/mixins/canvas-mixin.js'
 
 export default {

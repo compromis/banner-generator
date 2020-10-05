@@ -1,4 +1,4 @@
-import CompromisLogo from '@/utils/CompromisLogo'
+import CompromisLogo from '@/components/utils/CompromisLogo'
 import moment from 'moment'
 moment.locale('ca')
 
@@ -9,12 +9,11 @@ export default {
 
   props: {
     banner: Object,
-    aspect: String,
-    color: String
+    aspect: String
   },
 
   computed: {
-    objectPosition: function () {
+    objectPosition () {
       const objectPosition = (this.banner.pictureAspect === 'vertical')
         ? '0% ' + (100 - this.banner.picturePos) + '%'
         : (100 - this.banner.picturePos) + '% 0%'
@@ -55,8 +54,10 @@ export default {
       return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
     },
 
+    // deprecated
     formatLocal (local) {
       return local
+        .trim()
         .replace(/^per/gi, '')
         .replace(/#/g, '')
     }

@@ -4,35 +4,37 @@
     :class="[
       'banner-canvas',
       'aspect-' + aspect,
-      aspect === '11' ? 'disposition-' + banner.disposition : '',
-      banner.localLabel && banner.hasLocalLabel ? 'has-local-label' : '',
-      'blobs-' + color
+      'theme-' + banner.theme,
+      'disposition-' + banner.disposition
     ]"
     v-if="banner">
-    <div class="blob blob-image">
-      <img :src="banner.picturePreview" alt="Imatge" v-if="banner.picturePreview" :style="objectPosition" />
-    </div>
-    <div class="blob blob-1"></div>
-    <div class="blob blob-2"></div>
-    <div class="text text-wysiwyg" v-if="banner.text">
-      <div v-html="banner.text"></div>
-    </div>
-    <emojis-on-canvas v-model="banner.emojis" />
-    <div class="logo">
-      <compromis-logo :mono="true" />
-      <div :class="{ 'logo-local-label': true, 'logo-local-label--long': banner.localLabel.length > 18 }" v-if="banner.localLabel && banner.hasLocalLabel">
-        {{ banner.localLabel | formatLocal }}
+    <div class="grid">
+      <banner-picture
+        :picture="banner.picturePreview"
+        :picture-position="objectPosition"
+        :theme="banner.theme"
+        :color="banner.color"
+        edge
+        :full-gradient="banner.fullGradient" />
+      <div class="text text-wysiwyg" v-if="banner.text">
+        <div v-html="banner.text"></div>
       </div>
     </div>
-    <div class="hashtag" v-if="aspect === '11'">
-      {{ banner.hashtag }}
-    </div>
+    <emojis-on-canvas v-model="banner.emojis" />
+    <banner-frame
+      :theme="banner.theme"
+      :hashtag="banner.hashtag"
+      :local-label="banner.localLabel"
+      :aspect="aspect"
+      :color="banner.color" />
   </div>
 </template>
 
 <script>
 import CanvasMixin from '@/mixins/canvas-mixin.js'
-import EmojisOnCanvas from '@/utils/EmojisOnCanvas'
+import BannerPicture from '@/components/canvas/BannerPicture'
+import BannerFrame from '@/components/canvas/BannerFrame'
+import EmojisOnCanvas from '@/components/canvas/EmojisOnCanvas'
 
 export default {
   name: 'text-canvas',
@@ -40,7 +42,9 @@ export default {
   mixins: [CanvasMixin],
 
   components: {
-    EmojisOnCanvas
+    EmojisOnCanvas,
+    BannerPicture,
+    BannerFrame
   }
 }
 </script>
@@ -48,106 +52,73 @@ export default {
 <style lang="scss" scoped>
   @import "../../../sass/variables";
 
-  .text {
-    position: absolute;
-    background: $white;
-    bottom: 80px;
-    left: 40px;
-    right: 40px;
-    z-index: 30;
-    box-shadow: $raised-shadow;
-    border-radius: $card-radius;
-    padding: 24px 24px;
-    max-height: 515px;
-    overflow: hidden;
-  }
-
-  .blob {
-    &-1 {
-      left: -58%;
-      top: -82%;
-      z-index: 20;
-    }
-
-    &-2 {
-      right: -57%;
-      bottom: -81%;
-      z-index: 20;
-      --gradient-orientation: -45deg;
-    }
-
-    &-image {
+  .theme-glowy {
+    .grid {
+      display: grid;
+      grid-template-rows: 1fr auto;
+      gap: 35px;
+      position: absolute;
       top: 0;
       left: 0;
-      bottom: 0;
       right: 0;
-      height: 100%;
-      width: 100%;
-      z-index: 10;
-      background: $gray-300;
-      transform: rotate(0);
-      border-radius: 0;
-
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transform: rotate(0);
-      }
-    }
-  }
-
-  .logo {
-    color: $white;
-    z-index: 20;
-
-    &-local-label {
-      color: $white;
-    }
-  }
-
-  .hashtag {
-    top: 20px;
-    left: 35px;
-    bottom: auto;
-  }
-
-  .has-local-label {
-    .blob-2 {
-      right: -40%;
-    }
-  }
-
-  // Story aspect
-  .aspect-916 {
-    .blob {
-      &-1 {
-        top: -85%;
-        left: -120%;
-      }
-
-      &-2 {
-        right: -120%;
-        bottom: -84%;
-      }
+      bottom: 80px;
     }
 
     .text {
-      left: 16px;
-      right: 16px;
-      padding: 16px;
+      padding: 35px 35px 0 35px;
+      overflow: hidden;
+      font-size: 1.25rem;
     }
 
-    .logo {
-      display: none;
+    .banner-picture {
+      display: flex;
+    }
+
+    .banner-picture::v-deep .glowy-card {
+      min-height: 300px;
+    }
+
+    &.aspect-916 {
+      .text {
+        padding: 30px 30px 0 30px;
+      }
     }
   }
 
-  // Card on top
-  .disposition-1 {
+  .theme-blobs, .theme-blobless {
     .text {
-      bottom: auto;
-      top: 80px;
+      position: absolute;
+      background: $white;
+      bottom: 80px;
+      left: 35px;
+      right: 35px;
+      z-index: 30;
+      box-shadow: $raised-shadow;
+      border-radius: $card-radius;
+      padding: 24px 24px;
+      max-height: 515px;
+      overflow: hidden;
+    }
+
+    &.aspect-916 {
+      .text {
+        left: 16px;
+        right: 16px;
+        padding: 16px;
+      }
+    }
+
+    &.disposition-top {
+      .text {
+        top: 80px;
+        bottom: auto;
+      }
+    }
+  }
+
+  .theme-blobless {
+    .text {
+      bottom: 120px;
     }
   }
 </style>
@@ -189,10 +160,16 @@ export default {
       font-size: 24px;
       letter-spacing: -.5px;
       line-height: 1.1;
+
+      @at-root .theme-glowy h2 {
+        padding: 14px 16px;
+        border-radius: 8px;
+        margin: 16px -16px;
+      }
     }
 
     p {
-      line-height: 1.1;
+      line-height: 1.2;
       margin: 16px 0;
     }
 
@@ -219,7 +196,7 @@ export default {
           content: '➡️';
           color: $orange;
           font-weight: bold;
-          left: 24px;
+          left: 36px;
         }
       }
 
@@ -256,10 +233,16 @@ export default {
           padding-left: 28px;
 
           &::before {
-            left: 16px;
+            left: 30px;
           }
         }
       }
+    }
+  }
+
+  .theme-blobs, .theme-blobless {
+    .text-wysiwyg ul li::before {
+      left: 18px;
     }
   }
 </style>

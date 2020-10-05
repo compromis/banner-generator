@@ -1,25 +1,43 @@
 <template>
-  <div :class="{ 'navbar': true, 'navbar--dark': dark }">
-    <router-link to="/" class="logo-link">
-      <compromis-logo class="logo" :mono="dark" />
+  <div :class="{ 'navbar': true, 'navbar--dark': inWorkspace }">
+    <router-link to="/" class="logo">
+      <careta class="logo-careta" :logo-style="inWorkspace ? 'mono' : 'normal'" />
+      <div :class="['nav-label logo-label', { 'is-hidden-mobile': inWorkspace }]">Generador de targes</div>
     </router-link>
-    <div class="nav-label logo-label">Disseny</div>
-    <div class="nav-label app-label">Generador de targes</div>
+    <transition name="fade">
+      <div v-if="template" class="nav-label template-label">
+        <span :class="{ 'is-hidden-mobile': inWorkspace }">&gt;</span>
+        {{ template.name }}
+      </div>
+    </transition>
   </div>
 </template>
 
 <script>
-import CompromisLogo from '@/utils/CompromisLogo'
+import templates from './templates/templates'
+import Careta from '@/components/canvas/Careta'
 
 export default {
   name: 'app-header',
 
+  data () {
+    return {
+      templates
+    }
+  },
+
   components: {
-    CompromisLogo
+    Careta
   },
 
   props: {
-    dark: Boolean
+    inWorkspace: Boolean
+  },
+
+  computed: {
+    template () {
+      return this.templates.find(template => template.id.toLowerCase() === this.$route.params.pathMatch)
+    }
   }
 }
 </script>
@@ -33,14 +51,24 @@ export default {
     top: 0;
     left: 0;
     right: 0;
-    background-color: $white;
-    padding: .75rem 2rem;
+    background-color: transparent;
+    padding: .75rem 1rem;
     height: $navbar-height;
     transition: .25s ease-in-out;
 
     .logo {
-      color: $white;
-      height: 1.75rem;
+      display: flex;
+
+      &-careta {
+        color: $white;
+        height: 1.75rem;
+      }
+
+      &-label {
+        margin-left: .75rem;
+        color: $gray-700;
+        transition: opacity .2s;
+      }
     }
 
     .nav-label {
@@ -50,26 +78,34 @@ export default {
       letter-spacing: -.3px;
       line-height: 1;
       white-space: nowrap;
+      transition: .25s ease-in-out;
     }
 
-    .logo-label {
-      margin-left: .75rem;
-      color: $gray-700;
-    }
+    .template-label {
+      margin-left: .4rem;
+      opacity: .75;
+      color: $white;
 
-    .app-label {
-      margin-left: auto;
-      color: $gray-700;
+      span {
+        margin-right: .4rem;
+      }
     }
 
     &--dark {
       background: $gray-900;
       color: $white;
 
-      .logo-label,
-      .app-label {
-        color: $white;
-        opacity: .75;
+      .logo {
+        &-label {
+          color: $white;
+          opacity: .75;
+        }
+
+        &:hover {
+          .logo-label {
+            opacity: 1;
+          }
+        }
       }
     }
   }
@@ -78,20 +114,10 @@ export default {
     .navbar {
       z-index: 100;
       padding: .75rem 1rem;
+    }
 
-      .logo-label {
-        display: none !important;
-      }
-
-      .app-label {
-        margin-left: .5rem;
-      }
-
-      .logo-link {
-        display: inline-block;
-        width: 30px;
-        overflow: hidden;
-      }
+    .navbar:not(.navbar--dark) {
+      background: $white;
     }
   }
 </style>

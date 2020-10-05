@@ -1,50 +1,41 @@
 <template>
   <div :class="{ 'pane tweet-pane': true, 'pane-dimmed': paneDimmed, 'pane-916': aspect === 1 }">
     <!-- Style -->
-    <b-field label="Estil">
-      <b-tabs
-        id="style-tabs"
-        type="is-toggle"
-        size="is-small"
-        v-model="properties.card"
-        class="tabs-field"
-        expanded>
-        <b-tab-item label="Transparent"></b-tab-item>
-        <b-tab-item label="Targeta"></b-tab-item>
-        <b-tab-item label="Fosc"></b-tab-item>
-      </b-tabs>
-    </b-field>
+    <c-tab-group>
+      <c-tab v-model="properties.style" value="transparent" name="style">Transparent</c-tab>
+      <c-tab v-model="properties.style" value="card" name="style">Targeta</c-tab>
+      <c-tab v-model="properties.style" value="dark" name="style">Fosc</c-tab>
+    </c-tab-group>
 
     <!-- Color -->
-    <b-field label="Color de fons">
-      <color-selector is-rounded v-model="properties.backgroundColor" :colors="['black', 'white', 'orange', 'lgbt', 'feminism', 'green']" />
-    </b-field>
+    <color-selector label="Color de fons" is-rounded v-model="properties.backgroundColor" :colors="['black', 'white', 'orange', 'lgbt', 'feminism', 'green']" />
 
     <!-- Tweet URL -->
     <div class="tweet-input">
-      <b-field
+    <c-input-text
       label="Tweet"
-      :type="setFieldType('tweetId')"
-      :message="setFieldMessage('tweetId')">
-        <b-input
-          v-model="properties.tweetUrl"
-          placeholder="https://"
-          :disabled="fetching || properties.tweetEmbed"
-          @keydown.native="(e) => handleKeyStrokes(e)">
-        </b-input>
-      </b-field>
-
-      <b-button size="is-small" rounded @click="pasteUrl" icon-left="paste">Engantxa</b-button>
+      name="tweetUrl"
+      type="url"
+      placeholder="https://"
+      v-model="properties.tweetUrl"
+      :disabled="(fetching || properties.tweetEmbed) ? true : false"
+      :message="setFieldMessage('tweetId')"
+      @keydown="(e) => handleKeyStrokes(e)" />
+      <b-button rounded size="is-small" icon-left="paste" @click="pasteUrl">
+          Enganxa
+      </b-button>
     </div>
 
-    <div v-if="fetching" class="fetching">Carregant tweet...</div>
+    <div v-if="fetching" class="c-field c-field-content fetching">Carregant tweet...</div>
 
     <!-- Tweet card -->
     <transition name="slide">
       <div v-if="properties.tweetEmbed">
         <!-- Tweet card -->
-        <div class="tweet-embed mini-card">
-          <div class="tweet-embed-pic"><img :src="properties.tweetEmbed.user.profile_image_url_https" /></div>
+        <div class="tweet-embed c-field">
+          <div class="tweet-embed-pic">
+            <img :src="properties.tweetEmbed.user.profile_image_url_https" />
+          </div>
           <div class="tweet-embed-user">
             <strong>{{ properties.tweetEmbed.user.name }}</strong>
             <div>@{{ properties.tweetEmbed.user.screen_name }}</div>
@@ -62,7 +53,7 @@
         </div>
 
         <!-- Text size -->
-        <b-field label="Tamany del text" class="range">
+        <c-field label="Tamany del text" compact>
           <range-slider
             name="points"
             :min="75"
@@ -70,70 +61,75 @@
             v-model="properties.textSize"
             @touchstart="dimPane(true)"
             @touchend="dimPane(false)" />
-        </b-field>
+        </c-field>
 
         <!-- Tweet media -->
         <transition name="slide">
           <div v-if="properties.tweetEmbed && properties.tweetEmbed.entities['media']">
-            <b-switch v-model="properties.showMedia" style="margin-bottom: 1rem">
-              Mostrar imatge del tweet
-            </b-switch>
-
-            <transition name="slide">
-              <div v-if="properties.showMedia">
-                <!-- Pictures -->
-                <div class="twitter-media mini-card">
-                  <div v-for="(media, i) in properties.tweetEmbed.entities.media" :key="i" class="twitter-media-item">
-                    <img :src="media.media_url_https" />
-                  </div>
-                </div>
-
-                <!-- Picture position -->
-                <b-field label="Posició de la imatge" class="range">
-                  <range-slider
-                    name="points"
-                    :min="0"
-                    :max="100"
-                    v-model="properties.picturePos"
-                    @touchstart="dimPane(true)"
-                    @touchend="dimPane(false)" />
-                </b-field>
+            <div class="c-field">
+              <div class="c-field-content" style="padding-bottom: 0">
+                <b-switch v-model="properties.showMedia" style="margin-bottom: 1rem">
+                  Mostrar imatge del tweet
+                </b-switch>
               </div>
-            </transition>
+
+              <transition name="slide">
+                <div v-if="properties.showMedia">
+                  <!-- Pictures -->
+                  <div class="twitter-media c-field c-field-content" style="padding-top: 0">
+                    <div v-for="(media, i) in properties.tweetEmbed.entities.media" :key="i" class="twitter-media-item">
+                      <img :src="media.media_url_https" />
+                    </div>
+                  </div>
+
+                  <!-- Picture position -->
+                  <c-field label="Posició de la imatge" compact class="c-field-force-border">
+                    <range-slider
+                      name="points"
+                      :min="0"
+                      :max="100"
+                      v-model="properties.picturePos"
+                      @touchstart="dimPane(true)"
+                      @touchend="dimPane(false)" />
+                  </c-field>
+                </div>
+              </transition>
+            </div>
           </div>
         </transition>
 
-        <b-switch v-model="properties.showCounts" style="margin-bottom: 1rem">
-            Mostrar compte de RTs i Favs
-        </b-switch>
+        <c-field>
+          <b-switch v-model="properties.showCounts">
+              Mostrar compte de RTs i Favs
+          </b-switch>
+        </c-field>
       </div>
     </transition>
 
-    <b-switch v-model="properties.showCta" style="margin-bottom: 1rem">
-        Afegir cridada a l'acció
-    </b-switch>
+    <c-field>
+      <b-switch v-model="properties.showCta">
+          Afegir cridada a l'acció
+      </b-switch>
+    </c-field>
     <transition name="slide">
-      <div v-if="properties.showCta">
-        <b-field>
-          <b-input placeholder="Passa-ho" v-model="properties.cta" maxlength="24"></b-input>
-        </b-field>
-      </div>
+        <c-input-text
+          v-if="properties.showCta"
+          label="Cridada a l'acció"
+          name="cta"
+          placeholder="Passa-ho!"
+          v-model="properties.cta"
+          :maxlength="24" />
     </transition>
 
     <!-- Local label -->
     <transition name="slide">
-      <div v-if="!aspect" class="field">
-        <b-switch v-model="properties.hasLocalLabel">
-          Afegir text al logo
-        </b-switch>
-        <transition name="slide">
-          <div v-if="properties.hasLocalLabel" class="local-label">
-            <b-field>
-              <b-input placeholder="Alacant" v-model="properties.localLabel" maxlength="48"></b-input>
-            </b-field>
-          </div>
-        </transition>
-      </div>
+      <c-input-text
+        v-if="!aspect"
+        label="Text logo"
+        name="localLabel"
+        placeholder="Alacant"
+        v-model="properties.localLabel"
+        :maxlength="48" />
     </transition>
   </div>
 </template>
@@ -141,7 +137,9 @@
 <script>
 import API from '@/api'
 import PaneMixin from '@/mixins/pane-mixin.js'
-import ColorSelector from '@/utils/ColorSelector'
+import ColorSelector from '@/components/pane/ColorSelector'
+import CTabGroup from '@/components/pane/CTabGroup'
+import CTab from '@/components/pane/CTab'
 
 export default {
   name: 'tweet-pane',
@@ -149,7 +147,9 @@ export default {
   mixins: [PaneMixin],
 
   components: {
-    ColorSelector
+    ColorSelector,
+    CTabGroup,
+    CTab
   },
 
   data () {
@@ -163,7 +163,7 @@ export default {
         showCounts: true,
         showCta: false,
         backgroundColor: 'black',
-        card: 0,
+        style: 'transparent',
         cta: 'Passa-ho!'
       },
       fetching: false
@@ -251,24 +251,14 @@ export default {
 
     .button {
       position: absolute;
-      top: 0;
-      right: 0;
+      top: .5rem;
+      right: .5rem;
     }
   }
 
   .fetching {
-    margin-top: -.75rem;
-    margin-bottom: 1rem;
     color: $gray-700;
     font-size: .85rem;
-  }
-
-  .mini-card {
-    border: 2px $gray-200 solid;
-    padding: 1rem;
-    font-size: .85rem;
-    border-radius: .5rem;
-    margin-bottom: 1rem;
   }
 
   .tweet-embed {
@@ -279,6 +269,8 @@ export default {
       "pic user remove"
       "text text text";
     gap: .25rem;
+    font-size: .85rem;
+    padding: $field-padding;
 
     &-pic {
       grid-area: pic;

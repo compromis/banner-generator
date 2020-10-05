@@ -10,7 +10,7 @@
 
 <script>
 import CanvasMixin from '@/mixins/canvas-mixin'
-import Careta from '@/utils/Careta'
+import Careta from '@/components/canvas/Careta'
 
 export default {
   name: 'social-canvas',

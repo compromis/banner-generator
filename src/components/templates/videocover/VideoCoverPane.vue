@@ -1,50 +1,54 @@
 <template>
   <div :class="{ 'pane video-cover-pane': true, 'pane-dimmed': paneDimmed }">
-    <!-- Text -->
-    <div class="text-wrapper">
-      <!-- Secondary Text  -->
-      <b-field label="Text superior">
-        <b-input placeholder="Baldoví" v-model="properties.textSecondary" maxlength="25"></b-input>
-      </b-field>
+    <!-- Secondary Text  -->
+    <c-input-text
+      label="Text superior"
+      name="textSecondary"
+      placeholder="Baldoví"
+      v-model="properties.textSecondary"
+      :max-length="25"
+    />
 
-      <!-- Secondary Text Color  -->
-      <color-selector v-model="properties.textSecondaryColor" />
+    <!-- Secondary Text Color  -->
+    <color-selector v-model="properties.textSecondaryColor" />
 
-      <!-- Main Text  -->
-      <b-field label="Text principal">
-        <b-input type="textarea" placeholder="Cinc tipus de tila que des de Compromís recomanem a Abascal" v-model="properties.text" maxlength="70"></b-input>
-      </b-field>
+    <!-- Main Text  -->
+    <c-input-text
+      label="Text principal"
+      name="text"
+      type="textarea"
+      placeholder="Cinc tipus de tila que des de Compromís recomanem a Abascal"
+      v-model="properties.text"
+      :max-length="70"
+    />
 
-      <!-- Text Color  -->
-      <color-selector v-model="properties.textColor" />
+    <!-- Text Color  -->
+    <color-selector v-model="properties.textColor" />
 
-      <!-- Text align -->
-      <b-field label="Alineació del text" class="text-align-group">
-        <b-tabs @change="updateTextAlign" :value="0" class="text-align" type="is-toggle" size="is-small" expanded>
-          <b-tab-item icon="align-left"></b-tab-item>
-          <b-tab-item icon="align-center"></b-tab-item>
-          <b-tab-item icon="align-right"></b-tab-item>
-        </b-tabs>
+    <!-- Text size -->
+    <c-field label="Tamany del text" class="range-field" compact>
+      <range-slider
+        name="points"
+        :min="75"
+        :max="125"
+        v-model="properties.textSize"
+        @touchstart="dimPane(true)"
+        @touchend="dimPane(false)" />
+    </c-field>
 
-        <!-- Text position -->
-        <b-tabs @change="updateTextPosition" :value="2" class="text-position" type="is-toggle" size="is-small" expanded>
-          <b-tab-item icon="arrow-to-top"></b-tab-item>
-          <b-tab-item icon="grip-lines"></b-tab-item>
-          <b-tab-item icon="arrow-to-bottom"></b-tab-item>
-        </b-tabs>
-      </b-field>
+    <!-- Text position -->
+    <c-tab-group>
+      <c-tab name="text-pos" v-model="properties.textPos" value="flex-start" icon="arrow-to-top"></c-tab>
+      <c-tab name="text-pos" v-model="properties.textPos" value="center" icon="grip-lines"></c-tab>
+      <c-tab name="text-pos" v-model="properties.textPos" value="flex-end" icon="arrow-to-bottom"></c-tab>
+    </c-tab-group>
 
-      <!-- Text size -->
-      <b-field label="Tamany del text" class="range">
-        <range-slider
-          name="points"
-          :min="75"
-          :max="125"
-          v-model="properties.textSize"
-          @touchstart="dimPane(true)"
-          @touchend="dimPane(false)" />
-      </b-field>
-    </div>
+    <!-- Text align -->
+    <c-tab-group>
+      <c-tab name="text-align" v-model="properties.textAlign" value="left" icon="align-left"></c-tab>
+      <c-tab name="text-align" v-model="properties.textAlign" value="center" icon="align-center"></c-tab>
+      <c-tab name="text-align" v-model="properties.textAlign" value="right" icon="align-right"></c-tab>
+    </c-tab-group>
 
     <!-- Emoji picker -->
     <emoji-picker v-model="properties.emojis" />
@@ -55,10 +59,7 @@
       :display-errors="displayErrors"
       :errors="errors"
       @upload="updateImage"
-      @delete="properties.picture = null; properties.picturePreview = null" />
-
-    <!-- Picture position -->
-    <b-field label="Posició de la imatge" class="range">
+      @delete="properties.picture = null; properties.picturePreview = null">
       <range-slider
         name="points"
         :min="0"
@@ -66,7 +67,7 @@
         v-model="properties.picturePos"
         @touchstart="dimPane(true)"
         @touchend="dimPane(false)" />
-    </b-field>
+    </picture-upload>
 
     <!-- Frame color  -->
     <color-selector v-model="properties.frameColor" label="Color del marc" isRounded />
@@ -75,8 +76,10 @@
 
 <script>
 import PaneMixin from '@/mixins/pane-mixin.js'
-import ColorSelector from '@/utils/ColorSelector'
-import EmojiPicker from '@/utils/EmojiPicker'
+import ColorSelector from '@/components/pane/ColorSelector'
+import EmojiPicker from '@/components/pane/EmojiPicker'
+import CTab from '@/components/pane/CTab'
+import CTabGroup from '@/components/pane/CTabGroup'
 
 export default {
   name: 'video-cover-pane',
@@ -103,22 +106,14 @@ export default {
 
   components: {
     ColorSelector,
-    EmojiPicker
+    EmojiPicker,
+    CTab,
+    CTabGroup
   },
 
   methods: {
     validate () {
       this.pictureRequired()
-    },
-
-    updateTextAlign (i) {
-      const values = ['left', 'center', 'right']
-      this.properties.textAlign = values[i]
-    },
-
-    updateTextPosition (i) {
-      const values = ['flex-start', 'center', 'flex-end']
-      this.properties.textPos = values[i]
     }
   }
 }

@@ -8,6 +8,10 @@
     text-overflow: ellipsis;
     width: 100%;
   }
+
+  .is-danger {
+    background: rgba($red, .1);
+  }
 }
 
 .banner-disposition .tab-content {
@@ -31,26 +35,115 @@
   }
 }
 
-.field {
+.c-field {
   position: relative;
+  border-bottom: 1px $gray-300 solid;
+  transition: .2s ease;
 
-  &:last-child {
-    margin-bottom: 1.5rem;
+  label {
+    font-weight: normal;
+    color: $gray-800;
+    font-size: .85rem;
+  }
+
+  &-info {
+    display: flex;
+    padding: .75rem $field-padding 0 $field-padding;
+    align-items: center;
+    font-size: .85rem;
+    color: $gray-800;
+
+    label {
+      flex-grow: 1;
+    }
+
+    .char-count {
+      display: none;
+      font-size: .75rem;
+    }
+  }
+
+  &-content {
+    padding: .75rem $field-padding;
+
+    &-sm {
+      padding: .25rem $field-padding;
+    }
+  }
+
+  .c-button {
+    display: block;
+    background: transparent;
+    border: 0;
+    width: 100%;
+    text-align: left;
+    color: $gray-900;
+    padding: $field-padding;
+    font-size: 1rem;
+    transition: .2s ease;
+
+    &:hover {
+      background: $gray-100;
+      cursor: pointer;
+    }
+
+    &:active,
+    &:focus {
+      outline: 0;
+      background: $gray-200;
+    }
+  }
+
+  &.c-field-focusable:focus-within {
+    background: $gray-100;
+
+    .char-count {
+      display: block;
+    }
+  }
+
+  &.c-field-force-border {
+    border-bottom: 1px $gray-300 solid !important;
+  }
+
+  &-error {
+    color: $red;
+    font-size: .75rem;
+    padding: 0 $field-padding .5rem $field-padding;
+  }
+
+  &.has-errors {
+    background: rgba($red, .1);
+
+    &:focus-within {
+      background: rgba($red, .15);
+    }
+
+    label {
+      color: $red;
+    }
+  }
+
+  .vue-swatches__trigger {
+    height: 1.75rem !important;
+    width: 1.75rem !important;
+    border-radius: 4px !important;
   }
 }
 
-.textarea-small .textarea {
-  min-height: 4.3rem;
+.blobless-gradient-option {
+  background: $white;
+  margin-top: -1px;
+}
+
+.textarea-small textarea {
+  min-height: 4rem !important;
 }
 
 .control .help.counter {
   position: absolute;
   bottom: -25px;
   right: 0;
-}
-
-.field:not(:last-child) {
-  margin-bottom: 1.5rem;
 }
 
 .dropdown-item .field {
@@ -77,6 +170,63 @@
   border-radius: 4px !important;
 }
 
+//date and time inputs
+.datepicker {
+  .input {
+    border: 0;
+    background: transparent;
+    border-radius: 0;
+    border-width: 0;
+
+    &:focus, &:active {
+      box-shadow: none !important;
+    }
+  }
+}
+
+.timepicker {
+  padding: 6px 14px;
+  border-bottom: 1px solid $gray-300;
+
+  select, .dropdown-content {
+    padding: 0 !important;
+    background: transparent;
+    font-size: 1rem;
+    font-weight: normal;
+    font-weight: 400 !important;
+    height: auto !important;
+    border: 0;
+
+    .control {
+      font-size: 1rem !important;
+    }
+  }
+
+  select:focus {
+    box-shadow: none;
+  }
+
+  .select {
+    height: auto !important;
+  }
+}
+
+.date-time-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+
+  .c-field:last-child {
+    border-left: 1px solid $gray-200;
+    border-bottom: 0;
+  }
+}
+
+//properly fix this and remove
+.dropdown-content {
+  box-shadow: none;
+  border: 1px solid $gray-300;
+}
+
 @media (max-width: $xs-breakpoint) {
   .pane {
     transition: background .25s ease-in-out;
@@ -94,15 +244,27 @@
     &-dimmed {
       background: transparent !important;
       box-shadow: none !important;
-    
+
       .field,
+      .c-field,
       .emoji-picker {
         opacity: 0;
 
-        &.range {
+        &.image-upload-field,
+        &.range-field {
           opacity: 1;
-          background: white;
-          box-shadow: $default-shadow;
+          background: transparent !important;
+          border-color: transparent;
+
+          .upload,
+          label {
+            opacity: 0;
+          }
+
+          .range-slider {
+            background: white;
+            box-shadow: $default-shadow;
+          }
         }
       }
     }
