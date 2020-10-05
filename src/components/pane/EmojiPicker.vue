@@ -1,5 +1,17 @@
 <template>
   <div class="c-field emoji-picker">
+    <ul class="emojis">
+      <li v-for="(emoji, i) in value" :key="i">
+        <span v-html="emoji.tag" class="emoji-img"></span>
+        <b-tooltip label="Darrere del text" type="is-dark" style="margin-left: auto">
+          <b-button @click="position('back', i)" size="is-small" icon-right="send-backward" :type="emoji.pos === 'back' ? 'is-primary' : ''"></b-button>
+        </b-tooltip>
+        <b-tooltip label="Davant del text" type="is-dark">
+          <b-button @click="position('front', i)" size="is-small" icon-right="bring-forward" :type="emoji.pos === 'front' ? 'is-primary' : ''"></b-button>
+        </b-tooltip>
+        <b-button @click="remove(i)" size="is-small" type="is-danger" icon-right="times"></b-button>
+      </li>
+    </ul>
     <twemoji-picker
       :pickerWidth="260"
       :pickerHeight="220"
@@ -15,18 +27,6 @@
         <button class="c-button">😉Afegeix emojis</button>
       </template>
     </twemoji-picker>
-    <ul class="emojis">
-      <li v-for="(emoji, i) in value" :key="i">
-        <span v-html="emoji.tag" class="emoji-img"></span>
-        <b-tooltip label="Darrere del text" type="is-dark" style="margin-left: auto">
-          <b-button @click="position('back', i)" size="is-small" icon-right="send-backward" :type="emoji.pos === 'back' ? 'is-primary' : ''"></b-button>
-        </b-tooltip>
-        <b-tooltip label="Davant del text" type="is-dark">
-          <b-button @click="position('front', i)" size="is-small" icon-right="bring-forward" :type="emoji.pos === 'front' ? 'is-primary' : ''"></b-button>
-        </b-tooltip>
-        <b-button @click="remove(i)" size="is-small" type="is-danger" icon-right="times"></b-button>
-      </li>
-    </ul>
   </div>
 </template>
 
@@ -80,19 +80,14 @@ export default {
       background: $white;
     }
 
-    .c-button {
-      margin-bottom: -7px;
-    }
-
     .emojis {
-      margin-top: .5rem;
       background: $white;
 
       li {
         display: grid;
         grid-template-columns: 22px 1fr auto auto;
         gap: .25rem;
-        border-top: 1px $gray-200 solid;
+        border-bottom: 1px $gray-200 solid;
         padding: .75rem $field-padding;
         align-content: center;
 
@@ -104,10 +99,6 @@ export default {
         img {
           display: block;
           margin: 0;
-        }
-
-        &:last-child {
-          border-bottom: 0;
         }
       }
     }

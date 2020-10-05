@@ -3,13 +3,11 @@
     <div class="toolbar">
       <b-button to="/" tag="router-link" icon-left="chevron-left" type="is-text">Enrere</b-button>
     </div>
-    <div class="pane-wrapper">
-      <component
-        class="pane"
-        :is="selectedTemplate.components.pane"
-        @updated="(props) => bannerProperties = props"
-        @updateIsDownloadable="setIsDownloadable" />
-    </div>
+    <component
+      class="pane"
+      :is="selectedTemplate.components.pane"
+      @updated="(props) => bannerProperties = props"
+      @updateIsDownloadable="setIsDownloadable" />
     <canvas-container
       class="canvas"
       :canvas-component="selectedTemplate.components.canvas"
@@ -149,7 +147,7 @@ export default {
     grid-template-areas:
       "nav nav"
       "pane canvas";
-    align-items: center;
+    align-items: stretch;
     background: $gray-lightest;
     position: fixed;
     top: $navbar-height;
@@ -162,23 +160,16 @@ export default {
       grid-area: nav;
     }
 
-    .pane-wrapper {
+    .pane {
       display: flex;
       grid-area: pane;
-      margin: 1.5rem 0 1.5rem 1.5rem;
-      box-shadow: 0 7px 25px -16px;
-      border-radius: 1rem;
-      overflow: hidden;
-      transition: .2s ease;
-      max-height: 80vh;
+      background-color: $white;
+      border-right: 1px $gray-300 solid;
+      width: 100%;
+      overflow-y: auto;
+      flex-direction: column;
 
-      .pane {
-        background-color: $white;
-        width: 100%;
-        overflow-y: auto;
-
-        @include scrollbar();
-      }
+      @include scrollbar();
     }
 
     .canvas {
@@ -255,7 +246,7 @@ export default {
         width: 100%;
       }
 
-      .pane-wrapper {
+      .pane {
         position: relative;
         z-index: 15;
         box-shadow: 0 -.4rem 1.7rem -.3rem rgba($gray-900, .15),
@@ -265,6 +256,7 @@ export default {
         width: 100vw;
         margin: 0;
         max-height: unset;
+        overflow: hidden;
       }
 
       .help-block {

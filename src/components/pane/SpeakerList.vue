@@ -173,149 +173,146 @@ export default {
 <style lang="scss">
   @import "../../sass/variables";
 
-  .speakers-add .c-button {
-    font-size: .85rem;
-  }
-
-  .speakers-add {
-    border-top: 1px solid $gray-200;
-  }
-
-  .speakers {
-    border-top: 1px solid $gray-200;
-    margin-top: .75rem;
-  }
-
-  .speaker {
-    &-item {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      grid-template-areas: "name";
-      padding: 0;
-      position: relative;
-
-      .field {
-        margin-bottom: 0;
-      }
-
-      &:last-child {
-        .speaker-picture, .speaker-description, .speaker-name {
-          border-bottom: 0;
-        }
-      }
+  .pane {
+    .speakers-add .c-button {
+      font-size: .85rem;
     }
 
-    &-name {
-      grid-area: name;
+    .speakers-add {
+      border-top: 1px solid $gray-200;
     }
 
-    &-description {
-      grid-area: description;
+    .speakers {
+      border-top: 1px solid $gray-200;
+      margin-top: .75rem;
+      margin-bottom: -1px;
     }
 
-    &-name, &-description {
-      .control .help.counter {
-        margin-right: 0.8em;
-        position: relative;
-        margin-top: -2.9rem;
-        z-index: 10;
-        color: $gray-600;
-        font-size: .65rem;
-      }
-
-      .input {
-        padding-right: 2.75rem;
-      }
-    }
-
-    &-picture {
-      grid-area: picture;
-      align-self: stretch;
-      display: grid;
-      align-items: stretch;
-      padding: $field-padding;
-      border-right: 1px solid $gray-200;
-      border-bottom: 1px solid $gray-200;
-
-      .control {
-        display: flex;
-        align-items: stretch;
-      }
-
-      .has-text-centered {
-        padding-top: 1rem;
-      }
-
-      .has-image-centered {
-        margin: .15rem;
-        border-radius: .25rem;
-        overflow: hidden;
-        height: 3.15rem;
-
-        img {
-          height: 100%;
-          width: 100%;
-          object-fit: cover;
-        }
-      }
-    }
-
-    &-remove {
-      position: absolute;
-      top: 0;
-      left: 0;
-      padding: .5rem;
-
-      .button {
-        border-radius: 100%;
-        width: 1.25rem;
+    .speaker {
+      &-item {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        grid-template-areas: "name";
         padding: 0;
-        height: 1.25rem !important;
+        position: relative;
+
+        .field {
+          margin-bottom: 0;
+        }
+      }
+
+      &-name {
+        grid-area: name;
+      }
+
+      &-description {
+        grid-area: description;
+      }
+
+      &-name, &-description {
+        .control .help.counter {
+          margin-right: 0.8em;
+          position: relative;
+          margin-top: -2.9rem;
+          z-index: 10;
+          color: $gray-600;
+          font-size: .65rem;
+        }
+
+        .input {
+          padding-right: 2.75rem;
+        }
+      }
+
+      &-picture {
+        grid-area: picture;
+        align-self: stretch;
+        display: grid;
+        align-items: stretch;
+        padding: $field-padding;
+        border-right: 1px solid $gray-200;
+        border-bottom: 1px solid $gray-200;
+
+        .control {
+          display: flex;
+          align-items: stretch;
+        }
+
+        .has-text-centered {
+          padding-top: 1rem;
+        }
+
+        .has-image-centered {
+          margin: .15rem;
+          border-radius: .25rem;
+          overflow: hidden;
+          height: 3.15rem;
+
+          img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+          }
+        }
+      }
+
+      &-remove {
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: .5rem;
+
+        .button {
+          border-radius: 100%;
+          width: 1.25rem;
+          padding: 0;
+          height: 1.25rem !important;
+        }
       }
     }
-  }
 
-  .c-field:not(.accepts-picture) {
-    .speaker-item {
-      .c-field-small {
-        padding-left: 1.75rem;
+    .c-field:not(.accepts-picture) {
+      .speaker-item {
+        .c-field-small {
+          padding-left: 1.75rem;
+        }
+      }
+
+      .speaker-remove {
+        top: 50%;
+        transform: translateY(-50%);
       }
     }
 
-    .speaker-remove {
-      top: 50%;
-      transform: translateY(-50%);
+    .accepts-picture.accepts-description {
+      .speaker-item {
+        grid-template-columns: 6rem 1fr auto;
+        grid-template-areas:
+          "picture name"
+          "picture description";
+      }
     }
-  }
 
-  .accepts-picture.accepts-description {
-    .speaker-item {
-      grid-template-columns: 6rem 1fr auto;
-      grid-template-areas:
-        "picture name"
-        "picture description";
+    .accepts-description {
+      .speaker-item {
+        grid-template-columns: 1fr auto;
+        grid-template-areas:
+          "name"
+          "description";
+      }
     }
-  }
 
-  .accepts-description {
-    .speaker-item {
-      grid-template-columns: 1fr auto;
-      grid-template-areas:
-        "name"
-        "description";
+    .accepts-picture {
+      .speaker-item {
+        grid-template-columns: 4.35rem 1fr auto;
+        grid-template-areas:
+          "picture name"
+          "picture description";
+      }
     }
-  }
 
-  .accepts-picture {
-    .speaker-item {
-      grid-template-columns: 4.35rem 1fr auto;
-      grid-template-areas:
-        "picture name"
-        "picture description";
+    .upload-draggable.is-danger {
+      border-color: $danger;
     }
-  }
-
-  .upload-draggable.is-danger {
-    border-color: $danger;
   }
 </style>
