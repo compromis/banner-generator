@@ -26,7 +26,7 @@
     <color-selector v-model="properties.textColor" />
 
     <!-- Text size -->
-    <c-field label="Tamany del text" class="range" compact>
+    <c-field label="Tamany del text" class="range-field" compact>
       <range-slider
         name="points"
         :min="75"

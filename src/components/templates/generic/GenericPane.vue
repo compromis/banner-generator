@@ -37,7 +37,7 @@
     </transition>
 
     <!-- Text size -->
-    <c-field label="Tamany del text">
+    <c-field label="Tamany del text" class="range-field" compact>
       <range-slider
         name="points"
         :min="75"

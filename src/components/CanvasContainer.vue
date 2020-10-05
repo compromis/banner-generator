@@ -266,6 +266,7 @@ export default {
       .button {
         &-label {
           display: inline;
+          top: 0;
         }
 
         &.is-large {

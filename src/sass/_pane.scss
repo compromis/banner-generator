@@ -253,7 +253,8 @@
       .emoji-picker {
         opacity: 0;
 
-        &.image-upload-field {
+        &.image-upload-field,
+        &.range-field {
           opacity: 1;
           background: transparent !important;
           border-color: transparent;

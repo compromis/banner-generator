@@ -104,7 +104,7 @@
     </picture-upload>
 
     <!-- Text size -->
-    <c-field label="Tamany del text" class="range">
+    <c-field label="Tamany del text" class="range-field" compact>
       <range-slider
         name="points"
         :min="75"
