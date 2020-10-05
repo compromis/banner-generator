@@ -68,13 +68,15 @@
 </template>
 
 <script>
+import CField from '@/components/pane/CField.vue'
 import CInputText from '@/components/pane/CInputText'
 
 export default {
   name: 'speaker-list',
 
   components: {
-    CInputText
+    CInputText,
+    CField
   },
 
   props: {

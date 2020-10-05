@@ -80,6 +80,9 @@
         @touchend="dimPane(false)" />
     </picture-upload>
 
+    <!-- Frame color  -->
+    <color-selector v-model="properties.color" :colors="availableColors['glowy']" label="Color" is-rounded />
+
     <!-- Local label -->
     <transition name="slide">
       <c-input-text
@@ -94,6 +97,7 @@
 </template>
 
 <script>
+import ColorSelector from '@/components/pane/ColorSelector.vue'
 import PaneMixin from '@/mixins/pane-mixin'
 import DatePicker from '@/components/pane/DatePicker'
 import SpeakerList from '@/components/pane/SpeakerList'
@@ -105,7 +109,8 @@ export default {
 
   components: {
     DatePicker,
-    SpeakerList
+    SpeakerList,
+    ColorSelector
   },
 
   data () {
@@ -116,7 +121,8 @@ export default {
         date: new Date(),
         time: new Date(),
         place: '',
-        speakers: []
+        speakers: [],
+        color: 'orange'
       }
     }
   },

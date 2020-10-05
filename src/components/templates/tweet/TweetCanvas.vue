@@ -67,7 +67,7 @@
         <img src="./images/point-down.png" alt="" />
       </div>
     </div>
-    <banner-frame theme="glowy" mono-logo />
+    <banner-frame theme="blobless" :logo="banner.backgroundColor === 'white' ? 'color' : 'auto'" />
   </div>
 </template>
 

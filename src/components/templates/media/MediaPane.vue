@@ -153,6 +153,9 @@
         @touchend="dimPane(false)" />
     </picture-upload>
 
+    <!-- Frame color  -->
+    <color-selector v-model="properties.color" :colors="availableColors['glowy']" label="Color" is-rounded />
+
     <!-- Hashtag -->
     <transition name="slide">
       <c-input-text
@@ -180,6 +183,7 @@
 </template>
 
 <script>
+import ColorSelector from '@/components/pane/ColorSelector.vue'
 import PaneMixin from '@/mixins/pane-mixin.js'
 import presets from './presets'
 import Swatches from 'vue-swatches'
@@ -190,7 +194,8 @@ export default {
 
   components: {
     Swatches,
-    DatePicker
+    DatePicker,
+    ColorSelector
   },
 
   mixins: [PaneMixin],
@@ -208,7 +213,8 @@ export default {
         customSource: '',
         customSourceColor: '#1CA085',
         customProgramme: '',
-        customProgrammeColor: '#1CA085'
+        customProgrammeColor: '#1CA085',
+        color: 'orange'
       },
       presets
     }

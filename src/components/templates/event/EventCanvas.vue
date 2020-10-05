@@ -12,6 +12,7 @@
         :picture="banner.picturePreview"
         :picture-position="objectPosition"
         theme="glowy"
+        :color="banner.color"
         edge
         :height="aspect === 'event' ? 420 : null" />
       <div class="event">

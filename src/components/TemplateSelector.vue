@@ -17,7 +17,6 @@
       </transition-group>
     </div>
     <app-footer @archive="(show) => showArchive = show" />
-    <v-tour name="selectorTour" :steps="selectorSteps" :callbacks="tourCallbacks" :options="{ labels }"></v-tour>
     <BrowserWarning />
     <svg width="0" height="0">
       <radialGradient id="compromisGradient" r="150%" cx="30%" cy="107%">

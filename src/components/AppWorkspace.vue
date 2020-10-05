@@ -70,10 +70,6 @@ export default {
     EventBus.$on('paneLoaded', () => { this.loadingTemplate = false })
   },
 
-  destroyed () {
-    this.$tours['workspaceTour'].stop()
-  },
-
   watch: {
     '$route': function (newRoute) {
       this.selectedTemplate = this.templates.find(template => template.id.toLowerCase() === newRoute.params.pathMatch)
