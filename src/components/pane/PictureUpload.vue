@@ -20,6 +20,7 @@
             <span>{{ picture.name }}</span>
           </div>
         </b-upload>
+        <div v-if="!picture && displayErrors" class="error-text">Has d'ajuntar una foto</div>
         <b-button
           v-if="picture"
           @click="$emit('delete')"
@@ -79,6 +80,12 @@ export default {
     right: 1rem;
     top: .75rem;
     border-top-right-radius: 6px;
+  }
+
+  .error-text {
+    color: #f14668;
+    font-size: 0.75rem;
+    padding: .5rem 0 0;
   }
 
   .picture-preview {

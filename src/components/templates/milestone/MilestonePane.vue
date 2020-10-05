@@ -138,6 +138,7 @@ export default {
 
   methods: {
     validate () {
+      this.fieldRequired({ text: "Has d'escriure un text" })
       this.pictureRequired()
     }
   }

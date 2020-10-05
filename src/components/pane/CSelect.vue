@@ -103,5 +103,6 @@ export default {
     position: absolute;
     top: 2.75rem;
     right: 1rem;
+    pointer-events: none;
   }
 </style>

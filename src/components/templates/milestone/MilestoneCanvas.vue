@@ -150,7 +150,7 @@ export default {
   .style-transparent {
     .card {
       box-shadow: none;
-      border: 2px $white solid;
+      border: 3px $white solid;
 
       &-status {
         color: $white;

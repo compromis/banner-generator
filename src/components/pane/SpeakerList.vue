@@ -33,7 +33,7 @@
           :maxlength="maxLengthDescription"
           small
         />
-        <c-field class="speaker-picture" v-if="acceptsPicture">
+        <c-field class="speaker-picture" v-if="acceptsPicture" edge>
           <b-upload
             @input="(image) => updateSpeakerPicture(image, i)"
             drag-drop
@@ -234,6 +234,10 @@ export default {
         padding: $field-padding;
         border-right: 1px solid $gray-200;
         border-bottom: 1px solid $gray-200;
+
+        & > div {
+          display: flex;
+        }
 
         .control {
           display: flex;
