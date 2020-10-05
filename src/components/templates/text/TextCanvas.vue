@@ -65,7 +65,7 @@ export default {
     }
 
     .text {
-      padding: 35px 35px 0 35px;
+      padding: 0 35px;
       overflow: hidden;
       font-size: 1.25rem;
     }
@@ -243,6 +243,13 @@ export default {
   .theme-blobs, .theme-blobless {
     .text-wysiwyg ul li::before {
       left: 18px;
+    }
+  }
+
+  .theme-glowy {
+    .text-wysiwyg > div > h2 {
+      margin-top: 0;
+      margin-bottom: 20px;
     }
   }
 </style>
