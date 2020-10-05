@@ -69,12 +69,23 @@ export default [
     }
   },
   {
+    id: 'Milestone',
+    name: 'Aconseguiment',
+    aspects: ['11', '916'],
+    icon: 'check-circle',
+    label: '✨Nou',
+    components: {
+      pane: () => import(/* webpackChunkName: "milestone" */ './milestone/MilestonePane'),
+      canvas: () => import(/* webpackChunkName: "milestone" */ './milestone/MilestoneCanvas'),
+      help: () => import(/* webpackChunkName: "milestone" */ './milestone/MilestoneHelp')
+    }
+  },
+  {
     id: 'Tweet',
     name: 'Tweet',
     aspects: ['11'],
     icon: 'twitter',
     iconPack: 'fab',
-    label: '✨Nou',
     components: {
       pane: () => import(/* webpackChunkName: "tweet" */ './tweet/TweetPane'),
       canvas: () => import(/* webpackChunkName: "tweet" */ './tweet/TweetCanvas'),
