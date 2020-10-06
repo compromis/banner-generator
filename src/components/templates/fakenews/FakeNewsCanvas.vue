@@ -6,6 +6,7 @@
       'aspect-' + aspect,
       aspect === '11' ? 'disposition-' + banner.disposition : '',
       banner.localLabel && banner.hasLocalLabel ? 'has-local-label' : '',
+      'banner-background-' + banner.mode
     ]"
     v-if="banner">
     <div class="blob-image">
@@ -20,6 +21,7 @@
     </div>
     <banner-frame
       theme="blobs"
+      :mode="banner.mode"
       :local-label="banner.localLabel"
       :aspect="aspect" />
   </div>

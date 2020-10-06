@@ -6,6 +6,7 @@
       'aspect-' + aspect,
       'disposition-' + banner.disposition,
       'theme-' + banner.theme,
+      'banner-background-' + banner.mode,
       { 'full-gradient': banner.fullGradient }
     ]"
     v-if="banner">
@@ -27,6 +28,7 @@
       </div>
     </div>
     <banner-frame
+      :mode="banner.mode"
       :theme="banner.theme"
       :color="banner.color"
       :hashtag="banner.hashtag"
