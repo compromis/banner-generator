@@ -5,7 +5,7 @@
       'banner-canvas',
       `style-${banner.style}`,
       `background-${banner.backgroundColor}`,
-      banner.localLabel ? 'has-local-label' : '',
+      `mode-${banner.mode}`
     ]"
     v-if="banner">
     <div class="background">
@@ -166,7 +166,7 @@ export default {
       --card-background: #{$white};
     }
 
-    &.style-dark {
+    &.style-card.mode-black {
       --base-color: #{$white};
       --twitter-color: #{$white};
       --quote-border-color: #{$gray-600};
