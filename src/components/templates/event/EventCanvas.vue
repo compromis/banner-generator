@@ -45,6 +45,7 @@
     </div>
     <banner-frame
       theme="glowy"
+      :mode="banner.mode"
       :hashtag="banner.hashtag"
       :local-label="banner.localLabel"
       :aspect="aspect" />
