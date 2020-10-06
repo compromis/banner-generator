@@ -4,6 +4,7 @@ import RangeSlider from '@/components/pane/RangeSlider.vue'
 import CInputText from '@/components/pane/CInputText'
 import CSelect from '@/components/pane/CSelect'
 import CField from '@/components/pane/CField'
+import ColorSelector from '@/components/pane/ColorSelector'
 
 export default {
   // Shared components across templates
@@ -12,15 +13,16 @@ export default {
     PictureUpload,
     CInputText,
     CSelect,
-    CField
+    CField,
+    ColorSelector
   },
 
   // Shared data across templates
   data () {
     return {
       properties: {
-        card: 1, // deprecated
         theme: 'glowy',
+        mode: 'white',
         picture: null,
         picturePreview: '',
         picturePos: 50,

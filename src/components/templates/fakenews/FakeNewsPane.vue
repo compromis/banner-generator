@@ -33,6 +33,13 @@
         @touchend="dimPane(false)" />
     </picture-upload>
 
+    <!-- Dark mode -->
+    <color-selector
+      v-model="properties.mode"
+      :colors="['white', 'black']"
+      label="Color de fons"
+      is-rounded />
+
     <!-- Local label -->
     <transition name="slide">
       <c-input-text

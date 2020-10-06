@@ -4,11 +4,20 @@
     <c-tab-group>
       <c-tab v-model="properties.style" value="transparent" name="style">Transparent</c-tab>
       <c-tab v-model="properties.style" value="card" name="style">Targeta</c-tab>
-      <c-tab v-model="properties.style" value="dark" name="style">Fosc</c-tab>
     </c-tab-group>
 
     <!-- Color -->
     <color-selector label="Color de fons" is-rounded v-model="properties.backgroundColor" :colors="['black', 'white', 'orange', 'lgbt', 'feminism', 'green']" />
+
+    <!-- Dark mode -->
+    <transition name="slide">
+      <color-selector
+        v-if="properties.style === 'card'"
+        v-model="properties.mode"
+        :colors="['white', 'black']"
+        label="Color de la targeta"
+        is-rounded />
+    </transition>
 
     <!-- Tweet URL -->
     <div class="tweet-input">
@@ -137,7 +146,6 @@
 <script>
 import API from '@/api'
 import PaneMixin from '@/mixins/pane-mixin.js'
-import ColorSelector from '@/components/pane/ColorSelector'
 import CTabGroup from '@/components/pane/CTabGroup'
 import CTab from '@/components/pane/CTab'
 
@@ -147,7 +155,6 @@ export default {
   mixins: [PaneMixin],
 
   components: {
-    ColorSelector,
     CTabGroup,
     CTab
   },
