@@ -6,7 +6,8 @@
       'banner-canvas',
       'aspect-' + aspect,
       'disposition-' + banner.disposition,
-      'theme-' + banner.theme
+      'theme-' + banner.theme,
+      'banner-background-' + banner.mode
     ]">
     <banner-picture
       :picture="banner.picturePreview"
@@ -19,6 +20,7 @@
       :full-gradient="banner.fullGradient" />
     <headline-card
       :theme="banner.theme"
+      :mode="banner.mode"
       :headline="banner.headline"
       :source="banner.source"
       :custom-source="banner.customSource"
@@ -27,6 +29,7 @@
     <emojis-on-canvas v-model="banner.emojis" />
     <banner-frame
       :theme="banner.theme"
+      :mode="banner.mode"
       :hashtag="banner.hashtag"
       :local-label="banner.localLabel"
       :aspect="aspect"
