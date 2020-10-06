@@ -5,6 +5,7 @@
       'banner-canvas',
       'aspect-' + aspect,
       `has-${banner.speakers.length}-speakers`,
+      'banner-background-' + banner.mode
     ]"
     :style="{
       '--speakers': banner.speakers.length
@@ -264,4 +265,15 @@ export default {
         }
       }
     }
+
+  //Dark background
+  .banner-canvas.banner-background-black {
+    .event-info, .speakers-title, .speakers-name {
+      color: $white;
+    }
+
+    .speakers-subtitle, .speakers-overtitle, .speakers-description {
+      color: $gray-400;
+    }
+  }
 </style>

@@ -5,6 +5,7 @@
       'banner-canvas',
       'aspect-' + aspect,
       'disposition-' + banner.disposition,
+      'banner-background-' + banner.mode
     ]"
     v-if="banner">
     <div class="media-grid">
@@ -181,6 +182,17 @@ export default {
       &-subtitle {
         margin-top: 6px;
       }
+    }
+  }
+
+  //Dark background
+  .banner-canvas.banner-background-black {
+    .event-info, .medium-title {
+      color: $white;
+    }
+
+    .medium-subtitle, .medium-overtitle {
+      color: $gray-400;
     }
   }
 </style>

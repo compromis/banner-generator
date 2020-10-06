@@ -4,6 +4,19 @@
   border: 2px black solid;
 }
 
+.banner-canvas.banner-background-black {
+  background: $gray-900;
+
+  .card {
+    background: $gray-800;
+    color: $white;
+  }
+
+  .hashtag {
+    color: $white;
+  }
+}
+
 .banner-canvas {
   [contenteditable]:hover {
     background: rgba($primary, .1);
