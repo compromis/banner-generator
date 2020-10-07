@@ -20,6 +20,7 @@ $gray-600: mix($gray-darkest, $gray-lightest, 50%);
 $gray-700: mix($gray-darkest, $gray-lightest, 70%);
 $gray-800:  mix($gray-darkest, $gray-lightest, 90%);
 $gray-900: $gray-darkest;
+$gray-1000: darken($gray-darkest, 5%);
 
 $black-bis: $gray-900;
 $black-ter: $gray-800;

@@ -5,7 +5,7 @@
 }
 
 .banner-canvas.banner-background-black {
-  background: $gray-900;
+  background: $gray-1000;
 
   .card {
     background: $gray-800;
@@ -15,6 +15,14 @@
   .hashtag {
     color: $white;
   }
+
+  .glowy-ghost {
+    opacity: .25 !important;
+  }
+}
+
+.glowy-ghost {
+  opacity: .75 !important;
 }
 
 .banner-canvas {

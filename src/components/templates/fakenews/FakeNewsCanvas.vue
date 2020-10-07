@@ -59,19 +59,6 @@ export default {
   }
 
   .blob {
-    &-1 {
-      left: -58%;
-      top: -82%;
-      z-index: 20;
-    }
-
-    &-2 {
-      right: -57%;
-      bottom: -81%;
-      z-index: 20;
-      --gradient-orientation: -45deg;
-    }
-
     &-image {
       position: absolute;
       top: 30px;
@@ -125,42 +112,8 @@ export default {
     }
   }
 
-  .logo {
-    color: $white;
-    z-index: 20;
-
-    &-local-label {
-      color: $white;
-    }
-  }
-
-  .hashtag {
-    bottom: 30px;
-    left: 35px;
-    top: auto;
-    color: $gray-900;
-  }
-
-  .has-local-label {
-    .blob-2 {
-      right: -40%;
-    }
-  }
-
   // Story aspect
   .aspect-916 {
-    .blob {
-      &-1 {
-        top: -85%;
-        left: -120%;
-      }
-
-      &-2 {
-        right: -120%;
-        bottom: -84%;
-      }
-    }
-
     .text {
       left: 40px;
       right: 40px;
@@ -169,9 +122,10 @@ export default {
     .stamp {
       font-size: 90px;
     }
+  }
 
-    .logo {
-      display: none;
-    }
+  // Dark mode
+  .banner-background-black .text {
+    color: $white;
   }
 </style>
