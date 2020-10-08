@@ -24,6 +24,15 @@
       :message="setFieldMessage('amount')"
       :maxlength="14" />
 
+    <!-- Amount -->
+    <c-input-text
+      label="Persones"
+      name="people"
+      placeholder="10.000"
+      v-model="properties.people"
+      :message="setFieldMessage('people')"
+      :maxlength="14" />
+
     <!-- Picture -->
     <picture-upload
       :picture="properties.picture"
@@ -75,7 +84,8 @@ export default {
     validate () {
       this.fieldRequired({
         municipality: "Has d'escriure un poble",
-        amount: "Has d'escriure una quantitat"
+        amount: "Has d'escriure una quantitat",
+        people: "Has d'escriure una quantitat"
       })
       this.allCapsDisallowed('municipality')
     }
