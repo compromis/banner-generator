@@ -76,7 +76,6 @@
 
 <script>
 import PaneMixin from '@/mixins/pane-mixin.js'
-import ColorSelector from '@/components/pane/ColorSelector'
 import EmojiPicker from '@/components/pane/EmojiPicker'
 import CTab from '@/components/pane/CTab'
 import CTabGroup from '@/components/pane/CTabGroup'
@@ -85,6 +84,12 @@ export default {
   name: 'video-cover-pane',
 
   mixins: [PaneMixin],
+
+  components: {
+    EmojiPicker,
+    CTab,
+    CTabGroup
+  },
 
   data () {
     return {
@@ -102,13 +107,6 @@ export default {
         emojis: []
       }
     }
-  },
-
-  components: {
-    ColorSelector,
-    EmojiPicker,
-    CTab,
-    CTabGroup
   },
 
   methods: {

@@ -137,7 +137,7 @@ export default {
         domtoimage.toPng(
           document.getElementById('bannerCanvas' + aspect),
           {
-            bgcolor: '#fff',
+            bgcolor: this.banner.mode === 'black' ? '#353949' : '#fff',
             width: bannerWidth,
             height: bannerHeight,
             style: {

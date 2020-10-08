@@ -4,7 +4,8 @@
     :class="[
       'banner-canvas',
       'aspect-' + aspect,
-      'style-' + banner.style
+      'style-' + banner.style,
+      'mode-' + banner.mode
     ]"
     v-if="banner">
     <emojis-on-canvas v-model="banner.emojis" />
@@ -80,7 +81,7 @@ export default {
       --overtitle-text-color: rgba(255, 255, 255, .6);
     }
 
-    &.style-dark {
+    &.style-card.mode-black {
       --card-background: #{$gray-900};
       --text-color: #{$white};
       --overtitle-text-color: #{$gray-400};

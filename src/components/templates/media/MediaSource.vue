@@ -134,17 +134,17 @@ export default {
   position: absolute;
   top: 8px;
   left: 0;
-  bottom: -3px;
+  bottom: -2px;
   right: 7px;
   border-radius: 10px;
-  filter: blur(15px);
+  filter: blur(6px);
   z-index: -10;
-  opacity: .5;
+  opacity: .25;
 
   &.second {
-    bottom: -1px;
-    filter: blur(5px);
-    opacity: .5;
+    bottom: 0;
+    filter: blur(4px);
+    opacity: .35;
   }
 }
 

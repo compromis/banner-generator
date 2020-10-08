@@ -3,7 +3,6 @@
     <c-tab-group>
       <c-tab v-model="properties.style" value="transparent" name="style">Transparent</c-tab>
       <c-tab v-model="properties.style" value="card" name="style">Targeta</c-tab>
-      <c-tab v-model="properties.style" value="dark" name="style">Fosc</c-tab>
     </c-tab-group>
 
     <!-- Text -->
@@ -20,7 +19,7 @@
       type="textarea"
       label="Text"
       name="text"
-      placeholder="Hem afegit 438438 profesors"
+      placeholder="Nou pla per afegir més personal docent"
       v-model="properties.text"
       :maxlength="100"
       :message="setFieldMessage('text')" />
@@ -75,6 +74,16 @@
     <!-- Frame color  -->
     <color-selector v-model="properties.color" :colors="availableColors[properties.theme]" label="Color" is-rounded />
 
+    <!-- Dark mode -->
+    <transition name="slide">
+      <color-selector
+        v-if="properties.style === 'card'"
+        v-model="properties.mode"
+        :colors="['white', 'black']"
+        label="Color de la targeta"
+        is-rounded />
+    </transition>
+
     <!-- Hashtag -->
     <transition name="slide">
       <c-input-text
@@ -104,7 +113,6 @@
 <script>
 import PaneMixin from '@/mixins/pane-mixin'
 import EmojiPicker from '@/components/pane/EmojiPicker'
-import ColorSelector from '@/components/pane/ColorSelector'
 import CTabGroup from '@/components/pane/CTabGroup'
 import CTab from '@/components/pane/CTab'
 
@@ -115,7 +123,6 @@ export default {
 
   components: {
     EmojiPicker,
-    ColorSelector,
     CTabGroup,
     CTab
   },

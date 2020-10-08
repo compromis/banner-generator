@@ -43,6 +43,13 @@
       </b-switch>
     </c-field>
 
+    <!-- Dark mode -->
+    <color-selector
+      v-model="properties.mode"
+      :colors="['white', 'black']"
+      :label="properties.theme === 'glowy' ? 'Color de fons' : 'Color de targeta'"
+      :is-rounded="properties.theme === 'glowy'" />
+
     <!-- Hashtag -->
     <transition name="slide">
       <c-input-text
@@ -74,7 +81,6 @@ import { VueEditor } from 'vue2-editor'
 import PaneMixin from '@/mixins/pane-mixin.js'
 import EmojiPicker from '@/components/pane/EmojiPicker'
 import ThemeSelector from '@/components/pane/ThemeSelector'
-import ColorSelector from '@/components/pane/ColorSelector'
 import CTabGroup from '@/components/pane/CTabGroup'
 import CTab from '@/components/pane/CTab'
 
@@ -87,7 +93,6 @@ export default {
     VueEditor,
     EmojiPicker,
     ThemeSelector,
-    ColorSelector,
     CTabGroup,
     CTab
   },

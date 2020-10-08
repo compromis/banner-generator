@@ -124,6 +124,11 @@ export default {
         width: 6rem;
         height: 6rem;
         border-radius: 1rem;
+
+        svg {
+          width: 2.5rem !important;
+          height: 2.5rem;
+        }
       }
 
       &-name {

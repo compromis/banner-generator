@@ -62,6 +62,16 @@
       </b-switch>
     </c-field>
 
+    <!-- Dark mode -->
+    <transition name="slide">
+      <color-selector
+        v-if="properties.theme === 'glowy'"
+        v-model="properties.mode"
+        :colors="['white', 'black']"
+        label="Color de fons"
+        is-rounded />
+    </transition>
+
     <!-- Hashtag -->
     <transition name="slide">
       <c-input-text
@@ -91,7 +101,6 @@
 <script>
 import PaneMixin from '@/mixins/pane-mixin.js'
 import ThemeSelector from '@/components/pane/ThemeSelector'
-import ColorSelector from '@/components/pane/ColorSelector'
 import CTabGroup from '@/components/pane/CTabGroup'
 import CTab from '@/components/pane/CTab'
 
@@ -102,7 +111,6 @@ export default {
 
   components: {
     ThemeSelector,
-    ColorSelector,
     CTabGroup,
     CTab
   },
