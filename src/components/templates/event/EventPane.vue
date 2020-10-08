@@ -81,7 +81,14 @@
     </picture-upload>
 
     <!-- Frame color  -->
-    <color-selector v-model="properties.color" :colors="availableColors['glowy']" label="Color" is-rounded />
+    <color-selector v-model="properties.color" :colors="availableColors['glowy']" label="Color accent" is-rounded />
+
+    <!-- Dark mode -->
+    <color-selector
+      v-model="properties.mode"
+      :colors="['white', 'black']"
+      label="Color de fons"
+      is-rounded />
 
     <!-- Local label -->
     <transition name="slide">
@@ -97,7 +104,6 @@
 </template>
 
 <script>
-import ColorSelector from '@/components/pane/ColorSelector.vue'
 import PaneMixin from '@/mixins/pane-mixin'
 import DatePicker from '@/components/pane/DatePicker'
 import SpeakerList from '@/components/pane/SpeakerList'
@@ -109,8 +115,7 @@ export default {
 
   components: {
     DatePicker,
-    SpeakerList,
-    ColorSelector
+    SpeakerList
   },
 
   data () {

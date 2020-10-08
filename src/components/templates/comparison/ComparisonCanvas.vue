@@ -5,7 +5,8 @@
       'banner-canvas',
       'aspect-' + aspect,
       aspect === '11' || banner.card ? 'disposition-' + banner.disposition : '',
-      banner.invertOrder ? 'comparison--inverted' : ''
+      banner.invertOrder ? 'comparison--inverted' : '',
+      'banner-background-' + banner.mode
     ]"
     v-if="banner">
     <div :class="['comparison-images', banner.invertOrder ? 'comparison-images--inverted' : '']">
@@ -50,9 +51,10 @@
     </div>
     <banner-frame
       theme="glowy"
+      :mode="banner.mode"
       :hashtag="banner.hashtag"
       :local-label="banner.localLabel"
-      :logo-align="banner.invertOrder ? 'left' : 'right' "
+      :logo-align="banner.invertOrder ? 'left' : 'right'"
        />
   </div>
 </template>

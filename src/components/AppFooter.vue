@@ -37,7 +37,6 @@ export default {
     backdrop-filter: blur(4px);
     background-color: rgba($body-background-color, .75);
     border-radius: .5rem;
-    margin: 1rem;
     margin-top: 2rem;
 
     strong {

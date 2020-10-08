@@ -5,7 +5,8 @@
       'banner-canvas',
       'aspect-' + aspect,
       'disposition-' + banner.disposition,
-      'theme-' + banner.theme
+      'theme-' + banner.theme,
+      'banner-background-' + banner.mode
     ]"
     v-if="banner">
     <div class="text" v-if="banner.text" :style="{ alignItems: banner.textPos, textAlign: banner.textAlign }">
@@ -22,6 +23,7 @@
     <emojis-on-canvas v-model="banner.emojis" />
     <banner-frame
       :theme="banner.theme"
+      :mode="banner.mode"
       :hashtag="banner.hashtag"
       :local-label="banner.localLabel"
       :aspect="aspect"

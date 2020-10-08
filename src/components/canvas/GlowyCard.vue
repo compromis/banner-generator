@@ -106,10 +106,12 @@ export default {
     &-ghost {
       top: 5px;
       z-index: 1;
-      filter: blur(34px) brightness(.85);
+      filter: blur(28px) brightness(.85);
+      opacity: .75;
 
       &.second {
         filter: blur(8px) brightness(.85);
+        opacity: .5;
       }
     }
 

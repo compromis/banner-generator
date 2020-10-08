@@ -5,7 +5,8 @@
       'banner-canvas',
       'aspect-' + aspect,
       'theme-' + banner.theme,
-      'disposition-' + banner.disposition
+      'disposition-' + banner.disposition,
+      'banner-background-' + banner.mode
     ]"
     v-if="banner">
     <div class="grid">
@@ -23,6 +24,7 @@
     <emojis-on-canvas v-model="banner.emojis" />
     <banner-frame
       :theme="banner.theme"
+      :mode="banner.mode"
       :hashtag="banner.hashtag"
       :local-label="banner.localLabel"
       :aspect="aspect"
@@ -88,7 +90,7 @@ export default {
   .theme-blobs, .theme-blobless {
     .text {
       position: absolute;
-      background: $white;
+      background: var(--card-background, #{$white});
       bottom: 80px;
       left: 35px;
       right: 35px;
@@ -250,6 +252,21 @@ export default {
     .text-wysiwyg > div > h2 {
       margin-top: 0;
       margin-bottom: 20px;
+    }
+  }
+
+  .banner-background-black {
+    .text-wysiwyg {
+      --card-background: #{$gray-900};
+      color: $white;
+
+      h2 {
+        background: $gray-800;
+      }
+
+      strong {
+        color: $white;
+      }
     }
   }
 </style>

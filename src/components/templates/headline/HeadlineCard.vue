@@ -1,11 +1,11 @@
 <template>
-  <div :class="{'headline': true, 'headline--pills': theme !== 'blobs'}">
+  <div :class="{'headline': true, 'headline--pills': theme !== 'blobs', 'headline--dark': mode === 'black'}">
     <div class="headline-source headline-source--custom" v-if="source === 'other'">
       <span :style="{ color: customSourceColor }">{{ customSource }}</span>
     </div>
     <div class="headline-source" v-else-if="source">
       <img
-      :src="source.logo"
+      :src="mode === 'black' && 'logoCard' in source ? source.logoCard : source.logo"
       :alt="source.name"
       :style="{ height: source.logoHeight + 'px' }" />
     </div>
@@ -25,7 +25,8 @@
         :font-size="fontSize"
         :line-height="source && source !== 'other' ? source.font.lineHeight : null"
         :padding="source && source !== 'other' ? source.font.padding : '15px 12px 6px'"
-        :width="720" />
+        :width="720"
+        :pill-style="mode" />
     </div>
   </div>
 </template>
@@ -45,7 +46,14 @@ export default {
       type: String,
       default: 'blobs',
       validator (value) {
-        return ['blobs', 'glowy', 'blobless'].indexOf(value) !== -1
+        return ['blobs', 'glowy', 'blobless'].includes(value)
+      }
+    },
+    mode: {
+      type: String,
+      default: 'white',
+      validator (value) {
+        return ['white', 'black'].includes(value)
       }
     },
     source: {
@@ -119,6 +127,19 @@ export default {
       box-shadow: $raised-shadow;
       border-radius: 8px;
       padding: 6px 10px;
+    }
+  }
+
+  // Dark mode
+  &--dark {
+    &:not(.headline--pills),
+    .headline-source {
+      background: $gray-900;
+      color: $white;
+    }
+
+    .headline-source img {
+      filter: grayscale(100%) brightness(0) invert(1);
     }
   }
 }

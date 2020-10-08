@@ -86,7 +86,11 @@
     </picture-upload>
 
     <!-- Frame color  -->
-    <color-selector v-model="properties.color" :colors="availableColors[properties.theme]" label="Color" is-rounded />
+    <color-selector
+      v-model="properties.color"
+      :colors="availableColors[properties.theme]"
+      label="Color accent"
+      is-rounded />
 
     <transition name="slide">
       <c-field v-if="properties.theme === 'blobless'" class="blobless-gradient-option">
@@ -95,6 +99,13 @@
         </b-switch>
       </c-field>
     </transition>
+
+    <!-- Dark mode -->
+    <color-selector
+      v-model="properties.mode"
+      :colors="['white', 'black']"
+      :label="properties.theme === 'glowy' ? 'Color de fons' : 'Color de targeta'"
+      :is-rounded="properties.theme === 'glowy'" />
 
     <!-- Hashtag -->
     <transition name="slide">
@@ -130,7 +141,6 @@ import EmojiPicker from '@/components/pane/EmojiPicker'
 import CTab from '@/components/pane/CTab'
 import CTabGroup from '@/components/pane/CTabGroup'
 import ThemeSelector from '@/components/pane/ThemeSelector'
-import ColorSelector from '@/components/pane/ColorSelector'
 
 export default {
   name: 'headline-pane',
@@ -140,8 +150,7 @@ export default {
     EmojiPicker,
     CTab,
     CTabGroup,
-    ThemeSelector,
-    ColorSelector
+    ThemeSelector
   },
 
   mixins: [PaneMixin],

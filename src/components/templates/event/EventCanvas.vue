@@ -5,6 +5,7 @@
       'banner-canvas',
       'aspect-' + aspect,
       'disposition-' + banner.disposition,
+      'banner-background-' + banner.mode
     ]"
     v-if="banner">
     <div class="event-grid">
@@ -44,6 +45,7 @@
     </div>
     <banner-frame
       theme="glowy"
+      :mode="banner.mode"
       :hashtag="banner.hashtag"
       :local-label="banner.localLabel"
       :aspect="aspect" />
@@ -200,6 +202,17 @@ export default {
       right: 0;
       left: 0;
       bottom: 0;
+    }
+  }
+
+  //Dark background
+  .banner-canvas.banner-background-black {
+    .event-info, .event-title, .event-name {
+      color: $white;
+    }
+
+    .event-subtitle, .event-overtitle, .event-description {
+      color: $gray-400;
     }
   }
 </style>

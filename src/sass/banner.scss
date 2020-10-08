@@ -4,29 +4,24 @@
   border: 2px black solid;
 }
 
-.banner-canvas {
-  .blob {
-    position: absolute;
-    width: 720px;
-    height: 720px;
-    overflow: hidden;
-    border-radius: $border-radius;
-    background: $gradient;
-    transform: rotate($rotation);
-    transition: all .5s ease-in-out;
+.banner-canvas.banner-background-black {
+  background: $gray-1000;
 
-    &-image {
-      background: $gray-300;
-
-      img {
-        transform: rotate(-$rotation);
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-    }
+  .card {
+    background: $gray-800;
+    color: $white;
   }
 
+  .hashtag {
+    color: $white;
+  }
+
+  .glowy-ghost {
+    opacity: .25 !important;
+  }
+}
+
+.banner-canvas {
   [contenteditable]:hover {
     background: rgba($primary, .1);
     outline: .5rem rgba($primary, .1) solid;
