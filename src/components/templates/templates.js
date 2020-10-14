@@ -150,6 +150,19 @@ export default [
     }
   },
   {
+    id: 'Labora',
+    name: 'Labora ECOVID',
+    aspects: ['11'],
+    icon: 'euro-sign',
+    label: '🦠Covid-19',
+    hidden: true,
+    components: {
+      pane: () => import(/* webpackChunkName: "labora" */ './labora/LaboraPane'),
+      canvas: () => import(/* webpackChunkName: "labora" */ './labora/LaboraCanvas'),
+      help: () => import(/* webpackChunkName: "labora" */ './labora/LaboraHelp')
+    }
+  },
+  {
     id: 'Superavit',
     name: 'Superàvit local',
     aspects: ['11'],
