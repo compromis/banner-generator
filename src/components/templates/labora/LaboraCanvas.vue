@@ -3,27 +3,25 @@
     :id="'bannerCanvas' + aspect"
     :class="[
       'banner-canvas',
-      'banner-background-black',
       banner.localLabel && banner.hasLocalLabel ? 'has-local-label' : '',
     ]"
     v-if="banner">
-    <div class="background-image">
+    <div :class="['background-image', {'has-picture': banner.picturePreview}]">
       <img :src="banner.picturePreview" alt="Imatge" v-if="banner.picturePreview" :style="objectPosition" />
     </div>
     <div class="content">
-      <div class="line-1" v-if="banner.lang === 'val'">Gràcies al programa ECOVID de Labora, {{ municipalityCouncil }} rebrà una ajuda de</div>
+      <div class="line-1" v-html="line1"></div>
       <div class="big-number">{{ banner.amount }} €</div>
-      <div class="line-2" v-if="banner.lang === 'val'">i podrà donar feina durant sis mesos a</div>
-      <div class="big-number">
-        <font-awesome-icon :icon="['far', 'user-friends']" />
-        {{ banner.people }}
+      <div class="line-2">{{ line2 }}</div>
+      <div class="big-number big-number-people" style="margin-bottom: 0">
+        <span class="big-number-people-icon"><font-awesome-icon :icon="['far', 'user-friends']" /></span>
+        <span class="big-number-people-number">{{ banner.people }}</span>
+        <span class="big-number-people-label">{{ line3 }}</span>
       </div>
     </div>
     <banner-frame
-      theme="glowy"
-      mode="black"
-      hashtag="Amb Labora, les persones primer."
-      :local-label="banner.localLabel"
+      theme="blobless"
+      hashtag="Amb Labora, les persones primer"
       :aspect="aspect" />
   </div>
 </template>
@@ -46,7 +44,7 @@ export default {
       const { lang, municipality } = this.banner
 
       if (lang === 'val') {
-        let string = "L'Ajuntament"
+        let string = "l'Ajuntament"
 
         if (['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'].includes(municipality[0])) {
           string += " d'"
@@ -59,7 +57,25 @@ export default {
         return string
       }
 
-      return `El Ayuntamiento de ${municipality}`
+      return `el Ayuntamiento de ${municipality}`
+    },
+
+    line1 () {
+      return this.banner.lang === 'val'
+        ? `Gràcies al <span>Programa ECOVID de Labora</span>, ${this.municipalityCouncil} rebrà una ajuda de`
+        : `Gracias al <span>Programa ECOVID de Labora</span>, ${this.municipalityCouncil} recibirá una ayuda de`
+    },
+
+    line2 () {
+      return this.banner.lang === 'val'
+        ? 'i podrà donar feina durant sis mesos a'
+        : 'y podrá dar trabajo durante seis meses a'
+    },
+
+    line3 () {
+      return this.banner.lang === 'val'
+        ? 'persones'
+        : 'personas'
     }
   }
 }
@@ -74,75 +90,90 @@ export default {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: $gray-900;
 
     img {
       width: 100%;
       height: 100%;
-      opacity: .25;
       object-fit: cover;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: $gradient;
+    }
+
+    &.has-picture::after {
+      background: $trans-gradient;
     }
   }
 
   .content {
     position: absolute;
-    top: 55px;
-    left: 55px;
-    right: 55px;
-    color: $white;
-    font-size: 32px;
-    font-weight: bold;
+    top: 120px;
+    left: 70px;
+    right: 70px;
+    color: $gray-900;
+    font-size: 28px;
     letter-spacing: -0.02em;
     line-height: 1.2;
     max-height: 570px;
     overflow: hidden;
+    background: $white;
+    border-radius: 16px;
+    box-shadow: $raised-shadow;
+    padding: 24px;
 
     .big-number {
-      display: inline-block;
-      font-size: 92px;
-      background: linear-gradient(to right, $gradient-start, $gradient-end);
-      color: $white;
-      border-radius: 10px;
-      padding: 5px 20px;
+      display: block;
+      font-size: 82px;
+      background: $gray-100;
+      color: $gray-900;
+      padding: 18px 24px;
       line-height: 1;
-      margin-bottom: 30px;
-      margin-top: 10px;
+      margin: 10px -24px;
       letter-spacing: -0.04em;
-    }
+      font-weight: bold;
 
-    .line-3 {
-      em {
-        font-style: normal;
-        color: #f74249;
-        background: rgba($gray-900, 1);
-        padding: 0 8px;
-        border-radius: 4px;
-      }
+      &-people {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        grid-template-rows: auto auto;
+        margin-bottom: -24px !important;
 
-      img {
-        width: 38px;
-        vertical-align: middle;
-      }
-    }
+        &-icon {
+          grid-area: 1 / 1 / span 2 / 1;
+          align-content: center;
+          line-height: 1;
+          padding-right: 12px;
+        }
 
-    .list-of-things {
-      list-style: none;
-      padding: 0;
-      margin: 10px 0 40px 0;
+        &-number {
+          grid-area: 1 / 2 / 1 / 2;
+          font-size: 62px;
+        }
 
-      li {
-        position: relative;
-        font-weight: normal;
-        padding-left: 48px;
-        margin: 20px 0;
-
-        img {
-          position: absolute;
-          left: 0;
-          top: 2px;
-          width: 34px;
+        &-label {
+          grid-area: 2 / 2 / 2 / 2;
+          font-size: 18px;
+          text-transform: uppercase;
+          letter-spacing: 0.02em;
+          padding-left: 10px;
         }
       }
+    }
+
+    .line-1::v-deep span {
+      color: #e15d20;
+      font-weight: bold;
+    }
+
+    .line-2 {
+      margin-top: 34px;
     }
   }
 </style>

@@ -19,7 +19,7 @@
     <c-input-text
       label="Quantitat"
       name="amount"
-      placeholder="30 milions"
+      placeholder="200.000"
       v-model="properties.amount"
       :message="setFieldMessage('amount')"
       :maxlength="14" />
@@ -28,7 +28,7 @@
     <c-input-text
       label="Persones"
       name="people"
-      placeholder="10.000"
+      placeholder="150"
       v-model="properties.people"
       :message="setFieldMessage('people')"
       :maxlength="14" />
@@ -48,17 +48,6 @@
         @touchstart="dimPane(true)"
         @touchend="dimPane(false)" />
     </picture-upload>
-
-    <!-- Local label -->
-    <transition name="slide">
-      <c-input-text
-        v-if="!aspect"
-        label="Text logo"
-        name="localLabel"
-        placeholder="Alacant"
-        v-model="properties.localLabel"
-        :maxlength="48" />
-    </transition>
   </div>
 </template>
 
