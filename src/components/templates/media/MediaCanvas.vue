@@ -13,7 +13,7 @@
         :picture="banner.picturePreview"
         :picture-position="objectPosition"
         theme="glowy"
-        :color="color"
+        :color="banner.color"
         :edge="true" />
       <div class="medium">
         <span>{{ banner.aspect }}</span>
