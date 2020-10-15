@@ -19,19 +19,25 @@
     <c-input-text
       label="Quantitat"
       name="amount"
-      placeholder="200.000"
+      placeholder="300.000"
       v-model="properties.amount"
       :message="setFieldMessage('amount')"
       :maxlength="14" />
 
-    <!-- Amount -->
+    <!-- People -->
     <c-input-text
       label="Persones"
       name="people"
-      placeholder="150"
+      placeholder="50"
       v-model="properties.people"
       :message="setFieldMessage('people')"
       :maxlength="14" />
+
+    <div class="c-field c-field-content c-field-help">
+      <a href="https://comprom.is/KJdurTH" target="_blank">
+        <font-awesome-icon :icon="['far', 'question-circle']" />
+        Consulta la qüantiat que <br> correspon al teu poble</a>
+    </div>
 
     <!-- Picture -->
     <picture-upload
@@ -83,4 +89,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.c-field-help a {
+  display: flex;
+  align-items: center;
+  line-height: 1;
+
+  svg {
+    margin-right: .5rem;
+  }
+}
 </style>

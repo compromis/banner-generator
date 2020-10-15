@@ -1,15 +1,13 @@
 <template>
   <div
     :id="'bannerCanvas' + aspect"
-    :class="[
-      'banner-canvas',
-      banner.localLabel && banner.hasLocalLabel ? 'has-local-label' : '',
-    ]"
+    class="banner-canvas"
     v-if="banner">
     <div :class="['background-image', {'has-picture': banner.picturePreview}]">
       <img :src="banner.picturePreview" alt="Imatge" v-if="banner.picturePreview" :style="objectPosition" />
     </div>
     <div class="content">
+      <div class="sup">{{ banner.municipality }}</div>
       <div class="line-1" v-html="line1"></div>
       <div class="big-number">{{ banner.amount }} €</div>
       <div class="line-2">{{ line2 }}</div>
@@ -40,30 +38,10 @@ export default {
   },
 
   computed: {
-    municipalityCouncil () {
-      const { lang, municipality } = this.banner
-
-      if (lang === 'val') {
-        let string = "l'Ajuntament"
-
-        if (['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'].includes(municipality[0])) {
-          string += " d'"
-        } else {
-          string += ' de '
-        }
-
-        string += municipality
-
-        return string
-      }
-
-      return `el Ayuntamiento de ${municipality}`
-    },
-
     line1 () {
       return this.banner.lang === 'val'
-        ? `Gràcies al <span>Programa ECOVID de Labora</span>, ${this.municipalityCouncil} rebrà una ajuda de`
-        : `Gracias al <span>Programa ECOVID de Labora</span>, ${this.municipalityCouncil} recibirá una ayuda de`
+        ? `Gràcies al <span>Programa ECOVID de Labora</span>, l'Ajuntament rebrà una ajuda de`
+        : `Gracias al <span>Programa ECOVID de Labora</span>, el Ayuntamiento recibirá una ayuda de`
     },
 
     line2 () {
@@ -128,9 +106,18 @@ export default {
     box-shadow: $raised-shadow;
     padding: 24px;
 
+    .sup {
+      text-transform: uppercase;
+      font-size: 18px;
+      font-weight: bold;
+      letter-spacing: 0.05em;
+      margin-bottom: 16px;
+      color: $gray-700;
+    }
+
     .big-number {
       display: block;
-      font-size: 82px;
+      font-size: 72px;
       background: $gray-100;
       color: $gray-900;
       padding: 18px 24px;
