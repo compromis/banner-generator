@@ -13,8 +13,7 @@
       <div class="line-2">{{ line2 }}</div>
       <div class="big-number big-number-people" style="margin-bottom: 0">
         <span class="big-number-people-icon"><font-awesome-icon :icon="['far', 'user-friends']" /></span>
-        <span class="big-number-people-number">{{ banner.people }}</span>
-        <span class="big-number-people-label">{{ line3 }}</span>
+        <span class="big-number-people-number">{{ banner.people }} {{ line3 }}</span>
       </div>
     </div>
     <banner-frame
@@ -117,7 +116,7 @@ export default {
 
     .big-number {
       display: block;
-      font-size: 72px;
+      font-size: 62px;
       background: $gray-100;
       color: $gray-900;
       padding: 18px 24px;
@@ -133,23 +132,7 @@ export default {
         margin-bottom: -24px !important;
 
         &-icon {
-          grid-area: 1 / 1 / span 2 / 1;
-          align-content: center;
-          line-height: 1;
-          padding-right: 12px;
-        }
-
-        &-number {
-          grid-area: 1 / 2 / 1 / 2;
-          font-size: 62px;
-        }
-
-        &-label {
-          grid-area: 2 / 2 / 2 / 2;
-          font-size: 18px;
-          text-transform: uppercase;
-          letter-spacing: 0.02em;
-          padding-left: 10px;
+          margin-right: 10px;
         }
       }
     }

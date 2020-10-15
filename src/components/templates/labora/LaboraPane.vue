@@ -24,6 +24,12 @@
       :message="setFieldMessage('amount')"
       :maxlength="14" />
 
+    <div class="c-field c-field-content">
+      <a href="https://comprom.is/KJdurTH" target="_blank" class="c-field-help">
+        <font-awesome-icon :icon="['far', 'question-circle']" />
+        Consulta la qüantiat que correspon al teu poble</a>
+    </div>
+
     <!-- People -->
     <c-input-text
       label="Persones"
@@ -34,9 +40,8 @@
       :maxlength="14" />
 
     <div class="c-field c-field-content c-field-help">
-      <a href="https://comprom.is/KJdurTH" target="_blank">
         <font-awesome-icon :icon="['far', 'question-circle']" />
-        Consulta la qüantiat que <br> correspon al teu poble</a>
+        Consulta al teu ajuntament aquesta informació
     </div>
 
     <!-- Picture -->
@@ -89,7 +94,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.c-field-help a {
+.c-field-help {
   display: flex;
   align-items: center;
   line-height: 1;
