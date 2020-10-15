@@ -84,8 +84,7 @@ export default {
     validate () {
       this.fieldRequired({
         municipality: "Has d'escriure un poble",
-        amount: "Has d'escriure una quantitat",
-        people: "Has d'escriure una quantitat"
+        amount: "Has d'escriure una quantitat"
       })
       this.allCapsDisallowed('municipality')
     }

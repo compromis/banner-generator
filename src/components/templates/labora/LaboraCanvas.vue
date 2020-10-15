@@ -11,7 +11,7 @@
       <div class="line-1" v-html="line1"></div>
       <div class="big-number">{{ banner.amount }} €</div>
       <div class="line-2">{{ line2 }}</div>
-      <div class="big-number big-number-people" style="margin-bottom: 0">
+      <div class="big-number big-number-people" style="margin-bottom: 0" v-if="banner.people">
         <span class="big-number-people-icon"><font-awesome-icon :icon="['far', 'user-friends']" /></span>
         <span class="big-number-people-number">{{ banner.people }} {{ line3 }}</span>
       </div>
@@ -44,9 +44,15 @@ export default {
     },
 
     line2 () {
-      return this.banner.lang === 'val'
-        ? 'i podrà donar feina durant sis mesos a'
-        : 'y podrá dar trabajo durante seis meses a'
+      if (this.banner.people) {
+        return this.banner.lang === 'val'
+          ? 'i podrà donar feina durant sis mesos a'
+          : 'y podrá dar trabajo durante seis meses a'
+      } else {
+        return this.banner.lang === 'val'
+          ? 'per crear nous llocs de treball'
+          : 'para crear nuevos puestos de trabajo'
+      }
     },
 
     line3 () {
@@ -85,7 +91,7 @@ export default {
     }
 
     &.has-picture::after {
-      background: $trans-gradient;
+      background: linear-gradient(45deg, rgba($gradient-start, .95), rgba($gradient-end, .7), rgba($gradient-end, .4))
     }
   }
 
@@ -121,9 +127,13 @@ export default {
       color: $gray-900;
       padding: 18px 24px;
       line-height: 1;
-      margin: 10px -24px;
+      margin: 12px -24px;
       letter-spacing: -0.04em;
       font-weight: bold;
+
+      &--last {
+        margin-bottom: -24px;
+      }
 
       &-people {
         display: grid;
@@ -143,7 +153,7 @@ export default {
     }
 
     .line-2 {
-      margin-top: 34px;
+      margin-top: 20px;
     }
   }
 </style>
