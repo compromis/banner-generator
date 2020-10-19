@@ -42,7 +42,7 @@
         </div>
         <media-source
           :source="banner.source"
-          :custom-cource="banner.customSource"
+          :custom-source="banner.customSource"
           :custom-source-color="banner.customSourceColor"
           :programme="banner.programme"
           :custom-programme="banner.customProgramme"
