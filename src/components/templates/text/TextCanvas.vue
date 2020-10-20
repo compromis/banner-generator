@@ -82,7 +82,7 @@ export default {
 
     &.aspect-916 {
       .text {
-        padding: 30px 30px 0 30px;
+        padding: 0 30px;
       }
     }
   }

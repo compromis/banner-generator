@@ -5,7 +5,7 @@
 }
 
 .banner-canvas.banner-background-black {
-  background: $gray-1000;
+  background: $gray-900;
 
   .card {
     background: $gray-800;
@@ -21,7 +21,7 @@
   }
 
   .text-holder.text-black .text-lines {
-    background: mix($white, $gray-900, 3%) !important;
+    background: $gray-800 !important;
   }
 }
 
