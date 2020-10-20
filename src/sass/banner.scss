@@ -19,6 +19,10 @@
   .glowy-ghost {
     opacity: .25 !important;
   }
+
+  .text-holder.text-black .text-lines {
+    background: mix($white, $gray-900, 3%) !important;
+  }
 }
 
 .banner-canvas {
