@@ -104,12 +104,14 @@ export default {
       right: 0;
       border-radius: $border-radius;
       background: $gradient;
-      filter: blur(34px);
+      filter: blur(32px);
       z-index: 19;
+      opacity: .65;
 
       &.second {
         bottom: -1px;
         filter: blur(6px) brightness(.85);
+        opacity: .85;
       }
     }
 

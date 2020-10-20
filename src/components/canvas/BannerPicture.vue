@@ -107,6 +107,10 @@ export default {
         top: 50%;
         bottom: -10%;
 
+        &.gradient-orange {
+          background: linear-gradient(var(--gradient-orientation, 110deg), rgba($gradient-start, 1) 0, rgba($gradient-start, .9) 20%, rgba($gradient-end, .7) 60%, rgba($gradient-end, 0) 95%);
+        }
+
         &.gradient-lgbt {
           --gradient-orientation: 90deg;
           top: 87%;
