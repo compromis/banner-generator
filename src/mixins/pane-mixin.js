@@ -38,9 +38,9 @@ export default {
       displayErrors: false,
       paneDimmed: false,
       availableColors: {
-        glowy: ['none', 'orange', 'lgbt', 'feminism', 'green'],
-        blobs: ['orange', 'lgbt', 'feminism', 'green'],
-        blobless: ['orange', 'black', 'lgbt', 'feminism', 'green']
+        glowy: ['none', 'orange', 'lgbt', 'feminism'],
+        blobs: ['orange', 'lgbt', 'feminism'],
+        blobless: ['orange', 'black', 'lgbt', 'feminism']
       }
     }
   },
