@@ -21,7 +21,7 @@ export default {
   data () {
     return {
       properties: {
-        theme: 'glowy',
+        theme: 'blobless',
         mode: 'white',
         picture: null,
         picturePreview: '',

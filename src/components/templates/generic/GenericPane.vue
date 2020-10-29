@@ -149,7 +149,7 @@ export default {
         emojis: [],
         textColor: 'black',
         color: 'orange',
-        fullGradient: true
+        fullGradient: false
       }
     }
   },

@@ -123,7 +123,7 @@ export default {
         textColor: 'white',
         color: 'orange',
         disposition: 'left',
-        fullGradient: true
+        fullGradient: false
       }
     }
   },

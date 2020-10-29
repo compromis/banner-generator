@@ -165,7 +165,7 @@ export default {
         customSourceColor: '#1CA085',
         emojis: [],
         color: 'orange',
-        fullGradient: true
+        fullGradient: false
       },
       presets: presets
     }

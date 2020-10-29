@@ -104,7 +104,7 @@ export default {
         emojis: [],
         disposition: 'bottom',
         color: 'orange',
-        fullGradient: true
+        fullGradient: false
       },
       customToolbar: [
         [{ header: 1 }, { header: 2 }],
