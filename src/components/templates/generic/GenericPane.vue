@@ -147,7 +147,7 @@ export default {
         textAlignI: 1,
         textSize: 100,
         emojis: [],
-        textColor: 'black',
+        textColor: 'white',
         color: 'orange',
         fullGradient: false
       }
