@@ -94,6 +94,7 @@ export default {
   data () {
     return {
       properties: {
+        theme: 'glowy',
         title: '',
         overtitle: '',
         date: new Date(),
