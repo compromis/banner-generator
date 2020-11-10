@@ -4,8 +4,8 @@
     <glowy-blob position="bottom" :aspect="aspect" v-if="theme === 'blobs'" :color="color" :wide="localLabel.length > 6" />
     <div class="hashtag" v-if="aspect !== '916'">{{ hashtag }}</div>
     <div :class="['logo', `logo--align-${logoAlign}`]" v-if="aspect === '11'">
-      <compromis-logo :mono="(theme === 'glowy' && mode === 'white') || logo === 'color' ? false : true" />
-      <div :class="{ 'logo-local-label': true, 'logo-local-label--long': localLabel.length > 18 }" v-if="localLabel">
+      <compromis-logo :mono="!colorLogo" />
+      <div :class="{ 'logo-local-label': true, 'logo-local-label--gray': colorLogo, 'logo-local-label--long': localLabel.length > 18 }" v-if="localLabel">
         {{ localLabel | formatLocal  }}
       </div>
     </div>
@@ -65,6 +65,12 @@ export default {
     }
   },
 
+  computed: {
+    colorLogo () {
+      return (this.theme === 'glowy' && this.mode === 'white') || this.logo === 'color'
+    }
+  },
+
   filters: {
     formatLocal (local) {
       return local
@@ -111,6 +117,10 @@ export default {
         font-size: .95rem;
         white-space: normal;
         width: 90px;
+      }
+
+      &--gray {
+        color: $gray-600;
       }
     }
   }
