@@ -39,14 +39,12 @@
     <!-- Text position -->
     <c-tab-group>
       <c-tab name="text-pos" v-model="properties.textPos" value="flex-start" icon="arrow-to-top"></c-tab>
-      <c-tab name="text-pos" v-model="properties.textPos" value="center" icon="grip-lines"></c-tab>
       <c-tab name="text-pos" v-model="properties.textPos" value="flex-end" icon="arrow-to-bottom"></c-tab>
     </c-tab-group>
 
     <!-- Text align -->
     <c-tab-group>
       <c-tab name="text-align" v-model="properties.textAlign" value="left" icon="align-left"></c-tab>
-      <c-tab name="text-align" v-model="properties.textAlign" value="center" icon="align-center"></c-tab>
       <c-tab name="text-align" v-model="properties.textAlign" value="right" icon="align-right"></c-tab>
     </c-tab-group>
 
@@ -69,8 +67,19 @@
         @touchend="dimPane(false)" />
     </picture-upload>
 
+    <!-- Hide frame -->
+    <transition name="slide">
+      <c-field v-if="aspect === 1">
+        <b-switch v-model="properties.showFrame">
+            Marc de color
+        </b-switch>
+      </c-field>
+    </transition>
+
     <!-- Frame color  -->
-    <color-selector v-model="properties.frameColor" label="Color del marc" isRounded />
+    <transition name="slide">
+      <color-selector v-if="properties.showFrame || aspect !== 1" v-model="properties.frameColor" label="Color del marc" isRounded />
+    </transition>
   </div>
 </template>
 
@@ -104,7 +113,8 @@ export default {
         textSecondaryColor: 'white',
         textSecondary: '',
         frameColor: 'orange',
-        emojis: []
+        emojis: [],
+        showFrame: true
       }
     }
   },

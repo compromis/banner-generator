@@ -141,7 +141,7 @@ export default [
   {
     id: 'Video',
     name: 'Portada de vídeo',
-    aspects: ['11', 'event'],
+    aspects: ['11', '916', 'event'],
     icon: 'play',
     components: {
       pane: () => import(/* webpackChunkName: "videocover" */ './videocover/VideoCoverPane'),
