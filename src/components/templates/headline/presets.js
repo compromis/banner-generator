@@ -28,6 +28,7 @@ import AlicantePlazaPNG from './logos/alicante-plaza.png'
 import CastelloTVPNG from './logos/castello-tv.png'
 import MediterraneoCsPNG from './logos/mediterraneo-cs.png'
 import ElMeridianoPNG from './logos/el-meridiano.png'
+import ActualitatValencianaPNG from './logos/actualitat-valenciana.png'
 
 const fonts = {
   tiemposHeadline: {
@@ -300,6 +301,14 @@ const sources = [
     logoHeight: 20,
     font: fonts.roboto,
     color: '#00849e'
+  },
+  {
+    id: 'actualitatvalenciana',
+    name: 'Actualitat Valenciana',
+    logo: ActualitatValencianaPNG,
+    logoHeight: 20,
+    font: fonts.roboto,
+    color: '#d60b52'
   }
 ]
 
