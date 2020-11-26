@@ -6,7 +6,7 @@
       name="textSecondary"
       placeholder="Baldoví"
       v-model="properties.textSecondary"
-      :maxlength="25"
+      :maxlength="20"
     />
 
     <!-- Secondary Text Color  -->
@@ -19,7 +19,7 @@
       type="textarea"
       placeholder="Cinc tipus de tila que des de Compromís recomanem a Abascal"
       v-model="properties.text"
-      :maxlength="70"
+      :maxlength="50"
     />
 
     <!-- Text Color  -->
@@ -29,8 +29,8 @@
     <c-field label="Tamany del text" class="range-field" compact>
       <range-slider
         name="points"
-        :min="75"
-        :max="125"
+        :min="85"
+        :max="115"
         v-model="properties.textSize"
         @touchstart="dimPane(true)"
         @touchend="dimPane(false)" />
