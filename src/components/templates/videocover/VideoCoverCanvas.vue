@@ -177,17 +177,17 @@ export default {
 
   .aspect-916 {
     .text {
-      height: 405px;
+      height: 391px;
       top: 50%;
-      left: 7px;
-      right: 7px;
+      left: 15px;
+      right: 15px;
       transform: translateY(-50%);
       padding: 20px;
       box-sizing: border-box;
     }
 
     .background-image {
-      height: 405px;
+      height: 391px;
       top: 50%;
       left: 15px;
       right: 15px;
@@ -196,13 +196,13 @@ export default {
     }
 
     .careta {
-      top: 172px;
+      top: 176px;
       left: 25px;
       width: 65px;
     }
 
     &.text-pos-flex-start .careta {
-      bottom: 172px;
+      bottom: 175px;
       top: unset;
     }
 
