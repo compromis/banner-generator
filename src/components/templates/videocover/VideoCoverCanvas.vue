@@ -136,7 +136,7 @@ export default {
   }
 
   .border-black {
-    background: $gray-darkest;
+    background: linear-gradient($gray-darkest, $gray-darkest);
   }
 
   .border-orange {
@@ -144,7 +144,7 @@ export default {
   }
 
   .border-white {
-    background:  $white;
+    background: $white;
   }
 
   .aspect-event {
