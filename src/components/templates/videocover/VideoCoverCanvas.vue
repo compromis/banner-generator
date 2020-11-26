@@ -177,7 +177,7 @@ export default {
 
   .aspect-916 {
     .text {
-      height: 405px;
+      height: 379px;
       top: 50%;
       left: 7px;
       right: 7px;
