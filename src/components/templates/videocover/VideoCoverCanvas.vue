@@ -62,17 +62,17 @@ export default {
     fontSizePrimary () {
       const { aspect, banner, fontSize } = this
       return aspect === '11'
-        ? fontSize(banner.text, 80, 40, 70, banner.textSize)
-        : aspect === '916' ? fontSize(banner.text, 40, 16, 70, banner.textSize)
-          : fontSize(banner.text, 60, 30, 70, banner.textSize)
+        ? fontSize(banner.text, 83, 42, 50, banner.textSize)
+        : aspect === '916' ? fontSize(banner.text, 60, 32, 50, banner.textSize)
+          : fontSize(banner.text, 54, 36, 50, banner.textSize)
     },
 
     fontSizeSecondary () {
       const { aspect, banner, fontSize } = this
       return aspect === '11'
-        ? fontSize(banner.text, 40, 30, 70, banner.textSize)
-        : aspect === '916' ? fontSize(banner.text, 18, 14, 70, banner.textSize)
-          : fontSize(banner.text, 30, 25, 70, banner.textSize)
+        ? fontSize(banner.text, 40, 32, 50, banner.textSize)
+        : aspect === '916' ? fontSize(banner.text, 22, 18, 50, banner.textSize)
+          : fontSize(banner.text, 30, 27, 50, banner.textSize)
     }
   }
 }
@@ -179,15 +179,15 @@ export default {
     .text {
       height: 379px;
       top: 50%;
-      left: 7px;
-      right: 7px;
+      left: 15px;
+      right: 15px;
       transform: translateY(-50%);
-      padding: 20px;
+      padding: 13px;
       box-sizing: border-box;
     }
 
     .background-image {
-      height: 405px;
+      height: 391px;
       top: 50%;
       left: 15px;
       right: 15px;
@@ -196,13 +196,13 @@ export default {
     }
 
     .careta {
-      top: 172px;
+      top: 176px;
       left: 25px;
       width: 65px;
     }
 
     &.text-pos-flex-start .careta {
-      bottom: 172px;
+      bottom: 175px;
       top: unset;
     }
 
