@@ -172,7 +172,7 @@ export default {
   }
 
   .border-black {
-    background: $gray-darkest;
+    background: linear-gradient($gray-darkest, $gray-darkest);
   }
 
   .border-orange {
@@ -180,7 +180,7 @@ export default {
   }
 
   .border-white {
-    background:  $white;
+    background: $white;
   }
 
   .aspect-event {
@@ -213,7 +213,7 @@ export default {
 
   .aspect-916 {
     .text {
-      height: 381px;
+      height: 379px;
       top: 50%;
       left: 15px;
       right: 15px;
