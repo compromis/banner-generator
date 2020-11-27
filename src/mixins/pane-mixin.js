@@ -94,16 +94,25 @@ export default {
   // Shared functionality across templates
   methods: {
     updateImage (image) {
-      this.properties.picture = image
-      this.properties.picturePreview = URL.createObjectURL(image)
+      this.customUpdateImage('', image)
+    },
+
+    customUpdateImage (prefix, image) {
+      const picture = prefix ? `${prefix}Picture` : 'picture'
+      const picturePreview = prefix ? `${prefix}PicturePreview` : 'picturePreview'
+      const pictureAspect = prefix ? `${prefix}PictureDimensions` : 'pictureAspect'
+      const pictureDimensions = prefix ? `${prefix}PictureDimensions` : 'pictureDimensions'
+
+      this.properties[picture] = image
+      this.properties[picturePreview] = URL.createObjectURL(image)
 
       const img = new Image()
       img.onload = () => {
         const { width, height } = img
-        this.properties.pictureAspect = (width / height > 1) ? 'horizontal' : 'vertical'
-        this.properties.pictureDimensions = { width, height }
+        this.properties[pictureAspect] = (width / height > 1) ? 'horizontal' : 'vertical'
+        this.properties[pictureDimensions] = { width, height }
       }
-      img.src = this.properties.picturePreview
+      img.src = this.properties[picturePreview]
     },
 
     updateHashtag (hashtag) {

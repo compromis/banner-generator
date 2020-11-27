@@ -19,7 +19,7 @@
       type="textarea"
       placeholder="Cinc tipus de tila que des de Compromís recomanem a Abascal"
       v-model="properties.text"
-      :maxlength="50"
+      :maxlength="40"
     />
 
     <!-- Text Color  -->
@@ -69,6 +69,35 @@
         @touchend="dimPane(false)" />
     </picture-upload>
 
+    <!-- Pit against -->
+    <c-field>
+      <b-switch v-model="properties.pitAgainst">
+          Enfrontar imatges
+      </b-switch>
+    </c-field>
+
+    <!-- Picture to pit against -->
+    <transition name="slide">
+      <picture-upload
+        id="pit-against-picture"
+        field-name="pitAgainstPicture"
+        label="Segona foto"
+        v-if="properties.pitAgainst"
+        :picture="properties.pitAgainstPicture"
+        :display-errors="displayErrors"
+        :errors="errors"
+        @upload="(image) => customUpdateImage('pitAgainst', image)"
+        @delete="properties.pitAgainstPicture = null; properties.pitAgainstPicturePreview = null">
+        <range-slider
+          name="points"
+          :min="0"
+          :max="100"
+          v-model="properties.pitAgainstPicturePos"
+          @touchstart="dimPane(true)"
+          @touchend="dimPane(false)" />
+      </picture-upload>
+    </transition>
+
     <!-- Hide frame -->
     <transition name="slide">
       <c-field v-if="aspect === 1">
@@ -116,7 +145,13 @@ export default {
         textSecondary: '',
         frameColor: 'orange',
         emojis: [],
-        showFrame: true
+        showFrame: true,
+        pitAgainst: false,
+        pitAgainstPicture: null,
+        pitAgainstPicturePreview: null,
+        pitAgainstPicturePos: 50,
+        pitAgainstPictureAspect: 'horizontal',
+        pitAgainstPictureDimensions: null
       }
     }
   },

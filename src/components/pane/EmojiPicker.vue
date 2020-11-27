@@ -19,6 +19,7 @@
       :emojiGroups="emojiGroups"
       :skinsSelection="true"
       :recentEmojisFeat="true"
+      :searchEmojisFeat="true"
       recentEmojisStorage="local"
       twemojiExtension=".svg"
       twemojiFolder="svg"

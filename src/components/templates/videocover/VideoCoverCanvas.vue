@@ -9,7 +9,15 @@
       { 'hide-frame': banner.showFrame === false }
     ]"
     v-if="banner">
-    <div class="background-image">
+    <div class="background-image images-pitted-against" v-if="banner.pitAgainst">
+      <div class="image-left">
+        <img :src="banner.picturePreview" alt="Imatge 1" v-if="banner.picturePreview" :style="objectPosition" />
+      </div>
+      <div class="image-right">
+        <img :src="banner.pitAgainstPicturePreview" alt="Imatge 2" v-if="banner.pitAgainstPicturePreview" :style="pitAgainstObjectPosition" />
+      </div>
+    </div>
+    <div class="background-image" v-else>
       <img :src="banner.picturePreview" alt="Imatge" v-if="banner.picturePreview" :style="objectPosition" />
     </div>
     <div class="text" :style="{ alignItems: banner.textPos, justifyContent, textAlign: banner.textAlign }">
@@ -62,17 +70,24 @@ export default {
     fontSizePrimary () {
       const { aspect, banner, fontSize } = this
       return aspect === '11'
-        ? fontSize(banner.text, 83, 42, 50, banner.textSize)
-        : aspect === '916' ? fontSize(banner.text, 60, 32, 50, banner.textSize)
-          : fontSize(banner.text, 54, 36, 50, banner.textSize)
+        ? fontSize(banner.text, 86, 44, 40, banner.textSize)
+        : aspect === '916' ? fontSize(banner.text, 60, 32, 40, banner.textSize)
+          : fontSize(banner.text, 54, 36, 40, banner.textSize)
     },
 
     fontSizeSecondary () {
       const { aspect, banner, fontSize } = this
       return aspect === '11'
-        ? fontSize(banner.text, 40, 32, 50, banner.textSize)
-        : aspect === '916' ? fontSize(banner.text, 22, 18, 50, banner.textSize)
-          : fontSize(banner.text, 30, 27, 50, banner.textSize)
+        ? fontSize(banner.text, 40, 32, 40, banner.textSize)
+        : aspect === '916' ? fontSize(banner.text, 22, 18, 40, banner.textSize)
+          : fontSize(banner.text, 26, 24, 40, banner.textSize)
+    },
+
+    pitAgainstObjectPosition () {
+      const objectPosition = (this.banner.pitAgainstPictureAspect === 'vertical')
+        ? '0% ' + (100 - this.banner.pitAgainstPicturePos) + '%'
+        : (100 - this.banner.pitAgainstPicturePos) + '% 0%'
+      return { objectPosition }
     }
   }
 }
@@ -106,7 +121,7 @@ export default {
     position: absolute;
     top: 60px;
     left: 55px;
-    width: 100px;
+    width: 80px;
     z-index: 1000;
   }
 
@@ -132,6 +147,27 @@ export default {
       width: 100%;
       height: 100%;
       object-fit: cover;
+    }
+
+    &.images-pitted-against {
+      background: $white;
+
+      [class^='image-'] {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 62%;
+      }
+
+      .image-left {
+        left: -13px;
+        clip-path: polygon(0 0, 100% 0, 65% 100%, 0% 100%);
+      }
+
+      .image-right {
+        right: -13px;
+        clip-path: polygon(35% 0, 100% 0, 100% 100%, 0% 100%);
+      }
     }
   }
 
@@ -166,7 +202,7 @@ export default {
     .careta {
       top: 40px;
       left: 35px;
-      width: 80px;
+      width: 70px;
     }
 
     &.text-pos-flex-start .careta {
@@ -177,7 +213,7 @@ export default {
 
   .aspect-916 {
     .text {
-      height: 391px;
+      height: 381px;
       top: 50%;
       left: 15px;
       right: 15px;
@@ -193,12 +229,22 @@ export default {
       right: 15px;
       transform: translateY(-50%);
       border-radius: 10px;
+
+      &.images-pitted-against {
+        .image-left {
+          left: -12px;
+        }
+
+        .image-right {
+          right: -5px;
+        }
+      }
     }
 
     .careta {
       top: 176px;
       left: 25px;
-      width: 65px;
+      width: 55px;
     }
 
     &.text-pos-flex-start .careta {

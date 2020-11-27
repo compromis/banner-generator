@@ -140,7 +140,7 @@ export default [
   },
   {
     id: 'Video',
-    name: 'Portada de vídeo',
+    name: 'Miniatura de vídeo',
     aspects: ['11', '916', 'event'],
     icon: 'play',
     components: {
