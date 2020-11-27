@@ -148,7 +148,7 @@ export default {
 
     pictureRequired () {
       if (!this.properties.picture) {
-        this.errors.picture = ['Has de seleccionar una foro']
+        this.errors.picture = ['Has de seleccionar una foto']
       }
     },
 

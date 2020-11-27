@@ -69,18 +69,18 @@ export default {
 
     fontSizePrimary () {
       const { aspect, banner, fontSize } = this
-      return aspect === '11'
-        ? fontSize(banner.text, 86, 44, 40, banner.textSize)
-        : aspect === '916' ? fontSize(banner.text, 60, 32, 40, banner.textSize)
-          : fontSize(banner.text, 54, 36, 40, banner.textSize)
+      const sizes = {
+        11: { min: 54, max: 86 },
+        916: { min: 32, max: 60 },
+        event: { min: 36, max: 54 }
+      }
+
+      return fontSize(banner.text, sizes[aspect].max, sizes[aspect].min, 40, banner.textSize)
     },
 
     fontSizeSecondary () {
-      const { aspect, banner, fontSize } = this
-      return aspect === '11'
-        ? fontSize(banner.text, 40, 32, 40, banner.textSize)
-        : aspect === '916' ? fontSize(banner.text, 22, 18, 40, banner.textSize)
-          : fontSize(banner.text, 26, 24, 40, banner.textSize)
+      const size = parseInt(this.fontSizePrimary, 10) * 0.5
+      return size + 'px'
     },
 
     pitAgainstObjectPosition () {

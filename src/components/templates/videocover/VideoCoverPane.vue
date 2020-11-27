@@ -17,7 +17,7 @@
       label="Text principal"
       name="text"
       type="textarea"
-      placeholder="Cinc tipus de tila que des de Compromís recomanem a Abascal"
+      placeholder="5 tipus de tila que recomanem a Abascal"
       v-model="properties.text"
       :maxlength="40"
     />
@@ -159,6 +159,12 @@ export default {
   methods: {
     validate () {
       this.pictureRequired()
+
+      if (this.properties.pitAgainst) {
+        this.fieldRequired({
+          pitAgainstPicture: 'Has de seleccionar una foto'
+        })
+      }
     }
   }
 }
