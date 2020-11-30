@@ -5,6 +5,7 @@ import EldiarioSVG from './logos/eldiario.svg'
 import LevanteSVG from './logos/levante.svg'
 import LasprovinciasSVG from './logos/lasprovincias.svg'
 import ElpaisSVG from './logos/elpais.svg'
+import PublicoPNG from './logos/publico.png'
 import LasextaSVG from './logos/lasexta.svg'
 import ApuntSVG from './logos/apunt.svg'
 import SerSVG from './logos/ser.svg'
@@ -132,6 +133,14 @@ const sources = [
     logoHeight: 22,
     font: fonts.tiemposHeadline,
     color: '#1F4D80'
+  },
+  {
+    id: 'publico',
+    name: 'Público',
+    logo: PublicoPNG,
+    logoHeight: 22,
+    font: fonts.tiemposHeadline,
+    color: '#d11031'
   },
   {
     id: 'lasexta',
