@@ -1,5 +1,17 @@
 export default [
   {
+    id: 'Christmas',
+    name: 'Comerç Local',
+    aspects: ['11', '916'],
+    icon: 'gifts',
+    label: '🎄Nadal',
+    components: {
+      pane: () => import(/* webpackChunkName: "christmas" */ './christmas/ChristmasPane'),
+      canvas: () => import(/* webpackChunkName: "christmas" */ './christmas/ChristmasCanvas'),
+      help: () => import(/* webpackChunkName: "christmas" */ './christmas/ChristmasHelp')
+    }
+  },
+  {
     id: 'Headline',
     name: 'Titular de premsa',
     aspects: ['11', '916'],

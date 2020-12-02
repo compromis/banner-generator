@@ -21,6 +21,7 @@
     "dom-to-image": "^2.6.0",
     "file-saver": "^2.0.2",
     "moment": "^2.24.0",
+    "node-vibrant": "3.1.5",
     "parallax-js": "^3.1.0",
     "vue": "^2.6.10",
     "vue-loading-overlay": "^3.2.0",
