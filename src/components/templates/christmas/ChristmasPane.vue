@@ -30,6 +30,26 @@
           @touchstart="dimPane(true)"
           @touchend="dimPane(false)" />
       </picture-upload>
+
+      <!-- Has custom message -->
+      <c-field>
+        <b-switch v-model="properties.hasCustomMessage">
+          Missatge personalitzat
+        </b-switch>
+      </c-field>
+
+    <transition name="slide">
+      <!-- Custom message -->
+      <c-input-text
+        v-if="properties.hasCustomMessage"
+        type="textarea"
+        label="Missatge"
+        name="text"
+        placeholder="Aquest any..."
+        v-model="properties.customMessage"
+        :maxlength="100"
+        :message="setFieldMessage('customMessage')" />
+    </transition>
   </div>
 </template>
 
@@ -45,7 +65,9 @@ export default {
     return {
       properties: {
         lang: 'val',
-        municipality: ''
+        municipality: '',
+        hasCustomMessage: false,
+        customMessage: ''
       }
     }
   },
@@ -53,10 +75,17 @@ export default {
   methods: {
     validate () {
       this.pictureRequired()
-      this.fieldRequired({
-        municipality: "Has d'escriure un poble"
-      })
-      this.allCapsDisallowed('municipality')
+      if (this.properties.hasCustomMessage) {
+        this.fieldRequired({
+          customMessage: "Has d'escriure un missatge"
+        })
+        this.allCapsDisallowed('customMessage')
+      } else {
+        this.fieldRequired({
+          municipality: "Has d'escriure un poble"
+        })
+        this.allCapsDisallowed('municipality')
+      }
     }
   }
 }
