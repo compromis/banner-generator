@@ -239,8 +239,8 @@ export default {
   .text {
     position: absolute;
     bottom: 0;
-    left: 78px;
-    right: 78px;
+    left: 115px;
+    right: 115px;
     text-align: center;
     font-weight: bold;
     font-size: 22px;

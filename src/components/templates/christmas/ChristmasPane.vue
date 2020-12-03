@@ -10,10 +10,10 @@
     <c-input-text
       label="Nom del poble"
       name="municipality"
-      placeholder="Alzira"
+      placeholder="Xixona"
       v-model="properties.municipality"
       :message="setFieldMessage('municipality')"
-      :maxlength="40" />
+      :maxlength="30" />
 
     <!-- Picture -->
     <picture-upload
@@ -45,7 +45,7 @@
         type="textarea"
         label="Missatge"
         name="text"
-        placeholder="Aquest any..."
+        placeholder="Aquest any especialment, els xicotets comerços de Xixona et necessiten!"
         v-model="properties.customMessage"
         :maxlength="100"
         :message="setFieldMessage('customMessage')" />
