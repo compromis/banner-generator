@@ -93,11 +93,11 @@ export default {
 
   // Shared functionality across templates
   methods: {
-    updateImage (image) {
-      this.customUpdateImage('', image)
+    updateImage (image, ratio) {
+      this.customUpdateImage('', image, ratio || 1)
     },
 
-    customUpdateImage (prefix, image) {
+    customUpdateImage (prefix, image, ratio) {
       const picture = prefix ? `${prefix}Picture` : 'picture'
       const picturePreview = prefix ? `${prefix}PicturePreview` : 'picturePreview'
       const pictureAspect = prefix ? `${prefix}PictureDimensions` : 'pictureAspect'
@@ -109,7 +109,7 @@ export default {
       const img = new Image()
       img.onload = () => {
         const { width, height } = img
-        this.properties[pictureAspect] = (width / height > 1) ? 'horizontal' : 'vertical'
+        this.properties[pictureAspect] = (width / height > ratio) ? 'horizontal' : 'vertical'
         this.properties[pictureDimensions] = { width, height }
       }
       img.src = this.properties[picturePreview]

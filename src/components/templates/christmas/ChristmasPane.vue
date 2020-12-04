@@ -20,6 +20,7 @@
       :picture="properties.picture"
       :display-errors="displayErrors"
       :errors="errors"
+      :ratio="1.86"
       @upload="updateImage"
       @delete="properties.picture = null; properties.picturePreview = null">
         <range-slider

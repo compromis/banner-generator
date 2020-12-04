@@ -7,7 +7,7 @@
       </div>
       <div class="c-field-content">
         <b-upload
-          @input="(picture) => $emit('upload', picture)"
+          @input="(picture) => $emit('upload', picture, ratio)"
           drag-drop
           accept="image/*"
           :type="picture ? '' : displayErrors ? 'is-danger' : ''">
@@ -49,6 +49,10 @@ export default {
     label: {
       type: String,
       default: 'Foto'
+    },
+    ratio: {
+      type: Number,
+      default: 1
     }
   },
 
