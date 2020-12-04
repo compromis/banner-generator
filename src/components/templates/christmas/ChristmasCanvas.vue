@@ -4,13 +4,18 @@
     :class="[
       'banner-canvas',
       'aspect-' + aspect,
+      'lang-' + banner.lang
     ]"
     v-if="banner">
     <div class="background" :style="{ '--light-vibrant': lightVibrant, '--dark-vibrant': darkVibrant, '--dark-muted': darkMuted, '--vibrant': vibrant }">
       <div class="picture">
-        <div class="title">
-          <span class="top">A Nadal,</span>
+        <div class="title" v-if="banner.lang === 'val'">
+          <span class="top">Per Nadal,</span>
           <span class="bottom">comerç local</span>
+        </div>
+        <div class="title" v-if="banner.lang === 'cas'">
+          <span class="top">Por Navidad,</span>
+          <span class="bottom">comercio local</span>
         </div>
         <div class="picture-holder">
           <img v-if="banner.picture" :src="banner.picturePreview" :style="objectPosition" />
@@ -93,8 +98,8 @@ export default {
     textDefault () {
       const { municipality, lang } = this.banner
       const texts = {
-        val: `Aquest any especialment, els xicotets comerços ${this.municipalityWithPreposition} et necessiten!`,
-        cas: `Este año especialmente, los pequeños comercios de ${municipality} te necesitan!`
+        val: `Enguany més que mai, els xicotets comerços ${this.municipalityWithPreposition} ens necessiten`,
+        cas: `Este año especialmente, los pequeños comercios de ${municipality} nos necesitan`
       }
 
       return texts[lang]
@@ -183,12 +188,12 @@ export default {
 
   .title {
     position: absolute;
-    top: -195px;
-    left: 0;
+    top: -200px;
+    left: 10px;
     font-size: 95px;
     font-family: Texturina, serif;
     font-weight: 900;
-    line-height: .8;
+    line-height: .9;
     color: var(--dark-vibrant);
     z-index: 20;
 
@@ -199,8 +204,13 @@ export default {
 
     .bottom {
       display: block;
-      text-indent: .6em;
+      text-indent: .3em;
     }
+  }
+
+  .lang-cas .title {
+    top: -180px;
+    font-size: 80px;
   }
 
   .decorations {
@@ -239,8 +249,8 @@ export default {
   .text {
     position: absolute;
     bottom: 0;
-    left: 115px;
-    right: 115px;
+    left: 125px;
+    right: 125px;
     text-align: center;
     font-weight: bold;
     font-size: 22px;
@@ -278,6 +288,10 @@ export default {
     .title {
       top: -112px;
       font-size: 50px;
+    }
+
+    &.lang-cas .title {
+      font-size: 42px;
     }
 
     .picture {
