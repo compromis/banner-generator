@@ -32,7 +32,6 @@
     <transition name="slide">
       <color-selector
         v-if="properties.theme !== 'blobless' || !properties.fullGradient"
-        label="Color del text"
         v-model="properties.textColor" />
     </transition>
 
@@ -51,6 +50,24 @@
         </div>
       </article>
     </c-field>
+
+    <c-field>
+      <b-switch v-model="properties.hasSecondaryText">
+        Afegeix text secundari
+      </b-switch>
+    </c-field>
+
+    <transition name="slide">
+      <c-input-text
+        v-if="properties.hasSecondaryText"
+        type="textarea"
+        label="Text secundari"
+        name="secondary-text"
+        placeholder=""
+        v-model="properties.secondaryText"
+        :maxlength="100"
+        :message="setFieldMessage('secondaryText')" />
+    </transition>
 
     <!-- Emoji picker -->
     <emoji-picker v-model="properties.emojis" />
@@ -146,6 +163,8 @@ export default {
         textPosI: 1,
         textAlignI: 1,
         textSize: 100,
+        hasSecondaryText: false,
+        secondaryText: '',
         emojis: [],
         textColor: 'white',
         color: 'orange',

@@ -9,16 +9,28 @@
       'banner-background-' + banner.mode
     ]"
     v-if="banner">
-    <div class="text" v-if="banner.text" :style="{ alignItems: banner.textPos, textAlign: banner.textAlign }">
-      <text-in-pills
-        v-if="banner.text"
-        :text="$options.filters.formatString(banner.text)"
-        :pill-style="banner.textColor"
-        :text-align="banner.textAlign"
-        :font-size="fontSizePrimary"
-        :width="820"
-        :transparent="banner.theme === 'blobless' && banner.fullGradient"
-        shadow />
+    <div class="text" :style="{ alignItems: banner.textPos, textAlign: banner.textAlign }">
+      <div class="text-wrapper">
+        <text-in-pills
+          v-if="banner.text"
+          :text="$options.filters.formatString(banner.text)"
+          :pill-style="banner.textColor"
+          :text-align="banner.textAlign"
+          :font-size="fontSizePrimary"
+          :width="820"
+          :transparent="banner.theme === 'blobless' && banner.fullGradient"
+          shadow />
+        <text-in-pills
+          class="secondary-text"
+          v-if="banner.secondaryText && banner.hasSecondaryText"
+          :text="$options.filters.formatString(banner.secondaryText)"
+          :pill-style="secondaryTextColor"
+          :text-align="banner.textAlign"
+          :font-size="fontSizeSecondary"
+          :width="820"
+          :transparent="banner.theme === 'blobless' && banner.fullGradient"
+          shadow />
+      </div>
     </div>
     <emojis-on-canvas v-model="banner.emojis" />
     <banner-frame
@@ -62,9 +74,26 @@ export default {
   computed: {
     fontSizePrimary () {
       const { aspect, banner, fontSize } = this
-      return aspect === '11'
-        ? fontSize(banner.text, 60, 35, 110, banner.textSize)
-        : fontSize(banner.text, 50, 25, 110, banner.textSize)
+      const sizes = {
+        11: { min: 35, max: 60 },
+        916: { min: 25, max: 50 }
+      }
+
+      return fontSize(banner.text, sizes[aspect].max, sizes[aspect].min, 100, banner.textSize)
+    },
+
+    fontSizeSecondary () {
+      const size = parseInt(this.fontSizePrimary, 10) * 0.5
+      return size + 'px'
+    },
+
+    secondaryTextColor () {
+      const translations = {
+        black: 'white',
+        white: 'black',
+        orange: 'white'
+      }
+      return translations[this.banner.textColor]
     }
   }
 }
@@ -82,6 +111,14 @@ export default {
     right: 70px;
     z-index: 30;
     transition: all .5s ease-in-out;
+
+    &-wrapper {
+      width: 100%;
+    }
+  }
+
+  .secondary-text {
+    margin-top: 24px;
   }
 
   .aspect-916 .text {
