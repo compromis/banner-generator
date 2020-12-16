@@ -90,17 +90,6 @@
                       <img :src="media.media_url_https" />
                     </div>
                   </div>
-
-                  <!-- Picture position -->
-                  <c-field label="Posició de la imatge" compact class="c-field-force-border">
-                    <range-slider
-                      name="points"
-                      :min="0"
-                      :max="100"
-                      v-model="properties.picturePos"
-                      @touchstart="dimPane(true)"
-                      @touchend="dimPane(false)" />
-                  </c-field>
                 </div>
               </transition>
             </div>
@@ -309,6 +298,8 @@ export default {
   }
 
   .twitter-media {
+    border-bottom: 0;
+
     img {
       display: block;
       width: 60px;

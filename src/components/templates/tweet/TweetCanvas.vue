@@ -8,13 +8,7 @@
       `mode-${banner.mode}`
     ]"
     v-if="banner">
-    <div class="background">
-      <img
-        :src="banner.tweetEmbed.entities.media[0].media_url_https"
-        v-if="banner.tweetEmbed && banner.tweetEmbed.entities['media'] && banner.showMedia"
-        alt="Imatge"
-        :style="objectPosition" />
-    </div>
+    <div class="background"></div>
     <div class="tweet-wrapper">
       <div class="tweet" v-if="banner.tweetEmbed">
         <div class="tweet-user">
@@ -37,6 +31,12 @@
           </div>
         </div>
         <div class="tweet-text" :style="{ fontSize: textFontSize }" contenteditable v-html="tweetText"></div>
+        <div class="tweet-picture" v-if="inlinePicture">
+          <img
+            :src="banner.tweetEmbed.entities.media[0].media_url_https"
+            alt="Imatge"
+            :style="objectPosition" />
+        </div>
         <div class="tweet-quote" v-if="banner.tweetEmbed.is_quote_status">
           <div class="tweet-quote-user">
             <img :src="banner.tweetEmbed.quoted_status.user.profile_image_url_https" />
@@ -86,10 +86,6 @@ export default {
   },
 
   computed: {
-    textFontSize () {
-      return this.fontSize(this.banner.tweetEmbed.full_text, 40, 24, 280, this.banner.textSize)
-    },
-
     tweetText () {
       const text = this.banner.tweetEmbed.full_text
       const urlRegex = /(https?:\/\/[^\s]+)/g
@@ -99,6 +95,16 @@ export default {
         .replace(urlRegex, '')
         .replace(hashtagRegex, (text) => `<span class="ht">${text}</span>`)
         .replace(mentionRegex, (text) => `<span class="ht">${text}</span>`)
+    },
+
+    inlinePicture () {
+      const { banner } = this
+      return banner.tweetEmbed && banner.tweetEmbed.entities['media'] && banner.showMedia
+    },
+
+    textFontSize () {
+      const fontSize = this.fontSize(this.banner.tweetEmbed.full_text, 40, 24, 280, this.banner.textSize, true)
+      return (this.inlinePicture) ? `${fontSize * 0.6}px` : `${fontSize}px`
     }
   },
 
@@ -211,6 +217,18 @@ export default {
       z-index: 200;
     }
 
+    &-picture {
+      margin-top: 16px;
+
+      img {
+        border-radius: 6px;
+        border: 1px $gray-300 solid;
+        width: 100%;
+        max-height: 250px;
+        object-fit: cover;
+      }
+    }
+
     &-user {
       display: flex;
       margin-bottom: 16px;
@@ -288,7 +306,7 @@ export default {
     }
 
     &-date {
-      margin: 16px 0 32px;
+      margin: 13px 0;
       opacity: .5;
     }
 

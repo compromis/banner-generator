@@ -64,11 +64,11 @@ export default {
   },
 
   methods: {
-    fontSize (text, maxFontSize, minFontSize, maxLength, multiplier) {
+    fontSize (text, maxFontSize, minFontSize, maxLength, multiplier, returnInt) {
       const adjust = multiplier ? multiplier / 100 : 1
       const propLength = text.length / maxLength
       const fontSize = (maxFontSize * adjust) + propLength * ((minFontSize * adjust) - (maxFontSize * adjust))
-      return `${fontSize}px`
+      return returnInt ? fontSize : `${fontSize}px`
     }
   }
 }
