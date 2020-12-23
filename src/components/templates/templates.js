@@ -1,5 +1,17 @@
 export default [
   {
+    id: 'ChristmasGreetings',
+    name: 'Felicitació',
+    aspects: ['11', '916'],
+    icon: 'hat-santa',
+    label: '🎄Nadal',
+    components: {
+      pane: () => import(/* webpackChunkName: "christmas" */ './christmas-greetings/ChristmasGreetingsPane'),
+      canvas: () => import(/* webpackChunkName: "christmas" */ './christmas-greetings/ChristmasGreetingsCanvas'),
+      help: () => import(/* webpackChunkName: "christmas" */ './christmas-greetings/ChristmasGreetingsHelp')
+    }
+  },
+  {
     id: 'Christmas',
     name: 'Comerç Local',
     aspects: ['11', '916'],
@@ -85,7 +97,6 @@ export default [
     name: 'Aconseguiment',
     aspects: ['11', '916'],
     icon: 'check-circle',
-    label: '✨Nou',
     components: {
       pane: () => import(/* webpackChunkName: "milestone" */ './milestone/MilestonePane'),
       canvas: () => import(/* webpackChunkName: "milestone" */ './milestone/MilestoneCanvas'),
@@ -167,6 +178,7 @@ export default [
     aspects: ['11'],
     icon: 'euro-sign',
     label: '🦠Covid-19',
+    archived: true,
     components: {
       pane: () => import(/* webpackChunkName: "labora" */ './labora/LaboraPane'),
       canvas: () => import(/* webpackChunkName: "labora" */ './labora/LaboraCanvas'),
