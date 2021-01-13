@@ -15,22 +15,32 @@
       :message="setFieldMessage('municipality')"
       :maxlength="30" />
 
+    <!-- Has custom message -->
+    <c-field>
+      <b-switch v-model="properties.hasCustomPicture">
+        Foto personalitzada
+      </b-switch>
+    </c-field>
+
     <!-- Picture -->
-    <picture-upload
-      :picture="properties.picture"
-      :display-errors="displayErrors"
-      :errors="errors"
-      :ratio="1.86"
-      @upload="updateImage"
-      @delete="properties.picture = null; properties.picturePreview = null">
-        <range-slider
-          name="points"
-          :min="0"
-          :max="100"
-          v-model="properties.picturePos"
-          @touchstart="dimPane(true)"
-          @touchend="dimPane(false)" />
-      </picture-upload>
+    <transition name="slide">
+      <picture-upload
+        v-if="properties.hasCustomPicture"
+        :picture="properties.picture"
+        :display-errors="displayErrors"
+        :errors="errors"
+        :ratio="1.86"
+        @upload="updateImage"
+        @delete="properties.picture = null; properties.picturePreview = null">
+          <range-slider
+            name="points"
+            :min="0"
+            :max="100"
+            v-model="properties.picturePos"
+            @touchstart="dimPane(true)"
+            @touchend="dimPane(false)" />
+        </picture-upload>
+      </transition>
 
       <!-- Has custom message -->
       <c-field>
@@ -46,9 +56,9 @@
         type="textarea"
         label="Missatge"
         name="text"
-        placeholder="Aquest any especialment, els xicotets comerços de Xixona et necessiten!"
+        placeholder="T'estime tant que enguany em quede a casa"
         v-model="properties.customMessage"
-        :maxlength="100"
+        :maxlength="60"
         :message="setFieldMessage('customMessage')" />
     </transition>
   </div>
@@ -58,7 +68,7 @@
 import PaneMixin from '@/mixins/pane-mixin.js'
 
 export default {
-  name: 'christmas-pane',
+  name: 'christmas-greetings-pane',
 
   mixins: [PaneMixin],
 
@@ -67,6 +77,7 @@ export default {
       properties: {
         lang: 'val',
         municipality: '',
+        hasCustomPicture: false,
         hasCustomMessage: false,
         customMessage: ''
       }
@@ -75,7 +86,6 @@ export default {
 
   methods: {
     validate () {
-      this.pictureRequired()
       if (this.properties.hasCustomMessage) {
         this.fieldRequired({
           customMessage: "Has d'escriure un missatge"
@@ -93,6 +103,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import "../../../sass/variables";
+  @import "../../../../sass/variables";
 
 </style>

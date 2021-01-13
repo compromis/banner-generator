@@ -1,34 +1,56 @@
 <template>
   <div :class="{ 'pane christmas-pane': true, 'pane-916': aspect === 1 }">
-    <b-field label="Idioma">
-      <b-tabs
-        id="style-tabs"
-        type="is-toggle"
-        size="is-small"
-        v-model="properties.language"
-        class="tabs-field"
-        expanded>
-        <b-tab-item label="Valencià"></b-tab-item>
-        <b-tab-item label="Castellà"></b-tab-item>
-      </b-tabs>
-    </b-field>
+    <!-- Language -->
+    <c-select label="Idioma" name="lang" v-model="properties.lang" expanded>
+        <option value="val">Valencià</option>
+        <option value="cas">Castellà</option>
+    </c-select>
 
-    <b-field
-      label="Nom del municipi"
-      :type="properties.localLabel ? '' : displayErrors ? 'is-danger' : ''"
-      :message="properties.localLabel ? '' : displayErrors ? `Has d'omplir un el nom del municipi` : ''">
-      <b-input placeholder="Alacant" maxlength="30" v-model="properties.localLabel"></b-input>
-    </b-field>
+    <!-- Municipality -->
+    <c-input-text
+      label="Nom del poble"
+      name="municipality"
+      placeholder="Xixona"
+      v-model="properties.municipality"
+      :message="setFieldMessage('municipality')"
+      :maxlength="30" />
 
-    <b-field
-      label="Colors">
-      <ul class="colors">
-        <li :class="{'selected': properties.color === 1}" @click="properties.color = 1"><span class="color-1 color-green"><span class="color-2 color-yellow"></span></span></li>
-        <li :class="{'selected': properties.color === 2}" @click="properties.color = 2"><span class="color-1 color-red"><span class="color-2 color-yellow"></span></span></li>
-        <li :class="{'selected': properties.color === 3}" @click="properties.color = 3"><span class="color-1 color-yellow"><span class="color-2 color-green"></span></span></li>
-        <li :class="{'selected': properties.color === 4}" @click="properties.color = 4"><span class="color-1 color-yellow"><span class="color-2 color-red"></span></span></li>
-      </ul>
-    </b-field>
+    <!-- Picture -->
+    <picture-upload
+      :picture="properties.picture"
+      :display-errors="displayErrors"
+      :errors="errors"
+      :ratio="1.86"
+      @upload="updateImage"
+      @delete="properties.picture = null; properties.picturePreview = null">
+        <range-slider
+          name="points"
+          :min="0"
+          :max="100"
+          v-model="properties.picturePos"
+          @touchstart="dimPane(true)"
+          @touchend="dimPane(false)" />
+      </picture-upload>
+
+      <!-- Has custom message -->
+      <c-field>
+        <b-switch v-model="properties.hasCustomMessage">
+          Missatge personalitzat
+        </b-switch>
+      </c-field>
+
+    <transition name="slide">
+      <!-- Custom message -->
+      <c-input-text
+        v-if="properties.hasCustomMessage"
+        type="textarea"
+        label="Missatge"
+        name="text"
+        placeholder="Aquest any especialment, els xicotets comerços de Xixona et necessiten!"
+        v-model="properties.customMessage"
+        :maxlength="100"
+        :message="setFieldMessage('customMessage')" />
+    </transition>
   </div>
 </template>
 
@@ -36,98 +58,41 @@
 import PaneMixin from '@/mixins/pane-mixin.js'
 
 export default {
-  name: 'generic-pane',
+  name: 'christmas-pane',
 
   mixins: [PaneMixin],
 
   data () {
     return {
       properties: {
-        style: 'green',
-        language: 0,
-        color: 1
+        lang: 'val',
+        municipality: '',
+        hasCustomMessage: false,
+        customMessage: ''
       }
     }
   },
 
-  watch: {
-    properties: {
-      handler: function (properties) {
-        // Check if canvas can be downloaded
-        this.isDownloadable = (
-          properties.localLabel !== ''
-        )
-      },
-      deep: true
+  methods: {
+    validate () {
+      this.pictureRequired()
+      if (this.properties.hasCustomMessage) {
+        this.fieldRequired({
+          customMessage: "Has d'escriure un missatge"
+        })
+        this.allCapsDisallowed('customMessage')
+      } else {
+        this.fieldRequired({
+          municipality: "Has d'escriure un poble"
+        })
+        this.allCapsDisallowed('municipality')
+      }
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-  @import "../../../sass/variables";
-  @import "./colors";
+  @import "../../../../sass/variables";
 
-  .colors {
-    display: grid;
-    grid-template-rows: 3.25rem;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 1rem;
-    margin: 0;
-    padding: 0;
-
-    li {
-      border: 2px $gray-200 solid;
-      padding: 2px;
-      display: flex;
-      align-items: stretch;
-      justify-content: stretch;
-      border-radius: 5px;
-      overflow: hidden;
-      transition: .25s ease-in-out;
-
-      span {
-        width: 100%;
-        height: 100%;
-      }
-
-      .color-1 {
-        display: flex;
-        align-items: stretch;
-        justify-content: stretch;
-        padding: 10px;
-        border-radius: 4px;
-      }
-
-      &.selected,
-      &.selected:hover {
-        border-color: $primary;
-      }
-
-      &:hover {
-        border-color: $gray-400;
-      }
-    }
-  }
-
-  .color {
-    &-green {
-      background: $green;
-    }
-    &-red {
-      background: $red;
-    }
-    &-yellow {
-      background: $yellow;
-    }
-  }
-
-  .pane-916 {
-    display: flex;
-    flex-direction: column;
-
-    .text-wrapper {
-      order: 1;
-    }
-  }
 </style>

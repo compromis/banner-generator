@@ -1,29 +1,5 @@
 export default [
   {
-    id: 'ChristmasGreetings',
-    name: 'Felicitació',
-    aspects: ['11', '916'],
-    icon: 'hat-santa',
-    label: '🎄Nadal',
-    components: {
-      pane: () => import(/* webpackChunkName: "christmas" */ './christmas-greetings/ChristmasGreetingsPane'),
-      canvas: () => import(/* webpackChunkName: "christmas" */ './christmas-greetings/ChristmasGreetingsCanvas'),
-      help: () => import(/* webpackChunkName: "christmas" */ './christmas-greetings/ChristmasGreetingsHelp')
-    }
-  },
-  {
-    id: 'Christmas',
-    name: 'Comerç Local',
-    aspects: ['11', '916'],
-    icon: 'gifts',
-    label: '🎄Nadal',
-    components: {
-      pane: () => import(/* webpackChunkName: "christmas" */ './christmas/ChristmasPane'),
-      canvas: () => import(/* webpackChunkName: "christmas" */ './christmas/ChristmasCanvas'),
-      help: () => import(/* webpackChunkName: "christmas" */ './christmas/ChristmasHelp')
-    }
-  },
-  {
     id: 'Headline',
     name: 'Titular de premsa',
     aspects: ['11', '916'],
@@ -196,6 +172,32 @@ export default [
       pane: () => import(/* webpackChunkName: "archived" */ './archived/superavit/SuperavitPane'),
       canvas: () => import(/* webpackChunkName: "archived" */ './archived/superavit/SuperavitCanvas'),
       help: () => import(/* webpackChunkName: "archived" */ './archived/superavit/SuperavitHelp')
+    }
+  },
+  {
+    id: 'ChristmasGreetings',
+    name: 'Felicitació',
+    aspects: ['11', '916'],
+    icon: 'hat-santa',
+    label: '🎄Nadal',
+    archived: true,
+    components: {
+      pane: () => import(/* webpackChunkName: "christmas" */ './archived/christmas-greetings/ChristmasGreetingsPane'),
+      canvas: () => import(/* webpackChunkName: "christmas" */ './archived/christmas-greetings/ChristmasGreetingsCanvas'),
+      help: () => import(/* webpackChunkName: "christmas" */ './archived/christmas-greetings/ChristmasGreetingsHelp')
+    }
+  },
+  {
+    id: 'Christmas',
+    name: 'Comerç Local',
+    aspects: ['11', '916'],
+    icon: 'gifts',
+    label: '🎄Nadal',
+    archived: true,
+    components: {
+      pane: () => import(/* webpackChunkName: "christmas" */ './archived/christmas/ChristmasPane'),
+      canvas: () => import(/* webpackChunkName: "christmas" */ './archived/christmas/ChristmasCanvas'),
+      help: () => import(/* webpackChunkName: "christmas" */ './archived/christmas/ChristmasHelp')
     }
   }
 ]

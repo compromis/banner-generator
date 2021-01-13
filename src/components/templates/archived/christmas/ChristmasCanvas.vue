@@ -4,189 +4,339 @@
     :class="[
       'banner-canvas',
       'aspect-' + aspect,
-      aspect === '11' ? 'disposition-' + banner.disposition : '',
-      'color-' + banner.color
+      'lang-' + banner.lang
     ]"
     v-if="banner">
-    <christmas-background class="christmas-background" :color="color" />
-    <careta class="careta" />
-    <img src="./santa-hat.png" class="santa-hat" />
-    <div class="text" v-if="banner.language === 0">
-      <span class="text-local">Des de Compromís<br />{{ banner.localLabel }} us desitgem</span>
-      <span class="text-merry">Bones festes <br /> i bon any 2020!</span>
+    <div class="background" :style="{ '--light-vibrant': lightVibrant, '--dark-vibrant': darkVibrant, '--dark-muted': darkMuted, '--vibrant': vibrant }">
+      <div class="picture">
+        <div class="title" v-if="banner.lang === 'val'">
+          <span class="top">Per Nadal,</span>
+          <span class="bottom">comerç local</span>
+        </div>
+        <div class="title" v-if="banner.lang === 'cas'">
+          <span class="top">Por Navidad,</span>
+          <span class="bottom">comercio local</span>
+        </div>
+        <div class="picture-holder">
+          <img v-if="banner.picture" :src="banner.picturePreview" :style="objectPosition" />
+        </div>
+        <div class="decorations">
+          <christmas-decoration v-for="i in 3" :key="i" :class="`decoration-${i}`" />
+        </div>
+      </div>
+      <div class="text">
+        <div v-if="banner.hasCustomMessage" class="text-default">{{ banner.customMessage }}</div>
+        <div v-else class="text-default">{{ textDefault }}</div>
+        <div class="compromis-logo">
+          <compromis-logo mono />
+          <span :class="['municipality', {'municipality--long': banner.municipality.length > 18 }]">{{ banner.municipality }}</span>
+        </div>
+      </div>
     </div>
-    <div v-else class="text">
-      <span class="text-local">Desde Compromís <br />{{ banner.localLabel }} os deseamos</span>
-      <span class="text-merry">¡Felices fiestas <br /> y feliz año 2020!</span>
-    </div>
-    <div class="background"></div>
   </div>
 </template>
 
 <script>
-import ChristmasBackground from './ChristmasBackground'
-import Careta from '@/components/canvas/Careta'
-import CanvasMixin from '@/mixins/canvas-mixin.js'
+import Vibrant from 'node-vibrant'
+import CompromisLogo from '@/components/utils/CompromisLogo'
+import CanvasMixin from '@/mixins/canvas-mixin'
+import ChristmasDecoration from './ChristmasDecoration'
 
 export default {
-  name: 'generic-canvas',
+  name: 'christmas-canvas',
 
   mixins: [CanvasMixin],
 
   components: {
-    ChristmasBackground,
-    Careta
+    CompromisLogo,
+    ChristmasDecoration
+  },
+
+  data () {
+    return {
+      palette: null
+    }
+  },
+
+  computed: {
+    lightVibrant () {
+      const [r, g, b] = this.palette ? this.palette['LightVibrant'].rgb : [232, 205, 175]
+      return `rgb(${r}, ${g}, ${b})`
+    },
+
+    darkVibrant () {
+      const [r, g, b] = this.palette ? this.palette['DarkVibrant'].rgb : [4, 40, 95]
+      return `rgb(${r}, ${g}, ${b})`
+    },
+
+    darkMuted () {
+      const [r, g, b] = this.palette ? this.palette['DarkMuted'].rgb : [84, 59, 47]
+      return `rgb(${r}, ${g}, ${b})`
+    },
+
+    vibrant () {
+      if (!this.palette) return 'rgb(196, 132, 68)'
+      const [r, g, b] = this.palette ? this.palette['Vibrant'].rgb : [184, 118, 48]
+      return `rgb(${r}, ${g}, ${b})`
+    },
+
+    municipalityWithPreposition () {
+      const { municipality } = this.banner
+      let string = ''
+
+      if (['a', 'à', 'e', 'è', 'é', 'i', 'í', 'o', 'ò', 'ó', 'u', 'ú', 'A', 'À', 'E', 'È', 'É', 'I', 'Í', 'O', 'Ò', 'Ó', 'U', 'Ú'].includes(municipality[0])) {
+        string += "d'"
+      } else {
+        string += 'de '
+      }
+
+      string += municipality
+
+      return string
+    },
+
+    textDefault () {
+      const { municipality, lang } = this.banner
+      const texts = {
+        val: `Enguany més que mai, els xicotets comerços ${this.municipalityWithPreposition} ens necessiten`,
+        cas: `Este año especialmente, los pequeños comercios de ${municipality} nos necesitan`
+      }
+
+      return texts[lang]
+    }
+  },
+
+  mounted () {
+    this.getPalette()
+  },
+
+  watch: {
+    'banner.picturePreview' () {
+      this.getPalette()
+    }
+  },
+
+  methods: {
+    getPalette () {
+      const img = document.createElement('img')
+      img.setAttribute('src', this.banner.picturePreview)
+
+      img.addEventListener('load', () => {
+        Vibrant.from(img).maxColorCount(200).getPalette().then((palette) => {
+          this.palette = palette
+        })
+      })
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-  @import "../../../sass/variables";
-  @import "./colors";
+  @import "../../../../sass/variables";
 
   @font-face {
-    font-family: 'Windsor';
-    src: url('./Windsor.ttf') format('truetype');
-    font-weight: 700;
+    font-family: 'Texturina';
     font-style: normal;
+    font-weight: 900;
+    font-display: swap;
+    src: url(./Texturina.ttf) format('truetype');
   }
 
-  .christmas-background {
-    position: relative;
+  .background {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     z-index: 1;
+    background-color: var(--light-vibrant);
   }
 
-  .santa-hat {
+  .picture {
     position: absolute;
-    top: 43px;
-    left: 188px;
-    width: 265px;
-    z-index: 15;
+    top: 236px;
+    left: 60px;
+    right: 60px;
+
+    &-holder {
+      position: relative;
+      z-index: 1;
+      transform: rotate(-2deg);
+      height: 306px;
+      background: var(--dark-muted);
+
+      img {
+        width: 100%;
+        height: 306px;
+        object-fit: cover;
+        display: block;
+      }
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        background: var(--dark-muted);
+        mix-blend-mode: lighten;
+        opacity: .85;
+      }
+    }
   }
 
-  .careta {
+  .title {
     position: absolute;
-    width: 214px;
-    height: 214px;
-    top: 180px;
-    left: 258px;
-    z-index: 10;
-    transform: rotate(-7deg);
-  }
-
-  .text {
-    position: absolute;
-    left: 115px;
-    right: 115px;
-    bottom: 130px;
-    text-align: center;
-    font-family: Windsor, serif;
+    top: -200px;
+    left: 10px;
+    font-size: 95px;
+    font-family: Texturina, serif;
+    font-weight: 900;
     line-height: .9;
-    letter-spacing: -.025rem;
+    color: var(--dark-vibrant);
     z-index: 20;
 
-    &-local {
-      font-size: 36px;
-      margin-bottom: 5px;
-      color: $green;
+    .top {
+      display: block;
+      font-size: .95em;
     }
 
-    &-merry {
-      font-size: 50px;
-      color: $red;
+    .bottom {
+      display: block;
+      text-indent: .3em;
+    }
+  }
+
+  .lang-cas .title {
+    top: -180px;
+    font-size: 80px;
+  }
+
+  .decorations {
+    color: var(--vibrant);
+
+    [class^='decoration'] {
+      position: absolute;
+      height: var(--size);
+      width: var(--size);
+      z-index: 20;
     }
 
-    span {
+    .decoration-1 {
+      --size: 113px;
+      top: 45px;
+      left: -40px;
+    }
+
+    .decoration-2 {
+      --size: 70px;
+      top: 172px;
+      left: -43px;
+    }
+
+    .decoration-3 {
+      --size: 100px;
+      bottom: -24px;
+      right: -41px;
+    }
+
+    svg {
       display: block;
     }
   }
 
-  .color {
-    &-2 {
-      .text {
-        &-local {
-          color: $red;
-        }
+  .text {
+    position: absolute;
+    bottom: 0;
+    left: 125px;
+    right: 125px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 22px;
+    line-height: 1.1;
+    color: var(--dark-vibrant);
+    letter-spacing: -.025em;
 
-        &-merry {
-          color: $green;
-        }
+    .compromis-logo {
+      display: flex;
+      width: fit-content;
+      margin: 0 auto;
+      padding: 30px 0;
+      align-items: center;
+
+      svg {
+        width: 180px;
       }
-    }
 
-    &-3 {
-      .text {
-        &-local {
-          color: $yellow;
-        }
+      .municipality {
+        font-weight: normal;
+        margin-left: 10px;
 
-        &-merry {
-          color: $white;
-        }
-      }
-    }
-
-    &-4 {
-      .text {
-        &-local {
-          color: $yellow;
-        }
-
-        &-merry {
-          color: $white;
+        &--long {
+          font-size: 14px;
+          white-space: normal;
+          width: 90px;
+          text-align: left;
         }
       }
     }
   }
 
+  /* Story */
   .aspect-916 {
-    .background {
-      background: $yellow;
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      z-index: 0;
+    .title {
+      top: -112px;
+      font-size: 50px;
     }
 
-    .careta {
-      width: 177px;
-      height: 177px;
-      top: 120px;
-      left: 110px;
+    &.lang-cas .title {
+      font-size: 42px;
     }
 
-    .santa-hat {
-      top: 7px;
-      left: 51px;
-      width: 220px;
+    .picture {
+      top: 168px;
+      left: 40px;
+      right: 40px;
+
+      &-holder {
+        height: 360px;
+
+        img {
+          height: 360px;
+        }
+      }
+    }
+
+    .decoration-1 {
+      --size: 90px;
+    }
+
+    .decoration-2 {
+      --size: 50px;
+      top: 151px;
+      left: -30px;
+    }
+
+    .decoration-3 {
+      --size: 75px;
+      right: -35px;
     }
 
     .text {
-      left: 30px;
-      right: 30px;
-      bottom: 90px;
+      font-size: 17px;
+      bottom: 50px;
+      left: 55px;
+      right: 55px;
 
-      &-local {
-        margin-bottom: 10px;
-      }
-
-      &-merry {
-        font-size: 46px;
+      .compromis-logo {
+        width: 140px;
+        padding: 20px 0;
       }
     }
 
-    &.color-3 {
-      .background {
-        background: $green;
-      }
-    }
-
-    &.color-4 {
-      .background {
-        background: $red;
-      }
+    .municipality {
+      display: none;
     }
   }
 </style>
