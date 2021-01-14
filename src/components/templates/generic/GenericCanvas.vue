@@ -44,7 +44,7 @@
       :picture="banner.picturePreview"
       :picture-position="objectPosition"
       :picture-dimensions="banner.pictureDimensions"
-      :height="aspect === '11' ? 500 : null"
+      :height="aspect === '11' ? 500 : aspect === 'event' ? 285 : null"
       :width="aspect === '916' ? 405 : null"
       :theme="banner.theme"
       :color="banner.color"
@@ -76,7 +76,8 @@ export default {
       const { aspect, banner, fontSize } = this
       const sizes = {
         11: { min: 35, max: 60 },
-        916: { min: 25, max: 50 }
+        916: { min: 25, max: 50 },
+        event: { min: 30, max: 55 }
       }
 
       return fontSize(banner.text, sizes[aspect].max, sizes[aspect].min, 100, banner.textSize)
@@ -138,6 +139,11 @@ export default {
       left: 25px;
       right: 25px;
     }
+
+    &.aspect-event .text {
+      top: 65px;
+      bottom: 95px;
+    }
   }
 
   /* Glowy theme */
@@ -182,6 +188,20 @@ export default {
         }
       }
     }
+
+    /* Event */
+    &.aspect-event {
+      .text {
+        top: 25px;
+        bottom: 95px;
+      }
+
+      .banner-picture::v-deep .glowy-card {
+        top: 30px;
+        left: 30px;
+        right: 30px;
+      }
+    }
   }
 
   /* Blobless theme */
@@ -197,6 +217,13 @@ export default {
       .text {
         left: 25px;
         right: 25px;
+      }
+    }
+
+    &.aspect-event {
+      .text {
+        top: 65px;
+        bottom: 95px;
       }
     }
   }

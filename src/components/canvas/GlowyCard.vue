@@ -4,8 +4,9 @@
       'glowy-card',
       `gradient-${color}`,
       `glow-size-${glowSize}`,
-      {'edge': edge},
-      {'full-width': proportionalWidth === '100%'}
+      { edge },
+      { 'full-width': proportionalWidth === '100%'},
+      { 'height-set': height !== null }
     ]"
     :style="{
       '--width': proportionalWidth,
@@ -212,10 +213,10 @@ export default {
     height: 100%;
   }
 
-  .aspect-event {
+  .height-set {
     .glowy {
       &-card, &-subject, &-ghost {
-        min-height: 0;
+        min-height: unset;
       }
     }
   }

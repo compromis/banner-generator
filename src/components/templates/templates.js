@@ -13,7 +13,7 @@ export default [
   {
     id: 'Generic',
     name: 'Frase',
-    aspects: ['11', '916'],
+    aspects: ['11', '916', 'event'],
     supports: ['multicolor-blobs'],
     icon: 'font',
     components: {
