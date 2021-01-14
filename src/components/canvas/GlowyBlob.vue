@@ -70,12 +70,22 @@ export default {
         left: -118% !important;
         top: -84%;
       }
+
+      &.aspect-event {
+        left: -61%;
+        top: -150%;
+      }
     }
 
     &.position-bottom {
       right: -57%;
       bottom: -81%;
       --gradient-orientation: -45deg;
+
+      &.aspect-event {
+        right: -61%;
+        bottom: -145%;
+      }
 
       &.is-wide {
         right: -46%;

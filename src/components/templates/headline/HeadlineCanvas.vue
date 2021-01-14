@@ -13,7 +13,7 @@
       :picture="banner.picturePreview"
       :picture-position="objectPosition"
       :picture-dimensions="banner.pictureDimensions"
-      :height="aspect === '11' ? 500 : 730"
+      :height="aspect === '11' ? 500 : aspect === '916' ? 730 : 285"
       :theme="banner.theme"
       :edge="aspect === '916'"
       :color="banner.color"
@@ -170,6 +170,47 @@ export default {
       .headline {
         top: 85px;
         bottom: auto;
+      }
+    }
+  }
+
+  /* Twitter */
+  .aspect-event {
+    &.theme-blobless {
+      &.disposition-top {
+        .headline {
+          top: 35px;
+        }
+      }
+    }
+
+    &.theme-glowy {
+      .banner-picture::v-deep .glowy-card {
+        top: 35px;
+      }
+
+      &.disposition-top {
+        .headline {
+          top: 35px;
+        }
+      }
+
+      &.disposition-bottom {
+        .headline {
+          bottom: 90px;
+        }
+      }
+    }
+
+    &.disposition-bottom {
+      .headline {
+        bottom: 80px;
+      }
+    }
+
+    &.disposition-top {
+      .headline {
+        top: 72px;
       }
     }
   }

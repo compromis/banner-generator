@@ -3,7 +3,7 @@
     <glowy-blob position="top" :aspect="aspect" v-if="theme === 'blobs'" :color="color" :wide="hashtag.length > 18" />
     <glowy-blob position="bottom" :aspect="aspect" v-if="theme === 'blobs'" :color="color" :wide="localLabel.length > 6" />
     <div class="hashtag" v-if="aspect !== '916'">{{ hashtag }}</div>
-    <div :class="['logo', `logo--align-${logoAlign}`]" v-if="aspect === '11'">
+    <div :class="['logo', `logo--align-${logoAlign}`]" v-if="aspect !== '916'">
       <compromis-logo :mono="!colorLogo" />
       <div :class="{ 'logo-local-label': true, 'logo-local-label--gray': colorLogo, 'logo-local-label--long': localLabel.length > 18 }" v-if="localLabel">
         {{ localLabel | formatLocal  }}

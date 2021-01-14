@@ -2,7 +2,7 @@ export default [
   {
     id: 'Headline',
     name: 'Titular de premsa',
-    aspects: ['11', '916'],
+    aspects: ['11', '916', 'event'],
     icon: 'newspaper',
     components: {
       pane: () => import(/* webpackChunkName: "headline" */ './headline/HeadlinePane'),

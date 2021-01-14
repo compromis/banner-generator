@@ -211,4 +211,12 @@ export default {
     width: 100%;
     height: 100%;
   }
+
+  .aspect-event {
+    .glowy {
+      &-card, &-subject, &-ghost {
+        min-height: 0;
+      }
+    }
+  }
 </style>
