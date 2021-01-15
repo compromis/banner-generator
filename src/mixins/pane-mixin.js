@@ -17,6 +17,14 @@ export default {
     ColorSelector
   },
 
+  // Shared props across templates
+  props: {
+    template: {
+      type: Object,
+      required: true
+    }
+  },
+
   // Shared data across templates
   data () {
     return {
@@ -45,12 +53,26 @@ export default {
     }
   },
 
+  computed: {
+    aspectKey () {
+      return this.template.aspects[this.aspect]
+    }
+  },
+
   created () {
     // Emit default properties to canvas on creation
     this.$emit('updated', this.properties)
 
     // Update aspect
-    EventBus.$on('aspectUpdated', (aspect) => { this.aspect = aspect })
+    EventBus.$on('aspectUpdated', (aspect) => {
+      this.aspect = aspect
+
+      // Check theme is available in selected aspect
+      // Otherwise default to blobless
+      if (this.availableThemes && !this.availableThemes.includes(this.properties.theme)) {
+        this.properties.theme = 'blobless'
+      }
+    })
 
     // Display errors
     EventBus.$on('checkForErrors', (check) => {
@@ -79,6 +101,8 @@ export default {
         this.validate()
         this.isDownloadable = Object.keys(this.errors).length === 0
 
+        // Check color is available in selected theme
+        // Otherwise, default to orange
         if ('color' in properties && !this.availableColors[properties.theme].includes(properties.color)) {
           this.properties.color = 'orange'
         }

@@ -6,6 +6,7 @@
     <component
       class="pane"
       :is="selectedTemplate.components.pane"
+      :template="selectedTemplate"
       @updated="(props) => bannerProperties = props"
       @updateIsDownloadable="setIsDownloadable" />
     <canvas-container

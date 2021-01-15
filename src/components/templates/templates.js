@@ -25,7 +25,7 @@ export default [
   {
     id: 'Text',
     name: 'Text lliure',
-    aspects: ['11', '916'],
+    aspects: ['11', '916', 'event'],
     supports: ['multicolor-blobs'],
     icon: 'align-left',
     components: {
@@ -37,7 +37,7 @@ export default [
   {
     id: 'Quote',
     name: 'Cita',
-    aspects: ['11', '916'],
+    aspects: ['11', '916', 'event'],
     supports: ['multicolor-blobs'],
     icon: 'quote-left',
     components: {

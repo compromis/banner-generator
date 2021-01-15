@@ -65,9 +65,13 @@ export default {
   computed: {
     fontSizePrimary () {
       const { aspect, banner, fontSize } = this
-      return aspect === '11'
-        ? fontSize(banner.quote, 43, 33, 110, banner.textSize)
-        : fontSize(banner.quote, 38, 30, 110, banner.textSize)
+      const sizes = {
+        11: { min: 33, max: 43 },
+        916: { min: 28, max: 36 },
+        event: { min: 30, max: 38 }
+      }
+
+      return fontSize(banner.quote, sizes[aspect].max, sizes[aspect].min, 110)
     }
   }
 }
@@ -127,6 +131,10 @@ export default {
       justify-content: flex-end;
       align-items: flex-start;
 
+      &-glyph-orange {
+        color: $gradient-end;
+      }
+
       &-author {
         margin-left: auto;
       }
@@ -177,9 +185,16 @@ export default {
     &.aspect-916 {
       .quote {
         top: 120px;
-        left: 25px;
-        right: 25px;
+        left: 30px;
+        right: 20px;
         bottom: 120px;
+      }
+    }
+
+    &.aspect-event {
+      .quote {
+        top: 110px;
+        bottom: 20px;
       }
     }
 
@@ -190,13 +205,20 @@ export default {
         right: 50px;
         bottom: 160px;
       }
+
+      &.aspect-event {
+        .quote {
+          top: -20px;
+          right: 40px;
+        }
+      }
     }
   }
 
   .theme-blobless {
     .quote {
       top: 80px;
-      left: 60px;
+      left: 55px;
       right: auto;
       bottom: 130px;
     }
@@ -221,8 +243,15 @@ export default {
 
     &.aspect-916 {
       .quote {
-        left: 25px;
-        right: 25px;
+        left: 30px;
+        right: 20px;
+      }
+    }
+
+    &.aspect-event {
+      .quote {
+        top: 40px;
+        bottom: 110px;
       }
     }
   }

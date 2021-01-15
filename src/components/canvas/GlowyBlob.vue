@@ -83,7 +83,7 @@ export default {
       --gradient-orientation: -45deg;
 
       &.aspect-event {
-        right: -61%;
+        right: -65%;
         bottom: -145%;
       }
 

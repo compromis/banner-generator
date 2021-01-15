@@ -1,7 +1,7 @@
 <template>
   <div :class="{ 'pane': true, 'pane-dimmed': paneDimmed }">
     <!-- Theme selector -->
-    <theme-selector v-model="properties.theme" />
+    <theme-selector v-model="properties.theme" :themes="availableThemes" />
 
     <!-- Quote -->
     <c-input-text
@@ -75,7 +75,7 @@
     <!-- Hashtag -->
     <transition name="slide">
       <c-input-text
-        v-if="!aspect"
+        v-if="aspectKey !== '916'"
         label="Hashtag"
         name="hashtag"
         placeholder="#"
@@ -88,7 +88,7 @@
     <!-- Local label -->
     <transition name="slide">
       <c-input-text
-        v-if="!aspect"
+        v-if="aspectKey !== '916'"
         label="Text logo"
         name="localLabel"
         placeholder="Alacant"
@@ -125,6 +125,18 @@ export default {
         disposition: 'left',
         fullGradient: false
       }
+    }
+  },
+
+  computed: {
+    availableThemes () {
+      const themes = {
+        11: ['glowy', 'blobs', 'blobless'],
+        916: ['glowy', 'blobs', 'blobless'],
+        event: ['blobs', 'blobless']
+      }
+
+      return themes[this.aspectKey]
     }
   },
 
