@@ -113,7 +113,9 @@ export default {
 
         &.gradient-lgbt {
           --gradient-orientation: 90deg;
-          top: 87%;
+          top: unset;
+          bottom: 0;
+          height: 90px;
         }
       }
 

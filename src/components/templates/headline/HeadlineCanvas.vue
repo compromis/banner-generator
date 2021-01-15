@@ -213,7 +213,7 @@ export default {
 
     &.disposition-bottom {
       .headline {
-        bottom: 80px;
+        bottom: 100px;
       }
     }
 
