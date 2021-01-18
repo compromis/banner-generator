@@ -1,7 +1,7 @@
 <template>
   <div :class="{ 'pane generic-pane': true, 'pane-dimmed': paneDimmed, 'pane-916': aspect === 1 }">
     <!-- Theme selector -->
-    <theme-selector v-model="properties.theme" />
+    <theme-selector v-model="properties.theme" :themes="availableThemes" />
 
     <!-- Text -->
     <c-input-text
@@ -170,6 +170,18 @@ export default {
         color: 'orange',
         fullGradient: false
       }
+    }
+  },
+
+  computed: {
+    availableThemes () {
+      const themes = {
+        11: ['glowy', 'blobs', 'blobless'],
+        916: ['glowy', 'blobs', 'blobless'],
+        event: ['blobs', 'blobless']
+      }
+
+      return themes[this.aspectKey]
     }
   },
 

@@ -1,7 +1,7 @@
 <template>
   <div :class="{ 'pane headline-pane': true, 'pane-dimmed': paneDimmed }">
     <!-- Theme selector -->
-    <theme-selector v-model="properties.theme"/>
+    <theme-selector v-model="properties.theme" :themes="availableThemes" />
 
     <!-- Source -->
     <c-select
@@ -168,6 +168,18 @@ export default {
         fullGradient: false
       },
       presets: presets
+    }
+  },
+
+  computed: {
+    availableThemes () {
+      const themes = {
+        11: ['glowy', 'blobs', 'blobless'],
+        916: ['glowy', 'blobs', 'blobless'],
+        event: ['blobs', 'blobless']
+      }
+
+      return themes[this.aspectKey]
     }
   },
 
