@@ -13,7 +13,7 @@
       :picture="banner.picturePreview"
       :picture-position="objectPosition"
       :picture-dimensions="banner.pictureDimensions"
-      :height="aspect === '11' ? 500 : aspect === '916' ? 730 : 285"
+      :height="aspect === '11' ? 500 : 730"
       :theme="banner.theme"
       :edge="aspect === '916'"
       :color="banner.color"
@@ -151,15 +151,6 @@ export default {
         .headline {
           top: 75px;
         }
-      }
-    }
-
-    /* Event */
-    &.aspect-event {
-      .banner-picture::v-deep .glowy-card {
-        top: 30px !important;
-        left: 30px;
-        right: 30px;
       }
     }
   }

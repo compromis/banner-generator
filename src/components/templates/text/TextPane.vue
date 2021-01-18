@@ -1,7 +1,7 @@
 <template>
   <div :class="{ 'pane generic-pane': true, 'pane-dimmed': paneDimmed, 'pane-916': aspect === 1 }">
     <!-- Theme selector -->
-    <theme-selector v-model="properties.theme" />
+    <theme-selector v-model="properties.theme" :themes="availableThemes" />
 
     <c-field label="Contingut" edge>
       <vue-editor v-model="properties.text" :editor-toolbar="customToolbar" />
@@ -53,7 +53,7 @@
     <!-- Hashtag -->
     <transition name="slide">
       <c-input-text
-        v-if="!aspect"
+        v-if="aspect != '916'"
         label="Hashtag"
         name="hashtag"
         placeholder="#"
@@ -66,7 +66,7 @@
     <!-- Local label -->
     <transition name="slide">
       <c-input-text
-        v-if="!aspect"
+        v-if="aspectKey != '916'"
         label="Text logo"
         name="localLabel"
         placeholder="Alacant"
@@ -111,6 +111,18 @@ export default {
         ['bold', 'underline'],
         [{ list: 'check' }, { list: 'bullet' }, { list: 'ordered' }]
       ]
+    }
+  },
+
+  computed: {
+    availableThemes () {
+      const themes = {
+        11: ['glowy', 'blobs', 'blobless'],
+        916: ['glowy', 'blobs', 'blobless'],
+        event: ['blobs', 'blobless']
+      }
+
+      return themes[this.aspectKey]
     }
   },
 

@@ -110,10 +110,23 @@ export default {
       }
     }
 
+    &.aspect-event {
+      .text {
+        bottom: 85px;
+        top: auto;
+      }
+    }
+
     &.disposition-top {
       .text {
         top: 80px;
         bottom: auto;
+      }
+
+      &.aspect-event {
+        .text {
+          top: 65px;
+        }
       }
     }
   }
@@ -238,6 +251,22 @@ export default {
             left: 30px;
           }
         }
+      }
+    }
+  }
+
+  .aspect-event {
+    .text-wysiwyg {
+      font-size: 14px;
+
+      h1 {
+        font-size: 30px;
+      }
+
+      h2 {
+        font-size: 20px;
+        padding-top: 12px;
+        padding-bottom: 12px;
       }
     }
   }
