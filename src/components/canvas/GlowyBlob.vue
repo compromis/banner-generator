@@ -75,6 +75,11 @@ export default {
         left: -61%;
         top: -150%;
       }
+
+      &.is-wide.aspect-event {
+        left: -44%;
+        top: -151%;
+      }
     }
 
     &.position-bottom {
@@ -84,7 +89,7 @@ export default {
 
       &.aspect-event {
         right: -65%;
-        bottom: -145%;
+        bottom: -148%;
       }
 
       &.is-wide {

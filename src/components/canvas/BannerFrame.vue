@@ -1,7 +1,7 @@
 <template>
   <div :class="['banner-frame', `banner-frame--${theme}`]">
     <glowy-blob position="top" :aspect="aspect" v-if="theme === 'blobs'" :color="color" :wide="hashtag.length > 18" />
-    <glowy-blob position="bottom" :aspect="aspect" v-if="theme === 'blobs'" :color="color" :wide="localLabel.length > 6" />
+    <glowy-blob position="bottom" :aspect="aspect" v-if="theme === 'blobs'" :color="color" :wide="localLabel.length > 6 || (aspect === 'event' && localLabel.length > 0)"/>
     <div class="hashtag" v-if="aspect !== '916'">{{ hashtag }}</div>
     <div :class="['logo', `logo--align-${logoAlign}`]" v-if="aspect !== '916'">
       <compromis-logo :mono="!colorLogo" />

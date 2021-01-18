@@ -10,10 +10,10 @@
       { 'full-gradient': banner.fullGradient }
     ]"
     v-if="banner">
-    <div class="quote">
+    <div :style="{ fontSize: fontSizePrimary }" class="quote">
       <div :style="{ textAlign: banner.disposition }">
         <div :class="['quote-glyph', 'quote-glyph-' + banner.textColor ]" >“</div>
-        <div class="quote-text-wrapper">
+        <div class="quote-text-wrapper" style="font-size: 16px">
           <text-in-pills
             v-if="banner.quote"
             :text="$options.filters.formatString($options.filters.formatQuote(banner.quote))"
@@ -68,10 +68,10 @@ export default {
       const sizes = {
         11: { min: 33, max: 43 },
         916: { min: 28, max: 36 },
-        event: { min: 30, max: 38 }
+        event: { min: 23, max: 36 }
       }
 
-      return fontSize(banner.quote, sizes[aspect].max, sizes[aspect].min, 110)
+      return fontSize(banner.quote, sizes[aspect].max, sizes[aspect].min, 140)
     }
   }
 }
@@ -111,15 +111,15 @@ export default {
     }
 
     &-author {
-      font-size: 19px;
+      font-size: clamp(14px, 0.65em, 18px); ;
       letter-spacing: -0.5px;
       margin-top: 12px;
       line-height: 1.2;
-      width: 165px;
       color: $white;
       font-weight: bold;
       white-space: pre-line;
       max-height: 90px;
+      max-width: 75%;
       text-shadow: 0 2px 6px rgba(0, 0, 0, .5);
     }
   }
@@ -250,9 +250,25 @@ export default {
 
     &.aspect-event {
       .quote {
-        top: 40px;
+        top: 0;
         bottom: 110px;
       }
+    }
+  }
+
+  .aspect-event {
+    &.disposition-left {
+      .quote {
+        bottom: 38px;
+      }
+    }
+
+    .quote {
+      width: 375px;
+    }
+
+    .quote-author {
+      max-width: 70%;
     }
   }
 </style>
