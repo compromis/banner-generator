@@ -59,6 +59,7 @@ export default {
       return local
         .trim()
         .replace(/^per/gi, '')
+        .replace(/^pel/gi, '')
         .replace(/#/g, '')
     }
   },

@@ -47,6 +47,17 @@ export default [
     }
   },
   {
+    id: 'Chart',
+    name: 'Gràfica',
+    aspects: ['11'],
+    icon: 'chart-bar',
+    components: {
+      pane: () => import(/* webpackChunkName: "chart" */ './chart/ChartPane'),
+      canvas: () => import(/* webpackChunkName: "chart" */ './chart/ChartCanvas'),
+      help: () => import(/* webpackChunkName: "chart" */ './chart/ChartHelp')
+    }
+  },
+  {
     id: 'Comparison',
     name: 'Comparativa',
     aspects: ['11'],
