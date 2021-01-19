@@ -4,7 +4,7 @@
     <theme-selector v-model="properties.theme" :themes="['blobs', 'blobless']" />
 
     <!-- Chart data input -->
-    <chart-data />
+    <chart-data v-model="properties.chart" />
 
     <!-- Emoji picker -->
     <emoji-picker v-model="properties.emojis" />
@@ -88,6 +88,28 @@ export default {
     return {
       properties: {
         emojis: [],
+        chart: {
+          sets: [
+            {
+              label: 'Compromís',
+              color: 'orangered'
+            },
+            {
+              label: 'PP',
+              color: 'blue'
+            }
+          ],
+          data: [
+            {
+              label: 'gener',
+              values: [100, 200]
+            },
+            {
+              label: 'febrer',
+              values: [220, 120]
+            }
+          ]
+        },
         color: 'orange',
         fullGradient: false
       }

@@ -18,7 +18,7 @@
         edge
         :full-gradient="banner.fullGradient" />
       <div class="text text-wysiwyg">
-        <bar-chart-css />
+        <bar-chart-css :chart="banner.chart" />
       </div>
     </div>
     <emojis-on-canvas v-model="banner.emojis" />

@@ -1,10 +1,20 @@
 <template>
   <div>
-    <p>dsflkghdlfg</p>
+    <h1>{{ message }}</h1>
     <div class="chart">
-      <div class="chart-item" v-for="data in dataset" :key="data">
-        <div class="chart-item-bar chart-item-bar-a" :style="{height: calcHeight(data.valueA)}"></div>
-        <div class="chart-item-label">{{data.name}}</div>
+      <div class="chart-item" v-for="(data, d) in chart.data" :key="d">
+        <div class="chart-item-bars">
+          <div
+            v-for="(value, set) in data.values"
+            :key="set"
+            class="chart-item-bar"
+            :style="{
+              height: calcHeight(value, 200),
+              backgroundColor: chart.sets[set].color
+            }"
+          ></div>
+        </div>
+        <div class="chart-item-label">{{ data.label }}</div>
       </div>
     </div>
   </div>
@@ -12,27 +22,34 @@
 <script>
 
 export default {
+  props: {
+    chart: {
+      type: Object,
+      required: true
+    }
+  },
+
   data () {
     return {
-      message: 'asfsdgadsfg',
-      // 1 dataset amb dos values o 2 datasets??
-      dataset: [
-        {
-          name: 'febrer',
-          valueA: 100,
-          valueB: 150,
-          colorA: '#fff',
-          colorB: '#fff'
-        }
-      ]
+      message: 'asfsdgadsfg'
     }
   },
 
   methods: {
-    calcHeight (value) {
-      // buscar valor més alt dins de dataset = highestvalue
-      // regla de 3 -> highestvalue = 100 -> value = x
-      return value + 'px'
+    calcHeight (value, maxHeight) {
+      const height = value * maxHeight / this.heightestValue
+      return height + 'px'
+    }
+  },
+
+  computed: {
+    heightestValue () {
+      let values = []
+      this.chart.data.forEach(row => {
+        values = [...values, ...row.values]
+      })
+
+      return Math.max(...values)
     }
   }
 }
@@ -55,14 +72,21 @@ export default {
 
   &-label {
     color: $gray-700;
-    font-size: 1.25rem;
+    font-size: 18px;
   }
+
+  &-bars {
+    display: flex;
+    align-items: flex-end;
+  }
+
   &-bar {
     margin-bottom: .5rem;
     background-color: $orange;
     width: 30px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+    margin: 0 5px;
   }
 }
 </style>
