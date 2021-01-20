@@ -98,11 +98,11 @@ export default {
           data: [
             {
               label: 'gener',
-              values: [{ number: 200, color: 'inherit', highlight: false }]
+              values: [{ number: 200, color: 'orangered', highlight: false }]
             },
             {
               label: 'febrer',
-              values: [{ number: 100, color: 'inherit', highlight: false }]
+              values: [{ number: 100, color: 'orangered', highlight: false }]
             }
           ]
         },

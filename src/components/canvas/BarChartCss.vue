@@ -46,7 +46,8 @@ export default {
     heightestValue () {
       let values = []
       this.chart.data.forEach(row => {
-        values = [...values, ...row.values]
+        const rowValues = row.values.map(value => value.number)
+        values = [...values, ...rowValues]
       })
 
       return Math.max(...values)
