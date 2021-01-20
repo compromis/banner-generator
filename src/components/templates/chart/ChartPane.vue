@@ -93,20 +93,16 @@ export default {
             {
               label: 'Compromís',
               color: 'orangered'
-            },
-            {
-              label: 'PP',
-              color: 'blue'
             }
           ],
           data: [
             {
               label: 'gener',
-              values: [100, 200]
+              values: [{ number: 200, color: 'inherit', highlight: false }]
             },
             {
               label: 'febrer',
-              values: [220, 120]
+              values: [{ number: 100, color: 'inherit', highlight: false }]
             }
           ]
         },

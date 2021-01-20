@@ -9,8 +9,8 @@
             :key="set"
             class="chart-item-bar"
             :style="{
-              height: calcHeight(value, 200),
-              backgroundColor: chart.sets[set].color
+              height: calcHeight(value.number, 200),
+              backgroundColor: value.color === 'inherit' ? chart.sets[set].color : value.color
             }"
           ></div>
         </div>
