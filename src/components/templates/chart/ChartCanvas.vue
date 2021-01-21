@@ -18,7 +18,8 @@
         edge
         :full-gradient="banner.fullGradient" />
       <div class="text text-wysiwyg">
-        <bar-chart-css :chart="banner.chart" />
+        <bar-chart :chart="banner.chart" v-if="chartType === 'bar'"/>
+        <line-chart :chart="banner.chart"/>
       </div>
     </div>
     <emojis-on-canvas v-model="banner.emojis" />
@@ -37,20 +38,26 @@ import CanvasMixin from '@/mixins/canvas-mixin.js'
 import BannerPicture from '@/components/canvas/BannerPicture'
 import BannerFrame from '@/components/canvas/BannerFrame'
 import EmojisOnCanvas from '@/components/canvas/EmojisOnCanvas'
-// import BarChart from '@/components/canvas/BarChart'
-import BarChartCss from '@/components/canvas/BarChartCss'
+import LineChart from '@/components/canvas/LineChart'
+import BarChart from '@/components/canvas/BarChart'
 
 export default {
   name: 'chart-canvas',
 
   mixins: [CanvasMixin],
 
+  data () {
+    return {
+      chartType: 'line'
+    }
+  },
+
   components: {
     EmojisOnCanvas,
     BannerPicture,
     BannerFrame,
-    BarChartCss
-    // BarChart,
+    BarChart,
+    LineChart
   }
 }
 </script>
