@@ -71,29 +71,6 @@
     }
   }
 
-  .c-button {
-    display: block;
-    background: transparent;
-    border: 0;
-    width: 100%;
-    text-align: left;
-    color: $gray-900;
-    padding: $field-padding;
-    font-size: 1rem;
-    transition: .2s ease;
-
-    &:hover {
-      background: $gray-100;
-      cursor: pointer;
-    }
-
-    &:active,
-    &:focus {
-      outline: 0;
-      background: $gray-200;
-    }
-  }
-
   &.c-field-focusable:focus-within {
     background: $gray-100;
 
@@ -125,9 +102,35 @@
   }
 
   .vue-swatches__trigger {
-    height: 1.75rem !important;
-    width: 1.75rem !important;
     border-radius: 4px !important;
+  }
+}
+
+.c-button {
+  display: block;
+  background: transparent;
+  border: 0;
+  width: 100%;
+  text-align: left;
+  color: $gray-900;
+  padding: $field-padding;
+  font-size: 1rem;
+  transition: .2s ease;
+
+  &:hover {
+    background: $gray-100;
+    cursor: pointer;
+  }
+
+  &:active,
+  &:focus {
+    outline: 0;
+    background: $gray-200;
+  }
+
+  &.c-button-sm {
+    font-size: .85rem;
+    padding: .5rem $field-padding;
   }
 }
 
@@ -165,8 +168,6 @@
 }
 
 .vue-swatches__trigger {
-  height: 2.25rem !important;
-  width: 2.25rem !important;
   border-radius: 4px !important;
 }
 

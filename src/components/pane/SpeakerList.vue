@@ -54,7 +54,7 @@
             type="is-danger"
             icon-right="times"
             v-if="speakers.length > minSpeakers">
-            </b-button>
+          </b-button>
         </div>
       </li>
     </ul>
