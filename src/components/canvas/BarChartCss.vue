@@ -2,7 +2,7 @@
   <div>
     <h1>{{ message }}</h1>
     <div :class="{'chart' : true, 'chart-horizontal' : horizontal}">
-      <div class="chart-item" v-for="(data, d) in chart.data" :key="d">
+      <div class="chart-item" v-for="(data, d) in truncatedData" :key="d">
         <div class="chart-item-bars">
           <div
             v-for="(value, set) in data.values"
@@ -54,6 +54,12 @@ export default {
   },
 
   computed: {
+    truncatedData () {
+      const max = this.horizontal ? 4 : 10
+      return this.chart.data.filter((entry, i) => {
+        return i < max
+      })
+    },
     highestValue () {
       let values = []
       this.chart.data.forEach(row => {
