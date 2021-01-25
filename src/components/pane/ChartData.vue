@@ -85,7 +85,14 @@ export default {
     },
 
     canAddNewSet () {
-      return true
+      const max = {
+        'bar-vertical': 4,
+        'bar-horizontal': 4,
+        'lines': 100,
+        'doughnut': 1
+      }
+
+      return this.chartData.sets.length < max[this.chartType]
     }
   },
 

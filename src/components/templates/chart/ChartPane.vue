@@ -13,8 +13,8 @@
       :maxlength="160"
       :message="setFieldMessage('title')" />
 
-    <!-- Language -->
-    <c-select label="Tipus de gràfica" v-model="properties.chartType" expanded>
+    <!-- Chart type -->
+    <c-select name="chartType" label="Tipus de gràfica" v-model="properties.chartType" expanded>
         <option value="bar-vertical">Barres verticals</option>
         <option value="bar-horizontal">Barres horitzontals</option>
         <option value="lines">Línies</option>
