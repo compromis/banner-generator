@@ -3,8 +3,27 @@
     <!-- Theme selector -->
     <theme-selector v-model="properties.theme" :themes="['blobs', 'blobless']" />
 
+    <!-- Title -->
+    <c-input-text
+      label="Títol"
+      name="title"
+      type="textarea"
+      placeholder="Baixa l'atur..."
+      v-model="properties.title"
+      :maxlength="160"
+      :message="setFieldMessage('title')" />
+
     <!-- Chart data input -->
     <chart-data v-model="properties.chart" />
+
+    <!-- Title -->
+    <c-input-text
+      label="Font"
+      name="source"
+      :message="setFieldMessage('source')"
+      placeholder="INE"
+      v-model="properties.source"
+      :maxlength="40" />
 
     <!-- Emoji picker -->
     <emoji-picker v-model="properties.emojis" />
@@ -87,6 +106,8 @@ export default {
   data () {
     return {
       properties: {
+        title: '',
+        source: '',
         emojis: [],
         chart: {
           sets: [

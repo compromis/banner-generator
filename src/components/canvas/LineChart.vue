@@ -1,30 +1,23 @@
 <script>
-import { Line } from 'vue-chartjs'
+import Chart from 'chart.js'
+import { Line, mixins } from 'vue-chartjs'
 Chart.defaults.global.defaultFontFamily = "'Compromis', sans-serif"
 Chart.defaults.global.tooltips.enabled = false
 
 export default {
   extends: Line,
 
+  mixins: [mixins.reactiveData],
+
+  props: {
+    chart: {
+      type: Object,
+      required: true
+    }
+  },
+
   data () {
     return {
-      chartdata: {
-        labels: ['January', 'February', 'jaskdas', 'jkashdkas'],
-        datasets: [
-          {
-            label: 'Data One',
-            borderColor: '#f87979',
-            backgroundColor: 'transparent',
-            data: [40, 20, 35, 45]
-          },
-          {
-            label: 'Data Two',
-            borderColor: '#2f7343',
-            backgroundColor: 'transparent',
-            data: [10, 28, 8, 40]
-          }
-        ]
-      },
       options: {
         responsive: true,
         maintainAspectRatio: false,
@@ -47,8 +40,38 @@ export default {
     }
   },
 
+  computed: {
+    computedChartData () {
+      const labels = this.chart.data.map(row => row.label)
+      const datasets = this.chart.sets.map((set, setKey) => {
+        const setdata = this.chart.data.map(row => row.values[setKey].number)
+
+        return {
+          label: set.label,
+          borderColor: set.color,
+          backgroundColor: 'transparent',
+          data: setdata
+        }
+      })
+
+      return {
+        labels,
+        datasets
+      }
+    }
+  },
+
   mounted () {
-    this.renderChart(this.chartdata, this.options)
+    this.renderChart(this.chartData, this.options)
+  },
+
+  watch: {
+    computedChartData: {
+      deep: true,
+      handler (data) {
+        this.chartData = data
+      }
+    }
   }
 }
 </script>
