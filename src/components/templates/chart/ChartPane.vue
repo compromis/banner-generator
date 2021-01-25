@@ -97,7 +97,7 @@
 import PaneMixin from '@/mixins/pane-mixin.js'
 import EmojiPicker from '@/components/pane/EmojiPicker'
 import ThemeSelector from '@/components/pane/ThemeSelector'
-import ChartData from '@/components/pane/ChartData'
+import ChartData from './ChartData'
 
 export default {
   name: 'chart-pane',

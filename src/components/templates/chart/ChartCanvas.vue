@@ -43,8 +43,8 @@ import CanvasMixin from '@/mixins/canvas-mixin.js'
 import BannerPicture from '@/components/canvas/BannerPicture'
 import BannerFrame from '@/components/canvas/BannerFrame'
 import EmojisOnCanvas from '@/components/canvas/EmojisOnCanvas'
-import LineChart from '@/components/canvas/LineChart'
-import BarChart from '@/components/canvas/BarChart'
+import LineChart from './LineChart'
+import BarChart from './BarChart'
 
 export default {
   name: 'chart-canvas',

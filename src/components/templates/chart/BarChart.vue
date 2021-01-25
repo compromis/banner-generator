@@ -3,18 +3,20 @@
     <div :class="{'chart' : true, 'chart-horizontal' : horizontal}">
       <div class="chart-item" v-for="(data, d) in truncatedData" :key="d">
         <div class="chart-item-bars">
-          <div
-            v-for="(value, set) in data.values"
-            :key="set"
-            class="chart-item-bar"
-            :style="{
-              width: horizontal ? calcLength(value.number) : 'reset',
-              height: horizontal ? 'auto' : calcLength(value.number),
-              backgroundColor: value.color
-            }"
-          >
-            <div :style="{color: value.highlight ? value.color : null}" :class="{'chart-item-number' : true, 'chart-item-number-starred' : value.highlight}">{{ value.number }}</div>
-          </div>
+          <template v-for="(value, set) in data.values">
+            <div
+              v-if="set < 4"
+              :key="set"
+              class="chart-item-bar"
+              :style="{
+                width: horizontal ? calcLength(value.number) : 'reset',
+                height: horizontal ? 'auto' : calcLength(value.number),
+                backgroundColor: value.color
+              }"
+            >
+              <div :style="{color: value.highlight ? value.color : null}" :class="{'chart-item-number' : true, 'chart-item-number-starred' : value.highlight}">{{ value.number }}</div>
+            </div>
+          </template>
         </div>
         <div class="chart-item-label">{{ data.label }}</div>
       </div>
@@ -48,10 +50,8 @@ export default {
 
   computed: {
     truncatedData () {
-      const max = this.horizontal ? 4 : 10
-      return this.chart.data.filter((entry, i) => {
-        return i < max
-      })
+      const max = this.horizontal ? 8 : 10
+      return this.chart.data.filter((entry, i) => i < max)
     },
     highestValue () {
       let values = []
@@ -67,7 +67,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../sass/variables";
+@import "../../../sass/variables";
 .chart {
   display: grid;
   grid-auto-columns: 1fr;

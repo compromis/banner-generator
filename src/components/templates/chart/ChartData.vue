@@ -1,7 +1,7 @@
 <template>
   <div class="chart-data">
     <ul class="sets">
-      <li v-for="(set, setKey) in chartData.sets" :key="setKey">
+      <li v-for="(set, setKey) in chartData.sets" :key="setKey" :class="{ hidden: setKey >= maxSets }">
         <input type="text" v-model="set.label" class="set-name" placeholder="Nom del set" :ref="`setLabel${setKey}`" />
         <button @click="deleteSet(setKey)" class="remove set-remove">-</button>
 
@@ -13,7 +13,7 @@
             <th class="centered-col"><font-awesome-icon :icon="['far', 'highlighter']" /></th>
             <th></th>
           </tr>
-          <tr v-for="(dataRow, dataKey) in chartData.data" :key="setKey + dataKey">
+          <tr v-for="(dataRow, dataKey) in chartData.data" :key="setKey + dataKey" :class="{ hidden: dataKey >= maxRows }">
             <td class="has-input">
               <input type="text" v-model="dataRow.label" maxlength="24" :ref="`label${setKey}${dataKey}`" />
             </td>
@@ -34,13 +34,13 @@
             </td>
           </tr>
         </table>
-        <button @click="newRow(setKey)" class="c-button c-button-sm">
+        <button v-if="chartData.data[0].values.length < maxRows" @click="newRow(setKey)" class="c-button c-button-sm">
           <font-awesome-icon :icon="['far', 'plus']" />
           Nova fila
         </button>
       </li>
     </ul>
-    <button v-if="canAddNewSet" @click="newSet" class="c-button">
+    <button v-if="chartData.sets.length < maxSets" @click="newSet" class="c-button">
         <font-awesome-icon :icon="['far', 'plus']" />
         Nou set
     </button>
@@ -84,15 +84,26 @@ export default {
       }
     },
 
-    canAddNewSet () {
+    maxSets () {
       const max = {
         'bar-vertical': 4,
         'bar-horizontal': 4,
-        'lines': 100,
+        'lines': 6,
         'doughnut': 1
       }
 
-      return this.chartData.sets.length < max[this.chartType]
+      return max[this.chartType]
+    },
+
+    maxRows () {
+      const max = {
+        'bar-vertical': 10,
+        'bar-horizontal': 10,
+        'lines': 40,
+        'doughnut': 10
+      }
+
+      return max[this.chartType]
     }
   },
 
@@ -143,7 +154,7 @@ export default {
 </script>
 
 <style lang="scss">
-  @import "../../sass/variables";
+  @import "../../../sass/variables";
 
   .chart-data {
     border-bottom: 1px $gray-300 solid;
@@ -205,6 +216,10 @@ export default {
         text-align: right;
       }
 
+      .hidden {
+        opacity: .5;
+      }
+
       .b-checkbox.checkbox:not(.button) {
         margin-right: 0;
         display: flex;
@@ -233,6 +248,10 @@ export default {
       li {
         position: relative;
         border-bottom: 1px $gray-200 solid;
+
+        &.hidden {
+          opacity: .5;
+        }
       }
 
       .set-name {
