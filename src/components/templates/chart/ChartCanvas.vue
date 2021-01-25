@@ -19,9 +19,10 @@
         :full-gradient="banner.fullGradient" />
       <div class="chart">
         <h1>{{ banner.title }}</h1>
-        <bar-chart :chart="banner.chart" v-if="chartType === 'bar'"/>
-        <line-chart :chart="banner.chart"/>
-        <div v-if="banner.source">
+        <bar-chart :chart="banner.chart" v-if="banner.chartType === 'bar-vertical'" />
+        <bar-chart :chart="banner.chart" horizontal v-if="banner.chartType === 'bar-horizontal'" />
+        <line-chart :chart="banner.chart" v-if="banner.chartType === 'lines'" />
+        <div class="source" v-if="banner.source">
           Font: {{ banner.source }}
         </div>
       </div>
@@ -50,12 +51,6 @@ export default {
 
   mixins: [CanvasMixin],
 
-  data () {
-    return {
-      chartType: 'line'
-    }
-  },
-
   components: {
     EmojisOnCanvas,
     BannerPicture,
@@ -81,6 +76,15 @@ export default {
     padding: 24px 24px;
     max-height: 515px;
     overflow: hidden;
+
+    h1 {
+      font-size: 32px;
+    }
+
+    .source {
+      color: $gray-700;
+      font-size: 14px;
+    }
   }
 
   .aspect-916 {
@@ -95,6 +99,13 @@ export default {
     .chart {
       bottom: 85px;
       top: auto;
+    }
+  }
+
+  .banner-background-black {
+    .chart {
+      background: $gray-900;
+      color: $white;
     }
   }
 

@@ -2,6 +2,8 @@
 import Chart from 'chart.js'
 import { Line, mixins } from 'vue-chartjs'
 Chart.defaults.global.defaultFontFamily = "'Compromis', sans-serif"
+Chart.defaults.global.defaultFontSize = 14
+Chart.defaults.global.defaultFontColor = '#707380'
 Chart.defaults.global.tooltips.enabled = false
 
 export default {
@@ -50,6 +52,7 @@ export default {
           label: set.label,
           borderColor: set.color,
           backgroundColor: 'transparent',
+          borderWidth: 5,
           data: setdata
         }
       })
@@ -62,6 +65,7 @@ export default {
   },
 
   mounted () {
+    this.chartData = this.computedChartData
     this.renderChart(this.chartData, this.options)
   },
 

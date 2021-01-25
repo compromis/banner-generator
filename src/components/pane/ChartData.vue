@@ -21,7 +21,7 @@
               <input type="number" v-model="dataRow.values[setKey].number" />
             </td>
             <td>
-              <swatches v-model="dataRow.values[setKey].color" popover-to="left" swatch-size="20" :trigger-style="{ height: '1.15rem', width: '1.15rem' }"></swatches>
+              <swatches v-model="dataRow.values[setKey].color" popover-to="left" swatch-size="20" :trigger-style="{ height: '1.15rem', width: '1.15rem' }" :disabled="chartType === 'lines'"></swatches>
             </td>
             <td>
               <b-checkbox v-model="dataRow.values[setKey].highlight"
@@ -40,7 +40,7 @@
         </button>
       </li>
     </ul>
-    <button @click="newSet" class="c-button">
+    <button v-if="canAddNewSet" @click="newSet" class="c-button">
         <font-awesome-icon :icon="['far', 'plus']" />
         Nou set
     </button>
@@ -66,6 +66,10 @@ export default {
     chart: {
       type: Object,
       required: true
+    },
+    chartType: {
+      type: String,
+      required: true
     }
   },
 
@@ -78,6 +82,10 @@ export default {
       set (chart) {
         this.$emit('updateChart', chart)
       }
+    },
+
+    canAddNewSet () {
+      return true
     }
   },
 
@@ -207,6 +215,10 @@ export default {
 
       .vue-swatches {
         height: 1.15rem;
+
+        &--is-disabled {
+          opacity: .5;
+        }
       }
     }
 
@@ -239,6 +251,7 @@ export default {
         right: .6rem;
       }
     }
+
     .remove {
       display: flex;
       background: $gray-100;
