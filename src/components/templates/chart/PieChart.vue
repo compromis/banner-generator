@@ -1,15 +1,14 @@
 <script>
 import Chart from 'chart.js'
-import { Line, mixins } from 'vue-chartjs'
-import ChartDataLabels from 'chartjs-plugin-datalabels'
+import { Pie, mixins } from 'vue-chartjs'
 Chart.defaults.global.defaultFontFamily = "'Compromis', sans-serif"
 Chart.defaults.global.defaultFontSize = 14
 Chart.defaults.global.defaultFontColor = '#707380'
 Chart.defaults.global.tooltips.enabled = false
-Chart.defaults.global.legend.display = false
+Chart.defaults.global.legend.display = true
 
 export default {
-  extends: Line,
+  extends: Pie,
 
   mixins: [mixins.reactiveData],
 
@@ -29,6 +28,9 @@ export default {
           xAxes: [{
             gridLines: {
               display: false
+            },
+            ticks: {
+              display: false
             }
           }],
           yAxes: [{
@@ -43,7 +45,7 @@ export default {
 
         plugins: {
           datalabels: {
-            align: 'top'
+            color: 'white'
           }
         }
       }
@@ -55,11 +57,11 @@ export default {
       const labels = this.chart.data.map(row => row.label)
       const datasets = this.chart.sets.map((set, setKey) => {
         const setdata = this.chart.data.map(row => row.values[setKey].number)
+        const color = this.chart.data.map(row => row.values[setKey].color)
 
         return {
           label: set.label,
-          borderColor: set.color,
-          backgroundColor: 'transparent',
+          backgroundColor: color,
           borderWidth: 5,
           data: setdata
         }

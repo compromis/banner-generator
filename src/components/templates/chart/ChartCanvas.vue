@@ -31,6 +31,9 @@
         <line-chart
           v-if="banner.chartType === 'lines'"
           :chart="banner.chart" />
+        <pie-chart
+          v-if="banner.chartType === 'pie'"
+          :chart="banner.chart" />
 
         <chart-legend
           v-if="banner.chart.sets.length > 1"
@@ -60,6 +63,7 @@ import BannerFrame from '@/components/canvas/BannerFrame'
 import EmojisOnCanvas from '@/components/canvas/EmojisOnCanvas'
 import LineChart from './LineChart'
 import BarChart from './BarChart'
+import PieChart from './PieChart'
 import ChartLegend from './ChartLegend'
 
 export default {
@@ -73,7 +77,8 @@ export default {
     BannerFrame,
     BarChart,
     LineChart,
-    ChartLegend
+    ChartLegend,
+    PieChart
   }
 }
 </script>
