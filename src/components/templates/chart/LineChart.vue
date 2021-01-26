@@ -1,6 +1,7 @@
 <script>
 import Chart from 'chart.js'
 import { Line, mixins } from 'vue-chartjs'
+import ChartDataLabels from 'chartjs-plugin-datalabels'
 Chart.defaults.global.defaultFontFamily = "'Compromis', sans-serif"
 Chart.defaults.global.defaultFontSize = 14
 Chart.defaults.global.defaultFontColor = '#707380'
@@ -38,6 +39,12 @@ export default {
               display: false
             }
           }]
+        },
+
+        plugins: {
+          datalabels: {
+            align: 'top'
+          }
         }
       }
     }

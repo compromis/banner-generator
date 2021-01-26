@@ -41,6 +41,12 @@ export default {
               display: false
             }
           }]
+        },
+
+        plugins: {
+          datalabels: {
+            color: 'white'
+          }
         }
       }
     }
