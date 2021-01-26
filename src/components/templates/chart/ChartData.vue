@@ -12,6 +12,7 @@
             <th>
               <swatches
                 v-model="set.color"
+                :colors="availableColors"
                 @input="(color) => handleColorChange(setKey, color)"
                 popover-to="left"
                 swatch-size="20"
@@ -46,6 +47,7 @@
             </td>
             <td>
               <swatches
+                :colors="availableColors"
                 v-model="dataRow.values[setKey].color"
                 popover-to="left"
                 swatch-size="20"
@@ -91,6 +93,17 @@ export default {
   model: {
     prop: 'chart',
     event: 'updateChart'
+  },
+
+  data () {
+    return {
+      availableColors: [
+        '#FF6720', '#f79226', '#ffd10f', '#ef404d',
+        '#c0382b', '#55a4db', '#2980b9', '#a14a9c',
+        '#27af60', '#7fc347', '#1ca085', '#3d556e',
+        '#222f3d', '#BDC3C8'
+      ]
+    }
   },
 
   props: {
@@ -152,9 +165,9 @@ export default {
 
   methods: {
     newSet () {
-      // Default colors in order of set creation
-      const colors = ['orangered', '#2980B9', '#1CA085', '#8E43AD']
-      const color = colors[this.chartData.sets.length]
+      // Assaign colors in set order
+      const colors = ['#FF6720', '#2980b9', '#7fc347', '#a14a9c', '#ffd10f', '#1ca085']
+      const color = colors[this.chartData.sets.length] || '#BDC3C8'
       // Add new set
       this.chartData.sets.push({ label: '', color })
       // Add data rows

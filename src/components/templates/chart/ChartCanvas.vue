@@ -19,10 +19,24 @@
         :full-gradient="banner.fullGradient" />
       <div class="chart">
         <h1>{{ banner.title }}</h1>
-        <bar-chart :chart="banner.chart" v-if="banner.chartType === 'bar-vertical'" />
-        <bar-chart :chart="banner.chart" horizontal v-if="banner.chartType === 'bar-horizontal'" />
-        <line-chart :chart="banner.chart" v-if="banner.chartType === 'lines'" />
-        <chart-legend v-if="banner.chart.sets.length > 1" :sets="banner.chart.sets" :chart-type="banner.chartType" />
+
+        <bar-chart
+          v-if="banner.chartType === 'bar-vertical'"
+          :chart="banner.chart" />
+        <bar-chart
+          v-if="banner.chartType === 'bar-horizontal'"
+          :chart="banner.chart"
+          horizontal
+          :max-length="400" />
+        <line-chart
+          v-if="banner.chartType === 'lines'"
+          :chart="banner.chart" />
+
+        <chart-legend
+          v-if="banner.chart.sets.length > 1"
+          :sets="banner.chart.sets"
+          :chart-type="banner.chartType" />
+
         <div class="source" v-if="banner.source">
           Font: {{ banner.source }}
         </div>
@@ -89,6 +103,7 @@ export default {
     .source {
       color: $gray-700;
       font-size: 14px;
+      margin-top: 10px;
     }
   }
 

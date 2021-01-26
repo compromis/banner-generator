@@ -1,7 +1,7 @@
 <template>
-  <div classs="chart-legend">
+  <div class="chart-legend">
     <template v-for="(set, setKey) in sets">
-      <div class="chart-legend-item" v-if="setKey < limit" :key="set">
+      <div class="chart-legend-item" v-if="setKey < limit" :key="setKey">
         <div class="chart-legend-item-color" :style="{ backgroundColor: set.color }"></div>
         <div class="chart-legend-item-label">{{ set.label }}</div>
       </div>
@@ -43,10 +43,10 @@ export default {
 
 .chart-legend {
   display: flex;
-  flex-direction: row;
+  margin-top: 10px;
 
   &-item {
-    display: inline-flex;
+    display: flex;
     margin-right: 12px;
 
     &-color {
