@@ -1,12 +1,12 @@
 <script>
 import Chart from 'chart.js'
 import { Line, mixins } from 'vue-chartjs'
+// eslint-disable-next-line
 import ChartDataLabels from 'chartjs-plugin-datalabels'
+
 Chart.defaults.global.defaultFontFamily = "'Compromis', sans-serif"
 Chart.defaults.global.defaultFontSize = 14
 Chart.defaults.global.defaultFontColor = '#707380'
-Chart.defaults.global.tooltips.enabled = false
-Chart.defaults.global.legend.display = false
 
 export default {
   extends: Line,
@@ -25,6 +25,13 @@ export default {
       options: {
         responsive: true,
         maintainAspectRatio: false,
+        tooltips: { enabled: false },
+        layout: {
+          padding: { top: 35, left: 30, right: 30, bottom: 0 }
+        },
+        legend: {
+          display: false
+        },
         scales: {
           xAxes: [{
             gridLines: {
@@ -43,7 +50,27 @@ export default {
 
         plugins: {
           datalabels: {
-            align: 'top'
+            align: 'end',
+            color: ({ dataIndex: dataKey, datasetIndex: setKey }) => {
+              const row = this.chart.data[dataKey].values[setKey]
+              return row.highlight ? row.color : '#707380'
+            },
+            font: ({ dataIndex: dataKey, datasetIndex: setKey }) => {
+              const row = this.chart.data[dataKey].values[setKey]
+              return row.highlight ? { size: 28, weight: 'bold' } : { size: 14, weight: 'normal' }
+            },
+            display: ({ dataIndex: dataKey, datasetIndex: setKey }) => {
+              const row = this.chart.data[dataKey].values[setKey]
+              return !(this.chart.options.onlyHighlighted && !row.highlight)
+            },
+            formatter: (value) => {
+              const options = { notation: 'compact', compactDisplay: 'short' }
+              if (this.chart.options.valuesInEuros) {
+                options.style = 'currency'
+                options.currency = 'EUR'
+              }
+              return new Intl.NumberFormat('es-ES', options).format(value)
+            }
           }
         }
       }
@@ -73,15 +100,15 @@ export default {
   },
 
   mounted () {
-    this.chartData = this.computedChartData
+    this.chartData = { ...this.computedChartData, update: 0 }
     this.renderChart(this.chartData, this.options)
   },
 
   watch: {
-    computedChartData: {
+    chart: {
       deep: true,
-      handler (data) {
-        this.chartData = data
+      handler () {
+        this.chartData = { ...this.computedChartData, update: Math.random() }
       }
     }
   }

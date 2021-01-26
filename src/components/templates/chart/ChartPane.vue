@@ -134,18 +134,18 @@ export default {
         chart: {
           sets: [
             {
-              label: 'Compromís',
-              color: 'orangered'
+              label: '',
+              color: '#FF6720'
             }
           ],
           data: [
             {
               label: 'gener',
-              values: [{ number: 200, color: 'orangered', highlight: false }]
+              values: [{ number: 200, color: '#FF6720', highlight: false }]
             },
             {
               label: 'febrer',
-              values: [{ number: 100, color: 'orangered', highlight: false }]
+              values: [{ number: 100, color: '#FF6720', highlight: false }]
             }
           ],
           options: {

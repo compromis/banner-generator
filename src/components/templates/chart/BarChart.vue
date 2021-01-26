@@ -5,7 +5,7 @@
         <div class="chart-item-bars">
           <template v-for="(value, set) in data.values">
             <div
-              v-if="set < 4"
+              v-if="set < maxSets"
               :key="set"
               class="chart-item-bar"
               :style="{
@@ -31,6 +31,8 @@
 </template>
 
 <script>
+import config from './config'
+
 export default {
   props: {
     chart: {
@@ -44,6 +46,12 @@ export default {
     maxLength: {
       type: Number,
       default: 300
+    }
+  },
+
+  data () {
+    return {
+      config
     }
   },
 
@@ -64,9 +72,11 @@ export default {
   },
 
   computed: {
+    chartType () {
+      return this.horizontal ? 'bar-horizontal' : 'bar-vertical'
+    },
     truncatedData () {
-      const max = this.horizontal ? 8 : 10
-      return this.chart.data.filter((entry, i) => i < max)
+      return this.chart.data.filter((entry, i) => i < this.config.maxRows[this.chartType])
     },
     highestValue () {
       let values = []
@@ -76,6 +86,9 @@ export default {
       })
 
       return Math.max(...values)
+    },
+    maxSets () {
+      return this.config.maxSets[this.chartType]
     }
   }
 }

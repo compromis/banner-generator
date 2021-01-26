@@ -12,7 +12,7 @@
             <th>
               <swatches
                 v-model="set.color"
-                :colors="availableColors"
+                :colors="config.availableColors"
                 @input="(color) => handleColorChange(setKey, color)"
                 popover-to="left"
                 swatch-size="20"
@@ -47,7 +47,7 @@
             </td>
             <td>
               <swatches
-                :colors="availableColors"
+                :colors="config.availableColors"
                 v-model="dataRow.values[setKey].color"
                 popover-to="left"
                 swatch-size="20"
@@ -82,6 +82,7 @@
 
 <script>
 import Swatches from 'vue-swatches'
+import config from './config'
 
 export default {
   name: 'chart-data',
@@ -97,12 +98,7 @@ export default {
 
   data () {
     return {
-      availableColors: [
-        '#FF6720', '#f79226', '#ffd10f', '#ef404d',
-        '#c0382b', '#55a4db', '#2980b9', '#a14a9c',
-        '#27af60', '#7fc347', '#1ca085', '#3d556e',
-        '#222f3d', '#BDC3C8'
-      ]
+      config
     }
   },
 
@@ -129,45 +125,27 @@ export default {
     },
 
     maxSets () {
-      const max = {
-        'bar-vertical': 4,
-        'bar-horizontal': 4,
-        'lines': 6,
-        'pie': 1
-      }
-
-      return max[this.chartType]
+      return this.config.maxSets[this.chartType]
     },
 
     maxRows () {
-      const max = {
-        'bar-vertical': 10,
-        'bar-horizontal': 10,
-        'lines': 40,
-        'pie': 10
-      }
-
-      return max[this.chartType]
+      return this.config.maxRows[this.chartType]
     },
 
     rowColorDisabled () {
-      // Disabled if line charts or more than one set
-      const disabledIn = ['lines']
-      return disabledIn.includes(this.chartType) || this.chartData.sets.length > 1
+      return this.config.rowColorDisabled.in.includes(this.chartType) ||
+        (this.chartData.sets.length > 1 && !this.config.rowColorDisabled.except.includes(this.chartType))
     },
 
     setColorDisabled () {
-      // Disabled in doughnut charts
-      const disabledIn = ['doughnut']
-      return disabledIn.includes(this.chartType)
+      return this.config.setColorDisabled.in.includes(this.chartType)
     }
   },
 
   methods: {
     newSet () {
       // Assaign colors in set order
-      const colors = ['#FF6720', '#2980b9', '#7fc347', '#a14a9c', '#ffd10f', '#1ca085']
-      const color = colors[this.chartData.sets.length] || '#BDC3C8'
+      const color = this.config.colorDefaults[this.chartData.sets.length] || '#BDC3C8'
       // Add new set
       this.chartData.sets.push({ label: '', color })
       // Add data rows
@@ -304,6 +282,8 @@ export default {
 
       .hidden {
         opacity: .5;
+        pointer-events: none;
+        cursor: not-allowed;
       }
 
       .b-checkbox.checkbox:not(.button) {
@@ -337,6 +317,8 @@ export default {
 
         &.hidden {
           opacity: .5;
+          pointer-events: none;
+          cursor: not-allowed;
         }
       }
 

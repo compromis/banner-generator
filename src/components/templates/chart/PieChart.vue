@@ -1,11 +1,12 @@
 <script>
 import Chart from 'chart.js'
 import { Pie, mixins } from 'vue-chartjs'
+// eslint-disable-next-line
+import ChartDataLabels from 'chartjs-plugin-datalabels'
+
 Chart.defaults.global.defaultFontFamily = "'Compromis', sans-serif"
 Chart.defaults.global.defaultFontSize = 14
 Chart.defaults.global.defaultFontColor = '#707380'
-Chart.defaults.global.tooltips.enabled = false
-Chart.defaults.global.legend.display = true
 
 export default {
   extends: Pie,
@@ -22,8 +23,12 @@ export default {
   data () {
     return {
       options: {
+        defaultFontFamily: 'Compromis, sans-serif',
+        defaultFontSize: 14,
+        defaultFontColor: '#707380',
         responsive: true,
         maintainAspectRatio: false,
+        tooltips: { enabled: false },
         scales: {
           xAxes: [{
             gridLines: {
@@ -45,7 +50,23 @@ export default {
 
         plugins: {
           datalabels: {
-            color: 'white'
+            color: 'white',
+            font: ({ dataIndex: dataKey, datasetIndex: setKey }) => {
+              const row = this.chart.data[dataKey].values[setKey]
+              return row.highlight ? { size: 28, weight: 'bold' } : { size: 14, weight: 'normal' }
+            },
+            display: ({ dataIndex: dataKey, datasetIndex: setKey }) => {
+              const row = this.chart.data[dataKey].values[setKey]
+              return !(this.chart.options.onlyHighlighted && !row.highlight)
+            },
+            formatter: (value) => {
+              const options = { notation: 'compact', compactDisplay: 'short' }
+              if (this.chart.options.valuesInEuros) {
+                options.style = 'currency'
+                options.currency = 'EUR'
+              }
+              return new Intl.NumberFormat('es-ES', options).format(value)
+            }
           }
         }
       }
@@ -55,17 +76,14 @@ export default {
   computed: {
     computedChartData () {
       const labels = this.chart.data.map(row => row.label)
-      const datasets = this.chart.sets.map((set, setKey) => {
-        const setdata = this.chart.data.map(row => row.values[setKey].number)
-        const color = this.chart.data.map(row => row.values[setKey].color)
-
-        return {
-          label: set.label,
-          backgroundColor: color,
-          borderWidth: 5,
-          data: setdata
-        }
-      })
+      const color = this.chart.data.map(row => row.values[0].color)
+      const setdata = this.chart.data.map(row => row.values[0].number)
+      const datasets = [{
+        label: this.chart.sets[0].label,
+        backgroundColor: color,
+        borderWidth: 5,
+        data: setdata
+      }]
 
       return {
         labels,
@@ -75,15 +93,15 @@ export default {
   },
 
   mounted () {
-    this.chartData = this.computedChartData
+    this.chartData = { ...this.computedChartData, update: 0 }
     this.renderChart(this.chartData, this.options)
   },
 
   watch: {
-    computedChartData: {
+    chart: {
       deep: true,
-      handler (data) {
-        this.chartData = data
+      handler () {
+        this.chartData = { ...this.computedChartData, update: Math.random() }
       }
     }
   }

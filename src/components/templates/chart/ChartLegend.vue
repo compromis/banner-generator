@@ -10,6 +10,8 @@
 </template>
 
 <script>
+import config from './config'
+
 export default {
   props: {
     sets: {
@@ -25,14 +27,7 @@ export default {
 
   computed: {
     limit () {
-      const limits = {
-        'bar-vertical': 4,
-        'bar-horizontal': 4,
-        'lines': 8,
-        'doughnut': 1
-      }
-
-      return limits[this.chartType]
+      return config.maxSets[this.chartType]
     }
   }
 }
@@ -44,10 +39,11 @@ export default {
 .chart-legend {
   display: flex;
   margin-top: 10px;
+  justify-content: center;
 
   &-item {
     display: flex;
-    margin-right: 12px;
+    margin-right: 16px;
 
     &-color {
       border-radius: 5px;
@@ -57,7 +53,7 @@ export default {
     }
 
     &-label {
-      margin-left: 10px;
+      margin-left: 6px;
     }
   }
 }
