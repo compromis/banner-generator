@@ -22,6 +22,7 @@
         <bar-chart :chart="banner.chart" v-if="banner.chartType === 'bar-vertical'" />
         <bar-chart :chart="banner.chart" horizontal v-if="banner.chartType === 'bar-horizontal'" />
         <line-chart :chart="banner.chart" v-if="banner.chartType === 'lines'" />
+        <pie-chart :chart="banner.chart" v-if="banner.chartType === 'pie'" />
         <chart-legend v-if="banner.chart.sets.length > 1" :sets="banner.chart.sets" :chart-type="banner.chartType" />
         <div class="source" v-if="banner.source">
           Font: {{ banner.source }}
@@ -46,6 +47,7 @@ import BannerFrame from '@/components/canvas/BannerFrame'
 import EmojisOnCanvas from '@/components/canvas/EmojisOnCanvas'
 import LineChart from './LineChart'
 import BarChart from './BarChart'
+import PieChart from './PieChart'
 import ChartLegend from './ChartLegend'
 
 export default {
@@ -59,7 +61,8 @@ export default {
     BannerFrame,
     BarChart,
     LineChart,
-    ChartLegend
+    ChartLegend,
+    PieChart
   }
 }
 </script>

@@ -18,6 +18,7 @@
         <option value="bar-vertical">Barres verticals</option>
         <option value="bar-horizontal">Barres horitzontals</option>
         <option value="lines">Línies</option>
+        <option value="pie">Pie</option>
     </c-select>
 
     <!-- Chart data input -->

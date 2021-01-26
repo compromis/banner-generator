@@ -50,6 +50,7 @@ export default {
     margin-right: 12px;
 
     &-color {
+      border-radius: 5px;
       width: 30px;
       height: 20px;
       background-color: $gray-700;

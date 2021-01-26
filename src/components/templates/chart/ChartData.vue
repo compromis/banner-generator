@@ -89,7 +89,7 @@ export default {
         'bar-vertical': 4,
         'bar-horizontal': 4,
         'lines': 6,
-        'doughnut': 1
+        'pie': 1
       }
 
       return max[this.chartType]
@@ -100,7 +100,7 @@ export default {
         'bar-vertical': 10,
         'bar-horizontal': 10,
         'lines': 40,
-        'doughnut': 10
+        'pie': 10
       }
 
       return max[this.chartType]
