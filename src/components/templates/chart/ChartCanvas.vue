@@ -86,6 +86,7 @@ export default {
 
     h1 {
       font-size: 32px;
+      line-height: 1.1;
     }
 
     .source {

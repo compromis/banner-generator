@@ -24,7 +24,20 @@
     <!-- Chart data input -->
     <chart-data v-model="properties.chart" :chart-type="properties.chartType" />
 
-    <!-- Title -->
+    <!-- Chart options -->
+    <c-field>
+      <b-switch v-model="properties.chart.options.onlyHighlighted">
+          Mostrar només valors destacats
+      </b-switch>
+    </c-field>
+
+    <c-field class="adjacent">
+      <b-switch v-model="properties.chart.options.valuesInEuros">
+          Valors en euros
+      </b-switch>
+    </c-field>
+
+    <!-- Source -->
     <c-input-text
       label="Font"
       name="source"
@@ -134,7 +147,11 @@ export default {
               label: 'febrer',
               values: [{ number: 100, color: 'orangered', highlight: false }]
             }
-          ]
+          ],
+          options: {
+            onlyHighlighted: false,
+            valuesInEuros: false
+          }
         },
         color: 'orange',
         fullGradient: false

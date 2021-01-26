@@ -14,7 +14,13 @@
                 backgroundColor: value.color
               }"
             >
-              <div :style="{color: value.highlight ? value.color : null}" :class="{'chart-item-number' : true, 'chart-item-number-starred' : value.highlight}">{{ value.number }}</div>
+              <div
+                v-if="!chart.options.onlyHighlighted || value.highlight"
+                :style="{ color: value.highlight ? value.color : null }"
+                :class="{'chart-item-number' : true, 'chart-item-number-starred' : value.highlight}"
+              >
+                {{ formatNumber(value.number) }}
+              </div>
             </div>
           </template>
         </div>
@@ -45,6 +51,15 @@ export default {
     calcLength (value) {
       const length = value * this.maxLength / this.highestValue
       return length + 'px'
+    },
+
+    formatNumber (number) {
+      const options = { notation: 'compact', compactDisplay: 'short' }
+      if (this.chart.options.valuesInEuros) {
+        options.style = 'currency'
+        options.currency = 'EUR'
+      }
+      return new Intl.NumberFormat('es-ES', options).format(number)
     }
   },
 
@@ -76,6 +91,7 @@ export default {
   align-items: end;
   justify-items: center;
   gap: 18px;
+  margin-top: 38px;
 }
 
 .chart-item {
@@ -116,13 +132,12 @@ export default {
   &-number {
     position: absolute;
     font-size: 14px;
-    top: -20px;
+    top: -10px;
     left: 50%;
-    transform: translate(-50%, 0);
+    transform: translate(-50%, -100%);
     line-height: 1;
 
     &-starred {
-      top: -35px;
       font-weight: bold;
       font-size: 28px;
       background: rgba($white, .75);
@@ -140,13 +155,15 @@ export default {
 .chart-horizontal {
   grid-auto-flow: row;
   align-items: start;
+  margin-top: 10px;
+  margin-right: 60px;
 
   .chart-item {
     flex-direction: row-reverse;
 
     &-label {
       text-align: left;
-      width: 130px;
+      width: 100px;
       margin-top: 0;
       margin-right: 8px;
       height: auto;
@@ -170,13 +187,10 @@ export default {
 
     &-number {
       left: unset;
-      right: -40px;
+      right: -10px;
       top: 50%;
-      transform: translate(0, -50%);
-
-      &-starred {
-        right: -50px;
-      }
+      transform: translate(100%, -50%);
+      text-align: left;
     }
   }
 }
