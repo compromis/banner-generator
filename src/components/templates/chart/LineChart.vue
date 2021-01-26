@@ -5,6 +5,7 @@ Chart.defaults.global.defaultFontFamily = "'Compromis', sans-serif"
 Chart.defaults.global.defaultFontSize = 14
 Chart.defaults.global.defaultFontColor = '#707380'
 Chart.defaults.global.tooltips.enabled = false
+Chart.defaults.global.legend.display = false
 
 export default {
   extends: Line,

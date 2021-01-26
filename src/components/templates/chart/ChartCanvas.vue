@@ -22,6 +22,7 @@
         <bar-chart :chart="banner.chart" v-if="banner.chartType === 'bar-vertical'" />
         <bar-chart :chart="banner.chart" horizontal v-if="banner.chartType === 'bar-horizontal'" />
         <line-chart :chart="banner.chart" v-if="banner.chartType === 'lines'" />
+        <chart-legend :sets="banner.chart.sets" />
         <div class="source" v-if="banner.source">
           Font: {{ banner.source }}
         </div>
@@ -45,6 +46,7 @@ import BannerFrame from '@/components/canvas/BannerFrame'
 import EmojisOnCanvas from '@/components/canvas/EmojisOnCanvas'
 import LineChart from './LineChart'
 import BarChart from './BarChart'
+import ChartLegend from './ChartLegend'
 
 export default {
   name: 'chart-canvas',
@@ -56,7 +58,8 @@ export default {
     BannerPicture,
     BannerFrame,
     BarChart,
-    LineChart
+    LineChart,
+    ChartLegend
   }
 }
 </script>

@@ -90,7 +90,7 @@ export default {
     margin-top: 8px;
     flex-shrink: 0;
     flex-grow: 0;
-    height: 50px;
+    height: 20px;
     text-align: center;
     line-height: 1.2;
     overflow: hidden;
