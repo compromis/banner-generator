@@ -9,22 +9,53 @@
           <tr>
             <th>Etiqueta</th>
             <th width="80">Valor</th>
-            <th><swatches v-model="set.color" @input="(color) => handleColorChange(setKey, color)" popover-to="left" swatch-size="20" :trigger-style="{ height: '1.15rem', width: '1.15rem' }"></swatches></th>
+            <th>
+              <swatches
+                v-model="set.color"
+                @input="(color) => handleColorChange(setKey, color)"
+                popover-to="left"
+                swatch-size="20"
+                :trigger-style="{ height: '1.15rem', width: '1.15rem' }"
+                :disabled="setColorDisabled">
+              </swatches>
+            </th>
             <th class="centered-col"><font-awesome-icon :icon="['far', 'highlighter']" /></th>
             <th></th>
           </tr>
-          <tr v-for="(dataRow, dataKey) in chartData.data" :key="setKey + dataKey" :class="{ hidden: dataKey >= maxRows }">
+          <tr
+            v-for="(dataRow, dataKey) in chartData.data"
+            :key="setKey + dataKey"
+            :class="{ hidden: dataKey >= maxRows }"
+          >
             <td class="has-input">
-              <input type="text" v-model="dataRow.label" maxlength="24" :ref="`label${setKey}${dataKey}`" />
+              <input
+                type="text"
+                v-model="dataRow.label"
+                maxlength="24"
+                :ref="`label${setKey}${dataKey}`"
+                @keydown="handleValueKeyDown($event, 'label', setKey, dataKey)"
+              />
             </td>
             <td class="has-input">
-              <input type="number" v-model="dataRow.values[setKey].number" />
+              <input
+                type="number"
+                v-model="dataRow.values[setKey].number"
+                :ref="`value${setKey}${dataKey}`"
+                @keydown="handleValueKeyDown($event, 'value', setKey, dataKey)"
+              />
             </td>
             <td>
-              <swatches v-model="dataRow.values[setKey].color" popover-to="left" swatch-size="20" :trigger-style="{ height: '1.15rem', width: '1.15rem' }" :disabled="chartType === 'lines'"></swatches>
+              <swatches
+                v-model="dataRow.values[setKey].color"
+                popover-to="left"
+                swatch-size="20"
+                :trigger-style="{ height: '1.15rem', width: '1.15rem' }"
+                :disabled="rowColorDisabled">
+              </swatches>
             </td>
             <td>
-              <b-checkbox v-model="dataRow.values[setKey].highlight"
+              <b-checkbox
+                v-model="dataRow.values[setKey].highlight"
                 :true-value="true"
                 :false-value="false">
               </b-checkbox>
@@ -104,29 +135,50 @@ export default {
       }
 
       return max[this.chartType]
+    },
+
+    rowColorDisabled () {
+      // Disabled if line charts or more than one set
+      const disabledIn = ['lines']
+      return disabledIn.includes(this.chartType) || this.chartData.sets.length > 1
+    },
+
+    setColorDisabled () {
+      // Disabled in doughnut charts
+      const disabledIn = ['doughnut']
+      return disabledIn.includes(this.chartType)
     }
   },
 
   methods: {
     newSet () {
+      // Default colors in order of set creation
       const colors = ['orangered', '#2980B9', '#1CA085', '#8E43AD']
       const color = colors[this.chartData.sets.length]
+      // Add new set
       this.chartData.sets.push({ label: '', color })
+      // Add data rows
       this.chartData.data.forEach(row => {
+        // Reset first set's colors in case they've changed
+        row.values[0].color = this.chartData.sets[0].color
+        // Add new data row for set
         row.values.push({ number: 0, color, highlight: false })
       })
+      // Focus new set field
       this.$nextTick(() => {
         this.$refs[`setLabel${this.chartData.sets.length - 1}`][0].focus()
       })
     },
 
     newRow (setKey) {
+      // Add new row to each set
       let values = []
       this.chartData.sets.forEach(set => {
         values.push({ number: 0, color: set.color, highlight: false })
       })
-
       this.chartData.data.push({ label: '', values })
+
+      // Focus new row field
       this.$nextTick(() => {
         this.$refs[`label${setKey}${this.chartData.data.length - 1}`][0].focus()
       })
@@ -144,10 +196,31 @@ export default {
     },
 
     handleColorChange (setKey, color) {
-      // Change color
+      // Change color of all rows
       this.chartData.data.forEach(row => {
         row.values[setKey].color = color
       })
+    },
+
+    handleValueKeyDown (e, col, setKey, dataKey) {
+      // Focus adjacent fields o create new row if enter
+      switch (e.key) {
+        case 'ArrowDown':
+          const nextDataKey = dataKey + 1
+          if (col === 'label' && this.$refs[col + setKey + nextDataKey]) {
+            this.$refs[col + setKey + nextDataKey][0].focus()
+          }
+          break
+        case 'ArrowUp':
+          const prevDataKey = dataKey + 1
+          if (col === 'label' && this.$refs[col + setKey + prevDataKey]) {
+            this.$refs[col + setKey + prevDataKey][0].focus()
+          }
+          break
+        case 'Enter':
+          this.newRow(setKey)
+          break
+      }
     }
   }
 }
