@@ -79,6 +79,7 @@ export default {
     padding: 24px 24px;
     max-height: 515px;
     overflow: hidden;
+    color: $gray-700;
 
     h1 {
       font-size: 32px;
@@ -108,7 +109,7 @@ export default {
   .banner-background-black {
     .chart {
       background: $gray-900;
-      color: $white;
+      color: $gray-100;
     }
   }
 

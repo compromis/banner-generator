@@ -9,7 +9,7 @@
               :key="set"
               class="chart-item-bar"
               :style="{
-                width: horizontal ? calcLength(value.number) : 'reset',
+                width: horizontal ? calcLength(value.number) : null,
                 height: horizontal ? 'auto' : calcLength(value.number),
                 backgroundColor: value.color
               }"
@@ -85,8 +85,7 @@ export default {
   width: 100%;
 
   &-label {
-    color: $gray-700;
-    font-size: 16px;
+    font-size: 14px;
     margin-top: 8px;
     flex-shrink: 0;
     flex-grow: 0;
@@ -116,16 +115,24 @@ export default {
 
   &-number {
     position: absolute;
-    font-size: 16px;
-    color: $gray-700;
-    top: -30px;
+    font-size: 14px;
+    top: -20px;
     left: 50%;
     transform: translate(-50%, 0);
+    line-height: 1;
 
     &-starred {
-      top: -40px;
-      font-size: 24px;
-      color: red;
+      top: -35px;
+      font-weight: bold;
+      font-size: 28px;
+      background: rgba($white, .75);
+      padding: 1px 3px;
+      z-index: 100;
+      border-radius: 3px;
+
+      @at-root .banner-background-black .chart-item-number-starred {
+        background: rgba($gray-900, .75);
+      }
     }
   }
 }
@@ -137,40 +144,40 @@ export default {
   .chart-item {
     flex-direction: row-reverse;
 
-  &-label {
-    text-align: left;
-    width: 130px;
-    margin-top: 0;
-    margin-right: 8px;
-    height: auto;
-  }
+    &-label {
+      text-align: left;
+      width: 130px;
+      margin-top: 0;
+      margin-right: 8px;
+      height: auto;
+    }
 
-  &-bars {
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    width: 100%;
-    flex-direction: column;
-  }
+    &-bars {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      width: 100%;
+      flex-direction: column;
+    }
 
-  &-bar {
-    margin: .5% 0;
-    max-width: 100%;
-    min-height: 25px;
-    border-top-left-radius: 0;
-    border-bottom-right-radius: 10px;
-  }
+    &-bar {
+      margin: .5% 0;
+      max-width: 100%;
+      min-height: 25px;
+      border-top-left-radius: 0;
+      border-bottom-right-radius: 10px;
+    }
 
-  &-number {
-    left: unset;
-    right: -40px;
-    top: 50%;
-    transform: translate(0, -50%);
+    &-number {
+      left: unset;
+      right: -40px;
+      top: 50%;
+      transform: translate(0, -50%);
 
-    &-starred {
-      right: -50px;
+      &-starred {
+        right: -50px;
+      }
     }
   }
-}
 }
 </style>
