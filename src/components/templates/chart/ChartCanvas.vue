@@ -22,7 +22,7 @@
         <bar-chart :chart="banner.chart" v-if="banner.chartType === 'bar-vertical'" />
         <bar-chart :chart="banner.chart" horizontal v-if="banner.chartType === 'bar-horizontal'" />
         <line-chart :chart="banner.chart" v-if="banner.chartType === 'lines'" />
-        <chart-legend :sets="banner.chart.sets" />
+        <chart-legend v-if="banner.chart.sets.length > 1" :sets="banner.chart.sets" :chart-type="banner.chartType" />
         <div class="source" v-if="banner.source">
           Font: {{ banner.source }}
         </div>

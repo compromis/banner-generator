@@ -1,9 +1,11 @@
 <template>
   <div classs="chart-legend">
-    <div class="chart-legend-item" v-for="set in sets" :key="set">
-      <div class="chart-legend-item-color" :style="{backgroundColor: set.color}"></div>
-      <div class="chart-legend-item-label">{{ set.label }}</div>
-    </div>
+    <template v-for="(set, setKey) in sets">
+      <div class="chart-legend-item" v-if="setKey < limit" :key="set">
+        <div class="chart-legend-item-color" :style="{ backgroundColor: set.color }"></div>
+        <div class="chart-legend-item-label">{{ set.label }}</div>
+      </div>
+    </template>
   </div>
 </template>
 
@@ -12,7 +14,25 @@ export default {
   props: {
     sets: {
       type: Array,
-      default: []
+      default: () => []
+    },
+
+    chartType: {
+      type: String,
+      default: 'bar-vertical'
+    }
+  },
+
+  computed: {
+    limit () {
+      const limits = {
+        'bar-vertical': 4,
+        'bar-horizontal': 4,
+        'lines': 8,
+        'doughnut': 1
+      }
+
+      return limits[this.chartType]
     }
   }
 }
@@ -20,6 +40,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "../../../sass/variables";
+
 .chart-legend {
   display: flex;
   flex-direction: row;
@@ -31,12 +52,11 @@ export default {
     &-color {
       width: 30px;
       height: 20px;
-      background-color: red;
+      background-color: $gray-700;
     }
 
     &-label {
       margin-left: 10px;
-      color: $gray-700
     }
   }
 }
