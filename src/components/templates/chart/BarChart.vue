@@ -26,6 +26,7 @@
         </div>
         <div class="chart-item-label">{{ data.label }}</div>
       </div>
+      <hr class="chart-line">
     </div>
   </div>
 </template>
@@ -92,6 +93,7 @@ export default {
 @import "../../../sass/variables";
 .chart {
   display: grid;
+  position: relative;
   grid-auto-columns: 1fr;
   grid-template-rows: 1fr;
   grid-auto-flow: column;
@@ -99,6 +101,26 @@ export default {
   justify-items: center;
   gap: 18px;
   margin-top: 38px;
+
+  &-line {
+    position: absolute;
+    bottom: 7px;
+    width: 100%;
+    height: 1px;
+    background-color: $gray-200;
+  }
+
+  &-horizontal {
+    .chart-line{
+      width: 1px;
+      height: calc(100% + 4px);
+      background-color: #e5e7ed;
+      top: -4px;
+      bottom: 0;
+      left: 107px;
+      margin: 0;
+    }
+  }
 }
 
 .chart-item {

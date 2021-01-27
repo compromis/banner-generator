@@ -38,12 +38,15 @@ export default {
 
 .chart-legend {
   display: flex;
+  flex-wrap: wrap;
   margin-top: 10px;
-  justify-content: center;
+  justify-content: flex-start;
+  font-size: 12px;
 
   &-item {
     display: flex;
     margin-right: 16px;
+    margin-bottom: 4px;
 
     &-color {
       border-radius: 5px;

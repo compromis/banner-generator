@@ -11,14 +11,16 @@ export default {
     'bar-horizontal': 4,
     'lines': 6,
     'pie': 1,
-    'doughnut': 1
+    'doughnut': 1,
+    'farto': 1
   },
   maxRows: {
     'bar-vertical': 10,
     'bar-horizontal': 10,
     'lines': 40,
     'pie': 10,
-    'doughnut': 10
+    'doughnut': 10,
+    'farto': 8
   },
   rowColorDisabled: {
     in: ['lines'],

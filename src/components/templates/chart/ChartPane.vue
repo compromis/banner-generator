@@ -10,7 +10,7 @@
       type="textarea"
       placeholder="Baixa l'atur..."
       v-model="properties.title"
-      :maxlength="160"
+      :maxlength="120"
       :message="setFieldMessage('title')" />
 
     <!-- Chart type -->
@@ -18,8 +18,9 @@
         <option value="bar-vertical">Barres verticals</option>
         <option value="bar-horizontal">Barres horitzontals</option>
         <option value="lines">Línies</option>
-        <option value="pie">Pie</option>
-        <option value="doughnut">Doughnut</option>
+        <option value="doughnut">Semicercle</option>
+        <option value="pie">Pastís</option>
+        <option value="farto">Fartó</option>
     </c-select>
 
     <!-- Chart data input -->
@@ -46,6 +47,16 @@
       placeholder="INE"
       v-model="properties.source"
       :maxlength="40" />
+
+      <!-- Descripció -->
+      <c-input-text
+      label="Descripció"
+      name="description"
+      type="textarea"
+      placeholder="Reduïm les xifres un 25% des d'abril..."
+      v-model="properties.description"
+      :maxlength="260"
+      :message="setFieldMessage('description')" />
 
     <!-- Emoji picker -->
     <emoji-picker v-model="properties.emojis" />
@@ -129,6 +140,7 @@ export default {
     return {
       properties: {
         title: '',
+        description: '',
         source: '',
         emojis: [],
         chartType: 'bar-vertical',

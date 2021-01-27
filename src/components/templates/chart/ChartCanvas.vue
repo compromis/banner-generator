@@ -18,11 +18,12 @@
         edge
         :full-gradient="banner.fullGradient" />
       <div class="chart">
-        <h1>{{ banner.title }}</h1>
+        <h1 :style="{fontSize: fontSize(banner.title, 40, 28, 120)}">{{ banner.title }}</h1>
 
         <bar-chart
           v-if="banner.chartType === 'bar-vertical'"
-          :chart="banner.chart" />
+          :chart="banner.chart"
+          :max-length="banner.description ? 200 : 310" />
         <bar-chart
           v-if="banner.chartType === 'bar-horizontal'"
           :chart="banner.chart"
@@ -40,15 +41,20 @@
           v-if="banner.chartType === 'doughnut'"
           :chart="banner.chart"
           :mode="banner.mode" />
+        <farto-chart
+          v-if="banner.chartType === 'farto'"
+          :chart="banner.chart" />
 
-        <chart-legend
-          v-if="banner.chart.sets.length > 1"
-          :sets="banner.chart.sets"
-          :chart-type="banner.chartType" />
-
-        <div class="source" v-if="banner.source">
-          Font: {{ banner.source }}
+        <div class="chart-info">
+          <chart-legend
+            v-if="banner.chart.sets.length > 1"
+            :sets="banner.chart.sets"
+            :chart-type="banner.chartType" />
+          <div class="source" v-if="banner.source">
+            Font: {{ banner.source }}
+          </div>
         </div>
+        <div class="description" v-if="banner.description">{{ banner.description }}</div>
       </div>
     </div>
     <emojis-on-canvas v-model="banner.emojis" />
@@ -71,6 +77,7 @@ import LineChart from './LineChart'
 import BarChart from './BarChart'
 import PieChart from './PieChart'
 import DoughnutChart from './DoughnutChart'
+import FartoChart from './FartoChart'
 import ChartLegend from './ChartLegend'
 
 export default {
@@ -86,7 +93,8 @@ export default {
     LineChart,
     PieChart,
     DoughnutChart,
-    ChartLegend
+    ChartLegend,
+    FartoChart
   }
 }
 </script>
@@ -109,14 +117,31 @@ export default {
     color: $gray-700;
 
     h1 {
+      color: $gray-900;
       font-size: 32px;
       line-height: 1.1;
     }
 
+    &-info {
+      display: grid;
+      grid-template-columns: 70% 30%;
+      align-items: end;
+    }
+
     .source {
       color: $gray-700;
-      font-size: 14px;
-      margin-top: 10px;
+      font-size: 12px;
+      text-align: right;
+      align-self: end;
+      height: 20px;
+      margin-bottom: 4px;
+    }
+
+    .description {
+      font-size: 16px;
+      margin: 8px -24px -24px;
+      padding: 10px 24px;
+      background: $gray-100;
     }
   }
 

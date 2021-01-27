@@ -2,7 +2,7 @@
   <div class="chart-data">
     <ul class="sets">
       <li v-for="(set, setKey) in chartData.sets" :key="setKey" :class="{ hidden: setKey >= maxSets }">
-        <input type="text" v-model="set.label" class="set-name" placeholder="Nom del set" :ref="`setLabel${setKey}`" />
+        <input type="text" maxlength="20" v-model="set.label" class="set-name" placeholder="Nom del set" :ref="`setLabel${setKey}`" />
         <button @click="deleteSet(setKey)" class="remove set-remove">-</button>
 
         <table class="set-data">
