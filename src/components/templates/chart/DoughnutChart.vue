@@ -1,6 +1,6 @@
 <script>
 import Chart from 'chart.js'
-import { Line, mixins } from 'vue-chartjs'
+import { Doughnut, mixins } from 'vue-chartjs'
 import ChartMixin from './chart-mixin'
 // eslint-disable-next-line
 import ChartDataLabels from 'chartjs-plugin-datalabels'
@@ -10,7 +10,7 @@ Chart.defaults.global.defaultFontSize = 14
 Chart.defaults.global.defaultFontColor = '#707380'
 
 export default {
-  extends: Line,
+  extends: Doughnut,
 
   mixins: [mixins.reactiveData, ChartMixin],
 
@@ -28,18 +28,21 @@ export default {
   data () {
     return {
       options: {
+        circumference: Math.PI,
+        rotation: -Math.PI,
         responsive: true,
         maintainAspectRatio: false,
         tooltips: { enabled: false },
+        legend: { display: false },
         layout: {
-          padding: { top: 35, left: 30, right: 30, bottom: 0 }
-        },
-        legend: {
-          display: false
+          padding: { top: 35, left: 0, right: 0, bottom: 0 }
         },
         scales: {
           xAxes: [{
             gridLines: {
+              display: false
+            },
+            ticks: {
               display: false
             }
           }],
@@ -55,12 +58,7 @@ export default {
 
         plugins: {
           datalabels: {
-            align: 'top',
-            anchor: '',
-            color: ({ dataIndex: dataKey, datasetIndex: setKey }) => {
-              const row = this.chart.data[dataKey].values[setKey]
-              return row.highlight ? row.color : this.mode === 'black' ? 'white' : '#707380'
-            },
+            color: 'white',
             font: ({ dataIndex: dataKey, datasetIndex: setKey }) => {
               const row = this.chart.data[dataKey].values[setKey]
               return row.highlight ? { size: 28, weight: 'bold' } : { size: 14, weight: 'normal' }
@@ -81,17 +79,15 @@ export default {
   computed: {
     computedChartData () {
       const labels = this.chart.data.map(row => row.label)
-      const datasets = this.chart.sets.map((set, setKey) => {
-        const setdata = this.chart.data.map(row => row.values[setKey].number)
-
-        return {
-          label: set.label,
-          borderColor: set.color,
-          backgroundColor: 'transparent',
-          borderWidth: 5,
-          data: setdata
-        }
-      })
+      const color = this.chart.data.map(row => row.values[0].color)
+      const setdata = this.chart.data.map(row => row.values[0].number)
+      const datasets = [{
+        label: this.chart.sets[0].label,
+        backgroundColor: color,
+        borderColor: this.mode === 'black' ? '#353949' : '#FFF',
+        borderWidth: 5,
+        data: setdata
+      }]
 
       return {
         labels,
@@ -101,7 +97,6 @@ export default {
   },
 
   mounted () {
-    Chart.defaults.global.defaultFontColor = (this.mode === 'black') ? '#FFFFFF' : '#707380'
     this.chartData = { ...this.computedChartData, update: 0 }
     this.renderChart(this.chartData, this.options)
   },
@@ -112,11 +107,6 @@ export default {
       handler () {
         this.chartData = { ...this.computedChartData, update: Math.random() }
       }
-    },
-
-    mode (mode) {
-      Chart.defaults.global.defaultFontColor = (mode === 'black') ? '#FFFFFF' : '#707380'
-      this.renderChart(this.chartData, this.options)
     }
   }
 }

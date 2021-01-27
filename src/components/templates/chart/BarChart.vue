@@ -31,9 +31,12 @@
 </template>
 
 <script>
+import ChartMixin from './chart-mixin'
 import config from './config'
 
 export default {
+  mixins: [ChartMixin],
+
   props: {
     chart: {
       type: Object,
@@ -59,15 +62,6 @@ export default {
     calcLength (value) {
       const length = value * this.maxLength / this.highestValue
       return length + 'px'
-    },
-
-    formatNumber (number) {
-      const options = { notation: 'compact', compactDisplay: 'short' }
-      if (this.chart.options.valuesInEuros) {
-        options.style = 'currency'
-        options.currency = 'EUR'
-      }
-      return new Intl.NumberFormat('es-ES', options).format(number)
     }
   },
 

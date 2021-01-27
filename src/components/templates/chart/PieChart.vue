@@ -1,6 +1,7 @@
 <script>
 import Chart from 'chart.js'
 import { Pie, mixins } from 'vue-chartjs'
+import ChartMixin from './chart-mixin'
 // eslint-disable-next-line
 import ChartDataLabels from 'chartjs-plugin-datalabels'
 
@@ -11,24 +12,29 @@ Chart.defaults.global.defaultFontColor = '#707380'
 export default {
   extends: Pie,
 
-  mixins: [mixins.reactiveData],
+  mixins: [mixins.reactiveData, ChartMixin],
 
   props: {
     chart: {
       type: Object,
       required: true
+    },
+    mode: {
+      type: String,
+      default: 'white'
     }
   },
 
   data () {
     return {
       options: {
-        defaultFontFamily: 'Compromis, sans-serif',
-        defaultFontSize: 14,
-        defaultFontColor: '#707380',
         responsive: true,
         maintainAspectRatio: false,
         tooltips: { enabled: false },
+        legend: { display: false },
+        layout: {
+          padding: { top: 35, left: 0, right: 0, bottom: 0 }
+        },
         scales: {
           xAxes: [{
             gridLines: {
@@ -60,12 +66,7 @@ export default {
               return !(this.chart.options.onlyHighlighted && !row.highlight)
             },
             formatter: (value) => {
-              const options = { notation: 'compact', compactDisplay: 'short' }
-              if (this.chart.options.valuesInEuros) {
-                options.style = 'currency'
-                options.currency = 'EUR'
-              }
-              return new Intl.NumberFormat('es-ES', options).format(value)
+              return this.formatNumber(value)
             }
           }
         }
@@ -81,6 +82,7 @@ export default {
       const datasets = [{
         label: this.chart.sets[0].label,
         backgroundColor: color,
+        borderColor: this.mode === 'black' ? '#353949' : '#FFF',
         borderWidth: 5,
         data: setdata
       }]

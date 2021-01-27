@@ -203,7 +203,7 @@ export default {
           }
           break
         case 'ArrowUp':
-          const prevDataKey = dataKey + 1
+          const prevDataKey = dataKey - 1
           if (col === 'label' && this.$refs[col + setKey + prevDataKey]) {
             this.$refs[col + setKey + prevDataKey][0].focus()
           }

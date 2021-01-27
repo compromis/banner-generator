@@ -30,10 +30,16 @@
           :max-length="400" />
         <line-chart
           v-if="banner.chartType === 'lines'"
-          :chart="banner.chart" />
+          :chart="banner.chart"
+          :mode="banner.mode" />
         <pie-chart
           v-if="banner.chartType === 'pie'"
-          :chart="banner.chart" />
+          :chart="banner.chart"
+          :mode="banner.mode" />
+        <doughnut-chart
+          v-if="banner.chartType === 'doughnut'"
+          :chart="banner.chart"
+          :mode="banner.mode" />
 
         <chart-legend
           v-if="banner.chart.sets.length > 1"
@@ -64,6 +70,7 @@ import EmojisOnCanvas from '@/components/canvas/EmojisOnCanvas'
 import LineChart from './LineChart'
 import BarChart from './BarChart'
 import PieChart from './PieChart'
+import DoughnutChart from './DoughnutChart'
 import ChartLegend from './ChartLegend'
 
 export default {
@@ -77,8 +84,9 @@ export default {
     BannerFrame,
     BarChart,
     LineChart,
-    ChartLegend,
-    PieChart
+    PieChart,
+    DoughnutChart,
+    ChartLegend
   }
 }
 </script>

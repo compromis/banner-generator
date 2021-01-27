@@ -19,6 +19,7 @@
         <option value="bar-horizontal">Barres horitzontals</option>
         <option value="lines">Línies</option>
         <option value="pie">Pie</option>
+        <option value="doughnut">Doughnut</option>
     </c-select>
 
     <!-- Chart data input -->
@@ -31,11 +32,11 @@
       </b-switch>
     </c-field>
 
-    <c-field class="adjacent">
-      <b-switch v-model="properties.chart.options.valuesInEuros">
-          Valors en euros
-      </b-switch>
-    </c-field>
+    <c-select name="chartType" label="Valors" v-model="properties.chart.options.valuesIn" expanded>
+        <option value="numbers">Números</option>
+        <option value="euros">Euros (€)</option>
+        <option value="percentage">Percentatge (%)</option>
+    </c-select>
 
     <!-- Source -->
     <c-input-text
@@ -150,12 +151,22 @@ export default {
           ],
           options: {
             onlyHighlighted: false,
-            valuesInEuros: false
+            valuesIn: 'numbers'
           }
         },
         color: 'orange',
         fullGradient: false
       }
+    }
+  },
+
+  watch: {
+    // the shame
+    'properties.mode' () {
+      this.properties.chart.data[0].values[0].number++
+      this.$nextTick(() => {
+        this.properties.chart.data[0].values[0].number--
+      })
     }
   },
 
