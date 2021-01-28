@@ -171,6 +171,7 @@ export default {
 
   methods: {
     validate () {
+      this.allCapsDisallowed('title', 'description')
       if (this.properties.theme !== 'blobless') {
         this.pictureRequired()
       }
