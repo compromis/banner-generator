@@ -5,7 +5,6 @@
       'banner-canvas',
       'aspect-' + aspect,
       'theme-' + banner.theme,
-      'disposition-' + banner.disposition,
       'banner-background-' + banner.mode,
       { 'has-description': banner.description.length }
     ]"
@@ -143,6 +142,10 @@ export default {
       padding: 10px 24px;
       background: $gray-100;
     }
+  }
+
+  ::v-deep canvas {
+    height: 400px !important;
   }
 
   .has-description {
