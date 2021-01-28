@@ -100,6 +100,12 @@ export default {
       handler () {
         this.updateChart()
       }
+    },
+    mode: {
+      deep: true,
+      handler () {
+        this.updateChart()
+      }
     }
   },
 
@@ -110,12 +116,17 @@ export default {
         datasets: [{
           label: this.label,
           backgroundColor: this.colors,
+          borderColor: this.mode === 'black' ? '#353949' : '#FFF',
+          borderWidth: 5,
           data: this.datapoints,
           datalabels: {
             labels: {
               name: {
                 align: 'end',
                 anchor: 'end',
+                color: () => {
+                  return this.mode === 'black' ? 'white' : '#707380'
+                },
                 font: { size: 16 },
                 formatter: function (value, ctx) {
                   return ctx.chart.data.labels[ctx.dataIndex]

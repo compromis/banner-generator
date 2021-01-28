@@ -32,7 +32,7 @@ export default {
         maintainAspectRatio: false,
         tooltips: { enabled: false },
         layout: {
-          padding: { top: 35, left: 30, right: 30, bottom: 0 }
+          padding: { top: 45, left: 30, right: 30, bottom: 0 }
         },
         legend: {
           display: false

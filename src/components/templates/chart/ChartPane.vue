@@ -169,16 +169,6 @@ export default {
     }
   },
 
-  watch: {
-    // the shame
-    'properties.mode' () {
-      this.properties.chart.data[0].values[0].number++
-      this.$nextTick(() => {
-        this.properties.chart.data[0].values[0].number--
-      })
-    }
-  },
-
   methods: {
     validate () {
       // Chart data required

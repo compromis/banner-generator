@@ -108,13 +108,16 @@ export default {
     width: 100%;
     height: 1px;
     background-color: $gray-200;
+
+    @at-root .banner-background-black .chart-line {
+      background-color: $gray-700;
+    }
   }
 
   &-horizontal {
     .chart-line{
       width: 1px;
       height: calc(100% + 4px);
-      background-color: #e5e7ed;
       top: -4px;
       bottom: 0;
       left: 107px;
