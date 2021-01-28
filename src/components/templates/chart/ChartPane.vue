@@ -171,7 +171,9 @@ export default {
 
   methods: {
     validate () {
-      // Chart data required
+      if (this.properties.theme !== 'blobless') {
+        this.pictureRequired()
+      }
     }
   }
 }

@@ -1,37 +1,35 @@
 <template>
-  <div
-    class="c-field image-upload-field"
-      :message="fieldName in errors && displayErrors ? errors[fieldName].join('. ') : ''">
-      <div class="c-field-info">
-        <label>{{ label }}</label>
-      </div>
-      <div class="c-field-content">
-        <b-upload
-          @input="(picture) => $emit('upload', picture, ratio)"
-          drag-drop
-          accept="image/*"
-          :type="picture ? '' : displayErrors ? 'is-danger' : ''">
-          <div class="content has-text-centered" v-if="!picture">
-            <b-icon icon="upload" size="is-large" />
-            <p>Arrosega la foto</p>
-          </div>
-          <div class="picture-preview has-text-centered" v-else>
-            <img :src="preview" alt="Imatge" />
-            <span>{{ picture.name }}</span>
-          </div>
-        </b-upload>
-        <div v-if="!picture && displayErrors" class="error-text">Has d'ajuntar una foto</div>
-        <b-button
-          v-if="picture"
-          @click="$emit('delete')"
-          class="remove-image"
-          type="is-danger"
-          size="is-small"
-          icon-right="times">
-        </b-button>
-        <slot></slot>
-      </div>
+  <div class="c-field image-upload-field">
+    <div class="c-field-info">
+      <label>{{ label }}</label>
     </div>
+    <div class="c-field-content">
+      <b-upload
+        @input="(picture) => $emit('upload', picture, ratio)"
+        drag-drop
+        accept="image/*"
+        :type="'picture' in errors && displayErrors ? 'is-danger' : ''">
+        <div class="content has-text-centered" v-if="!picture">
+          <b-icon icon="upload" size="is-large" />
+          <p>Arrosega la foto</p>
+        </div>
+        <div class="picture-preview has-text-centered" v-else>
+          <img :src="preview" alt="Imatge" />
+          <span>{{ picture.name }}</span>
+        </div>
+      </b-upload>
+      <div v-if="'picture' in errors && displayErrors" class="error-text">Has d'ajuntar una foto</div>
+      <b-button
+        v-if="picture"
+        @click="$emit('delete')"
+        class="remove-image"
+        type="is-danger"
+        size="is-small"
+        icon-right="times">
+      </b-button>
+      <slot></slot>
+    </div>
+  </div>
 </template>
 
 <script>

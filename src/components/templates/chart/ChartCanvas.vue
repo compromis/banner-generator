@@ -98,7 +98,11 @@ export default {
     ChartLegend
   },
 
-  data: () => config
+  data () {
+    return {
+      config
+    }
+  }
 }
 </script>
 
@@ -141,7 +145,7 @@ export default {
 
     .description {
       font-size: 16px;
-      margin: 8px -24px -24px;
+      margin: 16px -24px -24px;
       padding: 10px 24px;
       background: $gray-100;
     }

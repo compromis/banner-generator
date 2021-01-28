@@ -46,7 +46,7 @@ export default {
   &-item {
     display: flex;
     margin-right: 16px;
-    margin-bottom: 4px;
+    margin-top: 4px;
 
     &-color {
       border-radius: 5px;

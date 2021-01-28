@@ -59,7 +59,7 @@ export default {
       selectedTemplate: null,
       loadingTemplate: true,
       isCardModalActive: false,
-      isDownloadable: false
+      isDownloadable: true
     }
   },
 
