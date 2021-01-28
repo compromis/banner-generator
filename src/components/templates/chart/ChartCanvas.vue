@@ -6,7 +6,8 @@
       'aspect-' + aspect,
       'theme-' + banner.theme,
       'disposition-' + banner.disposition,
-      'banner-background-' + banner.mode
+      'banner-background-' + banner.mode,
+      { 'has-description': banner.description.length }
     ]"
     v-if="banner">
     <div class="grid">
@@ -142,6 +143,12 @@ export default {
       margin: 8px -24px -24px;
       padding: 10px 24px;
       background: $gray-100;
+    }
+  }
+
+  .has-description {
+    &::v-deep canvas {
+      height: 300px !important;
     }
   }
 
