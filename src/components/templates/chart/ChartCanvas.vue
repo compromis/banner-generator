@@ -128,7 +128,6 @@ export default {
     }
 
     .source {
-      color: $gray-700;
       font-size: 12px;
       text-align: right;
       margin-left: auto;
@@ -173,6 +172,14 @@ export default {
     .chart {
       background: $gray-900;
       color: $gray-100;
+
+      .description {
+        background: $gray-800;
+      }
+    }
+
+    h1 {
+      color: $white;
     }
   }
 
