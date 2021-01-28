@@ -49,7 +49,7 @@
 
         <div class="chart-info">
           <chart-legend
-            v-if="banner.chart.sets.length > 1"
+            v-if="banner.chart.sets.length > 1 && config.maxSets[banner.chartType] > 1"
             :sets="banner.chart.sets"
             :chart-type="banner.chartType" />
           <div class="source" v-if="banner.source">
@@ -71,6 +71,7 @@
 </template>
 
 <script>
+import config from './config'
 import CanvasMixin from '@/mixins/canvas-mixin.js'
 import BannerPicture from '@/components/canvas/BannerPicture'
 import BannerFrame from '@/components/canvas/BannerFrame'
@@ -95,7 +96,9 @@ export default {
     PieChart,
     FartoChart,
     ChartLegend
-  }
+  },
+
+  data: () => config
 }
 </script>
 

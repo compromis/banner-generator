@@ -24,9 +24,9 @@ export default {
   },
   rowColorDisabled: {
     in: ['lines'],
-    except: ['pie', 'doughnut']
+    except: ['pie', 'doughnut', 'farto']
   },
   setColorDisabled: {
-    in: ['pie', 'doughnut']
+    in: ['pie', 'doughnut', 'farto']
   }
 }
