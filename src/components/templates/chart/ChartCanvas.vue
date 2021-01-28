@@ -124,18 +124,17 @@ export default {
     }
 
     &-info {
-      display: grid;
-      grid-template-columns: 70% 30%;
-      align-items: end;
+      display: flex;
+      align-items: flex-end;
     }
 
     .source {
       color: $gray-700;
       font-size: 12px;
       text-align: right;
-      align-self: end;
-      height: 20px;
-      margin-bottom: 4px;
+      margin-left: auto;
+      align-self: flex-end;
+      min-width: 30%;
     }
 
     .description {
