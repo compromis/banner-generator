@@ -16,7 +16,8 @@
         :theme="banner.theme"
         :color="banner.color"
         edge
-        :full-gradient="banner.fullGradient" />
+        :full-gradient="banner.fullGradient"
+        :gradient-background="!banner.picturePreview" />
       <div class="chart">
         <h1 :style="{fontSize: fontSize(banner.title, 40, 28, 120)}">{{ banner.title }}</h1>
 

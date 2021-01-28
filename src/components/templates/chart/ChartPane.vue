@@ -61,6 +61,16 @@
     <!-- Emoji picker -->
     <emoji-picker v-model="properties.emojis" />
 
+    <!-- Frame color  -->
+    <color-selector v-model="properties.color" :colors="availableColors[properties.theme]" label="Color" is-rounded />
+
+    <!-- Dark mode -->
+    <color-selector
+      v-model="properties.mode"
+      :colors="['white', 'black']"
+      :label="properties.theme === 'glowy' ? 'Color de fons' : 'Color de targeta'"
+      :is-rounded="properties.theme === 'glowy'" />
+
     <!-- Picture -->
     <picture-upload
       :picture="properties.picture"
@@ -75,23 +85,10 @@
         v-model="properties.picturePos"
         @touchstart="dimPane(true)"
         @touchend="dimPane(false)" />
-    </picture-upload>
-
-    <!-- Frame color  -->
-    <color-selector v-model="properties.color" :colors="availableColors[properties.theme]" label="Color" is-rounded />
-
-    <c-field v-if="properties.theme === 'blobless'" class="blobless-gradient-option">
-      <b-switch v-model="properties.fullGradient">
+      <b-switch v-if="properties.theme === 'blobless' && properties.picture" v-model="properties.fullGradient">
         Degradat sobre tota la imatge
       </b-switch>
-    </c-field>
-
-    <!-- Dark mode -->
-    <color-selector
-      v-model="properties.mode"
-      :colors="['white', 'black']"
-      :label="properties.theme === 'glowy' ? 'Color de fons' : 'Color de targeta'"
-      :is-rounded="properties.theme === 'glowy'" />
+    </picture-upload>
 
     <!-- Hashtag -->
     <transition name="slide">
