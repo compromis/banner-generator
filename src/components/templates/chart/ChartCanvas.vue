@@ -37,10 +37,11 @@
           v-if="banner.chartType === 'pie'"
           :chart="banner.chart"
           :mode="banner.mode" />
-        <doughnut-chart
+        <pie-chart
           v-if="banner.chartType === 'doughnut'"
           :chart="banner.chart"
-          :mode="banner.mode" />
+          :mode="banner.mode"
+          doughnut />
         <farto-chart
           v-if="banner.chartType === 'farto'"
           :chart="banner.chart" />
@@ -76,7 +77,6 @@ import EmojisOnCanvas from '@/components/canvas/EmojisOnCanvas'
 import LineChart from './LineChart'
 import BarChart from './BarChart'
 import PieChart from './PieChart'
-import DoughnutChart from './DoughnutChart'
 import FartoChart from './FartoChart'
 import ChartLegend from './ChartLegend'
 
@@ -92,9 +92,8 @@ export default {
     BarChart,
     LineChart,
     PieChart,
-    DoughnutChart,
-    ChartLegend,
-    FartoChart
+    FartoChart,
+    ChartLegend
   }
 }
 </script>

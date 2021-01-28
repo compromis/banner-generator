@@ -1,6 +1,6 @@
 <script>
 import Chart from 'chart.js'
-import { Pie, mixins } from 'vue-chartjs'
+import { Pie } from 'vue-chartjs'
 import ChartMixin from './chart-mixin'
 // eslint-disable-next-line
 import ChartDataLabels from 'chartjs-plugin-datalabels'
@@ -12,7 +12,7 @@ Chart.defaults.global.defaultFontColor = '#707380'
 export default {
   extends: Pie,
 
-  mixins: [mixins.reactiveData, ChartMixin],
+  mixins: [ChartMixin],
 
   props: {
     chart: {
@@ -22,18 +22,37 @@ export default {
     mode: {
       type: String,
       default: 'white'
+    },
+    doughnut: {
+      type: Boolean,
+      default: false
     }
   },
 
-  data () {
-    return {
-      options: {
+  computed: {
+    labels () {
+      return this.chart.data.map(row => row.label)
+    },
+    datasetlabel () {
+      return this.chart.sets[0].label
+    },
+    colors () {
+      return this.chart.data.map(row => row.values[0].color)
+    },
+    datapoints () {
+      return this.chart.data.map(row => row.values[0].number)
+    },
+    options () {
+      const options = {
+        animation: {
+          duration: 0
+        },
         responsive: true,
         maintainAspectRatio: false,
         tooltips: { enabled: false },
         legend: { display: false },
         layout: {
-          padding: { top: 35, left: 0, right: 0, bottom: 0 }
+          padding: { top: 35, left: 40, right: 40, bottom: 0 }
         },
         scales: {
           xAxes: [{
@@ -52,59 +71,75 @@ export default {
               display: false
             }
           }]
-        },
-
-        plugins: {
-          datalabels: {
-            color: 'white',
-            font: ({ dataIndex: dataKey, datasetIndex: setKey }) => {
-              const row = this.chart.data[dataKey].values[setKey]
-              return row.highlight ? { size: 28, weight: 'bold' } : { size: 14, weight: 'normal' }
-            },
-            display: ({ dataIndex: dataKey, datasetIndex: setKey }) => {
-              const row = this.chart.data[dataKey].values[setKey]
-              return !(this.chart.options.onlyHighlighted && !row.highlight)
-            },
-            formatter: (value) => {
-              return this.formatNumber(value)
-            }
-          }
         }
       }
-    }
-  },
 
-  computed: {
-    computedChartData () {
-      const labels = this.chart.data.map(row => row.label)
-      const color = this.chart.data.map(row => row.values[0].color)
-      const setdata = this.chart.data.map(row => row.values[0].number)
-      const datasets = [{
-        label: this.chart.sets[0].label,
-        backgroundColor: color,
-        borderColor: this.mode === 'black' ? '#353949' : '#FFF',
-        borderWidth: 5,
-        data: setdata
-      }]
-
-      return {
-        labels,
-        datasets
+      if (this.doughnut) {
+        options.circumference = Math.PI
+        options.rotation = -Math.PI
+        options.cutoutPercentage = 50
       }
+
+      return options
     }
   },
 
   mounted () {
-    this.chartData = { ...this.computedChartData, update: 0 }
-    this.renderChart(this.chartData, this.options)
+    this.updateChart()
   },
 
   watch: {
     chart: {
       deep: true,
       handler () {
-        this.chartData = { ...this.computedChartData, update: Math.random() }
+        this.updateChart()
       }
+    },
+    options: {
+      deep: true,
+      handler () {
+        this.updateChart()
+      }
+    }
+  },
+
+  methods: {
+    updateChart () {
+      this.renderChart({
+        labels: this.labels,
+        datasets: [{
+          label: this.label,
+          backgroundColor: this.colors,
+          data: this.datapoints,
+          datalabels: {
+            labels: {
+              name: {
+                align: 'end',
+                anchor: 'end',
+                font: { size: 16 },
+                formatter: function (value, ctx) {
+                  return ctx.chart.data.labels[ctx.dataIndex]
+                }
+              },
+              value: {
+                align: 'center',
+                color: 'white',
+                font: ({ dataIndex: dataKey, datasetIndex: setKey }) => {
+                  const row = this.chart.data[dataKey].values[setKey]
+                  return row.highlight ? { size: 28, weight: 'bold' } : { size: 14, weight: 'normal' }
+                },
+                display: ({ dataIndex: dataKey, datasetIndex: setKey }) => {
+                  const row = this.chart.data[dataKey].values[setKey]
+                  return !(this.chart.options.onlyHighlighted && !row.highlight)
+                },
+                formatter: (value) => {
+                  return this.formatNumber(value)
+                }
+              }
+            }
+          }
+        }]
+      }, this.options)
     }
   }
 }
