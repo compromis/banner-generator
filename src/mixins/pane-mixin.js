@@ -42,7 +42,7 @@ export default {
       },
       errors: {},
       aspect: 0,
-      isDownloadable: false,
+      isDownloadable: true,
       displayErrors: false,
       paneDimmed: false,
       availableColors: {

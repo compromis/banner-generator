@@ -135,6 +135,12 @@ export default {
     .text {
       bottom: 120px;
     }
+
+    &.aspect-event.disposition-top {
+      .text {
+        top: 40px;
+      }
+    }
   }
 </style>
 

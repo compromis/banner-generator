@@ -109,6 +109,7 @@
           Afegir cridada a l'acció
       </b-switch>
     </c-field>
+
     <transition name="slide">
         <c-input-text
           v-if="properties.showCta"

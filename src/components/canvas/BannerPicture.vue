@@ -4,7 +4,7 @@
     <div v-else class="background-picture">
       <img v-if="picture" :src="picture" :style="picturePosition" />
     </div>
-    <div v-if="theme === 'blobless'" :class="['banner-gradient', `gradient-${color}`, { 'gradient-partial': !fullGradient, 'gradient-full': fullGradient }]"></div>
+    <div v-if="theme === 'blobless'" :class="['banner-gradient', `gradient-${color}`, { 'gradient-partial': !fullGradient, 'gradient-full': fullGradient, 'gradient-background': gradientBackground}]"></div>
   </div>
 </template>
 
@@ -44,6 +44,10 @@ export default {
     fullGradient: {
       type: Boolean,
       default: true
+    },
+    gradientBackground: {
+      type: Boolean,
+      default: false
     }
   }
 }
@@ -125,6 +129,28 @@ export default {
         }
         &.gradient-black {
           background: rgba($gray-800, .65);
+        }
+      }
+
+      &-background {
+        top: 0;
+        bottom: 0;
+
+        &.gradient-orange {
+          background: linear-gradient(var(--gradient-orientation, 110deg), rgba($gradient-start, 1), rgba($gradient-end, 1), rgba($gradient-end, 1));
+        }
+        &.gradient-black {
+          background: rgba($gray-800, 1);
+        }
+        &.gradient-lgbt {
+          --gradient-orientation: 153.5deg;
+          top: 0;
+          bottom: 0;
+          height: unset;
+          opacity: 1;
+        }
+        &.gradient-feminism {
+          background: linear-gradient(var(--gradient-orientation, 110deg), rgba(125, 58, 129, 1), rgba(197, 70, 135, 1), rgba(197, 70, 135, 1));
         }
       }
     }
