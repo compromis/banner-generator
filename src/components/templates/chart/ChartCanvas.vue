@@ -120,6 +120,7 @@ export default {
       color: $gray-900;
       font-size: 32px;
       line-height: 1.1;
+      margin-bottom: 20px;
     }
 
     &-info {

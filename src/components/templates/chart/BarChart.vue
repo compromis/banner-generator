@@ -100,7 +100,7 @@ export default {
   align-items: end;
   justify-items: center;
   gap: 18px;
-  margin-top: 38px;
+  margin-top: 54px;
 
   &-line {
     position: absolute;
