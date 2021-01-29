@@ -12,7 +12,7 @@
         <div class="numbers">
           <main>
             <span>{{ banner.municipality }} {{ line('REP') }}</span>
-            <strong class="big-number">{{ banner.amount }} €</strong>
+            <strong :style="{ fontSize: fontSize(banner.amount, 80, 60, 10) }">{{ banner.amount }} €</strong>
           </main>
           <aside>
             <div>
@@ -161,10 +161,6 @@ export default {
     main {
       display: flex;
       flex-direction: column;
-
-      .big-number {
-        font-size: 74px;
-      }
 
       span {
         font-size: 34px;
