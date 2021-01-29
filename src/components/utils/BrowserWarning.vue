@@ -5,7 +5,8 @@
         <h2>Atenció</h2>
         <p>
           Hem detectat que el teu navegador pot <strong>no ser compatible</strong> amb aquesta app.
-          La ferramenta només està pensada per a ser gastada amb els navegadors <strong>Chrome i Firefox</strong>.
+          La ferramenta només està pensada per a ser gastada amb les últimes versions
+          dels navegadors <strong>Chrome i Firefox</strong>.
           Recomanem que empres els navegadors compatibles.
         </p>
         <b-button ref="confirm" type="is-primary" @click="isModalActive = false">Entés</b-button>
@@ -28,7 +29,10 @@ export default {
 
   created () {
     const result = browser()
-    if (['chrome', 'firefox', 'opera'].includes(result.name)) {
+    const isBlinkOrGecko = ['chrome', 'firefox', 'opera'].includes(result.name)
+    const isNewChrome = result.name === 'chrome' && result.versionNumber > 80
+
+    if (isBlinkOrGecko && isNewChrome) {
       this.isModalActive = false
     }
   }

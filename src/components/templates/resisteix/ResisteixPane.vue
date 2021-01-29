@@ -1,7 +1,7 @@
 <template>
   <div :class="{ 'pane generic-pane': true, 'pane-dimmed': paneDimmed, 'pane-916': aspect === 1 }">
     <!-- Language -->
-    <c-select label="Idioma" v-model="properties.lang" expanded>
+    <c-select name="lang" label="Idioma" v-model="properties.lang" expanded>
         <option value="val">Valencià</option>
         <option value="cas">Castellà</option>
     </c-select>
