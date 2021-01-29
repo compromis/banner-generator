@@ -12,7 +12,7 @@
         <div class="numbers">
           <main>
             <span>{{ banner.municipality }} {{ line('REP') }}</span>
-            <strong :style="{ fontSize: fontSize(banner.amount, 80, 60, 10) }">{{ banner.amount }} €</strong>
+            <strong :style="{ fontSize: fontSize(banner.amount, 90, 60, 10) }">{{ banner.amount }} €</strong>
           </main>
           <aside>
             <div>
