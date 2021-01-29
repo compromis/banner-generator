@@ -24,13 +24,11 @@
       :message="setFieldMessage('amount')"
       :maxlength="14" />
 
-    <!--
     <div class="c-field c-field-content">
-      <a href="https://comprom.is/KJdurTH" target="_blank" class="c-field-help">
+      <a href="https://comprom.is/YKxmqZ4" target="_blank" class="c-field-help">
         <font-awesome-icon :icon="['far', 'question-circle']" />
         Consulta la qüantiat que correspon al teu poble</a>
     </div>
-    -->
 
     <!-- Picture -->
     <picture-upload
