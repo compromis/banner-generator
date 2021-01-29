@@ -5,7 +5,10 @@ export default {
     '#27af60', '#7fc347', '#1ca085', '#3d556e',
     '#222f3d', '#BDC3C8'
   ],
-  colorDefaults: ['#FF6720', '#2980b9', '#7fc347', '#a14a9c', '#ffd10f', '#1ca085'],
+  colorDefaults: [
+    '#FF6720', '#2980b9', '#7fc347', '#a14a9c',
+    '#ffd10f', '#1ca085'
+  ],
   maxSets: {
     'bar-vertical': 4,
     'bar-horizontal': 4,
@@ -23,8 +26,7 @@ export default {
     'farto': 8
   },
   rowColorDisabled: {
-    in: ['lines'],
-    except: ['pie', 'doughnut', 'farto']
+    in: ['lines']
   },
   setColorDisabled: {
     in: ['pie', 'doughnut', 'farto']

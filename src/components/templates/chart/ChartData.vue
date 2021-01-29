@@ -134,7 +134,7 @@ export default {
 
     rowColorDisabled () {
       return this.config.rowColorDisabled.in.includes(this.chartType) ||
-        (this.chartData.sets.length > 1 && !this.config.rowColorDisabled.except.includes(this.chartType))
+        (this.chartData.sets.length > 1 && !this.config.setColorDisabled.in.includes(this.chartType))
     },
 
     setColorDisabled () {

@@ -1,5 +1,17 @@
 export default [
   {
+    id: 'Resisteix',
+    name: 'Pla Resisteix',
+    aspects: ['11'],
+    icon: 'euro-sign',
+    label: '🦠Covid-19',
+    components: {
+      pane: () => import(/* webpackChunkName: "resisteix" */ './resisteix/ResisteixPane'),
+      canvas: () => import(/* webpackChunkName: "resisteix" */ './resisteix/ResisteixCanvas'),
+      help: () => import(/* webpackChunkName: "resisteix" */ './resisteix/ResisteixHelp')
+    }
+  },
+  {
     id: 'Headline',
     name: 'Titular de premsa',
     aspects: ['11', '916', 'event'],
@@ -50,6 +62,7 @@ export default [
     id: 'Chart',
     name: 'Gràfica',
     aspects: ['11'],
+    label: '✨Nou',
     icon: 'chart-bar',
     components: {
       pane: () => import(/* webpackChunkName: "chart" */ './chart/ChartPane'),
@@ -167,9 +180,9 @@ export default [
     label: '🦠Covid-19',
     archived: true,
     components: {
-      pane: () => import(/* webpackChunkName: "labora" */ './labora/LaboraPane'),
-      canvas: () => import(/* webpackChunkName: "labora" */ './labora/LaboraCanvas'),
-      help: () => import(/* webpackChunkName: "labora" */ './labora/LaboraHelp')
+      pane: () => import(/* webpackChunkName: "labora" */ './archived/labora/LaboraPane'),
+      canvas: () => import(/* webpackChunkName: "labora" */ './archived/labora/LaboraCanvas'),
+      help: () => import(/* webpackChunkName: "labora" */ './archived/labora/LaboraHelp')
     }
   },
   {
