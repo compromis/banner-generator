@@ -11,9 +11,8 @@
       <div class="card card--primary">
         <div class="numbers">
           <main>
-            <h2>{{ banner.municipality }}</h2>
+            <span>{{ banner.municipality }} {{ line('REP') }}</span>
             <strong class="big-number">{{ banner.amount }} €</strong>
-            <span contenteditable>{{ line('AJUDA') + banner.municipality }}</span>
           </main>
           <aside>
             <div>
@@ -73,7 +72,7 @@ export default {
     return {
       literals: {
         val: {
-          AJUDA: 'Ajuda rebuda per a empreses i autònoms',
+          REP: 'rep',
           PER_EMPRESA: 'per cada microempresa o autònom',
           PER_TREBALLADOR: 'per cada treballador/a',
           SECTORS: 'SECTORS BENEFICIATS',
@@ -83,7 +82,7 @@ export default {
           CULTURA: 'Cultura i espectacles'
         },
         cas: {
-          AJUDA: 'Ayuda recibida para empresas y autónomos de ',
+          REP: 'recibe',
           PER_EMPRESA: 'por cada microempresa o autónomo',
           PER_TREBALLADOR: 'por cada trabajador/a',
           SECTORS: 'SECTORES BENEFICIADOS',
@@ -98,27 +97,7 @@ export default {
 
   methods: {
     line (ref) {
-      if (ref === 'AJUDA' && this.banner.lang === 'val') {
-        return this.handleGenitive()
-      }
-
       return this.literals[this.banner.lang][ref]
-    },
-
-    handleGenitive () {
-      let string = this.literals.val.AJUDA
-      if ([
-        'a', 'e', 'i', 'o', 'u',
-        'A', 'E', 'I', 'O', 'U',
-        'à', 'è', 'ò', 'À', 'È', 'Ò',
-        'í', 'ú', 'Ú', 'Í'
-      ].includes(this.banner.municipality[0])) {
-        string += " d'"
-      } else {
-        string += ' de '
-      }
-
-      return string
     }
   }
 }
@@ -129,7 +108,7 @@ export default {
 
   .content {
     position: absolute;
-    top: 58px;
+    top: 54px;
     left: 70px;
     right: 70px;
     color: $gray-900;
@@ -176,7 +155,7 @@ export default {
       display: block;
       color: $gray-600;
       line-height: 1.1;
-      font-size: 16px;
+      font-size: 17px;
     }
 
     main {
@@ -185,11 +164,12 @@ export default {
 
       .big-number {
         font-size: 74px;
-        margin-top: auto;
       }
 
       span {
-        font-size: 19px;
+        font-size: 34px;
+        display: block;
+        margin-top: auto;
       }
     }
 
@@ -258,7 +238,7 @@ export default {
     }
 
     &.has-picture::after {
-      background: linear-gradient(330deg, rgba($gradient-start, .95), rgba($gradient-end, .7), rgba($gradient-end, .95))
+      background: linear-gradient(330deg, rgba($gradient-start, .95), rgba($gradient-end, .5), rgba($gradient-end, .95))
     }
   }
 </style>
