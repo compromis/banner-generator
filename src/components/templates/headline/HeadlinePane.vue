@@ -120,6 +120,13 @@
         :message="setFieldMessage('hashtag')" />
     </transition>
 
+    <!-- Logo -->
+    <transition name="slide">
+      <logo-selector
+        v-if="aspectKey !== '916'"
+        v-model="properties.logo" />
+    </transition>
+
     <!-- Local label -->
     <transition name="slide">
       <c-input-text

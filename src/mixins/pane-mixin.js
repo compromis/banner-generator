@@ -5,6 +5,7 @@ import CInputText from '@/components/pane/CInputText'
 import CSelect from '@/components/pane/CSelect'
 import CField from '@/components/pane/CField'
 import ColorSelector from '@/components/pane/ColorSelector'
+import LogoSelector from '@/components/pane/LogoSelector'
 
 export default {
   // Shared components across templates
@@ -14,7 +15,8 @@ export default {
     CInputText,
     CSelect,
     CField,
-    ColorSelector
+    ColorSelector,
+    LogoSelector
   },
 
   // Shared props across templates
@@ -38,7 +40,8 @@ export default {
         pictureDimensions: null,
         hashtag: '',
         hasLocalLabel: false,
-        localLabel: ''
+        localLabel: '',
+        logo: 'compromis'
       },
       errors: {},
       aspect: 0,
