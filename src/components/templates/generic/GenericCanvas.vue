@@ -48,7 +48,9 @@
       :width="aspect === '916' ? 405 : null"
       :theme="banner.theme"
       :color="banner.color"
-      :full-gradient="banner.fullGradient" />
+      :full-gradient="banner.fullGradient"
+      :gradient-background="!banner.picturePreview"
+      />
   </div>
 </template>
 

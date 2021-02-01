@@ -32,16 +32,13 @@
         v-model="properties.picturePos"
         @touchstart="dimPane(true)"
         @touchend="dimPane(false)" />
+      <b-switch v-if="properties.theme === 'blobless' && properties.picture" v-model="properties.fullGradient">
+        Degradat sobre tota la imatge
+      </b-switch>
     </picture-upload>
 
     <!-- Frame color  -->
     <color-selector v-model="properties.color" :colors="availableColors[properties.theme]" label="Color" is-rounded />
-
-    <c-field v-if="properties.theme === 'blobless'" class="blobless-gradient-option">
-      <b-switch v-model="properties.fullGradient">
-        Degradat sobre tota la imatge
-      </b-switch>
-    </c-field>
 
     <!-- Dark mode -->
     <color-selector
@@ -128,7 +125,9 @@ export default {
 
   methods: {
     validate () {
-      this.pictureRequired()
+      if (this.properties.theme !== 'blobless') {
+        this.pictureRequired()
+      }
     }
   }
 }
