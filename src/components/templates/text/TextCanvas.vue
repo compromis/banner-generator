@@ -16,7 +16,8 @@
         :theme="banner.theme"
         :color="banner.color"
         edge
-        :full-gradient="banner.fullGradient" />
+        :full-gradient="banner.fullGradient"
+        :gradient-background="!banner.picturePreview" />
       <div class="text text-wysiwyg" v-if="banner.text">
         <div v-html="banner.text"></div>
       </div>
