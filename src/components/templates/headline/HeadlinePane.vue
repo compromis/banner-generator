@@ -121,11 +121,7 @@
     </transition>
 
     <!-- Logo -->
-    <transition name="slide">
-      <logo-selector
-        v-if="aspectKey !== '916'"
-        v-model="properties.logo" />
-    </transition>
+    <logo-selector v-model="properties.logo" />
 
     <!-- Local label -->
     <transition name="slide">

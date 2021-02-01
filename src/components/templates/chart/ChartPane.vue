@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ 'pane generic-pane': true, 'pane-dimmed': paneDimmed, 'pane-916': aspect === 1 }">
+  <div :class="['pane', 'chart-pane', { 'pane-dimmed': paneDimmed }, `logo-${properties.logo}`]">
     <!-- Theme selector -->
     <theme-selector v-model="properties.theme" :themes="['blobs', 'blobless']" />
 
@@ -102,6 +102,9 @@
         :maxlength="properties.localLabel ? 18 : 32"
         :message="setFieldMessage('hashtag')" />
     </transition>
+
+    <!-- Logo -->
+    <logo-selector v-model="properties.logo" />
 
     <!-- Local label -->
     <transition name="slide">

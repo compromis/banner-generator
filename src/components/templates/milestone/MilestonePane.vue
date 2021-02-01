@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ 'pane milestone-pane': true, 'pane-dimmed': paneDimmed, 'pane-916': aspect === 1 }">
+  <div :class="['pane', 'milestone-pane', { 'pane-dimmed': paneDimmed, 'pane-916': aspect === 1 }, `logo-${properties.logo}`]">
     <c-tab-group>
       <c-tab v-model="properties.style" value="transparent" name="style">Transparent</c-tab>
       <c-tab v-model="properties.style" value="card" name="style">Targeta</c-tab>
@@ -96,6 +96,9 @@
         :maxlength="properties.localLabel ? 18 : 32"
         :message="setFieldMessage('hashtag')" />
     </transition>
+
+    <!-- Logo -->
+    <logo-selector v-model="properties.logo" />
 
     <!-- Local label -->
     <transition name="slide">

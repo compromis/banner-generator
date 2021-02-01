@@ -7,6 +7,7 @@
       'disposition-' + banner.disposition,
       'theme-' + banner.theme,
       'banner-background-' + banner.mode,
+      'logo-' + banner.logo,
       { 'full-gradient': banner.fullGradient }
     ]"
     v-if="banner">
@@ -33,6 +34,7 @@
       :color="banner.color"
       :hashtag="banner.hashtag"
       :local-label="banner.localLabel"
+      :logo="banner.logo"
       :aspect="aspect" />
     <banner-picture
       :picture="banner.picturePreview"

@@ -5,7 +5,8 @@
       'banner-canvas',
       'aspect-' + aspect,
       'disposition-' + banner.disposition,
-      'banner-background-' + banner.mode
+      'banner-background-' + banner.mode,
+      'logo-' + banner.logo
     ]"
     v-if="banner">
     <div class="media-grid">
@@ -58,7 +59,8 @@
       :mode="banner.mode"
       :hashtag="banner.hashtag"
       :local-label="banner.localLabel"
-      :aspect="aspect" />
+      :aspect="aspect"
+      :logo="banner.logo" />
   </div>
 </template>
 

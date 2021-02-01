@@ -55,7 +55,7 @@
       :hashtag="banner.hashtag"
       :local-label="banner.localLabel"
       :logo-align="banner.invertOrder ? 'left' : 'right'"
-       />
+      :logo="banner.logo" />
   </div>
 </template>
 

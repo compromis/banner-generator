@@ -6,6 +6,7 @@
       'aspect-' + aspect,
       'theme-' + banner.theme,
       'banner-background-' + banner.mode,
+      'logo-' + banner.logo,
       { 'has-description': banner.description.length }
     ]"
     v-if="banner">
@@ -66,7 +67,8 @@
       :hashtag="banner.hashtag"
       :local-label="banner.localLabel"
       :aspect="aspect"
-      :color="banner.color" />
+      :color="banner.color"
+      :logo="banner.logo" />
   </div>
 </template>
 

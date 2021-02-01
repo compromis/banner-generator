@@ -5,7 +5,8 @@
       'banner-canvas',
       'aspect-' + aspect,
       `has-${banner.speakers.length}-speakers`,
-      'banner-background-' + banner.mode
+      'banner-background-' + banner.mode,
+      'logo-' + banner.logo
     ]"
     :style="{
       '--speakers': banner.speakers.length
@@ -50,6 +51,7 @@
       :mode="banner.mode"
       :hashtag="banner.hashtag"
       :local-label="banner.localLabel"
+      :logo="banner.logo"
       :aspect="aspect" />
   </div>
 </template>

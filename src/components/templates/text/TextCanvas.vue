@@ -6,7 +6,8 @@
       'aspect-' + aspect,
       'theme-' + banner.theme,
       'disposition-' + banner.disposition,
-      'banner-background-' + banner.mode
+      'banner-background-' + banner.mode,
+      'logo-' + banner.logo
     ]"
     v-if="banner">
     <div class="grid">
@@ -28,7 +29,8 @@
       :hashtag="banner.hashtag"
       :local-label="banner.localLabel"
       :aspect="aspect"
-      :color="banner.color" />
+      :color="banner.color"
+      :logo="banner.logo" />
   </div>
 </template>
 

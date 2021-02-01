@@ -4,6 +4,7 @@
     :class="[
       'banner-canvas',
       'aspect-' + aspect,
+      'logo-' + banner.logo,
       aspect === '11' ? 'disposition-' + banner.disposition : '',
       banner.localLabel && banner.hasLocalLabel ? 'has-local-label' : '',
       'banner-background-' + banner.mode
@@ -23,6 +24,7 @@
       theme="blobs"
       :mode="banner.mode"
       :local-label="banner.localLabel"
+      :logo="banner.logo"
       :aspect="aspect" />
   </div>
 </template>
