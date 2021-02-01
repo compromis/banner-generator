@@ -32,6 +32,7 @@
       :mode="banner.mode"
       :hashtag="banner.hashtag"
       :local-label="banner.localLabel"
+      :logo="banner.logo"
       :aspect="aspect"
       :color="banner.color" />
   </div>

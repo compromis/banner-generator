@@ -1,12 +1,13 @@
 <template>
   <div :class="['banner-frame', `banner-frame--${theme}`]">
     <glowy-blob position="top" :aspect="aspect" v-if="theme === 'blobs'" :color="color" :wide="hashtag.length > 18" />
-    <glowy-blob position="bottom" :aspect="aspect" v-if="theme === 'blobs'" :color="color" :wide="localLabel.length > 6 || (aspect === 'event' && localLabel.length > 0)"/>
+    <glowy-blob position="bottom" :aspect="aspect" v-if="theme === 'blobs'" :color="color" :wide="isBottomBlobWide"/>
     <div class="hashtag" v-if="aspect !== '916'">{{ hashtag }}</div>
     <div :class="['logo', `logo--align-${logoAlign}`]" v-if="aspect !== '916'">
-      <compromis-logo :mono="!colorLogo" />
+      <component :is="logoComponent" :mono="!colorLogo" :class="`logo-${logo}`" />
+      <compromis-logo v-if="logo !== 'compromis' && localLabel.length === 0" :mono="!colorLogo" class="trailing-compromis-logo" />
       <div :class="{ 'logo-local-label': true, 'logo-local-label--gray': colorLogo, 'logo-local-label--long': localLabel.length > 18 }" v-if="localLabel">
-        {{ localLabel | formatLocal  }}
+        {{ localLabel | formatLocal }}
       </div>
     </div>
   </div>
@@ -14,6 +15,9 @@
 
 <script>
 import CompromisLogo from '@/components/utils/CompromisLogo'
+import BlocLogo from '@/components/utils/BlocLogo'
+import IniciativaLogo from '@/components/utils/IniciativaLogo'
+import VerdsLogo from '@/components/utils/VerdsLogo'
 import GlowyBlob from './GlowyBlob'
 
 export default {
@@ -21,6 +25,9 @@ export default {
 
   components: {
     CompromisLogo,
+    BlocLogo,
+    IniciativaLogo,
+    VerdsLogo,
     GlowyBlob
   },
 
@@ -62,12 +69,33 @@ export default {
     logo: {
       type: String,
       default: 'auto'
+    },
+    logoType: {
+      type: String,
+      default: 'compromis'
     }
   },
 
   computed: {
+    logoComponent () {
+      const logos = {
+        compromis: CompromisLogo,
+        bloc: BlocLogo,
+        iniciativa: IniciativaLogo,
+        verds: VerdsLogo
+      }
+
+      return logos[this.logo]
+    },
+
     colorLogo () {
-      return (this.theme === 'glowy' && this.mode === 'white') || this.logo === 'color'
+      return (this.theme === 'glowy' && this.mode === 'white') || this.logoType === 'color'
+    },
+
+    isBottomBlobWide () {
+      const { localLabel, aspect, logo } = this
+
+      return localLabel.length > 6 || (aspect === 'event' && localLabel.length > 0) || logo !== 'compromis'
     }
   },
 
@@ -122,6 +150,26 @@ export default {
       &--gray {
         color: $gray-600;
       }
+    }
+
+    .trailing-compromis-logo {
+      margin-left: 16px;
+      height: 25px;
+    }
+
+    .logo-bloc {
+      height: 20px;
+      transform: translateY(-1px);
+    }
+
+    .logo-iniciativa {
+      height: 35px;
+      transform: translateY(-2px);
+    }
+
+    .logo-verds {
+      height: 22px;
+      transform: translateY(1px);
     }
   }
 
