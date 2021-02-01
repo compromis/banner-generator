@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ 'pane headline-pane': true, 'pane-dimmed': paneDimmed }">
+  <div :class="['pane', 'headline-pane', { 'pane-dimmed': paneDimmed }, `logo-${properties.logo}`]">
     <!-- Theme selector -->
     <theme-selector v-model="properties.theme" :themes="availableThemes" />
 

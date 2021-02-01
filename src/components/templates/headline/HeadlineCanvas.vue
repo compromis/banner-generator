@@ -7,7 +7,8 @@
       'aspect-' + aspect,
       'disposition-' + banner.disposition,
       'theme-' + banner.theme,
-      'banner-background-' + banner.mode
+      'banner-background-' + banner.mode,
+      'logo-' + banner.logo
     ]">
     <banner-picture
       :picture="banner.picturePreview"
