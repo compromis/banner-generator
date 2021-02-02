@@ -161,6 +161,7 @@ export default {
   data () {
     return {
       properties: {
+        theme: 'glowy',
         source: null,
         customSource: '',
         customSourceColor: '#1CA085',

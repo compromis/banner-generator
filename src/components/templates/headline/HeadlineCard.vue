@@ -1,5 +1,5 @@
 <template>
-  <div :class="{'headline': true, 'headline--pills': theme !== 'blobs', 'headline--dark': mode === 'black'}">
+  <div :class="['headline', {'headline--pills': theme !== 'blobs', 'headline--dark': mode === 'black'}]">
     <div class="headline-source headline-source--custom" v-if="source === 'other'">
       <span :style="{ color: customSourceColor }">{{ customSource }}</span>
     </div>
@@ -42,39 +42,36 @@ export default {
   },
 
   props: {
-    theme: {
-      type: String,
-      default: 'blobs',
-      validator (value) {
-        return ['blobs', 'glowy', 'blobless'].includes(value)
-      }
-    },
-    mode: {
-      type: String,
-      default: 'white',
-      validator (value) {
-        return ['white', 'black'].includes(value)
-      }
-    },
-    source: {
-      type: [Object, String],
-      default: null
-    },
-    customSource: {
-      type: String,
-      default: ''
-    },
-    customSourceColor: {
-      type: String,
-      default: ''
-    },
     headline: {
       type: String,
-      default: ''
+      required: true
     },
+
     fontSize: {
       type: String,
       default: ''
+    }
+  },
+
+  computed: {
+    theme () {
+      return this.$store.state.banner.theme
+    },
+
+    mode () {
+      return this.$store.state.banner.mode
+    },
+
+    source () {
+      return this.$store.state.banner.source
+    },
+
+    customSource () {
+      return this.$store.state.banner.customSource
+    },
+
+    customSourceColor () {
+      return this.$store.state.banner.customSourceColor
     }
   }
 }

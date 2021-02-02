@@ -1,18 +1,23 @@
 <template>
   <div class="banner-picture">
-    <glowy-card v-if="banner.theme === 'glowy'" v-bind="$attrs" />
+    <glowy-card
+      v-if="banner.theme === 'glowy'"
+      :picture="computedPicture"
+      :picture-position="picturePosition"
+      :color="computedColor"
+      v-bind="$attrs" />
     <div v-else class="background-picture">
-      <img v-if="banner.picture" :src="banner.picturePreview" :style="banner.picturePosition" />
+      <img v-if="computedPicture" :src="computedPicture" :style="picturePosition" />
     </div>
     <div
       v-if="banner.theme === 'blobless'"
       :class="[
         'banner-gradient',
-        `gradient-${banner.color}`,
+        `gradient-${computedColor}`,
         {
           'gradient-partial': !banner.fullGradient,
           'gradient-full': banner.fullGradient,
-          'gradient-background': gradientBackground
+          'gradient-background': !computedPicture
         }
       ]"></div>
   </div>
@@ -28,20 +33,32 @@ export default {
     GlowyCard
   },
 
+  props: {
+    picture: {
+      type: String,
+      default: null
+    },
+    picturePosition: {
+      type: Object,
+      default: null
+    },
+    color: {
+      type: String,
+      default: null
+    }
+  },
+
   computed: {
     banner () {
       return this.$store.state.banner
     },
 
-    gradientBackground () {
-      return !this.banner.picturePreview
-    }
-  },
+    computedPicture () {
+      return this.picture || this.banner.picturePreview
+    },
 
-  props: {
-    picturePosition: {
-      type: Object,
-      default: null
+    computedColor () {
+      return this.color || this.banner.color
     }
   }
 }

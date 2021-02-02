@@ -33,14 +33,10 @@ export default {
 
   props: {
     picture: {
-      type: [File, String],
+      type: String,
       default: null
     },
     picturePosition: {
-      type: Object,
-      default: null
-    },
-    pictureDimensions: {
       type: Object,
       default: null
     },
@@ -52,13 +48,6 @@ export default {
       type: Number,
       default: null
     },
-    color: {
-      type: String,
-      default: 'orange',
-      validator (value) {
-        return ['orange', 'feminism', 'green', 'lgbt', 'custom', 'none'].indexOf(value) !== -1
-      }
-    },
     edge: {
       type: Boolean,
       default: false
@@ -66,6 +55,10 @@ export default {
     glowSize: {
       type: String,
       default: 'lg'
+    },
+    color: {
+      type: String,
+      default: 'orange'
     }
   },
 

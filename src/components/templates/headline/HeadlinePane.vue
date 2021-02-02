@@ -64,9 +64,7 @@
     </c-tab-group>
 
     <!-- Emoji picker -->
-    <transition name="slide">
-      <emoji-picker v-model="properties.emojis" v-if="properties.card === 1" />
-    </transition>
+    <emoji-picker v-model="properties.emojis" />
 
     <!-- Picture -->
     <picture-upload

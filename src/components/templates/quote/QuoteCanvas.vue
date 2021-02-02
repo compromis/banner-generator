@@ -28,22 +28,11 @@
         <div class="quote-author">{{ banner.author | formatString }}</div>
       </div>
     </div>
-    <banner-frame
-      :mode="banner.mode"
-      :theme="banner.theme"
-      :color="banner.color"
-      :hashtag="banner.hashtag"
-      :local-label="banner.localLabel"
-      :logo="banner.logo"
-      :aspect="aspect" />
+    <banner-frame />
     <banner-picture
-      :picture="banner.picturePreview"
       :picture-position="objectPosition"
       :height="aspect === '11' ? 570 : 730"
-      :theme="banner.theme"
-      :color="banner.color"
-      :edge="aspect === '916'"
-      :full-gradient="banner.theme === 'blobless' && banner.fullGradient" />
+      :edge="aspect === '916'" />
   </div>
 </template>
 
