@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ 'pane': true, 'pane-dimmed': paneDimmed }">
+  <div :class="['pane', 'event-pane', { 'pane-dimmed': paneDimmed }, `logo-${properties.logo}`]">
     <!-- Title -->
     <c-input-text
       label="Titol"
@@ -89,6 +89,9 @@
       :colors="['white', 'black']"
       label="Color de fons"
       is-rounded />
+
+    <!-- Logo -->
+    <logo-selector v-model="properties.logo" />
 
     <!-- Local label -->
     <transition name="slide">

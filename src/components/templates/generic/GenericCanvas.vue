@@ -6,7 +6,8 @@
       'aspect-' + aspect,
       'disposition-' + banner.disposition,
       'theme-' + banner.theme,
-      'banner-background-' + banner.mode
+      'banner-background-' + banner.mode,
+      'logo-' + banner.logo
     ]"
     v-if="banner">
     <div class="text" :style="{ alignItems: banner.textPos, textAlign: banner.textAlign }">
@@ -39,7 +40,8 @@
       :hashtag="banner.hashtag"
       :local-label="banner.localLabel"
       :aspect="aspect"
-      :color="banner.color" />
+      :color="banner.color"
+      :logo="banner.logo" />
     <banner-picture
       :picture="banner.picturePreview"
       :picture-position="objectPosition"

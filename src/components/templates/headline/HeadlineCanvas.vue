@@ -7,7 +7,8 @@
       'aspect-' + aspect,
       'disposition-' + banner.disposition,
       'theme-' + banner.theme,
-      'banner-background-' + banner.mode
+      'banner-background-' + banner.mode,
+      'logo-' + banner.logo
     ]">
     <banner-picture
       :picture-position="objectPosition"
@@ -27,6 +28,7 @@
       :mode="banner.mode"
       :hashtag="banner.hashtag"
       :local-label="banner.localLabel"
+      :logo="banner.logo"
       :aspect="aspect"
       :color="banner.color" />
   </div>

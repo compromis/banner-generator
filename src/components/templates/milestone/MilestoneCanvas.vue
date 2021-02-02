@@ -5,7 +5,8 @@
       'banner-canvas',
       'aspect-' + aspect,
       'style-' + banner.style,
-      'mode-' + banner.mode
+      'mode-' + banner.mode,
+      'logo-' + banner.logo,
     ]"
     v-if="banner">
     <emojis-on-canvas v-model="banner.emojis" />
@@ -33,6 +34,7 @@
       :width="aspect === '916' ? 405 : null"
       theme="blobless"
       :color="banner.color"
+      :logo="banner.logo"
       full-gradient />
   </div>
 </template>

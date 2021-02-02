@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ 'pane tweet-pane': true, 'pane-dimmed': paneDimmed, 'pane-916': aspect === 1 }">
+  <div :class="['pane', 'tweet-pane', { 'pane-dimmed': paneDimmed }, `logo-${properties.logo}`]">
     <!-- Style -->
     <c-tab-group>
       <c-tab v-model="properties.style" value="transparent" name="style">Transparent</c-tab>
@@ -119,6 +119,9 @@
           v-model="properties.cta"
           :maxlength="24" />
     </transition>
+
+    <!-- Logo -->
+    <logo-selector v-model="properties.logo" />
 
     <!-- Local label -->
     <transition name="slide">

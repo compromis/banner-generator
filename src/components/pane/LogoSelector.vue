@@ -1,0 +1,39 @@
+<template>
+  <c-select name="logo" label="Logo" v-model="logo" expanded>
+      <option value="compromis">Compromís</option>
+      <option value="bloc">BLOC</option>
+      <option value="iniciativa">Iniciativa</option>
+      <option value="verds">Verds</option>
+  </c-select>
+</template>
+
+<script>
+import CSelect from './CSelect'
+
+export default {
+  name: 'party-selector',
+
+  components: {
+    CSelect
+  },
+
+  props: {
+    value: {
+      type: String,
+      default: 'compromis'
+    }
+  },
+
+  computed: {
+    logo: {
+      get () {
+        return this.value
+      },
+
+      set (value) {
+        this.$emit('input', value)
+      }
+    }
+  }
+}
+</script>
