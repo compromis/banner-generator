@@ -75,7 +75,7 @@
     <!-- Hashtag -->
     <transition name="slide">
       <c-input-text
-        v-if="aspectKey !== '916'"
+        v-if="aspect !== '916'"
         label="Hashtag"
         name="hashtag"
         placeholder="#"
@@ -88,7 +88,7 @@
     <!-- Local label -->
     <transition name="slide">
       <c-input-text
-        v-if="aspectKey !== '916'"
+        v-if="aspect !== '916'"
         label="Text logo"
         name="localLabel"
         placeholder="Alacant"
@@ -136,7 +136,7 @@ export default {
         event: ['blobs', 'blobless']
       }
 
-      return themes[this.aspectKey]
+      return themes[this.aspect]
     }
   },
 

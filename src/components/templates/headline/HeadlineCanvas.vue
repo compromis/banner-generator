@@ -10,14 +10,9 @@
       'banner-background-' + banner.mode
     ]">
     <banner-picture
-      :picture="banner.picturePreview"
       :picture-position="objectPosition"
-      :picture-dimensions="banner.pictureDimensions"
       :height="aspect === '11' ? 500 : 730"
-      :theme="banner.theme"
-      :edge="aspect === '916'"
-      :color="banner.color"
-      :full-gradient="banner.fullGradient" />
+      :edge="aspect === '916'" />
     <headline-card
       :theme="banner.theme"
       :mode="banner.mode"

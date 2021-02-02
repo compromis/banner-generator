@@ -1,4 +1,3 @@
-import { EventBus } from '@/event-bus.js'
 import PictureUpload from '@/components/pane/PictureUpload.vue'
 import RangeSlider from '@/components/pane/RangeSlider.vue'
 import CInputText from '@/components/pane/CInputText'
@@ -17,18 +16,10 @@ export default {
     ColorSelector
   },
 
-  // Shared props across templates
-  props: {
-    template: {
-      type: Object,
-      required: true
-    }
-  },
-
   // Shared data across templates
   data () {
     return {
-      properties: {
+      properties: { // Default props for all templates
         theme: 'blobless',
         mode: 'white',
         picture: null,
@@ -40,83 +31,70 @@ export default {
         hasLocalLabel: false,
         localLabel: ''
       },
-      errors: {},
-      aspect: 0,
-      isDownloadable: true,
-      displayErrors: false,
-      paneDimmed: false,
-      availableColors: {
-        glowy: ['none', 'orange', 'lgbt', 'feminism'],
-        blobs: ['orange', 'lgbt', 'feminism'],
-        blobless: ['orange', 'black', 'lgbt', 'feminism']
-      }
+      paneDimmed: false
     }
   },
 
   computed: {
-    aspectKey () {
-      return this.template.aspects[this.aspect]
+    availableColors () {
+      return this.$store.state.availableColors
+    },
+
+    aspect () {
+      return this.$store.state.aspect
+    },
+
+    displayErrors () {
+      return this.$store.state.displayErrors
+    },
+
+    errors () {
+      return this.$store.state.errors
     }
   },
 
   created () {
     // Emit default properties to canvas on creation
-    this.$emit('updated', this.properties)
+    this.$store.commit('updateBanner', this.properties)
 
-    // Update aspect
-    EventBus.$on('aspectUpdated', (aspect) => {
-      this.aspect = aspect
-
-      // Check theme is available in selected aspect
-      // Otherwise default to blobless
-      if (this.availableThemes && !this.availableThemes.includes(this.properties.theme)) {
-        this.properties.theme = 'blobless'
-      }
+    this.$root.$on('checkForErrors', () => {
+      this.checkForErrors()
     })
-
-    // Display errors
-    EventBus.$on('checkForErrors', (check) => {
-      this.displayErrors = check
-      this.errors = {}
-      this.validate()
-      if (check && !this.isDownloadable) {
-        window.scrollTo({
-          top: 400,
-          behavior: 'smooth'
-        })
-      }
-    })
-  },
-
-  mounted () {
-    EventBus.$emit('paneLoaded', true)
   },
 
   // Emit banner property changes to canvas
   watch: {
     properties: {
       handler: function (properties) {
-        this.$emit('updated', properties)
-        this.errors = {}
-        this.validate()
-        this.isDownloadable = Object.keys(this.errors).length === 0
+        this.$store.commit('updateBanner', properties)
+        this.checkForErrors()
 
         // Check color is available in selected theme
         // Otherwise, default to orange
-        if ('color' in properties && !this.availableColors[properties.theme].includes(properties.color)) {
+        if ('color' in properties && !this.$store.state.availableColors[properties.theme].includes(properties.color)) {
           this.properties.color = 'orange'
         }
       },
       deep: true
     },
 
-    isDownloadable: function (isDownloadable) {
-      this.$emit('updateIsDownloadable', isDownloadable)
+    aspect () {
+      // Check theme is available in selected aspect
+      // Otherwise default to blobless
+      if (this.availableThemes && !this.availableThemes.includes(this.properties.theme)) {
+        this.properties.theme = 'blobless'
+      }
     }
   },
 
   // Shared functionality across templates
   methods: {
+    checkForErrors () {
+      this.$store.commit('updateErrors', {})
+      this.validate()
+      this.$store.commit('updateIsDownloadable', Object.keys(this.errors).length === 0)
+    },
+
     updateImage (image, ratio) {
       this.customUpdateImage('', image, ratio || 1)
     },
@@ -161,40 +139,34 @@ export default {
     fieldRequired (fields) {
       Object.keys(fields).forEach(field => {
         if (!this.properties[field]) {
-          if (field in this.errors) {
-            this.errors[field].push(fields[field])
-          } else {
-            this.errors[field] = [fields[field]]
-          }
+          this.$store.commit('addError', { field, message: fields[field] })
         }
       })
     },
 
-    pictureRequired () {
+    pictureRequired (field = 'picture') {
       if (!this.properties.picture) {
-        this.errors.picture = ['Has de seleccionar una foto']
+        this.$store.commit('addError', { field, message: 'Has de seleccionar una foto' })
       }
     },
 
     allCapsDisallowed (...fields) {
-      const errorMessage = 'Recomanem no escriure tot el text en majúscules'
+      const message = 'Recomanem no escriure tot el text en majúscules'
       fields.forEach(field => {
         if (this.properties[field].toUpperCase() === this.properties[field] && this.properties[field]) {
-          if (field in this.errors) {
-            this.errors[field].push(errorMessage)
-          } else {
-            this.errors[field] = [errorMessage]
-          }
+          this.$store.commit('addError', { field, message })
         }
       })
     },
 
     setFieldType (field) {
-      return field in this.errors && this.displayErrors ? 'is-danger' : ''
+      const { errors, displayErrors } = this
+      return field in errors && displayErrors ? 'is-danger' : ''
     },
 
     setFieldMessage (field) {
-      return field in this.errors && this.displayErrors ? this.errors[field].join('. ') : ''
+      const { errors, displayErrors } = this
+      return field in errors && displayErrors ? errors[field].join('. ') : ''
     }
   }
 }

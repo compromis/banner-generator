@@ -30,10 +30,10 @@
     <!-- Date and time -->
     <transition name="slide">
       <div class="date-time-grid">
-        <c-field label="Data" v-if="aspect !== 2" edge focusable label-for="date">
+        <c-field label="Data" v-if="aspect !== '916'" edge focusable label-for="date">
           <date-picker v-model="properties.date" id="date"/>
         </c-field>
-        <c-field label="Hora" v-if="aspect !== 2" edge focusable>
+        <c-field label="Hora" v-if="aspect !== '916'" edge focusable>
           <b-timepicker
             rounded
             inline
@@ -49,7 +49,7 @@
       <c-input-text
         label="Lloc"
         name="place"
-        v-if="aspect !== 2"
+        v-if="aspect !== '916'"
         :message="setFieldMessage('place')"
         placeholder="Riu Túria"
         v-model="properties.place"

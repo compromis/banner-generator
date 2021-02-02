@@ -28,7 +28,6 @@
 </template>
 
 <script>
-import templates from './templates/templates'
 import AppFooter from './AppFooter'
 import BrowserWarning from '@/components/utils/BrowserWarning'
 
@@ -42,8 +41,13 @@ export default {
 
   data () {
     return {
-      templates,
       showArchive: false
+    }
+  },
+
+  computed: {
+    templates () {
+      return this.$store.state.templates
     }
   }
 }

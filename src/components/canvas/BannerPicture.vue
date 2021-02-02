@@ -1,10 +1,20 @@
 <template>
   <div class="banner-picture">
-    <glowy-card v-if="theme === 'glowy'" :picture="picture" :picture-position="picturePosition" :color="color" v-bind="$attrs" />
+    <glowy-card v-if="banner.theme === 'glowy'" v-bind="$attrs" />
     <div v-else class="background-picture">
-      <img v-if="picture" :src="picture" :style="picturePosition" />
+      <img v-if="banner.picture" :src="banner.picturePreview" :style="banner.picturePosition" />
     </div>
-    <div v-if="theme === 'blobless'" :class="['banner-gradient', `gradient-${color}`, { 'gradient-partial': !fullGradient, 'gradient-full': fullGradient, 'gradient-background': gradientBackground}]"></div>
+    <div
+      v-if="banner.theme === 'blobless'"
+      :class="[
+        'banner-gradient',
+        `gradient-${banner.color}`,
+        {
+          'gradient-partial': !banner.fullGradient,
+          'gradient-full': banner.fullGradient,
+          'gradient-background': gradientBackground
+        }
+      ]"></div>
   </div>
 </template>
 
@@ -18,36 +28,20 @@ export default {
     GlowyCard
   },
 
+  computed: {
+    banner () {
+      return this.$store.state.banner
+    },
+
+    gradientBackground () {
+      return !this.banner.picturePreview
+    }
+  },
+
   props: {
-    theme: {
-      type: String,
-      default: 'blobs',
-      validator (value) {
-        return ['blobs', 'glowy', 'blobless'].includes(value)
-      }
-    },
-    picture: {
-      type: [File, String],
-      default: null
-    },
     picturePosition: {
       type: Object,
       default: null
-    },
-    color: {
-      type: String,
-      default: 'orange',
-      validator (value) {
-        return ['custom', 'none', 'black', 'orange', 'feminism', 'lgbt', 'green'].includes(value)
-      }
-    },
-    fullGradient: {
-      type: Boolean,
-      default: true
-    },
-    gradientBackground: {
-      type: Boolean,
-      default: false
     }
   }
 }

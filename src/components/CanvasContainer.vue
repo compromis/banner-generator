@@ -4,7 +4,7 @@
       id="aspect-tabs"
       type="is-toggle-rounded"
       position="is-centered"
-      v-model="aspect"
+      v-model="aspectIndex"
       @change="resize">
       <template v-for="(aspect, id) in aspects">
         <b-tab-item
@@ -15,14 +15,11 @@
       </template>
     </b-tabs>
 
-    <div :class="['banner-aspect', `banner-aspect-${template.aspects[aspect]}`]">
+    <div :class="['banner-aspect', `banner-aspect-${aspect}`]">
       <div
         :class="['canvas-wrapper', `template-${template.id.toLowerCase()}`]"
         :style="{transform: `scale(${scale})`, margin: `${margin}px`}">
-        <component
-          :is="canvasComponent"
-          :banner="banner"
-          :aspect="template.aspects[aspect]" />
+        <component :is="canvasComponent" />
       </div>
     </div>
 
@@ -31,7 +28,7 @@
         label="Has d'emplenar tots els camps necessaris"
         position="is-left"
         type="is-dark"
-        :active="!isDownloadable && displayTooltip">
+        :active="!isDownloadable && displayErrors">
         <b-button
           type="is-primary"
           size="is-large"
@@ -50,46 +47,60 @@
 <script>
 import domtoimage from 'dom-to-image'
 import { saveAs } from 'file-saver'
-import { EventBus } from '@/event-bus'
 import API from '@/api'
-import aspects from '@/components/templates/aspects'
-import CaretaSelector from '@/components/pane/CaretaSelector'
 
 export default {
   name: 'canvas-container',
 
   props: {
-    canvasComponent: Function,
-    banner: Object,
-    template: Object,
-    isDownloadable: Boolean
-  },
-
-  components: {
-    CaretaSelector
+    canvasComponent: Function
   },
 
   data () {
     return {
-      aspect: 0,
+      aspectIndex: 0,
       displayTooltip: false,
       downloading: false,
       scale: 1,
-      margin: 0,
-      aspects
+      margin: 0
+    }
+  },
+
+  computed: {
+    aspects () {
+      return this.$store.state.aspects
+    },
+
+    aspect () {
+      return this.$store.state.aspect
+    },
+
+    template () {
+      return this.$store.state.template
+    },
+
+    banner () {
+      return this.$store.state.banner
+    },
+
+    isDownloadable () {
+      return this.$store.state.isDownloadable
+    },
+
+    displayErrors () {
+      return this.$store.state.displayErrors
     }
   },
 
   watch: {
-    aspect: function () {
-      EventBus.$emit('aspectUpdated', this.aspect)
+    aspectIndex (aspect) {
+      this.$store.commit('setAspect', aspect)
     }
   },
 
   created () {
     this.resize()
     window.addEventListener('resize', this.handleWindowResize)
-    EventBus.$on('download', this.download)
   },
 
   destroyed () {
@@ -102,10 +113,9 @@ export default {
     },
 
     handleWindowResize (e) {
-      const aspect = this.template.aspects[this.aspect]
       const minHeight = 450
       const maxHeight = 950
-      const { minScale, maxScale, minMargin, maxMargin } = this.aspects[aspect]
+      const { minScale, maxScale, minMargin, maxMargin } = this.aspects[this.aspect]
       const height = e.srcElement.innerHeight
       const propHeight = (height - minHeight) / (maxHeight - minHeight)
 
@@ -123,11 +133,16 @@ export default {
 
     download () {
       if (!this.banner) return
-      this.displayTooltip = true
-      EventBus.$emit('checkForErrors', true)
+      this.$store.commit('setDisplayErrors', true)
+      this.$root.$emit('checkForErrors')
+      if (!this.isDownloadable) {
+        window.scrollTo({
+          top: 400,
+          behavior: 'smooth'
+        })
+      }
 
-      const aspect = this.template.aspects[this.aspect]
-      const { width, height, downloadScale } = this.aspects[aspect]
+      const { width, height, downloadScale } = this.aspects[this.aspect]
       const bannerWidth = width * downloadScale
       const bannerHeight = height * downloadScale
 
@@ -135,9 +150,9 @@ export default {
         this.downloading = true
 
         domtoimage.toPng(
-          document.getElementById('bannerCanvas' + aspect),
+          document.getElementById('bannerCanvas' + this.aspect),
           {
-            bgcolor: this.banner.mode === 'black' ? '#353949' : '#fff',
+            bgcolor: 'transparent',
             width: bannerWidth,
             height: bannerHeight,
             style: {
@@ -152,7 +167,7 @@ export default {
           // eslint-disable-next-line
           gtag('event', 'banner_download', {
             event_category: 'banners',
-            event_label: aspect
+            event_label: this.aspect
           })
         })
       }
