@@ -54,7 +54,7 @@
     <!-- Speakers -->
     <transition name="slide">
       <speaker-list
-        v-show="aspect !== 2"
+        v-show="aspect !== '916'"
         :accepts-picture="false"
         :accepts-description="false"
         :min-speakers="0"
@@ -96,7 +96,7 @@
     <!-- Local label -->
     <transition name="slide">
       <c-input-text
-        v-if="!aspect"
+        v-if="aspect === '11'"
         label="Text logo"
         name="localLabel"
         placeholder="Alacant"

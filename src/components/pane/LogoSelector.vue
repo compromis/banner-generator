@@ -1,5 +1,5 @@
 <template>
-  <c-select name="logo" label="Logo" v-model="logo" expanded>
+  <c-select name="logo" label="Logo" v-model="logo" expanded v-if="showLogoSelector">
       <option value="compromis">Compromís</option>
       <option value="bloc">BLOC</option>
       <option value="iniciativa">Iniciativa</option>
@@ -33,6 +33,10 @@ export default {
       set (value) {
         this.$emit('input', value)
       }
+    },
+
+    showLogoSelector () {
+      return this.$store.state.settings.showLogoSelector
     }
   }
 }

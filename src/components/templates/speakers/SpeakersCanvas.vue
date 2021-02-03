@@ -18,7 +18,7 @@
           <glowy-card
             :picture="speaker.picture"
             :height="cardSize"
-            gradient="none"
+            color="none"
             glow-size="sm" />
         </div>
         <div class="speakers-name">{{ speaker.name }}</div>
@@ -31,13 +31,7 @@
       </div>
       <div
         class="speakers-title"
-        :style="{
-          fontSize: aspect === '11'
-            ? fontSize(banner.title, 50, 35 , 60)
-            : aspect === 'event'
-              ? fontSize(banner.title, 45, 28 , 60)
-              : fontSize(banner.title, 40, 27 , 60)
-        }">
+        :style="{ fontSize: titleSize }">
         {{ banner.title | formatString }}
       </div>
     </div>
@@ -46,13 +40,7 @@
       <event-info color="gradient" icon="clock">{{ banner.time | formatTime }}</event-info>
       <event-info color="gradient" icon="map-marker-alt">{{ banner.place }}</event-info>
     </div>
-    <banner-frame
-      theme="glowy"
-      :mode="banner.mode"
-      :hashtag="banner.hashtag"
-      :local-label="banner.localLabel"
-      :logo="banner.logo"
-      :aspect="aspect" />
+    <banner-frame />
   </div>
 </template>
 
@@ -83,6 +71,17 @@ export default {
       } else {
         return 180
       }
+    },
+
+    titleSize () {
+      const { fontSize, banner, aspect } = this
+      const sizes = {
+        11: { min: 35, max: 50 },
+        916: { min: 27, max: 40 },
+        event: { min: 28, max: 45 }
+      }
+
+      return fontSize(banner.title, sizes[aspect].max, sizes[aspect].min, 60)
     }
   }
 }

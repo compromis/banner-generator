@@ -19,6 +19,10 @@ export default new Vuex.Store({
       glowy: ['none', 'orange', 'lgbt', 'feminism'],
       blobs: ['orange', 'lgbt', 'feminism'],
       blobless: ['orange', 'black', 'lgbt', 'feminism']
+    },
+    settings: {
+      showArchive: false,
+      showLogoSelector: false
     }
   },
   mutations: {
@@ -53,6 +57,18 @@ export default new Vuex.Store({
 
     setDisplayErrors (state, displayErrors) {
       state.displayErrors = displayErrors
+    },
+
+    updateSettings (state, { prop, value }) {
+      state.settings[prop] = value
+      localStorage.setItem('settings', JSON.stringify(state.settings))
+    },
+
+    initialiseStore (state) {
+      const settings = localStorage.getItem('settings')
+      if (settings) {
+        state.settings = JSON.parse(settings)
+      }
     }
   }
 })

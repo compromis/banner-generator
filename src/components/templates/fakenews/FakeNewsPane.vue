@@ -47,7 +47,7 @@
     <!-- Local label -->
     <transition name="slide">
       <c-input-text
-        v-if="!aspect"
+        v-if="aspect === '11'"
         label="Text logo"
         name="localLabel"
         placeholder="Alacant"
@@ -68,6 +68,7 @@ export default {
   data () {
     return {
       properties: {
+        theme: 'blobs',
         text: '',
         stamp: 'FALS'
       }

@@ -16,8 +16,8 @@
         </template>
       </transition-group>
     </div>
-    <app-footer @archive="(show) => showArchive = show" />
-    <BrowserWarning />
+    <app-footer />
+    <browser-warning />
     <svg width="0" height="0">
       <radialGradient id="compromisGradient" r="150%" cx="30%" cy="107%">
         <stop class="gradient-start" offset="0" />
@@ -39,16 +39,19 @@ export default {
     BrowserWarning
   },
 
-  data () {
-    return {
-      showArchive: false
-    }
-  },
-
   computed: {
     templates () {
       return this.$store.state.templates
+    },
+
+    showArchive () {
+      return this.$store.state.settings.showArchive
     }
+  },
+
+  mounted () {
+    this.$store.commit('setTemplate', null)
+    this.$store.commit('updateBanner', null)
   }
 }
 </script>
