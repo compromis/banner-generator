@@ -166,7 +166,7 @@
     <!-- Hashtag -->
     <transition name="slide">
       <c-input-text
-        v-if="!aspect"
+        v-if="aspect === '11'"
         label="Hashtag"
         name="hashtag"
         placeholder="#"
@@ -182,7 +182,7 @@
     <!-- Local label -->
     <transition name="slide">
       <c-input-text
-        v-if="!aspect"
+        v-if="aspect === '11'"
         label="Text logo"
         name="localLabel"
         placeholder="Alacant"

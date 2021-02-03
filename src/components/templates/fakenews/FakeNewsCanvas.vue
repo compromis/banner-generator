@@ -20,12 +20,7 @@
         <div class="text-lines" :style="{ fontSize: aspect === '11' ? fontSize(banner.text, 50, 30, 140) : fontSize(banner.text, 50, 22, 140) }">{{ banner.text | formatString }}</div>
       </div>
     </div>
-    <banner-frame
-      theme="blobs"
-      :mode="banner.mode"
-      :local-label="banner.localLabel"
-      :logo="banner.logo"
-      :aspect="aspect" />
+    <banner-frame />
   </div>
 </template>
 
