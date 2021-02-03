@@ -20,12 +20,12 @@
         :full-gradient="banner.fullGradient"
         :gradient-background="!banner.picturePreview" />
       <div class="chart">
-        <h1 :style="{fontSize: fontSize(banner.title, 40, 28, 120)}">{{ banner.title }}</h1>
+        <h1 v-if="aspect === '11'" :style="{fontSize: fontSize(banner.title, 40, 28, 120)}">{{ banner.title }}</h1>
 
         <bar-chart
           v-if="banner.chartType === 'bar-vertical'"
           :chart="banner.chart"
-          :max-length="banner.description ? 200 : 310" />
+          :max-length="aspect === 'event' ? (banner.description ? 250 : 360) : (banner.description ? 200 : 310)" />
         <bar-chart
           v-if="banner.chartType === 'bar-horizontal'"
           :chart="banner.chart"
@@ -60,6 +60,13 @@
         <div class="description" v-if="banner.description">{{ banner.description }}</div>
       </div>
     </div>
+    <text-in-pills
+      v-if="banner.title && aspect === 'event'"
+      :text="banner.title"
+      style="margin: 30px 0 0 30px; max-width: 210px;"
+      :font-size="fontSize(banner.title, 28, 18, 120)"
+      shadow
+    />
     <emojis-on-canvas v-model="banner.emojis" />
     <banner-frame
       :theme="banner.theme"
@@ -68,7 +75,8 @@
       :local-label="banner.localLabel"
       :aspect="aspect"
       :color="banner.color"
-      :logo="banner.logo" />
+      :logo="banner.logo"
+      :logoAlign="aspect === event ? 'right' : 'left'" />
   </div>
 </template>
 
@@ -78,6 +86,7 @@ import CanvasMixin from '@/mixins/canvas-mixin.js'
 import BannerPicture from '@/components/canvas/BannerPicture'
 import BannerFrame from '@/components/canvas/BannerFrame'
 import EmojisOnCanvas from '@/components/canvas/EmojisOnCanvas'
+import TextInPills from '@/components/canvas/TextInPills'
 import LineChart from './LineChart'
 import BarChart from './BarChart'
 import PieChart from './PieChart'
@@ -91,6 +100,7 @@ export default {
 
   components: {
     EmojisOnCanvas,
+    TextInPills,
     BannerPicture,
     BannerFrame,
     BarChart,
@@ -196,6 +206,17 @@ export default {
   .theme-blobless {
     .chart {
       bottom: 120px;
+    }
+  }
+
+  .aspect-event {
+    .chart {
+      bottom: 50%;
+      left: 40px;
+      right: 32px;
+      transform: scale(0.65) translate(0, 50%);
+      transform-origin: right bottom;
+      padding-top: 0;
     }
   }
 </style>

@@ -61,7 +61,7 @@ export default [
   {
     id: 'Chart',
     name: 'Gràfica',
-    aspects: ['11'],
+    aspects: ['11', 'event'],
     label: '✨Nou',
     icon: 'chart-bar',
     components: {

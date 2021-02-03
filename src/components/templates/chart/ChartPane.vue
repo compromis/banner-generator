@@ -46,7 +46,7 @@
       :message="setFieldMessage('source')"
       placeholder="INE"
       v-model="properties.source"
-      :maxlength="40" />
+      :maxlength="30" />
 
       <!-- Descripció -->
       <c-input-text
