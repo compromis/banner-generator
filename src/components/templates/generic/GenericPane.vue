@@ -79,25 +79,20 @@
       :errors="errors"
       @upload="updateImage"
       @delete="properties.picture = null; properties.picturePreview = null">
-        <range-slider
-          name="points"
-          :min="0"
-          :max="100"
-          v-model="properties.picturePos"
-          @touchstart="dimPane(true)"
-          @touchend="dimPane(false)" />
-      </picture-upload>
+      <range-slider
+        name="points"
+        :min="0"
+        :max="100"
+        v-model="properties.picturePos"
+        @touchstart="dimPane(true)"
+        @touchend="dimPane(false)" />
+      <b-switch v-if="properties.theme === 'blobless' && properties.picture" v-model="properties.fullGradient">
+        Degradat sobre tota la imatge
+      </b-switch>
+    </picture-upload>
 
     <!-- Frame color  -->
     <color-selector v-model="properties.color" :colors="availableColors[properties.theme]" label="Color" is-rounded />
-
-    <transition name="slide">
-      <c-field v-if="properties.theme === 'blobless'" class="blobless-gradient-option">
-        <b-switch v-model="properties.fullGradient">
-          Degradat sobre tota la imatge
-        </b-switch>
-      </c-field>
-    </transition>
 
     <!-- Dark mode -->
     <transition name="slide">
@@ -187,7 +182,9 @@ export default {
 
   methods: {
     validate () {
-      this.pictureRequired()
+      if (this.properties.theme !== 'blobless') {
+        this.pictureRequired()
+      }
     }
   }
 }

@@ -10,7 +10,7 @@
     <c-input-text
       label="Nom del poble"
       name="municipality"
-      placeholder="Alzira"
+      placeholder="Torrent"
       v-model="properties.municipality"
       :message="setFieldMessage('municipality')"
       :maxlength="40" />
@@ -19,7 +19,7 @@
     <c-input-text
       label="Quantitat"
       name="amount"
-      placeholder="70.000"
+      placeholder="1.973.516"
       v-model="properties.amount"
       :message="setFieldMessage('amount')"
       :maxlength="14" />
