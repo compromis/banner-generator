@@ -47,6 +47,11 @@ export default {
     showArchive () {
       return this.$store.state.settings.showArchive
     }
+  },
+
+  mounted () {
+    this.$store.commit('setTemplate', null)
+    this.$store.commit('updateBanner', null)
   }
 }
 </script>
