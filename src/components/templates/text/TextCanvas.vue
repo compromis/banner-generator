@@ -6,30 +6,20 @@
       'aspect-' + aspect,
       'theme-' + banner.theme,
       'disposition-' + banner.disposition,
-      'banner-background-' + banner.mode
+      'banner-background-' + banner.mode,
+      'logo-' + banner.logo
     ]"
     v-if="banner">
     <div class="grid">
       <banner-picture
-        :picture="banner.picturePreview"
         :picture-position="objectPosition"
-        :theme="banner.theme"
-        :color="banner.color"
-        edge
-        :full-gradient="banner.fullGradient"
-        :gradient-background="!banner.picturePreview" />
+        edge />
       <div class="text text-wysiwyg" v-if="banner.text">
         <div v-html="banner.text"></div>
       </div>
     </div>
     <emojis-on-canvas v-model="banner.emojis" />
-    <banner-frame
-      :theme="banner.theme"
-      :mode="banner.mode"
-      :hashtag="banner.hashtag"
-      :local-label="banner.localLabel"
-      :aspect="aspect"
-      :color="banner.color" />
+    <banner-frame />
   </div>
 </template>
 

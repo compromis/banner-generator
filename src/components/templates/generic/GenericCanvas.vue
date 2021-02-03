@@ -6,7 +6,8 @@
       'aspect-' + aspect,
       'disposition-' + banner.disposition,
       'theme-' + banner.theme,
-      'banner-background-' + banner.mode
+      'banner-background-' + banner.mode,
+      'logo-' + banner.logo
     ]"
     v-if="banner">
     <div class="text" :style="{ alignItems: banner.textPos, textAlign: banner.textAlign }">
@@ -33,24 +34,11 @@
       </div>
     </div>
     <emojis-on-canvas v-model="banner.emojis" />
-    <banner-frame
-      :theme="banner.theme"
-      :mode="banner.mode"
-      :hashtag="banner.hashtag"
-      :local-label="banner.localLabel"
-      :aspect="aspect"
-      :color="banner.color" />
+    <banner-frame />
     <banner-picture
-      :picture="banner.picturePreview"
       :picture-position="objectPosition"
-      :picture-dimensions="banner.pictureDimensions"
       :height="aspect === '11' ? 500 : aspect === 'event' ? 285 : null"
-      :width="aspect === '916' ? 405 : null"
-      :theme="banner.theme"
-      :color="banner.color"
-      :full-gradient="banner.fullGradient"
-      :gradient-background="!banner.picturePreview"
-      />
+      :width="aspect === '916' ? 405 : null" />
   </div>
 </template>
 

@@ -5,7 +5,8 @@
       'banner-canvas',
       'aspect-' + aspect,
       'style-' + banner.style,
-      'mode-' + banner.mode
+      'mode-' + banner.mode,
+      'logo-' + banner.logo,
     ]"
     v-if="banner">
     <emojis-on-canvas v-model="banner.emojis" />
@@ -19,21 +20,11 @@
         </span>
       </div>
     </div>
-    <banner-frame
-      theme="blobless"
-      :hashtag="banner.hashtag"
-      :local-label="banner.localLabel"
-      :aspect="aspect"
-      :color="banner.color" />
+    <banner-frame />
     <banner-picture
-      :picture="banner.picturePreview"
       :picture-position="objectPosition"
-      :picture-dimensions="banner.pictureDimensions"
       :height="aspect === '11' ? 500 : null"
-      :width="aspect === '916' ? 405 : null"
-      theme="blobless"
-      :color="banner.color"
-      full-gradient />
+      :width="aspect === '916' ? 405 : null" />
   </div>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ 'pane generic-pane': true, 'pane-dimmed': paneDimmed, 'pane-916': aspect === 1 }">
+  <div :class="['pane', 'chart-pane', { 'pane-dimmed': paneDimmed }, `logo-${properties.logo}`]">
     <!-- Theme selector -->
     <theme-selector v-model="properties.theme" :themes="['blobs', 'blobless']" />
 
@@ -46,7 +46,7 @@
       :message="setFieldMessage('source')"
       placeholder="INE"
       v-model="properties.source"
-      :maxlength="40" />
+      :maxlength="30" />
 
       <!-- Descripció -->
       <c-input-text
@@ -103,10 +103,13 @@
         :message="setFieldMessage('hashtag')" />
     </transition>
 
+    <!-- Logo -->
+    <logo-selector v-model="properties.logo" />
+
     <!-- Local label -->
     <transition name="slide">
       <c-input-text
-        v-if="aspectKey != '916'"
+        v-if="aspect != '916'"
         label="Text logo"
         name="localLabel"
         placeholder="Alacant"

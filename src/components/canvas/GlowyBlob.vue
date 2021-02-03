@@ -31,19 +31,18 @@ export default {
       type: Boolean,
       default: false
     },
-    aspect: {
-      type: String,
-      default: '11'
-    },
-    color: {
-      type: String,
-      default: 'orange',
-      validator (value) {
-        return ['none', 'orange', 'feminism', 'lgbt', 'green'].includes(value)
-      }
-    },
     offset: {
       type: Object
+    }
+  },
+
+  computed: {
+    aspect () {
+      return this.$store.state.aspect
+    },
+
+    color () {
+      return this.$store.state.banner.color
     }
   }
 }

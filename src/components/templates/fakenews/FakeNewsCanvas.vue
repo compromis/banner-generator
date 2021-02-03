@@ -4,6 +4,7 @@
     :class="[
       'banner-canvas',
       'aspect-' + aspect,
+      'logo-' + banner.logo,
       aspect === '11' ? 'disposition-' + banner.disposition : '',
       banner.localLabel && banner.hasLocalLabel ? 'has-local-label' : '',
       'banner-background-' + banner.mode
@@ -19,11 +20,7 @@
         <div class="text-lines" :style="{ fontSize: aspect === '11' ? fontSize(banner.text, 50, 30, 140) : fontSize(banner.text, 50, 22, 140) }">{{ banner.text | formatString }}</div>
       </div>
     </div>
-    <banner-frame
-      theme="blobs"
-      :mode="banner.mode"
-      :local-label="banner.localLabel"
-      :aspect="aspect" />
+    <banner-frame />
   </div>
 </template>
 

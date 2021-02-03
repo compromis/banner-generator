@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ 'pane': true, 'pane-dimmed': paneDimmed }">
+  <div :class="['pane', 'speakers-pane', { 'pane-dimmed': paneDimmed }, `logo-${properties.logo}`]">
     <!-- Title -->
     <c-input-text
       label="Títol"
@@ -30,10 +30,10 @@
     <!-- Date and time -->
     <transition name="slide">
       <div class="date-time-grid">
-        <c-field label="Data" v-if="aspect !== 2" edge focusable label-for="date">
+        <c-field label="Data" v-if="aspect !== '916'" edge focusable label-for="date">
           <date-picker v-model="properties.date" id="date"/>
         </c-field>
-        <c-field label="Hora" v-if="aspect !== 2" edge focusable>
+        <c-field label="Hora" v-if="aspect !== '916'" edge focusable>
           <b-timepicker
             rounded
             inline
@@ -49,7 +49,7 @@
       <c-input-text
         label="Lloc"
         name="place"
-        v-if="aspect !== 2"
+        v-if="aspect !== '916'"
         :message="setFieldMessage('place')"
         placeholder="Riu Túria"
         v-model="properties.place"
@@ -63,10 +63,13 @@
       label="Color de fons"
       is-rounded />
 
+    <!-- Logo -->
+    <logo-selector v-model="properties.logo" />
+
     <!-- Local label -->
     <transition name="slide">
       <c-input-text
-        v-if="!aspect"
+        v-if="aspect === '11'"
         label="Text logo"
         name="localLabel"
         placeholder="Alacant"

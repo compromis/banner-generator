@@ -68,7 +68,7 @@
 
     <!-- Hashtag -->
     <transition name="slide">
-      <b-field label="Hashtag" v-if="!aspect">
+      <b-field label="Hashtag" v-if="aspect === '11'">
         <b-input
           placeholder="#"
           @input="updateHashtag"
@@ -80,7 +80,7 @@
 
     <!-- Local label -->
     <transition name="slide">
-      <div v-if="!aspect" class="field">
+      <div v-if="aspect === '11'" class="field">
         <b-switch v-model="properties.hasLocalLabel">
           Afegir text al logo
         </b-switch>

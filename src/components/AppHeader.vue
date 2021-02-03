@@ -14,17 +14,10 @@
 </template>
 
 <script>
-import templates from './templates/templates'
 import Careta from '@/components/canvas/Careta'
 
 export default {
   name: 'app-header',
-
-  data () {
-    return {
-      templates
-    }
-  },
 
   components: {
     Careta
@@ -36,7 +29,7 @@ export default {
 
   computed: {
     template () {
-      return this.templates.find(template => template.id.toLowerCase() === this.$route.params.pathMatch)
+      return this.$store.state.template
     }
   }
 }

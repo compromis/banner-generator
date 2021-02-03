@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ 'pane headline-pane': true, 'pane-dimmed': paneDimmed }">
+  <div :class="['pane', 'headline-pane', { 'pane-dimmed': paneDimmed }, `logo-${properties.logo}`]">
     <!-- Theme selector -->
     <theme-selector v-model="properties.theme" :themes="availableThemes" />
 
@@ -64,9 +64,7 @@
     </c-tab-group>
 
     <!-- Emoji picker -->
-    <transition name="slide">
-      <emoji-picker v-model="properties.emojis" v-if="properties.card === 1" />
-    </transition>
+    <emoji-picker v-model="properties.emojis" />
 
     <!-- Picture -->
     <picture-upload
@@ -110,7 +108,7 @@
     <!-- Hashtag -->
     <transition name="slide">
       <c-input-text
-        v-if="aspectKey !== '916'"
+        v-if="aspect !== '916'"
         label="Hashtag"
         name="hashtag"
         placeholder="#"
@@ -120,10 +118,13 @@
         :message="setFieldMessage('hashtag')" />
     </transition>
 
+    <!-- Logo -->
+    <logo-selector v-model="properties.logo" />
+
     <!-- Local label -->
     <transition name="slide">
       <c-input-text
-        v-if="aspectKey !== '916'"
+        v-if="aspect !== '916'"
         label="Text logo"
         name="localLabel"
         placeholder="Alacant"
@@ -179,7 +180,7 @@ export default {
         event: ['blobs', 'blobless']
       }
 
-      return themes[this.aspectKey]
+      return themes[this.aspect]
     }
   },
 

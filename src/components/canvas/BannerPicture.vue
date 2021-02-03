@@ -1,10 +1,25 @@
 <template>
   <div class="banner-picture">
-    <glowy-card v-if="theme === 'glowy'" :picture="picture" :picture-position="picturePosition" :color="color" v-bind="$attrs" />
+    <glowy-card
+      v-if="banner.theme === 'glowy'"
+      :picture="computedPicture"
+      :picture-position="picturePosition"
+      :color="computedColor"
+      v-bind="$attrs" />
     <div v-else class="background-picture">
-      <img v-if="picture" :src="picture" :style="picturePosition" />
+      <img v-if="computedPicture" :src="computedPicture" :style="picturePosition" />
     </div>
-    <div v-if="theme === 'blobless'" :class="['banner-gradient', `gradient-${color}`, { 'gradient-partial': !fullGradient, 'gradient-full': fullGradient, 'gradient-background': gradientBackground}]"></div>
+    <div
+      v-if="banner.theme === 'blobless'"
+      :class="[
+        'banner-gradient',
+        `gradient-${computedColor}`,
+        {
+          'gradient-partial': !banner.fullGradient,
+          'gradient-full': banner.fullGradient,
+          'gradient-background': !computedPicture
+        }
+      ]"></div>
   </div>
 </template>
 
@@ -19,15 +34,8 @@ export default {
   },
 
   props: {
-    theme: {
-      type: String,
-      default: 'blobs',
-      validator (value) {
-        return ['blobs', 'glowy', 'blobless'].includes(value)
-      }
-    },
     picture: {
-      type: [File, String],
+      type: String,
       default: null
     },
     picturePosition: {
@@ -36,18 +44,21 @@ export default {
     },
     color: {
       type: String,
-      default: 'orange',
-      validator (value) {
-        return ['custom', 'none', 'black', 'orange', 'feminism', 'lgbt', 'green'].includes(value)
-      }
+      default: null
+    }
+  },
+
+  computed: {
+    banner () {
+      return this.$store.state.banner
     },
-    fullGradient: {
-      type: Boolean,
-      default: true
+
+    computedPicture () {
+      return this.picture || this.banner.picturePreview
     },
-    gradientBackground: {
-      type: Boolean,
-      default: false
+
+    computedColor () {
+      return this.color || this.banner.color
     }
   }
 }

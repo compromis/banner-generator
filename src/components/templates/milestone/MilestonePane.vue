@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ 'pane milestone-pane': true, 'pane-dimmed': paneDimmed, 'pane-916': aspect === 1 }">
+  <div :class="['pane', 'milestone-pane', { 'pane-dimmed': paneDimmed, 'pane-916': aspect === 1 }, `logo-${properties.logo}`]">
     <c-tab-group>
       <c-tab v-model="properties.style" value="transparent" name="style">Transparent</c-tab>
       <c-tab v-model="properties.style" value="card" name="style">Targeta</c-tab>
@@ -87,7 +87,7 @@
     <!-- Hashtag -->
     <transition name="slide">
       <c-input-text
-        v-if="!aspect"
+        v-if="aspect === '11'"
         label="Hashtag"
         name="hashtag"
         placeholder="#"
@@ -97,10 +97,13 @@
         :message="setFieldMessage('hashtag')" />
     </transition>
 
+    <!-- Logo -->
+    <logo-selector v-model="properties.logo" />
+
     <!-- Local label -->
     <transition name="slide">
       <c-input-text
-        v-if="!aspect"
+        v-if="aspect === '11'"
         label="Text logo"
         name="localLabel"
         placeholder="Alacant"

@@ -5,7 +5,8 @@
       'banner-canvas',
       `style-${banner.style}`,
       `background-${banner.backgroundColor}`,
-      `mode-${banner.mode}`
+      `mode-${banner.mode}`,
+      `logo-${banner.logo}`
     ]"
     v-if="banner">
     <div class="background"></div>
@@ -67,7 +68,7 @@
         <img src="./images/point-down.png" alt="" />
       </div>
     </div>
-    <banner-frame theme="blobless" :local-label="banner.localLabel" :logo="banner.backgroundColor === 'white' ? 'color' : 'auto'" />
+    <banner-frame :logo-style="banner.backgroundColor === 'white' ? 'color' : 'auto'" />
   </div>
 </template>
 

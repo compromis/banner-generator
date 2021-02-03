@@ -6,25 +6,20 @@
       'aspect-' + aspect,
       'theme-' + banner.theme,
       'banner-background-' + banner.mode,
+      'logo-' + banner.logo,
       { 'has-description': banner.description.length }
     ]"
     v-if="banner">
     <div class="grid">
-      <banner-picture
-        :picture="banner.picturePreview"
-        :picture-position="objectPosition"
-        :theme="banner.theme"
-        :color="banner.color"
-        edge
-        :full-gradient="banner.fullGradient"
-        :gradient-background="!banner.picturePreview" />
+      <banner-picture :picture-position="objectPosition" edge />
       <div class="chart">
-        <h1 :style="{fontSize: fontSize(banner.title, 40, 28, 120)}">{{ banner.title }}</h1>
-
+        <h1 v-if="aspect === '11'" :style="{ fontSize: fontSize(banner.title, 40, 28, 120) }">
+          {{ banner.title }}
+        </h1>
         <bar-chart
           v-if="banner.chartType === 'bar-vertical'"
           :chart="banner.chart"
-          :max-length="banner.description ? 200 : 310" />
+          :max-length="aspect === 'event' ? (banner.description ? 250 : 360) : (banner.description ? 200 : 310)" />
         <bar-chart
           v-if="banner.chartType === 'bar-horizontal'"
           :chart="banner.chart"
@@ -59,14 +54,15 @@
         <div class="description" v-if="banner.description">{{ banner.description }}</div>
       </div>
     </div>
+    <text-in-pills
+      v-if="banner.title && aspect === 'event'"
+      :text="banner.title"
+      style="margin: 30px 0 0 30px; max-width: 210px;"
+      :font-size="fontSize(banner.title, 28, 18, 120)"
+      shadow
+    />
     <emojis-on-canvas v-model="banner.emojis" />
-    <banner-frame
-      :theme="banner.theme"
-      :mode="banner.mode"
-      :hashtag="banner.hashtag"
-      :local-label="banner.localLabel"
-      :aspect="aspect"
-      :color="banner.color" />
+    <banner-frame :logo-align="aspect === 'event' ? 'left' : 'right'" />
   </div>
 </template>
 
@@ -76,6 +72,7 @@ import CanvasMixin from '@/mixins/canvas-mixin.js'
 import BannerPicture from '@/components/canvas/BannerPicture'
 import BannerFrame from '@/components/canvas/BannerFrame'
 import EmojisOnCanvas from '@/components/canvas/EmojisOnCanvas'
+import TextInPills from '@/components/canvas/TextInPills'
 import LineChart from './LineChart'
 import BarChart from './BarChart'
 import PieChart from './PieChart'
@@ -89,6 +86,7 @@ export default {
 
   components: {
     EmojisOnCanvas,
+    TextInPills,
     BannerPicture,
     BannerFrame,
     BarChart,
@@ -194,6 +192,17 @@ export default {
   .theme-blobless {
     .chart {
       bottom: 120px;
+    }
+  }
+
+  .aspect-event {
+    .chart {
+      bottom: 50%;
+      left: 40px;
+      right: 32px;
+      transform: scale(0.65) translate(0, 50%);
+      transform-origin: right bottom;
+      padding-top: 0;
     }
   }
 </style>

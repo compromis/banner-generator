@@ -7,33 +7,18 @@
       'aspect-' + aspect,
       'disposition-' + banner.disposition,
       'theme-' + banner.theme,
-      'banner-background-' + banner.mode
+      'banner-background-' + banner.mode,
+      'logo-' + banner.logo
     ]">
     <banner-picture
-      :picture="banner.picturePreview"
       :picture-position="objectPosition"
-      :picture-dimensions="banner.pictureDimensions"
       :height="aspect === '11' ? 500 : 730"
-      :theme="banner.theme"
-      :edge="aspect === '916'"
-      :color="banner.color"
-      :full-gradient="banner.fullGradient" />
+      :edge="aspect === '916'" />
     <headline-card
-      :theme="banner.theme"
-      :mode="banner.mode"
-      :headline="banner.headline"
-      :source="banner.source"
-      :custom-source="banner.customSource"
-      :custom-source-color="banner.customSourceColor"
-      :font-size="aspect === '11' ? fontSize(banner.headline, 50, 30, 160) : fontSize(banner.headline, 35, 23.5, 160)"/>
+      :headline="$options.filters.formatString(banner.headline)"
+      :font-size="headlineFontSize" />
     <emojis-on-canvas v-model="banner.emojis" />
-    <banner-frame
-      :theme="banner.theme"
-      :mode="banner.mode"
-      :hashtag="banner.hashtag"
-      :local-label="banner.localLabel"
-      :aspect="aspect"
-      :color="banner.color" />
+    <banner-frame />
   </div>
 </template>
 
@@ -54,6 +39,18 @@ export default {
     BannerFrame,
     EmojisOnCanvas,
     HeadlineCard
+  },
+
+  computed: {
+    headlineFontSize () {
+      const sizes = {
+        11: { min: 30, max: 50 },
+        916: { min: 23.5, max: 35 },
+        event: { min: 23.5, max: 35 }
+      }
+
+      return this.fontSize(this.banner.headline, sizes[this.aspect].max, sizes[this.aspect].min, 160)
+    }
   }
 }
 </script>

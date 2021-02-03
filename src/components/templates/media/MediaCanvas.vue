@@ -5,15 +5,13 @@
       'banner-canvas',
       'aspect-' + aspect,
       'disposition-' + banner.disposition,
-      'banner-background-' + banner.mode
+      'banner-background-' + banner.mode,
+      'logo-' + banner.logo
     ]"
     v-if="banner">
     <div class="media-grid">
       <banner-picture
-        :picture="banner.picturePreview"
         :picture-position="objectPosition"
-        theme="glowy"
-        :color="banner.color"
         :edge="true" />
       <div class="medium">
         <span>{{ banner.aspect }}</span>
@@ -27,18 +25,18 @@
         <div class="medium-title" :style="{fontSize: fontSize(banner.title, 60, 40, 30)}">
           <span v-if="aspect === '11'">{{ banner.title | formatString }}</span>
           <text-in-pills
-          v-else
-          :text="banner.title"
-          :fontSize="fontSize(banner.title, 50, 35, 30)"
-          />
+            v-else
+            :text="banner.title"
+            :fontSize="fontSize(banner.title, 50, 35, 30)"
+            />
         </div>
         <div class="medium-subtitle">
           <span v-if="aspect === '11'">{{ banner.subtitle | formatString }}</span>
           <text-in-pills
-          v-else
-          :text="banner.subtitle"
-          fontSize="20px"
-          />
+            v-else
+            :text="banner.subtitle"
+            fontSize="20px"
+            />
         </div>
         <media-source
           :source="banner.source"
@@ -53,12 +51,7 @@
         </div>
       </div>
     </div>
-    <banner-frame
-      theme="glowy"
-      :mode="banner.mode"
-      :hashtag="banner.hashtag"
-      :local-label="banner.localLabel"
-      :aspect="aspect" />
+    <banner-frame />
   </div>
 </template>
 

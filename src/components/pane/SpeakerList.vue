@@ -19,8 +19,7 @@
           size="is-small"
           :icon="icon"
           :maxlength="maxLengthName"
-          small
-        />
+          small />
         <c-input-text
           class="speaker-description"
           v-if="acceptsDescription"
@@ -31,8 +30,7 @@
           size="is-small"
           icon="credit-card-blank"
           :maxlength="maxLengthDescription"
-          small
-        />
+          small />
         <c-field class="speaker-picture" v-if="acceptsPicture" edge>
           <b-upload
             @input="(image) => updateSpeakerPicture(image, i)"
@@ -155,7 +153,7 @@ export default {
       this.speakers.push({ name: '', description: '', picture: null })
       this.$nextTick(function () {
         const lastSpeaker = this.speakers.length - 1
-        this.$refs[`speaker${lastSpeaker}`][0].focus()
+        this.$refs['speaker' + lastSpeaker][0].$refs['speaker' + lastSpeaker].focus()
       })
     },
 

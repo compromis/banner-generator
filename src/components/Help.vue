@@ -33,13 +33,18 @@ export default {
   },
 
   props: {
-    template: Object,
     isText: Boolean
   },
 
   data () {
     return {
       formIsActive: false
+    }
+  },
+
+  computed: {
+    template () {
+      return this.$store.state.template
     }
   },
 
