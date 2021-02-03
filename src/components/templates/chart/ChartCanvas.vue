@@ -11,17 +11,11 @@
     ]"
     v-if="banner">
     <div class="grid">
-      <banner-picture
-        :picture="banner.picturePreview"
-        :picture-position="objectPosition"
-        :theme="banner.theme"
-        :color="banner.color"
-        edge
-        :full-gradient="banner.fullGradient"
-        :gradient-background="!banner.picturePreview" />
+      <banner-picture :picture-position="objectPosition" edge />
       <div class="chart">
-        <h1 v-if="aspect === '11'" :style="{fontSize: fontSize(banner.title, 40, 28, 120)}">{{ banner.title }}</h1>
-
+        <h1 v-if="aspect === '11'" :style="{ fontSize: fontSize(banner.title, 40, 28, 120) }">
+          {{ banner.title }}
+        </h1>
         <bar-chart
           v-if="banner.chartType === 'bar-vertical'"
           :chart="banner.chart"
@@ -68,15 +62,7 @@
       shadow
     />
     <emojis-on-canvas v-model="banner.emojis" />
-    <banner-frame
-      :theme="banner.theme"
-      :mode="banner.mode"
-      :hashtag="banner.hashtag"
-      :local-label="banner.localLabel"
-      :aspect="aspect"
-      :color="banner.color"
-      :logo="banner.logo"
-      :logoAlign="aspect === event ? 'right' : 'left'" />
+    <banner-frame :logo-align="aspect === 'event' ? 'left' : 'right'" />
   </div>
 </template>
 
