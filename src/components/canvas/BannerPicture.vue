@@ -118,11 +118,17 @@ export default {
         opacity: .75;
       }
 
+      &-feminism {
+        --gradient-orientation: -40deg;
+      }
+
       &-partial {
         top: 50%;
         bottom: -10%;
 
         &.gradient-orange {
+          mask-image: url(../../assets/mask.svg);
+          mask-mode: alpha;
           background: linear-gradient(var(--gradient-orientation, 110deg), rgba($gradient-start, 1) 0, rgba($gradient-start, .9) 20%, rgba($gradient-end, .7) 60%, rgba($gradient-end, 0) 95%);
         }
 
@@ -131,6 +137,12 @@ export default {
           top: unset;
           bottom: 0;
           height: 90px;
+        }
+
+        &.gradient-feminism {
+          mask-image: url(../../assets/mask.svg);
+          mask-mode: alpha;
+          bottom: 0;
         }
       }
 
@@ -161,7 +173,8 @@ export default {
           opacity: 1;
         }
         &.gradient-feminism {
-          background: linear-gradient(var(--gradient-orientation, 110deg), rgba(125, 58, 129, 1), rgba(197, 70, 135, 1), rgba(197, 70, 135, 1));
+          background: $gradient-feminista;
+          mask-image: none;
         }
       }
     }

@@ -8,6 +8,8 @@ $family-primary: 'Compromis', sans-serif;
 $primary: #ff6600;
 $primary-invert: findColorInvert($primary);
 $iniciativa: #AF243C;
+$feminism-start: #7D3A81;
+$feminism-end: #C54687;
 
 $gray-darkest: #353949;
 $gray-lightest: #f8faff;
@@ -65,7 +67,7 @@ $input-shadow: 0;
 $gradient-start: #d23517;
 $gradient-end: #f39128;
 $gradient: linear-gradient(var(--gradient-orientation, 45deg), $gradient-start, $gradient-end);
-$gradient-feminista: linear-gradient(var(--gradient-orientation, 45deg), #7D3A81, #C54687);
+$gradient-feminista: linear-gradient(var(--gradient-orientation, 45deg), $gradient-end, $gradient-start 14%, $feminism-end 48%, $feminism-start 100%);
 $gradient-green: linear-gradient(var(--gradient-orientation, 45deg), #38B34A, #8CC949);
 $gradient-iniciativa: linear-gradient(var(--gradient-orientation, 45deg), $iniciativa, $iniciativa);
 $gradient-lgtb: linear-gradient(var(--gradient-orientation, 180deg),
@@ -87,7 +89,7 @@ $blob-gradients: ('orange': $gradient, 'feminism': $gradient-feminista, 'green':
 
 // Translucent gradients
 $trans-gradient: linear-gradient(var(--gradient-orientation, 110deg), rgba($gradient-start, .95), rgba($gradient-end, .7), rgba($gradient-end, .1));
-$trans-gradient-feminism: linear-gradient(var(--gradient-orientation, 110deg), rgba(#7D3A81, .9), rgba(#C54687, .6), rgba(#C54687, 0));
+$trans-gradient-feminism: linear-gradient(var(--gradient-orientation, 110deg), rgba($gradient-end, .9), rgba($gradient-start, .6) 14%, rgba($feminism-end, .6) 48%, rgba($feminism-start, 0) 100%);
 $trans-gradient-green: linear-gradient(var(--gradient-orientation, 110deg), rgba(#38B34A, .9), rgba(#8CC949, .6), rgba(#8CC949, 0));
 $trans-gradient-custom: linear-gradient(var(--gradient-orientation, 180deg), var(--gradient-color, $gradient-start), transparent);
 $trans-gradient-black: linear-gradient(var(--gradient-orientation, 110deg), rgba($gray-900, .8), rgba($gray-900, 0));
