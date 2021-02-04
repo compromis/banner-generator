@@ -1,6 +1,6 @@
 <template>
   <div class="banner-workspace" v-if="banner">
-    <b-dropdown :triggers="['hover']" aria-role="list" v-if="template" class="aspect-selector">
+    <b-dropdown :triggers="['hover']" aria-role="list" v-if="template" class="aspect-selector-mobile">
       <template #trigger>
         <b-button :icon-left="aspects[aspect].icon" icon-right="chevron-down">
           <span class="aspect-name">{{ aspects[aspect].name }}</span>
@@ -150,7 +150,7 @@ export default {
         domtoimage.toPng(
           document.getElementById('bannerCanvas' + this.aspect),
           {
-            bgcolor: 'transparent',
+            bgcolor: this.banner.mode === 'black' ? '#353949' : '#fff',
             width: bannerWidth,
             height: bannerHeight,
             style: {
@@ -251,7 +251,8 @@ export default {
     margin: 0 auto;
   }
 
-  .aspect-selector {
+  .aspect-selector-mobile {
+    display: none !important;
     margin: 0 auto 1rem auto;
     transform: translateY(-0.375rem);
     min-width: 100px;
