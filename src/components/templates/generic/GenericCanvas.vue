@@ -37,7 +37,7 @@
     <banner-frame />
     <banner-picture
       :picture-position="objectPosition"
-      :height="aspect === '11' ? 500 : aspect === 'event' ? 285 : null"
+      :height="aspect === '11' ? 500 : aspect === '169' ? 285 : null"
       :width="aspect === '916' ? 405 : null" />
   </div>
 </template>
@@ -67,7 +67,7 @@ export default {
       const sizes = {
         11: { min: 35, max: 60 },
         916: { min: 25, max: 50 },
-        event: { min: 30, max: 55 }
+        169: { min: 30, max: 55 }
       }
 
       return fontSize(banner.text, sizes[aspect].max, sizes[aspect].min, 100, banner.textSize)
@@ -130,7 +130,7 @@ export default {
       right: 25px;
     }
 
-    &.aspect-event .text {
+    &.aspect-169 .text {
       top: 65px;
       bottom: 95px;
     }
@@ -179,8 +179,8 @@ export default {
       }
     }
 
-    /* Event */
-    &.aspect-event {
+    /* Twitter */
+    &.aspect-169 {
       .text {
         top: 25px;
         bottom: 95px;
@@ -210,7 +210,7 @@ export default {
       }
     }
 
-    &.aspect-event {
+    &.aspect-169 {
       .text {
         top: 65px;
         bottom: 95px;

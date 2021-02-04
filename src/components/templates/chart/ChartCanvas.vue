@@ -19,7 +19,7 @@
         <bar-chart
           v-if="banner.chartType === 'bar-vertical'"
           :chart="banner.chart"
-          :max-length="aspect === 'event' ? (banner.description ? 250 : 360) : (banner.description ? 200 : 310)" />
+          :max-length="aspect === '169' ? (banner.description ? 250 : 360) : (banner.description ? 200 : 310)" />
         <bar-chart
           v-if="banner.chartType === 'bar-horizontal'"
           :chart="banner.chart"
@@ -55,14 +55,14 @@
       </div>
     </div>
     <text-in-pills
-      v-if="banner.title && aspect === 'event'"
+      v-if="banner.title && aspect === '169'"
       :text="banner.title"
       style="margin: 30px 0 0 30px; max-width: 210px;"
       :font-size="fontSize(banner.title, 28, 18, 120)"
       shadow
     />
     <emojis-on-canvas v-model="banner.emojis" />
-    <banner-frame :logo-align="aspect === 'event' ? 'left' : 'right'" />
+    <banner-frame :logo-align="aspect === '169' ? 'left' : 'right'" />
   </div>
 </template>
 
@@ -167,7 +167,7 @@ export default {
     }
   }
 
-  .aspect-event {
+  .aspect-169 {
     .chart {
       bottom: 85px;
       top: auto;
@@ -195,7 +195,7 @@ export default {
     }
   }
 
-  .aspect-event {
+  .aspect-169 {
     .chart {
       bottom: 50%;
       left: 40px;

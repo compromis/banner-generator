@@ -32,9 +32,11 @@
         v-model="properties.picturePos"
         @touchstart="dimPane(true)"
         @touchend="dimPane(false)" />
-      <b-switch v-if="properties.theme === 'blobless' && properties.picture" v-model="properties.fullGradient">
-        Degradat sobre tota la imatge
-      </b-switch>
+      <transition name="slide">
+        <b-switch v-if="properties.theme === 'blobless' && properties.picture" v-model="properties.fullGradient">
+          Degradat sobre tota la imatge
+        </b-switch>
+      </transition>
     </picture-upload>
 
     <!-- Frame color  -->
@@ -119,7 +121,7 @@ export default {
       const themes = {
         11: ['glowy', 'blobs', 'blobless'],
         916: ['glowy', 'blobs', 'blobless'],
-        event: ['blobs', 'blobless']
+        169: ['blobs', 'blobless']
       }
 
       return themes[this.aspect]

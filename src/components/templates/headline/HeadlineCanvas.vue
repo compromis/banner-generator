@@ -46,7 +46,7 @@ export default {
       const sizes = {
         11: { min: 30, max: 50 },
         916: { min: 23.5, max: 35 },
-        event: { min: 23.5, max: 35 }
+        169: { min: 23.5, max: 35 }
       }
 
       return this.fontSize(this.banner.headline, sizes[this.aspect].max, sizes[this.aspect].min, 160)
@@ -172,7 +172,7 @@ export default {
   }
 
   /* Twitter */
-  .aspect-event {
+  .aspect-169 {
     &.theme-blobless {
       &.disposition-top {
         .headline {

@@ -101,7 +101,7 @@ export default {
       }
     }
 
-    &.aspect-event {
+    &.aspect-169 {
       .text {
         bottom: 85px;
         top: auto;
@@ -114,7 +114,7 @@ export default {
         bottom: auto;
       }
 
-      &.aspect-event {
+      &.aspect-169 {
         .text {
           top: 65px;
         }
@@ -127,7 +127,7 @@ export default {
       bottom: 120px;
     }
 
-    &.aspect-event.disposition-top {
+    &.aspect-169.disposition-top {
       .text {
         top: 40px;
       }
@@ -252,7 +252,7 @@ export default {
     }
   }
 
-  .aspect-event {
+  .aspect-169 {
     .text-wysiwyg {
       font-size: 14px;
 

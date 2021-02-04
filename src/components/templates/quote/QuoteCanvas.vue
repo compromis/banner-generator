@@ -59,7 +59,7 @@ export default {
       const sizes = {
         11: { min: 33, max: 43 },
         916: { min: 28, max: 36 },
-        event: { min: 23, max: 36 }
+        169: { min: 23, max: 36 }
       }
 
       return fontSize(banner.quote, sizes[aspect].max, sizes[aspect].min, 140)
@@ -182,7 +182,7 @@ export default {
       }
     }
 
-    &.aspect-event {
+    &.aspect-169 {
       .quote {
         top: 110px;
         bottom: 20px;
@@ -197,7 +197,7 @@ export default {
         bottom: 160px;
       }
 
-      &.aspect-event {
+      &.aspect-169 {
         .quote {
           top: -20px;
           right: 40px;
@@ -239,7 +239,7 @@ export default {
       }
     }
 
-    &.aspect-event {
+    &.aspect-169 {
       .quote {
         top: 0;
         bottom: 110px;
@@ -247,7 +247,7 @@ export default {
     }
   }
 
-  .aspect-event {
+  .aspect-169 {
     &.disposition-left {
       .quote {
         bottom: 38px;

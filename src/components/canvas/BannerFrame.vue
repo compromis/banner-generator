@@ -90,7 +90,7 @@ export default {
       const { banner, aspect } = this
 
       return banner.localLabel.length > 6 ||
-        (aspect === 'event' && banner.localLabel.length > 0) ||
+        (aspect === '169' && banner.localLabel.length > 0) ||
         banner.logo !== 'compromis'
     }
   },

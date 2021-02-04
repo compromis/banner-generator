@@ -35,8 +35,7 @@
           <text-in-pills
             v-else
             :text="banner.subtitle"
-            fontSize="20px"
-            />
+            fontSize="20px" />
         </div>
         <media-source
           :source="banner.source"

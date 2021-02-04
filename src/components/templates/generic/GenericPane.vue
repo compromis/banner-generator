@@ -178,7 +178,7 @@ export default {
       const themes = {
         11: ['glowy', 'blobs', 'blobless'],
         916: ['glowy', 'blobs', 'blobless'],
-        event: ['blobs', 'blobless']
+        169: ['blobs', 'blobless']
       }
 
       return themes[this.aspect]

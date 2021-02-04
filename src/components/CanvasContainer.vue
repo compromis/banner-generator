@@ -209,7 +209,8 @@ export default {
     width: 405px;
   }
 
-  .banner-aspect-event .banner-canvas {
+  .banner-aspect-event .banner-canvas,
+  .banner-aspect-169 .banner-canvas {
     width: 720px;
     height: 405px;
   }
@@ -255,7 +256,7 @@ export default {
     transform: translateY(-0.375rem);
     min-width: 100px;
     position: relative;
-    z-index: 500;
+    z-index: 40;
 
     &::v-deep .dropdown-menu {
       padding-top: 14px !important;
