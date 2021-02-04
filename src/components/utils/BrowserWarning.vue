@@ -4,9 +4,9 @@
         <b-icon icon="exclamation-triangle" size="is-large" />
         <h2>Atenció</h2>
         <p>
-          Hem detectat que el teu navegador pot <strong>no ser compatible</strong> amb aquesta app.
+          Es possible que el teu navegador <strong>no siga compatible</strong> amb aquesta aplicació.
           La ferramenta només està pensada per a ser gastada amb les últimes versions
-          dels navegadors <strong>Chrome i Firefox</strong>.
+          de <strong>Chrome o Edge</strong>.
           Recomanem que empres els navegadors compatibles.
         </p>
         <b-button ref="confirm" type="is-primary" @click="isModalActive = false">Entés</b-button>
@@ -29,10 +29,8 @@ export default {
 
   created () {
     const result = browser()
-    const isBlinkOrGecko = ['chrome', 'firefox', 'opera'].includes(result.name)
-    const isNewChrome = result.name === 'chrome' && result.versionNumber > 80
 
-    if (isBlinkOrGecko && isNewChrome) {
+    if (result.name === 'chrome' && result.versionNumber > 80) {
       this.isModalActive = false
     }
   }
