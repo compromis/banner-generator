@@ -81,6 +81,11 @@
         v-model="properties.picturePos"
         @touchstart="dimPane(true)"
         @touchend="dimPane(false)" />
+      <transition name="slide">
+        <b-switch v-model="properties.fullGradient" v-if="properties.theme === 'blobless'">
+          Degradat sobre tota la imatge
+        </b-switch>
+      </transition>
     </picture-upload>
 
     <!-- Frame color  -->
@@ -89,14 +94,6 @@
       :colors="availableColors[properties.theme]"
       label="Color accent"
       is-rounded />
-
-    <transition name="slide">
-      <c-field v-if="properties.theme === 'blobless'" class="blobless-gradient-option">
-        <b-switch v-model="properties.fullGradient">
-          Degradat sobre tota la imatge
-        </b-switch>
-      </c-field>
-    </transition>
 
     <!-- Dark mode -->
     <color-selector

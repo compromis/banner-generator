@@ -1,19 +1,19 @@
 <template>
   <div class="banner-workspace" v-if="banner">
-    <b-tabs
-      id="aspect-tabs"
-      type="is-toggle-rounded"
-      position="is-centered"
-      v-model="aspectIndex"
-      @change="resize">
-      <template v-for="(aspect, id) in aspects">
-        <b-tab-item
-          :key="id"
-          v-if="template.aspects.includes(id)"
-          :label="aspect.name"
-          :icon="aspect.icon" />
+    <b-dropdown :triggers="['hover']" aria-role="list" v-if="template" class="aspect-selector">
+      <template #trigger>
+        <b-button :icon-left="aspects[aspect].icon" icon-right="chevron-down">
+          <span class="aspect-name">{{ aspects[aspect].name }}</span>
+          <span class="aspect-description">{{ aspects[aspect].description }}</span>
+        </b-button>
       </template>
-    </b-tabs>
+
+      <b-dropdown-item v-for="taspect in template.aspects" aria-role="listitem" :key="taspect" @click="() => selectAspect(taspect)">
+        <font-awesome-icon :icon="['far', aspects[taspect].icon]" fixed-width />
+        <span class="aspect-name">{{ aspects[taspect].name }}</span>
+        <span class="aspect-description">{{ aspects[taspect].description }}</span>
+      </b-dropdown-item>
+    </b-dropdown>
 
     <div :class="['banner-aspect', `banner-aspect-${aspect}`]">
       <div
@@ -58,7 +58,6 @@ export default {
 
   data () {
     return {
-      aspectIndex: 0,
       displayTooltip: false,
       downloading: false,
       scale: 1,
@@ -92,12 +91,6 @@ export default {
     }
   },
 
-  watch: {
-    aspectIndex (aspect) {
-      this.$store.commit('setAspect', aspect)
-    }
-  },
-
   created () {
     this.resize()
     window.addEventListener('resize', this.handleWindowResize)
@@ -108,6 +101,11 @@ export default {
   },
 
   methods: {
+    selectAspect (aspect) {
+      this.$store.commit('setAspect', aspect)
+      this.resize()
+    },
+
     resize () {
       this.handleWindowResize({ srcElement: window })
     },
@@ -250,6 +248,38 @@ export default {
 
   .banner-workspace .careta-selector {
     margin: 0 auto;
+  }
+
+  .aspect-selector {
+    margin: 0 auto 1rem auto;
+    transform: translateY(-0.375rem);
+    min-width: 100px;
+    position: relative;
+    z-index: 500;
+
+    &::v-deep .dropdown-menu {
+      padding-top: 14px !important;
+    }
+
+    .button {
+      min-width: 170px !important;
+    }
+
+    .dropdown-item {
+      display: flex;
+      align-items: center;
+      padding-right: 1rem;
+      min-width: 175px;
+    }
+
+    .aspect-name {
+      margin: 0 .5rem;
+    }
+
+    .aspect-description {
+      color: $gray-700;
+      margin-left: auto;
+    }
   }
 
   @media (max-width: $xs-breakpoint) {

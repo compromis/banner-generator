@@ -44,7 +44,7 @@
         v-model="properties.textSize"
         @touchstart="dimPane(true)"
         @touchend="dimPane(false)" />
-      <article class="message is-info is-small" v-if="aspect === '11'">
+      <article class="message is-info is-small" v-if="aspect === '916'">
         <div class="message-body">
           Es recomana utilitzar la ferramenta de text nativa d'Instragram per a afegir text en aquest model de tarja.
         </div>
@@ -86,9 +86,11 @@
         v-model="properties.picturePos"
         @touchstart="dimPane(true)"
         @touchend="dimPane(false)" />
-      <b-switch v-if="properties.theme === 'blobless' && properties.picture" v-model="properties.fullGradient">
-        Degradat sobre tota la imatge
-      </b-switch>
+      <transition name="slide">
+        <b-switch v-if="properties.theme === 'blobless' && properties.picture" v-model="properties.fullGradient">
+          Degradat sobre tota la imatge
+        </b-switch>
+      </transition>
     </picture-upload>
 
     <!-- Frame color  -->

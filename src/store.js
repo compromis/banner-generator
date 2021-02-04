@@ -31,7 +31,7 @@ export default new Vuex.Store({
     },
 
     setAspect (state, aspect) {
-      state.aspect = state.template.aspects[aspect]
+      state.aspect = aspect
     },
 
     updateBanner (state, banner) {

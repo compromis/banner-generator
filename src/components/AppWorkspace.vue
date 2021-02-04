@@ -86,7 +86,7 @@ export default {
     setTemplate (name) {
       const template = this.templates.find(template => template.id.toLowerCase() === name)
       this.$store.commit('setTemplate', template)
-      this.$store.commit('setAspect', 0)
+      this.$store.commit('setAspect', template.aspects[0])
       this.$store.commit('setDisplayErrors', false)
     }
   },

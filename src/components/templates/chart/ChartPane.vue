@@ -15,12 +15,12 @@
 
     <!-- Chart type -->
     <c-select name="chartType" label="Tipus de gràfica" v-model="properties.chartType" expanded>
-        <option value="bar-vertical">Barres verticals</option>
-        <option value="bar-horizontal">Barres horitzontals</option>
-        <option value="lines">Línies</option>
-        <option value="doughnut">Semicercle</option>
-        <option value="pie">Pastís</option>
-        <option value="farto">Fartó</option>
+      <option value="bar-vertical">Barres verticals</option>
+      <option value="bar-horizontal">Barres horitzontals</option>
+      <option value="lines">Línies</option>
+      <option value="doughnut">Semicercle</option>
+      <option value="pie">Pastís</option>
+      <option value="farto">Fartó</option>
     </c-select>
 
     <!-- Chart data input -->
@@ -29,14 +29,14 @@
     <!-- Chart options -->
     <c-field>
       <b-switch v-model="properties.chart.options.onlyHighlighted">
-          Mostrar només valors destacats
+        Mostrar només valors destacats
       </b-switch>
     </c-field>
 
     <c-select name="chartType" label="Valors" v-model="properties.chart.options.valuesIn" expanded>
-        <option value="numbers">Números</option>
-        <option value="euros">Euros (€)</option>
-        <option value="percentage">Percentatge (%)</option>
+      <option value="numbers">Números</option>
+      <option value="euros">Euros (€)</option>
+      <option value="percentage">Percentatge (%)</option>
     </c-select>
 
     <!-- Source -->
@@ -50,13 +50,13 @@
 
       <!-- Descripció -->
       <c-input-text
-      label="Descripció"
-      name="description"
-      type="textarea"
-      placeholder="Reduïm les xifres un 25% des d'abril..."
-      v-model="properties.description"
-      :maxlength="260"
-      :message="setFieldMessage('description')" />
+        label="Descripció"
+        name="description"
+        type="textarea"
+        placeholder="Reduïm les xifres un 25% des d'abril..."
+        v-model="properties.description"
+        :maxlength="260"
+        :message="setFieldMessage('description')" />
 
     <!-- Emoji picker -->
     <emoji-picker v-model="properties.emojis" />
@@ -85,9 +85,11 @@
         v-model="properties.picturePos"
         @touchstart="dimPane(true)"
         @touchend="dimPane(false)" />
-      <b-switch v-if="properties.theme === 'blobless' && properties.picture" v-model="properties.fullGradient">
-        Degradat sobre tota la imatge
-      </b-switch>
+      <transition name="slide">
+        <b-switch v-if="properties.theme === 'blobless' && properties.picture" v-model="properties.fullGradient">
+          Degradat sobre tota la imatge
+        </b-switch>
+      </transition>
     </picture-upload>
 
     <!-- Hashtag -->
