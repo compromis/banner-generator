@@ -31,19 +31,18 @@ export default {
       type: Boolean,
       default: false
     },
-    aspect: {
-      type: String,
-      default: '11'
-    },
-    color: {
-      type: String,
-      default: 'orange',
-      validator (value) {
-        return ['none', 'orange', 'feminism', 'lgbt', 'green'].includes(value)
-      }
-    },
     offset: {
       type: Object
+    }
+  },
+
+  computed: {
+    aspect () {
+      return this.$store.state.aspect
+    },
+
+    color () {
+      return this.$store.state.banner.color
     }
   }
 }
@@ -71,12 +70,12 @@ export default {
         top: -84%;
       }
 
-      &.aspect-event {
+      &.aspect-169 {
         left: -61%;
         top: -150%;
       }
 
-      &.is-wide.aspect-event {
+      &.is-wide.aspect-169 {
         left: -44%;
         top: -151%;
       }
@@ -87,7 +86,7 @@ export default {
       bottom: -81%;
       --gradient-orientation: -45deg;
 
-      &.aspect-event {
+      &.aspect-169 {
         right: -65%;
         bottom: -148%;
       }

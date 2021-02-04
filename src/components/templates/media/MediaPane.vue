@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ 'pane media-pane': true, 'pane-dimmed': paneDimmed }">
+  <div :class="['pane', 'media-pane', { 'pane-dimmed': paneDimmed, 'pane-916': aspect === 1 }, `logo-${properties.logo}`]">
     <!-- Title -->
     <c-input-text
       label="Títol"
@@ -166,7 +166,7 @@
     <!-- Hashtag -->
     <transition name="slide">
       <c-input-text
-        v-if="!aspect"
+        v-if="aspect === '11'"
         label="Hashtag"
         name="hashtag"
         placeholder="#"
@@ -176,10 +176,13 @@
         :message="setFieldMessage('hashtag')" />
     </transition>
 
+    <!-- Logo -->
+    <logo-selector v-model="properties.logo" />
+
     <!-- Local label -->
     <transition name="slide">
       <c-input-text
-        v-if="!aspect"
+        v-if="aspect === '11'"
         label="Text logo"
         name="localLabel"
         placeholder="Alacant"

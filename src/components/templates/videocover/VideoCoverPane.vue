@@ -100,7 +100,7 @@
 
     <!-- Hide frame -->
     <transition name="slide">
-      <c-field v-if="aspect === 1">
+      <c-field v-if="aspect === '916'">
         <b-switch v-model="properties.showFrame">
             Marc de color
         </b-switch>

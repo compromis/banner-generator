@@ -3,22 +3,10 @@
     <div class="toolbar">
       <b-button to="/" tag="router-link" icon-left="chevron-left" type="is-text">Enrere</b-button>
     </div>
-    <component
-      class="pane"
-      :is="selectedTemplate.components.pane"
-      :template="selectedTemplate"
-      @updated="(props) => bannerProperties = props"
-      @updateIsDownloadable="setIsDownloadable" />
-    <canvas-container
-      class="canvas"
-      :canvas-component="selectedTemplate.components.canvas"
-      :template="selectedTemplate"
-      :banner="bannerProperties"
-      :is-downloadable="isDownloadable" />
-    <help
-      id="help-button"
-      class="help-block"
-      :template="selectedTemplate" />
+    <component :is="template.components.pane" class="pane" />
+    <canvas-container :canvas-component="template.components.canvas" class="canvas" />
+    <help id="help-button" class="help-block" />
+
     <b-modal :active="isCardModalActive" @close="isCardModalActive = false" :width="640" scroll="keep">
       <div class="card content">
         <b-icon icon="exclamation-triangle" size="is-large" />
@@ -39,8 +27,6 @@
 import CanvasContainer from './CanvasContainer'
 import Help from './Help'
 import Loading from 'vue-loading-overlay'
-import templates from './templates/templates'
-import { EventBus } from '@/event-bus'
 import 'vue-loading-overlay/dist/vue-loading.css'
 
 export default {
@@ -54,37 +40,41 @@ export default {
 
   data () {
     return {
-      templates: templates,
-      bannerProperties: null,
-      selectedTemplate: null,
-      loadingTemplate: true,
-      isCardModalActive: false,
-      isDownloadable: true
+      isCardModalActive: false
+    }
+  },
+
+  computed: {
+    template () {
+      return this.$store.state.template
+    },
+
+    templates () {
+      return this.$store.state.templates
+    },
+
+    loadingTemplate () {
+      return this.$store.state.banner === null
     }
   },
 
   created () {
     // Find and set selected template based on route param
-    this.selectedTemplate = this.templates.find(template => template.id.toLowerCase() === this.$route.params.pathMatch)
-
-    // Hide loading indicator when template finishes loading
-    EventBus.$on('paneLoaded', () => { this.loadingTemplate = false })
+    this.setTemplate(this.$route.params.pathMatch)
   },
 
   watch: {
     '$route': function (newRoute) {
-      this.selectedTemplate = this.templates.find(template => template.id.toLowerCase() === newRoute.params.pathMatch)
+      this.setTemplate(newRoute.params.pathMatch)
     },
     // Autofocus default button on modal shown
     // Bring focus back to opener button on modal closed
-    watch: {
-      isCardModalActive: function (isActive) {
-        const button = isActive ? 'confirm' : 'close'
+    isCardModalActive: function (isActive) {
+      const button = isActive ? 'confirm' : 'close'
 
-        this.$nextTick(() => {
-          this.$refs[button].$el.focus()
-        })
-      }
+      this.$nextTick(() => {
+        this.$refs[button].$el.focus()
+      })
     }
   },
 
@@ -93,8 +83,11 @@ export default {
       this.$router.push({ name: 'start', params: { confirmed } })
     },
 
-    setIsDownloadable (isDownloadable) {
-      this.isDownloadable = isDownloadable
+    setTemplate (name) {
+      const template = this.templates.find(template => template.id.toLowerCase() === name)
+      this.$store.commit('setTemplate', template)
+      this.$store.commit('setAspect', template.aspects[0])
+      this.$store.commit('setDisplayErrors', false)
     }
   },
 

@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ 'pane': true, 'pane-dimmed': paneDimmed }">
+  <div :class="['pane', 'quote-pane', { 'pane-dimmed': paneDimmed }, `logo-${properties.logo}`]">
     <!-- Theme selector -->
     <theme-selector v-model="properties.theme" :themes="availableThemes" />
 
@@ -51,16 +51,15 @@
         v-model="properties.picturePos"
         @touchstart="dimPane(true)"
         @touchend="dimPane(false)" />
+      <transition name="slide">
+        <b-switch v-model="properties.fullGradient" v-if="properties.theme === 'blobless'">
+          Degradat sobre tota la imatge
+        </b-switch>
+      </transition>
     </picture-upload>
 
     <!-- Frame color  -->
     <color-selector v-model="properties.color" :colors="availableColors[properties.theme]" label="Color" is-rounded />
-
-    <c-field v-if="properties.theme === 'blobless'" class="blobless-gradient-option">
-      <b-switch v-model="properties.fullGradient">
-        Degradat sobre tota la imatge
-      </b-switch>
-    </c-field>
 
     <!-- Dark mode -->
     <transition name="slide">
@@ -75,7 +74,7 @@
     <!-- Hashtag -->
     <transition name="slide">
       <c-input-text
-        v-if="aspectKey !== '916'"
+        v-if="aspect !== '916'"
         label="Hashtag"
         name="hashtag"
         placeholder="#"
@@ -85,10 +84,13 @@
         :message="setFieldMessage('hashtag')" />
     </transition>
 
+    <!-- Logo -->
+    <logo-selector v-model="properties.logo" />
+
     <!-- Local label -->
     <transition name="slide">
       <c-input-text
-        v-if="aspectKey !== '916'"
+        v-if="aspect !== '916'"
         label="Text logo"
         name="localLabel"
         placeholder="Alacant"
@@ -133,10 +135,10 @@ export default {
       const themes = {
         11: ['glowy', 'blobs', 'blobless'],
         916: ['glowy', 'blobs', 'blobless'],
-        event: ['blobs', 'blobless']
+        169: ['blobs', 'blobless']
       }
 
-      return themes[this.aspectKey]
+      return themes[this.aspect]
     }
   },
 

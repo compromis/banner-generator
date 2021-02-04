@@ -1,28 +1,25 @@
 <template>
   <div class="banner-workspace" v-if="banner">
-    <b-tabs
-      id="aspect-tabs"
-      type="is-toggle-rounded"
-      position="is-centered"
-      v-model="aspect"
-      @change="resize">
-      <template v-for="(aspect, id) in aspects">
-        <b-tab-item
-          :key="id"
-          v-if="template.aspects.includes(id)"
-          :label="aspect.name"
-          :icon="aspect.icon" />
+    <b-dropdown :triggers="['hover']" aria-role="list" v-if="template" class="aspect-selector">
+      <template #trigger>
+        <b-button :icon-left="aspects[aspect].icon" icon-right="chevron-down">
+          <span class="aspect-name">{{ aspects[aspect].name }}</span>
+          <span class="aspect-description">{{ aspects[aspect].description }}</span>
+        </b-button>
       </template>
-    </b-tabs>
 
-    <div :class="['banner-aspect', `banner-aspect-${template.aspects[aspect]}`]">
+      <b-dropdown-item v-for="taspect in template.aspects" aria-role="listitem" :key="taspect" @click="() => selectAspect(taspect)">
+        <font-awesome-icon :icon="['far', aspects[taspect].icon]" fixed-width />
+        <span class="aspect-name">{{ aspects[taspect].name }}</span>
+        <span class="aspect-description">{{ aspects[taspect].description }}</span>
+      </b-dropdown-item>
+    </b-dropdown>
+
+    <div :class="['banner-aspect', `banner-aspect-${aspect}`]">
       <div
         :class="['canvas-wrapper', `template-${template.id.toLowerCase()}`]"
         :style="{transform: `scale(${scale})`, margin: `${margin}px`}">
-        <component
-          :is="canvasComponent"
-          :banner="banner"
-          :aspect="template.aspects[aspect]" />
+        <component :is="canvasComponent" />
       </div>
     </div>
 
@@ -31,7 +28,7 @@
         label="Has d'emplenar tots els camps necessaris"
         position="is-left"
         type="is-dark"
-        :active="!isDownloadable && displayTooltip">
+        :active="!isDownloadable && displayErrors">
         <b-button
           type="is-primary"
           size="is-large"
@@ -50,46 +47,53 @@
 <script>
 import domtoimage from 'dom-to-image'
 import { saveAs } from 'file-saver'
-import { EventBus } from '@/event-bus'
 import API from '@/api'
-import aspects from '@/components/templates/aspects'
-import CaretaSelector from '@/components/pane/CaretaSelector'
 
 export default {
   name: 'canvas-container',
 
   props: {
-    canvasComponent: Function,
-    banner: Object,
-    template: Object,
-    isDownloadable: Boolean
-  },
-
-  components: {
-    CaretaSelector
+    canvasComponent: Function
   },
 
   data () {
     return {
-      aspect: 0,
       displayTooltip: false,
       downloading: false,
       scale: 1,
-      margin: 0,
-      aspects
+      margin: 0
     }
   },
 
-  watch: {
-    aspect: function () {
-      EventBus.$emit('aspectUpdated', this.aspect)
+  computed: {
+    aspects () {
+      return this.$store.state.aspects
+    },
+
+    aspect () {
+      return this.$store.state.aspect
+    },
+
+    template () {
+      return this.$store.state.template
+    },
+
+    banner () {
+      return this.$store.state.banner
+    },
+
+    isDownloadable () {
+      return this.$store.state.isDownloadable
+    },
+
+    displayErrors () {
+      return this.$store.state.displayErrors
     }
   },
 
   created () {
     this.resize()
     window.addEventListener('resize', this.handleWindowResize)
-    EventBus.$on('download', this.download)
   },
 
   destroyed () {
@@ -97,15 +101,19 @@ export default {
   },
 
   methods: {
+    selectAspect (aspect) {
+      this.$store.commit('setAspect', aspect)
+      this.resize()
+    },
+
     resize () {
       this.handleWindowResize({ srcElement: window })
     },
 
     handleWindowResize (e) {
-      const aspect = this.template.aspects[this.aspect]
       const minHeight = 450
       const maxHeight = 950
-      const { minScale, maxScale, minMargin, maxMargin } = this.aspects[aspect]
+      const { minScale, maxScale, minMargin, maxMargin } = this.aspects[this.aspect]
       const height = e.srcElement.innerHeight
       const propHeight = (height - minHeight) / (maxHeight - minHeight)
 
@@ -123,11 +131,16 @@ export default {
 
     download () {
       if (!this.banner) return
-      this.displayTooltip = true
-      EventBus.$emit('checkForErrors', true)
+      this.$store.commit('setDisplayErrors', true)
+      this.$root.$emit('checkForErrors')
+      if (!this.isDownloadable) {
+        window.scrollTo({
+          top: 400,
+          behavior: 'smooth'
+        })
+      }
 
-      const aspect = this.template.aspects[this.aspect]
-      const { width, height, downloadScale } = this.aspects[aspect]
+      const { width, height, downloadScale } = this.aspects[this.aspect]
       const bannerWidth = width * downloadScale
       const bannerHeight = height * downloadScale
 
@@ -135,9 +148,9 @@ export default {
         this.downloading = true
 
         domtoimage.toPng(
-          document.getElementById('bannerCanvas' + aspect),
+          document.getElementById('bannerCanvas' + this.aspect),
           {
-            bgcolor: this.banner.mode === 'black' ? '#353949' : '#fff',
+            bgcolor: 'transparent',
             width: bannerWidth,
             height: bannerHeight,
             style: {
@@ -152,7 +165,7 @@ export default {
           // eslint-disable-next-line
           gtag('event', 'banner_download', {
             event_category: 'banners',
-            event_label: aspect
+            event_label: this.aspect
           })
         })
       }
@@ -196,7 +209,8 @@ export default {
     width: 405px;
   }
 
-  .banner-aspect-event .banner-canvas {
+  .banner-aspect-event .banner-canvas,
+  .banner-aspect-169 .banner-canvas {
     width: 720px;
     height: 405px;
   }
@@ -235,6 +249,38 @@ export default {
 
   .banner-workspace .careta-selector {
     margin: 0 auto;
+  }
+
+  .aspect-selector {
+    margin: 0 auto 1rem auto;
+    transform: translateY(-0.375rem);
+    min-width: 100px;
+    position: relative;
+    z-index: 40;
+
+    &::v-deep .dropdown-menu {
+      padding-top: 14px !important;
+    }
+
+    .button {
+      min-width: 170px !important;
+    }
+
+    .dropdown-item {
+      display: flex;
+      align-items: center;
+      padding-right: 1rem;
+      min-width: 175px;
+    }
+
+    .aspect-name {
+      margin: 0 .5rem;
+    }
+
+    .aspect-description {
+      color: $gray-700;
+      margin-left: auto;
+    }
   }
 
   @media (max-width: $xs-breakpoint) {

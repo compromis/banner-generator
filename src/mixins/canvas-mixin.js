@@ -1,18 +1,16 @@
-import CompromisLogo from '@/components/utils/CompromisLogo'
 import moment from 'moment'
 moment.locale('ca')
 
 export default {
-  components: {
-    CompromisLogo
-  },
-
-  props: {
-    banner: Object,
-    aspect: String
-  },
-
   computed: {
+    banner () {
+      return this.$store.state.banner
+    },
+
+    aspect () {
+      return this.$store.state.aspect
+    },
+
     objectPosition () {
       const objectPosition = (this.banner.pictureAspect === 'vertical')
         ? '0% ' + (100 - this.banner.picturePos) + '%'

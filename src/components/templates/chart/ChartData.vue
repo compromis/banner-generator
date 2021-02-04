@@ -3,7 +3,7 @@
     <ul class="sets">
       <li v-for="(set, setKey) in chartData.sets" :key="setKey" :class="{ hidden: setKey >= maxSets }">
         <input type="text" maxlength="20" v-model="set.label" class="set-name" placeholder="Nom del set" :ref="`setLabel${setKey}`" />
-        <button @click="deleteSet(setKey)" class="remove set-remove">-</button>
+        <button v-if="chartData.sets.length > 1" @click="deleteSet(setKey)" class="remove set-remove">-</button>
 
         <table class="set-data">
           <tr>
@@ -63,7 +63,7 @@
               </b-checkbox>
             </td>
             <td>
-              <button @click="deleteRow(dataKey)" class="remove">-</button>
+              <button v-if="chartData.data.length > 1" @click="deleteRow(dataKey)" class="remove">-</button>
             </td>
           </tr>
         </table>
@@ -176,14 +176,18 @@ export default {
     },
 
     deleteRow (rowKey) {
-      this.chartData.data.splice(rowKey, 1)
+      if (this.chartData.data.length > 1) {
+        this.chartData.data.splice(rowKey, 1)
+      }
     },
 
     deleteSet (setKey) {
-      this.chartData.sets.splice(setKey, 1)
-      this.chartData.data.forEach(row => {
-        row.values.splice(setKey, 1)
-      })
+      if (this.chartData.sets.length > 1) {
+        this.chartData.sets.splice(setKey, 1)
+        this.chartData.data.forEach(row => {
+          row.values.splice(setKey, 1)
+        })
+      }
     },
 
     handleColorChange (setKey, color) {

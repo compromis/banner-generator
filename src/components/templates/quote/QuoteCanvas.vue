@@ -7,6 +7,7 @@
       'disposition-' + banner.disposition,
       'theme-' + banner.theme,
       'banner-background-' + banner.mode,
+      'logo-' + banner.logo,
       { 'full-gradient': banner.fullGradient }
     ]"
     v-if="banner">
@@ -27,21 +28,11 @@
         <div class="quote-author">{{ banner.author | formatString }}</div>
       </div>
     </div>
-    <banner-frame
-      :mode="banner.mode"
-      :theme="banner.theme"
-      :color="banner.color"
-      :hashtag="banner.hashtag"
-      :local-label="banner.localLabel"
-      :aspect="aspect" />
+    <banner-frame />
     <banner-picture
-      :picture="banner.picturePreview"
       :picture-position="objectPosition"
       :height="aspect === '11' ? 570 : 730"
-      :theme="banner.theme"
-      :color="banner.color"
-      :edge="aspect === '916'"
-      :full-gradient="banner.theme === 'blobless' && banner.fullGradient" />
+      :edge="aspect === '916'" />
   </div>
 </template>
 
@@ -68,7 +59,7 @@ export default {
       const sizes = {
         11: { min: 33, max: 43 },
         916: { min: 28, max: 36 },
-        event: { min: 23, max: 36 }
+        169: { min: 23, max: 36 }
       }
 
       return fontSize(banner.quote, sizes[aspect].max, sizes[aspect].min, 140)
@@ -191,7 +182,7 @@ export default {
       }
     }
 
-    &.aspect-event {
+    &.aspect-169 {
       .quote {
         top: 110px;
         bottom: 20px;
@@ -206,7 +197,7 @@ export default {
         bottom: 160px;
       }
 
-      &.aspect-event {
+      &.aspect-169 {
         .quote {
           top: -20px;
           right: 40px;
@@ -248,7 +239,7 @@ export default {
       }
     }
 
-    &.aspect-event {
+    &.aspect-169 {
       .quote {
         top: 0;
         bottom: 110px;
@@ -256,7 +247,7 @@ export default {
     }
   }
 
-  .aspect-event {
+  .aspect-169 {
     &.disposition-left {
       .quote {
         bottom: 38px;

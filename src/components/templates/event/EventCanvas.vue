@@ -5,15 +5,13 @@
       'banner-canvas',
       'aspect-' + aspect,
       'disposition-' + banner.disposition,
-      'banner-background-' + banner.mode
+      'banner-background-' + banner.mode,
+      'logo-' + banner.logo
     ]"
     v-if="banner">
     <div class="event-grid">
       <banner-picture
-        :picture="banner.picturePreview"
         :picture-position="objectPosition"
-        theme="glowy"
-        :color="banner.color"
         edge
         :height="aspect === 'event' ? 420 : null" />
       <div class="event">
@@ -28,10 +26,9 @@
         <div class="event-title" :style="{fontSize: fontSize(banner.title, 60, 40, 60)}">
           <span v-if="aspect === '11'">{{ banner.title | formatString }}</span>
           <text-in-pills
-          v-else
-          :text="banner.title"
-          :fontSize="fontSize(banner.title, 50, 35, 60)"
-          />
+            v-else
+            :text="banner.title"
+            :fontSize="fontSize(banner.title, 50, 35, 60)" />
         </div>
         <div class="event-details event-details--speakers" v-if="banner.speakers.length > 0 && aspect !== 'event'">
           <event-info color="gradient" icon="keynote">{{ speakers }}</event-info>
@@ -43,12 +40,7 @@
         </div>
       </div>
     </div>
-    <banner-frame
-      theme="glowy"
-      :mode="banner.mode"
-      :hashtag="banner.hashtag"
-      :local-label="banner.localLabel"
-      :aspect="aspect" />
+    <banner-frame />
   </div>
 </template>
 

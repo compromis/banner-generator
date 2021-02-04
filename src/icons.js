@@ -7,7 +7,7 @@ import {
   faArrowToTop, faGripLines, faBroadcastTower, faFont, faQuoteLeft, faNewspaper, faPortrait, faUserCircle,
   faQuestionCircle, faCheckCircle, faColumns, faCircleNotch, faBan, faBringForward, faSendBackward,
   faEuroSign, faHandPointRight, faPlay, faRetweet, faHeart, faPaste, faCheck, faGifts, faHatSanta,
-  faChartBar, faHighlighter
+  faChartBar, faHighlighter, faCog
 } from '@fortawesome/pro-regular-svg-icons'
 import {
   faBadgeCheck
@@ -24,5 +24,5 @@ library.add(
   faArrowToTop, faGripLines, faBroadcastTower, faFont, faQuoteLeft, faNewspaper, faPortrait, faUserCircle,
   faQuestionCircle, faCheckCircle, faColumns, faCircleNotch, faBan, faBringForward, faSendBackward,
   faEuroSign, faHandPointRight, faPlay, faTwitter, faRetweet, faHeart, faBadgeCheck, faPaste, faCheck,
-  faGifts, faHatSanta, faChartBar, faHighlighter
+  faGifts, faHatSanta, faChartBar, faHighlighter, faCog
 )

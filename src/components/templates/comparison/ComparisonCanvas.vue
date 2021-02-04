@@ -15,7 +15,6 @@
         :picture-position="objectPositionBefore"
         :style="beforeGradientColor"
         :height="600"
-        theme="glowy"
         color="custom"
         class="banner-picture-before"
         glow-size="sm" />
@@ -24,7 +23,6 @@
         :picture-position="objectPositionAfter"
         :style="{'--gradient-orientation' : '0deg'}"
         :height="600"
-        theme="glowy"
         color="orange"
         class="banner-picture-after"
         glow-size="sm" />
@@ -55,7 +53,7 @@
       :hashtag="banner.hashtag"
       :local-label="banner.localLabel"
       :logo-align="banner.invertOrder ? 'left' : 'right'"
-       />
+      :logo="banner.logo" />
   </div>
 </template>
 

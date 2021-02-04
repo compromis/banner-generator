@@ -15,6 +15,7 @@
       v-if="type !== 'textarea'"
       :type="type"
       :name="name"
+      :ref="name"
       :id="name"
       :maxlength="maxlength"
       :placeholder="placeholder"

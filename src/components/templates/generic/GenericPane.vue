@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ 'pane generic-pane': true, 'pane-dimmed': paneDimmed, 'pane-916': aspect === 1 }">
+  <div :class="['pane', 'generic-pane', { 'pane-dimmed': paneDimmed, 'pane-916': aspect === 1 }, `logo-${properties.logo}`]">
     <!-- Theme selector -->
     <theme-selector v-model="properties.theme" :themes="availableThemes" />
 
@@ -44,7 +44,7 @@
         v-model="properties.textSize"
         @touchstart="dimPane(true)"
         @touchend="dimPane(false)" />
-      <article class="message is-info is-small" v-if="aspect === 1">
+      <article class="message is-info is-small" v-if="aspect === '916'">
         <div class="message-body">
           Es recomana utilitzar la ferramenta de text nativa d'Instragram per a afegir text en aquest model de tarja.
         </div>
@@ -79,25 +79,22 @@
       :errors="errors"
       @upload="updateImage"
       @delete="properties.picture = null; properties.picturePreview = null">
-        <range-slider
-          name="points"
-          :min="0"
-          :max="100"
-          v-model="properties.picturePos"
-          @touchstart="dimPane(true)"
-          @touchend="dimPane(false)" />
-      </picture-upload>
+      <range-slider
+        name="points"
+        :min="0"
+        :max="100"
+        v-model="properties.picturePos"
+        @touchstart="dimPane(true)"
+        @touchend="dimPane(false)" />
+      <transition name="slide">
+        <b-switch v-if="properties.theme === 'blobless' && properties.picture" v-model="properties.fullGradient">
+          Degradat sobre tota la imatge
+        </b-switch>
+      </transition>
+    </picture-upload>
 
     <!-- Frame color  -->
     <color-selector v-model="properties.color" :colors="availableColors[properties.theme]" label="Color" is-rounded />
-
-    <transition name="slide">
-      <c-field v-if="properties.theme === 'blobless'" class="blobless-gradient-option">
-        <b-switch v-model="properties.fullGradient">
-          Degradat sobre tota la imatge
-        </b-switch>
-      </c-field>
-    </transition>
 
     <!-- Dark mode -->
     <transition name="slide">
@@ -112,7 +109,7 @@
     <!-- Hashtag -->
     <transition name="slide">
       <c-input-text
-        v-if="!aspect"
+        v-if="aspect === '11'"
         label="Hashtag"
         name="hashtag"
         placeholder="#"
@@ -122,10 +119,13 @@
         :message="setFieldMessage('hashtag')" />
     </transition>
 
+    <!-- Logo -->
+    <logo-selector v-model="properties.logo" />
+
     <!-- Local label -->
     <transition name="slide">
       <c-input-text
-        v-if="!aspect"
+        v-if="aspect !== '916'"
         label="Text logo"
         name="localLabel"
         placeholder="Alacant"
@@ -178,16 +178,18 @@ export default {
       const themes = {
         11: ['glowy', 'blobs', 'blobless'],
         916: ['glowy', 'blobs', 'blobless'],
-        event: ['blobs', 'blobless']
+        169: ['blobs', 'blobless']
       }
 
-      return themes[this.aspectKey]
+      return themes[this.aspect]
     }
   },
 
   methods: {
     validate () {
-      this.pictureRequired()
+      if (this.properties.theme !== 'blobless') {
+        this.pictureRequired()
+      }
     }
   }
 }

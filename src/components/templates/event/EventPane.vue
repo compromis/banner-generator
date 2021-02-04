@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ 'pane': true, 'pane-dimmed': paneDimmed }">
+  <div :class="['pane', 'event-pane', { 'pane-dimmed': paneDimmed }, `logo-${properties.logo}`]">
     <!-- Title -->
     <c-input-text
       label="Titol"
@@ -23,10 +23,10 @@
     <!-- Date and time -->
     <transition name="slide">
       <div class="date-time-grid">
-        <c-field label="Data" v-if="aspect !== 2" edge focusable label-for="date">
+        <c-field label="Data" v-if="aspect !== '916'" edge focusable label-for="date">
           <date-picker v-model="properties.date" id="date"/>
         </c-field>
-        <c-field label="Hora" v-if="aspect !== 2" edge focusable>
+        <c-field label="Hora" v-if="aspect !== '916'" edge focusable>
           <b-timepicker
             rounded
             inline
@@ -42,7 +42,7 @@
       <c-input-text
         label="Lloc"
         name="venue"
-        v-if="aspect !== 2"
+        v-if="aspect !== '916'"
         :type="setFieldType('place')"
         :message="setFieldMessage('place')"
         placeholder="Riu Túria"
@@ -54,7 +54,7 @@
     <!-- Speakers -->
     <transition name="slide">
       <speaker-list
-        v-show="aspect !== 2"
+        v-show="aspect !== '916'"
         :accepts-picture="false"
         :accepts-description="false"
         :min-speakers="0"
@@ -90,10 +90,13 @@
       label="Color de fons"
       is-rounded />
 
+    <!-- Logo -->
+    <logo-selector v-model="properties.logo" />
+
     <!-- Local label -->
     <transition name="slide">
       <c-input-text
-        v-if="!aspect"
+        v-if="aspect === '11'"
         label="Text logo"
         name="localLabel"
         placeholder="Alacant"

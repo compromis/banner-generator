@@ -3,7 +3,7 @@
     <font-awesome-icon :icon="['far', icon]" fixed-width />
     <slot></slot>
     <svg width="0" height="0">
-      <radialGradient id="compromisGradient" r="150%" cx="30%" cy="107%">
+      <radialGradient id="iconGradient" r="150%" cx="30%" cy="107%">
         <stop class="gradient-start" offset="0" />
         <stop class="gradient-end" offset="1" />
       </radialGradient>
@@ -52,7 +52,7 @@ export default {
   &-gradient {
     svg {
       * {
-        fill: url(#compromisGradient) !important;
+        fill: url(#iconGradient) !important;
       }
     }
   }

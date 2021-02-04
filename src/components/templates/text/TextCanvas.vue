@@ -6,29 +6,20 @@
       'aspect-' + aspect,
       'theme-' + banner.theme,
       'disposition-' + banner.disposition,
-      'banner-background-' + banner.mode
+      'banner-background-' + banner.mode,
+      'logo-' + banner.logo
     ]"
     v-if="banner">
     <div class="grid">
       <banner-picture
-        :picture="banner.picturePreview"
         :picture-position="objectPosition"
-        :theme="banner.theme"
-        :color="banner.color"
-        edge
-        :full-gradient="banner.fullGradient" />
+        edge />
       <div class="text text-wysiwyg" v-if="banner.text">
         <div v-html="banner.text"></div>
       </div>
     </div>
     <emojis-on-canvas v-model="banner.emojis" />
-    <banner-frame
-      :theme="banner.theme"
-      :mode="banner.mode"
-      :hashtag="banner.hashtag"
-      :local-label="banner.localLabel"
-      :aspect="aspect"
-      :color="banner.color" />
+    <banner-frame />
   </div>
 </template>
 
@@ -110,7 +101,7 @@ export default {
       }
     }
 
-    &.aspect-event {
+    &.aspect-169 {
       .text {
         bottom: 85px;
         top: auto;
@@ -123,7 +114,7 @@ export default {
         bottom: auto;
       }
 
-      &.aspect-event {
+      &.aspect-169 {
         .text {
           top: 65px;
         }
@@ -136,7 +127,7 @@ export default {
       bottom: 120px;
     }
 
-    &.aspect-event.disposition-top {
+    &.aspect-169.disposition-top {
       .text {
         top: 40px;
       }
@@ -261,7 +252,7 @@ export default {
     }
   }
 
-  .aspect-event {
+  .aspect-169 {
     .text-wysiwyg {
       font-size: 14px;
 

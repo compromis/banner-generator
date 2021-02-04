@@ -14,7 +14,7 @@ export default [
   {
     id: 'Headline',
     name: 'Titular de premsa',
-    aspects: ['11', '916', 'event'],
+    aspects: ['11', '916', '169'],
     icon: 'newspaper',
     components: {
       pane: () => import(/* webpackChunkName: "headline" */ './headline/HeadlinePane'),
@@ -25,7 +25,7 @@ export default [
   {
     id: 'Generic',
     name: 'Frase',
-    aspects: ['11', '916', 'event'],
+    aspects: ['11', '916', '169'],
     supports: ['multicolor-blobs'],
     icon: 'font',
     components: {
@@ -37,7 +37,7 @@ export default [
   {
     id: 'Text',
     name: 'Text lliure',
-    aspects: ['11', '916', 'event'],
+    aspects: ['11', '916', '169'],
     supports: ['multicolor-blobs'],
     icon: 'align-left',
     components: {
@@ -49,7 +49,7 @@ export default [
   {
     id: 'Quote',
     name: 'Cita',
-    aspects: ['11', '916', 'event'],
+    aspects: ['11', '916', '169'],
     supports: ['multicolor-blobs'],
     icon: 'quote-left',
     components: {
@@ -61,7 +61,7 @@ export default [
   {
     id: 'Chart',
     name: 'Gràfica',
-    aspects: ['11'],
+    aspects: ['11', '169'],
     label: '✨Nou',
     icon: 'chart-bar',
     components: {

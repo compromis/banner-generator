@@ -6,7 +6,8 @@
       'aspect-' + aspect,
       'disposition-' + banner.disposition,
       'theme-' + banner.theme,
-      'banner-background-' + banner.mode
+      'banner-background-' + banner.mode,
+      'logo-' + banner.logo
     ]"
     v-if="banner">
     <div class="text" :style="{ alignItems: banner.textPos, textAlign: banner.textAlign }">
@@ -33,22 +34,11 @@
       </div>
     </div>
     <emojis-on-canvas v-model="banner.emojis" />
-    <banner-frame
-      :theme="banner.theme"
-      :mode="banner.mode"
-      :hashtag="banner.hashtag"
-      :local-label="banner.localLabel"
-      :aspect="aspect"
-      :color="banner.color" />
+    <banner-frame />
     <banner-picture
-      :picture="banner.picturePreview"
       :picture-position="objectPosition"
-      :picture-dimensions="banner.pictureDimensions"
-      :height="aspect === '11' ? 500 : aspect === 'event' ? 285 : null"
-      :width="aspect === '916' ? 405 : null"
-      :theme="banner.theme"
-      :color="banner.color"
-      :full-gradient="banner.fullGradient" />
+      :height="aspect === '11' ? 500 : aspect === '169' ? 285 : null"
+      :width="aspect === '916' ? 405 : null" />
   </div>
 </template>
 
@@ -77,7 +67,7 @@ export default {
       const sizes = {
         11: { min: 35, max: 60 },
         916: { min: 25, max: 50 },
-        event: { min: 30, max: 55 }
+        169: { min: 30, max: 55 }
       }
 
       return fontSize(banner.text, sizes[aspect].max, sizes[aspect].min, 100, banner.textSize)
@@ -140,7 +130,7 @@ export default {
       right: 25px;
     }
 
-    &.aspect-event .text {
+    &.aspect-169 .text {
       top: 65px;
       bottom: 95px;
     }
@@ -189,8 +179,8 @@ export default {
       }
     }
 
-    /* Event */
-    &.aspect-event {
+    /* Twitter */
+    &.aspect-169 {
       .text {
         top: 25px;
         bottom: 95px;
@@ -220,7 +210,7 @@ export default {
       }
     }
 
-    &.aspect-event {
+    &.aspect-169 {
       .text {
         top: 65px;
         bottom: 95px;

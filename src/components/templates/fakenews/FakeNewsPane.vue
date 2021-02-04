@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ 'pane generic-pane': true, 'pane-dimmed': paneDimmed, 'pane-916': aspect === 1 }">
+  <div :class="{ 'pane fake-news-pane': true, 'pane-dimmed': paneDimmed, 'pane-916': aspect === 1 }">
     <!-- Text -->
     <c-input-text
       label="Realitat"
@@ -10,12 +10,13 @@
       :maxlength="140"
       :message="setFieldMessage('text')" />
 
-      <c-select label="Segell" placeholder="Segells" name="stamp" v-model="properties.stamp" expanded>
-        <option value="FALS">FALS</option>
-        <option value="FALSO">FALSO</option>
-        <option value="BULO">BULO</option>
-        <option value="FAKE">FAKE</option>
-      </c-select>
+    <!-- Stamp -->
+    <c-select label="Segell" placeholder="Segells" name="stamp" v-model="properties.stamp" expanded>
+      <option value="FALS">FALS</option>
+      <option value="FALSO">FALSO</option>
+      <option value="BULO">BULO</option>
+      <option value="FAKE">FAKE</option>
+    </c-select>
 
     <!-- Picture -->
     <picture-upload
@@ -40,10 +41,13 @@
       label="Color de fons"
       is-rounded />
 
+    <!-- Logo -->
+    <logo-selector v-model="properties.logo" />
+
     <!-- Local label -->
     <transition name="slide">
       <c-input-text
-        v-if="!aspect"
+        v-if="aspect === '11'"
         label="Text logo"
         name="localLabel"
         placeholder="Alacant"
@@ -64,6 +68,7 @@ export default {
   data () {
     return {
       properties: {
+        theme: 'blobs',
         text: '',
         stamp: 'FALS'
       }

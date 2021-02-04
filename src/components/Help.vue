@@ -4,9 +4,9 @@
       Si tens qualsevol dubte o suggeriment, pots <a href="#" @click.prevent="toggleForm">contactar-nos</a>.
     </div>
     <div v-else>
-    <b-tooltip label="Ajuda i suggeriments" position="is-left" type="is-dark">
-      <b-button type="is-text" icon-left="question-circle" size="is-large" class="help-block-button" @click="toggleForm"></b-button>
-    </b-tooltip>
+      <b-tooltip label="Ajuda i suggeriments" position="is-left" type="is-dark">
+        <b-button type="is-text" icon-left="question-circle" size="is-large" class="help-block-button" @click="toggleForm"></b-button>
+      </b-tooltip>
     </div>
 
     <b-modal :active.sync="formIsActive" scroll="keep">
@@ -33,13 +33,18 @@ export default {
   },
 
   props: {
-    template: Object,
     isText: Boolean
   },
 
   data () {
     return {
       formIsActive: false
+    }
+  },
+
+  computed: {
+    template () {
+      return this.$store.state.template
     }
   },
 
