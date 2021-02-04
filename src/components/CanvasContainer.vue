@@ -1,6 +1,6 @@
 <template>
   <div class="banner-workspace" v-if="banner">
-    <b-dropdown :triggers="['hover']" aria-role="list" v-if="template" class="aspect-selector-mobile">
+    <b-dropdown :triggers="['hover']" aria-role="list" v-if="template" class="aspect-selector">
       <template #trigger>
         <b-button :icon-left="aspects[aspect].icon" icon-right="chevron-down">
           <span class="aspect-name">{{ aspects[aspect].name }}</span>
@@ -251,8 +251,7 @@ export default {
     margin: 0 auto;
   }
 
-  .aspect-selector-mobile {
-    display: none !important;
+  .aspect-selector {
     margin: 0 auto 1rem auto;
     transform: translateY(-0.375rem);
     min-width: 100px;
