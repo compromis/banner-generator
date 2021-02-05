@@ -1,7 +1,7 @@
 <template>
   <div :class="['pane', 'chart-pane', { 'pane-dimmed': paneDimmed }, `logo-${properties.logo}`]">
     <!-- Theme selector -->
-    <theme-selector v-model="properties.theme" :themes="['blobs', 'blobless']" />
+    <theme-selector v-model="properties.theme" :themes="availableThemes" />
 
     <!-- Title -->
     <c-input-text
@@ -171,6 +171,17 @@ export default {
         color: 'orange',
         fullGradient: false
       }
+    }
+  },
+
+  computed: {
+    availableThemes () {
+      const themes = {
+        11: ['blobs', 'blobless'],
+        169: ['blobless']
+      }
+
+      return themes[this.aspect]
     }
   },
 

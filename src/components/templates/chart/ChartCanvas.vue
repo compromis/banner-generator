@@ -18,25 +18,19 @@
         </h1>
         <bar-chart
           v-if="banner.chartType === 'bar-vertical'"
-          :chart="banner.chart"
-          :max-length="aspect === '169' ? (banner.description ? 250 : 360) : (banner.description ? 200 : 310)" />
-        <bar-chart
+          :chart="banner.chart" />
+        <horizontal-bar-chart
           v-if="banner.chartType === 'bar-horizontal'"
-          :chart="banner.chart"
-          horizontal
-          :max-length="400" />
+          :chart="banner.chart" />
         <line-chart
           v-if="banner.chartType === 'lines'"
-          :chart="banner.chart"
-          :mode="banner.mode" />
+          :chart="banner.chart" />
         <pie-chart
           v-if="banner.chartType === 'pie'"
-          :chart="banner.chart"
-          :mode="banner.mode" />
+          :chart="banner.chart" />
         <pie-chart
           v-if="banner.chartType === 'doughnut'"
           :chart="banner.chart"
-          :mode="banner.mode"
           doughnut />
         <farto-chart
           v-if="banner.chartType === 'farto'"
@@ -73,8 +67,9 @@ import BannerPicture from '@/components/canvas/BannerPicture'
 import BannerFrame from '@/components/canvas/BannerFrame'
 import EmojisOnCanvas from '@/components/canvas/EmojisOnCanvas'
 import TextInPills from '@/components/canvas/TextInPills'
-import LineChart from './LineChart'
 import BarChart from './BarChart'
+import HorizontalBarChart from './HorizontalBarChart'
+import LineChart from './LineChart'
 import PieChart from './PieChart'
 import FartoChart from './FartoChart'
 import ChartLegend from './ChartLegend'
@@ -90,6 +85,7 @@ export default {
     BannerPicture,
     BannerFrame,
     BarChart,
+    HorizontalBarChart,
     LineChart,
     PieChart,
     FartoChart,
@@ -150,12 +146,12 @@ export default {
   }
 
   ::v-deep canvas {
-    height: 400px !important;
+    height: 350px !important;
   }
 
   .has-description {
     &::v-deep canvas {
-      height: 300px !important;
+      height: 280px !important;
     }
   }
 
@@ -202,7 +198,6 @@ export default {
       right: 32px;
       transform: scale(0.65) translate(0, 50%);
       transform-origin: right bottom;
-      padding-top: 0;
     }
   }
 </style>
