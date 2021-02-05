@@ -19,10 +19,6 @@ export default {
       type: Object,
       required: true
     },
-    mode: {
-      type: String,
-      default: 'white'
-    },
     doughnut: {
       type: Boolean,
       default: false

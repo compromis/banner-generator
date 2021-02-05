@@ -1,16 +1,18 @@
 <script>
 import Chart from 'chart.js'
-import { Line, mixins } from 'vue-chartjs'
+import { HorizontalBar, mixins } from 'vue-chartjs'
 import ChartMixin from './chart-mixin'
 // eslint-disable-next-line
 import ChartDataLabels from 'chartjs-plugin-datalabels'
+// eslint-disable-next-line
+import ChartRoundedCorners from './chart-rounded-corners'
 
 Chart.defaults.global.defaultFontFamily = "'Compromis', sans-serif"
 Chart.defaults.global.defaultFontSize = 14
 Chart.defaults.global.defaultFontColor = '#707380'
 
 export default {
-  extends: Line,
+  extends: HorizontalBar,
 
   mixins: [mixins.reactiveData, ChartMixin],
 
@@ -28,7 +30,7 @@ export default {
         maintainAspectRatio: false,
         tooltips: { enabled: false },
         layout: {
-          padding: { top: 45, left: 45, right: 45, bottom: 0 }
+          padding: { top: 0, left: 0, right: 100, bottom: 0 }
         },
         legend: {
           display: false
@@ -37,13 +39,14 @@ export default {
           xAxes: [{
             gridLines: {
               display: false
+            },
+            ticks: {
+              display: false,
+              beginAtZero: true
             }
           }],
           yAxes: [{
             gridLines: {
-              display: false
-            },
-            ticks: {
               display: false
             }
           }]
@@ -51,8 +54,8 @@ export default {
 
         plugins: {
           datalabels: {
-            align: 'top',
-            anchor: '',
+            align: 'end',
+            anchor: 'end',
             color: ({ dataIndex: dataKey, datasetIndex: setKey }) => {
               const row = this.chart.data[dataKey].values[setKey]
               return row.highlight ? row.color : this.mode === 'black' ? 'white' : '#707380'
@@ -79,11 +82,12 @@ export default {
       const labels = this.chart.data.map(row => row.label)
       const datasets = this.chart.sets.map((set, setKey) => {
         const setdata = this.chart.data.map(row => row.values[setKey].number)
+        const colors = this.chart.data.map(row => row.values[setKey].color)
 
         return {
           label: set.label,
-          borderColor: set.color,
-          backgroundColor: 'transparent',
+          borderColor: 'transparent',
+          backgroundColor: colors,
           borderWidth: 5,
           data: setdata
         }
