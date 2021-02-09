@@ -112,7 +112,7 @@
         <c-input-text
           label="Nom del programa"
           name="customProgramme"
-          placeholder="En Análisis"
+          placeholder="L'anàlisi"
           v-model="properties.customProgramme"
           :maxlength="30"
           :message="setFieldMessage('customProgramme')"
