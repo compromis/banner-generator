@@ -8,8 +8,6 @@ $family-primary: 'Compromis', sans-serif;
 $primary: #ff6600;
 $primary-invert: findColorInvert($primary);
 $iniciativa: #AF243C;
-$feminism-start: #7D3A81;
-$feminism-end: #C54687;
 
 $gray-darkest: #353949;
 $gray-lightest: #f8faff;
@@ -66,6 +64,8 @@ $input-shadow: 0;
 // Gradients
 $gradient-start: #d23517;
 $gradient-end: #f39128;
+$feminism-start: #7D3A81;
+$feminism-end: #C54687;
 $gradient: linear-gradient(var(--gradient-orientation, 45deg), $gradient-start, $gradient-end);
 $gradient-feminista: linear-gradient(var(--gradient-orientation, 45deg), $gradient-end, $gradient-start 14%, $feminism-end 48%, $feminism-start 100%);
 $gradient-green: linear-gradient(var(--gradient-orientation, 45deg), #38B34A, #8CC949);

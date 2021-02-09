@@ -118,18 +118,15 @@ export default {
         opacity: .75;
       }
 
-      &-feminism {
-        --gradient-orientation: -40deg;
-      }
-
       &-partial {
         top: 50%;
         bottom: -10%;
 
         &.gradient-orange {
-          mask-image: url(../../assets/mask.svg);
-          mask-mode: alpha;
-          background: linear-gradient(var(--gradient-orientation, 110deg), rgba($gradient-start, 1) 0, rgba($gradient-start, .9) 20%, rgba($gradient-end, .7) 60%, rgba($gradient-end, 0) 95%);
+          top: 30%;
+          bottom: 0;
+          background: url(../../assets/gradients/gradient-partial.png);
+          background-size: 100% 100%;
         }
 
         &.gradient-lgbt {
@@ -140,18 +137,23 @@ export default {
         }
 
         &.gradient-feminism {
-          mask-image: url(../../assets/mask.svg);
-          mask-mode: alpha;
+          top: 30%;
           bottom: 0;
+          background: url(../../assets/gradients/feminism-partial.png);
+          background-size: 100% 100%; // this seems redundant but is needed, otherwise chrome sizes according to overriden bg
         }
       }
 
       &-full {
         &.gradient-orange {
-          background: linear-gradient(var(--gradient-orientation, 110deg), rgba($gradient-start, .9), rgba($gradient-end, .8), rgba($gradient-end, .3));
+          background: linear-gradient(-10deg, rgba($gradient-start, .9), rgba($gradient-end, .8), rgba($gradient-end, .3));
         }
         &.gradient-black {
           background: rgba($gray-800, .65);
+        }
+        &.gradient-feminism {
+          background: url(../../assets/gradients/feminism-full.png);
+          background-size: 100% 100%; // this seems redundant but is needed, otherwise chrome sizes according to overriden bg
         }
       }
 
@@ -160,7 +162,8 @@ export default {
         bottom: 0;
 
         &.gradient-orange {
-          background: linear-gradient(var(--gradient-orientation, 110deg), rgba($gradient-start, 1), rgba($gradient-end, 1), rgba($gradient-end, 1));
+          top: 0;
+          background: linear-gradient(-38deg, $gradient-start 0%, $gradient-end 90%, $gradient-end 100%);
         }
         &.gradient-black {
           background: rgba($gray-800, 1);
@@ -173,8 +176,9 @@ export default {
           opacity: 1;
         }
         &.gradient-feminism {
-          background: $gradient-feminista;
-          mask-image: none;
+          top: 0;
+          background: url(../../assets/gradients/feminism-background.jpg);
+          background-size: 100% 100%;
         }
       }
     }
