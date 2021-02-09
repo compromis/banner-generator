@@ -1,5 +1,8 @@
 <template>
   <div :class="['pane', 'media-pane', { 'pane-dimmed': paneDimmed, 'pane-916': aspect === 1 }, `logo-${properties.logo}`]">
+    <!-- Theme selector -->
+    <theme-selector v-model="properties.theme" :themes="availableThemes" />
+
     <!-- Title -->
     <c-input-text
       label="Títol"
@@ -137,6 +140,14 @@
       </div>
     </transition>
 
+    <!-- Card position -->
+    <transition name="slide">
+      <c-tab-group v-if="properties.theme === 'blobless' && aspect === '11'">
+        <c-tab v-model="properties.disposition" value="full" name="disposition">Targeta centrada</c-tab>
+        <c-tab v-model="properties.disposition" value="half" name="disposition">Targeta a l'esquerra</c-tab>
+      </c-tab-group>
+    </transition>
+
     <!-- Picture -->
     <picture-upload
       :picture="properties.picture"
@@ -151,6 +162,11 @@
         v-model="properties.picturePos"
         @touchstart="dimPane(true)"
         @touchend="dimPane(false)" />
+      <transition name="slide">
+        <b-switch v-model="properties.fullGradient" v-if="properties.theme === 'blobless'">
+          Degradat sobre tota la imatge
+        </b-switch>
+      </transition>
     </picture-upload>
 
     <!-- Frame color  -->
@@ -158,6 +174,7 @@
 
     <!-- Dark mode -->
     <color-selector
+      v-if="properties.theme === 'glowy'"
       v-model="properties.mode"
       :colors="['white', 'black']"
       label="Color de fons"
@@ -197,13 +214,19 @@ import PaneMixin from '@/mixins/pane-mixin.js'
 import presets from './presets'
 import Swatches from 'vue-swatches'
 import DatePicker from '@/components/pane/DatePicker'
+import ThemeSelector from '@/components/pane/ThemeSelector'
+import CTab from '@/components/pane/CTab'
+import CTabGroup from '@/components/pane/CTabGroup'
 
 export default {
   name: 'media-pane',
 
   components: {
     Swatches,
-    DatePicker
+    DatePicker,
+    ThemeSelector,
+    CTab,
+    CTabGroup
   },
 
   mixins: [PaneMixin],
@@ -223,7 +246,9 @@ export default {
         customSourceColor: '#1CA085',
         customProgramme: '',
         customProgrammeColor: '#1CA085',
-        color: 'orange'
+        color: 'orange',
+        fullGradient: false,
+        disposition: 'full'
       },
       presets
     }
@@ -233,6 +258,17 @@ export default {
     // Set a default time
     this.properties.time.setHours(10)
     this.properties.time.setMinutes(0)
+  },
+
+  computed: {
+    availableThemes () {
+      const themes = {
+        11: ['glowy', 'blobless'],
+        916: ['glowy', 'blobless']
+      }
+
+      return themes[this.aspect]
+    }
   },
 
   methods: {

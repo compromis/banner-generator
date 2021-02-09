@@ -6,24 +6,24 @@
       'aspect-' + aspect,
       'disposition-' + banner.disposition,
       'banner-background-' + banner.mode,
+      'theme-' + banner.theme,
       'logo-' + banner.logo
     ]"
     v-if="banner">
     <div class="media-grid">
       <banner-picture
         :picture-position="objectPosition"
-        :edge="true" />
-      <div class="medium">
-        <span>{{ banner.aspect }}</span>
+        :edge="banner.theme === 'blobless' ? false : true" />
+      <div :class="{'medium': true, 'card': banner.theme === 'blobless', 'medium-half': banner.disposition === 'half'}">
         <div class="medium-overtitle">
-          <span v-if="aspect === '11'">{{ banner.overtitle | formatString }}</span>
+          <span v-if="aspect === '11' || banner.theme === 'blobless'">{{ banner.overtitle | formatString }}</span>
           <text-in-pills
             v-else
             :text="banner.overtitle"
             fontSize="20px" />
         </div>
         <div class="medium-title" :style="{fontSize: fontSize(banner.title, 60, 40, 30)}">
-          <span v-if="aspect === '11'">{{ banner.title | formatString }}</span>
+          <span v-if="aspect === '11' || banner.theme === 'blobless'">{{ banner.title | formatString }}</span>
           <text-in-pills
             v-else
             :text="banner.title"
@@ -31,7 +31,7 @@
             />
         </div>
         <div class="medium-subtitle">
-          <span v-if="aspect === '11'">{{ banner.subtitle | formatString }}</span>
+          <span v-if="aspect === '11' || banner.theme === 'blobless'">{{ banner.subtitle | formatString }}</span>
           <text-in-pills
             v-else
             :text="banner.subtitle"
@@ -186,6 +186,31 @@ export default {
 
     .medium-subtitle, .medium-overtitle {
       color: $gray-400;
+    }
+  }
+
+  .theme-blobless {
+    .medium {
+      padding: 20px;
+      position: absolute;
+      left: 35px;
+      bottom: 90px;
+      width: 608px;
+    }
+
+    .medium-half {
+      width: 275px;
+    }
+
+    .media-grid {
+      bottom: 0;
+    }
+
+    &.aspect-916 {
+      .medium {
+        left: 20px;
+        width: 325px;
+      }
     }
   }
 </style>
