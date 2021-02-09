@@ -4,7 +4,6 @@
     :class="[
       'banner-canvas',
       'aspect-' + aspect,
-      'disposition-' + banner.disposition,
       'theme-' + banner.theme,
       'banner-background-' + banner.mode,
       'logo-' + banner.logo
