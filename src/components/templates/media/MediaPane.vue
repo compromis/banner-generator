@@ -142,9 +142,10 @@
 
     <!-- Card position -->
     <transition name="slide">
-      <c-tab-group v-if="properties.theme === 'blobless' && aspect === '11'">
-        <c-tab v-model="properties.disposition" value="full" name="disposition">Targeta centrada</c-tab>
-        <c-tab v-model="properties.disposition" value="half" name="disposition">Targeta a l'esquerra</c-tab>
+      <c-tab-group v-if="properties.theme !== 'glowy' && aspect === '11'">
+        <c-tab v-model="properties.disposition" value="left" name="disposition" icon="align-left"></c-tab>
+        <c-tab v-model="properties.disposition" value="full" name="disposition" icon="align-center"></c-tab>
+        <c-tab v-model="properties.disposition" value="right" name="disposition" icon="align-right"></c-tab>
       </c-tab-group>
     </transition>
 
@@ -163,7 +164,7 @@
         @touchstart="dimPane(true)"
         @touchend="dimPane(false)" />
       <transition name="slide">
-        <b-switch v-model="properties.fullGradient" v-if="properties.theme === 'blobless'">
+        <b-switch v-model="properties.fullGradient" v-if="properties.theme !== 'glowy'">
           Degradat sobre tota la imatge
         </b-switch>
       </transition>
@@ -174,11 +175,10 @@
 
     <!-- Dark mode -->
     <color-selector
-      v-if="properties.theme === 'glowy'"
       v-model="properties.mode"
       :colors="['white', 'black']"
-      label="Color de fons"
-      is-rounded />
+      :label="properties.theme === 'glowy' ? 'Color de fons' : 'Color de targeta'"
+      :is-rounded="properties.theme === 'glowy'" />
 
     <!-- Hashtag -->
     <transition name="slide">
@@ -263,8 +263,8 @@ export default {
   computed: {
     availableThemes () {
       const themes = {
-        11: ['glowy', 'blobless'],
-        916: ['glowy', 'blobless']
+        11: ['glowy', 'blobless', 'blobs'],
+        916: ['glowy', 'blobless', 'blobs']
       }
 
       return themes[this.aspect]

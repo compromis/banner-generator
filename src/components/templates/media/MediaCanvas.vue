@@ -13,17 +13,17 @@
     <div class="media-grid">
       <banner-picture
         :picture-position="objectPosition"
-        :edge="banner.theme === 'blobless' ? false : true" />
-      <div :class="{'medium': true, 'card': banner.theme === 'blobless', 'medium-half': banner.disposition === 'half'}">
+        :edge="banner.theme !== 'glowy' ? false : true" />
+      <div :class="['medium', `medium-${banner.disposition}`, {'card': banner.theme !== 'glowy'}]">
         <div class="medium-overtitle">
-          <span v-if="aspect === '11' || banner.theme === 'blobless'">{{ banner.overtitle | formatString }}</span>
+          <span v-if="aspect === '11' || banner.theme !== 'glowy'">{{ banner.overtitle | formatString }}</span>
           <text-in-pills
             v-else
             :text="banner.overtitle"
             fontSize="20px" />
         </div>
         <div class="medium-title" :style="{fontSize: fontSize(banner.title, 60, 40, 30)}">
-          <span v-if="aspect === '11' || banner.theme === 'blobless'">{{ banner.title | formatString }}</span>
+          <span v-if="aspect === '11' || banner.theme !== 'glowy'">{{ banner.title | formatString }}</span>
           <text-in-pills
             v-else
             :text="banner.title"
@@ -31,7 +31,7 @@
             />
         </div>
         <div class="medium-subtitle">
-          <span v-if="aspect === '11' || banner.theme === 'blobless'">{{ banner.subtitle | formatString }}</span>
+          <span v-if="aspect === '11' || banner.theme !== 'glowy'">{{ banner.subtitle | formatString }}</span>
           <text-in-pills
             v-else
             :text="banner.subtitle"
@@ -43,7 +43,8 @@
           :custom-source-color="banner.customSourceColor"
           :programme="banner.programme"
           :custom-programme="banner.customProgramme"
-          :custom-programme-color="banner.customProgrammeColor"/>
+          :custom-programme-color="banner.customProgrammeColor"
+          :glows="banner.mode === 'white'"/>
         <div class="medium-details">
           <event-info color="gradient" icon="calendar-day">{{ banner.date | formatDate }}</event-info>
           <event-info color="gradient" icon="clock">{{ banner.time | formatTime }}</event-info>
@@ -189,17 +190,24 @@ export default {
     }
   }
 
-  .theme-blobless {
+  .theme-blobless, .theme-blobs {
     .medium {
       padding: 20px;
       position: absolute;
       left: 35px;
       bottom: 90px;
       width: 608px;
+      z-index: 30;
     }
 
-    .medium-half {
+    .medium-left {
       width: 275px;
+    }
+
+    .medium-right {
+      width: 275px;
+      left: auto;
+      right: 35px;
     }
 
     .media-grid {
