@@ -7,7 +7,13 @@ export default {
 
   methods: {
     formatNumber (number) {
-      const options = { notation: 'compact', compactDisplay: 'short', maximumFractionDigits: 2 }
+      const options = { notation: 'compact', compactDisplay: 'short' }
+
+      if (number.toString().split('').includes('.')) {
+        console.log('I gots the digits')
+        options.maximumFractionDigits = 2
+      }
+
       if (this.chart.options.valuesIn === 'euros') {
         options.style = 'currency'
         options.currency = 'EUR'
