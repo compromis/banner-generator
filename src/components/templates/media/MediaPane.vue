@@ -1,5 +1,8 @@
 <template>
   <div :class="['pane', 'media-pane', { 'pane-dimmed': paneDimmed, 'pane-916': aspect === 1 }, `logo-${properties.logo}`]">
+    <!-- Theme selector -->
+    <theme-selector v-model="properties.theme" :themes="availableThemes" />
+
     <!-- Title -->
     <c-input-text
       label="Títol"
@@ -112,7 +115,7 @@
         <c-input-text
           label="Nom del programa"
           name="customProgramme"
-          placeholder="En Análisis"
+          placeholder="L'anàlisi"
           v-model="properties.customProgramme"
           :maxlength="30"
           :message="setFieldMessage('customProgramme')"
@@ -137,6 +140,15 @@
       </div>
     </transition>
 
+    <!-- Card position -->
+    <transition name="slide">
+      <c-tab-group v-if="properties.theme !== 'glowy' && aspect === '11'">
+        <c-tab v-model="properties.disposition" value="left" name="disposition" icon="align-left"></c-tab>
+        <c-tab v-model="properties.disposition" value="full" name="disposition" icon="align-center"></c-tab>
+        <c-tab v-model="properties.disposition" value="right" name="disposition" icon="align-right"></c-tab>
+      </c-tab-group>
+    </transition>
+
     <!-- Picture -->
     <picture-upload
       :picture="properties.picture"
@@ -151,6 +163,11 @@
         v-model="properties.picturePos"
         @touchstart="dimPane(true)"
         @touchend="dimPane(false)" />
+      <transition name="slide">
+        <b-switch v-model="properties.fullGradient" v-if="properties.theme !== 'glowy'">
+          Degradat sobre tota la imatge
+        </b-switch>
+      </transition>
     </picture-upload>
 
     <!-- Frame color  -->
@@ -160,8 +177,8 @@
     <color-selector
       v-model="properties.mode"
       :colors="['white', 'black']"
-      label="Color de fons"
-      is-rounded />
+      :label="properties.theme === 'glowy' ? 'Color de fons' : 'Color de targeta'"
+      :is-rounded="properties.theme === 'glowy'" />
 
     <!-- Hashtag -->
     <transition name="slide">
@@ -197,13 +214,19 @@ import PaneMixin from '@/mixins/pane-mixin.js'
 import presets from './presets'
 import Swatches from 'vue-swatches'
 import DatePicker from '@/components/pane/DatePicker'
+import ThemeSelector from '@/components/pane/ThemeSelector'
+import CTab from '@/components/pane/CTab'
+import CTabGroup from '@/components/pane/CTabGroup'
 
 export default {
   name: 'media-pane',
 
   components: {
     Swatches,
-    DatePicker
+    DatePicker,
+    ThemeSelector,
+    CTab,
+    CTabGroup
   },
 
   mixins: [PaneMixin],
@@ -223,7 +246,9 @@ export default {
         customSourceColor: '#1CA085',
         customProgramme: '',
         customProgrammeColor: '#1CA085',
-        color: 'orange'
+        color: 'orange',
+        fullGradient: false,
+        disposition: 'full'
       },
       presets
     }
@@ -233,6 +258,17 @@ export default {
     // Set a default time
     this.properties.time.setHours(10)
     this.properties.time.setMinutes(0)
+  },
+
+  computed: {
+    availableThemes () {
+      const themes = {
+        11: ['glowy', 'blobless', 'blobs'],
+        916: ['glowy', 'blobless', 'blobs']
+      }
+
+      return themes[this.aspect]
+    }
   },
 
   methods: {

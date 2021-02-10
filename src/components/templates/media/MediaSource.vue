@@ -9,14 +9,14 @@
         :style="{
           background: source === 'other' ? customSourceColor : source['color'],
           color: source !== 'other' && source['color'] === 'white' ? '#353949' : 'white',
-          boxShadow: source['color'] === 'white' ? '0 2px 20px #ccc' : ''
+          boxShadow: source['color'] === 'white' && glows ? '0 2px 20px #ccc' : ''
         }">
         <img v-if="source !== 'other'" :src="source.logo" />
         <span v-if="source !== 'other'">{{ source['name'] }}</span>
         <span v-else>{{ customSource }}</span>
       </div>
-      <div class="glowy-ghost first" :style="{ background: source === 'other' ? customSourceColor : source['color'] }"></div>
-      <div class="glowy-ghost second" :style="{ background: source === 'other' ? customSourceColor : source['color'] }"></div>
+      <div v-if="glows" class="glowy-ghost first" :style="{ background: source === 'other' ? customSourceColor : source['color'] }"></div>
+      <div v-if="glows" class="glowy-ghost second" :style="{ background: source === 'other' ? customSourceColor : source['color'] }"></div>
     </div>
     <div class="programme-wrapper" v-if="programme">
       <div
@@ -27,14 +27,14 @@
         :style="{
           background: programme === 'other' ? customProgrammeColor : programme['color'],
           color: programme !== 'other' && programme['color'] === 'white' ? '#353949' : 'white',
-          boxShadow: programme['color'] === 'white' ? '0 2px 20px #ccc' : ''
+          boxShadow: programme['color'] === 'white' && glows ? '0 2px 20px #ccc' : ''
         }">
         <img v-if="programme !== 'other'" :src="programme.logo" :style="{ width: programme['width']}"/>
         <span v-if="programme !== 'other'">{{ programme['name'] }}</span>
         <span v-else>{{ customProgramme }}</span>
       </div>
-      <div class="glowy-ghost first" :style="{ background: programme === 'other' ? customProgrammeColor : programme['color'] }"></div>
-      <div class="glowy-ghost second" :style="{ background: programme === 'other' ? customProgrammeColor : programme['color'] }"></div>
+      <div v-if="glows" class="glowy-ghost first" :style="{ background: programme === 'other' ? customProgrammeColor : programme['color'] }"></div>
+      <div v-if="glows" class="glowy-ghost second" :style="{ background: programme === 'other' ? customProgrammeColor : programme['color'] }"></div>
     </div>
   </div>
 </template>
@@ -67,6 +67,10 @@ export default {
     customProgrammeColor: {
       type: String,
       default: ''
+    },
+    glows: {
+      type: Boolean,
+      default: true
     }
   }
 }

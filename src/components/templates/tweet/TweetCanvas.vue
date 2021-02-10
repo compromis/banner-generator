@@ -68,7 +68,7 @@
         <img src="./images/point-down.png" alt="" />
       </div>
     </div>
-    <banner-frame :logo-style="banner.backgroundColor === 'white' ? 'color' : 'auto'" />
+    <banner-frame :logo-type="banner.backgroundColor === 'white' ? 'color' : 'auto'" />
   </div>
 </template>
 
@@ -153,9 +153,12 @@ export default {
     }
 
     &.background-feminism {
-      --background: #{$gradient-feminista};
+      --background: url(../../../assets/gradients/feminism-background.jpg);
       --link-color: #{$white};
       --link-decoration: underline;
+      .background {
+        background-size: 100% 100%;
+      }
     }
 
     &.background-green {

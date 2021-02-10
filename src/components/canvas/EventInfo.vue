@@ -43,10 +43,11 @@ export default {
   padding-right: 20px;
   line-height: 1.1;
 
-  svg {
+  .svg-inline--fa {
     padding-right: 8px;
     font-size: 28px;
     margin-top: -1px;
+    flex-shrink: 0;
   }
 
   &-gradient {

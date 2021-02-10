@@ -6,25 +6,25 @@
       'aspect-' + aspect,
       'disposition-' + banner.disposition,
       'banner-background-' + banner.mode,
+      'theme-' + banner.theme,
       'logo-' + banner.logo
     ]"
     v-if="banner">
     <div class="event-grid">
       <banner-picture
         :picture-position="objectPosition"
-        edge
+        :edge="banner.theme !== 'glowy' ? false : true"
         :height="aspect === 'event' ? 420 : null" />
-      <div class="event">
-        <span>{{ banner.aspect }}</span>
+      <div :class="['event', `event-${banner.disposition}`, {'card': banner.theme !== 'glowy'}]">
         <div class="event-overtitle">
-          <span v-if="aspect === '11'">{{ banner.overtitle | formatString }}</span>
+          <span v-if="aspect === '11' || banner.theme !== 'glowy'">{{ banner.overtitle | formatString }}</span>
           <text-in-pills
             v-else
             :text="banner.overtitle"
             fontSize="20px" />
         </div>
         <div class="event-title" :style="{fontSize: fontSize(banner.title, 60, 40, 60)}">
-          <span v-if="aspect === '11'">{{ banner.title | formatString }}</span>
+          <span v-if="aspect === '11' || banner.theme !== 'glowy'">{{ banner.title | formatString }}</span>
           <text-in-pills
             v-else
             :text="banner.title"
@@ -205,6 +205,48 @@ export default {
 
     .event-subtitle, .event-overtitle, .event-description {
       color: $gray-400;
+    }
+  }
+
+  .theme-blobless, .theme-blobs {
+    .event {
+      padding: 20px;
+      position: absolute;
+      left: 35px;
+      bottom: 90px;
+      width: 608px;
+      z-index: 30;
+    }
+
+    .event-left {
+      width: 275px;
+    }
+
+    .event-right {
+      width: 275px;
+      left: auto;
+      right: 35px;
+    }
+
+    .event-grid {
+      bottom: 0;
+    }
+
+    .event-right, .event-left {
+      .event-details {
+        flex-direction: column;
+      }
+
+      .event-info {
+        margin-top: 10px;
+      }
+    }
+
+    &.aspect-916 {
+      .event {
+        left: 20px;
+        width: 325px;
+      }
     }
   }
 </style>

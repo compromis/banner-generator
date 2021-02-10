@@ -141,5 +141,17 @@ export default {
       --gradient-orientation: 180deg !important;
       background-size: 100% 144px;
     }
+
+    &.gradient-feminism .glowy-subject,
+    &.gradient-feminism .glowy-ghost {
+      background-position: -403px 155px;
+      background-size: 53%;
+    }
+
+    &.gradient-feminism.position-top .glowy-subject,
+    &.gradient-feminism.position-top .glowy-ghost {
+      background-position: 0 334px;
+      background-size: unset;
+    }
   }
 </style>

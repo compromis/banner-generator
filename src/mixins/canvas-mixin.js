@@ -52,11 +52,11 @@ export default {
       return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
     },
 
-    // deprecated
     formatLocal (local) {
       return local
         .trim()
         .replace(/^per/gi, '')
+        .replace(/ per /gi, '')
         .replace(/^pel/gi, '')
         .replace(/#/g, '')
     }
