@@ -234,7 +234,7 @@ export default {
   data () {
     return {
       properties: {
-        theme: 'glowy',
+        theme: 'blobless',
         title: '',
         overtitle: '',
         subtitle: '',

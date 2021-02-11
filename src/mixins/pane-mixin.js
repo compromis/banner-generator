@@ -85,7 +85,7 @@ export default {
       // Check theme is available in selected aspect
       // Otherwise default to blobless
       if (this.availableThemes && !this.availableThemes.includes(this.properties.theme)) {
-        this.properties.theme = 'blobless'
+        this.properties.theme = this.availableThemes[0]
       }
     }
   },
