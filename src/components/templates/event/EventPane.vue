@@ -93,7 +93,7 @@
     </picture-upload>
 
     <!-- Frame color  -->
-    <color-selector v-model="properties.color" :colors="availableColors['glowy']" label="Color accent" is-rounded />
+    <color-selector v-model="properties.color" :colors="availableColors[properties.theme]" label="Color accent" is-rounded />
 
     <!-- Dark mode -->
     <color-selector
