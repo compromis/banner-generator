@@ -12,6 +12,7 @@ export default new Vuex.Store({
     template: null,
     aspect: '11',
     banner: null,
+    child: null,
     errors: {},
     displayErrors: false,
     isDownloadable: true,
@@ -36,6 +37,10 @@ export default new Vuex.Store({
 
     updateBanner (state, banner) {
       state.banner = banner
+    },
+
+    updateChild (state, value) {
+      state.child = value
     },
 
     updateErrors (state, errors) {

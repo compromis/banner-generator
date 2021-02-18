@@ -198,7 +198,7 @@ export default {
   }
 
   .tab-content {
-    display: none !important;
+    // display: none !important;
   }
 
   .banner-aspect {
