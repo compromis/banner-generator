@@ -33,6 +33,7 @@ export default {
     this.$store.commit('updateChild', 'party')
   }
 }
+
 </script>
 
 <style lang="scss">

@@ -1,18 +1,20 @@
 <template>
-  <div>
+  <div v-if="child">
     <comparison-canvas-party v-if="child === 'party'"/>
-    Active tab is {{ child }}
+    <comparison-canvas-headline v-if="child === 'headline'"/>
   </div>
 </template>
 
 <script>
 import ComparisonCanvasParty from './ComparisonCanvasParty'
+import ComparisonCanvasHeadline from './ComparisonCanvasHeadline'
 
 export default {
   name: 'comparison-canvas',
 
   components: {
-    ComparisonCanvasParty
+    ComparisonCanvasParty,
+    ComparisonCanvasHeadline
   },
 
   computed: {

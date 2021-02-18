@@ -1,64 +1,64 @@
 <template>
   <div>
-    <!-- Party -->
+    <!-- First Headline -->
     <c-select
       name="source"
-      label="Partit a comparar"
+      label="Primer mitjà"
       :message="setFieldMessage('source')"
-      placeholder="Selecciona un partit"
-      @input="updateSource"
-      :value="properties.source">
+      placeholder="Selecciona un mitjà"
+      @input="updateFirstSource"
+      :value="properties.firstSource">
       <option
         v-for="source in presets"
         :value="source.id"
         :key="source.id"
-        :selected="properties.source === source.id">
+        :selected="properties.firstSource === source.id">
         {{ source.name }}
       </option>
       <option
         value="other"
-        :selected="properties.source === 'other'">
+        :selected="properties.firstSource === 'other'">
         Altre...
       </option>
     </c-select>
 
-    <!-- Other party -->
+    <!-- Other Source -->
     <transition name="slide">
-      <div v-if="properties.source === 'other'" class="source-input-group">
+      <div v-if="properties.firstSource === 'other'" class="source-input-group">
         <div class="c-field">
           <div class="c-field-info">
             <label>Color</label>
           </div>
           <div class="c-field-content-sm">
-            <swatches v-model="properties.customSourceColor"></swatches>
+            <swatches v-model="properties.customFirstSourceColor"></swatches>
           </div>
         </div>
         <c-input-text
-          label="Formació política"
+          label="Mitjà de comunicació"
           name="customSource"
-          placeholder="Partit local"
-          v-model="properties.customSource"
+          placeholder="La Veu"
+          v-model="properties.customFirstSource"
           :maxlength="30"
           :message="setFieldMessage('customSource')"
           class="source-input-name" />
       </div>
     </transition>
 
-    <!-- Before Text  -->
+    <!-- First Headline Text  -->
     <c-input-text
-      label="Text de l'altre partit"
+      label="Primer titular"
       name="textBefore"
       type="textarea"
-      placeholder="Mireu què mal ho han fet..."
+      placeholder="L'ús de la bici està per davall de 9000..."
       v-model="properties.textBefore"
       :maxlength="160"
       :message="setFieldMessage('textBefore')" />
 
-    <!-- Before Picture -->
+    <!-- First Headline Picture -->
     <picture-upload
       id="picture-field"
       field-name="pictureBefore"
-      label="Foto de l'altre partit"
+      label="Foto del primer titular"
       :picture="properties.pictureBefore"
       :display-errors="displayErrors"
       :errors="errors"
@@ -73,12 +73,56 @@
         @touchend="dimPane(false)" />
     </picture-upload>
 
-    <!-- After Text  -->
+    <!-- Second Headline Source -->
+    <c-select
+      name="source"
+      label="Segon mitjà"
+      :message="setFieldMessage('source')"
+      placeholder="Selecciona un mitjà"
+      @input="updateSecondSource"
+      :value="properties.secondSource">
+      <option
+        v-for="source in presets"
+        :value="source.id"
+        :key="source.id"
+        :selected="properties.secondSource === source.id">
+        {{ source.name }}
+      </option>
+      <option
+        value="other"
+        :selected="properties.secondSource === 'other'">
+        Altre...
+      </option>
+    </c-select>
+
+    <!-- Other Source -->
+    <transition name="slide">
+      <div v-if="properties.secondSource === 'other'" class="source-input-group">
+        <div class="c-field">
+          <div class="c-field-info">
+            <label>Color</label>
+          </div>
+          <div class="c-field-content-sm">
+            <swatches v-model="properties.customSecondSourceColor"></swatches>
+          </div>
+        </div>
+        <c-input-text
+          label="Mitjà de comunicació"
+          name="customSource"
+          placeholder="La Veu"
+          v-model="properties.customSecondSource"
+          :maxlength="30"
+          :message="setFieldMessage('customSource')"
+          class="source-input-name" />
+      </div>
+    </transition>
+
+    <!-- Second Headline  -->
     <c-input-text
-      label="Text de Compromís"
+      label="Segon titular"
       name="textAfter"
       type="textarea"
-      placeholder="I què bé ho fem"
+      placeholder="L'ús de la bici està per damunt de 9000..."
       v-model="properties.textAfter"
       :maxlength="160"
       :message="setFieldMessage('textAfter')" />
@@ -87,7 +131,7 @@
     <picture-upload
       id="picture-field"
       field-name="pictureAfter"
-      label="Foto de Compromís"
+      label="Foto del segon titular"
       :picture="properties.pictureAfter"
       :display-errors="displayErrors"
       :errors="errors"
@@ -111,13 +155,6 @@
         v-model="properties.textSize"
         @touchstart="dimPane(true)"
         @touchend="dimPane(false)" />
-    </c-field>
-
-    <!-- Local label -->
-    <c-field>
-      <b-switch v-model="properties.invertOrder">
-        Invertir ordre de partits
-      </b-switch>
     </c-field>
 
     <!-- Dark mode -->
@@ -145,7 +182,7 @@
 
 <script>
 import PaneMixin from '@/mixins/pane-mixin.js'
-import presets from './presets'
+import presets from '../headline/presets'
 import Swatches from 'vue-swatches'
 
 export default {
@@ -161,9 +198,12 @@ export default {
     return {
       properties: {
         theme: 'glowy',
-        source: null,
-        customSource: '',
-        customSourceColor: '#1CA085',
+        firstSource: null,
+        secondSource: null,
+        customFirstSource: '',
+        customSecondSource: '',
+        customFirstSourceColor: '#1CA085',
+        customSecondSourceColor: '#1CA085',
         textAfter: '',
         textBefore: '',
         textSize: 100,
@@ -203,13 +243,22 @@ export default {
       img.src = this.properties[`picture${which}Preview`]
     },
 
-    updateSource (source) {
+    updateFirstSource (source) {
       if (source === 'other') {
-        this.properties.source = 'other'
+        this.properties.firstSource = 'other'
         return
       }
 
-      this.properties.source = this.presets.find(preset => preset.id === source)
+      this.properties.firstSource = this.presets.find(preset => preset.id === source)
+    },
+
+    updateSecondSource (source) {
+      if (source === 'other') {
+        this.properties.secondSource = 'other'
+        return
+      }
+
+      this.properties.secondSource = this.presets.find(preset => preset.id === source)
     }
   }
 }
