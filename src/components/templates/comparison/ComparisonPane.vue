@@ -1,11 +1,11 @@
 <template>
-  <div :class="{ 'pane comparison-pane': true, 'pane-dimmed': false }">
+  <div :class="['pane', 'comparison-pane', { 'pane-dimmed': paneDimmed }]">
     <b-tabs @input="updateActiveTab">
       <b-tab-item label="Partits" value="party">
-        <comparison-pane-party />
+        <comparison-pane-party @dimPane="(dimmed) => paneDimmed = dimmed" />
       </b-tab-item>
       <b-tab-item label="Titulars" value="headline">
-        <comparison-pane-headline />
+        <comparison-pane-headline @dimPane="(dimmed) => paneDimmed = dimmed" />
       </b-tab-item>
     </b-tabs>
   </div>
@@ -23,9 +23,16 @@ export default {
     ComparisonPaneHeadline
   },
 
+  data () {
+    return {
+      paneDimmed: true
+    }
+  },
+
   methods: {
     updateActiveTab (value) {
       this.$store.commit('updateChild', value)
+      this.$root.$emit('refreshPane', value)
     }
   },
 

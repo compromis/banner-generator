@@ -4,9 +4,9 @@
     <c-select
       name="source"
       label="Primer mitjà"
-      :message="setFieldMessage('source')"
+      :message="setFieldMessage('firstSource')"
       placeholder="Selecciona un mitjà"
-      @input="updateFirstSource"
+      @input="(source) => updateSource('first', source)"
       :value="properties.firstSource">
       <option
         v-for="source in presets"
@@ -69,17 +69,17 @@
         :min="0"
         :max="100"
         v-model="properties.pictureBeforePos"
-        @touchstart="dimPane(true)"
-        @touchend="dimPane(false)" />
+        @touchstart="$emit('dimPane', true)"
+        @touchend="$emit('dimPane', false)" />
     </picture-upload>
 
     <!-- Second Headline Source -->
     <c-select
       name="source"
       label="Segon mitjà"
-      :message="setFieldMessage('source')"
+      :message="setFieldMessage('secondSource')"
       placeholder="Selecciona un mitjà"
-      @input="updateSecondSource"
+      @input="(source) => updateSource('second', source)"
       :value="properties.secondSource">
       <option
         v-for="source in presets"
@@ -142,8 +142,8 @@
         :min="0"
         :max="100"
         v-model="properties.pictureAfterPos"
-        @touchstart="dimPane(true)"
-        @touchend="dimPane(false)" />
+        @touchstart="$emit('dimPane', true)"
+        @touchend="$emit('dimPane', false)" />
     </picture-upload>
 
     <!-- Text size -->
@@ -153,8 +153,8 @@
         :min="75"
         :max="125"
         v-model="properties.textSize"
-        @touchstart="dimPane(true)"
-        @touchend="dimPane(false)" />
+        @touchstart="$emit('dimPane', true)"
+        @touchend="$emit('dimPane', false)" />
     </c-field>
 
     <!-- Dark mode -->
@@ -215,22 +215,34 @@ export default {
         pictureAfterPos: 50,
         invertOrder: false
       },
-      presets: presets
+      presets
     }
+  },
+
+  mounted () {
+    this.$root.$on('refreshPane', (pane) => {
+      if (pane === 'headline') {
+        this.$store.commit('updateBanner', this.properties)
+      }
+    })
   },
 
   methods: {
     validate () {
-      const sourceField = (this.properties.source === 'other')
-        ? { customSource: "Has d'escriure el nom d'un partit" }
-        : { source: 'Has de seleccionar un partit' }
+      const firstSourceField = (this.properties.firstSource === 'other')
+        ? { customFirstSource: "Has d'escriure un primer mitjà" }
+        : { firstSource: 'Has de seleccionar un partit' }
+      const secondSourceField = (this.properties.secondSource === 'other')
+        ? { customSecondSource: "Has d'escriure un segon mitjà" }
+        : { secondSource: 'Has de seleccionar un segon mitjà' }
 
       this.fieldRequired({
-        textBefore: "Has d'escirure una cita",
-        textAfter: "Has d'escriure un autor",
+        textBefore: "Has d'escirure un primer titular",
+        textAfter: "Has d'escriure un segon titular",
         pictureBefore: 'Has de seleccionar una foto',
         pictureAfter: 'Has de seleccionar una foto',
-        ...sourceField
+        ...firstSourceField,
+        ...secondSourceField
       })
       this.allCapsDisallowed('textBefore', 'textAfter')
     },
@@ -243,22 +255,13 @@ export default {
       img.src = this.properties[`picture${which}Preview`]
     },
 
-    updateFirstSource (source) {
+    updateSource (which, source) {
       if (source === 'other') {
-        this.properties.firstSource = 'other'
+        this.properties[`${which}Source`] = 'other'
         return
       }
 
-      this.properties.firstSource = this.presets.find(preset => preset.id === source)
-    },
-
-    updateSecondSource (source) {
-      if (source === 'other') {
-        this.properties.secondSource = 'other'
-        return
-      }
-
-      this.properties.secondSource = this.presets.find(preset => preset.id === source)
+      this.properties[`${which}Source`] = this.presets.find(preset => preset.id === source)
     }
   }
 }

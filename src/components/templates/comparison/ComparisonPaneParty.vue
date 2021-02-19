@@ -69,8 +69,8 @@
         :min="0"
         :max="100"
         v-model="properties.pictureBeforePos"
-        @touchstart="dimPane(true)"
-        @touchend="dimPane(false)" />
+        @touchstart="$emit('dimPane', true)"
+        @touchend="$emit('dimPane', false)" />
     </picture-upload>
 
     <!-- After Text  -->
@@ -98,8 +98,8 @@
         :min="0"
         :max="100"
         v-model="properties.pictureAfterPos"
-        @touchstart="dimPane(true)"
-        @touchend="dimPane(false)" />
+        @touchstart="$emit('dimPane', true)"
+        @touchend="$emit('dimPane', false)" />
     </picture-upload>
 
     <!-- Text size -->
@@ -109,8 +109,8 @@
         :min="75"
         :max="125"
         v-model="properties.textSize"
-        @touchstart="dimPane(true)"
-        @touchend="dimPane(false)" />
+        @touchstart="$emit('dimPane', true)"
+        @touchend="$emit('dimPane', false)" />
     </c-field>
 
     <!-- Local label -->
@@ -179,6 +179,14 @@ export default {
     }
   },
 
+  mounted () {
+    this.$root.$on('refreshPane', (pane) => {
+      if (pane === 'party') {
+        this.$store.commit('updateBanner', this.properties)
+      }
+    })
+  },
+
   methods: {
     validate () {
       const sourceField = (this.properties.source === 'other')
@@ -186,8 +194,8 @@ export default {
         : { source: 'Has de seleccionar un partit' }
 
       this.fieldRequired({
-        textBefore: "Has d'escirure una cita",
-        textAfter: "Has d'escriure un autor",
+        textBefore: "Has d'escirure un text",
+        textAfter: "Has d'escriure un text",
         pictureBefore: 'Has de seleccionar una foto',
         pictureAfter: 'Has de seleccionar una foto',
         ...sourceField

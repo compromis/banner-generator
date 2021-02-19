@@ -59,7 +59,6 @@ export default {
   created () {
     // Emit default properties to canvas on creation
     this.$store.commit('updateBanner', this.properties)
-    console.log(this.properties)
 
     this.$root.$on('checkForErrors', () => {
       this.checkForErrors()
