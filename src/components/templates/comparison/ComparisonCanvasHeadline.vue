@@ -9,42 +9,58 @@
       'banner-background-' + banner.mode
     ]"
     v-if="banner">
-    <div :class="['comparison-images', banner.invertOrder ? 'comparison-images--inverted' : '']">
+    <div class="comparison-images">
       <banner-picture
         :picture="banner.pictureBeforePreview"
         :picture-position="objectPositionBefore"
-        :style="beforeGradientColor"
-        :height="600"
+        :style="{'--gradient-color': banner.firstSourceCustomColor, '--gradient-orientation': '90deg'}"
+        :height="285"
         color="custom"
         class="banner-picture-before"
         glow-size="sm" />
       <banner-picture
         :picture="banner.pictureAfterPreview"
         :picture-position="objectPositionAfter"
-        :style="{'--gradient-orientation' : '0deg'}"
-        :height="600"
-        color="orange"
+        :style="{'--gradient-color': banner.secondSourceCustomColor, '--gradient-orientation': '-90deg'}"
+        :height="285"
+        color="custom"
         class="banner-picture-after"
         glow-size="sm" />
     </div>
-    <div :class="['before-party', 'before-party--custom']" v-if="banner.source === 'other'" :style="{color: banner.customSourceColor}">
-      {{ banner.customSource }}
-    </div>
-    <div class="before-party" v-else-if="banner.source" >
-      <img :src="banner.source.logo" :alt="banner.source.name" :style="{ height: banner.source.logoHeight + 'px' }" />
-    </div>
     <div class="comparison">
+      <div class="comparison-description comparison-description-first">
+        {{banner.firstDescription}}
+      </div>
       <div class="comparison-text comparison-text-before"
         :style="{
           fontSize: smallestFontSize
         }">
-        {{ banner.textBefore | formatString }}
+        <div :class="['first-source', 'first-source--custom']" v-if="banner.firstSource === 'other'" :style="{color: banner.firstSourceCustomColor}">
+          {{ banner.customFirstSource }}
+        </div>
+        <div class="first-source" v-else-if="banner.firstSource" >
+          <img :src="banner.firstSource.logo" :alt="banner.firstSource.name" :style="{ height: banner.firstSource.logoHeight + 'px' }" />
+        </div>
+        <span :style="banner.firstSource && banner.firstSource !== 'other' ? {fontFamily: banner.firstSource.font.fontFamily, lineHeight: banner.firstSource.font.lineHeight} : null">{{ banner.textBefore | formatString }}</span>
+      </div>
+      <div class="comparison-description comparison-description-second">
+        {{banner.secondDescription}}
       </div>
       <div class="comparison-text comparison-text-after"
         :style="{
           fontSize: smallestFontSize
         }">
-        {{ banner.textAfter | formatString }}
+        <div :class="['second-source', 'second-source--custom']" v-if="banner.secondSource === 'other'" :style="{color: banner.secondSourceCustomColor}">
+          {{ banner.customSecondSource }}
+        </div>
+        <div class="second-source" v-else-if="banner.secondSource" >
+          <img :src="banner.secondSource.logo" :alt="banner.secondSource.name" :style="{ height: banner.secondSource.logoHeight + 'px' }" />
+        </div>
+        <span :style="banner.secondSource && banner.secondSource !== 'other' ? {fontFamily: banner.secondSource.font.fontFamily, lineHeight: banner.secondSource.font.lineHeight} : null" >{{ banner.textAfter | formatString }}</span>
+      </div>
+      <div v-if="banner.comparisonMode !== 'none'" class="comparison-mode">
+        <span v-if="banner.comparisonMode === 'arrow'">↓</span>
+        <span v-else style="fontSize: 78px">vs</span>
       </div>
     </div>
     <banner-frame
@@ -63,7 +79,7 @@ import BannerPicture from '@/components/canvas/BannerPicture'
 import BannerFrame from '@/components/canvas/BannerFrame'
 
 export default {
-  name: 'comparison-canvas-party',
+  name: 'comparison-canvas-headline',
 
   mixins: [CanvasMixin],
 
@@ -82,18 +98,9 @@ export default {
       return { objectPosition }
     },
     smallestFontSize () {
-      const before = this.fontSize(this.banner.textBefore, 40, 25, 160, this.banner.textSize)
-      const after = this.fontSize(this.banner.textAfter, 40, 25, 160, this.banner.textSize)
+      const before = this.fontSize(this.banner.textBefore, 35, 18, 160, this.banner.textSize)
+      const after = this.fontSize(this.banner.textAfter, 35, 18, 160, this.banner.textSize)
       return before < after ? before : after
-    },
-    beforeGradientColor () {
-      const { banner } = this
-      if (!banner.source) return
-      return {
-        '--gradient-color': banner.source === 'other'
-          ? banner.customSourceColor
-          : banner.source['color']
-      }
     }
   }
 }
@@ -101,6 +108,11 @@ export default {
 
 <style lang="scss" scoped>
   @import "../../../sass/variables";
+
+  .banner-background-black {
+    --circle-bg: #{$white};
+    --circle-text: #{$gray-900};
+  }
 
   .comparison {
     display: flex;
@@ -116,9 +128,8 @@ export default {
 
     &-images {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-column-gap: 30px;
-      align-items: stretch;
+      grid-row-gap: 25px;
+      align-content: start;
       position: absolute;
       padding: 30px;
       top: 0;
@@ -135,55 +146,57 @@ export default {
     &-text {
       line-height: 1.1;
       word-wrap: break-word;
-      width: 265px;
+      width: 275px;
       padding: 16px;
       position: absolute;
       letter-spacing: -.5px;
       color: $white;
 
       &-before {
-        top: 90px;
+        bottom: 408px;
         left: 35px;
       }
 
       &-after {
-        bottom: 90px;
-        right: 45px;
+        bottom: 96px;
+        right: 38px;
+        text-align: right;
       }
     }
 
-    &--inverted {
-      .banner-picture-before {
-        grid-row: 1;
-        grid-column: 2;
-        --gradient-orientation: 180deg;
+    &-description {
+      position: absolute;
+      color: $white;
+      font-size: 20px;
+
+      &-first {
+        top: 42px;
+        left: 50px;
       }
 
-      .banner-picture-after {
-        grid-row: 1;
-        grid-column: 1;
-        --gradient-orientation: 180deg;
+      &-second {
+        bottom: 340px;
+        right: 50px;
+        text-align: right;
       }
+    }
 
-      .before-party {
-        right: 35px;
-        left: unset;
-      }
+    &-mode {
+      position: absolute;
+      bottom: 335px;
+      left: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--circle-bg, #{$gray-800});
+      color: var(--circle-text, #{$white});
+      height: 120px;
+      width: 120px;
+      border-radius: 100%;
+      font-size: 92px;
 
-      .comparison-text {
-        &-after {
-          bottom: 90px;
-          left: 35px;
-          right: auto;
-          top: auto;
-        }
-
-        &-before {
-          top: 90px;
-          right: 45px;
-          bottom: auto;
-          left: auto;
-        }
+      span {
+        transform: translateY(-5px);
       }
     }
   }
@@ -193,11 +206,13 @@ export default {
     min-width: unset;
   }
 
-  .before-party {
+  .banner-picture::v-deep .glowy-card {
+    min-height: unset;
+  }
+
+  .first-source, .second-source {
     z-index: 20;
-    position: absolute;
-    top: 25px;
-    left: 35px;
+    filter: grayscale(1) invert(1) brightness(100);
 
     &--custom {
       margin-bottom: 4px;
