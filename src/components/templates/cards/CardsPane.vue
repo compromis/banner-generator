@@ -1,5 +1,14 @@
 <template>
   <div :class="['pane', 'cards-pane', { 'pane-dimmed': paneDimmed, 'pane-916': aspect === 1 }, `logo-${properties.logo}`]">
+    <!-- Card title -->
+    <c-input-text
+      type="textarea"
+      label="Títol"
+      name="title"
+      placeholder="Títol"
+      v-model="properties.title"
+      :maxlength="48" />
+
     <!-- Cards manager -->
     <cards-manager v-model="properties.cards" />
 
@@ -77,6 +86,7 @@ export default {
   data () {
     return {
       properties: {
+        title: '',
         cards: [],
         emojis: [],
         color: 'orange',
