@@ -3,7 +3,7 @@
     <ul class="sets">
       <li v-for="(set, setKey) in chartData.sets" :key="setKey" :class="{ hidden: setKey >= maxSets }">
         <input type="text" maxlength="20" v-model="set.label" class="set-name" placeholder="Nom del set" :ref="`setLabel${setKey}`" />
-        <button v-if="chartData.sets.length > 1" @click="deleteSet(setKey)" class="remove set-remove">-</button>
+        <button v-if="chartData.sets.length > 1" @click="deleteSet(setKey)" class="c-button-circle remove set-remove">-</button>
 
         <table class="set-data">
           <tr>
@@ -63,7 +63,7 @@
               </b-checkbox>
             </td>
             <td>
-              <button v-if="chartData.data.length > 1" @click="deleteRow(dataKey)" class="remove">-</button>
+              <button v-if="chartData.data.length > 1" @click="deleteRow(dataKey)" class="c-button-circle remove">-</button>
             </td>
           </tr>
         </table>
@@ -347,32 +347,6 @@ export default {
         position: absolute;
         top: .65rem;
         right: .6rem;
-      }
-    }
-
-    .remove {
-      display: flex;
-      background: $gray-100;
-      color: $gray-700;
-      border: 0;
-      appearance: none;
-      border-radius: 2rem;
-      padding: 0;
-      margin: 0;
-      align-items: center;
-      justify-content: center;
-      height: 1.15rem;
-      width: 1.15rem;
-      box-shadow: 0 0 0 2px white;
-
-      &:hover {
-        background: $gray-200;
-        color: $gray-900;
-      }
-
-      &:focus {
-        outline: 0;
-        box-shadow: 0 0 0 2px $gray-300;
       }
     }
   }
