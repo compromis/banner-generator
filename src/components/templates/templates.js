@@ -1,17 +1,5 @@
 export default [
   {
-    id: 'Resisteix',
-    name: 'Pla Resisteix',
-    aspects: ['11'],
-    icon: 'euro-sign',
-    label: '🦠Covid-19',
-    components: {
-      pane: () => import(/* webpackChunkName: "resisteix" */ './resisteix/ResisteixPane'),
-      canvas: () => import(/* webpackChunkName: "resisteix" */ './resisteix/ResisteixCanvas'),
-      help: () => import(/* webpackChunkName: "resisteix" */ './resisteix/ResisteixHelp')
-    }
-  },
-  {
     id: 'Headline',
     name: 'Titular de premsa',
     aspects: ['11', '916', '169'],
@@ -74,11 +62,24 @@ export default [
     id: 'Comparison',
     name: 'Comparativa',
     aspects: ['11'],
+    label: '✨Nou',
     icon: 'columns',
     components: {
       pane: () => import(/* webpackChunkName: "comparison" */ './comparison/ComparisonPane'),
       canvas: () => import(/* webpackChunkName: "comparison" */ './comparison/ComparisonCanvas'),
       help: () => import(/* webpackChunkName: "comparison" */ './comparison/ComparisonHelp')
+    }
+  },
+  {
+    id: 'Cards',
+    name: 'Graella',
+    aspects: ['11'],
+    label: '✨Nou',
+    icon: 'grip-horizontal',
+    components: {
+      pane: () => import(/* webpackChunkName: "cards" */ './cards/CardsPane'),
+      canvas: () => import(/* webpackChunkName: "cards" */ './cards/CardsCanvas'),
+      help: () => import(/* webpackChunkName: "cards" */ './cards/CardsHelp')
     }
   },
   {
@@ -170,6 +171,19 @@ export default [
       pane: () => import(/* webpackChunkName: "videocover" */ './videocover/VideoCoverPane'),
       canvas: () => import(/* webpackChunkName: "videocover" */ './videocover/VideoCoverCanvas'),
       help: () => import(/* webpackChunkName: "videocover" */ './videocover/VideoCoverHelp')
+    }
+  },
+  {
+    id: 'Resisteix',
+    name: 'Pla Resisteix',
+    aspects: ['11'],
+    icon: 'euro-sign',
+    label: '🦠Covid-19',
+    archived: true,
+    components: {
+      pane: () => import(/* webpackChunkName: "resisteix" */ './resisteix/ResisteixPane'),
+      canvas: () => import(/* webpackChunkName: "resisteix" */ './resisteix/ResisteixCanvas'),
+      help: () => import(/* webpackChunkName: "resisteix" */ './resisteix/ResisteixHelp')
     }
   },
   {
