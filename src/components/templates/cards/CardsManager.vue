@@ -61,7 +61,7 @@
     </ul>
 
     <button v-if="canAddMoreCards" @click="addCard" class="c-button">
-      <font-awesome-icon :icon="['far', 'plus']" />
+      <font-awesome-icon :icon="['far', 'plus']" style="margin-right: .5rem" />
       Nova targeta
     </button>
   </fieldset>
@@ -143,35 +143,45 @@ export default {
 <style lang="scss" scoped>
   @import "../../../sass/variables";
 
+  $border-color: $gray-300;
+  $border-radius: .5rem;
+
   .card {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    border: 1px $gray-300 solid;
+    border: 1px $border-color solid;
     box-shadow: none;
-    border-radius: .5rem;
+    border-radius: $border-radius;
     margin: 1rem;
     padding: 0;
-    overflow: hidden;
 
     &-type-emoji {
       .card-text {
         grid-column: span 9 / span 9;
-        border-left: 1px $gray-300 solid;
+        border-left: 1px $border-color solid;
+      }
+    }
+
+    &-type-number {
+      .card-text {
+        border-bottom-left-radius: $border-radius;
       }
     }
 
     &-type {
       grid-column: span 4 / span 4;
+      border-top-left-radius: $border-radius;
     }
 
     &-colspan {
       grid-column: span 4 / span 4;
-      border-left: 1px $gray-300 solid;
+      border-left: 1px $border-color solid;
     }
 
     &-rowspan {
       grid-column: span 4 / span 4;
-      border-left: 1px $gray-300 solid;
+      border-left: 1px $border-color solid;
+      border-top-right-radius: $border-radius;
     }
 
     &-emoji {
@@ -186,6 +196,7 @@ export default {
     &-text {
       grid-column: span 12 / span 12;
       border-bottom: 0;
+      border-bottom-right-radius: $border-radius;
     }
 
     &-actions {

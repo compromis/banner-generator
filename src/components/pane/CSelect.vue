@@ -22,8 +22,7 @@
       </option>
       <slot></slot>
     </select>
-    <font-awesome-icon
-      :icon="['far', 'chevron-down']" />
+    <font-awesome-icon :icon="['far', 'chevron-down']" />
     <div v-if="message" class="c-field-error">
       {{ message }}
     </div>

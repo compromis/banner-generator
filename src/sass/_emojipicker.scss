@@ -1,0 +1,67 @@
+// Restyle picker component
+#popper-button,
+#popper-button .button {
+  width: 100%;
+}
+
+#popper-container {
+  background: $white !important;
+  box-shadow: $default-shadow;
+  border: 0 !important;
+}
+
+#emoji-container > #emoji-popup {
+  padding: 0 !important;
+}
+
+#emoji-container > #emoji-popup > #emoji-popover-header {
+  border-bottom: 1px $gray-200 solid;
+  padding: 7px 5px !important;
+
+  @include scrollbar();
+}
+
+#emoji-container > #emoji-popup .emoji-popover-inner {
+  background: $white !important;
+  @include scrollbar();
+}
+
+#emoji-container > #emoji-popup .emoji-popover-inner > div > .emoji-list > span {
+  display: inline-block;
+}
+
+#emoji-container > #emoji-popup img.emoji {
+  width: 22px !important;
+  height: 22px !important;
+}
+
+#arrow::before {
+  background: $white !important;
+  border-bottom: 1px $gray-200 solid;
+  border-right: 1px $gray-200 solid;
+}
+
+[data-popper-placement="bottom-start"] #arrow::before {
+  border: 0;
+  border-top: 1px $gray-200 solid;
+  border-left: 1px $gray-200 solid;
+}
+
+#emoji-popover-search {
+  background-color: white;
+  border-radius: 0;
+  margin: 0;
+}
+
+#emoji-container > #emoji-popup #emoji-popover-search > #search-header {
+  border-bottom: 1px solid $gray-200;
+  border-radius: 0;
+}
+
+#emoji-container > #emoji-popup #emoji-popover-search > #search-header > span {
+  padding: 8px 10px;
+}
+
+#emoji-container > #emoji-popup #emoji-popover-search > #search-header > input {
+  margin: 0;
+}
