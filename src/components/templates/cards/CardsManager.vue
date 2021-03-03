@@ -53,9 +53,9 @@
         </div>
 
         <div class="card-actions">
-          <button class="c-button-circle" @click="removeCard(i)">-</button>
-          <button class="c-button-circle" v-if="i !== 0" @click="moveUp(i)">↑</button>
-          <button class="c-button-circle" v-if="i !== cards.length - 1" @click="moveDown(i)">↓</button>
+          <button class="c-button-circle remove" @click="removeCard(i)">-</button>
+          <button class="c-button-circle move-up" v-if="i !== 0" @click="moveUp(i)">↑</button>
+          <button class="c-button-circle move-down" v-if="i !== cards.length - 1" @click="moveDown(i)">↓</button>
         </div>
       </li>
     </ul>

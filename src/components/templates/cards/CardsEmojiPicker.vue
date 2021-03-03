@@ -41,7 +41,7 @@ export default {
   },
 
   props: {
-    value: Array
+    value: String
   },
 
   data () {
@@ -81,7 +81,7 @@ export default {
       display: flex;
       justify-content: center;
       align-items: center;
-      background: $white;
+      background: transparent !important;
       height: 7rem;
       border-bottom-left-radius: .5rem;
 

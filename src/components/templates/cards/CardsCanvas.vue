@@ -10,14 +10,18 @@
     ]"
     v-if="banner">
     <div :class="['card-grid', { 'card-grid-with-title': banner.title.length > 0 }]">
-      <div class="card-title" v-if="banner.title">
+      <div class="banner-title" v-if="banner.title">
         {{ banner.title }}
       </div>
       <div class="card"
-        v-for="(card, i) in computedCards"
+        v-for="card in computedCards"
         :key="card.id"
         :class="['card-colspan-' + card.colspan, 'card-rowspan-' + card.rowspan]">
-        {{i}}
+        <div v-if="card.type === 'emoji'" v-html="card.emoji" class="card-emoji" />
+        <div v-else class="card-number">
+          {{ card.number }}
+        </div>
+        <p class="card-text">{{ card.text }}</p>
       </div>
     </div>
     <emojis-on-canvas v-model="banner.emojis" />
@@ -85,6 +89,28 @@ export default {
 
     .card {
       padding: 20px;
+      display: flex;
+      flex-direction: column;
+      color: $gray-900;
+
+      &-text {
+        margin-top: auto;
+        padding-top: 10px;
+        font-size: 20px;
+        line-height: 1.25;
+        letter-spacing: -0.02em;
+        color: $gray-700;
+      }
+
+      &-emoji::v-deep img {
+        width: 45px;
+      }
+
+      &-number {
+        font-size: 36px;
+        letter-spacing: -0.02em;
+        line-height: 1.1;
+      }
 
       &-colspan {
         &-2 {
@@ -107,7 +133,7 @@ export default {
       }
     }
 
-    .card-title {
+    .banner-title {
       position: relative;
       z-index: 40;
       color: $white;

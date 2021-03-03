@@ -87,7 +87,11 @@ export default {
     return {
       properties: {
         title: '',
-        cards: [],
+        cards: [
+          { type: 'emoji', text: '', colspan: 2, rowspan: 1 },
+          { type: 'emoji', text: '', colspan: 1, rowspan: 1 },
+          { type: 'emoji', text: '', colspan: 3, rowspan: 1 }
+        ],
         emojis: [],
         color: 'orange',
         fullGradient: false
