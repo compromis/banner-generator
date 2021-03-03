@@ -48,7 +48,7 @@
             :name="`text-${card.id}`"
             placeholder="Text"
             v-model="card.text"
-            :maxlength="48"
+            :maxlength="maxLength(card)"
             class="card-text" />
         </div>
 
@@ -60,7 +60,7 @@
       </li>
     </ul>
 
-    <button v-if="canAddMoreCards" @click="addCard" class="c-button">
+    <button v-if="cellCount < maxCards" @click="addCard" class="c-button">
       <font-awesome-icon :icon="['far', 'plus']" style="margin-right: .5rem" />
       Nova targeta
     </button>
@@ -105,9 +105,8 @@ export default {
       }
     },
 
-    canAddMoreCards () {
-      const cols = this.cards.reduce((sum, { colspan, rowspan }) => sum + colspan * rowspan, 0)
-      return cols < this.maxCards
+    cellCount () {
+      return this.cards.reduce((sum, { colspan, rowspan }) => sum + colspan * rowspan, 0)
     }
   },
 
@@ -135,6 +134,14 @@ export default {
 
     moveDown (i) {
       this.cards.splice(i + 1, 0, this.cards.splice(i, 1)[0])
+    },
+
+    maxLength (card) {
+      const cells = card.colspan * card.rowspan
+      const min = 0
+      const max = 450
+      const maxCells = 9
+      return Math.round(min + cells * ((max - min) / maxCells))
     }
   }
 }

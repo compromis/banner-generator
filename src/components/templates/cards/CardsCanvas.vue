@@ -9,14 +9,14 @@
       'logo-' + banner.logo
     ]"
     v-if="banner">
-    <div :class="['card-grid', { 'card-grid-with-title': banner.title.length > 0 }]">
+    <div :class="['card-grid', { 'card-grid-with-title': banner.title.length > 0, 'card-grid-single-row': rowCount === 1}]">
       <div class="banner-title" v-if="banner.title">
         {{ banner.title }}
       </div>
       <div class="card"
         v-for="card in computedCards"
         :key="card.id"
-        :class="['card-colspan-' + card.colspan, 'card-rowspan-' + card.rowspan]">
+        :class="['card-colspan-' + card.colspan, 'card-rowspan-' + card.rowspan, {'card-chunky' : isChunky(card)}]">
         <div v-if="card.type === 'emoji'" v-html="card.emoji" class="card-emoji" />
         <div v-else class="card-number">
           {{ card.number }}
@@ -62,6 +62,20 @@ export default {
       }
 
       return computedCards
+    },
+
+    cellCount () {
+      return this.computedCards.reduce((sum, { colspan, rowspan }) => sum + colspan * rowspan, 0)
+    },
+
+    rowCount () {
+      return Math.ceil(this.cellCount / 3)
+    }
+  },
+
+  methods: {
+    isChunky (card) {
+      return (card.rowspan * card.colspan >= 4) || (this.rowCount === 2 && card.colspan >= 2)
     }
   }
 }
@@ -85,6 +99,16 @@ export default {
 
     &-with-title {
       grid-template-rows: auto 1fr;
+    }
+
+    &-single-row {
+      top: 180px;
+      bottom: 200px;
+    }
+
+    &-single-row.card-grid-with-title {
+      top: 150px;
+      bottom: 170px;
     }
 
     .card {
@@ -129,6 +153,12 @@ export default {
 
         &-3 {
           grid-row: span 3;
+        }
+      }
+
+      &-chunky {
+        .card-number {
+          font-size: 48px;
         }
       }
     }
