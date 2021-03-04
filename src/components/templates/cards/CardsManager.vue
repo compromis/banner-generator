@@ -138,10 +138,10 @@ export default {
 
     maxLength (card) {
       const cells = card.colspan * card.rowspan
-      const min = 0
+      const min = 50
       const max = 450
       const maxCells = 9
-      return Math.round(min + cells * ((max - min) / maxCells))
+      return Math.round(min + (cells - 1) * ((max - min) / (maxCells - 1)))
     }
   }
 }
