@@ -5,7 +5,7 @@
       type="textarea"
       label="Títol"
       name="title"
-      placeholder="Títol"
+      placeholder="Ajudes a empreses i autònoms"
       v-model="properties.title"
       :maxlength="48" />
 

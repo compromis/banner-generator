@@ -30,9 +30,9 @@
             v-if="card.type === 'number'"
             label="Xifra"
             :name="`number-${card.id}`"
-            placeholder="20.000€"
+            placeholder="600€"
             v-model="card.number"
-            :maxlength="14"
+            :maxlength="34"
             class="card-number" />
 
           <!-- Card emoji -->
@@ -46,7 +46,7 @@
             type="textarea"
             label="Text"
             :name="`text-${card.id}`"
-            placeholder="Text"
+            placeholder="Per cada treballador/a a jornada completa"
             v-model="card.text"
             :maxlength="maxLength(card)"
             class="card-text" />

@@ -18,10 +18,10 @@
         :key="card.id"
         :class="['card-colspan-' + card.colspan, 'card-rowspan-' + card.rowspan, {'card-chunky' : isChunky(card)}]">
         <div v-if="card.type === 'emoji'" v-html="card.emoji" class="card-emoji" />
-        <div v-else class="card-number">
+        <div v-else class="card-number" contenteditable>
           {{ card.number }}
         </div>
-        <p class="card-text">{{ card.text }}</p>
+        <p class="card-text" contenteditable>{{ card.text }}</p>
       </div>
     </div>
     <emojis-on-canvas v-model="banner.emojis" />
