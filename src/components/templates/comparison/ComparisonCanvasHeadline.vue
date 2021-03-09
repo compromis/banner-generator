@@ -108,6 +108,7 @@ export default {
 
 <style lang="scss" scoped>
   @import "../../../sass/variables";
+  @import "../headline/fonts";
 
   .banner-background-black {
     --circle-bg: #{$white};
