@@ -1,7 +1,7 @@
 <template>
   <a href="https://somriure.compromis.net" target="_blank" class="psa card elsomriure">
     <span class="psa-flare">✨Nou</span>
-    <h4>Generador de <img src="../../assets/elsomriure.svg" alt="El Somriure" class="elsomriure-logo" /></h4>
+    <h4>Generador d'<img src="../../assets/elsomriure.svg" alt="El Somriure" class="elsomriure-logo" /></h4>
     <p>Presentem una nova ferramenta per a generar edicions impreses d'El Somriure per al vostre col·lectiu local</p>
   </a>
 </template>
