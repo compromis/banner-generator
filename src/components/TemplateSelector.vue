@@ -1,6 +1,7 @@
 <template>
   <div class="template-selector">
     <div class="template-selector-templates">
+      <public-service-announcement />
       <h2 class="template-selector-header">Selecciona un model de tarja</h2>
       <transition-group tag="ul" name="fade">
         <template v-for="template in templates">
@@ -29,6 +30,7 @@
 
 <script>
 import AppFooter from './AppFooter'
+import PublicServiceAnnouncement from '@/components/utils/PublicServiceAnnouncement'
 import BrowserWarning from '@/components/utils/BrowserWarning'
 
 export default {
@@ -36,6 +38,7 @@ export default {
 
   components: {
     AppFooter,
+    PublicServiceAnnouncement,
     BrowserWarning
   },
 
