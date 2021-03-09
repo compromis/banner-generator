@@ -16,12 +16,17 @@
       <div class="card"
         v-for="card in computedCards"
         :key="card.id"
-        :class="['card-colspan-' + card.colspan, 'card-rowspan-' + card.rowspan, {'card-chunky' : isChunky(card)}]">
+        :class="[
+          'card-type-' + card.type,
+          'card-colspan-' + card.colspan,
+          'card-rowspan-' + card.rowspan,
+          {'card-chunky' : isChunky(card)}
+        ]">
         <div v-if="card.type === 'emoji'" v-html="card.emoji" class="card-emoji" />
-        <div v-else class="card-number" contenteditable>
+        <div v-else class="card-number" contenteditable spellcheck="false">
           {{ card.number }}
         </div>
-        <p class="card-text" contenteditable>{{ card.text }}</p>
+        <p class="card-text" contenteditable spellcheck="false">{{ card.text }}</p>
       </div>
     </div>
     <emojis-on-canvas v-model="banner.emojis" />
@@ -120,10 +125,14 @@ export default {
       &-text {
         margin-top: auto;
         padding-top: 10px;
-        font-size: 20px;
+        font-size: 22px;
         line-height: 1.25;
         letter-spacing: -0.02em;
         color: $gray-700;
+      }
+
+      &-type-emoji .card-text {
+        color: $gray-900;
       }
 
       &-emoji::v-deep img {
