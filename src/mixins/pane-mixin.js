@@ -105,7 +105,7 @@ export default {
     customUpdateImage (prefix, image, ratio) {
       const picture = prefix ? `${prefix}Picture` : 'picture'
       const picturePreview = prefix ? `${prefix}PicturePreview` : 'picturePreview'
-      const pictureAspect = prefix ? `${prefix}PictureDimensions` : 'pictureAspect'
+      const pictureAspect = prefix ? `${prefix}PictureAspect` : 'pictureAspect'
       const pictureDimensions = prefix ? `${prefix}PictureDimensions` : 'pictureDimensions'
 
       this.properties[picture] = image
@@ -115,6 +115,7 @@ export default {
       img.onload = () => {
         const { width, height } = img
         this.properties[pictureAspect] = (width / height > ratio) ? 'horizontal' : 'vertical'
+        console.log(width, height, ratio, width / height, this.properties[pictureAspect])
         this.properties[pictureDimensions] = { width, height }
       }
       img.src = this.properties[picturePreview]

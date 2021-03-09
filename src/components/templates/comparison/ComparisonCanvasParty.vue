@@ -11,7 +11,7 @@
     v-if="banner">
     <div :class="['comparison-images', banner.invertOrder ? 'comparison-images--inverted' : '']">
       <banner-picture
-        :picture="banner.pictureBeforePreview"
+        :picture="banner.beforePicturePreview"
         :picture-position="objectPositionBefore"
         :style="beforeGradientColor"
         :height="600"
@@ -19,7 +19,7 @@
         class="banner-picture-before"
         glow-size="sm" />
       <banner-picture
-        :picture="banner.pictureAfterPreview"
+        :picture="banner.afterPicturePreview"
         :picture-position="objectPositionAfter"
         :style="{'--gradient-orientation' : '0deg'}"
         :height="600"
@@ -74,11 +74,15 @@ export default {
 
   computed: {
     objectPositionAfter: function () {
-      const objectPosition = (100 - this.banner.pictureAfterPos) + '% 0%'
+      const objectPosition = (this.banner.afterPictureAspect === 'vertical')
+        ? '0% ' + (100 - this.banner.afterPicturePos) + '%'
+        : (100 - this.banner.afterPicturePos) + '% 0%'
       return { objectPosition }
     },
     objectPositionBefore: function () {
-      const objectPosition = (100 - this.banner.pictureBeforePos) + '% 0%'
+      const objectPosition = (this.banner.beforePictureAspect === 'vertical')
+        ? '0% ' + (100 - this.banner.beforePicturePos) + '%'
+        : (100 - this.banner.beforePicturePos) + '% 0%'
       return { objectPosition }
     },
     smallestFontSize () {

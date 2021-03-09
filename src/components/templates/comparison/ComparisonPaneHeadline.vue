@@ -70,18 +70,19 @@
     <!-- First Headline Picture -->
     <picture-upload
       id="picture-field"
-      field-name="pictureBefore"
+      field-name="beforePicture"
       label="Foto del primer titular"
-      :picture="properties.pictureBefore"
+      :picture="properties.beforePicture"
       :display-errors="displayErrors"
       :errors="errors"
-      @upload="(image) => updateImageComparison('Before', image)"
-      @delete="properties.pictureBefore = null; properties.pictureBeforePreview = null">
+      :ratio="2.25"
+      @upload="(image, ratio) => updateImageComparison('before', image, ratio)"
+      @delete="properties.beforePicture = null; properties.beforePicturePreview = null">
       <range-slider
         name="points"
         :min="0"
         :max="100"
-        v-model="properties.pictureBeforePos"
+        v-model="properties.beforePicturePos"
         @touchstart="$emit('dimPane', true)"
         @touchend="$emit('dimPane', false)" />
     </picture-upload>
@@ -156,18 +157,19 @@
     <!-- After Picture -->
     <picture-upload
       id="picture-field"
-      field-name="pictureAfter"
+      field-name="afterPicture"
       label="Foto del segon titular"
-      :picture="properties.pictureAfter"
+      :picture="properties.afterPicture"
       :display-errors="displayErrors"
       :errors="errors"
-      @upload="(image) => updateImageComparison('After', image)"
-      @delete="properties.pictureAfter = null; properties.pictureAfterPreview = null">
+      :ratio="2.25"
+      @upload="(image, ratio) => updateImageComparison('after', image, ratio)"
+      @delete="properties.afterPicture = null; properties.afterPicturePreview = null">
       <range-slider
         name="points"
         :min="0"
         :max="100"
-        v-model="properties.pictureAfterPos"
+        v-model="properties.afterPicturePos"
         @touchstart="$emit('dimPane', true)"
         @touchend="$emit('dimPane', false)" />
     </picture-upload>
@@ -249,12 +251,12 @@ export default {
         firstDescription: '',
         secondDescription: '',
         textSize: null,
-        pictureBefore: null,
-        pictureBeforePreview: null,
-        pictureBeforePos: 50,
-        pictureAfter: null,
-        pictureAfterPreview: null,
-        pictureAfterPos: 50,
+        beforePicture: null,
+        beforePicturePreview: null,
+        beforePicturePos: 50,
+        afterPicture: null,
+        afterPicturePreview: null,
+        afterPicturePos: 50,
         comparisonMode: 'none'
       },
       presets
@@ -281,20 +283,16 @@ export default {
       this.fieldRequired({
         textBefore: "Has d'escirure un primer titular",
         textAfter: "Has d'escriure un segon titular",
-        pictureBefore: 'Has de seleccionar una foto',
-        pictureAfter: 'Has de seleccionar una foto',
+        beforePicture: 'Has de seleccionar una foto',
+        afterPicture: 'Has de seleccionar una foto',
         ...firstSourceField,
         ...secondSourceField
       })
       this.allCapsDisallowed('textBefore', 'textAfter')
     },
 
-    updateImageComparison (which, image) {
-      this.properties[`picture${which}`] = image
-      this.properties[`picture${which}Preview`] = URL.createObjectURL(image)
-
-      const img = new Image()
-      img.src = this.properties[`picture${which}Preview`]
+    updateImageComparison (which, image, ratio) {
+      this.customUpdateImage(which, image, ratio)
     },
 
     updateSource (which, sourceId) {
