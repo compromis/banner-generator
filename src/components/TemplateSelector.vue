@@ -1,7 +1,6 @@
 <template>
   <div class="template-selector">
     <div class="template-selector-templates">
-      <public-service-announcement />
       <h2 class="template-selector-header">Selecciona un model de tarja</h2>
       <transition-group tag="ul" name="fade">
         <template v-for="template in templates">
@@ -17,6 +16,7 @@
         </template>
       </transition-group>
     </div>
+    <public-service-announcement />
     <app-footer />
     <browser-warning />
     <svg width="0" height="0">
@@ -105,8 +105,8 @@ export default {
       font-size: 1.5rem;
       font-weight: bold;
       letter-spacing: -1px;
-      width: 15rem;
-      height: 15rem;
+      width: 15.5rem;
+      height: 15.5rem;
       border-radius: 1.5rem;
       box-shadow: $default-shadow;
       transition: .2s ease-in-out;

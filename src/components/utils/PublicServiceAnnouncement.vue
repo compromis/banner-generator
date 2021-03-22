@@ -18,7 +18,7 @@ export default {
   .psa {
     position: relative;
     display: block;
-    margin: 1rem 1rem 3rem 1rem;
+    margin: 4rem 1rem 3rem 1rem;
     padding: 1.5rem 1.75rem;
     transition: .25s ease;
 

@@ -3,6 +3,7 @@ export default [
     id: 'Ivace',
     name: 'IVACE',
     aspects: ['11'],
+    label: '✨Nou',
     icon: 'euro-sign',
     components: {
       pane: () => import(/* webpackChunkName: "ivace" */ './ivace/IvacePane'),
