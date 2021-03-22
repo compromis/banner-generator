@@ -34,14 +34,14 @@ export default {
   computed: {
     line1 () {
       return this.banner.lang === 'val'
-        ? `L'ajuntament <span>millorarà i modernitzarà la seua àrea industrial</span> amb una inversió de`
-        : `El ayuntamiento <span>mejorarà y modernizarà su área industrial</span> con una inversión de`
+        ? `L'ajuntament rep de la <span>Conselleria d'Economia Sostenible</span>, a través de l'IVACE, la quantitat de`
+        : `El ayuntamiento recibe de la <span>Conselleria d'Economia Sostenible</span>, a través del IVACE, la cantidad de`
     },
 
     line2 () {
       return this.banner.lang === 'val'
-        ? `rebuts de la Conselleria d'Economia Sostenible, a través de l'IVACE.`
-        : 'recibidos de la Conselleria de Economía Sostenible, a través del IVACE.'
+        ? 'per a millorar i modernitzar la seua àrea industrial.'
+        : 'para mejorar y modernizar su área industrial.'
     }
   }
 }
