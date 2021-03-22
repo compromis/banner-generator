@@ -1,5 +1,16 @@
 export default [
   {
+    id: 'Ivace',
+    name: 'IVACE',
+    aspects: ['11'],
+    icon: 'euro-sign',
+    components: {
+      pane: () => import(/* webpackChunkName: "ivace" */ './ivace/IvacePane'),
+      canvas: () => import(/* webpackChunkName: "ivace" */ './ivace/IvaceCanvas'),
+      help: () => import(/* webpackChunkName: "ivace" */ './ivace/IvaceHelp')
+    }
+  },
+  {
     id: 'Headline',
     name: 'Titular de premsa',
     aspects: ['11', '916', '169'],
