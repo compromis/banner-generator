@@ -8,6 +8,14 @@
         <span v-if="!isRounded">Aa</span>
       </li>
     </ul>
+    <transition name="slide">
+      <b-message v-if="value === 'lgbt'" type="is-warning" size="is-small">
+        Els colors LGTB s'han d'utilitzar únicament en targes relacionades amb aquest moviment.
+      </b-message>
+      <b-message v-if="value === 'feminism'" type="is-warning" size="is-small">
+        El color morat s'ha d'utilitzar únicament en targes relacionades amb el feminisme.
+      </b-message>
+    </transition>
   </div>
 </template>
 
@@ -125,5 +133,11 @@ export default {
     margin-right: .25rem;
     flex-shrink: 0;
   }
+}
+</style>
+
+<style lang="scss" scoped>
+.message {
+  margin: .5rem 1rem 1rem;
 }
 </style>
