@@ -46,13 +46,7 @@
           </b-upload>
         </c-field>
         <div class="speaker-remove">
-          <b-button
-            @click="deleteSpeaker(i)"
-            size="is-small"
-            type="is-danger"
-            icon-right="times"
-            v-if="speakers.length > minSpeakers">
-          </b-button>
+          <button v-if="speakers.length > minSpeakers" class="c-button-circle speaker-remove" @click="deleteSpeaker(i)">-</button>
         </div>
       </li>
     </ul>
@@ -178,12 +172,7 @@ export default {
       font-size: .85rem;
     }
 
-    .speakers-add {
-      border-top: 1px solid $gray-200;
-    }
-
     .speakers {
-      border-top: 1px solid $gray-200;
       margin-top: .75rem;
       margin-bottom: -1px;
     }
@@ -195,6 +184,9 @@ export default {
         grid-template-areas: "name";
         padding: 0;
         position: relative;
+        border: 1px $gray-200 solid;
+        margin: 1rem;
+        border-radius: .5rem;
 
         .field {
           margin-bottom: 0;
@@ -207,6 +199,7 @@ export default {
 
       &-description {
         grid-area: description;
+        border-bottom: 0;
       }
 
       &-name, &-description {
@@ -231,7 +224,7 @@ export default {
         align-items: stretch;
         padding: $field-padding;
         border-right: 1px solid $gray-200;
-        border-bottom: 1px solid $gray-200;
+        border-bottom: 0;
 
         & > div {
           display: flex;
@@ -262,9 +255,8 @@ export default {
 
       &-remove {
         position: absolute;
-        top: 0;
-        left: 0;
-        padding: .5rem;
+        top: .25rem;
+        right: -.25rem;
 
         .button {
           border-radius: 100%;
@@ -272,19 +264,6 @@ export default {
           padding: 0;
           height: 1.25rem !important;
         }
-      }
-    }
-
-    .c-field:not(.accepts-picture) {
-      .speaker-item {
-        .c-field-small {
-          padding-left: 1.75rem;
-        }
-      }
-
-      .speaker-remove {
-        top: 50%;
-        transform: translateY(-50%);
       }
     }
 

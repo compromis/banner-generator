@@ -59,7 +59,6 @@
       <speaker-list
         v-show="aspect !== '916'"
         :accepts-picture="false"
-        :accepts-description="false"
         :min-speakers="0"
         :max-speakers="6"
         :max-length-name="25"
