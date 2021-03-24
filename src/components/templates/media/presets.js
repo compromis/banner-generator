@@ -25,6 +25,7 @@ import teleSagunto from './logos/channels/telesagunto.jpg'
 import cadenaSer from '../headline/logos/ser.svg'
 import rne from './logos/channels/rne.svg'
 import ondaCero from './logos/channels/ondacero.png'
+import cope from './logos/channels/cope.svg'
 
 import radioPego from './logos/channels/radiopego.png'
 
@@ -37,6 +38,7 @@ import twitter from './logos/channels/twitter.svg'
 import facebook from './logos/channels/facebook.svg'
 import youtube from './logos/channels/youtube.svg'
 import instagram from './logos/channels/instagram.svg'
+import twitch from './logos/channels/twitch.svg'
 
 const sources = [
   {
@@ -175,6 +177,13 @@ const sources = [
         logo: rne,
         color: 'linear-gradient(45deg, #97233f 0%, #ff0000 100%)',
         programmes: []
+      },
+      {
+        id: 'cope',
+        name: 'Cadena Cope',
+        logo: cope,
+        color: '#2e72b8',
+        programmes: []
       }
     ]
   },
@@ -209,6 +218,13 @@ const sources = [
         name: 'Facebook',
         logo: facebook,
         color: '#1778F2',
+        programmes: []
+      },
+      {
+        id: 'twitch',
+        name: 'Twitch',
+        logo: twitch,
+        color: '#673b8f',
         programmes: []
       }
     ]
