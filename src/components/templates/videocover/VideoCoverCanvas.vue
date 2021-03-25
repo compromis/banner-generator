@@ -21,22 +21,30 @@
       <img :src="banner.picturePreview" alt="Imatge" v-if="banner.picturePreview" :style="objectPosition" />
     </div>
     <div class="text" :style="{ alignItems: banner.textPos, justifyContent, textAlign: banner.textAlign }">
-      <div class="text-wrapper" :style="{ fontSize: fontSizeSecondary }">
+      <div v-if="banner.fontStyle === 'regular'" class="text-wrapper" :style="{ fontSize: fontSizeSecondary }">
         <text-in-pills
           class="text-secondary"
           v-if="banner.textSecondary"
           :text="$options.filters.formatString(banner.textSecondary)"
-          :font-size="fontSizeSecondary"
+          :font-size="fontSizeSecondary()"
           :pill-style="banner.textSecondaryColor"
           :text-align="banner.textAlign"
           :width="550" />
         <text-in-pills
           v-if="banner.text"
           :text="$options.filters.formatString(banner.text)"
-          :font-size="fontSizePrimary"
+          :font-size="fontSizePrimary()"
           :pill-style="banner.textColor"
           :text-align="banner.textAlign"
           :width="550" />
+      </div>
+      <div v-if="banner.fontStyle === 'condensed'" class="text-wrapper-condensed">
+        <div class="text-secondary" v-if="banner.textSecondary" :style="{fontSize: fontSizeSecondary(), color: banner.textSecondaryColor}">
+          {{ $options.filters.formatString(banner.textSecondary) }}
+        </div>
+        <div class="text-primary" v-if="banner.text" :style="{fontSize: fontSizePrimary(), color: banner.textColor}">
+          {{ $options.filters.formatString(banner.text) }}
+        </div>
       </div>
     </div>
     <emojis-on-canvas v-model="banner.emojis" />
@@ -61,26 +69,35 @@ export default {
     Careta
   },
 
+  methods: {
+    fontSizePrimary (style = 'regular') {
+      const { aspect, banner, fontSize } = this
+      const sizes = {
+        regular: {
+          11: { min: 54, max: 86 },
+          916: { min: 32, max: 60 },
+          event: { min: 36, max: 54 }
+        },
+        condensed: {
+          11: { min: 54, max: 86 },
+          916: { min: 32, max: 60 },
+          event: { min: 36, max: 54 }
+        }
+      }
+
+      return fontSize(banner.text, sizes[style][aspect].max, sizes[style][aspect].min, 40, banner.textSize)
+    },
+
+    fontSizeSecondary (style = 'regular') {
+      const size = parseInt(this.fontSizePrimary(style), 10) * 0.5
+      return size + 'px'
+    }
+  },
+
   computed: {
     justifyContent () {
       const values = { left: 'flex-start', center: 'center', right: 'flex-end' }
       return values[this.banner.textAlign]
-    },
-
-    fontSizePrimary () {
-      const { aspect, banner, fontSize } = this
-      const sizes = {
-        11: { min: 54, max: 86 },
-        916: { min: 32, max: 60 },
-        event: { min: 36, max: 54 }
-      }
-
-      return fontSize(banner.text, sizes[aspect].max, sizes[aspect].min, 40, banner.textSize)
-    },
-
-    fontSizeSecondary () {
-      const size = parseInt(this.fontSizePrimary, 10) * 0.5
-      return size + 'px'
     },
 
     pitAgainstObjectPosition () {
@@ -97,6 +114,13 @@ export default {
 <style lang="scss" scoped>
   @import "../../../sass/variables";
 
+  @font-face {
+    font-family: 'Fixture';
+    font-style: normal;
+    font-weight: 800;
+    src: url(./fixture-cdn-bd.ttf) format('truetype');
+  }
+
   .text {
     display: flex;
     position: absolute;
@@ -110,6 +134,10 @@ export default {
     &-wrapper {
       position: relative;
       max-width: 80%;
+
+      &-condensed {
+        font-family: 'Fixture';
+      }
     }
 
     &-secondary {

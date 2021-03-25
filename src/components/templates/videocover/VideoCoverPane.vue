@@ -25,6 +25,12 @@
     <!-- Text Color  -->
     <color-selector v-model="properties.textColor" />
 
+    <!-- Font Style  -->
+     <c-tab-group>
+      <c-tab name="font-style" v-model="properties.fontStyle" value="regular">Lletra Normal</c-tab>
+      <c-tab name="font-style" v-model="properties.fontStyle" value="condensed">Lletra Condensada</c-tab>
+    </c-tab-group>
+
     <!-- Text size -->
     <c-field label="Tamany del text" class="range-field" compact>
       <range-slider
@@ -151,7 +157,8 @@ export default {
         pitAgainstPicturePreview: null,
         pitAgainstPicturePos: 50,
         pitAgainstPictureAspect: 'horizontal',
-        pitAgainstPictureDimensions: null
+        pitAgainstPictureDimensions: null,
+        fontStyle: 'regular'
       }
     }
   },
