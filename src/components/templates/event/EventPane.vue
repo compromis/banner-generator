@@ -26,10 +26,10 @@
     <!-- Date and time -->
     <transition name="slide">
       <div class="date-time-grid">
-        <c-field label="Data" v-if="aspect !== '916'" edge focusable label-for="date">
+        <c-field label="Data" v-if="aspect !== 'event'" edge focusable label-for="date">
           <date-picker v-model="properties.date" id="date"/>
         </c-field>
-        <c-field label="Hora" v-if="aspect !== '916'" edge focusable>
+        <c-field label="Hora" v-if="aspect !== 'event'" edge focusable>
           <b-timepicker
             rounded
             inline
@@ -41,34 +41,48 @@
     </transition>
 
     <!-- Event Type -->
-    <c-tab-group>
-      <c-tab v-model="properties.eventType" value="inperson" name="event-type">Acte físic</c-tab>
-      <c-tab v-model="properties.eventType" value="online" name="event-type">Acte virtual</c-tab>
+    <c-tab-group v-if="aspect !== 'event'">
+      <c-tab v-model="properties.eventType" value="inperson" name="event-type">En persona</c-tab>
+      <c-tab v-model="properties.eventType" value="stream" name="event-type">Emissió</c-tab>
+      <c-tab v-model="properties.eventType" value="videochat" name="event-type">Vídeo xat</c-tab>
     </c-tab-group>
 
-    <!-- Venue -->
-    <transition name="slide">
+    <transition-group tag="div" name="slide">
+      <!-- Venue -->
       <c-input-text
+        key="inperson"
+        v-if="aspect !== 'event' && properties.eventType === 'inperson'"
         label="Lloc"
         name="venue"
-        v-if="aspect !== '916' && properties.eventType === 'inperson'"
         :type="setFieldType('place')"
         :message="setFieldMessage('place')"
         placeholder="Riu Túria"
         v-model="properties.place"
-        max-length="60"
-      />
-    </transition>
+        max-length="60" />
 
-    <!-- Social Media Selector -->
-    <transition name="slide">
-      <social-selector v-if="properties.eventType === 'online'" v-model="properties.social"/>
-    </transition>
+      <!-- Social Media Selector -->
+      <social-selector
+        key="stream"
+        v-if="aspect !== 'event' && properties.eventType === 'stream'"
+        v-model="properties.social" />
+
+      <!-- Videochat -->
+      <c-input-text
+        key="videochat"
+        v-if="aspect !== 'event' && properties.eventType === 'videochat'"
+        label="Servei"
+        name="videochat"
+        :type="setFieldType('videochat')"
+        :message="setFieldMessage('videochat')"
+        placeholder="Google Meet"
+        v-model="properties.videochat"
+        max-length="60" />
+    </transition-group>
 
     <!-- Speakers -->
     <transition name="slide">
       <speaker-list
-        v-show="aspect !== '916'"
+        v-show="aspect !== 'event'"
         :accepts-picture="false"
         :min-speakers="0"
         :max-speakers="6"
@@ -107,6 +121,7 @@
 
     <!-- Dark mode -->
     <color-selector
+      v-if="aspect !== 'event'"
       v-model="properties.mode"
       :colors="['white', 'black']"
       :label="properties.theme === 'glowy' ? 'Color de fons' : 'Color de targeta'"
@@ -165,7 +180,8 @@ export default {
         fullGradient: false,
         disposition: 'full',
         social: [],
-        eventType: 'inperson'
+        eventType: 'inperson',
+        videochat: ''
       }
     }
   },
