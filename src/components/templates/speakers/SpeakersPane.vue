@@ -44,17 +44,44 @@
       </div>
     </transition>
 
-    <!-- Venue -->
-    <transition name="slide">
+    <!-- Event Type -->
+    <c-tab-group v-if="aspect !== 'event'">
+      <c-tab v-model="properties.eventType" value="inperson" name="event-type">En persona</c-tab>
+      <c-tab v-model="properties.eventType" value="stream" name="event-type">Emissió</c-tab>
+      <c-tab v-model="properties.eventType" value="videochat" name="event-type">Vídeo xat</c-tab>
+    </c-tab-group>
+
+    <transition-group tag="div" name="slide">
+      <!-- Venue -->
       <c-input-text
+        key="inperson"
+        v-if="aspect !== 'event' && properties.eventType === 'inperson'"
         label="Lloc"
-        name="place"
-        v-if="aspect !== '916'"
+        name="venue"
+        :type="setFieldType('place')"
         :message="setFieldMessage('place')"
         placeholder="Riu Túria"
         v-model="properties.place"
-        :maxlength="60" />
-    </transition>
+        max-length="60" />
+
+      <!-- Social Media Selector -->
+      <social-selector
+        key="stream"
+        v-if="aspect !== 'event' && properties.eventType === 'stream'"
+        v-model="properties.social" />
+
+      <!-- Videochat -->
+      <c-input-text
+        key="videochat"
+        v-if="aspect !== 'event' && properties.eventType === 'videochat'"
+        label="Servei"
+        name="videochat"
+        :type="setFieldType('videochat')"
+        :message="setFieldMessage('videochat')"
+        placeholder="Google Meet"
+        v-model="properties.videochat"
+        max-length="60" />
+    </transition-group>
 
     <!-- Dark mode -->
     <color-selector
@@ -83,6 +110,9 @@
 import PaneMixin from '@/mixins/pane-mixin'
 import DatePicker from '@/components/pane/DatePicker'
 import SpeakerList from '@/components/pane/SpeakerList'
+import CTab from '@/components/pane/CTab'
+import CTabGroup from '@/components/pane/CTabGroup'
+import SocialSelector from '@/components/pane/SocialSelector'
 
 export default {
   name: 'speakers-pane',
@@ -91,7 +121,10 @@ export default {
 
   components: {
     DatePicker,
-    SpeakerList
+    SpeakerList,
+    CTab,
+    CTabGroup,
+    SocialSelector
   },
 
   data () {
@@ -103,6 +136,9 @@ export default {
         date: new Date(),
         time: new Date(),
         place: '',
+        eventType: 'inperson',
+        selectedSocial: [],
+        videochat: '',
         speakers: [
           {
             name: 'Mónica Oltra',

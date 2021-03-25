@@ -38,9 +38,13 @@
     <div class="speakers-details-wrapper" v-if="aspect !== 'event'">
       <event-info color="gradient" icon="calendar-day">{{ banner.date | formatDate }}</event-info>
       <event-info color="gradient" icon="clock">{{ banner.time | formatTime }}</event-info>
-      <event-info color="gradient" icon="map-marker-alt">{{ banner.place }}</event-info>
+      <event-info v-if="banner.eventType === 'inperson'" color="gradient" icon="map-marker-alt">{{ banner.place }}</event-info>
+      <div v-if="banner.eventType === 'stream'" class="speakers-social-media">
+        <font-awesome-icon v-for="(social, i) in banner.social" :icon="['fab', social]" :key="i" />
+      </div>
+      <event-info v-if="banner.eventType === 'videochat'" color="gradient" icon="desktop">{{ banner.videochat }}</event-info>
     </div>
-    <banner-frame />
+    <banner-frame v-if="aspect !== 'event'"/>
   </div>
 </template>
 
@@ -166,6 +170,20 @@ export default {
       bottom: 16%;
       padding: 0 40px;
     }
+
+    &-social-media {
+      font-size: 28px;
+      display: flex;
+      align-items: center;
+
+      svg {
+        margin-right: 8px;
+
+        * {
+          fill: url(#iconGradient) !important;
+        }
+      }
+    }
   }
 
   // Story aspect
@@ -234,6 +252,10 @@ export default {
       &-details {
         margin: 7px 0;
         font-size: 19px;
+      }
+
+      &-social-media {
+        margin: 16px 4px 0;
       }
     }
 

@@ -157,7 +157,6 @@ export default {
       font-size: 28px;
       display: flex;
       align-items: center;
-      justify-content: center;
 
       svg {
         margin-right: 8px;
@@ -220,7 +219,6 @@ export default {
     }
 
     .event-social-media {
-      justify-content: flex-start;
       margin: 8px 4px 0;
     }
   }
