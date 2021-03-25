@@ -43,7 +43,10 @@
         <div class="event-details event-details" v-if="aspect !== 'event'">
           <event-info color="gradient" icon="calendar-day">{{ banner.date | formatDate }}</event-info>
           <event-info color="gradient" icon="clock">{{ banner.time | formatTime }}</event-info>
-          <event-info color="gradient" icon="map-marker-alt">{{ banner.place }}</event-info>
+          <event-info v-if="banner.eventType === 'physical'" color="gradient" icon="map-marker-alt">{{ banner.place }}</event-info>
+          <div v-if="banner.eventType === 'virtual'" class="event-social-media">
+            <font-awesome-icon v-for="(social, i) in banner.selectedSocial" :icon="['fab', social]" :key="i" />
+          </div>
         </div>
       </div>
     </div>
@@ -147,6 +150,21 @@ export default {
     &-info-speakers {
       align-items: flex-start;
       width: 100%;
+    }
+
+    &-social-media {
+      font-size: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      svg {
+        margin-right: 8px;
+
+        * {
+          fill: url(#iconGradient) !important;
+        }
+      }
     }
   }
 

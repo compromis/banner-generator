@@ -13,7 +13,7 @@ import {
   faBadgeCheck
 } from '@fortawesome/pro-solid-svg-icons'
 import {
-  faTwitter
+  faTwitter, faFacebook, faInstagram, faTwitch, faYoutube
 } from '@fortawesome/free-brands-svg-icons'
 
 library.add(
@@ -24,5 +24,5 @@ library.add(
   faArrowToTop, faGripLines, faBroadcastTower, faFont, faQuoteLeft, faNewspaper, faPortrait, faUserCircle,
   faQuestionCircle, faCheckCircle, faColumns, faCircleNotch, faBan, faBringForward, faSendBackward,
   faEuroSign, faHandPointRight, faPlay, faTwitter, faRetweet, faHeart, faBadgeCheck, faPaste, faCheck,
-  faGifts, faHatSanta, faChartBar, faHighlighter, faCog, faGripHorizontal
+  faGifts, faHatSanta, faChartBar, faHighlighter, faCog, faGripHorizontal, faFacebook, faInstagram, faTwitch, faYoutube
 )

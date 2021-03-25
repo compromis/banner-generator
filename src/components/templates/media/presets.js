@@ -25,6 +25,7 @@ import teleSagunto from './logos/channels/telesagunto.jpg'
 import cadenaSer from '../headline/logos/ser.svg'
 import rne from './logos/channels/rne.svg'
 import ondaCero from './logos/channels/ondacero.png'
+import cope from './logos/channels/cope.svg'
 
 import radioPego from './logos/channels/radiopego.png'
 
@@ -33,10 +34,7 @@ import apuntNtc from './logos/programme/apuntntc.png'
 import docs from './logos/programme/docs.jpg'
 import espejoPublico from './logos/programme/espejopublico.svg'
 
-import twitter from './logos/channels/twitter.svg'
-import facebook from './logos/channels/facebook.svg'
-import youtube from './logos/channels/youtube.svg'
-import instagram from './logos/channels/instagram.svg'
+import xarxes from './presets-xarxes.js'
 
 const sources = [
   {
@@ -175,44 +173,18 @@ const sources = [
         logo: rne,
         color: 'linear-gradient(45deg, #97233f 0%, #ff0000 100%)',
         programmes: []
+      },
+      {
+        id: 'cope',
+        name: 'Cadena Cope',
+        logo: cope,
+        color: '#2e72b8',
+        programmes: []
       }
     ]
   },
-
   // xarxes socials
-  {
-    name: 'Xarxes Socials',
-    channels: [
-      {
-        id: 'twitter',
-        name: 'Twitter',
-        logo: twitter,
-        color: '#1da1f2',
-        programmes: []
-      },
-      {
-        id: 'instagram',
-        name: 'Instagram',
-        logo: instagram,
-        color: 'linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%)',
-        programmes: []
-      },
-      {
-        id: 'youtube',
-        name: 'Youtube',
-        logo: youtube,
-        color: 'red',
-        programmes: []
-      },
-      {
-        id: 'facebook',
-        name: 'Facebook',
-        logo: facebook,
-        color: '#1778F2',
-        programmes: []
-      }
-    ]
-  },
+  xarxes,
   // televisions locals
   {
     name: 'Televisions Locals',

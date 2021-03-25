@@ -40,18 +40,29 @@
       </div>
     </transition>
 
+    <!-- Event Type -->
+    <c-tab-group>
+      <c-tab v-model="properties.eventType" value="physical" name="event-type">Acte físic</c-tab>
+      <c-tab v-model="properties.eventType" value="virtual" name="event-type">Acte virtual</c-tab>
+    </c-tab-group>
+
     <!-- Venue -->
     <transition name="slide">
       <c-input-text
         label="Lloc"
         name="venue"
-        v-if="aspect !== '916'"
+        v-if="aspect !== '916' && properties.eventType === 'physical'"
         :type="setFieldType('place')"
         :message="setFieldMessage('place')"
         placeholder="Riu Túria"
         v-model="properties.place"
         max-length="60"
       />
+    </transition>
+
+    <!-- Social Media Selector -->
+    <transition name="slide">
+      <social-selector v-if="properties.eventType === 'virtual'" v-model="properties.selectedSocial"/>
     </transition>
 
     <!-- Speakers -->
@@ -124,6 +135,7 @@ import SpeakerList from '@/components/pane/SpeakerList'
 import ThemeSelector from '@/components/pane/ThemeSelector'
 import CTab from '@/components/pane/CTab'
 import CTabGroup from '@/components/pane/CTabGroup'
+import SocialSelector from '@/components/pane/SocialSelector'
 
 export default {
   name: 'event-pane',
@@ -135,7 +147,8 @@ export default {
     SpeakerList,
     ThemeSelector,
     CTab,
-    CTabGroup
+    CTabGroup,
+    SocialSelector
   },
 
   data () {
@@ -150,7 +163,9 @@ export default {
         speakers: [],
         color: 'orange',
         fullGradient: false,
-        disposition: 'full'
+        disposition: 'full',
+        social: [],
+        eventType: 'physical'
       }
     }
   },
