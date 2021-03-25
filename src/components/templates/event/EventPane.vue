@@ -42,8 +42,8 @@
 
     <!-- Event Type -->
     <c-tab-group>
-      <c-tab v-model="properties.eventType" value="physical" name="event-type">Acte físic</c-tab>
-      <c-tab v-model="properties.eventType" value="virtual" name="event-type">Acte virtual</c-tab>
+      <c-tab v-model="properties.eventType" value="inperson" name="event-type">Acte físic</c-tab>
+      <c-tab v-model="properties.eventType" value="online" name="event-type">Acte virtual</c-tab>
     </c-tab-group>
 
     <!-- Venue -->
@@ -51,7 +51,7 @@
       <c-input-text
         label="Lloc"
         name="venue"
-        v-if="aspect !== '916' && properties.eventType === 'physical'"
+        v-if="aspect !== '916' && properties.eventType === 'inperson'"
         :type="setFieldType('place')"
         :message="setFieldMessage('place')"
         placeholder="Riu Túria"
@@ -62,7 +62,7 @@
 
     <!-- Social Media Selector -->
     <transition name="slide">
-      <social-selector v-if="properties.eventType === 'virtual'" v-model="properties.selectedSocial"/>
+      <social-selector v-if="properties.eventType === 'online'" v-model="properties.social"/>
     </transition>
 
     <!-- Speakers -->
@@ -165,7 +165,7 @@ export default {
         fullGradient: false,
         disposition: 'full',
         social: [],
-        eventType: 'physical'
+        eventType: 'inperson'
       }
     }
   },

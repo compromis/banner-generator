@@ -7,14 +7,13 @@
       <label
         v-for="(xarxa, i) in xarxes.channels"
         :key="i"
-        :class="['social-selector-item', {'social-selector-item-active': selectedSocial.includes(xarxa.id)}]"
+        :class="['social-selector-item', {'social-selector-item-active': value.includes(xarxa.id)}]"
       >
         <input
           :id="xarxa.id"
-          v-model="selectedSocial"
+          v-model="social"
           type="checkbox"
           :value="xarxa.id"
-          @change="onChange"
         >
         <b-icon :icon="xarxa.id" pack="fab" />
       </label>
@@ -30,8 +29,7 @@ export default {
 
   data () {
     return {
-      xarxes: xarxes,
-      selectedSocial: []
+      xarxes
     }
   },
 
@@ -39,12 +37,21 @@ export default {
     label: {
       type: String,
       default: 'Xarxes'
+    },
+    value: {
+      type: Array,
+      default: () => []
     }
   },
 
-  methods: {
-    onChange () {
-      this.$emit('input', this.selectedSocial)
+  computed: {
+    social: {
+      get () {
+        return this.value
+      },
+      set (selected) {
+        this.$emit('input', selected)
+      }
     }
   }
 }
@@ -65,7 +72,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    border: .15rem solid $gray-600;
+    border: 2px solid $gray-200;
     color: $gray-600;
     border-radius: .5rem;
     transition: .25s ease-in-out;
@@ -74,7 +81,12 @@ export default {
     font-size: 1.5rem;
     cursor: pointer;
 
-    &-active {
+    &:hover {
+      border-color: $gray-400;
+    }
+
+    &-active,
+    &-active:hover {
       border-color: $primary;
       color: $primary;
     }
