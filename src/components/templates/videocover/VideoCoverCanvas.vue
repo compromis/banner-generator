@@ -6,7 +6,7 @@
       'aspect-' + aspect,
       'border-' + banner.frameColor,
       'text-pos-' + banner.textPos,
-      { 'hide-frame': banner.showFrame === false }
+      { 'hide-frame': !banner.showFrame }
     ]"
     v-if="banner">
     <div class="background-image images-pitted-against" v-if="banner.pitAgainst">
@@ -26,23 +26,23 @@
           class="text-secondary"
           v-if="banner.textSecondary"
           :text="$options.filters.formatString(banner.textSecondary)"
-          :font-size="fontSizeSecondary()"
+          :font-size="fontSizeSecondary"
           :pill-style="banner.textSecondaryColor"
           :text-align="banner.textAlign"
           :width="550" />
         <text-in-pills
           v-if="banner.text"
           :text="$options.filters.formatString(banner.text)"
-          :font-size="fontSizePrimary()"
+          :font-size="fontSizePrimary"
           :pill-style="banner.textColor"
           :text-align="banner.textAlign"
           :width="550" />
       </div>
       <div v-if="banner.fontStyle === 'condensed'" class="text-wrapper-condensed">
-        <div class="text-secondary" v-if="banner.textSecondary" :style="{fontSize: fontSizeSecondary(), color: banner.textSecondaryColor}">
+        <div class="text-secondary" v-if="banner.textSecondary" :style="{fontSize: fontSizeSecondary, color: banner.textSecondaryColor}">
           {{ $options.filters.formatString(banner.textSecondary) }}
         </div>
-        <div class="text-primary" v-if="banner.text" :style="{fontSize: fontSizePrimary(), color: banner.textColor}">
+        <div class="text-primary" v-if="banner.text" :style="{fontSize: fontSizePrimary, color: banner.textColor}">
           {{ $options.filters.formatString(banner.text) }}
         </div>
       </div>
@@ -69,9 +69,9 @@ export default {
     Careta
   },
 
-  methods: {
-    fontSizePrimary (style = 'regular') {
-      const { aspect, banner, fontSize } = this
+  computed: {
+    fontSizePrimary () {
+      const { aspect, banner, fontSize, fontStyle } = this
       const sizes = {
         regular: {
           11: { min: 54, max: 86 },
@@ -85,16 +85,14 @@ export default {
         }
       }
 
-      return fontSize(banner.text, sizes[style][aspect].max, sizes[style][aspect].min, 40, banner.textSize)
+      return fontSize(banner.text, sizes[fontStyle][aspect].max, sizes[fontStyle][aspect].min, 40, banner.textSize)
     },
 
-    fontSizeSecondary (style = 'regular') {
-      const size = parseInt(this.fontSizePrimary(style), 10) * 0.5
+    fontSizeSecondary () {
+      const size = parseInt(this.fontSizePrimary, 10) * 0.5
       return size + 'px'
-    }
-  },
+    },
 
-  computed: {
     justifyContent () {
       const values = { left: 'flex-start', center: 'center', right: 'flex-end' }
       return values[this.banner.textAlign]
