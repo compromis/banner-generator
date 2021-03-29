@@ -1,16 +1,22 @@
 <template>
   <div :class="{ 'pane video-cover-pane': true, 'pane-dimmed': paneDimmed }">
+    <!-- Font Style  -->
+     <c-tab-group>
+      <c-tab name="font-style" v-model="properties.fontStyle" value="regular">Lletra Normal</c-tab>
+      <c-tab name="font-style" v-model="properties.fontStyle" value="condensed">Lletra Condensada</c-tab>
+    </c-tab-group>
+
     <!-- Secondary Text  -->
     <c-input-text
       label="Text superior"
       name="textSecondary"
       placeholder="Baldoví"
       v-model="properties.textSecondary"
-      :maxlength="20"
+      :maxlength="25"
     />
 
     <!-- Secondary Text Color  -->
-    <color-selector v-model="properties.textSecondaryColor" />
+    <color-selector v-model="properties.textSecondaryColor" :isFontColor="properties.fontStyle === 'condensed'" />
 
     <!-- Main Text  -->
     <c-input-text
@@ -19,17 +25,11 @@
       type="textarea"
       placeholder="5 tipus de tila que recomanem a Abascal"
       v-model="properties.text"
-      :maxlength="40"
+      :maxlength="50"
     />
 
     <!-- Text Color  -->
-    <color-selector v-model="properties.textColor" />
-
-    <!-- Font Style  -->
-     <c-tab-group>
-      <c-tab name="font-style" v-model="properties.fontStyle" value="regular">Lletra Normal</c-tab>
-      <c-tab name="font-style" v-model="properties.fontStyle" value="condensed">Lletra Condensada</c-tab>
-    </c-tab-group>
+    <color-selector v-model="properties.textColor" :isFontColor="properties.fontStyle === 'condensed'" />
 
     <!-- Text size -->
     <c-field label="Tamany del text" class="range-field" compact>

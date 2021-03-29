@@ -5,7 +5,7 @@
     </div>
     <ul :class="{'color-selector c-field-content': true, 'rounded' : isRounded }">
       <li v-for="color in colors" :key="color" :class="[`${color}-bg`, { active: value === color }]" @click="$emit('input', color)">
-        <span v-if="!isRounded">Aa</span>
+        <span v-if="!isRounded && !isFontColor">Aa</span>
       </li>
     </ul>
     <transition name="slide">
@@ -39,6 +39,10 @@ export default {
     isRounded: {
       type: Boolean,
       default: false
+    },
+    isFontColor: {
+      type: Boolean,
+      default: false
     }
   }
 }
@@ -54,6 +58,7 @@ export default {
 
   li {
     cursor: pointer;
+    height: 2.25rem;
     border: .2rem $white solid;
     border-radius: .5rem;
     box-shadow: 0 0 0 2px $gray-200;

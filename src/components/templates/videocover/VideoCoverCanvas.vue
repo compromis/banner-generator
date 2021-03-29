@@ -39,10 +39,10 @@
           :width="550" />
       </div>
       <div v-if="banner.fontStyle === 'condensed'" class="text-wrapper-condensed">
-        <div class="text-secondary" v-if="banner.textSecondary" :style="{fontSize: fontSizeSecondary, color: banner.textSecondaryColor}">
+        <div :class="['text-secondary', `text-secondary-${banner.textSecondaryColor}`]" v-if="banner.textSecondary" :style="{fontSize: fontSizeSecondary}">
           {{ $options.filters.formatString(banner.textSecondary) }}
         </div>
-        <div class="text-primary" v-if="banner.text" :style="{fontSize: fontSizePrimary, color: banner.textColor}">
+        <div :class="['text-primary', `text-primary-${banner.textColor}`]" v-if="banner.text" :style="{fontSize: fontSizePrimary}">
           {{ $options.filters.formatString(banner.text) }}
         </div>
       </div>
@@ -71,7 +71,7 @@ export default {
 
   computed: {
     fontSizePrimary () {
-      const { aspect, banner, fontSize, fontStyle } = this
+      const { aspect, banner, fontSize } = this
       const sizes = {
         regular: {
           11: { min: 54, max: 86 },
@@ -79,13 +79,13 @@ export default {
           event: { min: 36, max: 54 }
         },
         condensed: {
-          11: { min: 54, max: 86 },
-          916: { min: 32, max: 60 },
-          event: { min: 36, max: 54 }
+          11: { min: 84, max: 144 },
+          916: { min: 54, max: 80 },
+          event: { min: 80, max: 140 }
         }
       }
 
-      return fontSize(banner.text, sizes[fontStyle][aspect].max, sizes[fontStyle][aspect].min, 40, banner.textSize)
+      return fontSize(banner.text, sizes[banner.fontStyle][aspect].max, sizes[banner.fontStyle][aspect].min, 40, banner.textSize)
     },
 
     fontSizeSecondary () {
@@ -135,6 +135,36 @@ export default {
 
       &-condensed {
         font-family: 'Fixture';
+        letter-spacing: -0.01em;
+        text-transform: uppercase;
+        //text-shadow: 0px 0px 20px rgba(53,57,73,0.5), 0px 0px 2px rgba(53,57,73,0.3);
+
+        .text-primary {
+          line-height: 0.92;
+          letter-spacing: -0.02em;
+        }
+
+        .text-secondary {
+          line-height: 1;
+          margin-bottom: 12px;
+          letter-spacing: -0.01em;
+        }
+
+        .text-primary, .text-secondary {
+          &-black {
+            color: $gray-darkest;
+          }
+
+          &-orange {
+            background: $gradient;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+          }
+
+          &-white {
+            color: $white;
+          }
+        }
       }
     }
 
