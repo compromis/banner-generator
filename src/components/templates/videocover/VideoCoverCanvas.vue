@@ -48,7 +48,7 @@
       </div>
     </div>
     <emojis-on-canvas v-model="banner.emojis" />
-    <careta class="careta" />
+    <careta class="careta" v-if="banner.showLogo"/>
   </div>
 </template>
 
@@ -156,9 +156,7 @@ export default {
           }
 
           &-orange {
-            background: $gradient;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: $orange;
           }
 
           &-white {

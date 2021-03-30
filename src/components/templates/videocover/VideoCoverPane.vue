@@ -117,6 +117,13 @@
     <transition name="slide">
       <color-selector v-if="properties.showFrame || aspect !== 1" v-model="properties.frameColor" label="Color del marc" isRounded />
     </transition>
+
+    <!-- Show logo  -->
+    <c-field>
+        <b-switch v-model="properties.showLogo">
+            Mostrar careta
+        </b-switch>
+      </c-field>
   </div>
 </template>
 
@@ -158,7 +165,8 @@ export default {
         pitAgainstPicturePos: 50,
         pitAgainstPictureAspect: 'horizontal',
         pitAgainstPictureDimensions: null,
-        fontStyle: 'regular'
+        fontStyle: 'regular',
+        showLogo: true
       }
     }
   },
