@@ -7,10 +7,14 @@ export default {
 
   methods: {
     formatNumber (number) {
-      const options = { notation: 'compact', compactDisplay: 'short' }
+      const options = {}
+
+      if (number.toString().length > 6) {
+        options.notation = 'compact'
+        options.compactDisplay = 'short'
+      }
 
       if (number.toString().split('').includes('.')) {
-        console.log('I gots the digits')
         options.maximumFractionDigits = 2
       }
 

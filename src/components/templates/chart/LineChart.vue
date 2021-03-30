@@ -51,8 +51,18 @@ export default {
 
         plugins: {
           datalabels: {
-            align: 'top',
-            anchor: '',
+            align: ({ dataIndex: dataKey }) => {
+              if (dataKey === 0) {
+                return '300'
+              }
+
+              if (dataKey === this.chart.data.length - 1) {
+                return '235'
+              }
+
+              return 'top'
+            },
+            anchor: 'end',
             color: ({ dataIndex: dataKey, datasetIndex: setKey }) => {
               const row = this.chart.data[dataKey].values[setKey]
               return row.highlight ? row.color : this.mode === 'black' ? 'white' : '#707380'
