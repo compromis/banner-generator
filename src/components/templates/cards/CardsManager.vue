@@ -9,6 +9,7 @@
           <c-select label="Tipus" :name="`type-${card.id}`" v-model="card.type" class="card-type">
             <option value="emoji">Emoji</option>
             <option value="number">Xifra</option>
+            <option value="text">Text</option>
           </c-select>
 
           <!-- Card col span -->
@@ -27,10 +28,20 @@
 
           <!-- Card number -->
           <c-input-text
-            v-if="card.type === 'number'"
+            v-if="card.type !== 'number'"
             label="Xifra"
             :name="`number-${card.id}`"
             placeholder="600€"
+            v-model="card.number"
+            :maxlength="10"
+            class="card-number" />
+
+          <!-- Card text -->
+          <c-input-text
+            v-if="card.type === 'text'"
+            label="Text"
+            :name="`number-${card.id}`"
+            placeholder="Noves ajudes"
             v-model="card.number"
             :maxlength="34"
             class="card-number" />
