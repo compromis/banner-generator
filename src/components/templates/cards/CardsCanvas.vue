@@ -24,8 +24,8 @@
         ]">
         <div v-if="card.type === 'emoji'" v-html="card.emoji" class="card-emoji" />
         <div v-if="card.type === 'number'" class="card-number">
-          <svg width="100%" height="70">
-            <linearGradient id="compromis" gradientTransform="rotate(90)">
+          <svg width="100%" height="75">
+            <linearGradient id="compromis">
               <stop  offset="0" style="stop-color:#F29127"/>
               <stop  offset="0.2054" style="stop-color:#EC8426"/>
               <stop  offset="0.6036" style="stop-color:#DE6626"/>
@@ -34,8 +34,8 @@
             <text x="0" :y="isChunky(card) ? 55 : 35" style="fill: url(#compromis)">{{ card.number }}</text>
           </svg>
         </div>
-        <div v-if="card.type === 'text'" class="card-text-header" contenteditable spellcheck="false">
-          {{ card.number }}
+        <div v-if="card.type === 'text'" contenteditable class="card-text-header" spellcheck="false">
+          {{ card.textHeader }}
         </div>
         <p class="card-text" contenteditable spellcheck="false">{{ card.text }}</p>
       </div>
@@ -157,7 +157,7 @@ export default {
       }
 
       &-number {
-        font-size: 42px;
+        font-size: 46px;
         letter-spacing: -0.03em;
       }
 

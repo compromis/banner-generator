@@ -28,21 +28,21 @@
 
           <!-- Card number -->
           <c-input-text
-            v-if="card.type !== 'number'"
+            v-if="card.type === 'number'"
             label="Xifra"
             :name="`number-${card.id}`"
             placeholder="600€"
             v-model="card.number"
-            :maxlength="10"
+            :maxlength="12"
             class="card-number" />
 
           <!-- Card text -->
           <c-input-text
             v-if="card.type === 'text'"
-            label="Text"
+            label="Títol"
             :name="`number-${card.id}`"
             placeholder="Noves ajudes"
-            v-model="card.number"
+            v-model="card.textHeader"
             :maxlength="34"
             class="card-number" />
 
@@ -127,6 +127,7 @@ export default {
         id: Date.now(),
         type: 'emoji',
         number: '',
+        textHeader: '',
         emoji: null,
         text: '',
         colspan: 1,
