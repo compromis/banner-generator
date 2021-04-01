@@ -148,6 +148,13 @@ export default {
       background-size: 53%;
     }
 
+    &.is-wide.gradient-feminism  {
+      .glowy-ghost, .glowy-subject {
+        background-position: -440px 155px;
+        background-size: 60%;
+      }
+    }
+
     &.gradient-feminism.position-top .glowy-subject,
     &.gradient-feminism.position-top .glowy-ghost {
       background-position: 0 334px;
