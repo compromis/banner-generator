@@ -1,19 +1,45 @@
 <template>
-  <div class="banner-item">
+  <a class="banner-item">
     <div class="banner-item-thumbnail">
-
+      <img src="" alt="" v-if="banner.thumbnail">
+      <b-icon :icon="findIcon" :pack="findIconPack ? findIconPack : 'far'" size="is-large" v-else />
     </div>
     <div class="banner-item-info">
-      <div class="banner-title"></div>
-      <div class="banner-type"></div>
-      <div class="banner-saved"></div>
+      <div class="banner-title">{{ banner.title }}<b-icon icon="pen" pack="far" /></div>
+      <div class="banner-type"><b-icon :icon="findIcon" :pack="findIconPack ? findIconPack : 'far'" />{{ findName }}</div>
+      <div class="banner-saved"><b-icon icon="save" pack="far" />{{ banner.lastSaved }}</div>
     </div>
-  </div>
+  </a>
 </template>
 
 <script>
 export default {
-  name: 'banner-item'
+  name: 'banner-item',
+
+  props: {
+    banner: {
+      type: Object,
+      default: null
+    }
+  },
+
+  computed: {
+    templates () {
+      return this.$store.state.templates
+    },
+
+    findName () {
+      return this.templates.find((template) => template.id === this.banner.type).name
+    },
+
+    findIcon () {
+      return this.templates.find((template) => template.id === this.banner.type).icon
+    },
+
+    findIconPack () {
+      return this.templates.find((template) => template.id === this.banner.type).iconPack
+    }
+  }
 }
 </script>
 
@@ -22,9 +48,51 @@ export default {
 .banner-item {
   &-thumbnail {
     background: $gray-400;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 30px;
     height: 180px;
     width: 180px;
+    transition: .25s ease-in-out;
+
+    .icon {
+      color: $white;
+    }
+  }
+
+  &-info {
+    margin-top: 1rem;
+
+    .banner-title {
+      color: $gray-darkest;
+      max-width: 180px;
+      font-size: 1.2rem;
+      margin-bottom: .5rem;
+      line-height: 1.3;
+
+      .icon {
+        font-size: 1rem;
+      }
+    }
+
+    .banner-type, .banner-saved {
+      display: flex;
+      align-items: center;
+      font-size: 1rem;
+      color: $gray-700;
+
+      .icon {
+        font-size: 1.25rem;
+        margin-right: .5rem;
+      }
+    }
+  }
+
+  &:hover {
+    .banner-item-thumbnail {
+      transform: rotate($rotation) scale(1.025);
+    }
   }
 }
 </style>
