@@ -10,21 +10,27 @@
         {{ template.name }}
       </div>
     </transition>
+    <nav-login class="nav-login" />
   </div>
 </template>
 
 <script>
+import NavLogin from '@/components/ui/NavLogin'
 import Careta from '@/components/canvas/Careta'
 
 export default {
   name: 'app-header',
 
   components: {
-    Careta
+    Careta,
+    NavLogin
   },
 
   props: {
-    inWorkspace: Boolean
+    inWorkspace: {
+      type: Boolean,
+      default: false
+    }
   },
 
   computed: {
@@ -48,6 +54,7 @@ export default {
     padding: .75rem 1rem;
     height: $navbar-height;
     transition: .25s ease-in-out;
+    z-index: 50;
 
     .logo {
       display: flex;
@@ -82,6 +89,13 @@ export default {
       span {
         margin-right: .4rem;
       }
+    }
+
+    .nav-login {
+      margin-top: -.4rem;
+      margin-right: -.4rem;
+      margin-left: auto;
+      color: $white;
     }
 
     &--dark {
