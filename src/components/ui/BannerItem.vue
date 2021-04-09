@@ -2,11 +2,11 @@
   <a class="banner-item">
     <div class="banner-item-thumbnail">
       <img src="" alt="" v-if="banner.thumbnail">
-      <b-icon :icon="findIcon" :pack="findIconPack ? findIconPack : 'far'" size="is-large" v-else />
+      <b-icon :icon="template.icon" :pack="template.iconPack || 'far'" size="is-large" v-else />
     </div>
     <div class="banner-item-info">
       <div class="banner-title">{{ banner.title }}<b-icon icon="pen" pack="far" /></div>
-      <div class="banner-type"><b-icon :icon="findIcon" :pack="findIconPack ? findIconPack : 'far'" />{{ findName }}</div>
+      <div class="banner-type"><b-icon :icon="template.icon" :pack="template.iconPack || 'far'" />{{ template.name }}</div>
       <div class="banner-saved"><b-icon icon="save" pack="far" />{{ banner.lastSaved }}</div>
     </div>
   </a>
@@ -24,20 +24,9 @@ export default {
   },
 
   computed: {
-    templates () {
-      return this.$store.state.templates
-    },
-
-    findName () {
-      return this.templates.find((template) => template.id === this.banner.type).name
-    },
-
-    findIcon () {
-      return this.templates.find((template) => template.id === this.banner.type).icon
-    },
-
-    findIconPack () {
-      return this.templates.find((template) => template.id === this.banner.type).iconPack
+    template () {
+      const { templates } = this.$store.state
+      return templates.find(template => template.id === this.banner.type)
     }
   }
 }
@@ -45,6 +34,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "../../sass/variables";
+
 .banner-item {
   &-thumbnail {
     background: $gray-400;

@@ -5,25 +5,24 @@
       <div :class="['nav-label logo-label', { 'is-hidden-mobile': inWorkspace }]">Generador de targes</div>
     </router-link>
     <transition name="fade">
-      <div v-if="template" class="nav-label template-label">
-        <span :class="{ 'is-hidden-mobile': inWorkspace }">&gt;</span>
-        {{ template.name }}
-      </div>
+      <rename-title class="nav-label template-label" v-if="template" />
     </transition>
     <nav-login class="nav-login" />
   </div>
 </template>
 
 <script>
-import NavLogin from '@/components/ui/NavLogin'
 import Careta from '@/components/canvas/Careta'
+import NavLogin from '@/components/ui/NavLogin'
+import RenameTitle from '@/components/ui/RenameTitle'
 
 export default {
   name: 'app-header',
 
   components: {
     Careta,
-    NavLogin
+    NavLogin,
+    RenameTitle
   },
 
   props: {
@@ -83,12 +82,16 @@ export default {
 
     .template-label {
       margin-left: .4rem;
-      opacity: .75;
       color: $white;
+      flex-grow: 1;
 
       span {
         margin-right: .4rem;
       }
+    }
+
+    .spacer {
+      flex-grow: 1;
     }
 
     .nav-login {
