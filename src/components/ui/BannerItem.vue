@@ -1,16 +1,26 @@
 <template>
-  <a href="#" class="banner-item">
+  <article class="banner-item" ref="wrapper"> <!-- to solve: aço no pot ser un <a> -->
     <div class="banner-item-thumbnail">
       <img src="" alt="" v-if="banner.thumbnail">
       <b-icon :icon="template.icon" :pack="template.iconPack || 'far'" size="is-large" v-else />
     </div>
     <div class="banner-item-info">
-      <div class="banner-title"><input :placeholder="banner.title" :disabled="disabled" ref="input" @blur="update()"><button @click="handleClick()"><b-icon :icon="disabled ? 'pen' : 'check'" pack="far" /></button></div>
+      <form :class="['banner-title', { saving }]" @submit.prevent="rename">
+        <input
+          :value="banner.title"
+          :disabled="disabled || saving"
+          ref="input"
+          @blur="handleBlur">
+        <button @click="handleClick" type="button" v-if="!saving">
+          <b-icon :icon="disabled ? 'pen' : 'check'" pack="far" />
+        </button>
+        <font-awesome-icon :icon="['far', 'circle-notch']" spin v-else />
+      </form>
       <div class="banner-type"><b-icon :icon="template.icon" :pack="template.iconPack || 'far'" />{{ template.name }}</div>
       <div class="banner-saved"><b-icon icon="save" pack="far" />{{ banner.lastSaved }}</div>
       <a href="#" class="banner-delete"><b-icon icon="trash" pack="far" />Esborrar</a>
     </div>
-  </a>
+  </article>
 </template>
 
 <script>
@@ -26,6 +36,7 @@ export default {
 
   data () {
     return {
+      saving: false,
       disabled: true
     }
   },
@@ -38,8 +49,9 @@ export default {
   },
 
   methods: {
-    update () {
-      this.disabled = true
+    handleBlur () {
+      console.log('blur')
+      this.rename()
     },
 
     handleClick () {
@@ -49,8 +61,20 @@ export default {
           this.$refs.input.focus()
         })
       } else {
-        this.disabled = true
+        this.rename()
+        this.$nextTick(() => {
+          this.$refs.wrapper.focus()
+        })
       }
+    },
+
+    rename () {
+      // fake async request
+      this.saving = true
+      setTimeout(() => {
+        this.saving = false
+        this.disabled = true
+      }, 1000)
     }
   }
 }
@@ -65,9 +89,9 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 30px;
-    height: 180px;
-    width: 180px;
+    border-radius: 2rem;
+    height: 13rem;
+    width: 13rem;
     transition: .25s ease-in-out;
 
     .icon {
@@ -81,6 +105,7 @@ export default {
     .banner-title {
       position: relative;
       display: flex;
+      align-items: center;
       color: $gray-darkest;
       max-width: 180px;
       margin-bottom: .5rem;
@@ -88,13 +113,16 @@ export default {
 
       input {
         font-size: 1.12rem;
-        width: 180px;
+        width: 100%;
         border: none;
         background: transparent;
         border-radius: .25rem;
+        text-overflow: ellipsis;
+        padding-right: 2rem;
 
         &:disabled {
           color: $gray-darkest;
+          color: pointer;
         }
       }
 
@@ -102,7 +130,12 @@ export default {
         font-size: 1rem;
       }
 
+      &.saving {
+        opacity: .5;
+      }
+
       button {
+        display: block;
         opacity: 0;
         position: absolute;
         right: 0;
@@ -116,19 +149,21 @@ export default {
         transition: .1s ease-in-out;
         cursor: pointer;
         border-radius: .25rem;
+
+        &:hover {
+          color: $gray-900;
+        }
+
+        &:focus {
+          outline: 0;
+        }
+
+        &:focus-visible {
+          box-shadow: $focus-shadow;
+        }
       }
 
-      &::after {
-        content: '';
-        position: absolute;
-        background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 80%);
-        right: 2px;
-        top: 1px;
-        height: 20px;
-        width: 24px;
-      }
-
-      button, input {
+      input {
         &:focus {
           opacity: 1;
           outline: none;
