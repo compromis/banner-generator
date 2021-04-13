@@ -7,6 +7,9 @@
     <transition name="fade">
       <rename-title class="nav-label template-label" v-if="template" />
     </transition>
+    <transition name="fade">
+      <last-saved v-if="template" />
+    </transition>
     <nav-login class="nav-login" />
   </div>
 </template>
@@ -15,6 +18,7 @@
 import Careta from '@/components/canvas/Careta'
 import NavLogin from '@/components/ui/NavLogin'
 import RenameTitle from '@/components/ui/RenameTitle'
+import LastSaved from '@/components/ui/LastSaved.vue'
 
 export default {
   name: 'app-header',
@@ -22,7 +26,8 @@ export default {
   components: {
     Careta,
     NavLogin,
-    RenameTitle
+    RenameTitle,
+    LastSaved
   },
 
   props: {
