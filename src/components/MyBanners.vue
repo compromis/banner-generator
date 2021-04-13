@@ -3,18 +3,21 @@
     <h1>Les meues targes</h1>
     <div class="my-banners-list">
       <banner-item v-for="banner in banners" :key="banner.id" :banner="banner"/>
+      <banner-add />
     </div>
   </div>
 </template>
 
 <script>
 import BannerItem from '@/components/ui/BannerItem'
+import BannerAdd from '@/components/ui/BannerAdd'
 
 export default {
   name: 'my-banners',
 
   components: {
-    BannerItem
+    BannerItem,
+    BannerAdd
   },
 
   data () {
@@ -23,21 +26,21 @@ export default {
         {
           id: '1',
           type: 'Headline',
-          title: 'Titular de Carles Mulet',
+          title: 'Titular de Carles Mulet Mulet Mulet',
           lastSaved: 'Fa 2 mesos',
           thumbnail: null
         },
         {
           id: '2',
           type: 'Quote',
-          title: 'Frase de Carles Mulet',
+          title: 'Frase de Carles',
           lastSaved: 'Fa 3 mesos',
           thumbnail: null
         },
         {
           id: '3',
           type: 'Tweet',
-          title: 'Tweet de Carles Mulet',
+          title: 'Tweet de Carles Mulet Mulet Mulet Mulet',
           lastSaved: 'Fa 3 mesos',
           thumbnail: null
         }

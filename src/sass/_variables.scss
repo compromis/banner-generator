@@ -110,6 +110,10 @@ $default-shadow: 0 .8rem 1.7rem -.3rem var(--shadow-color, rgba($gray-900, .15))
 $raised-shadow: 0 1.25rem 2.1rem -.3rem var(--shadow-color, rgba($gray-900, .15)),
     0 .9rem 1.4rem -.5rem var(--shadow-color, rgba($gray-900, .2)),
     0 -.75rem 1.4rem -.4rem var(--shadow-color, rgba($gray-900, .015));
+$focus-shadow: 0 .8rem 1.7rem -.3rem rgba($orange, .15),
+    0 .5rem 1rem -.5rem rgba($orange, .2),
+    0 -.4rem 1rem -.4rem rgba($orange, .015),
+    0 0 0 .25rem rgba($orange, .5) !important;
 
 // Breakpoints
 $xs-breakpoint: 750px;
