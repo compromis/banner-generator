@@ -5,7 +5,7 @@
       <transition-group tag="ul" name="fade">
         <template v-for="template in templates">
           <li v-if="!(template['hidden'] || (template['archived'] && !showArchive))" :key="template.id">
-            <router-link :to="`/${template.id.toLowerCase()}`" :class="['template-item', `template-item-${template.id.toLowerCase()}`, template['isNew'] ? 'template-item-new' : '', template['archived'] ? 'template-archived' : '']">
+            <router-link :to="`/create/${template.id}`" :class="['template-item', `template-item-${template.id.toLowerCase()}`, template['isNew'] ? 'template-item-new' : '', template['archived'] ? 'template-archived' : '']">
               <span class="template-item-label" v-if="'label' in template">{{ template.label }}</span>
               <span class="template-item-icon">
                 <b-icon :icon="template.icon" :pack="'iconPack' in template ? template.iconPack : 'far'" size="is-large" />

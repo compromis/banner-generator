@@ -4,7 +4,7 @@
       ref="title"
       aria-label="Títol"
       type="text"
-      value="[title]"
+      :value="title"
       class="rename-title-input"
       placeholder="Sense títol"
       autocomplete="off"
@@ -24,6 +24,18 @@ export default {
   methods: {
     rename () {
       console.log('Renamed')
+    }
+  },
+
+  computed: {
+    title: {
+      get () {
+        const banner = this.$store.state.bannerMeta
+        return banner ? banner.title : ''
+      },
+      set (title) {
+        this.$store.commit('updateBannerTitle', title)
+      }
     }
   }
 }

@@ -28,6 +28,8 @@ import CanvasContainer from './CanvasContainer'
 import Help from './Help'
 import Loading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/vue-loading.css'
+import Http from '@/http'
+const http = new Http()
 
 export default {
   name: 'app-workspace',
@@ -40,7 +42,8 @@ export default {
 
   data () {
     return {
-      isCardModalActive: false
+      isCardModalActive: false,
+      banner: null
     }
   },
 
@@ -58,9 +61,10 @@ export default {
     }
   },
 
-  created () {
-    // Find and set selected template based on route param
-    this.setTemplate(this.$route.params.pathMatch)
+  async created () {
+    const banner = await http.banner(this.$route.params.id)
+    this.$store.commit('setBannerMeta', banner)
+    this.setTemplate(banner.type)
   },
 
   watch: {
@@ -84,7 +88,7 @@ export default {
     },
 
     setTemplate (name) {
-      const template = this.templates.find(template => template.id.toLowerCase() === name)
+      const template = this.templates.find(template => template.id === name)
       this.$store.commit('setTemplate', template)
       this.$store.commit('setAspect', template.aspects[0])
       this.$store.commit('setDisplayErrors', false)

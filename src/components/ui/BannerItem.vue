@@ -7,7 +7,7 @@
     <div class="banner-item-info">
       <form :class="['banner-title', { saving }]" @submit.prevent="rename">
         <input
-          :value="banner.title"
+          v-model="title"
           :disabled="disabled || saving"
           ref="input"
           @blur="handleBlur">
@@ -18,12 +18,15 @@
       </form>
       <div class="banner-type"><b-icon :icon="template.icon" :pack="template.iconPack || 'far'" />{{ template.name }}</div>
       <div class="banner-saved"><b-icon icon="save" pack="far" />{{ banner.lastSaved }}</div>
-      <a href="#" class="banner-delete"><b-icon icon="trash" pack="far" />Esborrar</a>
+      <button @click="remove" class="banner-delete"><b-icon icon="trash" pack="far" />Esborrar</button>
     </div>
   </article>
 </template>
 
 <script>
+import Http from '@/http'
+const http = new Http()
+
 export default {
   name: 'banner-item',
 
@@ -36,6 +39,7 @@ export default {
 
   data () {
     return {
+      title: '',
       saving: false,
       disabled: true
     }
@@ -68,14 +72,20 @@ export default {
       }
     },
 
-    rename () {
-      // fake async request
+    async rename () {
       this.saving = true
-      setTimeout(() => {
-        this.saving = false
-        this.disabled = true
-      }, 1000)
+      await http.rename(this.banner.id, this.title)
+      this.saving = false
+    },
+
+    async remove () {
+      await http.remove(this.banner.id)
+      this.$emit('remove', true)
     }
+  },
+
+  mounted () {
+    this.title = this.banner.title
   }
 }
 </script>
@@ -141,9 +151,6 @@ export default {
         right: 0;
         top: 0;
         bottom: 0;
-        border: none;
-        padding: 0;
-        background: transparent;
         z-index: 1;
         color: $gray-700;
         transition: .1s ease-in-out;
@@ -225,6 +232,14 @@ export default {
     .banner-item-thumbnail {
       box-shadow: $focus-shadow;
     }
+  }
+
+  button {
+    border: none;
+    padding: 0;
+    background: transparent;
+    appearance: none;
+    cursor: pointer;
   }
 }
 </style>

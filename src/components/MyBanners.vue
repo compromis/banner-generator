@@ -2,7 +2,7 @@
   <div class="my-banners">
     <h1>Les meues targes</h1>
     <div class="my-banners-list">
-      <banner-item v-for="banner in banners" :key="banner.id" :banner="banner"/>
+      <banner-item v-for="banner in banners" :key="banner.id" :banner="banner" @remove="getBanners()"/>
       <banner-add />
     </div>
   </div>
@@ -11,6 +11,7 @@
 <script>
 import BannerItem from '@/components/ui/BannerItem'
 import BannerAdd from '@/components/ui/BannerAdd'
+import Http from '@/http'
 
 export default {
   name: 'my-banners',
@@ -22,30 +23,20 @@ export default {
 
   data () {
     return {
-      banners: [
-        {
-          id: '1',
-          type: 'Headline',
-          title: 'Titular de Carles Mulet Mulet Mulet',
-          lastSaved: 'Fa 2 mesos',
-          thumbnail: null
-        },
-        {
-          id: '2',
-          type: 'Quote',
-          title: 'Frase de Carles',
-          lastSaved: 'Fa 3 mesos',
-          thumbnail: null
-        },
-        {
-          id: '3',
-          type: 'Tweet',
-          title: 'Tweet de Carles Mulet Mulet Mulet Mulet',
-          lastSaved: 'Fa 3 mesos',
-          thumbnail: null
-        }
-      ]
+      banners: []
     }
+  },
+
+  methods: {
+    async getBanners () {
+      const api = new Http()
+      this.banners = await api.myBanners()
+      console.log(this.banners)
+    }
+  },
+
+  mounted () {
+    this.getBanners()
   }
 }
 </script>

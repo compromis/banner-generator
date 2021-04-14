@@ -23,7 +23,7 @@
         </b-dropdown>
     </template>
     <template v-else>
-      <a href="espai_link" class="button is-ghost">
+      <a href="https://compromis.net/espai/auth/sso/targes_local" class="button is-ghost">
         Les meues targes
         <font-awesome-icon :icon="['far', 'user-circle']" />
       </a>
@@ -35,7 +35,7 @@
 export default {
   computed: {
     isLoggedIn () {
-      return true
+      return !!this.$store.state.auth.token
     }
   }
 }

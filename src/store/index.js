@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import createPersistedState from 'vuex-persistedstate'
 import templates from '@/components/templates/templates'
 import aspects from '@/components/templates/aspects'
+import auth from './auth'
 
 Vue.use(Vuex)
 
@@ -12,6 +14,7 @@ export default new Vuex.Store({
     template: null,
     aspect: '11',
     banner: null,
+    bannerMeta: null,
     child: null,
     errors: {},
     displayErrors: false,
@@ -35,8 +38,16 @@ export default new Vuex.Store({
       state.aspect = aspect
     },
 
+    setBannerMeta (state, banner) {
+      state.bannerMeta = banner
+    },
+
     updateBanner (state, banner) {
       state.banner = banner
+    },
+
+    updateBannerTitle (state, title) {
+      state.bannerMeta.title = title
     },
 
     updateChild (state, value) {
@@ -75,5 +86,11 @@ export default new Vuex.Store({
         state.settings = JSON.parse(settings)
       }
     }
-  }
+  },
+  modules: {
+    auth
+  },
+  plugins: [createPersistedState({
+    paths: ['auth']
+  })]
 })
