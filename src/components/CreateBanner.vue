@@ -5,8 +5,7 @@
 </template>
 
 <script>
-import Http from '@/http'
-const http = new Http()
+import http from '@/http'
 
 export default {
   async mounted () {

@@ -24,12 +24,11 @@
 </template>
 
 <script>
+import http from '@/http'
 import CanvasContainer from './CanvasContainer'
 import Help from './Help'
 import Loading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/vue-loading.css'
-import Http from '@/http'
-const http = new Http()
 
 export default {
   name: 'app-workspace',

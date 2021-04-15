@@ -1,13 +1,14 @@
 <template>
   <div class="nav-login">
+    {{ ssoLoginUrl }}
     <template v-if="isLoggedIn">
       <b-dropdown :triggers="['hover', 'click']" aria-role="list" position="is-bottom-left">
         <template #trigger>
           <b-button
-              label="Username"
-              type="is-ghost"
-              class="button"
-              icon-right="user-circle" />
+            :label="username"
+            type="is-ghost"
+            class="button"
+            icon-right="user-circle" />
         </template>
 
         <b-dropdown-item aria-role="listitem" has-link>
@@ -23,7 +24,7 @@
         </b-dropdown>
     </template>
     <template v-else>
-      <a href="https://compromis.net/espai/auth/sso/targes_local" class="button is-ghost">
+      <a :href="ssoLoginUrl" class="button is-ghost">
         Les meues targes
         <font-awesome-icon :icon="['far', 'user-circle']" />
       </a>
@@ -33,7 +34,17 @@
 
 <script>
 export default {
+  data () {
+    return {
+      ssoLoginUrl: process.env.VUE_APP_SSO_LOGIN_URL
+    }
+  },
+
   computed: {
+    username () {
+      return this.$store.state.auth.user.first_name
+    },
+
     isLoggedIn () {
       return !!this.$store.state.auth.token
     }

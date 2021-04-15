@@ -1,9 +1,9 @@
 import axios from 'axios'
 import store from './store/index'
 
-export default class API {
+export class API {
   constructor () {
-    this.apiUrl = 'http://localhost:3333'
+    this.apiUrl = process.env.VUE_APP_BACKEND_URL
     this.token = store.state.auth.token
     axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
     axios.defaults.headers.common.Authorization = 'Bearer ' + this.token
@@ -44,3 +44,5 @@ export default class API {
     })
   }
 }
+
+export default new API()

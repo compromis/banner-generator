@@ -11,7 +11,7 @@
 <script>
 import BannerItem from '@/components/ui/BannerItem'
 import BannerAdd from '@/components/ui/BannerAdd'
-import Http from '@/http'
+import http from '@/http'
 
 export default {
   name: 'my-banners',
@@ -23,20 +23,16 @@ export default {
 
   data () {
     return {
-      banners: [
-        {
-          title: 'asfsafsfa',
-          type: 'Headline'
-        }
-      ]
+      banners: [],
+      loading: false
     }
   },
 
   methods: {
     async getBanners () {
-      const api = new Http()
-      this.banners = await api.myBanners()
-      console.log(this.banners)
+      this.loading = true
+      this.banners = await http.myBanners()
+      this.loading = false
     }
   },
 

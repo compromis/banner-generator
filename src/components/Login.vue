@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import API from '@/http'
+import http from '@/http'
 
 export default {
   async mounted () {
@@ -17,9 +17,7 @@ export default {
     }
 
     await this.$store.commit('auth/setToken', token)
-    const api = new API()
-    console.log(api)
-    const user = await api.user()
+    const user = await http.user()
     this.$store.commit('auth/setUser', user)
     this.$router.push('/my-banners')
   }
