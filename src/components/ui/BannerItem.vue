@@ -1,24 +1,23 @@
 <template>
   <article class="banner-item" ref="wrapper">
-    <a :href="`/editor/${banner.id}`" class="banner-item-link">
+    <router-link :to="`/editor/${banner.id}`" class="banner-item-link">
       <div class="banner-item-thumbnail">
         <img src="" alt="" v-if="banner.thumbnail">
         <b-icon :icon="template.icon" :pack="template.iconPack || 'far'" size="is-large" v-else />
       </div>
       <div class="banner-item-info">
         <div class="banner-type"><b-icon :icon="template.icon" :pack="template.iconPack || 'far'" />{{ template.name }}</div>
-        <div class="banner-saved"><b-icon icon="save" pack="far" />{{ banner.lastSaved }}</div>
+        <div class="banner-saved"><b-icon icon="save" pack="far" />{{ banner.updated_at | formatTime }}</div>
       </div>
-    </a>
+    </router-link>
     <button @click="remove" class="banner-delete"><b-icon icon="trash" pack="far" />Esborrar</button>
     <form :class="['banner-title', { saving }]" @submit.prevent="rename">
       <div @click="handleTitleClick" class="banner-title-input-wrapper">
-      <input
-        v-model="title"
-        :disabled="disabled || saving"
-        ref="input"
-        @blur="handleBlur"
-        >
+        <input
+          v-model="title"
+          :disabled="disabled || saving"
+          ref="input"
+          @blur="handleBlur">
       </div>
       <button @click="handleClick" type="button" v-if="!saving">
         <b-icon :icon="disabled ? 'pen' : 'check'" pack="far" />
@@ -29,8 +28,12 @@
 </template>
 
 <script>
-import Http from '@/http'
-const http = new Http()
+import http from '@/http'
+import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
+import 'dayjs/locale/ca'
+dayjs.extend(relativeTime)
+dayjs.locale('ca')
 
 export default {
   name: 'banner-item',
@@ -50,6 +53,10 @@ export default {
     }
   },
 
+  mounted () {
+    this.title = this.banner.title
+  },
+
   computed: {
     template () {
       const { templates } = this.$store.state
@@ -57,9 +64,16 @@ export default {
     }
   },
 
+  filters: {
+    formatTime (time) {
+      const now = dayjs()
+      const lastSaved = dayjs(time)
+      return now.to(lastSaved)
+    }
+  },
+
   methods: {
     handleBlur () {
-      console.log('blur')
       this.rename()
     },
 
@@ -87,16 +101,13 @@ export default {
       this.saving = true
       await http.rename(this.banner.id, this.title)
       this.saving = false
+      this.disabled = true
     },
 
     async remove () {
       await http.remove(this.banner.id)
       this.$emit('remove', true)
     }
-  },
-
-  mounted () {
-    this.title = this.banner.title
   }
 }
 </script>
