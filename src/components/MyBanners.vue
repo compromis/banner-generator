@@ -23,7 +23,12 @@ export default {
 
   data () {
     return {
-      banners: []
+      banners: [
+        {
+          title: 'asfsafsfa',
+          type: 'Headline'
+        }
+      ]
     }
   },
 

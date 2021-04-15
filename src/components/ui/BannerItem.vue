@@ -1,25 +1,30 @@
 <template>
-  <article class="banner-item" ref="wrapper"> <!-- to solve: aço no pot ser un <a> -->
-    <div class="banner-item-thumbnail">
-      <img src="" alt="" v-if="banner.thumbnail">
-      <b-icon :icon="template.icon" :pack="template.iconPack || 'far'" size="is-large" v-else />
-    </div>
-    <div class="banner-item-info">
-      <form :class="['banner-title', { saving }]" @submit.prevent="rename">
-        <input
-          v-model="title"
-          :disabled="disabled || saving"
-          ref="input"
-          @blur="handleBlur">
-        <button @click="handleClick" type="button" v-if="!saving">
-          <b-icon :icon="disabled ? 'pen' : 'check'" pack="far" />
-        </button>
-        <font-awesome-icon :icon="['far', 'circle-notch']" spin v-else />
-      </form>
-      <div class="banner-type"><b-icon :icon="template.icon" :pack="template.iconPack || 'far'" />{{ template.name }}</div>
-      <div class="banner-saved"><b-icon icon="save" pack="far" />{{ banner.lastSaved }}</div>
-      <button @click="remove" class="banner-delete"><b-icon icon="trash" pack="far" />Esborrar</button>
-    </div>
+  <article class="banner-item" ref="wrapper">
+    <a :href="`/editor/${banner.id}`" class="banner-item-link">
+      <div class="banner-item-thumbnail">
+        <img src="" alt="" v-if="banner.thumbnail">
+        <b-icon :icon="template.icon" :pack="template.iconPack || 'far'" size="is-large" v-else />
+      </div>
+      <div class="banner-item-info">
+        <div class="banner-type"><b-icon :icon="template.icon" :pack="template.iconPack || 'far'" />{{ template.name }}</div>
+        <div class="banner-saved"><b-icon icon="save" pack="far" />{{ banner.lastSaved }}</div>
+      </div>
+    </a>
+    <button @click="remove" class="banner-delete"><b-icon icon="trash" pack="far" />Esborrar</button>
+    <form :class="['banner-title', { saving }]" @submit.prevent="rename">
+      <div @click="handleTitleClick" class="banner-title-input-wrapper">
+      <input
+        v-model="title"
+        :disabled="disabled || saving"
+        ref="input"
+        @blur="handleBlur"
+        >
+      </div>
+      <button @click="handleClick" type="button" v-if="!saving">
+        <b-icon :icon="disabled ? 'pen' : 'check'" pack="far" />
+      </button>
+      <font-awesome-icon :icon="['far', 'circle-notch']" spin v-else />
+    </form>
   </article>
 </template>
 
@@ -72,6 +77,12 @@ export default {
       }
     },
 
+    handleTitleClick () {
+      if (this.disabled) {
+        this.$router.push(`/editor/${this.banner.id}`)
+      }
+    },
+
     async rename () {
       this.saving = true
       await http.rename(this.banner.id, this.title)
@@ -94,6 +105,8 @@ export default {
 @import "../../sass/variables";
 
 .banner-item {
+  position: relative;
+
   &-thumbnail {
     background: $gray-400;
     display: flex;
@@ -110,87 +123,93 @@ export default {
   }
 
   &-info {
-    margin-top: 1rem;
+    margin-top: 3rem;
 
-    .banner-title {
-      position: relative;
-      display: flex;
-      align-items: center;
-      color: $gray-darkest;
-      max-width: 180px;
-      margin-bottom: .5rem;
-      line-height: 1.3;
-
-      input {
-        font-size: 1.12rem;
-        width: 100%;
-        border: none;
-        background: transparent;
-        border-radius: .25rem;
-        text-overflow: ellipsis;
-        padding-right: 2rem;
-
-        &:disabled {
-          color: $gray-darkest;
-          color: pointer;
-        }
-      }
-
-      .icon {
-        font-size: 1rem;
-      }
-
-      &.saving {
-        opacity: .5;
-      }
-
-      button {
-        display: block;
-        opacity: 0;
-        position: absolute;
-        right: 0;
-        top: 0;
-        bottom: 0;
-        z-index: 1;
-        color: $gray-700;
-        transition: .1s ease-in-out;
-        cursor: pointer;
-        border-radius: .25rem;
-
-        &:hover {
-          color: $gray-900;
-        }
-
-        &:focus {
-          outline: 0;
-        }
-
-        &:focus-visible {
-          box-shadow: $focus-shadow;
-        }
-      }
-
-      input {
-        &:focus {
-          opacity: 1;
-          outline: none;
-          box-shadow: $focus-shadow;
-        }
-      }
-    }
-
-    .banner-type, .banner-saved, .banner-delete {
-      display: flex;
-      align-items: center;
+    .icon {
       font-size: 1rem;
-      color: $gray-700;
-      margin-top: .25rem;
+    }
+  }
 
-      .icon {
-        font-size: 1.25rem;
-        margin-right: .5rem;
+  .banner-type, .banner-saved, .banner-delete {
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    color: $gray-700;
+    margin-top: .25rem;
+
+    .icon {
+      font-size: 1.25rem;
+      margin-right: .5rem;
+    }
+  }
+
+  .banner-title {
+    position: absolute;
+    top: 194px;
+    display: flex;
+    align-items: center;
+    color: $gray-darkest;
+    max-width: 180px;
+    margin-bottom: .5rem;
+    line-height: 1.3;
+
+    input {
+      font-size: 1.12rem;
+      width: 100%;
+      border: none;
+      background: transparent;
+      border-radius: .25rem;
+      text-overflow: ellipsis;
+      padding-right: 2rem;
+
+      &:disabled {
+        color: $gray-darkest;
+        color: pointer;
       }
     }
+
+    &-input-wrapper {
+      cursor: pointer;
+    }
+
+    &.saving {
+      opacity: .5;
+    }
+
+    button {
+      display: block;
+      opacity: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      z-index: 1;
+      color: $gray-700;
+      transition: .1s ease-in-out;
+      cursor: pointer;
+      border-radius: .25rem;
+
+      &:hover {
+        color: $gray-900;
+      }
+
+      &:focus {
+        outline: 0;
+      }
+
+      &:focus-visible {
+        box-shadow: $focus-shadow;
+      }
+    }
+
+    input {
+      &:focus {
+        opacity: 1;
+        outline: none;
+        box-shadow: $focus-shadow;
+      }
+    }
+  }
 
     .banner-delete {
       opacity: 0;
@@ -210,7 +229,6 @@ export default {
         text-decoration: underline;
       }
     }
-  }
 
   &:hover, &:focus, &:focus-within {
     .banner-item-thumbnail {
