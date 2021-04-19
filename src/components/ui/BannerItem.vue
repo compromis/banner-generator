@@ -10,20 +10,23 @@
         <div class="banner-saved"><b-icon icon="save" pack="far" />{{ banner.updated_at | formatTime }}</div>
       </div>
     </router-link>
-    <button @click="remove" class="banner-delete"><b-icon icon="trash" pack="far" />Esborrar</button>
     <form :class="['banner-title', { saving }]" @submit.prevent="rename">
       <div @click="handleTitleClick" class="banner-title-input-wrapper">
         <input
           v-model="title"
           :disabled="disabled || saving"
           ref="input"
-          @blur="handleBlur">
+          @blur="handleBlur"
+          required
+          autocomplete="off"
+          spellcheck="off">
       </div>
       <button @click="handleClick" type="button" v-if="!saving">
         <b-icon :icon="disabled ? 'pen' : 'check'" pack="far" />
       </button>
       <font-awesome-icon :icon="['far', 'circle-notch']" spin v-else />
     </form>
+    <button @click="remove" class="banner-delete"><b-icon icon="trash" pack="far" />Esborrar</button>
   </article>
 </template>
 
@@ -130,6 +133,17 @@ export default {
 
     .icon {
       color: $white;
+    }
+  }
+
+  &-link {
+    &:focus {
+      outline: none;
+
+      .banner-item-thumbnail {
+        box-shadow: $focus-shadow;
+        transform: rotate($rotation) scale(1.02);
+      }
     }
   }
 
@@ -242,10 +256,6 @@ export default {
     }
 
   &:hover, &:focus, &:focus-within {
-    .banner-item-thumbnail {
-      transform: rotate($rotation) scale(1.02);
-    }
-
     .banner-delete, button, input {
       opacity: 1;
     }
@@ -255,11 +265,9 @@ export default {
     }
   }
 
-  &:focus {
-    outline: none;
-
+  &:hover {
     .banner-item-thumbnail {
-      box-shadow: $focus-shadow;
+      transform: rotate($rotation) scale(1.02);
     }
   }
 

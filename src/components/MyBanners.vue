@@ -1,9 +1,13 @@
 <template>
-  <div class="my-banners">
+  <div :class="['my-banners', { loading }]">
     <h1>Les meues targes</h1>
     <div class="my-banners-list">
-      <banner-item v-for="banner in banners" :key="banner.id" :banner="banner" @remove="getBanners()"/>
       <banner-add />
+      <banner-item v-for="banner in banners" :key="banner.id" :banner="banner" @remove="getBanners()"/>
+      <button v-if="page != lastPage" class="load-banners" @click="loadBanners()">
+        <template v-if="loading"><font-awesome-icon :icon="['far', 'circle-notch']" class="icon" spin />Carregant...</template>
+        <template v-else><font-awesome-icon :icon="['far', 'sync']" class="icon" />Carrega més targes</template>
+      </button>
     </div>
   </div>
 </template>
@@ -24,15 +28,27 @@ export default {
   data () {
     return {
       banners: [],
-      loading: false
+      loading: true,
+      page: 1,
+      lastPage: 1,
+      order: 'updated_at',
+      by: 'desc'
     }
   },
 
   methods: {
     async getBanners () {
       this.loading = true
-      this.banners = await http.myBanners()
+      const { page, order, by } = this
+      const { data, lastPage } = await http.myBanners(page, order, by)
+      this.banners.push(...data)
+      this.lastPage = lastPage
       this.loading = false
+    },
+
+    loadBanners () {
+      this.page++
+      this.getBanners()
     }
   },
 
@@ -51,20 +67,64 @@ export default {
     padding-top: 5.25rem;
     margin: 0 auto;
     position: relative;
-    max-width: 1000px;
+    max-width: 984px;
+
+    &.loading {
+      opacity: .5;
+      pointer-events: none;
+    }
 
     h1 {
       font-size: 2rem;
       color: $gray-700;
+      margin-bottom: 1.5rem;
     }
 
     &-list {
       display: grid;
-      grid-auto-flow: column;
-      grid-auto-columns: 180px;
+      grid-template-columns: repeat(5, 180px);
       gap: 1.5rem;
       width: 100%;
-      flex-direction: row;
+    }
+
+    .load-banners {
+      display: flex;
+      padding: 1rem;
+      margin: auto;
+      border-radius: .5rem;
+      justify-content: center;
+      color: $gray-700;
+      font-size: 1.25rem;
+      border: none;
+      background: transparent;
+      appearance: none;
+      cursor: pointer;
+      grid-column: span 5;
+      transition: .25s ease-in-out;
+
+      .icon {
+        display: block;
+        margin-right: .5rem;
+        transition: .65s ease-in-out;
+        transform-origin: center center;
+      }
+
+      &:hover {
+        background: $gray-100;
+
+        .icon {
+          transform: rotate(360deg);
+        }
+      }
+
+      &:focus {
+        outline: none;
+        box-shadow: $focus-shadow;
+      }
+
+      &:hover, &:focus {
+        background: $gray-100;
+      }
     }
   }
 </style>
