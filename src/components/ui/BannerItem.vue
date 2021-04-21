@@ -1,6 +1,6 @@
 <template>
-  <article class="banner-item" ref="wrapper">
-    <router-link :to="`/editor/${banner.id}`" class="banner-item-link">
+  <article :class="['banner-item', { 'disabled': !disabled }]" ref="wrapper">
+    <router-link :event="disabled ? 'click' : false" :to="`/editor/${banner.id}`" class="banner-item-link">
       <div class="banner-item-thumbnail">
         <img src="" alt="" v-if="banner.thumbnail">
         <b-icon :icon="template.icon" :pack="template.iconPack || 'far'" size="is-large" v-else />
@@ -17,7 +17,6 @@
           :disabled="disabled || saving"
           ref="input"
           @blur="handleBlur"
-          required
           autocomplete="off"
           spellcheck="off">
       </div>
@@ -102,9 +101,11 @@ export default {
 
     async rename () {
       this.saving = true
-      await http.rename(this.banner.id, this.title)
+      const title = this.title || this.template.name
+      const banner = await http.rename(this.banner.id, title)
+      this.title = banner.title
       this.saving = false
-      this.disabled = true
+      setTimeout(() => { this.disabled = true }, 200)
     },
 
     async remove () {
@@ -144,6 +145,16 @@ export default {
         box-shadow: $focus-shadow;
         transform: rotate($rotation) scale(1.02);
       }
+    }
+  }
+
+  &.disabled {
+    .banner-title-input-wrapper {
+      cursor: pointer;
+    }
+
+    .banner-item-link {
+      cursor: default;
     }
   }
 
@@ -265,7 +276,7 @@ export default {
     }
   }
 
-  &:hover {
+  &:hover:not(.disabled) {
     .banner-item-thumbnail {
       transform: rotate($rotation) scale(1.02);
     }
