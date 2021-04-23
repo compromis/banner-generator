@@ -18,7 +18,7 @@ export default new Router({
     },
     {
       path: '/my-banners',
-      name: 'mybanners',
+      name: 'my-banners',
       component: MyBanners
     },
     {

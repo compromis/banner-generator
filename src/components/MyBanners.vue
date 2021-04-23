@@ -36,6 +36,12 @@ export default {
     }
   },
 
+  mounted () {
+    this.$store.commit('setTemplate', null)
+    this.$store.commit('updateBanner', null)
+    this.getBanners()
+  },
+
   methods: {
     async getBanners () {
       this.loading = true
@@ -50,15 +56,11 @@ export default {
       this.page++
       this.getBanners()
     }
-  },
-
-  mounted () {
-    this.getBanners()
   }
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   @import "../sass/variables";
 
   .my-banners {

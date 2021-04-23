@@ -109,6 +109,22 @@ export default {
     }
   }
 
+  @media (max-width: 1620px) {
+    .route-my-banners .blobs {
+      .blob-1 {
+        right: -45rem;
+      }
+
+      .blob-2 {
+        left: -45rem;
+      }
+
+      .blob-3 {
+        right: -40rem;
+      }
+    }
+  }
+
   @media (max-width: 1024px) {
     .blobs {
       .blob {
@@ -119,6 +135,10 @@ export default {
           top: -38rem;
         }
       }
+    }
+
+    .route-my-banners .blobs {
+      opacity: 0;
     }
   }
 
