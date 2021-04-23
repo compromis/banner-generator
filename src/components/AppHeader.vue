@@ -58,7 +58,7 @@ export default {
     padding: .75rem 1rem;
     height: $navbar-height;
     transition: .25s ease-in-out;
-    z-index: 50;
+    z-index: 40;
 
     .logo {
       display: flex;

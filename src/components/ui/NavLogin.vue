@@ -1,6 +1,5 @@
 <template>
   <div class="nav-login">
-    {{ ssoLoginUrl }}
     <template v-if="isLoggedIn">
       <b-dropdown :triggers="['hover', 'click']" aria-role="list" position="is-bottom-left">
         <template #trigger>

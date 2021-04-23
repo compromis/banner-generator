@@ -11,7 +11,6 @@
         </p>
         <b-button ref="confirm" type="is-primary" @click="isModalActive = false">Entés</b-button>
       </div>
-
   </b-modal>
 </template>
 

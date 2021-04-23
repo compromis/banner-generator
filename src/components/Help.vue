@@ -9,16 +9,18 @@
       </b-tooltip>
     </div>
 
-    <b-modal :active.sync="formIsActive" scroll="keep">
-      <div class="content">
-        <div v-if="template">
-          <h1>{{ template.name }}</h1>
-          <component :is="template.components.help" class="help-block-content" />
-          <hr>
+    <portal to="help">
+      <b-modal :active.sync="formIsActive" scroll="keep">
+        <div class="content">
+          <div v-if="template">
+            <h1>{{ template.name }}</h1>
+            <component :is="template.components.help" class="help-block-content" />
+            <hr>
+          </div>
+          <help-form />
         </div>
-        <help-form />
-      </div>
-    </b-modal>
+      </b-modal>
+    </portal>
   </div>
 </template>
 
@@ -77,7 +79,6 @@ export default {
 
     &-content {
       font-size: 1rem;
-
     }
 
     &-button {

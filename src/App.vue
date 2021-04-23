@@ -6,6 +6,8 @@
       <router-view />
     </transition>
     <app-background :hidden="backgroundHidden" />
+    <portal-target name="confirm" />
+    <portal-target name="help" class="help-block" />
   </div>
 </template>
 

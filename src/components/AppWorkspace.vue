@@ -7,18 +7,20 @@
     <canvas-container :canvas-component="template.components.canvas" class="canvas" />
     <help id="help-button" class="help-block" />
 
-    <b-modal :active="isCardModalActive" @close="isCardModalActive = false" :width="640" scroll="keep">
-      <div class="card content">
-        <b-icon icon="exclamation-triangle" size="is-large" />
-        <h2>Atenció</h2>
-        <p>
-          Vols tancar l'editor i tornar a la pantalla d'escollir tarja?
-          Es perdran tots els canvis.
-        </p>
-        <b-button ref="confirm" type="is-primary" @click="back">Si, tanca</b-button>
-        <b-button type="is-light" @click="isCardModalActive = false">No, continua editant</b-button>
-      </div>
-    </b-modal>
+    <portal to="confirm">
+      <b-modal :active="isCardModalActive" @close="isCardModalActive = false" :width="640" scroll="keep">
+        <div class="card content">
+          <b-icon icon="exclamation-triangle" size="is-large" />
+          <h2>Atenció</h2>
+          <p>
+            Vols tancar l'editor i tornar a la pantalla d'escollir tarja?
+            Es perdran tots els canvis.
+          </p>
+          <b-button ref="confirm" type="is-primary" @click="back">Si, tanca</b-button>
+          <b-button type="is-light" @click="isCardModalActive = false">No, continua editant</b-button>
+        </div>
+      </b-modal>
+    </portal>
     <loading :active.sync="loadingTemplate" :is-full-page="true" color="#ff6600"></loading>
   </div>
 </template>
@@ -42,6 +44,7 @@ export default {
   data () {
     return {
       isCardModalActive: false,
+      goingTo: null,
       banner: null
     }
   },
@@ -57,6 +60,10 @@ export default {
 
     loadingTemplate () {
       return this.$store.state.banner === null
+    },
+
+    isLoggedIn () {
+      return !!this.$store.state.auth.token
     }
   },
 
@@ -73,17 +80,18 @@ export default {
     // Autofocus default button on modal shown
     // Bring focus back to opener button on modal closed
     isCardModalActive: function (isActive) {
-      const button = isActive ? 'confirm' : 'close'
-
-      this.$nextTick(() => {
-        this.$refs[button].$el.focus()
-      })
+      // --- FIX ----
+      // const button = isActive ? 'confirm' : 'close'
+      // this.$nextTick(() => {
+      //    this.$refs[button].focus()
+      // })
     }
   },
 
   methods: {
     back (confirmed) {
-      this.$router.push({ name: 'start', params: { confirmed } })
+      const name = this.goingTo.name || 'start'
+      this.$router.push({ name, params: { confirmed } })
     },
 
     setTemplate (name) {
@@ -96,10 +104,12 @@ export default {
 
   beforeRouteLeave (to, from, next) {
     // Abort and show modal if going back unless 'confirmed' is explicitly set
-    if (to.params.confirmed) {
+    // or user is logged in
+    if (to.params.confirmed || this.isLoggedIn) {
       next()
     } else {
       this.isCardModalActive = true
+      this.goingTo = to
       next(false)
     }
   }
@@ -123,7 +133,7 @@ export default {
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 40;
+    z-index: 35;
 
     .nav {
       grid-area: nav;
