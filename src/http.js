@@ -14,8 +14,8 @@ export class API {
     return this._call('get', 'auth/user')
   }
 
-  myBanners (page, order, by) {
-    return this._call('get', 'banners', { params: { page, order, by } })
+  myBanners (page, order, by, limit) {
+    return this._call('get', 'banners', { params: { page, order, by, limit } })
   }
 
   banner (id) {

@@ -25,3 +25,35 @@
 .fade-enter, .fade-leave-to {
   opacity: 0;
 }
+
+.list-enter-active, .list-leave-active {
+  transition: all 1s cubic-bezier(.39,.06,.18,1.18);
+  overflow: hidden;
+  max-width: 16rem;
+  max-height: 24rem;
+}
+
+.list-leave-active {
+  transform: scale(.6);
+}
+
+.list-enter-active {
+  transform: scale(1);
+
+  @for $i from 0 through 9 {
+    &:nth-child(10n-#{$i}) {
+      transition-delay: 1.5s - $i * .1;
+    }
+  }
+}
+
+.list-enter {
+  transform: scale(0);
+}
+
+.list-enter, .list-leave-to {
+  opacity: 0;
+  max-width: 0;
+  max-height: 0;
+  overflow: hidden;
+}

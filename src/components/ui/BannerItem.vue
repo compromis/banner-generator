@@ -121,6 +121,8 @@ export default {
 
 .banner-item {
   position: relative;
+  padding: 1rem 0;
+  will-change: transform max-width opacity;
 
   &-thumbnail {
     background: $gray-400;
@@ -131,6 +133,7 @@ export default {
     height: 13rem;
     width: 13rem;
     transition: .25s ease-in-out;
+    margin: 0 .75rem;
 
     .icon {
       color: $white;
@@ -159,7 +162,7 @@ export default {
   }
 
   &-info {
-    margin-top: 3rem;
+    margin: 3rem .75rem 0 .75rem;
 
     .icon {
       font-size: 1rem;
@@ -172,6 +175,8 @@ export default {
     font-size: 1rem;
     color: $gray-700;
     margin-top: .25rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 
     .icon {
       font-size: 1.25rem;
@@ -181,13 +186,14 @@ export default {
 
   .banner-title {
     position: absolute;
-    top: 194px;
+    top: 14.85rem;
     display: flex;
     align-items: center;
     color: $gray-darkest;
     max-width: 180px;
     margin-bottom: .5rem;
     line-height: 1.3;
+    margin: 0 .75rem;
 
     input {
       font-size: 1.12rem;
@@ -254,6 +260,7 @@ export default {
       border-radius: .25rem;
       display: inline-flex;
       padding-right: .25rem;
+      margin: .2rem .75rem 0;
 
       &:focus {
         opacity: 1;

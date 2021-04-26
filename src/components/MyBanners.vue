@@ -1,28 +1,40 @@
 <template>
   <div :class="['my-banners', { loading }]">
-    <h1>Les meues targes</h1>
-    <div class="my-banners-list">
-      <banner-add />
-      <banner-item v-for="banner in banners" :key="banner.id" :banner="banner" @remove="getBanners()"/>
-      <button v-if="page != lastPage" class="load-banners" @click="loadBanners()">
-        <template v-if="loading"><font-awesome-icon :icon="['far', 'circle-notch']" class="icon" spin />Carregant...</template>
-        <template v-else><font-awesome-icon :icon="['far', 'sync']" class="icon" />Carrega més targes</template>
-      </button>
+    <div class="my-banners-toolbar">
+      <h1>Les meues targes</h1>
+      <select class="text-button sort-button" @input="sort">
+        <option value="updated_at.desc">Més recents primer</option>
+        <option value="updated_at.asc">Més antics primer</option>
+        <option value="title.asc">Alfabeticament</option>
+        <option value="type.asc">Per tipus</option>
+      </select>
+      <router-link to="/" class="text-button new-banner">
+        <font-awesome-icon :icon="['far', 'plus']" class="icon" />Nova tarja
+      </router-link>
     </div>
+    <transition name="fade" mode="out-in">
+      <div key="al" v-if="!sorting">
+        <transition-group name="list" tag="div" class="my-banners-list" mode="in-out">
+          <banner-item v-for="banner in banners" :key="banner.id" :banner="banner" @remove="getBanners"/>
+        </transition-group>
+      </div>
+    </transition>
+    <button v-if="page != lastPage" class="text-button load-banners" @click="appendBanners">
+      <template v-if="loading"><font-awesome-icon :icon="['far', 'circle-notch']" class="icon" spin />Carregant...</template>
+      <template v-else><font-awesome-icon :icon="['far', 'chevron-down']" class="icon" />Més targes</template>
+    </button>
   </div>
 </template>
 
 <script>
 import BannerItem from '@/components/ui/BannerItem'
-import BannerAdd from '@/components/ui/BannerAdd'
 import http from '@/http'
 
 export default {
   name: 'my-banners',
 
   components: {
-    BannerItem,
-    BannerAdd
+    BannerItem
   },
 
   data () {
@@ -32,7 +44,9 @@ export default {
       page: 1,
       lastPage: 1,
       order: 'updated_at',
-      by: 'desc'
+      by: 'desc',
+      limit: 10,
+      sorting: false
     }
   },
 
@@ -45,16 +59,34 @@ export default {
   methods: {
     async getBanners () {
       this.loading = true
-      const { page, order, by } = this
-      const { data, lastPage } = await http.myBanners(page, order, by)
+      const { page, order, by, limit } = this
+      const bannersToLoad = (page * limit)
+      const { data, lastPage } = await http.myBanners(1, order, by, bannersToLoad)
+      this.banners = data
+      this.lastPage = lastPage
+      this.loading = false
+    },
+
+    async appendBanners () {
+      this.page++
+      this.loading = true
+      const { page, order, by, limit } = this
+      const { data, lastPage } = await http.myBanners(page, order, by, limit)
       this.banners.push(...data)
       this.lastPage = lastPage
       this.loading = false
     },
 
-    loadBanners () {
-      this.page++
-      this.getBanners()
+    sort (e) {
+      this.sorting = true
+      this.banners = []
+      this.$nextTick(() => {
+        const [order, by] = e.target.value.split('.')
+        this.order = order
+        this.by = by
+        this.getBanners()
+        this.sorting = false
+      })
     }
   }
 }
@@ -64,35 +96,36 @@ export default {
   @import "../sass/variables";
 
   .my-banners {
-    display: grid;
-    grid-template-rows: 1fr auto;
     padding-top: 5.25rem;
     margin: 0 auto;
-    position: relative;
-    max-width: 984px;
+    max-width: 72.5rem;
+
+    &-toolbar {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
 
     &.loading {
-      opacity: .5;
       pointer-events: none;
     }
 
     h1 {
       font-size: 2rem;
       color: $gray-700;
-      margin-bottom: 1.5rem;
+      margin-right: auto;
     }
 
     &-list {
-      display: grid;
-      grid-template-columns: repeat(5, 180px);
-      gap: 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
       width: 100%;
+      margin: 0 -.75rem;
     }
 
-    .load-banners {
+    .text-button {
       display: flex;
       padding: 1rem;
-      margin: auto;
       border-radius: .5rem;
       justify-content: center;
       color: $gray-700;
@@ -101,7 +134,6 @@ export default {
       background: transparent;
       appearance: none;
       cursor: pointer;
-      grid-column: span 5;
       transition: .25s ease-in-out;
 
       .icon {
@@ -113,10 +145,6 @@ export default {
 
       &:hover {
         background: $gray-100;
-
-        .icon {
-          transform: rotate(360deg);
-        }
       }
 
       &:focus {
@@ -126,6 +154,20 @@ export default {
 
       &:hover, &:focus {
         background: $gray-100;
+      }
+    }
+
+    .load-banners {
+      margin: auto;
+    }
+
+    .sort-button, .sort-by-button, .new-banner {
+      padding: .65rem .65rem;
+    }
+
+    select {
+      option {
+        padding: 0;
       }
     }
   }
