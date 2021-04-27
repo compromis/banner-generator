@@ -2,24 +2,28 @@
   <div :class="['my-banners', { loading }]">
     <div class="my-banners-toolbar">
       <h1>Les meues targes</h1>
-      <select class="text-button sort-button" @input="sort">
-        <option value="updated_at.desc">Més recents primer</option>
-        <option value="updated_at.asc">Més antics primer</option>
-        <option value="title.asc">Alfabeticament</option>
-        <option value="type.asc">Per tipus</option>
-      </select>
+      <div class="sort-dropdown">
+        <select class="text-button sort-button" @input="sort">
+          <option value="updated_at.desc">Més recents primer</option>
+          <option value="updated_at.asc">Més antigues primer</option>
+          <option value="title.asc">Alfabèticament</option>
+          <option value="type.asc">Per tipus</option>
+        </select>
+        <font-awesome-icon :icon="['far', 'chevron-down']" class="icon" />
+      </div>
       <router-link to="/" class="text-button new-banner">
-        <font-awesome-icon :icon="['far', 'plus']" class="icon" />Nova tarja
+        <font-awesome-icon :icon="['far', 'plus']" class="icon" /> Nova tarja
       </router-link>
     </div>
     <transition name="fade" mode="out-in">
-      <div key="al" v-if="!sorting">
-        <transition-group name="list" tag="div" class="my-banners-list" mode="in-out">
+      <div key="banners" v-if="!sorting">
+        <transition-group name="list" tag="div" class="my-banners-list">
           <banner-item v-for="banner in banners" :key="banner.id" :banner="banner" @remove="getBanners"/>
         </transition-group>
       </div>
+      <div key="sorting" v-else></div>
     </transition>
-    <button v-if="page != lastPage" class="text-button load-banners" @click="appendBanners">
+    <button v-if="page != lastPage || loading" class="text-button load-banners" @click="appendBanners">
       <template v-if="loading"><font-awesome-icon :icon="['far', 'circle-notch']" class="icon" spin />Carregant...</template>
       <template v-else><font-awesome-icon :icon="['far', 'chevron-down']" class="icon" />Més targes</template>
     </button>
@@ -42,6 +46,7 @@ export default {
       banners: [],
       loading: true,
       page: 1,
+      pageTracker: 1,
       lastPage: 1,
       order: 'updated_at',
       by: 'desc',
@@ -59,22 +64,24 @@ export default {
   methods: {
     async getBanners () {
       this.loading = true
-      const { page, order, by, limit } = this
-      const bannersToLoad = (page * limit)
+      const { pageTracker, order, by, limit } = this
+      const bannersToLoad = (pageTracker * limit)
       const { data, lastPage } = await http.myBanners(1, order, by, bannersToLoad)
       this.banners = data
+      this.page = 1
       this.lastPage = lastPage
-      this.loading = false
+      setTimeout(() => { this.loading = false }, 1000) // linger on loading while animations play
     },
 
     async appendBanners () {
       this.page++
+      this.pageTracker++
       this.loading = true
       const { page, order, by, limit } = this
       const { data, lastPage } = await http.myBanners(page, order, by, limit)
       this.banners.push(...data)
       this.lastPage = lastPage
-      this.loading = false
+      setTimeout(() => { this.loading = false }, 1000) // linger on loading while animations play
     },
 
     sort (e) {
@@ -119,12 +126,12 @@ export default {
     &-list {
       display: flex;
       flex-wrap: wrap;
-      width: 100%;
       margin: 0 -.75rem;
     }
 
     .text-button {
       display: flex;
+      align-items: center;
       padding: 1rem;
       border-radius: .5rem;
       justify-content: center;
@@ -141,6 +148,7 @@ export default {
         margin-right: .5rem;
         transition: .65s ease-in-out;
         transform-origin: center center;
+        font-size: 1.25rem;
       }
 
       &:hover {
@@ -161,13 +169,33 @@ export default {
       margin: auto;
     }
 
-    .sort-button, .sort-by-button, .new-banner {
-      padding: .65rem .65rem;
+    .sort-button, .new-banner {
+      padding: .5rem .75rem;
     }
 
-    select {
-      option {
-        padding: 0;
+    .sort-dropdown {
+      position: relative;
+      color: $gray-700;
+      margin-right: .75rem;
+      font-size: 1.25rem;
+      border: 1px $gray-200 solid;
+      border-radius: .65rem;
+
+      select {
+        padding-right: 2.75rem;
+      }
+
+      .icon {
+        position: absolute;
+        right: .75rem;
+        top: 50%;
+        transform: translateY(-50%);
+        pointer-events: none;
+        color: $gray-400;
+      }
+
+      &:hover {
+        border-color: $gray-100;
       }
     }
   }

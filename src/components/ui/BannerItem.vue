@@ -109,8 +109,9 @@ export default {
     },
 
     async remove () {
-      await http.remove(this.banner.id)
-      this.$emit('remove', true)
+      const { id } = this.banner
+      await http.remove(id)
+      this.$emit('remove', id)
     }
   }
 }
@@ -130,8 +131,8 @@ export default {
     align-items: center;
     justify-content: center;
     border-radius: 2rem;
-    height: 13rem;
-    width: 13rem;
+    height: 13.25rem;
+    width: 13.25rem;
     transition: .25s ease-in-out;
     margin: 0 .75rem;
 
