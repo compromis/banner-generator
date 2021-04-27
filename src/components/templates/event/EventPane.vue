@@ -206,9 +206,16 @@ export default {
 
   methods: {
     validate () {
+      // Required fields for each event type
+      const eventLocationFields = {
+        inperson: 'place',
+        stream: 'social',
+        videochat: 'videochat'
+      }
+
       this.fieldRequired({
         title: "Has d'escriure un títol",
-        place: "Has d'escriure un lloc"
+        [eventLocationFields[this.properties.eventType]]: "Has d'escriure un lloc"
       })
       this.pictureRequired()
       this.allCapsDisallowed('title', 'place')
