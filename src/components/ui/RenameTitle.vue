@@ -1,41 +1,72 @@
 <template>
-  <form class="rename-title" @submit.prevent="rename">
-    <input
-      ref="title"
-      aria-label="Títol"
-      type="text"
-      :value="title"
-      class="rename-title-input"
-      placeholder="Sense títol"
-      autocomplete="off"
-      spellcheck="off"
-      @blur="rename">
-    <button type="submit" class="rename-title-submit">
-      <font-awesome-icon :icon="['far', 'check']" class="icon-check" />
-    </button>
-    <button type="button" class="rename-title-edit" @click="$refs.title.focus()">
-      <font-awesome-icon :icon="['far', 'pen']" class="icon-pen" />
-    </button>
-  </form>
+  <div :class="['rename-title', { saving, editing }]">
+    <form @submit.prevent="rename">
+      <input
+        ref="title"
+        aria-label="Títol"
+        type="text"
+        class="rename-title-input"
+        :placeholder="template.name"
+        :disabled="saving"
+        autocomplete="off"
+        spellcheck="off"
+        v-model="title"
+        @focus="focused"
+        @blur="rename">
+      <button type="submit" class="rename-title-submit">
+        <font-awesome-icon :icon="['far', 'check']" class="icon-check" />
+      </button>
+      <button type="button" class="rename-title-edit" @click="$refs.title.focus()">
+        <font-awesome-icon :icon="['far', 'pen']" class="icon-pen" />
+      </button>
+    </form>
+  </div>
 </template>
 
 <script>
+import http from '@/http'
+
 export default {
+  data () {
+    return {
+      saving: false,
+      editing: false
+    }
+  },
+
   methods: {
-    rename () {
-      console.log('Renamed')
+    async rename () {
+      this.saving = true
+      this.editing = false
+      const title = this.title || this.template.name
+      const banner = await http.rename(this.bannerMeta.id, title)
+      this.title = banner.title
+      this.saving = false
+    },
+
+    focused () {
+      this.editing = true
     }
   },
 
   computed: {
+    bannerMeta () {
+      return this.$store.state.bannerMeta
+    },
+
     title: {
       get () {
-        const banner = this.$store.state.bannerMeta
+        const banner = this.bannerMeta
         return banner ? banner.title : ''
       },
       set (title) {
         this.$store.commit('updateBannerTitle', title)
       }
+    },
+
+    template () {
+      const { templates } = this.$store.state
+      return templates.find(template => template.id === this.bannerMeta.type)
     }
   }
 }
@@ -46,6 +77,10 @@ export default {
 
   .rename-title {
     position: relative;
+
+    form {
+      flex-grow: 1;
+    }
 
     &-input {
       width: 100%;
@@ -60,6 +95,10 @@ export default {
 
       &::placeholder {
         color: $gray-600;
+      }
+
+      &:disabled {
+        opacity: .5;
       }
     }
 
@@ -76,7 +115,7 @@ export default {
       }
     }
 
-    &:focus-within {
+    &.editing {
       .rename-title-input {
         outline: 0;
         background: rgba($white, .15);

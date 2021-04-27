@@ -109,7 +109,7 @@ export default {
     }
   }
 
-  @media (max-width: 1620px) {
+  @media (max-width: 1720px) {
     .route-my-banners .blobs {
       .blob-1 {
         right: -45rem;
