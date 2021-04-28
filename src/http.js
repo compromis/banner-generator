@@ -34,6 +34,10 @@ export class API {
     return this._call('delete', `banners/${id}`)
   }
 
+  update (id, content) {
+    return this._call('patch', `banners/${id}`, { content })
+  }
+
   _call (method, path, params) {
     return new Promise((resolve, reject) => {
       axios[method](this.apiUrl + '/api/' + path, params).then((response) => {

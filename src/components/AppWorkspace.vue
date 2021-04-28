@@ -1,5 +1,5 @@
 <template>
-  <div class="workspace">
+  <div class="workspace" v-if="template">
     <div class="toolbar">
       <b-button to="/" tag="router-link" icon-left="chevron-left" type="is-text">Enrere</b-button>
     </div>
@@ -67,7 +67,7 @@ export default {
     }
   },
 
-  async created () {
+  async mounted () {
     const banner = await http.banner(this.$route.params.id)
     this.$store.commit('setBannerMeta', banner)
     this.setTemplate(banner.type)

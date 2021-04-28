@@ -1,3 +1,5 @@
+import http from '@/http'
+import { debounce } from 'lodash'
 import PictureUpload from '@/components/pane/PictureUpload.vue'
 import RangeSlider from '@/components/pane/RangeSlider.vue'
 import CInputText from '@/components/pane/CInputText'
@@ -56,9 +58,16 @@ export default {
     }
   },
 
-  created () {
-    // Emit default properties to canvas on creation
-    this.$store.commit('updateBanner', this.properties)
+  async mounted () {
+    const banner = await http.banner(this.$route.params.id)
+
+    if (banner.content) { // Set props from database
+      const properties = JSON.parse(banner.content)
+      this.properties = properties
+      this.$store.commit('updateBanner', properties)
+    } else { // Set default props for tempate
+      this.$store.commit('updateBanner', this.properties)
+    }
 
     this.$root.$on('checkForErrors', () => {
       this.checkForErrors()
@@ -77,6 +86,9 @@ export default {
         if ('color' in properties && !this.$store.state.availableColors[properties.theme].includes(properties.color)) {
           this.properties.color = 'orange'
         }
+
+        // Update
+        this.save(this)
       },
       deep: true
     },
@@ -92,6 +104,12 @@ export default {
 
   // Shared functionality across templates
   methods: {
+    save: debounce(async (self) => {
+      const { banner, bannerMeta } = self.$store.state
+      const updated = await http.update(bannerMeta.id, JSON.stringify(banner))
+      self.$store.commit('setBannerMeta', updated)
+    }, 1000),
+
     checkForErrors () {
       this.$store.commit('updateErrors', {})
       this.validate()
