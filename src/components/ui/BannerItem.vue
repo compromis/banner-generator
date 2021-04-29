@@ -25,7 +25,7 @@
       </button>
       <font-awesome-icon :icon="['far', 'circle-notch']" spin v-else />
     </form>
-    <button @click="remove" class="banner-delete"><b-icon icon="trash" pack="far" />Esborrar</button>
+    <button @click="remove" class="banner-delete"><b-icon icon="trash" pack="far" /><span class="text">Esborrar</span></button>
   </article>
 </template>
 
@@ -297,6 +297,76 @@ export default {
     background: transparent;
     appearance: none;
     cursor: pointer;
+  }
+}
+
+@media (max-width: $xs-breakpoint) {
+  .banner-item {
+    width: 100%;
+    padding: .85rem 0;
+    border-top: 1px solid $gray-200;
+
+    &-link {
+      width: 100%;
+      display: flex;
+
+      &:focus, &:hover {
+        .banner-item-thumbnail {
+          transform: none;
+        }
+      }
+    }
+
+    &:hover:not(.disabled) {
+      .banner-item-thumbnail {
+        transform: none;
+      }
+    }
+
+    &-thumbnail {
+      height: 7.5rem;
+      width: 7.5rem;
+    }
+
+    &-info {
+      margin: 2.25rem 0.75rem 0 0.75rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .banner-title {
+      top: .75rem;
+      left: 9rem;
+
+      input {
+        cursor: pointer;
+        font-size: 1.25rem;
+      }
+
+      button {
+        display: none;
+      }
+    }
+
+    .banner-delete {
+      position: absolute;
+      opacity: 1;
+      bottom: 1rem;
+      right: 0;
+      border: 1px solid $gray-600;
+      color: $gray-600;
+      border-radius: 2rem;
+      padding: .35rem;
+
+      .text {
+        display: none;
+      }
+
+      .icon {
+        margin: 0;
+      }
+    }
   }
 }
 </style>

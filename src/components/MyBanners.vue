@@ -199,4 +199,24 @@ export default {
       }
     }
   }
+
+@media (max-width: $md-breakpoint) {
+  .my-banners {
+    padding: 5.25rem 1rem 0;
+  }
+}
+
+@media (max-width: $xs-breakpoint) {
+  .my-banners {
+    &-toolbar {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    h1 {
+      margin-bottom: 1rem;
+      grid-column: span 2;
+    }
+  }
+}
 </style>
