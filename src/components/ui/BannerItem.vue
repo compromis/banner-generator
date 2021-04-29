@@ -25,7 +25,17 @@
       </button>
       <font-awesome-icon :icon="['far', 'circle-notch']" spin v-else />
     </form>
-    <button @click="remove" class="banner-delete"><b-icon icon="trash" pack="far" /><span class="text">Esborrar</span></button>
+    <button @click="modalOpen = true" class="banner-delete"><b-icon icon="trash" pack="far" /><span class="text">Esborrar</span></button>
+    <b-modal :active.sync="modalOpen" scroll="keep">
+      <div class="content">
+        <h3>Atenció</h3>
+        <p>Estàs segur que vols esborrar aquesta tarja? Aquesta acció no pot desfer-se.</p>
+        <div>
+          <b-button type="is-danger" @click="remove">Sí, esborra</b-button>
+          <b-button type="is-light" @click="modalOpen = false">Cancelar</b-button>
+        </div>
+      </div>
+    </b-modal>
   </article>
 </template>
 
@@ -51,7 +61,8 @@ export default {
     return {
       title: '',
       saving: false,
-      disabled: true
+      disabled: true,
+      modalOpen: false
     }
   },
 
@@ -297,6 +308,32 @@ export default {
     background: transparent;
     appearance: none;
     cursor: pointer;
+  }
+
+  &::v-deep .modal-content {
+  background: $white;
+  border-radius: 1rem;
+  max-width: 500px !important;
+
+    .content {
+      padding: 2rem;
+      max-height: 100%;
+      margin: 0 !important;
+    }
+
+    .button {
+      padding: .25rem 1rem;
+    }
+
+    .is-danger {
+      background: $red;
+      margin-right: .5rem;
+    }
+
+    .is-light {
+      background: $gray-200;
+      color: $gray-darkest;
+    }
   }
 }
 
