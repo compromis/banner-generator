@@ -47,7 +47,7 @@
 <script>
 import domtoimage from 'dom-to-image'
 import { saveAs } from 'file-saver'
-import API from '@/api'
+import http from '@/http'
 
 export default {
   name: 'canvas-container',
@@ -129,7 +129,7 @@ export default {
       }
     },
 
-    download () {
+    async download () {
       if (!this.banner) return
       this.$store.commit('setDisplayErrors', true)
       this.$root.$emit('checkForErrors')
@@ -140,6 +140,7 @@ export default {
         })
       }
 
+      const { id } = this.$store.state.bannerMeta
       const { width, height, downloadScale } = this.aspects[this.aspect]
       const bannerWidth = width * downloadScale
       const bannerHeight = height * downloadScale
@@ -147,7 +148,7 @@ export default {
       if (this.isDownloadable) {
         this.downloading = true
 
-        domtoimage.toPng(
+        const blob = await domtoimage.toPng(
           document.getElementById('bannerCanvas' + this.aspect),
           {
             bgcolor: this.banner.mode === 'black' ? '#353949' : '#fff',
@@ -158,16 +159,21 @@ export default {
               transformOrigin: 'top left'
             }
           }
-        ).then((blob) => {
-          saveAs(blob, 'banner.png')
-          API.saveToServer({ blob })
-          this.downloading = false
-          // eslint-disable-next-line
-          gtag('event', 'banner_download', {
+        )
+
+        // Download banner on browser
+        saveAs(blob, 'banner.png')
+        this.downloading = false
+
+        // Save preview to server
+        await http.preview(id, blob)
+
+        if (typeof gtag === 'function') {
+          window.gtag('event', 'banner_download', {
             event_category: 'banners',
             event_label: this.aspect
           })
-        })
+        }
       }
     }
   }

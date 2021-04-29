@@ -2,7 +2,7 @@
   <article :class="['banner-item', { 'disabled': !disabled }]" ref="wrapper">
     <router-link :event="disabled ? 'click' : false" :to="`/editor/${banner.id}`" class="banner-item-link">
       <div class="banner-item-thumbnail">
-        <img src="" alt="" v-if="banner.thumbnail">
+        <img :src="banner.preview" alt="" v-if="banner.preview">
         <b-icon :icon="template.icon" :pack="template.iconPack || 'far'" size="is-large" v-else />
       </div>
       <div class="banner-item-info">
@@ -135,6 +135,7 @@ export default {
     width: 13.25rem;
     transition: .25s ease-in-out;
     margin: 0 .75rem;
+    overflow: hidden;
 
     .icon {
       color: $white;

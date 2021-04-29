@@ -38,6 +38,11 @@ export class API {
     return this._call('patch', `banners/${id}`, { content })
   }
 
+  preview (id, preview) {
+    console.log(preview)
+    return this._call('patch', `banners/${id}/preview`, { preview })
+  }
+
   _call (method, path, params) {
     return new Promise((resolve, reject) => {
       axios[method](this.apiUrl + '/api/' + path, params).then((response) => {
