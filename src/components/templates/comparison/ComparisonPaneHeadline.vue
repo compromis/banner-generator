@@ -273,6 +273,8 @@ export default {
 
   methods: {
     validate () {
+      if (this.$store.state.child !== 'headline') return
+
       const firstSourceField = (this.properties.firstSource === 'other')
         ? { customFirstSource: "Has d'escriure un primer mitjà" }
         : { firstSource: 'Has de seleccionar un primer mitjà' }

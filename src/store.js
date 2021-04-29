@@ -12,7 +12,7 @@ export default new Vuex.Store({
     template: null,
     aspect: '11',
     banner: null,
-    child: null,
+    child: 'party',
     errors: {},
     displayErrors: false,
     isDownloadable: true,

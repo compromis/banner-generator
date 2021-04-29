@@ -191,6 +191,8 @@ export default {
 
   methods: {
     validate () {
+      if (this.$store.state.child !== 'party') return
+
       const sourceField = (this.properties.source === 'other')
         ? { customSource: "Has d'escriure el nom d'un partit" }
         : { source: 'Has de seleccionar un partit' }
