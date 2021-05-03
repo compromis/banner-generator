@@ -111,15 +111,15 @@ export default {
     async rename () {
       this.saving = true
       const title = this.title || this.template.name
-      const banner = await http.rename(this.banner.id, title)
+      const banner = await http.rename(this.banner.ref, title)
       this.title = banner.title
       this.saving = false
       setTimeout(() => { this.disabled = true }, 200)
     },
 
     async remove () {
-      const { id } = this.banner
-      await http.remove(id)
+      const { ref, id } = this.banner
+      await http.remove(ref)
       this.$emit('remove', id)
     }
   }

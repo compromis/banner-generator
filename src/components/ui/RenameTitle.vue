@@ -39,7 +39,7 @@ export default {
       this.saving = true
       this.editing = false
       const title = this.title || this.template.name
-      const banner = await http.rename(this.bannerMeta.id, title)
+      const banner = await http.rename(this.bannerMeta.ref, title)
       this.title = banner.title
       this.saving = false
     },

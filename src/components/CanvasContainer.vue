@@ -140,7 +140,7 @@ export default {
         })
       }
 
-      const { id } = this.$store.state.bannerMeta
+      const { ref } = this.$store.state.bannerMeta
       const { width, height, downloadScale } = this.aspects[this.aspect]
       const bannerWidth = width * downloadScale
       const bannerHeight = height * downloadScale
@@ -166,7 +166,7 @@ export default {
         this.downloading = false
 
         // Save preview to server
-        await http.preview(id, blob)
+        await http.preview(ref, blob)
 
         if (typeof gtag === 'function') {
           window.gtag('event', 'banner_download', {
