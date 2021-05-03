@@ -106,7 +106,7 @@ export default {
   methods: {
     save: debounce(async (self) => {
       const { banner, bannerMeta } = self.$store.state
-      const updated = await http.update(bannerMeta.id, JSON.stringify(banner))
+      const updated = await http.update(bannerMeta.ref, JSON.stringify(banner))
       self.$store.commit('setBannerMeta', updated)
     }, 1000),
 

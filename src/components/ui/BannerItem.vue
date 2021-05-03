@@ -1,6 +1,6 @@
 <template>
   <article :class="['banner-item', { 'disabled': !disabled || modalOpen }]" ref="wrapper">
-    <router-link :event="disabled ? 'click' : 'none'" :to="`/editor/${banner.id}`" class="banner-item-link">
+    <router-link :event="disabled ? 'click' : 'none'" :to="`/editor/${banner.ref}`" class="banner-item-link">
       <div class="banner-item-thumbnail">
         <img :src="banner.preview" alt="" v-if="banner.preview">
         <b-icon :icon="template.icon" :pack="template.iconPack || 'far'" size="is-large" v-else />
@@ -27,7 +27,7 @@
     </form>
     <button @click="modalOpen = true" class="banner-delete"><b-icon icon="trash" pack="far" /><span class="text">Esborrar</span></button>
     <transition name="blur">
-      <banner-item-modal v-if="modalOpen" @close="modalOpen = false" @remove="remove"/>
+      <banner-item-modal v-if="modalOpen" @close="modalOpen = false" @remove="remove" />
     </transition>
   </article>
 </template>
@@ -104,7 +104,7 @@ export default {
 
     handleTitleClick () {
       if (this.disabled) {
-        this.$router.push(`/editor/${this.banner.id}`)
+        this.$router.push(`/editor/${this.banner.ref}`)
       }
     },
 
@@ -118,9 +118,9 @@ export default {
     },
 
     async remove () {
-      const { ref, id } = this.banner
+      const { ref } = this.banner
       await http.remove(ref)
-      this.$emit('remove', id)
+      this.$emit('remove')
     }
   }
 }

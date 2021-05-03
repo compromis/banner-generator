@@ -18,29 +18,28 @@ export class API {
     return this._call('get', 'banners', { params: { page, order, by, limit } })
   }
 
-  banner (id) {
-    return this._call('get', `banners/${id}`)
+  banner (ref) {
+    return this._call('get', `banners/${ref}`)
   }
 
   create (type, title) {
     return this._call('post', 'banners', { type, title })
   }
 
-  rename (id, title) {
-    return this._call('patch', `banners/${id}/rename`, { title })
+  rename (ref, title) {
+    return this._call('patch', `banners/${ref}/rename`, { title })
   }
 
-  remove (id) {
-    return this._call('delete', `banners/${id}`)
+  remove (ref) {
+    return this._call('delete', `banners/${ref}`)
   }
 
-  update (id, content) {
-    return this._call('patch', `banners/${id}`, { content })
+  update (ref, content) {
+    return this._call('patch', `banners/${ref}`, { content })
   }
 
-  preview (id, preview) {
-    console.log(preview)
-    return this._call('patch', `banners/${id}/preview`, { preview })
+  preview (ref, preview) {
+    return this._call('patch', `banners/${ref}/preview`, { preview })
   }
 
   _call (method, path, params) {
