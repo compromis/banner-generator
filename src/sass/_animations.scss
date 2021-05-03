@@ -57,3 +57,12 @@
   max-height: 0;
   overflow: hidden;
 }
+
+.blur-enter-active, .blur-leave-active {
+  transition: all .25s;
+}
+
+.blur-enter, .blur-leave-to {
+  opacity: 0;
+  filter: blur(8px);
+}

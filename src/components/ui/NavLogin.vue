@@ -16,7 +16,7 @@
             Les meues targes
           </router-link>
         </b-dropdown-item>
-        <b-dropdown-item aria-role="listitem">
+        <b-dropdown-item @click="logout" aria-role="listitem">
           <font-awesome-icon :icon="['far', 'sign-out-alt']" fixed-width />
           Tanca sessió
         </b-dropdown-item>
@@ -46,6 +46,13 @@ export default {
 
     isLoggedIn () {
       return !!this.$store.state.auth.token
+    }
+  },
+
+  methods: {
+    logout () {
+      this.$store.commit('auth/logout')
+      this.$router.push('/')
     }
   }
 }

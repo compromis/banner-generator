@@ -1,6 +1,6 @@
 <template>
-  <article :class="['banner-item', { 'disabled': !disabled }]" ref="wrapper">
-    <router-link :event="disabled ? 'click' : false" :to="`/editor/${banner.id}`" class="banner-item-link">
+  <article :class="['banner-item', { 'disabled': !disabled || modalOpen }]" ref="wrapper">
+    <router-link :event="disabled ? 'click' : 'none'" :to="`/editor/${banner.id}`" class="banner-item-link">
       <div class="banner-item-thumbnail">
         <img :src="banner.preview" alt="" v-if="banner.preview">
         <b-icon :icon="template.icon" :pack="template.iconPack || 'far'" size="is-large" v-else />
@@ -26,16 +26,9 @@
       <font-awesome-icon :icon="['far', 'circle-notch']" spin v-else />
     </form>
     <button @click="modalOpen = true" class="banner-delete"><b-icon icon="trash" pack="far" /><span class="text">Esborrar</span></button>
-    <b-modal :active.sync="modalOpen" scroll="keep">
-      <div class="content">
-        <h3>Atenció</h3>
-        <p>Estàs segur que vols esborrar aquesta tarja? Aquesta acció no pot desfer-se.</p>
-        <div>
-          <b-button type="is-danger" @click="remove">Sí, esborra</b-button>
-          <b-button type="is-light" @click="modalOpen = false">Cancelar</b-button>
-        </div>
-      </div>
-    </b-modal>
+    <transition name="blur">
+      <banner-item-modal v-if="modalOpen" @close="modalOpen = false" @remove="remove"/>
+    </transition>
   </article>
 </template>
 
@@ -43,6 +36,7 @@
 import http from '@/http'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
+import bannerItemModal from './BannerItemModal'
 import 'dayjs/locale/ca'
 dayjs.extend(relativeTime)
 dayjs.locale('ca')
@@ -55,6 +49,10 @@ export default {
       type: Object,
       default: null
     }
+  },
+
+  components: {
+    bannerItemModal
   },
 
   data () {
@@ -146,7 +144,6 @@ export default {
     width: 13.25rem;
     transition: .25s ease-in-out;
     margin: 0 .75rem;
-    overflow: hidden;
 
     .icon {
       color: $white;
@@ -171,6 +168,10 @@ export default {
 
     .banner-item-link {
       cursor: default;
+    }
+
+    .banner-delete {
+      display: none;
     }
   }
 
@@ -308,32 +309,6 @@ export default {
     background: transparent;
     appearance: none;
     cursor: pointer;
-  }
-
-  &::v-deep .modal-content {
-  background: $white;
-  border-radius: 1rem;
-  max-width: 500px !important;
-
-    .content {
-      padding: 2rem;
-      max-height: 100%;
-      margin: 0 !important;
-    }
-
-    .button {
-      padding: .25rem 1rem;
-    }
-
-    .is-danger {
-      background: $red;
-      margin-right: .5rem;
-    }
-
-    .is-light {
-      background: $gray-200;
-      color: $gray-darkest;
-    }
   }
 }
 
