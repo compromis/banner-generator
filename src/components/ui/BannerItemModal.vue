@@ -2,7 +2,7 @@
   <div class="banner-item-modal">
     <div class="modal-content">
       <p>Estàs segur que vols esborrar aquesta tarja? Aquesta acció no pot desfer-se.</p>
-      <div>
+      <div class="button-group">
         <b-button type="is-danger" @click="$emit('remove')">Sí, esborra</b-button>
         <b-button type="is-light" @click="$emit('close')">Cancelar</b-button>
       </div>
@@ -49,6 +49,34 @@ export default {
     width: 80%;
     padding: .2rem .9rem;
     margin-bottom: .3rem;
+  }
+}
+
+@media (max-width: $xs-breakpoint) {
+  .banner-item-modal {
+    height: 9.2rem;
+
+    .modal-content {
+      height: 9.2rem;
+      padding: 1rem;
+      margin: 0;
+    }
+
+    p {
+      font-size: 1rem;
+    }
+
+    .button-group {
+      width: 100%;
+    }
+
+    .button {
+      width: 48%;
+
+      &:first-child {
+        margin-right: .5rem;
+      }
+    }
   }
 }
 </style>

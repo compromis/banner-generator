@@ -210,7 +210,16 @@ export default {
   .my-banners {
     &-toolbar {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1.25fr 1fr;
+      column-gap: .5rem;
+    }
+
+    .sort-dropdown {
+      margin: 0;
+
+      select {
+        width: 100%;
+      }
     }
 
     h1 {
