@@ -27,7 +27,7 @@ export default new Router({
       component: Login
     },
     {
-      path: '/editor/:id',
+      path: '/editor/:ref',
       name: 'workspace',
       component: AppWorkspace
     },

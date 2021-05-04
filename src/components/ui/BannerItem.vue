@@ -139,7 +139,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 2rem;
+    border-radius: 1rem;
     height: 13.25rem;
     width: 13.25rem;
     transition: .25s ease-in-out;
@@ -147,6 +147,10 @@ export default {
 
     .icon {
       color: $white;
+    }
+
+    img {
+      border-radius: 1rem;
     }
   }
 

@@ -59,10 +59,10 @@ export default {
   },
 
   async mounted () {
-    const banner = await http.banner(this.$route.params.id)
+    const { content } = this.$store.state.bannerMeta
 
-    if (banner.content) { // Set props from database
-      const properties = JSON.parse(banner.content)
+    if (content) { // Set props from database
+      const properties = JSON.parse(content)
       this.properties = properties
       this.$store.commit('updateBanner', properties)
     } else { // Set default props for tempate

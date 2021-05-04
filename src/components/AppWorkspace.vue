@@ -68,15 +68,12 @@ export default {
   },
 
   async mounted () {
-    const banner = await http.banner(this.$route.params.id)
+    const banner = await http.banner(this.$route.params.ref)
     this.$store.commit('setBannerMeta', banner)
     this.setTemplate(banner.type)
   },
 
   watch: {
-    '$route': function (newRoute) {
-      this.setTemplate(newRoute.params.pathMatch)
-    },
     // Autofocus default button on modal shown
     // Bring focus back to opener button on modal closed
     isCardModalActive: function (isActive) {
