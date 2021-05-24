@@ -70,10 +70,11 @@
     <picture-upload
       id="picture-field"
       :picture="properties.picture"
+      :preview="properties.picturePreview"
       :display-errors="displayErrors"
       :errors="errors"
       @upload="updateImage"
-      @delete="properties.picture = null; properties.picturePreview = null">
+      @delete="properties.picture = null; properties.picturePreview = ''">
       <range-slider
         name="points"
         :min="0"

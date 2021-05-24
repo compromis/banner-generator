@@ -116,24 +116,30 @@ export default {
       this.$store.commit('updateIsDownloadable', Object.keys(this.errors).length === 0)
     },
 
-    updateImage (image, ratio) {
+    async updateImage (image, ratio) {
       this.customUpdateImage('', image, ratio || 1)
     },
 
-    customUpdateImage (prefix, image, ratio) {
+    async customUpdateImage (prefix, image, ratio) {
+      const { ref } = this.$store.state.bannerMeta
       const picture = prefix ? `${prefix}Picture` : 'picture'
       const picturePreview = prefix ? `${prefix}PicturePreview` : 'picturePreview'
       const pictureAspect = prefix ? `${prefix}PictureAspect` : 'pictureAspect'
       const pictureDimensions = prefix ? `${prefix}PictureDimensions` : 'pictureDimensions'
 
+      // Upload to AWS
+      const formData = new FormData()
+      formData.append('picture', image, image.name)
+      const uploaded = await http.uploadPicture(ref, formData, picture)
+
+      // Set picture and calc dimensions
       this.properties[picture] = image
-      this.properties[picturePreview] = URL.createObjectURL(image)
+      this.properties[picturePreview] = uploaded.picture
 
       const img = new Image()
       img.onload = () => {
         const { width, height } = img
         this.properties[pictureAspect] = (width / height > ratio) ? 'horizontal' : 'vertical'
-        console.log(width, height, ratio, width / height, this.properties[pictureAspect])
         this.properties[pictureDimensions] = { width, height }
       }
       img.src = this.properties[picturePreview]

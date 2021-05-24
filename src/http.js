@@ -42,6 +42,10 @@ export class API {
     return this._call('patch', `banners/${ref}/preview`, { preview })
   }
 
+  uploadPicture (ref, picture, name) {
+    return this._call('post', `banners/${ref}/upload/${name}`, picture)
+  }
+
   _call (method, path, params) {
     return new Promise((resolve, reject) => {
       axios[method](this.apiUrl + '/api/' + path, params).then((response) => {

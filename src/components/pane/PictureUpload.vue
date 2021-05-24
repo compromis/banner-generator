@@ -15,7 +15,7 @@
         </div>
         <div class="picture-preview has-text-centered" v-else>
           <img :src="preview" alt="Imatge" />
-          <span>{{ picture.name }}</span>
+          <span v-if="picture">{{ picture.name }}</span>
         </div>
       </b-upload>
       <div v-if="'picture' in errors && displayErrors" class="error-text">Has d'ajuntar una foto</div>
@@ -37,7 +37,10 @@ export default {
   name: 'picture-upload',
 
   props: {
-    picture: File,
+    picture: {
+      type: [Object, File],
+      default: null
+    },
     displayErrors: Boolean,
     errors: Object,
     fieldName: {
@@ -51,12 +54,10 @@ export default {
     ratio: {
       type: Number,
       default: 1
-    }
-  },
-
-  computed: {
-    preview: function () {
-      return URL.createObjectURL(this.picture)
+    },
+    preview: {
+      type: String,
+      default: ''
     }
   }
 }
