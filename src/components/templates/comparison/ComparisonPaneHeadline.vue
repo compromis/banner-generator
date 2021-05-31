@@ -204,7 +204,7 @@
       placeholder="#"
       @input="updateHashtag"
       :value="properties.hashtag"
-      :maxlength="properties.localLabel ? 18 : 32" />
+      :maxlength="properties.localLabel ? 22 : 32" />
 
     <!-- Logo -->
     <logo-selector v-model="properties.logo" />
