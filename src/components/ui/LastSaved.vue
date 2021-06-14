@@ -32,7 +32,7 @@ export default {
       return false
     },
     lastSaved () {
-      return '2021-04-13 00:00:00'
+      return this.$store.state.bannerMeta.updated_at
     }
   },
   watch: {
@@ -44,13 +44,14 @@ export default {
   },
   mounted () {
     this.interval = setInterval(this.refresh, 30000)
+    this.refresh()
   },
   beforeDestroy () {
     clearInterval(this.interval)
   },
   methods: {
     refresh () {
-      if (!this.lastSaved) { return }
+      if (!this.lastSaved) return
       const now = dayjs()
       const savedAt = dayjs(this.lastSaved)
       this.displayDate = now.to(savedAt)
@@ -65,6 +66,10 @@ export default {
   .last-saved {
     color: $gray-600;
     padding: 0 1rem;
+
+    span {
+      transition: .25s ease;
+    }
   }
 
   .just-saved {

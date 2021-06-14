@@ -15,17 +15,22 @@
         <font-awesome-icon :icon="['far', 'plus']" class="icon" /> Nova tarja
       </router-link>
     </div>
-    <transition name="fade" mode="out-in">
-      <div key="banners" v-if="!sorting">
-        <transition-group name="list" tag="div" class="my-banners-list">
-          <banner-item v-for="banner in banners" :key="banner.id" :banner="banner" @remove="getBanners"/>
-        </transition-group>
-      </div>
-      <div key="sorting" v-else></div>
-    </transition>
+    <template v-if="banners.length">
+      <transition name="fade" mode="out-in">
+        <div key="banners" v-if="!sorting">
+          <transition-group name="list" tag="div" class="my-banners-list">
+            <banner-item v-for="banner in banners" :key="banner.id" :banner="banner" @remove="getBanners"/>
+          </transition-group>
+        </div>
+        <div key="sorting" v-else></div>
+      </transition>
+    </template>
+    <div v-else class="empty">
+      Encara no has creat cap tarja
+    </div>
     <button v-if="page != lastPage || loading" class="text-button load-banners" @click="appendBanners">
       <template v-if="loading"><font-awesome-icon :icon="['far', 'circle-notch']" class="icon" spin />Carregant...</template>
-      <template v-else><font-awesome-icon :icon="['far', 'chevron-down']" class="icon" />Més targes</template>
+      <template v-else-if="banners.length"><font-awesome-icon :icon="['far', 'chevron-down']" class="icon" />Més targes</template>
     </button>
   </div>
 </template>
@@ -55,7 +60,7 @@ export default {
     }
   },
 
-  mounted () {
+  created () {
     this.$store.commit('setTemplate', null)
     this.$store.commit('updateBanner', null)
     this.getBanners()
@@ -198,6 +203,13 @@ export default {
         border-color: $gray-100;
       }
     }
+  }
+
+  .empty {
+    font-size: 1.75rem;
+    text-align: center;
+    margin: 10rem 0;
+    color: $gray-600;
   }
 
 @media (max-width: $md-breakpoint) {
