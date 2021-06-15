@@ -6,12 +6,18 @@ export class API {
     this.apiUrl = process.env.VUE_APP_BACKEND_URL
     this.token = store.state.auth.token
     axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
-    axios.defaults.headers.common.Authorization = 'Bearer ' + this.token
+    if (this.token) {
+      axios.defaults.headers.common.Authorization = 'Bearer ' + this.token
+    }
     axios.defaults.headers.common['X-XSRF-TOKEN'] = ''
   }
 
   user () {
     return this._call('get', 'auth/user')
+  }
+
+  guest () {
+    return this._call('get', 'auth/guest')
   }
 
   myBanners (page, order, by, limit) {
