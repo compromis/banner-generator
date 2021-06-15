@@ -61,6 +61,12 @@ export default {
   },
 
   created () {
+    const { user } = this.$store.state.auth
+
+    if (!user) {
+      this.$router.push('/')
+    }
+
     this.$store.commit('setTemplate', null)
     this.$store.commit('updateBanner', null)
     this.getBanners()

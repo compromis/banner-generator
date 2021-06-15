@@ -4,7 +4,7 @@
       <b-dropdown :triggers="['hover', 'click']" aria-role="list" position="is-bottom-left">
         <template #trigger>
           <b-button
-            :label="username"
+            :label="user.first_name"
             type="is-ghost"
             class="button"
             icon-right="user-circle" />
@@ -40,12 +40,12 @@ export default {
   },
 
   computed: {
-    username () {
-      return this.$store.state.auth.user.first_name
+    user () {
+      return this.$store.state.auth.user
     },
 
     isLoggedIn () {
-      return !!this.$store.state.auth.token
+      return !!this.$store.state.auth.user
     }
   },
 
