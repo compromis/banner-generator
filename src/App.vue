@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import http from './http'
 import AppHeader from './components/AppHeader'
 import AppBackground from './components/AppBackground'
 
@@ -32,12 +33,24 @@ export default {
   created () {
     /// Hide background blobs when user in the workspace
     this.backgroundHidden = this.$route.name === 'workspace'
+    this.setGuest()
   },
 
   watch: {
-    '$route' (to, from) {
+    '$route' (to) {
       // Hide background blobs when user navigates to the workspace
       this.backgroundHidden = to.name === 'workspace'
+    }
+  },
+
+  methods: {
+    async setGuest () {
+      const { token } = this.$store.state.auth
+
+      if (!token) {
+        const guest = await http.guest()
+        this.$store.commit('auth/setToken', guest.token.token)
+      }
     }
   }
 }
