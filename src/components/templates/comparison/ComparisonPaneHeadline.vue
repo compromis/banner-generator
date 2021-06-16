@@ -204,7 +204,7 @@
       placeholder="#"
       @input="updateHashtag"
       :value="properties.hashtag"
-      :maxlength="properties.localLabel ? 18 : 32" />
+      :maxlength="properties.localLabel ? 22 : 32" />
 
     <!-- Logo -->
     <logo-selector v-model="properties.logo" />
@@ -273,6 +273,8 @@ export default {
 
   methods: {
     validate () {
+      if (this.$store.state.child !== 'headline') return
+
       const firstSourceField = (this.properties.firstSource === 'other')
         ? { customFirstSource: "Has d'escriure un primer mitjà" }
         : { firstSource: 'Has de seleccionar un primer mitjà' }

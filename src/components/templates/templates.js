@@ -1,17 +1,5 @@
 export default [
   {
-    id: 'Ivace',
-    name: 'IVACE',
-    aspects: ['11'],
-    label: '✨Nou',
-    icon: 'euro-sign',
-    components: {
-      pane: () => import(/* webpackChunkName: "ivace" */ './ivace/IvacePane'),
-      canvas: () => import(/* webpackChunkName: "ivace" */ './ivace/IvaceCanvas'),
-      help: () => import(/* webpackChunkName: "ivace" */ './ivace/IvaceHelp')
-    }
-  },
-  {
     id: 'Headline',
     name: 'Titular de premsa',
     aspects: ['11', '916', '169'],
@@ -183,6 +171,18 @@ export default [
       pane: () => import(/* webpackChunkName: "videocover" */ './videocover/VideoCoverPane'),
       canvas: () => import(/* webpackChunkName: "videocover" */ './videocover/VideoCoverCanvas'),
       help: () => import(/* webpackChunkName: "videocover" */ './videocover/VideoCoverHelp')
+    }
+  },
+  {
+    id: 'Ivace',
+    name: 'IVACE',
+    aspects: ['11'],
+    archived: true,
+    icon: 'euro-sign',
+    components: {
+      pane: () => import(/* webpackChunkName: "ivace" */ './ivace/IvacePane'),
+      canvas: () => import(/* webpackChunkName: "ivace" */ './ivace/IvaceCanvas'),
+      help: () => import(/* webpackChunkName: "ivace" */ './ivace/IvaceHelp')
     }
   },
   {

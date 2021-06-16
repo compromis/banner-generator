@@ -7,7 +7,6 @@
     <c-input-text
       label="Titol"
       name="title"
-      :type="setFieldType('title')"
       :message="setFieldMessage('title')"
       placeholder="Acte Central a València"
       v-model="properties.title"
@@ -54,7 +53,6 @@
         v-if="aspect !== 'event' && properties.eventType === 'inperson'"
         label="Lloc"
         name="venue"
-        :type="setFieldType('place')"
         :message="setFieldMessage('place')"
         placeholder="Riu Túria"
         v-model="properties.place"
@@ -72,7 +70,6 @@
         v-if="aspect !== 'event' && properties.eventType === 'videochat'"
         label="Servei"
         name="videochat"
-        :type="setFieldType('videochat')"
         :message="setFieldMessage('videochat')"
         placeholder="Google Meet"
         v-model="properties.videochat"
@@ -206,9 +203,16 @@ export default {
 
   methods: {
     validate () {
+      // Required fields for each event type
+      const eventLocationFields = {
+        inperson: 'place',
+        stream: 'social',
+        videochat: 'videochat'
+      }
+
       this.fieldRequired({
         title: "Has d'escriure un títol",
-        place: "Has d'escriure un lloc"
+        [eventLocationFields[this.properties.eventType]]: "Has d'escriure un lloc"
       })
       this.pictureRequired()
       this.allCapsDisallowed('title', 'place')
