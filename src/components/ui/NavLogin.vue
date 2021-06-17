@@ -1,26 +1,18 @@
 <template>
   <div class="nav-login">
     <template v-if="isLoggedIn">
-      <b-dropdown :triggers="['hover', 'click']" aria-role="list" position="is-bottom-left">
-        <template #trigger>
-          <b-button
-            :label="user.first_name"
-            type="is-ghost"
-            class="button"
-            icon-right="user-circle" />
-        </template>
-
-        <b-dropdown-item aria-role="listitem" has-link>
+      <c-dropdown :label="user.first_name" icon="user-circle" isGhost>
+        <c-dropdown-item>
           <router-link to="/my-banners">
             <font-awesome-icon :icon="['far', 'square']" fixed-width />
             Les meues targes
           </router-link>
-        </b-dropdown-item>
-        <b-dropdown-item @click="logout" aria-role="listitem">
+        </c-dropdown-item>
+        <c-dropdown-item @click.native="logout" aria-role="listitem">
           <font-awesome-icon :icon="['far', 'sign-out-alt']" fixed-width />
           Tanca sessió
-        </b-dropdown-item>
-        </b-dropdown>
+        </c-dropdown-item>
+    </c-dropdown>
     </template>
     <template v-else>
       <a :href="ssoLoginUrl" class="button is-ghost">
@@ -32,11 +24,19 @@
 </template>
 
 <script>
+import CDropdown from './CDropdown.vue'
+import CDropdownItem from './CDropdownItem.vue'
+
 export default {
   data () {
     return {
       ssoLoginUrl: process.env.VUE_APP_SSO_LOGIN_URL
     }
+  },
+
+  components: {
+    CDropdown,
+    CDropdownItem
   },
 
   computed: {

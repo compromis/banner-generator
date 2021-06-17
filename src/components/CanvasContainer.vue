@@ -1,19 +1,17 @@
 <template>
   <div class="banner-workspace" v-if="banner">
-    <b-dropdown :triggers="['hover']" aria-role="list" v-if="template" class="aspect-selector">
-      <template #trigger>
-        <b-button :icon-left="aspects[aspect].icon" icon-right="chevron-down">
-          <span class="aspect-name">{{ aspects[aspect].name }}</span>
-          <span class="aspect-description">{{ aspects[aspect].description }}</span>
-        </b-button>
+    <c-dropdown v-if="template" class="aspect-selector" :icon="aspects[aspect].icon">
+      <template v-slot:trigger>
+        <span class="aspect-name">{{ aspects[aspect].name }}</span>
+        <span class="aspect-description">{{ aspects[aspect].description }}</span>
+        <font-awesome-icon class="ml-2" :icon="['far', 'chevron-down']" fixed-width />
       </template>
-
-      <b-dropdown-item v-for="taspect in template.aspects" aria-role="listitem" :key="taspect" @click="() => selectAspect(taspect)">
+      <c-dropdown-item v-for="taspect in template.aspects" aria-role="listitem" :key="taspect" @click.native="() => selectAspect(taspect)">
         <font-awesome-icon :icon="['far', aspects[taspect].icon]" fixed-width />
         <span class="aspect-name">{{ aspects[taspect].name }}</span>
         <span class="aspect-description">{{ aspects[taspect].description }}</span>
-      </b-dropdown-item>
-    </b-dropdown>
+      </c-dropdown-item>
+    </c-dropdown>
 
     <div :class="['banner-aspect', `banner-aspect-${aspect}`]">
       <div
@@ -48,6 +46,8 @@
 import domtoimage from 'dom-to-image'
 import { saveAs } from 'file-saver'
 import http from '@/http'
+import CDropdown from './ui/CDropdown.vue'
+import CDropdownItem from './ui/CDropdownItem.vue'
 
 export default {
   name: 'canvas-container',
@@ -63,6 +63,11 @@ export default {
       scale: 1,
       margin: 0
     }
+  },
+
+  components: {
+    CDropdown,
+    CDropdownItem
   },
 
   computed: {
