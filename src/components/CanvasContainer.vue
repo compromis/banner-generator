@@ -1,6 +1,6 @@
 <template>
   <div class="banner-workspace" v-if="banner">
-    <c-dropdown v-if="template" class="aspect-selector" :icon="aspects[aspect].icon">
+    <c-dropdown v-if="template" name="aspect" class="aspect-selector" :icon="aspects[aspect].icon">
       <template v-slot:trigger>
         <span class="aspect-name">{{ aspects[aspect].name }}</span>
         <span class="aspect-description">{{ aspects[aspect].description }}</span>
@@ -9,7 +9,7 @@
       <c-dropdown-item v-for="taspect in template.aspects" aria-role="listitem" :key="taspect" @click.native="() => selectAspect(taspect)">
         <font-awesome-icon :icon="['far', aspects[taspect].icon]" fixed-width />
         <span class="aspect-name">{{ aspects[taspect].name }}</span>
-        <span class="aspect-description">{{ aspects[taspect].description }}</span>
+        <span class="ml-auto aspect-description">{{ aspects[taspect].description }}</span>
       </c-dropdown-item>
     </c-dropdown>
 

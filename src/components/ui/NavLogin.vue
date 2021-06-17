@@ -1,15 +1,13 @@
 <template>
   <div class="nav-login">
     <template v-if="isLoggedIn">
-      <c-dropdown :label="user.first_name" icon="user-circle" isGhost>
-        <c-dropdown-item>
-          <router-link to="/my-banners">
-            <font-awesome-icon :icon="['far', 'square']" fixed-width />
-            Les meues targes
-          </router-link>
+      <c-dropdown name="user" :label="user.first_name" icon="user-circle" is-ghost>
+        <c-dropdown-item to="/my-banners">
+          <font-awesome-icon :icon="['far', 'square']" fixed-width class="mr-2" />
+          Les meues targes
         </c-dropdown-item>
         <c-dropdown-item @click.native="logout" aria-role="listitem">
-          <font-awesome-icon :icon="['far', 'sign-out-alt']" fixed-width />
+          <font-awesome-icon :icon="['far', 'sign-out-alt']" fixed-width class="mr-2" />
           Tanca sessió
         </c-dropdown-item>
     </c-dropdown>
