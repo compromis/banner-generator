@@ -203,6 +203,10 @@ export default {
   }
 
   @media (max-width: $xs-breakpoint) {
+    .navbar.navbar--light .nav-login {
+      color: $gray-900 !important;
+    }
+
     .template-selector {
       h2 {
         font-size: 2.25rem;

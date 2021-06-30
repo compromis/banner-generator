@@ -239,7 +239,7 @@ export default {
         position: fixed;
         top: 3.5rem;
         right: 9rem;
-        z-index: 35;
+        z-index: 10;
 
         .button.is-text {
           color: $white;

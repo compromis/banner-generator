@@ -312,6 +312,11 @@ export default {
       padding-left: 0 !important;
       padding-right: 0 !important;
     }
+
+    .aspect-selector.c-dropdown {
+      margin-top: .25rem;
+      margin-bottom: -2rem;
+    }
   }
 
   @media (max-width: $xl-breakpoint) {

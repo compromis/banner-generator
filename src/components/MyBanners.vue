@@ -182,6 +182,7 @@ export default {
 
     .sort-button, .new-banner {
       padding: .5rem .75rem;
+      background: $white;
     }
 
     .sort-dropdown {
@@ -221,6 +222,10 @@ export default {
 @media (max-width: $md-breakpoint) {
   .my-banners {
     padding: 5.25rem 1rem 0;
+  }
+
+  .navbar.navbar--light .nav-login {
+    color: $gray-900 !important;
   }
 }
 

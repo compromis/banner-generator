@@ -14,7 +14,7 @@
     </template>
     <template v-else>
       <a :href="ssoLoginUrl" class="button is-ghost">
-        Les meues targes
+        <span class="is-hidden-mobile">Les meues targes</span>
         <font-awesome-icon :icon="['far', 'user-circle']" />
       </a>
     </template>
@@ -62,6 +62,10 @@ export default {
   .nav-login {
     position: relative;
     z-index: 50;
+
+    .c-dropdown {
+        margin: -.75rem;
+    }
 
     .button {
       color: $white;

@@ -1,12 +1,13 @@
 <template>
   <div class="last-saved">
     <span v-if="saving" class="saving">
-      <font-awesome-icon :icon="['far', 'save']" class="mr-1" /> Desant...
+      <font-awesome-icon :icon="['far', 'save']" class="mr-2" />
+      <span class="is-hidden-mobile">Desant...</span>
     </span>
     <span v-else-if="lastSaved">
       <span v-if="displayDate" :class="{ 'just-saved': justSaved }">
-        <font-awesome-icon v-if="justSaved" :icon="['far', 'save']" class="mr-1" />
-        Desat {{ displayDate }}
+        <font-awesome-icon v-if="justSaved" :icon="['far', 'save']" class="mr-2" />
+        <span class="is-hidden-mobile">Desat {{ displayDate }}</span>
       </span>
     </span>
   </div>
@@ -64,6 +65,8 @@ export default {
   @import "../../sass/variables";
 
   .last-saved {
+    display: flex;
+    align-items: center;
     color: $gray-600;
     padding: 0 1rem;
 
@@ -91,6 +94,12 @@ export default {
 
     100% {
       opacity: 1;
+    }
+  }
+
+  @media (max-width: $xs-breakpoint) {
+    .last-saved {
+      padding: 0;
     }
   }
 </style>

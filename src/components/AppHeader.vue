@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ 'navbar': true, 'navbar--dark': inWorkspace }">
+  <div :class="{ 'navbar': true, 'navbar--light': !inWorkspace, 'navbar--dark': inWorkspace }">
     <router-link to="/" class="logo">
       <careta class="logo-careta" :logo-style="inWorkspace ? 'mono' : 'normal'" />
       <div :class="['nav-label logo-label', { 'is-hidden-mobile': inWorkspace }]">Generador de targes</div>

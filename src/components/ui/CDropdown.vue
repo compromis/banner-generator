@@ -1,7 +1,7 @@
 <template>
   <div class="c-dropdown" aria-role="list" @mouseover="showDropdown = true" @mouseleave="showDropdown = false">
     <button :class="['button', { 'is-ghost' : isGhost }]" :aria-controls="name + 'Dropdown'" :aria-extended="showDropdown ? 'true' : 'false'">
-      <span class="trigger-label">
+      <span class="trigger-label is-hidden-mobile">
         {{ label }}
       </span>
       <font-awesome-icon :icon="['far', icon]" fixed-width />
@@ -59,7 +59,6 @@ export default {
   display: flex;
   justify-content: flex-end;
   padding: .75rem;
-  margin: -.75rem;
 
   &-list {
     position: absolute;
@@ -87,30 +86,24 @@ export default {
       outline: 0;
       box-shadow: 0 0 0 2px $primary;
     }
+  }
 
-    .fa-user-circle {
-      margin-left: .5rem;
-    }
+  .trigger-label {
+    margin-right: .5rem;
   }
 
   .is-ghost {
-    color: $white;
+    color: inherit;
     border-color: transparent;
 
     &:hover {
-      color: $white;
+      color: inherit;
       background: rgba($white, .15);
     }
 
     &:focus {
       box-shadow: 0 0 0 2px $white;
     }
-  }
-}
-
-@media (max-width: $xs-breakpoint) {
-  .trigger-label {
-    display: none;
   }
 }
 </style>
