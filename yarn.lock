@@ -688,22 +688,22 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@fortawesome/fontawesome-common-types@^0.2.28":
-  version "0.2.28"
-  resolved "https://npm.fontawesome.com/@fortawesome/fontawesome-common-types/-/0.2.28/fontawesome-common-types-0.2.28.tgz#1091bdfe63b3f139441e9cba27aa022bff97d8b2"
-  integrity sha512-gtis2/5yLdfI6n0ia0jH7NJs5i/Z/8M/ZbQL6jXQhCthEOe5Cr5NcQPhgTvFxNOtURE03/ZqUcEskdn2M+QaBg==
-
 "@fortawesome/fontawesome-common-types@^0.2.31":
   version "0.2.31"
   resolved "https://npm.fontawesome.com/@fortawesome/fontawesome-common-types/-/0.2.31/fontawesome-common-types-0.2.31.tgz#f15a39e5ab4e5dfda0717733bcacb9580e666ad9"
   integrity sha512-xfnPyH6NN5r/h1/qDYoGB0BlHSID902UkQzxR8QsoKDh55KAPr8ruAoie12WQEEQT8lRE2wtV7LoUllJ1HqCag==
 
-"@fortawesome/fontawesome-svg-core@^1.2.19":
-  version "1.2.28"
-  resolved "https://npm.fontawesome.com/@fortawesome/fontawesome-svg-core/-/1.2.28/fontawesome-svg-core-1.2.28.tgz#e5b8c8814ef375f01f5d7c132d3c3a2f83a3abf9"
-  integrity sha512-4LeaNHWvrneoU0i8b5RTOJHKx7E+y7jYejplR7uSVB34+mp3Veg7cbKk7NBCLiI4TyoWS1wh9ZdoyLJR8wSAdg==
+"@fortawesome/fontawesome-common-types@^0.2.33-beta1":
+  version "0.2.35"
+  resolved "https://npm.fontawesome.com/@fortawesome/fontawesome-common-types/-/0.2.35/fontawesome-common-types-0.2.35.tgz#01dd3d054da07a00b764d78748df20daf2b317e9"
+  integrity sha512-IHUfxSEDS9dDGqYwIW7wTN6tn/O8E0n5PcAHz9cAaBoZw6UpG20IG/YM3NNLaGPwPqgjBAFjIURzqoQs3rrtuw==
+
+"@fortawesome/fontawesome-svg-core@^1.2.33-beta1":
+  version "1.2.33-beta1"
+  resolved "https://npm.fontawesome.com/@fortawesome/fontawesome-svg-core/-/1.2.33-beta1/fontawesome-svg-core-1.2.33-beta1.tgz#df425981e9d5078617d02e465e5bdd8ccbc8a175"
+  integrity sha512-xQzg7LiEP1+siW2lwEhsg8iUNwxvt4WRe2lvOAOVR/rplzPtVI+mGdcfWzd/wl2I+b+OkGABpUfa8aHQN3lYIg==
   dependencies:
-    "@fortawesome/fontawesome-common-types" "^0.2.28"
+    "@fortawesome/fontawesome-common-types" "^0.2.33-beta1"
 
 "@fortawesome/free-brands-svg-icons@^5.15.0":
   version "5.15.0"
@@ -712,24 +712,24 @@
   dependencies:
     "@fortawesome/fontawesome-common-types" "^0.2.31"
 
-"@fortawesome/pro-regular-svg-icons@^5.9.0":
-  version "5.13.0"
-  resolved "https://npm.fontawesome.com/@fortawesome/pro-regular-svg-icons/-/5.13.0/pro-regular-svg-icons-5.13.0.tgz#f6a74484e1e20a8e8cfcc4e41c0c81c505e0d5dd"
-  integrity sha512-yYQV729ECEtpT+39KF7oRTDtAS7OxkAfj8kUjuE7AoxaVwcK/Mw9B6x3klpzXGJFc6gL+/CTxFCPRMbtIjNo+w==
+"@fortawesome/pro-regular-svg-icons@^6.0.0-beta1":
+  version "6.0.0-beta1"
+  resolved "https://npm.fontawesome.com/@fortawesome/pro-regular-svg-icons/-/6.0.0-beta1/pro-regular-svg-icons-6.0.0-beta1.tgz#16d12e0ca40cc4d1dcd76f95fbe42a89238b1986"
+  integrity sha512-a6v4ri3AZTtxxYBhE8cEPDrzkGAnGfzuJbOgqWyuOcmjvpIEnj7nvmRgafEHFZMZp4QI6OO5uSwhfQFCfDP9ag==
   dependencies:
-    "@fortawesome/fontawesome-common-types" "^0.2.28"
+    "@fortawesome/fontawesome-common-types" "^0.2.33-beta1"
 
-"@fortawesome/pro-solid-svg-icons@^5.13.0":
-  version "5.13.0"
-  resolved "https://npm.fontawesome.com/@fortawesome/pro-solid-svg-icons/-/5.13.0/pro-solid-svg-icons-5.13.0.tgz#8708f27cdbf906f0799e0f0d41a8b4556fafe798"
-  integrity sha512-MK3ycWLTTDw2xdY5BOQU3KYcGFk07Lj1Ub+EAlEAs9WcSgw7meEO3acPBpgNXUPB11gsI/4o9h+UxzJM1u+L8g==
+"@fortawesome/pro-solid-svg-icons@^6.0.0-beta1":
+  version "6.0.0-beta1"
+  resolved "https://npm.fontawesome.com/@fortawesome/pro-solid-svg-icons/-/6.0.0-beta1/pro-solid-svg-icons-6.0.0-beta1.tgz#e8f34e6e2fb84763b2aef7cc4c28f4fec2f2a6f7"
+  integrity sha512-J5ZR0SQQKKxby4c0bLzC8dDcqNN7VVIDnxB9hmkxG68qejtpUj/yQvA/PKWvWe+GLiPyAE31n73STf/16OTG2w==
   dependencies:
-    "@fortawesome/fontawesome-common-types" "^0.2.28"
+    "@fortawesome/fontawesome-common-types" "^0.2.33-beta1"
 
-"@fortawesome/vue-fontawesome@^0.1.6":
-  version "0.1.9"
-  resolved "https://npm.fontawesome.com/@fortawesome/vue-fontawesome/-/0.1.9/vue-fontawesome-0.1.9.tgz#d3af6d4e50f337327de90447fe35fa1e117a2fbe"
-  integrity sha512-h/emhmZz+DfB2zOGLWawNwXq82UYhn9waTfUjLLmeaIqtnIyNt6kYlpQT/vzJjLZRDRvY2IEJAh1di5qKpKVpA==
+"@fortawesome/vue-fontawesome@^2.0.2":
+  version "2.0.2"
+  resolved "https://npm.fontawesome.com/@fortawesome/vue-fontawesome/-/2.0.2/vue-fontawesome-2.0.2.tgz#5b86cd2fb7b4c17e5dede722c1c2855c97eceaea"
+  integrity sha512-ecpKSBUWXsxRJVi/dbOds4tkKwEcBQ1JSDZFzE2jTFpF8xIh3OgTX8POIor6bOltjibr3cdEyvnDjecMwUmxhQ==
 
 "@hapi/address@2.x.x":
   version "2.1.4"

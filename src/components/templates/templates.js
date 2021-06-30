@@ -73,7 +73,7 @@ export default [
     id: 'CompareHeadline',
     name: 'Compara titulars',
     aspects: ['11'],
-    icon: 'columns',
+    icon: 'table-rows',
     components: {
       pane: () => import(/* webpackChunkName: "compare-headline" */ './compare-headline/CompareHeadlinePane'),
       canvas: () => import(/* webpackChunkName: "compare-headline" */ './compare-headline/CompareHeadlineCanvas'),
