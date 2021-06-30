@@ -24,10 +24,10 @@
       </portal>
       <loading :active.sync="loadingTemplate" :is-full-page="true" color="#ff6600"></loading>
     </div>
-    <div v-else-if="error" class="message error">
+    <div v-else-if="error" class="banner-message error">
       No tens accés a aquesta tarja
     </div>
-    <div v-else class="message loading">
+    <div v-else class="banner-message loading">
       Carregant...
     </div>
   </div>
@@ -205,7 +205,7 @@ export default {
     display: none;
   }
 
-  .message {
+  .banner-message {
     height: 100vh;
     font-size: calc(1rem + 10vw);
     color: $gray-700;
