@@ -26,14 +26,14 @@
     <transition name="slide">
       <div class="date-time-grid">
         <c-field label="Data" v-if="aspect !== 'event'" edge focusable label-for="date">
-          <date-picker v-model="properties.date" id="date"/>
+          <date-picker v-model="eventDate" id="date"/>
         </c-field>
         <c-field label="Hora" v-if="aspect !== 'event'" edge focusable>
           <b-timepicker
             rounded
             inline
             :increment-minutes="15"
-            v-model="properties.time" >
+            v-model="eventTime" >
           </b-timepicker>
         </c-field>
       </div>
@@ -190,6 +190,28 @@ export default {
   },
 
   computed: {
+    eventDate: {
+      get () {
+        const { date } = this.properties
+        return date instanceof Date ? date : new Date(date)
+      },
+
+      set (value) {
+        this.properties.date = value
+      }
+    },
+
+    eventTime: {
+      get () {
+        const { time } = this.properties
+        return time instanceof Date ? time : new Date(time)
+      },
+
+      set (value) {
+        this.properties.time = value
+      }
+    },
+
     availableThemes () {
       const themes = {
         11: ['glowy', 'blobless', 'blobs'],
