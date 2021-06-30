@@ -62,6 +62,7 @@
     <!-- Picture -->
     <picture-upload
       :picture="properties.picture"
+      :preview="properties.picturePreview"
       :display-errors="displayErrors"
       :errors="errors"
       @upload="updateImage"
@@ -90,6 +91,7 @@
         label="Segona foto"
         v-if="properties.pitAgainst"
         :picture="properties.pitAgainstPicture"
+        :preview="properties.pitAgainstPicturePreview"
         :display-errors="displayErrors"
         :errors="errors"
         @upload="(image) => customUpdateImage('pitAgainst', image)"

@@ -40,6 +40,7 @@
     <!-- Picture -->
     <picture-upload
       :picture="properties.picture"
+      :preview="properties.picturePreview"
       :display-errors="displayErrors"
       :errors="errors"
       @upload="updateImage"

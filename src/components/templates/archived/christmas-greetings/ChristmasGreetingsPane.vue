@@ -27,6 +27,7 @@
       <picture-upload
         v-if="properties.hasCustomPicture"
         :picture="properties.picture"
+        :preview="properties.picturePreview"
         :display-errors="displayErrors"
         :errors="errors"
         :ratio="1.86"
