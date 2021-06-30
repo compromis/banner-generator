@@ -37,6 +37,7 @@
 import CompromisLogo from '@/components/utils/CompromisLogo'
 import BlocLogo from '@/components/utils/BlocLogo'
 import IniciativaLogo from '@/components/utils/IniciativaLogo'
+import JovespvLogo from '@/components/utils/JovespvLogo'
 import VerdsLogo from '@/components/utils/VerdsLogo'
 import GlowyBlob from './GlowyBlob'
 
@@ -48,6 +49,7 @@ export default {
     BlocLogo,
     IniciativaLogo,
     VerdsLogo,
+    JovespvLogo,
     GlowyBlob
   },
 
@@ -76,7 +78,8 @@ export default {
         compromis: CompromisLogo,
         bloc: BlocLogo,
         iniciativa: IniciativaLogo,
-        verds: VerdsLogo
+        verds: VerdsLogo,
+        jovespv: JovespvLogo
       }
 
       return logos[this.banner.logo]
@@ -166,6 +169,10 @@ export default {
     .logo-verds {
       height: 22px;
       transform: translateY(1px);
+    }
+
+    .logo-jovespv {
+      height: 29px;
     }
   }
 

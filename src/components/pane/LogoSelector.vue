@@ -4,6 +4,7 @@
     <option value="bloc">BLOC</option>
     <option value="iniciativa">Iniciativa</option>
     <option value="verds">Verds</option>
+    <option value="jovespv">Joves PV</option>
   </c-select>
 </template>
 
