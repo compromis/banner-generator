@@ -20,8 +20,7 @@
 
     <!-- Speakers -->
     <speaker-list
-      :default-speakers="properties.speakers"
-      @updated="(speakers) => properties.speakers = speakers"
+      v-model="properties.speakers"
       :display-errors="displayErrors"
       :errors="errors"
       :min-speakers="2"

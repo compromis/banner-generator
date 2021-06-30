@@ -37,7 +37,6 @@
       label-add="Afegeix inversió"
       placeholder=""
       icon="hand-point-right"
-      :default-speakers="[{ name: '' }]"
       :accepts-picture="false"
       :accepts-description="false"
       :min-speakers="1"
@@ -45,7 +44,7 @@
       :max-length-name="60"
       :display-errors="displayErrors"
       :errors="errors"
-      @updated="(things) => properties.things = things" />
+      v-model="properties.things" />
 
     <!-- Picture -->
     <picture-upload
@@ -116,7 +115,7 @@ export default {
         lang: 'val',
         municipality: '',
         amount: '',
-        things: [],
+        things: [{ name: '' }],
         hashtag: '#LesPersonesPrimer'
       }
     }

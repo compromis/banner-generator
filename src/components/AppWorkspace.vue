@@ -1,27 +1,35 @@
 <template>
-  <div class="workspace" v-if="template">
-    <div class="toolbar">
-      <b-button to="/" tag="router-link" icon-left="chevron-left" type="is-text">Enrere</b-button>
-    </div>
-    <component :is="template.components.pane" class="pane" />
-    <canvas-container :canvas-component="template.components.canvas" class="canvas" />
-    <help id="help-button" class="help-block" />
+  <div>
+    <div class="workspace" v-if="template && !error">
+      <div class="toolbar">
+        <b-button to="/" tag="router-link" icon-left="chevron-left" type="is-text">Enrere</b-button>
+      </div>
+      <component :is="template.components.pane" class="pane" />
+      <canvas-container :canvas-component="template.components.canvas" class="canvas" />
+      <help id="help-button" class="help-block" />
 
-    <portal to="confirm">
-      <b-modal :active="isCardModalActive" @close="isCardModalActive = false" :width="640" scroll="keep">
-        <div class="card content">
-          <b-icon icon="exclamation-triangle" size="is-large" />
-          <h2>Atenció</h2>
-          <p>
-            Vols tancar l'editor i tornar a la pantalla d'escollir tarja?
-            Es perdran tots els canvis.
-          </p>
-          <b-button ref="confirm" type="is-primary" @click="back">Si, tanca</b-button>
-          <b-button type="is-light" @click="isCardModalActive = false">No, continua editant</b-button>
-        </div>
-      </b-modal>
-    </portal>
-    <loading :active.sync="loadingTemplate" :is-full-page="true" color="#ff6600"></loading>
+      <portal to="confirm">
+        <b-modal :active="isCardModalActive" @close="isCardModalActive = false" :width="640" scroll="keep">
+          <div class="card content">
+            <b-icon icon="exclamation-triangle" size="is-large" />
+            <h2>Atenció</h2>
+            <p>
+              Vols tancar l'editor i tornar a la pantalla d'escollir tarja?
+              Es perdran tots els canvis.
+            </p>
+            <b-button ref="confirm" type="is-primary" @click="back">Si, tanca</b-button>
+            <b-button type="is-light" @click="isCardModalActive = false">No, continua editant</b-button>
+          </div>
+        </b-modal>
+      </portal>
+      <loading :active.sync="loadingTemplate" :is-full-page="true" color="#ff6600"></loading>
+    </div>
+    <div v-else-if="error" class="message error">
+      No tens accés a aquesta tarja
+    </div>
+    <div v-else class="message loading">
+      Carregant...
+    </div>
   </div>
 </template>
 
@@ -45,7 +53,8 @@ export default {
     return {
       isCardModalActive: false,
       goingTo: null,
-      banner: null
+      banner: null,
+      error: false
     }
   },
 
@@ -67,10 +76,14 @@ export default {
     }
   },
 
-  async mounted () {
-    const banner = await http.banner(this.$route.params.ref)
-    this.$store.commit('setBannerMeta', banner)
-    this.setTemplate(banner.type)
+  async created () {
+    try {
+      const banner = await http.banner(this.$route.params.ref)
+      this.$store.commit('setBannerMeta', banner)
+      this.setTemplate(banner.type)
+    } catch (error) {
+      this.error = true
+    }
   },
 
   watch: {
@@ -164,7 +177,7 @@ export default {
       top: 1rem;
       right: 1.5rem;
     }
- }
+  }
 
   .card {
     padding: 2rem;
@@ -190,6 +203,14 @@ export default {
 
   .toolbar {
     display: none;
+  }
+
+  .message {
+    height: 100vh;
+    font-size: calc(1rem + 10vw);
+    color: $gray-700;
+    display: grid;
+    place-items: center;
   }
 
   @media (max-width: $xs-breakpoint) {

@@ -72,9 +72,9 @@ export default {
   },
 
   props: {
-    defaultSpeakers: {
+    value: {
       type: Array,
-      default: () => []
+      required: true
     },
     acceptsPicture: {
       type: Boolean,
@@ -122,22 +122,15 @@ export default {
     }
   },
 
-  data () {
-    return {
-      speakers: []
-    }
-  },
-
-  created () {
-    this.speakers = this.defaultSpeakers
-  },
-
-  watch: {
+  computed: {
     speakers: {
-      handler: function () {
-        this.$emit('updated', this.speakers)
+      get () {
+        return this.value
       },
-      deep: true
+
+      set (speakers) {
+        this.$emit('input', speakers)
+      }
     }
   },
 

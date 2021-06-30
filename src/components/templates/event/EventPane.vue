@@ -79,13 +79,13 @@
     <!-- Speakers -->
     <transition name="slide">
       <speaker-list
+        v-model="properties.speakers"
         v-show="aspect !== 'event'"
         :accepts-picture="false"
         :min-speakers="0"
         :max-speakers="6"
         :max-length-name="25"
-        :max-length-description="50"
-        @updated="(speakers) => properties.speakers = speakers" />
+        :max-length-description="50" />
     </transition>
 
     <!-- Card position -->
