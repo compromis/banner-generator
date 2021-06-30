@@ -59,15 +59,25 @@ export default [
     }
   },
   {
-    id: 'Comparison',
-    name: 'Comparativa',
+    id: 'CompareParty',
+    name: 'Compara partits',
     aspects: ['11'],
-    label: '✨Nou',
     icon: 'columns',
     components: {
-      pane: () => import(/* webpackChunkName: "comparison" */ './comparison/ComparisonPane'),
-      canvas: () => import(/* webpackChunkName: "comparison" */ './comparison/ComparisonCanvas'),
-      help: () => import(/* webpackChunkName: "comparison" */ './comparison/ComparisonHelp')
+      pane: () => import(/* webpackChunkName: "compare-party" */ './compare-party/ComparePartyPane'),
+      canvas: () => import(/* webpackChunkName: "compare-party" */ './compare-party/ComparePartyCanvas'),
+      help: () => import(/* webpackChunkName: "compare-party" */ './compare-party/ComparePartyHelp')
+    }
+  },
+  {
+    id: 'CompareHeadline',
+    name: 'Compara titulars',
+    aspects: ['11'],
+    icon: 'columns',
+    components: {
+      pane: () => import(/* webpackChunkName: "compare-headline" */ './compare-headline/CompareHeadlinePane'),
+      canvas: () => import(/* webpackChunkName: "compare-headline" */ './compare-headline/CompareHeadlineCanvas'),
+      help: () => import(/* webpackChunkName: "compare-headline" */ './compare-headline/CompareHeadlineHelp')
     }
   },
   {

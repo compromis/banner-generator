@@ -79,8 +79,6 @@ import BannerPicture from '@/components/canvas/BannerPicture'
 import BannerFrame from '@/components/canvas/BannerFrame'
 
 export default {
-  name: 'comparison-canvas-headline',
-
   mixins: [CanvasMixin],
 
   components: {

@@ -15,7 +15,6 @@ export default new Vuex.Store({
     aspect: '11',
     banner: null,
     bannerMeta: null,
-    child: 'party',
     errors: {},
     displayErrors: false,
     isDownloadable: true,

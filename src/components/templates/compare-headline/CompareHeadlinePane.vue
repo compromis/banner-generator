@@ -230,8 +230,6 @@ import presets from '../headline/presets'
 import Swatches from 'vue-swatches'
 
 export default {
-  name: 'comparison-pane-party',
-
   components: {
     Swatches
   },
