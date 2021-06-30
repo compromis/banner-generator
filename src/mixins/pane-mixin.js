@@ -131,6 +131,7 @@ export default {
       const formData = new FormData()
       formData.append('picture', image, image.name)
       const uploaded = await http.uploadPicture(ref, formData, picture)
+      this.$root.$emit('pictureFinishedUploading', true)
 
       // Set picture and calc dimensions
       this.properties[picture] = image

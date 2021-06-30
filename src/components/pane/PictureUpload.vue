@@ -5,13 +5,17 @@
     </div>
     <div class="c-field-content">
       <b-upload
-        @input="(picture) => $emit('upload', picture, ratio)"
+        @input="setPicture"
         drag-drop
         accept="image/*"
         :type="'picture' in errors && displayErrors ? 'is-danger' : ''">
-        <div class="content has-text-centered" v-if="!picture">
+        <div class="content has-text-centered" v-if="!picture && !loading">
           <b-icon icon="upload" size="is-large" />
           <p>Arrosega la foto</p>
+        </div>
+        <div class="content has-text-centered" v-else-if="loading">
+          <font-awesome-icon :icon="['far', 'circle-notch']" class="icon icon-loading" spin />
+          <p>Carregant...</p>
         </div>
         <div class="picture-preview has-text-centered" v-else>
           <img :src="preview" alt="Imatge" />
@@ -59,6 +63,25 @@ export default {
       type: String,
       default: ''
     }
+  },
+
+  data () {
+    return {
+      loading: false
+    }
+  },
+
+  mounted () {
+    this.$root.$on('pictureFinishedUploading', (state) => {
+      this.loading = !state
+    })
+  },
+
+  methods: {
+    setPicture (picture) {
+      this.loading = true
+      this.$emit('upload', picture, this.ratio)
+    }
   }
 }
 </script>
@@ -72,6 +95,7 @@ export default {
     align-items: center;
     justify-content: center;
     padding: .75rem;
+    min-height: 4.65rem;
   }
 
   .c-field-content {
@@ -126,5 +150,9 @@ export default {
     flex-direction: column;
     width: 100%;
   }
+}
+
+.icon-loading.svg-inline--fa.fa-w-16 {
+  width: 2.25rem;
 }
 </style>
