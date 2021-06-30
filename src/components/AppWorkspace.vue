@@ -25,10 +25,10 @@
       <loading :active.sync="loadingTemplate" :is-full-page="true" color="#ff6600"></loading>
     </div>
     <div v-else-if="error" class="banner-message error">
-      No tens accés a aquesta tarja
-    </div>
-    <div v-else class="banner-message loading">
-      Carregant...
+      <div>
+        <p>No tens accés a aquesta tarja</p>
+        <a :href="ssoLoginUrl">Inicia sessió</a>
+      </div>
     </div>
   </div>
 </template>
@@ -54,7 +54,8 @@ export default {
       isCardModalActive: false,
       goingTo: null,
       banner: null,
-      error: false
+      error: false,
+      ssoLoginUrl: process.env.VUE_APP_SSO_LOGIN_URL
     }
   },
 
@@ -207,7 +208,7 @@ export default {
 
   .banner-message {
     height: 100vh;
-    font-size: calc(1rem + 10vw);
+    font-size: calc(1rem + 1vw);
     color: $gray-700;
     display: grid;
     place-items: center;
