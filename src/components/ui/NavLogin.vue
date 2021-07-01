@@ -14,7 +14,7 @@
     </template>
     <template v-else>
       <a :href="ssoLoginUrl" class="button is-ghost">
-        <span class="is-hidden-mobile">Les meues targes</span>
+        <span class="is-hidden-mobile mr-2">Les meues targes</span>
         <font-awesome-icon :icon="['far', 'user-circle']" />
       </a>
     </template>
