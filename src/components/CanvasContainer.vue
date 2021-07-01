@@ -145,7 +145,7 @@ export default {
         })
       }
 
-      const { ref } = this.$store.state.bannerMeta
+      const { ref, title } = this.$store.state.bannerMeta
       const { width, height, downloadScale } = this.aspects[this.aspect]
       const bannerWidth = width * downloadScale
       const bannerHeight = height * downloadScale
@@ -167,7 +167,7 @@ export default {
         )
 
         // Download banner on browser
-        saveAs(blob, 'banner.png')
+        saveAs(blob, title + '.png')
         this.downloading = false
 
         // Save preview to server
