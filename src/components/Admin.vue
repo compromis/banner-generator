@@ -12,7 +12,7 @@
         <button @click="user = null">Mostra tots</button>
     </div>
     <ul class="banners" v-if="banners">
-      <li v-for="banner in banners.data" :key="banner.id" class="banner-item">
+      <li v-for="banner in banners.data" :key="banner.id" class="banner-item" :class="{ 'deleted': !!banner.deleted_at }">
         <ul class="banner-item-meta">
           <li class="title">
             <router-link :to="`/editor/${banner.ref}`">{{ banner.title }}</router-link>
@@ -204,6 +204,14 @@ export default {
         img {
           width: 100%;
           border-radius: .5rem;
+        }
+      }
+
+      &.deleted {
+        opacity: .5;
+
+        .title {
+          text-decoration: line-through;
         }
       }
     }

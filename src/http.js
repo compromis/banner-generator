@@ -25,7 +25,7 @@ export class API {
   }
 
   all (page, user, onlyWithPreview) {
-    return this._call('get', 'all', { params: { page, user, onlyWithPreview } })
+    return this._call('get', 'all', { params: { page, user_id: user, onlyWithPreview } })
   }
 
   banner (ref) {
