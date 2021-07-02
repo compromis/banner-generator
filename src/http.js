@@ -12,6 +12,12 @@ export class API {
     axios.defaults.headers.common['X-XSRF-TOKEN'] = ''
   }
 
+  /* Temporary fix, review later */
+  setToken (token) {
+    this.token = token
+    axios.defaults.headers.common.Authorization = 'Bearer ' + token
+  }
+
   user () {
     return this._call('get', 'auth/user')
   }
