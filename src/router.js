@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import TemplateSelector from './components/TemplateSelector'
-import AppWorkspace from './components/AppWorkspace'
-import MyBanners from './components/MyBanners'
-import Login from './components/Login'
 import CreateBanner from './components/CreateBanner'
+import AppWorkspace from './components/AppWorkspace'
+import Login from './components/Login'
+const MyBanners = () => import('./components/MyBanners')
+const Admin = () => import('./components/Admin')
 
 Vue.use(Router)
 
@@ -35,6 +36,11 @@ export default new Router({
       path: '/create/:type',
       name: 'create',
       component: CreateBanner
+    },
+    {
+      path: '/admin',
+      name: 'admin',
+      component: Admin
     }
   ]
 })

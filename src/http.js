@@ -24,6 +24,10 @@ export class API {
     return this._call('get', 'banners', { params: { page, order, by, limit } })
   }
 
+  all (page, user, onlyWithPreview) {
+    return this._call('get', 'all', { params: { page, user, onlyWithPreview } })
+  }
+
   banner (ref) {
     return this._call('get', `banners/${ref}`)
   }
