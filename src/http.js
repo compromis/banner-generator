@@ -54,6 +54,10 @@ export class API {
     return this._call('patch', `banners/${ref}`, { content })
   }
 
+  duplicate (ref) {
+    return this._call('post', `banners/${ref}/duplicate`)
+  }
+
   preview (ref, preview) {
     return this._call('patch', `banners/${ref}/preview`, { preview })
   }

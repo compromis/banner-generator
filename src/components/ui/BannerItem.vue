@@ -25,7 +25,8 @@
       </button>
       <font-awesome-icon :icon="['far', 'circle-notch']" spin v-else />
     </form>
-    <button @click="modalOpen = true" class="banner-delete"><b-icon icon="trash" pack="far" /><span class="text">Esborrar</span></button>
+    <button @click="duplicate" class="banner-hover-button banner-duplicate"><b-icon icon="clone" pack="far" /><span class="text">Duplicar</span></button>
+    <button @click="modalOpen = true" class="banner-hover-button banner-delete"><b-icon icon="trash" pack="far" /><span class="text">Esborrar</span></button>
     <transition name="blur">
       <banner-item-modal v-if="modalOpen" @close="modalOpen = false" @remove="remove" />
     </transition>
@@ -121,6 +122,13 @@ export default {
       const { ref } = this.banner
       await http.remove(ref)
       this.$emit('remove')
+    },
+
+    async duplicate () {
+      console.log('yup')
+      const { ref } = this.banner
+      await http.duplicate(ref)
+      this.$emit('duplicate')
     }
   }
 }
@@ -174,7 +182,7 @@ export default {
       cursor: default;
     }
 
-    .banner-delete {
+    .banner-hover-button {
       display: none;
     }
   }
@@ -187,7 +195,7 @@ export default {
     }
   }
 
-  .banner-type, .banner-saved, .banner-delete {
+  .banner-type, .banner-saved, .banner-hover-button {
     display: flex;
     align-items: center;
     font-size: 1rem;
@@ -271,14 +279,12 @@ export default {
     }
   }
 
-    .banner-delete {
+    .banner-hover-button {
       opacity: 0;
-      color: red;
       transition: .25s ease-in-out;
       border-radius: .25rem;
       display: inline-flex;
-      padding-right: .25rem;
-      margin: .2rem .75rem 0;
+      margin-top: .2rem;
 
       &:focus {
         opacity: 1;
@@ -291,8 +297,16 @@ export default {
       }
     }
 
+    .banner-delete {
+      color: $red;
+    }
+
+    .banner-duplicate {
+      margin: 0 .75rem;
+    }
+
   &:hover, &:focus, &:focus-within {
-    .banner-delete, button, input {
+    .banner-hover-button, button, input {
       opacity: 1;
     }
 
@@ -365,7 +379,7 @@ export default {
       }
     }
 
-    .banner-delete {
+    .banner-hover-button {
       position: absolute;
       opacity: 1;
       bottom: 1rem;
@@ -373,7 +387,7 @@ export default {
       border: 1px solid $gray-600;
       color: $gray-600;
       border-radius: 2rem;
-      padding: .35rem;
+      padding: .25rem;
 
       .text {
         display: none;
@@ -382,6 +396,15 @@ export default {
       .icon {
         margin: 0;
       }
+    }
+
+    .banner-delete {
+      color: $red;
+      border-color: $red;
+    }
+
+    .banner-duplicate {
+      margin: 0 2.5rem;
     }
   }
 }
