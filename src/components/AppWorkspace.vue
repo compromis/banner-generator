@@ -8,7 +8,7 @@
       <canvas-container :canvas-component="template.components.canvas" class="canvas" />
       <help id="help-button" class="help-block" />
       <c-popup :showPopup="showPopup">
-        Inicia sessió amb l'espai compromís per a guardar les teues targes.
+        Inicia sessió amb l'Espai Compromís per a guardar versions editables de les teues targes.
         <template v-slot:buttons>
           <b-button @click="hideReminder">Ara no</b-button>
           <b-button type="is-primary" class="mr-0">Incia sessió</b-button>
@@ -95,8 +95,10 @@ export default {
     } catch (error) {
       this.error = true
     }
-    const showReminder = localStorage.getItem('login_reminder')
-    if (!this.isLoggedIn && showReminder !== 'hidden') {
+
+    const reminderLimit = localStorage.getItem('login_reminder')
+    const now = new Date()
+    if (!this.isLoggedIn && now.getTime() > reminderLimit) {
       this.showPopup = true
     }
   },
@@ -128,7 +130,8 @@ export default {
 
     hideReminder () {
       this.showPopup = false
-      localStorage.setItem('login_reminder', 'hidden')
+      const now = new Date()
+      localStorage.setItem('login_reminder', now.getTime() + 7 * 24 * 60 * 60 * 1000)
     }
   },
 
