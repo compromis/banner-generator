@@ -43,14 +43,16 @@ export default {
     },
 
     isLoggedIn () {
-      return !!this.$store.state.auth.user
+      return this.$store.getters['auth/isLoggedIn']
     }
   },
 
   methods: {
     logout () {
       this.$store.commit('auth/logout')
-      this.$router.push('/')
+      if (this.$route.path !== '/') {
+        this.$router.push('/')
+      }
     }
   }
 }

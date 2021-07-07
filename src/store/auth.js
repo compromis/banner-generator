@@ -1,9 +1,16 @@
 export default {
   namespaced: true,
+
   state: () => ({
     token: null,
     user: null
   }),
+
+  getters: {
+    isLoggedIn: state => {
+      return !!state.user
+    }
+  },
 
   mutations: {
     setToken (state, token) {
