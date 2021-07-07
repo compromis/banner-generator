@@ -19,7 +19,7 @@
       <transition name="fade" mode="out-in">
         <div key="banners" v-if="!sorting">
           <transition-group name="list" tag="div" class="my-banners-list">
-            <banner-item v-for="banner in banners" :key="banner.id" :banner="banner" @remove="getBanners" @duplicate="getBanners"/>
+            <banner-item v-for="banner in banners" :key="banner.id" :banner="banner" @updateBanners="getBanners" />
           </transition-group>
         </div>
         <div key="sorting" v-else></div>

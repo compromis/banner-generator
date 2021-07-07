@@ -121,14 +121,13 @@ export default {
     async remove () {
       const { ref } = this.banner
       await http.remove(ref)
-      this.$emit('remove')
+      this.$emit('updateBanners')
     },
 
     async duplicate () {
-      console.log('yup')
       const { ref } = this.banner
       await http.duplicate(ref)
-      this.$emit('duplicate')
+      this.$emit('updateBanners')
     }
   }
 }
