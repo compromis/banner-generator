@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import http from '@/http'
 import CDropdown from './CDropdown.vue'
 import CDropdownItem from './CDropdownItem.vue'
 
@@ -48,8 +49,10 @@ export default {
   },
 
   methods: {
-    logout () {
+    async logout () {
+      const guest = await http.guest()
       this.$store.commit('auth/logout')
+      this.$store.commit('auth/setToken', guest.token.token)
       if (this.$route.path !== '/') {
         this.$router.push('/')
       }

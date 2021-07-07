@@ -7,7 +7,7 @@
       <component :is="template.components.pane" class="pane" />
       <canvas-container :canvas-component="template.components.canvas" class="canvas" />
       <help id="help-button" class="help-block" />
-      <c-popup :showPopup="showPopup">
+      <c-popup :show-popup="showPopup">
         Inicia sessió amb l'Espai Compromís per a guardar versions editables de les teues targes.
         <template v-slot:buttons>
           <b-button @click="hideReminder">Ara no</b-button>
