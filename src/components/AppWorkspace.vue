@@ -73,7 +73,7 @@ export default {
     },
 
     isLoggedIn () {
-      return !!this.$store.state.auth.token
+      return this.$store.getters['auth/isLoggedIn']
     }
   },
 
