@@ -11,7 +11,7 @@
         Inicia sessió amb l'Espai Compromís per a guardar versions editables de les teues targes.
         <template v-slot:buttons>
           <b-button @click="hideReminder">Ara no</b-button>
-          <b-button type="is-primary" class="mr-0">Incia sessió</b-button>
+          <b-button type="is-primary" class="mr-0" tag="a" :href="ssoLoginUrl">Incia sessió</b-button>
         </template>
       </c-popup>
 
