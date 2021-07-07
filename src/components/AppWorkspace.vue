@@ -7,6 +7,13 @@
       <component :is="template.components.pane" class="pane" />
       <canvas-container :canvas-component="template.components.canvas" class="canvas" />
       <help id="help-button" class="help-block" />
+      <c-popup :showPopup="showPopup">
+        Inicia sessió amb l'espai compromís per a guardar les teues targes.
+        <template v-slot:buttons>
+          <b-button @click="hideReminder">Ara no</b-button>
+          <b-button type="is-primary" class="mr-0">Incia sessió</b-button>
+        </template>
+      </c-popup>
 
       <portal to="confirm">
         <b-modal :active="isCardModalActive" @close="isCardModalActive = false" :width="640" scroll="keep">
@@ -39,6 +46,7 @@ import CanvasContainer from './CanvasContainer'
 import Help from './Help'
 import Loading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/vue-loading.css'
+import CPopup from './ui/CPopup'
 
 export default {
   name: 'app-workspace',
@@ -46,7 +54,8 @@ export default {
   components: {
     CanvasContainer,
     Help,
-    Loading
+    Loading,
+    CPopup
   },
 
   data () {
@@ -55,7 +64,8 @@ export default {
       goingTo: null,
       banner: null,
       error: false,
-      ssoLoginUrl: process.env.VUE_APP_SSO_LOGIN_URL
+      ssoLoginUrl: process.env.VUE_APP_SSO_LOGIN_URL,
+      showPopup: false
     }
   },
 
@@ -85,6 +95,10 @@ export default {
     } catch (error) {
       this.error = true
     }
+    const showReminder = localStorage.getItem('login_reminder')
+    if (!this.isLoggedIn && showReminder !== 'hidden') {
+      this.showPopup = true
+    }
   },
 
   watch: {
@@ -110,6 +124,11 @@ export default {
       this.$store.commit('setTemplate', template)
       this.$store.commit('setAspect', template.aspects[0])
       this.$store.commit('setDisplayErrors', false)
+    },
+
+    hideReminder () {
+      this.showPopup = false
+      localStorage.setItem('login_reminder', 'hidden')
     }
   },
 
