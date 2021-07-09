@@ -44,9 +44,9 @@ export default {
     copyUrl () {
       navigator.clipboard.writeText(this.url)
       this.copied = true
-      setTimeout(function (scope) {
-        scope.copied = false
-      }, 4000, this)
+      setTimeout(() => {
+        this.copied = false
+      }, 4000)
     }
   }
 }
