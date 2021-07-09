@@ -10,6 +10,7 @@
     <transition name="fade">
       <last-saved v-if="template" />
     </transition>
+    <nav-share class="nav-share" />
     <nav-login class="nav-login" />
   </div>
 </template>
@@ -17,6 +18,7 @@
 <script>
 import Careta from '@/components/canvas/Careta'
 import NavLogin from '@/components/ui/NavLogin'
+import NavShare from '@/components/ui/NavShare'
 import RenameTitle from '@/components/ui/RenameTitle'
 import LastSaved from '@/components/ui/LastSaved.vue'
 
@@ -26,6 +28,7 @@ export default {
   components: {
     Careta,
     NavLogin,
+    NavShare,
     RenameTitle,
     LastSaved
   },
@@ -100,9 +103,14 @@ export default {
     }
 
     .nav-login {
-      margin-top: -.4rem;
+      margin-top: -.35rem;
       margin-right: -.4rem;
-      margin-left: auto;
+      color: $white;
+    }
+
+    .nav-share {
+      margin-top: -1.1rem;
+      margin-right: -.4rem;
       color: $white;
     }
 
