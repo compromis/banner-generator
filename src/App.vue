@@ -1,7 +1,6 @@
 <template>
   <div id="app" :class="'route-' + $route.name">
-    <app-header
-      :in-workspace="$route.name === 'workspace'" />
+    <app-header :in-workspace="$route.name === 'workspace'" />
     <transition name="fade" mode="out-in">
       <router-view />
     </transition>

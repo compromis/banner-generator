@@ -1,17 +1,19 @@
 <template>
-  <c-dropdown name="user" class="share-dropdown" label="Comparteix" icon="link" is-ghost>
-    <div class="share-dropdown-window">
-      <h2><font-awesome-icon class="mr-2" :icon="['far', 'link']" />Enllaç per a compartir</h2>
-      <div class="share-link">
-        <input type="text" @focus="$event.target.select()" :value="url"/>
-        <b-button :class="['mr-0', { 'success': copied }]" tag="a" @click="copyUrl">
-            <span v-if="!copied">Copia</span>
-            <span v-else-if="copied">Copiat!</span>
-        </b-button>
+  <div class="nav-share">
+    <c-dropdown name="user" class="share-dropdown" label="Comparteix" icon="link" is-ghost>
+      <div class="share-dropdown-window">
+        <h2><font-awesome-icon class="mr-2" :icon="['far', 'link']" />Enllaç per a compartir</h2>
+        <div class="share-link">
+          <input type="text" @focus="$event.target.select()" :value="url"/>
+          <b-button :class="['mr-0', { 'success': copied }]" tag="a" @click="copyUrl">
+              <span v-if="!copied">Copia</span>
+              <span v-else-if="copied">Copiat!</span>
+          </b-button>
+        </div>
+        <p>Qualsevol persona amb aquest enllaç pot editar la tarja amb el generador. Dues persones no poden estar editant la mateixa tarja a la vegada.</p>
       </div>
-      <p>Qualsevol persona amb aquest enllaç pot editar la tarja amb el generador. Dues persones no poden estar editant la mateixa tarja a la vegada.</p>
-    </div>
-  </c-dropdown>
+    </c-dropdown>
+  </div>
 </template>
 
 <script>
@@ -52,14 +54,21 @@ export default {
 
 <style lang="scss" scoped>
   @import "../../sass/variables";
+
+  .nav-share {
+    display: flex;
+    align-items: center;
+  }
+
   .share-dropdown {
+    margin: -.75rem;
+
     &-window {
       padding: .75rem;
-      width: 100vw;
-      max-width: 400px;
+      width: 400px;
 
       h2 {
-        font-size: 1.5rem;
+        font-size: 1.25rem;
       }
 
       p {
@@ -77,6 +86,7 @@ export default {
           border: none;
           border-radius: .5rem;
           margin-right: .5rem;
+          padding: 0 .5rem;
 
           &:focus {
             box-shadow: $focus-shadow;
@@ -97,6 +107,14 @@ export default {
           }
         }
       }
+    }
+  }
+
+  @media (max-width: $xs-breakpoint) {
+    .nav-share::v-deep .c-dropdown-list {
+      position: fixed;
+      left: 1rem;
+      right: 1rem;
     }
   }
 </style>

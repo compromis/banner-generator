@@ -58,13 +58,14 @@ export default {
     left: 0;
     right: 0;
     background-color: transparent;
-    padding: .75rem 1rem;
+    padding: 0 1rem;
     height: $navbar-height;
     transition: .25s ease-in-out;
     z-index: 40;
 
     .logo {
       display: flex;
+      align-items: center;
 
       &-careta {
         color: $white;
@@ -103,14 +104,11 @@ export default {
     }
 
     .nav-login {
-      margin-top: -.35rem;
       margin-right: -.4rem;
       color: $white;
     }
 
     .nav-share {
-      margin-top: -1.1rem;
-      margin-right: -.4rem;
       color: $white;
     }
 
