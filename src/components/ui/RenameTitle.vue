@@ -140,8 +140,8 @@ export default {
       border: 0;
       position: absolute;
       right: .25rem;
-      top: 0;
-      bottom: 0;
+      top: .75rem;
+      bottom: .75rem;
       color: $white;
       cursor: pointer;
       border-radius: .25rem;

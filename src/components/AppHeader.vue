@@ -10,7 +10,9 @@
     <transition name="fade">
       <last-saved v-if="template" />
     </transition>
-    <nav-share class="nav-share" />
+    <transition name="fade">
+      <nav-share v-if="template" class="nav-share" />
+    </transition>
     <nav-login class="nav-login" />
   </div>
 </template>
@@ -106,10 +108,12 @@ export default {
     .nav-login {
       margin-right: -.4rem;
       color: $white;
+      margin-left: auto;
     }
 
     .nav-share {
       color: $white;
+      margin-left: auto;
     }
 
     &--dark {

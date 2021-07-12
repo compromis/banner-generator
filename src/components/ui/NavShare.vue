@@ -2,7 +2,7 @@
   <div class="nav-share">
     <c-dropdown name="user" class="share-dropdown" label="Comparteix" icon="link" is-ghost>
       <div class="share-dropdown-window">
-        <h2><font-awesome-icon class="mr-2" :icon="['far', 'link']" />Enllaç per a compartir</h2>
+        <h2><font-awesome-icon class="mr-2" :icon="['far', 'link']" />Enllaç per a col·laborar</h2>
         <div class="share-link">
           <input type="text" @focus="$event.target.select()" :value="url"/>
           <b-button :class="['mr-0', { 'success': copied }]" tag="a" @click="copyUrl">
@@ -31,10 +31,6 @@ export default {
   },
 
   computed: {
-    isLoggedIn () {
-      return this.$store.getters['auth/isLoggedIn']
-    },
-
     url () {
       return window.location.href
     }
