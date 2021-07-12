@@ -2,7 +2,7 @@
   <footer :class="{ 'modal-open': showSettings || showHelp, 'columns': true }">
     <div class="column is-four-fifths">
       <help is-text @modalOpen="(open) => showHelp = open" />
-      <strong>Generador de Targes</strong> 2.0 és una aplicació desenvolupada pel <strong>Departament de Comunicació</strong> de <strong>Compromís</strong>.
+      <strong>Generador de Targes</strong> 3.0 és una aplicació desenvolupada pel <strong>Departament de Comunicació</strong> de <strong>Compromís</strong>.
     </div>
     <div class="column is-one-fifths">
       <app-settings @modalOpen="(open) => showSettings = open" />

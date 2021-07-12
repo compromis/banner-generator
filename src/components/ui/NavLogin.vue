@@ -65,6 +65,8 @@ export default {
   @import "../../sass/variables";
 
   .nav-login {
+    display: flex;
+    align-items: center;
     position: relative;
     z-index: 50;
 
