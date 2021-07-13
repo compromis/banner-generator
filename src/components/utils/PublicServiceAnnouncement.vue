@@ -1,9 +1,21 @@
 <template>
-  <a href="https://somriure.compromis.net" target="_blank" class="psa card elsomriure">
-    <span class="psa-flare">✨Nou</span>
-    <h4>Generador d'<img src="../../assets/elsomriure.svg" alt="El Somriure" class="elsomriure-logo" /></h4>
-    <p>Presentem una nova ferramenta per a generar edicions impreses d'El Somriure per al vostre col·lectiu local</p>
-  </a>
+  <div class="tools">
+    <h2>Més ferramentes</h2>
+    <div class="psas">
+      <a href="https://somriure.compromis.net" target="_blank" class="psa card elsomriure">
+        <h4>Generador d'<img src="../../assets/elsomriure.svg" alt="El Somriure" class="elsomriure-logo" /></h4>
+        <p>Genera edicions impreses d'El Somriure del teu col·lectiu local per a repartir pel poble.</p>
+      </a>
+      <a href="https://comprom.is/crea" target="_blank" class="psa card shorturls">
+        <h4>comprom.is/crea</h4>
+        <p>Genera adreces curtes comprom.is per a compartir en xarxes i veure quanta gent fa clic.</p>
+      </a>
+      <a href="https://disseny.compromis.net" target="_blank" class="psa card disseny">
+        <h4>Recursos de marca</h4>
+        <p>Descarrega el logo del teu col·lectiu, tipografies i més recursos de disseny.</p>
+      </a>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -15,10 +27,28 @@ export default {
 <style lang="scss" scoped>
   @import "../../sass/variables";
 
+  .tools {
+    margin: 4rem 1rem 3rem 1rem;
+
+    h2 {
+      color: rgba($gray-900, 0.25);
+      font-size: 3rem;
+      font-weight: bold;
+      letter-spacing: -1px;
+      line-height: 1;
+      margin-bottom: 2rem;
+    }
+  }
+
+  .psas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
   .psa {
     position: relative;
     display: block;
-    margin: 4rem 1rem 3rem 1rem;
     padding: 1.5rem 1.75rem;
     transition: .25s ease;
 
@@ -61,6 +91,8 @@ export default {
   }
 
   .elsomriure {
+    grid-column: 1 / -1;
+
     &-logo {
       height: 1.75rem;
     }
