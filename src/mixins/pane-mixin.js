@@ -135,7 +135,7 @@ export default {
 
       // Set picture and calc dimensions
       this.properties[picture] = image
-      this.properties[picturePreview] = uploaded.picture
+      this.properties[picturePreview] = uploaded.picture + '?t=' + new Date().getTime()
 
       const img = new Image()
       img.onload = () => {
