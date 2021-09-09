@@ -25,7 +25,8 @@ export default new Vuex.Store({
     },
     settings: {
       showArchive: false,
-      showLogoSelector: false
+      showLogoSelector: false,
+      transparentMode: false
     }
   },
   mutations: {

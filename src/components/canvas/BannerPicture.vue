@@ -1,5 +1,5 @@
 <template>
-  <div class="banner-picture">
+  <div class="banner-picture" v-if="!transparentMode">
     <glowy-card
       v-if="banner.theme === 'glowy'"
       :picture="computedPicture"
@@ -59,6 +59,10 @@ export default {
 
     computedColor () {
       return this.color || this.banner.color
+    },
+
+    transparentMode () {
+      return this.$store.state.settings.transparentMode
     }
   }
 }

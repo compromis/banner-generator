@@ -145,10 +145,12 @@ export default {
         })
       }
 
+      const { transparentMode } = this.$store.state.settings
       const { ref, title } = this.$store.state.bannerMeta
       const { width, height, downloadScale } = this.aspects[this.aspect]
       const bannerWidth = width * downloadScale
       const bannerHeight = height * downloadScale
+      const bgcolor = transparentMode ? 'transparent' : this.banner.mode === 'black' ? '#353949' : '#fff'
 
       if (this.isDownloadable) {
         this.downloading = true
@@ -156,7 +158,7 @@ export default {
         const blob = await domtoimage.toPng(
           document.getElementById('bannerCanvas' + this.aspect),
           {
-            bgcolor: this.banner.mode === 'black' ? '#353949' : '#fff',
+            bgcolor,
             width: bannerWidth,
             height: bannerHeight,
             style: {

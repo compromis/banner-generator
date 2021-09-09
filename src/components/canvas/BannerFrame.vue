@@ -1,5 +1,5 @@
 <template>
-  <div :class="['banner-frame', `banner-frame--${banner.theme}`]">
+  <div :class="['banner-frame', `banner-frame--${banner.theme}`]" v-if="!transparentMode">
     <glowy-blob
       v-if="banner.theme === 'blobs'"
       position="top"
@@ -95,6 +95,10 @@ export default {
       return banner.localLabel.length > 6 ||
         (aspect === '169' && banner.localLabel.length > 0) ||
         banner.logo !== 'compromis'
+    },
+
+    transparentMode () {
+      return this.$store.state.settings.transparentMode
     }
   },
 

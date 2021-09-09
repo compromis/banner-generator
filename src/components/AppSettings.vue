@@ -9,6 +9,7 @@
         <ul class="options">
           <li><b-switch v-model="showArchive">Mostrar plantilles arxivades</b-switch></li>
           <li><b-switch v-model="showLogoSelector">Mostrar logos de partits</b-switch></li>
+          <li v-if="isAdmin"><b-switch v-model="transparentMode">Descarrega amb fons transparent</b-switch></li>
         </ul>
         <b-button @click="modalOpen = false">Tanca</b-button>
       </div>
@@ -40,6 +41,20 @@ export default {
       set (value) {
         this.$store.commit('updateSettings', { prop: 'showLogoSelector', value })
       }
+    },
+
+    transparentMode: {
+      get () {
+        return this.$store.state.settings.transparentMode
+      },
+
+      set (value) {
+        this.$store.commit('updateSettings', { prop: 'transparentMode', value })
+      }
+    },
+
+    isAdmin () {
+      return this.$store.state.auth.user.role === 'admin'
     }
   },
 
