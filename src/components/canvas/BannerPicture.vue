@@ -54,7 +54,7 @@ export default {
     },
 
     computedPicture () {
-      return this.picture || this.banner.picturePreview
+      return this.banner.pictureBlob || this.banner.picturePreview
     },
 
     computedColor () {

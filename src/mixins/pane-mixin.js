@@ -124,6 +124,7 @@ export default {
       const { ref } = this.$store.state.bannerMeta
       const picture = prefix ? `${prefix}Picture` : 'picture'
       const picturePreview = prefix ? `${prefix}PicturePreview` : 'picturePreview'
+      const pictureBlob = prefix ? `${prefix}PictureBlob` : 'pictureBlob'
       const pictureAspect = prefix ? `${prefix}PictureAspect` : 'pictureAspect'
       const pictureDimensions = prefix ? `${prefix}PictureDimensions` : 'pictureDimensions'
 
@@ -136,6 +137,7 @@ export default {
       // Set picture and calc dimensions
       this.properties[picture] = image
       this.properties[picturePreview] = uploaded.picture + '?t=' + new Date().getTime()
+      this.properties[pictureBlob] = URL.createObjectURL(image)
 
       const img = new Image()
       img.onload = () => {
@@ -143,7 +145,7 @@ export default {
         this.properties[pictureAspect] = (width / height > ratio) ? 'horizontal' : 'vertical'
         this.properties[pictureDimensions] = { width, height }
       }
-      img.src = this.properties[picturePreview]
+      img.src = this.properties[pictureBlob]
     },
 
     updateHashtag (hashtag) {
