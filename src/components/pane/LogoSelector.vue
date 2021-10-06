@@ -5,6 +5,7 @@
     <option value="iniciativa">Iniciativa</option>
     <option value="verds">Verds</option>
     <option value="jovespv">Joves PV</option>
+    <option value="jovesiniciativa">Joves amb Iniciativa</option>
   </c-select>
 </template>
 

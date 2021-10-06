@@ -39,6 +39,7 @@ import BlocLogo from '@/components/utils/BlocLogo'
 import IniciativaLogo from '@/components/utils/IniciativaLogo'
 import JovespvLogo from '@/components/utils/JovespvLogo'
 import VerdsLogo from '@/components/utils/VerdsLogo'
+import JovesIniciativaLogo from '@/components/utils/JovesIniciativaLogo'
 import GlowyBlob from './GlowyBlob'
 
 export default {
@@ -50,6 +51,7 @@ export default {
     IniciativaLogo,
     VerdsLogo,
     JovespvLogo,
+    JovesIniciativaLogo,
     GlowyBlob
   },
 
@@ -79,7 +81,8 @@ export default {
         bloc: BlocLogo,
         iniciativa: IniciativaLogo,
         verds: VerdsLogo,
-        jovespv: JovespvLogo
+        jovespv: JovespvLogo,
+        jovesiniciativa: JovesIniciativaLogo
       }
 
       return logos[this.banner.logo]
