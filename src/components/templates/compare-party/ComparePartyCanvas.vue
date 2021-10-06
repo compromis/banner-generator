@@ -11,7 +11,7 @@
     v-if="banner">
     <div :class="['comparison-images', banner.invertOrder ? 'comparison-images--inverted' : '']">
       <banner-picture
-        :picture="banner.beforePicturePreview"
+        :picture="banner.beforePictureBlob || banner.beforePicturePreview"
         :picture-position="objectPositionBefore"
         :style="beforeGradientColor"
         :height="600"
@@ -19,7 +19,7 @@
         class="banner-picture-before"
         glow-size="sm" />
       <banner-picture
-        :picture="banner.afterPicturePreview"
+        :picture="banner.afterPictureBlob || banner.afterPicturePreview"
         :picture-position="objectPositionAfter"
         :style="{'--gradient-orientation' : '0deg'}"
         :height="600"

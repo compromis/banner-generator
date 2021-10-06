@@ -54,7 +54,7 @@ export default {
     },
 
     isAdmin () {
-      return this.$store.state.auth.user.role === 'admin'
+      return this.$store.state.auth.user && this.$store.state.auth.user.role === 'admin'
     }
   },
 
