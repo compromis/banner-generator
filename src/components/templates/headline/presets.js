@@ -30,6 +30,7 @@ import CastelloTVPNG from './logos/castello-tv.png'
 import MediterraneoCsPNG from './logos/mediterraneo-cs.png'
 import ElMeridianoPNG from './logos/el-meridiano.png'
 import ActualitatValencianaPNG from './logos/actualitat-valenciana.png'
+import AraMultimediaPNG from './logos/aramultimedia.png'
 
 const fonts = {
   tiemposHeadline: {
@@ -318,6 +319,14 @@ const sources = [
     logoHeight: 20,
     font: fonts.roboto,
     color: '#d60b52'
+  },
+  {
+    id: 'aramultimedia',
+    name: 'Ara Multimedia',
+    logo: AraMultimediaPNG,
+    logoHeight: 20,
+    font: fonts.roboto,
+    color: '#000'
   }
 ]
 
