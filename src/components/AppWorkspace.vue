@@ -139,7 +139,11 @@ export default {
     // Abort and show modal if going back unless 'confirmed' is explicitly set
     // or user is logged in
     if (to.params.confirmed || this.isLoggedIn) {
-      next()
+      if (to.name === 'create') {
+        next('/')
+      } else {
+        next()
+      }
     } else {
       this.isCardModalActive = true
       this.goingTo = to
