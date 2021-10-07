@@ -116,9 +116,9 @@ export default {
   },
 
   methods: {
-    back (confirmed) {
-      const name = this.goingTo.name || 'start'
-      this.$router.push({ name, params: { confirmed } })
+    back () {
+      const name = !this.goingTo || this.goingTo.name === 'create' ? 'start' : this.goingTo.name
+      this.$router.push({ name, params: { confirmed: true } })
     },
 
     setTemplate (name) {
