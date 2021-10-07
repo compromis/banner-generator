@@ -1,7 +1,7 @@
 <template>
   <c-select name="logo" label="Logo" v-model="logo" expanded v-if="showLogoSelector">
     <option value="compromis">Compromís</option>
-    <option value="bloc">BLOC</option>
+    <option value="mes">Més</option>
     <option value="iniciativa">Iniciativa</option>
     <option value="verds">Verds</option>
     <option value="jovespv">Joves PV</option>

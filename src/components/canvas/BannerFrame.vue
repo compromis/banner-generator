@@ -35,7 +35,7 @@
 
 <script>
 import CompromisLogo from '@/components/utils/CompromisLogo'
-import BlocLogo from '@/components/utils/BlocLogo'
+import MesLogo from '@/components/utils/MesLogo'
 import IniciativaLogo from '@/components/utils/IniciativaLogo'
 import JovespvLogo from '@/components/utils/JovespvLogo'
 import VerdsLogo from '@/components/utils/VerdsLogo'
@@ -47,7 +47,7 @@ export default {
 
   components: {
     CompromisLogo,
-    BlocLogo,
+    MesLogo,
     IniciativaLogo,
     VerdsLogo,
     JovespvLogo,
@@ -78,7 +78,7 @@ export default {
     logoComponent () {
       const logos = {
         compromis: CompromisLogo,
-        bloc: BlocLogo,
+        mes: MesLogo,
         iniciativa: IniciativaLogo,
         verds: VerdsLogo,
         jovespv: JovespvLogo,
