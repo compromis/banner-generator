@@ -17,7 +17,7 @@ import LaVeuSVG from './logos/laveu.svg'
 import EuropaPressSVG from './logos/europapress.svg'
 import InfoLibreSVG from './logos/infolibre.svg'
 import ElPeriodicoDeAquiPNG from './logos/elperiodicodeaqui.png'
-import ValenciaExtraPNG from './logos/valencia-extra.png'
+import ValenciaExtraSVG from './logos/valenciaextra.svg'
 import ElPeriodicSVG from './logos/elperiodic.svg'
 import ElConfidencialSVG from './logos/elconfidencial.svg'
 import LaMarinaPlazaSVG from './logos/marinaplaza.svg'
@@ -251,7 +251,7 @@ const sources = [
   {
     id: 'valenciaextra',
     name: 'València Extra',
-    logo: ValenciaExtraPNG,
+    logo: ValenciaExtraSVG,
     logoHeight: 24,
     font: fonts.titillium,
     color: '#E3803B'
