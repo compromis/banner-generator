@@ -12,7 +12,7 @@
       @input="updateSource"
       :value="properties.source">
       <option
-        v-for="source in presets"
+        v-for="source in presetsByName"
         :value="source.id"
         :key="source.id"
         :selected="properties.source === source.id">
@@ -171,6 +171,13 @@ export default {
   },
 
   computed: {
+    presetsByName () {
+      const presetsByName = [...this.presets]
+      return presetsByName.sort((a, b) => {
+        return a.name.localeCompare(b.name)
+      })
+    },
+
     availableThemes () {
       const themes = {
         11: ['glowy', 'blobs', 'blobless'],

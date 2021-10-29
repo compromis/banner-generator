@@ -1,39 +1,3 @@
-import laSexta from './logos/channels/lasexta.jpg'
-import laSextaNoche from './logos/programme/lasextanoche.jpg'
-import alRojoVivo from './logos/programme/alrojovivo.svg'
-
-import la1 from './logos/channels/tve.jpg'
-import la2 from './logos/channels/la2.png'
-import alacantiTv from './logos/channels/alacantitv.jpg'
-import horas24 from './logos/channels/24h.jpg'
-import antena3 from './logos/channels/antena3.jpg'
-import apunt from './logos/channels/apunt.png'
-import cuatro from './logos/channels/cuatro.png'
-import la8mediterraneo from './logos/channels/la8mediterraneo.jpg'
-import laPoblaTv from './logos/channels/lapoblatv.jpg'
-import levanteTv from './logos/channels/levantetv.jpg'
-import riberaTv from './logos/channels/riberatv.png'
-import castelloTv from './logos/channels/castello-tv.png'
-
-import tele7 from './logos/channels/tele7.jpg'
-import telecinco from './logos/channels/telecinco.jpg'
-import teleElx from './logos/channels/teleelx.png'
-import teleOrihuela from './logos/channels/teleorihuela.jpg'
-import teleSafor from './logos/channels/telesafor.jpg'
-import teleSagunto from './logos/channels/telesagunto.jpg'
-
-import cadenaSer from '../headline/logos/ser.svg'
-import rne from './logos/channels/rne.svg'
-import ondaCero from './logos/channels/ondacero.png'
-import cope from './logos/channels/cope.svg'
-
-import radioPego from './logos/channels/radiopego.png'
-
-import desayunos from './logos/programme/desayunos.jpeg'
-import apuntNtc from './logos/programme/apuntntc.png'
-import docs from './logos/programme/docs.jpg'
-import espejoPublico from './logos/programme/espejopublico.svg'
-
 import xarxes from './presets-xarxes.js'
 
 const sources = [
@@ -43,19 +7,19 @@ const sources = [
       {
         id: 'apunt',
         name: 'À Punt',
-        logo: apunt,
+        logo: require('./logos/channels/apunt.png'),
         color: 'black',
         programmes: [
           {
             id: 'docs',
             name: 'Docs',
-            logo: docs,
+            logo: require('./logos/programme/docs.jpg'),
             color: 'white'
           },
           {
             id: 'apuntntc',
             name: 'Notícies',
-            logo: apuntNtc,
+            logo: require('./logos/programme/apuntntc.png'),
             width: '105px',
             color: 'white'
           }
@@ -69,13 +33,13 @@ const sources = [
       {
         id: 'la1',
         name: 'La 1',
-        logo: la1,
+        logo: require('./logos/channels/tve.jpg'),
         color: 'white',
         programmes: [
           {
             id: 'desayunos',
             name: 'Los desayunos de TVE',
-            logo: desayunos,
+            logo: require('./logos/programme/desayunos.jpeg'),
             color: 'white',
             width: '90px'
           }
@@ -84,20 +48,20 @@ const sources = [
       {
         id: 'la2',
         name: 'La 2',
-        logo: la2,
+        logo: require('./logos/channels/la2.png'),
         color: 'white',
         programmes: []
       },
       {
         id: 'antena3',
         name: 'Antena 3',
-        logo: antena3,
+        logo: require('./logos/channels/antena3.jpg'),
         color: '#ff7328',
         programmes: [
           {
             id: 'espejopublico',
             name: 'Espejo Público',
-            logo: espejoPublico,
+            logo: require('./logos/programme/espejopublico.svg'),
             color: 'white',
             padding: '5px'
           }
@@ -106,33 +70,33 @@ const sources = [
       {
         id: 'cuatro',
         name: 'Cuatro',
-        logo: cuatro,
+        logo: require('./logos/channels/cuatro.png'),
         programmes: [],
         color: '#ff0000'
       },
       {
         id: 'telecinco',
         name: 'Telecinco',
-        logo: telecinco,
+        logo: require('./logos/channels/telecinco.jpg'),
         color: '#00a5db',
         programmes: []
       },
       {
         id: 'lasexta',
         name: 'laSexta',
-        logo: laSexta,
+        logo: require('./logos/channels/lasexta.jpg'),
         color: '#293b47',
         programmes: [
           {
             id: 'noche',
             name: 'La Sexta Noche',
-            logo: laSextaNoche,
+            logo: require('./logos/programme/lasextanoche.jpg'),
             color: 'black'
           },
           {
             id: 'alrojovivo',
             name: 'Al Rojo Vivo',
-            logo: alRojoVivo,
+            logo: require('./logos/programme/alrojovivo.svg'),
             color: '#d4001f',
             padding: '5px'
           }
@@ -141,7 +105,7 @@ const sources = [
       {
         id: '24h',
         name: '24h tve',
-        logo: horas24,
+        logo: require('./logos/channels/24h.jpg'),
         color: 'white',
         programmes: []
       }
@@ -155,7 +119,7 @@ const sources = [
       {
         id: 'cadenaser',
         name: 'Cadena SER',
-        logo: cadenaSer,
+        logo: require('../headline/logos/ser.svg'),
         padding: '5px',
         color: '#293b47',
         programmes: []
@@ -163,28 +127,44 @@ const sources = [
       {
         id: 'ondacero',
         name: 'Onda Cero',
-        logo: ondaCero,
+        logo: require('./logos/channels/ondacero.png'),
         color: '#293b47',
         programmes: []
       },
       {
         id: 'rne',
         name: 'Ràdio Nacional',
-        logo: rne,
+        logo: require('./logos/channels/rne.svg'),
         color: 'linear-gradient(45deg, #97233f 0%, #ff0000 100%)',
         programmes: []
       },
       {
         id: 'cope',
         name: 'Cadena Cope',
-        logo: cope,
+        logo: require('./logos/channels/cope.svg'),
         color: '#2e72b8',
         programmes: []
       }
     ]
   },
+
+  // radios valencianes
+  {
+    name: 'Radios valencianes',
+    channels: [
+      {
+        id: 'plazaradio',
+        name: 'Plaza Radio',
+        logo: require('./logos/channels/plazaradio.png'),
+        color: '#000',
+        programmes: []
+      }
+    ]
+  },
+
   // xarxes socials
   xarxes,
+
   // televisions locals
   {
     name: 'Televisions Locals',
@@ -192,77 +172,77 @@ const sources = [
       {
         id: 'alacantitv',
         name: 'Alacantí Tv',
-        logo: alacantiTv,
+        logo: require('./logos/channels/alacantitv.jpg'),
         color: 'white',
         programmes: []
       },
       {
         id: 'la8mediterraneo',
         name: 'la8 Mediterráneo',
-        logo: la8mediterraneo,
+        logo: require('./logos/channels/la8mediterraneo.jpg'),
         color: 'white',
         programmes: []
       },
       {
         id: 'lapoblatv',
         name: 'La Pobla TV',
-        logo: laPoblaTv,
+        logo: require('./logos/channels/lapoblatv.jpg'),
         color: 'white',
         programmes: []
       },
       {
         id: 'levantetv',
         name: 'Levante TV',
-        logo: levanteTv,
+        logo: require('./logos/channels/levantetv.jpg'),
         color: 'white',
         programmes: []
       },
       {
         id: 'riberatv',
         name: 'Ribera TV',
-        logo: riberaTv,
+        logo: require('./logos/channels/riberatv.png'),
         programmes: [],
         color: 'white'
       },
       {
         id: 'tele7',
         name: 'Tele 7 València',
-        logo: tele7,
+        logo: require('./logos/channels/tele7.jpg'),
         color: '#eb7201',
         programmes: []
       },
       {
         id: 'teleelx',
         name: 'TeleElx',
-        logo: teleElx,
+        logo: require('./logos/channels/teleelx.png'),
         color: '#d13138',
         programmes: []
       },
       {
         id: 'teleorihuela',
         name: 'Tele Orihuela',
-        logo: teleOrihuela,
+        logo: require('./logos/channels/teleorihuela.jpg'),
         color: 'black',
         programmes: []
       },
       {
         id: 'telesafor',
         name: 'TeleSafor',
-        logo: teleSafor,
+        logo: require('./logos/channels/telesafor.jpg'),
         color: '#51209e',
         programmes: []
       },
       {
         id: 'telesagunto',
         name: 'Tele Sagunt',
-        logo: teleSagunto,
+        logo: require('./logos/channels/telesagunto.jpg'),
         color: 'white',
         programmes: []
       },
       {
         id: 'castellotv',
         name: 'Castelló TV',
-        logo: castelloTv,
+        logo: require('./logos/channels/castello-tv.png'),
         color: 'white',
         programmes: []
       }
@@ -274,7 +254,7 @@ const sources = [
       {
         id: 'radiopego',
         name: 'Radio Pego',
-        logo: radioPego,
+        logo: require('./logos/channels/radiopego.png'),
         color: 'white',
         programmes: []
       }
