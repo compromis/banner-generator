@@ -6,6 +6,7 @@
     <option value="verds">Verds</option>
     <option value="jovespv">Joves PV</option>
     <option value="jovesiniciativa">Joves amb Iniciativa</option>
+    <option value="dones">Dones amb Compromís</option>
   </c-select>
 </template>
 

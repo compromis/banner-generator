@@ -11,13 +11,19 @@
     <div v-if="aspect !== '916'" class="hashtag" >{{ banner.hashtag }}</div>
     <div :class="['logo', `logo--align-${logoAlign}`]" v-if="aspect !== '916'">
       <component
+        v-if="logoGoes === 'before'"
         :is="logoComponent"
         :mono="!colorLogo"
-        :class="`logo-${banner.logo}`" />
+        :class="[`logo-${banner.logo}`, 'logo-before']" />
       <compromis-logo
         v-if="banner.logo !== 'compromis' && banner.localLabel.length === 0"
         :mono="!colorLogo"
         class="trailing-compromis-logo" />
+      <component
+        v-if="logoGoes === 'after'"
+        :is="logoComponent"
+        :mono="!colorLogo"
+        :class="[`logo-${banner.logo}`, 'logo-after']" />
       <div
         v-if="banner.localLabel"
         :class="[
@@ -40,6 +46,7 @@ import IniciativaLogo from '@/components/utils/IniciativaLogo'
 import JovespvLogo from '@/components/utils/JovespvLogo'
 import VerdsLogo from '@/components/utils/VerdsLogo'
 import JovesIniciativaLogo from '@/components/utils/JovesIniciativaLogo'
+import DonesLogo from '@/components/utils/DonesLogo'
 import GlowyBlob from './GlowyBlob'
 
 export default {
@@ -52,6 +59,7 @@ export default {
     VerdsLogo,
     JovespvLogo,
     JovesIniciativaLogo,
+    DonesLogo,
     GlowyBlob
   },
 
@@ -82,7 +90,22 @@ export default {
         iniciativa: IniciativaLogo,
         verds: VerdsLogo,
         jovespv: JovespvLogo,
-        jovesiniciativa: JovesIniciativaLogo
+        jovesiniciativa: JovesIniciativaLogo,
+        dones: DonesLogo
+      }
+
+      return logos[this.banner.logo]
+    },
+
+    logoGoes () {
+      const logos = {
+        compromis: '',
+        mes: 'before',
+        iniciativa: 'before',
+        verds: 'before',
+        jovespv: 'before',
+        jovesiniciativa: 'before',
+        dones: 'after'
       }
 
       return logos[this.banner.logo]
@@ -180,6 +203,11 @@ export default {
 
     .logo-jovespv {
       height: 29px;
+    }
+
+    .logo-dones {
+      height: 25px;
+      margin-left: 12px;
     }
   }
 
