@@ -99,7 +99,7 @@ export default {
 
     logoGoes () {
       const logos = {
-        compromis: '',
+        compromis: 'before',
         mes: 'before',
         iniciativa: 'before',
         verds: 'before',
