@@ -1,5 +1,17 @@
 export default [
   {
+    id: 'Igualtat',
+    name: 'Exigim Igualtat',
+    aspects: ['11'],
+    icon: 'portrait',
+    label: '✨Nou',
+    components: {
+      pane: () => import(/* webpackChunkName: "igualtat" */ './exigim-igualtat/IgualtatPane'),
+      canvas: () => import(/* webpackChunkName: "igualtat" */ './exigim-igualtat/IgualtatCanvas'),
+      help: () => import(/* webpackChunkName: "igualtat" */ './exigim-igualtat/IgualtatHelp')
+    }
+  },
+  {
     id: 'Headline',
     name: 'Titular de premsa',
     aspects: ['11', '916', '169'],
@@ -50,7 +62,6 @@ export default [
     id: 'Chart',
     name: 'Gràfica',
     aspects: ['11', '169'],
-    label: '✨Nou',
     icon: 'chart-bar',
     components: {
       pane: () => import(/* webpackChunkName: "chart" */ './chart/ChartPane'),
@@ -84,7 +95,6 @@ export default [
     id: 'Cards',
     name: 'Graella',
     aspects: ['11'],
-    label: '✨Nou',
     icon: 'grip-horizontal',
     components: {
       pane: () => import(/* webpackChunkName: "cards" */ './cards/CardsPane'),
