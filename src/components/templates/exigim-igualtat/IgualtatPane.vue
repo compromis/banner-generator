@@ -5,7 +5,7 @@
       label="Titol"
       name="title"
       :message="setFieldMessage('title')"
-      placeholder="Acte Central a València"
+      placeholder="Arreplegada de signatures a Oliva"
       v-model="properties.title"
       max-length="60"
     />
@@ -27,35 +27,14 @@
       </div>
     </transition>
 
-    <transition-group tag="div" name="slide">
       <!-- Venue -->
       <c-input-text
-        key="inperson"
-        v-if="aspect !== 'event' && properties.eventType === 'inperson'"
         label="Lloc"
         name="venue"
         :message="setFieldMessage('place')"
         placeholder="Riu Túria"
         v-model="properties.place"
         max-length="60" />
-
-      <!-- Social Media Selector -->
-      <social-selector
-        key="stream"
-        v-if="aspect !== 'event' && properties.eventType === 'stream'"
-        v-model="properties.social" />
-
-      <!-- Videochat -->
-      <c-input-text
-        key="videochat"
-        v-if="aspect !== 'event' && properties.eventType === 'videochat'"
-        label="Servei"
-        name="videochat"
-        :message="setFieldMessage('videochat')"
-        placeholder="Google Meet"
-        v-model="properties.videochat"
-        max-length="60" />
-    </transition-group>
 
     <!-- Speakers -->
     <transition name="slide">
