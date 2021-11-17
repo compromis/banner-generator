@@ -1,5 +1,11 @@
 <template>
   <div :class="['pane', 'event-pane', { 'pane-dimmed': paneDimmed }, `logo-${properties.logo}`]">
+    <!-- Language -->
+    <c-select name="lang" label="Idioma" v-model="properties.lang" expanded>
+        <option value="val">Valencià</option>
+        <option value="cas">Castellà</option>
+    </c-select>
+
     <!-- Title -->
     <c-input-text
       label="Titol"
@@ -83,6 +89,7 @@ export default {
     return {
       properties: {
         theme: 'blobless',
+        lang: 'val',
         title: '',
         date: new Date(),
         time: new Date(),

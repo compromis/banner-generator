@@ -1,5 +1,4 @@
 import moment from 'moment'
-moment.locale('ca')
 
 export default {
   computed: {
@@ -21,7 +20,7 @@ export default {
 
   filters: {
     formatDate (date) {
-      return moment(date).format('dddd, D MMMM')
+      return this.formatDateLocale(date, 'val')
     },
 
     formatTime (time) {
@@ -68,6 +67,11 @@ export default {
       const propLength = text.length / maxLength
       const fontSize = (maxFontSize * adjust) + propLength * ((minFontSize * adjust) - (maxFontSize * adjust))
       return returnInt ? fontSize : `${fontSize}px`
+    },
+
+    formatDateLocale (date, lang) {
+      const locales = { cas: 'es', val: 'ca' }
+      return moment(date).locale(locales[lang]).format('dddd, D MMMM')
     }
   }
 }

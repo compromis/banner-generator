@@ -11,7 +11,8 @@
     ]"
     v-if="banner">
     <div class="event-grid">
-      <igualtat-logo />
+      <igualtat-logo v-if="banner.lang === 'val'" class="igualtat-logo" />
+      <igualtat-logo-cas v-if="banner.lang === 'cas'" class="igualtat-logo" />
       <div :class="['event event-full card']">
         <img src="./speaker-image.png" class="speaker-image">
         <div class="event-title" :style="{fontSize: fontSize(banner.title, 50, 37, 60)}">
@@ -32,7 +33,7 @@
           </event-info>
         </div>
         <div class="event-details event-details" v-if="aspect !== 'event'">
-          <event-info color="gradient" icon="calendar-day">{{ banner.date | formatDate }}</event-info>
+          <event-info color="gradient" icon="calendar-day">{{ formatDateLocale(banner.date, banner.lang) }}</event-info>
           <event-info color="gradient" icon="clock">{{ banner.time | formatTime }}</event-info>
           <event-info color="gradient" icon="map-marker-alt">{{ banner.place }}</event-info>
         </div>
@@ -44,6 +45,7 @@
 
 <script>
 import IgualtatLogo from './IgualtatLogo'
+import IgualtatLogoCas from './IgualtatLogoCas'
 import CanvasMixin from '@/mixins/canvas-mixin.js'
 import BannerFrame from '@/components/canvas/BannerFrame'
 import EventInfo from '@/components/canvas/EventInfo'
@@ -56,6 +58,7 @@ export default {
 
   components: {
     IgualtatLogo,
+    IgualtatLogoCas,
     BannerFrame,
     EventInfo,
     TextInPills
@@ -240,7 +243,7 @@ export default {
 
   .igualtat-logo {
     padding: 35px;
-    max-width: 70%;
+    height: 150px;
   }
 
   .speaker-image {

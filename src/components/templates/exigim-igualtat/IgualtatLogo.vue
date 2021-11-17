@@ -1,5 +1,5 @@
 <template>
-<svg class="igualtat-logo" id="Capa_1" data-name="Capa 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 785.2 218.86">
+<svg id="Capa_1" data-name="Capa 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 785.2 218.86">
   <defs>
     <linearGradient id="New_Gradient_Swatch" x1="399.59" y1="100.62" x2="799.63" y2="44.13" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#583c89" />
