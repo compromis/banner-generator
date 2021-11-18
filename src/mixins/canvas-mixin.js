@@ -20,7 +20,7 @@ export default {
 
   filters: {
     formatDate (date) {
-      return this.formatDateLocale(date, 'val')
+      return moment(date).locale('ca').format('dddd, D MMMM')
     },
 
     formatTime (time) {
@@ -69,7 +69,7 @@ export default {
       return returnInt ? fontSize : `${fontSize}px`
     },
 
-    formatDateLocale (date, lang) {
+    formatDateLocale (date, lang = 'val') {
       const locales = { cas: 'es', val: 'ca' }
       return moment(date).locale(locales[lang]).format('dddd, D MMMM')
     }
