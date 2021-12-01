@@ -1,5 +1,29 @@
 export default [
   {
+    id: 'Christmas2021',
+    name: 'Felicitació Festes',
+    aspects: ['11'],
+    icon: 'hat-santa',
+    label: '🎄Festes',
+    components: {
+      pane: () => import(/* webpackChunkName: "christmas-2021" */ './christmas-2021/Christmas2021Pane'),
+      canvas: () => import(/* webpackChunkName: "christmas-2021" */ './christmas-2021/Christmas2021Canvas'),
+      help: () => import(/* webpackChunkName: "christmas-2021" */ './christmas-2021/Christmas2021Help')
+    }
+  },
+  {
+    id: 'ChristmasLocal2021',
+    name: 'Comerç Local',
+    aspects: ['11'],
+    icon: 'gifts',
+    label: '🎄Festes',
+    components: {
+      pane: () => import(/* webpackChunkName: "christmas-local-2021" */ './christmas-local-2021/ChristmasLocal2021Pane'),
+      canvas: () => import(/* webpackChunkName: "christmas-local-2021" */ './christmas-local-2021/ChristmasLocal2021Canvas'),
+      help: () => import(/* webpackChunkName: "christmas-local-2021" */ './christmas-local-2021/ChristmasLocal2021Help')
+    }
+  },
+  {
     id: 'Igualtat',
     name: 'Exigim Igualtat',
     aspects: ['11'],
