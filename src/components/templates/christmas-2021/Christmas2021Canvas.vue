@@ -7,7 +7,7 @@
       'lang-' + banner.lang
     ]"
     v-if="banner">
-    <div class="background" :style="{ '--light-vibrant': lightVibrant, '--dark-vibrant': darkVibrant, '--dark-muted': darkMuted, '--vibrant': vibrant }">
+    <div class="background">
       <div class="background-picture" v-if="banner.picture && banner.hasCustomPicture" key="picture">
         <img v-if="banner.picture" :src="banner.picturePreview" :style="objectPosition" />
       </div>
@@ -35,7 +35,6 @@
 </template>
 
 <script>
-import Vibrant from 'node-vibrant'
 import CompromisLogo from '@/components/utils/CompromisLogo'
 import Careta from '@/components/canvas/Careta'
 import ChristmasGreeting from './ChristmasGreeting'
@@ -52,33 +51,7 @@ export default {
     ChristmasGreeting
   },
 
-  data () {
-    return {
-      palette: null
-    }
-  },
-
   computed: {
-    lightVibrant () {
-      const [r, g, b] = this.palette && this.banner.hasCustomPicture && this.banner.picture ? this.palette['LightVibrant'].rgb : [255, 230, 181]
-      return `rgb(${r}, ${g}, ${b})`
-    },
-
-    darkVibrant () {
-      const [r, g, b] = this.palette && this.banner.hasCustomPicture && this.banner.picture ? this.palette['DarkVibrant'].rgb : [177, 32, 36]
-      return `rgb(${r}, ${g}, ${b})`
-    },
-
-    darkMuted () {
-      const [r, g, b] = this.palette && this.banner.hasCustomPicture && this.banner.picture ? this.palette['DarkMuted'].rgb : [84, 59, 47]
-      return `rgb(${r}, ${g}, ${b})`
-    },
-
-    vibrant () {
-      const [r, g, b] = this.palette && this.banner.hasCustomPicture && this.banner.picture ? this.palette['Vibrant'].rgb : [224, 181, 45]
-      return `rgb(${r}, ${g}, ${b})`
-    },
-
     textDefault () {
       const { lang } = this.banner
       const texts = {
@@ -87,29 +60,6 @@ export default {
       }
 
       return texts[lang]
-    }
-  },
-
-  mounted () {
-    this.getPalette()
-  },
-
-  watch: {
-    'banner.picturePreview' () {
-      this.getPalette()
-    }
-  },
-
-  methods: {
-    getPalette () {
-      const img = document.createElement('img')
-      img.setAttribute('src', this.banner.picturePreview)
-
-      img.addEventListener('load', () => {
-        Vibrant.from(img).maxColorCount(200).getPalette().then((palette) => {
-          this.palette = palette
-        })
-      })
     }
   }
 }
