@@ -8,23 +8,22 @@
     ]"
     v-if="banner">
     <div class="background">
-      <div class="background-picture" v-if="banner.picture && banner.hasCustomPicture" key="picture">
+      <div class="background-picture" v-if="banner.picture" key="picture">
         <img v-if="banner.picture" :src="banner.picturePreview" :style="objectPosition" />
       </div>
       <div class="frame"></div>
       <img class="snow-overlay" src="./snow-overlay.svg" alt="">
       <div class="picture">
-        <div :class="['title', { 'title-center': banner.hasCustomPicture }]">
+        <div :class="['title', { 'title-center': !!banner.picture }]">
           <christmas-greeting :lang="banner.lang" />
         </div>
-        <div v-if="!banner.hasCustomPicture" class="smiley-santa" key="santa">
+        <div v-if="!banner.picture" class="smiley-santa" key="santa">
           <careta class="careta" />
           <img src="./santa-hat.png" class="santa-hat" />
         </div>
       </div>
       <div class="text">
-        <div v-if="banner.hasCustomMessage && banner.customMessage" class="text-default">{{ banner.customMessage }}</div>
-        <div v-else class="text-default">{{ textDefault }}</div>
+        <div v-if="banner.customMessage" class="text-default">{{ banner.customMessage }}</div>
         <div class="compromis-logo">
           <compromis-logo mono />
           <span :class="['municipality', {'municipality--long': banner.municipality.length > 18 }]">{{ banner.municipality }}</span>
@@ -49,18 +48,6 @@ export default {
     CompromisLogo,
     Careta,
     ChristmasGreeting
-  },
-
-  computed: {
-    textDefault () {
-      const { lang } = this.banner
-      const texts = {
-        val: `T’estime tant que enguany em quede a casa.`,
-        cas: `Te quiero tanto que este año me quedo en casa.`
-      }
-
-      return texts[lang]
-    }
   }
 }
 </script>
@@ -163,7 +150,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    top: -125px;
+    top: -120px;
     color: var(--orange-christmas);
     z-index: 20;
 

@@ -18,9 +18,9 @@ export default [
     icon: 'gifts',
     label: '🎄Festes',
     components: {
-      pane: () => import(/* webpackChunkName: "christmas-local-2021" */ './christmas-local-2021/ChristmasLocal2021Pane'),
-      canvas: () => import(/* webpackChunkName: "christmas-local-2021" */ './christmas-local-2021/ChristmasLocal2021Canvas'),
-      help: () => import(/* webpackChunkName: "christmas-local-2021" */ './christmas-local-2021/ChristmasLocal2021Help')
+      pane: () => import(/* webpackChunkName: "christmas-2021" */ './christmas-local-2021/ChristmasLocal2021Pane'),
+      canvas: () => import(/* webpackChunkName: "christmas-2021" */ './christmas-local-2021/ChristmasLocal2021Canvas'),
+      help: () => import(/* webpackChunkName: "christmas-2021" */ './christmas-local-2021/ChristmasLocal2021Help')
     }
   },
   {

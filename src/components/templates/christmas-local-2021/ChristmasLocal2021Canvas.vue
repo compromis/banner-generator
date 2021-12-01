@@ -8,7 +8,7 @@
     ]"
     v-if="banner">
     <div class="background">
-      <div class="background-picture" v-if="banner.picture && banner.hasCustomPicture" key="picture">
+      <div class="background-picture" v-if="banner.picture" key="picture">
         <img v-if="banner.picture" :src="banner.picturePreview" :style="objectPosition" />
       </div>
       <div class="frame"></div>
@@ -19,7 +19,7 @@
         </div>
       </div>
       <div class="text">
-        <div v-if="banner.hasCustomMessage && banner.customMessage" class="text-default">{{ banner.customMessage }}</div>
+        <div v-if="banner.customMessage" class="text-default">{{ banner.customMessage }}</div>
         <div v-else class="text-default">{{ textDefault }}</div>
         <div class="compromis-logo">
           <compromis-logo mono />
@@ -49,8 +49,8 @@ export default {
     textDefault () {
       const { lang } = this.banner
       const texts = {
-        val: `T’estime tant que enguany em quede a casa.`,
-        cas: `Te quiero tanto que este año me quedo en casa.`
+        val: `Donem suport als comerços del nostre poble`,
+        cas: `Apoyemos a los comercios de nuestro pueblo`
       }
 
       return texts[lang]
