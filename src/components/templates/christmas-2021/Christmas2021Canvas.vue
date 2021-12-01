@@ -90,7 +90,7 @@ export default {
     top: 0;
     bottom: 0;
     z-index: -1;
-    opacity: 70%;
+    opacity: 0.7;
   }
 
   .picture {
