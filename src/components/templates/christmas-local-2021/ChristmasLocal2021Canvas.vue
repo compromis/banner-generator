@@ -15,7 +15,8 @@
       <img class="snow-overlay" src="./snow-overlay.svg" alt="">
       <div class="picture">
         <div class="title">
-          <christmas-local-greeting :lang="banner.lang"/>
+          <div v-if="banner.lang === 'val'">A Nadal, comerç local</div>
+          <div v-if="banner.lang === 'cas'">Por navidad, comercio local</div>
         </div>
       </div>
       <div class="text">
@@ -32,7 +33,6 @@
 
 <script>
 import CompromisLogo from '@/components/utils/CompromisLogo'
-import ChristmasLocalGreeting from './ChristmasLocalGreeting'
 import CanvasMixin from '@/mixins/canvas-mixin'
 
 export default {
@@ -41,8 +41,7 @@ export default {
   mixins: [CanvasMixin],
 
   components: {
-    CompromisLogo,
-    ChristmasLocalGreeting
+    CompromisLogo
   },
 
   computed: {
@@ -61,6 +60,7 @@ export default {
 
 <style lang="scss" scoped>
   @import "../../../sass/variables";
+  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@300&display=swap');
 
   .background {
     --dark-christmas: #2b2b2b;
@@ -152,12 +152,17 @@ export default {
   }
 
   .title {
+    font-family: 'Source Serif Pro', serif;
+    font-size: 6.5rem;
+    max-width: 600px;
+    line-height: 0.95;
+    text-align: center;
     position: absolute;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    top: 70px;
+    top: 80px;
     color: var(--orange-christmas);
     z-index: 20;
   }
