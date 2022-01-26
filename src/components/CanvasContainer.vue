@@ -13,7 +13,7 @@
       </c-dropdown-item>
     </c-dropdown>
 
-    <div :class="['banner-aspect', `banner-aspect-${aspect}`]">
+    <div :class="['banner-aspect', `banner-aspect-${aspect}`, isInTransparentMode && 'transparent-mode']">
       <div
         :class="['canvas-wrapper', `template-${template.id.toLowerCase()}`]"
         :style="{transform: `scale(${scale})`, margin: `${margin}px`}">
@@ -93,6 +93,10 @@ export default {
 
     displayErrors () {
       return this.$store.state.displayErrors
+    },
+
+    isInTransparentMode () {
+      return this.$store.state.settings.transparentMode
     }
   },
 
@@ -145,12 +149,11 @@ export default {
         })
       }
 
-      const { transparentMode } = this.$store.state.settings
       const { ref, title } = this.$store.state.bannerMeta
       const { width, height, downloadScale } = this.aspects[this.aspect]
       const bannerWidth = width * downloadScale
       const bannerHeight = height * downloadScale
-      const bgcolor = transparentMode ? 'transparent' : this.banner.mode === 'black' ? '#353949' : '#fff'
+      const bgcolor = this.isInTransparentMode ? 'transparent' : this.banner.mode === 'black' ? '#353949' : '#fff'
 
       if (this.isDownloadable) {
         this.downloading = true
