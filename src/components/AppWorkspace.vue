@@ -6,7 +6,10 @@
       </div>
       <component :is="template.components.pane" class="pane" />
       <canvas-container :canvas-component="template.components.canvas" class="canvas" />
-      <help id="help-button" class="help-block" />
+      <div class="workspace-buttons">
+        <help id="help-button" class="help-block" />
+        <app-settings @modalOpen="(open) => showSettings = open" compact />
+      </div>
       <c-popup :show-popup="showPopup">
         Inicia sessió amb l'Espai Compromís per a guardar versions editables de les teues targes.
         <template v-slot:buttons>
@@ -43,6 +46,7 @@
 <script>
 import http from '@/http'
 import CanvasContainer from './CanvasContainer'
+import AppSettings from './AppSettings'
 import Help from './Help'
 import Loading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/vue-loading.css'
@@ -55,7 +59,8 @@ export default {
     CanvasContainer,
     Help,
     Loading,
-    CPopup
+    CPopup,
+    AppSettings
   },
 
   data () {
@@ -65,7 +70,8 @@ export default {
       banner: null,
       error: false,
       ssoLoginUrl: process.env.VUE_APP_SSO_LOGIN_URL,
-      showPopup: false
+      showPopup: false,
+      showSettings: false
     }
   },
 
@@ -199,7 +205,7 @@ export default {
       overflow: hidden;
     }
 
-    .help-block {
+    .workspace-buttons {
       position: absolute;
       top: 1rem;
       right: 1.5rem;
@@ -283,11 +289,13 @@ export default {
         overflow: hidden;
       }
 
-      .help-block {
+      .workspace-buttons {
+        display: flex;
         position: fixed;
         top: 3.5rem;
         right: 9rem;
         z-index: 10;
+        gap: .5rem;
 
         .button.is-text {
           color: $white;

@@ -1,6 +1,11 @@
 <template>
   <div class="settings">
-    <div class="has-text-right settings-button">
+    <div v-if="compact">
+      <b-tooltip label="Opcions" position="is-left" type="is-dark">
+          <b-button type="is-text" icon-left="cog" size="is-large" class="help-block-button" @click="toggleModal"></b-button>
+      </b-tooltip>
+    </div>
+    <div class="has-text-right settings-button" v-else>
       <b-button @click="toggleModal" icon-left="cog" size="is-small" rounded>Opcions</b-button>
     </div>
     <b-modal :active.sync="modalOpen" scroll="keep">
@@ -19,6 +24,13 @@
 
 <script>
 export default {
+  props: {
+    compact: {
+      type: Boolean,
+      default: false
+    }
+  },
+
   data () {
     return {
       modalOpen: false
