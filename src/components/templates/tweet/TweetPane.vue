@@ -272,10 +272,9 @@ export default {
 
     setMediaAspect (url) {
       const img = new Image()
-      img.addEventListener('load', (event) => {
-        const { naturalWidth, naturalHeight } = event.target
+      img.addEventListener('load', () => {
+        const { naturalWidth, naturalHeight } = img
         this.properties.pictureAspect = (naturalWidth / naturalHeight > 1) ? 'horizontal' : 'vertical'
-        console.log(event, this.properties.pictureAspect)
       })
       img.src = url
     }
