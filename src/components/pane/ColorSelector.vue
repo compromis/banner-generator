@@ -9,12 +9,14 @@
       </li>
     </ul>
     <transition name="slide">
-      <b-message v-if="value === 'lgbt'" type="is-warning" size="is-small">
-        Els colors LGTB s'han d'utilitzar únicament en targes relacionades amb aquest moviment.
-      </b-message>
-      <b-message v-if="value === 'feminism'" type="is-warning" size="is-small">
-        El color morat s'ha d'utilitzar únicament en targes relacionades amb el feminisme.
-      </b-message>
+      <div>
+        <b-message v-if="value === 'lgbt'" type="is-warning" size="is-small">
+          Els colors LGTB s'han d'utilitzar únicament en targes relacionades amb aquest moviment.
+        </b-message>
+        <b-message v-if="value === 'feminism'" type="is-warning" size="is-small">
+          El color morat s'ha d'utilitzar únicament en targes relacionades amb el feminisme.
+        </b-message>
+      </div>
     </transition>
   </div>
 </template>
@@ -126,10 +128,26 @@ export default {
   .green-bg {
     background: $gradient-green;
   }
+
+  .transparent-bg {
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      border-bottom: 2px red solid;
+      transform: rotate(-45deg) translate(0, -50%);
+    }
+  }
 }
 
 .rounded {
   display: flex;
+  flex-wrap: wrap;
 
   li {
     height: 2.25rem;
