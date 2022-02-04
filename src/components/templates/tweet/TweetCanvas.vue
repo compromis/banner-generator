@@ -32,7 +32,7 @@
           </div>
         </div>
         <div class="tweet-text" :style="{ fontSize: textFontSize }" contenteditable v-html="tweetText"></div>
-        <div class="tweet-picture" v-if="inlinePicture">
+        <div class="tweet-picture" v-if="inlinePicture && !banner.mediaAsBackground">
           <img
             :src="banner.tweetEmbed.entities.media[0].media_url_https"
             alt="Imatge"
@@ -68,6 +68,12 @@
         <img src="./images/point-down.png" alt="" />
       </div>
     </div>
+    <div class="tweet-picture-as-background" v-if="inlinePicture && banner.mediaAsBackground">
+      <img
+        :src="banner.tweetEmbed.entities.media[0].media_url_https"
+        alt="Imatge"
+        :style="objectPosition" />
+    </div>
     <banner-frame :logo-type="banner.backgroundColor === 'white' ? 'color' : 'auto'" />
   </div>
 </template>
@@ -100,18 +106,18 @@ export default {
 
     inlinePicture () {
       const { banner } = this
-      return banner.tweetEmbed && banner.tweetEmbed.entities['media'] && banner.showMedia
+      return banner.tweetEmbed && banner.showMedia && banner.tweetEmbed.entities['media']
     },
 
     textFontSize () {
       const fontSize = this.fontSize(this.banner.tweetEmbed.full_text, 40, 24, 280, this.banner.textSize, true)
-      return (this.inlinePicture) ? `${fontSize * 0.6}px` : `${fontSize}px`
+      return (this.inlinePicture && !this.banner.mediaAsBackground) ? `${fontSize * 0.6}px` : `${fontSize}px`
     }
   },
 
   filters: {
     formatFullDate (date) {
-      return moment(date).format('D MMMM [a les] H:mm')
+      return moment(date).locale('ca').format('LLL')
     }
   }
 }
@@ -193,6 +199,7 @@ export default {
     left: 0;
     right: 0;
     bottom: 0;
+    z-index: 1;
 
     img {
       width: 100%;
@@ -209,6 +216,8 @@ export default {
     border-radius: $card-radius;
     padding: 26px;
     width: 100%;
+    max-height: 530px;
+    overflow: hidden;
 
     &-wrapper {
       position: absolute;
@@ -230,6 +239,29 @@ export default {
         width: 100%;
         max-height: 250px;
         object-fit: cover;
+      }
+
+      &-as-background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        z-index: 2;
+        opacity: .15;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        @at-root .background-transparent {
+          .tweet-picture-as-background {
+            opacity: 1;
+          }
+        }
       }
     }
 
@@ -345,6 +377,7 @@ export default {
     align-items: center;
     font-weight: bold;
     letter-spacing: -.02em;
+    z-index: 3;
 
     img {
       display: block;

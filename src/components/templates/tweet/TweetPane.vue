@@ -7,7 +7,7 @@
     </c-tab-group>
 
     <!-- Color -->
-    <color-selector label="Color de fons" is-rounded v-model="properties.backgroundColor" :colors="['black', 'white', 'orange', 'lgbt', 'feminism', 'green']" />
+    <color-selector label="Color de fons" is-rounded v-model="properties.backgroundColor" :colors="availableColors" />
 
     <!-- Dark mode -->
     <transition name="slide">
@@ -74,7 +74,7 @@
 
         <!-- Tweet media -->
         <transition name="slide">
-          <div v-if="properties.tweetEmbed && properties.tweetEmbed.entities['media']">
+          <div v-if="tweetHasImage">
             <div class="c-field">
               <div class="c-field-content" style="padding-bottom: 0">
                 <b-switch v-model="properties.showMedia" style="margin-bottom: 1rem">
@@ -89,6 +89,18 @@
                     <div v-for="(media, i) in properties.tweetEmbed.entities.media" :key="i" class="twitter-media-item">
                       <img :src="media.media_url_https" />
                     </div>
+                  </div>
+                  <div class="media-as-background">
+                    <range-slider
+                      name="points"
+                      :min="0"
+                      :max="100"
+                      v-model="properties.picturePos"
+                      @touchstart="dimPane(true)"
+                      @touchend="dimPane(false)" />
+                    <b-switch v-model="properties.mediaAsBackground">
+                      Imatge de fons
+                    </b-switch>
                   </div>
                 </div>
               </transition>
@@ -160,6 +172,7 @@ export default {
         tweetEmbed: null,
         textSize: 100,
         showMedia: true,
+        mediaAsBackground: false,
         showCounts: true,
         showCta: false,
         backgroundColor: 'black',
@@ -173,6 +186,22 @@ export default {
   watch: {
     'properties.tweetUrl' (url) {
       this.fetchTweet(url)
+    }
+  },
+
+  computed: {
+    availableColors () {
+      const colors = ['black', 'white', 'orange', 'lgbt', 'feminism', 'green']
+
+      if (this.tweetHasImage && this.properties.showMedia && this.properties.mediaAsBackground) {
+        colors.push('transparent')
+      }
+
+      return colors
+    },
+
+    tweetHasImage () {
+      return this.properties.tweetEmbed && this.properties.tweetEmbed.entities['media']
     }
   },
 
@@ -201,6 +230,11 @@ export default {
             this.fetching = false
             this.properties.tweetId = id
             this.properties.tweetEmbed = response
+
+            // Set pictureAspect
+            if (response.entities.media[0]) {
+              this.setMediaAspect(response.entities.media[0].media_url_https)
+            }
 
             // Default to hide counts if either of them is under 20
             if (response.retweet_count < 20 || response.favorite_count < 20) {
@@ -234,6 +268,15 @@ export default {
       navigator.clipboard.readText().then(text => {
         this.properties.tweetUrl = text
       })
+    },
+
+    setMediaAspect (url) {
+      const img = new Image()
+      img.addEventListener('load', () => {
+        const { naturalWidth, naturalHeight } = img
+        this.properties.pictureAspect = (naturalWidth / naturalHeight > 1) ? 'horizontal' : 'vertical'
+      })
+      img.src = url
     }
   }
 }
@@ -310,6 +353,16 @@ export default {
       height: 60px;
       object-fit: cover;
       border-radius: .5rem;
+    }
+  }
+
+  .media-as-background {
+    padding: 1rem;
+    padding-top: 0;
+    margin-top: -1rem;
+
+    .range-slider {
+      margin-bottom: .5rem;
     }
   }
 </style>

@@ -49,8 +49,14 @@ export default {
       return this.$store.state.aspect
     },
 
-    displayErrors () {
-      return this.$store.state.displayErrors
+    displayErrors: {
+      get () {
+        return this.$store.state.displayErrors
+      },
+
+      set (value) {
+        this.$store.commit('setDisplayErrors', value)
+      }
     },
 
     errors () {
