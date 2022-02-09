@@ -75,38 +75,73 @@
         <!-- Tweet media -->
         <transition name="slide">
           <div v-if="tweetHasImage">
-            <div class="c-field">
-              <div class="c-field-content" style="padding-bottom: 0">
-                <b-switch v-model="properties.showMedia" style="margin-bottom: 1rem">
-                  Mostrar imatge del tweet
-                </b-switch>
-              </div>
+            <c-select
+              name="mediaType"
+              label="Tipus d'imatge"
+              v-model="properties.mediaType">
+              <option
+                value="tweetimage"
+                :selected="properties.mediaType === 'tweetimage'">
+                Imatge del tweet
+              </option>
+              <option
+                value="uploaded"
+                :selected="properties.mediaType === 'uploaded'">
+                Putja una foto
+              </option>
+              <option
+                value="none"
+                :selected="properties.mediaType === 'none'">
+                Cap imatge
+              </option>
+            </c-select>
 
-              <transition name="slide">
-                <div v-if="properties.showMedia">
-                  <!-- Pictures -->
-                  <div class="twitter-media c-field c-field-content" style="padding-top: 0">
-                    <div v-for="(media, i) in properties.tweetEmbed.entities.media" :key="i" class="twitter-media-item">
-                      <img :src="media.media_url_https" />
-                    </div>
-                  </div>
-                  <div class="media-as-background">
-                    <range-slider
-                      name="points"
-                      :min="0"
-                      :max="100"
-                      v-model="properties.picturePos"
-                      @touchstart="dimPane(true)"
-                      @touchend="dimPane(false)" />
-                    <b-switch v-model="properties.mediaAsBackground">
-                      Imatge de fons
-                    </b-switch>
+            <transition name="slide">
+              <div class="c-field" v-if="properties.mediaType === 'tweetimage'">
+                <!-- Pictures -->
+                <div class="twitter-media c-field c-field-content">
+                  <div v-for="(media, i) in properties.tweetEmbed.entities.media" :key="i" class="twitter-media-item">
+                    <img :src="media.media_url_https" />
                   </div>
                 </div>
-              </transition>
-            </div>
+                <div class="media-as-background">
+                  <range-slider
+                    name="points"
+                    :min="0"
+                    :max="100"
+                    v-model="properties.picturePos"
+                    @touchstart="dimPane(true)"
+                    @touchend="dimPane(false)" />
+                  <b-switch v-model="properties.mediaAsBackground">
+                    Imatge de fons
+                  </b-switch>
+                </div>
+              </div>
+            </transition>
           </div>
         </transition>
+
+        <!-- Image -->
+        <picture-upload
+          v-if="properties.mediaType === 'uploaded' || !tweetHasImage"
+          id="picture-field"
+          :picture="properties.picture"
+          :preview="properties.picturePreview"
+          :display-errors="displayErrors"
+          :errors="errors"
+          @upload="updateImage"
+          @delete="properties.picture = null; properties.picturePreview = ''">
+          <range-slider
+            name="points"
+            :min="0"
+            :max="100"
+            v-model="properties.picturePos"
+            @touchstart="dimPane(true)"
+            @touchend="dimPane(false)" />
+          <b-switch v-model="properties.mediaAsBackground">
+            Imatge de fons
+          </b-switch>
+        </picture-upload>
 
         <c-field>
           <b-switch v-model="properties.showCounts">
@@ -171,7 +206,7 @@ export default {
         tweetId: null,
         tweetEmbed: null,
         textSize: 100,
-        showMedia: true,
+        mediaType: 'tweetimage',
         mediaAsBackground: false,
         showCounts: true,
         showCta: false,
@@ -193,11 +228,16 @@ export default {
     availableColors () {
       const colors = ['black', 'white', 'orange', 'lgbt', 'feminism', 'green']
 
-      if (this.tweetHasImage && this.properties.showMedia && this.properties.mediaAsBackground) {
+      if (this.tweetHasImage && this.showImage && this.properties.mediaAsBackground) {
         colors.push('transparent')
       }
 
       return colors
+    },
+
+    showImage () {
+      return this.properties.mediaType !== 'none' &&
+        (this.properties.mediaType === 'tweetimage' || this.properties.picture)
     },
 
     tweetHasImage () {
