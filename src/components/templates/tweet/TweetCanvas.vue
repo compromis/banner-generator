@@ -34,7 +34,7 @@
         <div class="tweet-text" :style="{ fontSize: textFontSize }" contenteditable v-html="tweetText"></div>
         <div class="tweet-picture" v-if="inlinePicture && !banner.mediaAsBackground">
           <img
-            :src="banner.tweetEmbed.entities.media[0].media_url_https"
+            :src="inlinePicture"
             alt="Imatge"
             :style="objectPosition" />
         </div>
@@ -70,7 +70,7 @@
     </div>
     <div class="tweet-picture-as-background" v-if="inlinePicture && banner.mediaAsBackground">
       <img
-        :src="banner.tweetEmbed.entities.media[0].media_url_https"
+        :src="inlinePicture"
         alt="Imatge"
         :style="objectPosition" />
     </div>
@@ -106,7 +106,16 @@ export default {
 
     inlinePicture () {
       const { banner } = this
-      return banner.tweetEmbed && banner.showMedia && banner.tweetEmbed.entities['media']
+
+      if (banner.mediaType === 'none') {
+        return ''
+      }
+
+      if (banner.mediaType === 'tweetimage') {
+        return banner.tweetEmbed && banner.tweetEmbed.entities['media'][0].media_url_https
+      }
+
+      return banner.pictureBlob || banner.picturePreview
     },
 
     textFontSize () {
