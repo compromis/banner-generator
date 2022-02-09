@@ -7,12 +7,11 @@
       :message="setFieldMessage('source')"
       placeholder="Selecciona un partit"
       @input="updateSource"
-      :value="properties.source">
+      :value="properties.source.id">
       <option
         v-for="source in presets"
         :value="source.id"
-        :key="source.id"
-        :selected="properties.source === source.id">
+        :key="source.id">
         {{ source.name }}
       </option>
       <option
@@ -63,7 +62,7 @@
       :preview="properties.beforePicturePreview"
       :display-errors="displayErrors"
       :errors="errors"
-      :ratio="0.530"
+      :ratio="1.8"
       @upload="(image, ratio) => updateImageComparison('before', image, ratio)"
       @delete="properties.beforePicture = null; properties.beforePicturePreview = null">
       <range-slider
@@ -94,7 +93,7 @@
       :preview="properties.afterPicturePreview"
       :display-errors="displayErrors"
       :errors="errors"
-      :ratio="0.530"
+      :ratio="1.8"
       @upload="(image, ratio) => updateImageComparison('after', image, ratio)"
       @delete="properties.afterPicture = null; properties.afterPicturePreview = null">
       <range-slider
@@ -124,15 +123,8 @@
       </b-switch>
     </c-field>
 
-    <!-- Dark mode -->
-    <color-selector
-      v-model="properties.mode"
-      :colors="['white', 'black']"
-      label="Color de fons"
-      is-rounded />
-
-    <!-- Logo -->
-    <logo-selector v-model="properties.logo" />
+    <!-- Emoji picker -->
+    <emoji-picker v-model="properties.emojis" />
 
     <!-- Local label -->
      <transition name="slide">
@@ -151,12 +143,14 @@
 import PaneMixin from '@/mixins/pane-mixin.js'
 import presets from './presets'
 import Swatches from 'vue-swatches'
+import EmojiPicker from '@/components/pane/EmojiPicker'
 
 export default {
   name: 'comparison-pane-party',
 
   components: {
-    Swatches
+    Swatches,
+    EmojiPicker
   },
 
   mixins: [PaneMixin],
@@ -165,7 +159,7 @@ export default {
     return {
       properties: {
         theme: 'glowy',
-        source: null,
+        source: presets[0],
         customSource: '',
         customSourceColor: '#1CA085',
         textAfter: '',
@@ -177,7 +171,8 @@ export default {
         afterPicture: null,
         afterPicturePreview: null,
         afterPicturePos: 50,
-        invertOrder: false
+        invertOrder: false,
+        emojis: []
       },
       presets: presets
     }

@@ -14,11 +14,11 @@
       :name="name"
       :class="{'has-value': value}">
       <option
-          v-if="computedValue == null"
-          :value="null"
-          disabled
-          hidden>
-          {{ placeholder }}
+        v-if="computedValue == null"
+        :value="null"
+        disabled
+        hidden>
+        {{ placeholder }}
       </option>
       <slot></slot>
     </select>
@@ -56,19 +56,12 @@ export default {
     }
   },
 
-  data () {
-    return {
-      selected: this.value
-    }
-  },
-
   computed: {
     computedValue: {
       get () {
-        return this.selected
+        return this.value
       },
       set (value) {
-        this.selected = value
         this.$emit('input', value)
       }
     }
