@@ -98,12 +98,6 @@ export default {
         fullGradient: false
       }
     }
-  },
-
-  methods: {
-    validate () {
-      //
-    }
   }
 }
 </script>

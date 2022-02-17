@@ -188,7 +188,6 @@ export default {
     },
 
     pictureRequired (field = 'picture') {
-      console.log(this.isInTransparentMode)
       if (!this.properties.picture && !this.isInTransparentMode) {
         this.$store.commit('addError', { field, message: 'Has de seleccionar una foto' })
       }
