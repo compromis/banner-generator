@@ -49,7 +49,6 @@
 
 <script>
 import PaneMixin from '@/mixins/pane-mixin'
-import { xyzToCIELab } from 'node-vibrant/lib/util'
 
 export default {
   name: 'vlc-pane',
