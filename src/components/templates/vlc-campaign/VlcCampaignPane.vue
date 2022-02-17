@@ -49,6 +49,7 @@
 
 <script>
 import PaneMixin from '@/mixins/pane-mixin'
+import { xyzToCIELab } from 'node-vibrant/lib/util'
 
 export default {
   name: 'vlc-pane',
@@ -63,20 +64,20 @@ export default {
         mode: 'vlc-green',
         sealPosition: 'random',
         sealPositions: [
-          { top: '-20px', left: '-20px' },
-          { top: '-20px', left: '40px' },
-          { top: '-20px', left: '440px' },
-          { top: '-20px', left: '490px' },
-          { top: 'unset', bottom: '-20px', left: '490px' },
-          { top: 'unset', bottom: '-20px', left: '440px' },
-          { top: 'unset', bottom: '-20px', left: '40px' },
-          { top: 'unset', bottom: '-20px', left: '20px' },
-          { top: 'unset', bottom: '40px', left: '-20px' },
-          { top: 'unset', bottom: '80px', left: '-20px' },
-          { top: '40px', left: '-20px' },
-          { top: '120px', left: '-20px' },
-          { top: '40px', left: '490px' },
-          { top: '120px', left: '490px' }
+          { top: '-20px', left: '-20px', transform: 'rotate(-12deg)' },
+          { top: '-20px', left: '40px', transform: 'rotate(-12deg)' },
+          { top: '-20px', left: '440px', transform: 'rotate(14deg)' },
+          { top: '-20px', left: '490px', transform: 'rotate(18deg)' },
+          { top: 'unset', bottom: '-20px', left: '490px', transform: 'rotate(10deg)' },
+          { top: 'unset', bottom: '-20px', left: '440px', transform: 'rotate(14deg)' },
+          { top: 'unset', bottom: '-20px', left: '40px', transform: 'rotate(-10deg)' },
+          { top: 'unset', bottom: '-20px', left: '20px', transform: 'rotate(-14deg)' },
+          { top: 'unset', bottom: '40px', left: '-20px', transform: 'rotate(-10deg)' },
+          { top: 'unset', bottom: '80px', left: '-20px', transform: 'rotate(-12deg)' },
+          { top: '40px', left: '-20px', transform: 'rotate(-10deg)' },
+          { top: '120px', left: '-20px', transform: 'rotate(-10deg)' },
+          { top: '40px', left: '490px', transform: 'rotate(16deg)' },
+          { top: '120px', left: '490px', transform: 'rotate(14deg)' }
         ]
       }
     }

@@ -125,7 +125,7 @@ export default {
     position: absolute;
     top: 20px;
     left: 20px;
-    width: 180px;
+    width: 160px;
     height: auto;
   }
 </style>
