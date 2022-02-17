@@ -6,18 +6,15 @@
       'banner-background-' + banner.mode,
     ]"
     v-if="banner">
+    <div class="background"></div>
     <div class="banner-grid">
       <div class="picture">
-        <div class="background-picture" key="picture">
+        <div class="background-picture">
           <img v-if="banner.picture" :src="banner.picturePreview" :style="objectPosition" />
         </div>
-        <vlc-seal :style="{color: `var(--${banner.mode})`, ...randomizeSeal}"/>
+        <vlc-seal :style="randomizedSeal"/>
       </div>
-      <div class="text">
-        <div class="text-wrapper">
-         {{ $options.filters.formatString(banner.text) }}
-        </div>
-      </div>
+      <div class="text" contenteditable>{{ banner.text | formatString }}</div>
     </div>
     <banner-frame />
   </div>
@@ -25,8 +22,8 @@
 
 <script>
 import CanvasMixin from '@/mixins/canvas-mixin'
-import VlcSeal from './VlcSeal.vue'
 import BannerFrame from '@/components/canvas/BannerFrame'
+import VlcSeal from './VlcSeal.vue'
 
 export default {
   name: 'vlc-canvas',
@@ -38,14 +35,8 @@ export default {
     BannerFrame
   },
 
-  methods: {
-    validate () {
-      //
-    }
-  },
-
   computed: {
-    randomizeSeal () {
+    randomizedSeal () {
       const index = this.banner.sealPosition === 'random' ? Math.floor(Math.random() * (this.banner.sealPositions.length - 1)) : this.banner.sealPosition
       return this.banner.sealPositions[index]
     }
@@ -74,8 +65,19 @@ export default {
 
   @each $name, $color in $colors {
     .banner-background-vlc-#{$name} {
-      background: $color;
+      --banner-color: var(--vlc-#{$name});
     }
+  }
+
+  .background {
+    position: absolute;
+    z-index: 0;
+    background-color: var(--banner-color);
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    transition: .5s ease-in-out;
   }
 
   .banner-grid {
@@ -86,20 +88,24 @@ export default {
     height: 720px;
     padding: 40px;
     row-gap: 60px;
+    z-index: 20;
   }
 
   .picture {
     position: relative;
+    z-index: 40;
   }
+
   .background-picture {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 1;
+    z-index: 40;
     height: 100%;
     width: 100%;
+    background: $gray-100;
 
     img {
       object-fit: cover;
@@ -118,14 +124,17 @@ export default {
     font-size: 30px;
     display: flex;
     z-index: 30;
+    white-space: pre-wrap;
   }
 
   .vlc-seal {
-    z-index: 2;
+    z-index: 50;
     position: absolute;
     top: 20px;
     left: 20px;
     width: 160px;
     height: auto;
+    color: var(--banner-color);
+    transition: .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
 </style>
