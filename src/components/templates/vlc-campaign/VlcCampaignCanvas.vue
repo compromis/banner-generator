@@ -130,8 +130,6 @@ export default {
   .vlc-seal {
     z-index: 50;
     position: absolute;
-    top: 20px;
-    left: 20px;
     width: 160px;
     height: auto;
     color: var(--banner-color);

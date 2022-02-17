@@ -46,7 +46,7 @@
         @touchend="dimPane(false)" />
       <article class="message is-info is-small" v-if="aspect === '916'">
         <div class="message-body">
-          Es recomana utilitzar la ferramenta de text nativa d'Instragram per a afegir text en aquest model de tarja.
+          Es recomana utilitzar la ferramenta de text nativa d'Instagram per a afegir text en aquest model de tarja.
         </div>
       </article>
     </c-field>
