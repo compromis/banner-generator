@@ -295,5 +295,17 @@ export default [
       canvas: () => import(/* webpackChunkName: "christmas" */ './archived/christmas/ChristmasCanvas'),
       help: () => import(/* webpackChunkName: "christmas" */ './archived/christmas/ChristmasHelp')
     }
+  },
+  {
+    id: 'VlcCampaign',
+    name: 'Estem on toca',
+    aspects: ['11'],
+    icon: 'align-left',
+    hidden: true,
+    components: {
+      pane: () => import(/* webpackChunkName: "vlcCampaign" */ './vlc-campaign/VlcCampaignPane'),
+      canvas: () => import(/* webpackChunkName: "vlcCampaign" */ './vlc-campaign/VlcCampaignCanvas'),
+      help: () => import(/* webpackChunkName: "vlcCampaign" */ './vlc-campaign/VlcCampaignHelp')
+    }
   }
 ]
