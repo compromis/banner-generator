@@ -9,13 +9,12 @@
       label="Font"
       :message="setFieldMessage('source')"
       placeholder="Selecciona una font"
-      @input="updateSource"
-      :value="properties.source">
+      v-model="properties.source">
       <option
         v-for="source in presetsByName"
-        :value="source.id"
+        :value="source"
         :key="source.id"
-        :selected="properties.source === source.id">
+        :selected="properties.source && properties.source.id === source.id">
         {{ source.name }}
       </option>
       <option
