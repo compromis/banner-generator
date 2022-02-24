@@ -112,7 +112,7 @@ export default {
       }
 
       if (banner.mediaType === 'tweetimage') {
-        return banner.tweetEmbed && banner.tweetEmbed.entities['media'][0].media_url_https
+        return banner.tweetEmbed && banner.tweetEmbed.entities['media'] && banner.tweetEmbed.entities['media'][0].media_url_https
       }
 
       return banner.pictureBlob || banner.picturePreview
