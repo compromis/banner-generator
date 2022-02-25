@@ -301,6 +301,14 @@ const sources = [
     logoHeight: 28,
     font: fonts.tiemposHeadline,
     color: '#000'
+  },
+  {
+    id: 'hortanoticias',
+    name: 'Horta Noticias',
+    logo: require('./logos/hortanoticias.png'),
+    logoHeight: 28,
+    font: fonts.roboto,
+    color: '#679c27'
   }
 ]
 
