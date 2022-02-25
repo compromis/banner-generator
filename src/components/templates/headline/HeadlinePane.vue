@@ -199,15 +199,6 @@ export default {
       })
       this.pictureRequired()
       this.allCapsDisallowed('headline')
-    },
-
-    updateSource (source) {
-      if (source === 'other') {
-        this.properties.source = 'other'
-        return
-      }
-
-      this.properties.source = this.presets.find(preset => preset.id === source)
     }
   }
 }

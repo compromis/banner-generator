@@ -7,15 +7,14 @@
         label="Primer mitjà"
         :message="setFieldMessage('firstSource')"
         placeholder="Selecciona un mitjà"
-        @input="(source) => updateSource('first', source)"
-        :value="properties.firstSource"
+        v-model="properties.firstSource"
         class="source-input-name"
         >
         <option
           v-for="source in presets"
-          :value="source.id"
+          :value="source"
           :key="source.id"
-          :selected="properties.firstSource === source.id">
+          :selected="properties.firstSource && properties.firstSource === source.id">
           {{ source.name }}
         </option>
         <option
@@ -95,15 +94,14 @@
         label="Segon mitjà"
         :message="setFieldMessage('secondSource')"
         placeholder="Selecciona un mitjà"
-        @input="(source) => updateSource('second', source)"
-        :value="properties.secondSource"
+        v-model="properties.secondSource"
         class="source-input-name"
         >
         <option
           v-for="source in presets"
-          :value="source.id"
+          :value="source"
           :key="source.id"
-          :selected="properties.secondSource === source.id">
+          :selected="properties.secondSource && properties.secondSource.id === source.id">
           {{ source.name }}
         </option>
         <option
@@ -295,16 +293,6 @@ export default {
 
     updateImageComparison (which, image, ratio) {
       this.customUpdateImage(which, image, ratio)
-    },
-
-    updateSource (which, sourceId) {
-      if (sourceId === 'other') {
-        this.properties[`${which}Source`] = 'other'
-        return
-      }
-      const source = this.presets.find(preset => preset.id === sourceId)
-      this.properties[`${which}Source`] = source
-      this.properties[`${which}SourceCustomColor`] = source.color
     }
   }
 }

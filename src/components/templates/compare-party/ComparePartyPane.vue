@@ -6,13 +6,12 @@
       label="Partit a comparar"
       :message="setFieldMessage('source')"
       placeholder="Selecciona un partit"
-      @input="updateSource"
-      :value="properties.source">
+      v-model="properties.source">
       <option
         v-for="source in presets"
-        :value="source.id"
+        :value="source"
         :key="source.id"
-        :selected="properties.source === source.id">
+        :selected="properties.source && properties.source.id === source.id">
         {{ source.name }}
       </option>
       <option
@@ -211,15 +210,6 @@ export default {
 
     updateImageComparison (which, image, ratio) {
       this.customUpdateImage(which, image, ratio)
-    },
-
-    updateSource (source) {
-      if (source === 'other') {
-        this.properties.source = 'other'
-        return
-      }
-
-      this.properties.source = this.presets.find(preset => preset.id === source)
     }
   }
 }

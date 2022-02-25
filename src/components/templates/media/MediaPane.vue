@@ -43,7 +43,7 @@
           v-for="source in category.channels"
           :value="source"
           :key="source.id"
-          :selected="properties.source === source.id">
+          :selected="properties.source && properties.source.id === source.id">
           {{ source.name }}
         </option>
       </optgroup>
@@ -62,13 +62,12 @@
         label="Programa"
         :message="setFieldMessage('programme')"
         placeholder="Selecciona un programa"
-        @input="updateProgramme"
-        :value="properties.programme">
+        v-model="properties.programme">
         <option
           v-for="programme in properties.source.programmes"
-          :value="programme.id"
+          :value="programme"
           :key="programme.id"
-          :selected="properties.programme === programme.id">
+          :selected="properties.programme && properties.programme.id === programme.id">
           {{ programme.name }}
         </option>
         <option
@@ -326,15 +325,6 @@ export default {
       } else {
         this.properties.programme = null
       }
-    },
-
-    updateProgramme (programme) {
-      if (programme === 'other') {
-        this.properties.programme = 'other'
-        return
-      }
-
-      this.properties.programme = this.properties.source.programmes.find(p => p.id === programme)
     }
   }
 }
