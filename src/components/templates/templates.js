@@ -103,6 +103,17 @@ export default [
     }
   },
   {
+    id: 'RollCall',
+    name: 'Votació',
+    aspects: ['11'],
+    icon: 'abacus',
+    components: {
+      pane: () => import(/* webpackChunkName: "rollcall" */ './rollcall/RollCallPane'),
+      canvas: () => import(/* webpackChunkName: "rollcall" */ './rollcall/RollCallCanvas'),
+      help: () => import(/* webpackChunkName: "rollcall" */ './rollcall/RollCallHelp')
+    }
+  },
+  {
     id: 'FakeNews',
     name: 'Bulo',
     aspects: ['11', '916'],
