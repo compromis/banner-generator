@@ -1,98 +1,81 @@
 <template>
-  <fieldset class="c-field cards-manager">
-    <legend class="c-field-info">Targetes</legend>
+  <fieldset class="c-field roll-call-manager">
+    <legend class="c-field-info">Partits</legend>
 
-    <ul class="cards">
-      <li v-for="(card, i) in cards" :key="card.id">
-        <div :class="['card', `card-type-${card.type}`]">
-          <!-- Card type -->
-          <c-select label="Tipus" :name="`type-${card.id}`" v-model="card.type" class="card-type">
-            <option value="emoji">Emoji</option>
-            <option value="number">Xifra</option>
-            <option value="text">Text</option>
+    <ul class="parties">
+      <li v-for="(party, i) in parties" :key="i">
+        <div class="party">
+          <!-- Party -->
+          <c-select label="Partit" :name="`partyselect-${i}`" v-model="party.party" class="party-select" :disabled="i === 0">
+            <template v-for="preset in presets">
+              <option v-if="notInList(preset, party)" :key="preset.id" :value="preset">{{ preset.name }}</option>
+            </template>
+            <option value="custom">Altre...</option>
           </c-select>
 
-          <!-- Card col span -->
-          <c-select label="Columnes" :name="`colspan-${card.id}`" v-model="card.colspan" class="card-colspan">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-          </c-select>
+          <!-- Custom -->
+          <div class="party-custom" v-if="party.party === 'custom'">
+            <div class="party-color">
+              <swatches v-model="party.color"></swatches>
+            </div>
+            <c-input-text
+              type="text"
+              label="Nom"
+              :name="`partycustomname-${i}`"
+              placeholder="Nom del partit"
+              class="party-name"
+              v-model="party.name"
+              :maxlength="48" />
+          </div>
 
-          <!-- Card row span -->
-          <c-select label="Files" :name="`rowspan-${card.id}`" v-model="card.rowspan" class="card-rowspan">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
+          <!-- Party -->
+          <c-select label="Vot" :name="`partyvoted-${i}`" v-model="party.voted" class="party-voted">
+            <option value="for">🟢 A favor</option>
+            <option value="against">🔴 En contra</option>
+            <option value="abstain">🟡 Abstenció</option>
           </c-select>
 
           <!-- Card number -->
           <c-input-text
-            v-if="card.type === 'number'"
-            label="Xifra"
-            :name="`number-${card.id}`"
-            placeholder="600€"
-            v-model="card.number"
-            :maxlength="12"
-            class="card-number" />
-
-          <!-- Card text -->
-          <c-input-text
-            v-if="card.type === 'text'"
-            label="Títol"
-            :name="`number-${card.id}`"
-            placeholder="Noves ajudes"
-            v-model="card.textHeader"
-            :maxlength="34"
-            class="card-number" />
-
-          <!-- Card emoji -->
-          <cards-emoji-picker
-            v-if="card.type === 'emoji'"
-            v-model="card.emoji"
-            class="card-emoji" />
-
-          <!-- Card text -->
-          <c-input-text
-            type="textarea"
-            label="Text"
-            :name="`text-${card.id}`"
-            placeholder="Per cada treballador/a a jornada completa"
-            v-model="card.text"
-            :maxlength="maxLength(card)"
-            class="card-text" />
+            label="Vots"
+            type="number"
+            :name="`partyvotes-${i}`"
+            placeholder="3"
+            v-model="party.votes"
+            class="party-votes" />
         </div>
 
-        <div class="card-actions">
+        <div class="party-actions">
           <button class="c-button-circle remove" @click="removeCard(i)">-</button>
-          <button class="c-button-circle move-up" v-if="i !== 0" @click="moveUp(i)">↑</button>
-          <button class="c-button-circle move-down" v-if="i !== cards.length - 1" @click="moveDown(i)">↓</button>
         </div>
       </li>
     </ul>
 
-    <button v-if="cellCount < maxCards" @click="addCard" class="c-button">
+    <button @click="addCard" class="c-button">
       <font-awesome-icon :icon="['far', 'plus']" style="margin-right: .5rem" />
-      Nova targeta
+      Afegeix partit
     </button>
   </fieldset>
 </template>
 
 <script>
+import presets from './parties.js'
+import Swatches from 'vue-swatches'
 import CSelect from '@/components/pane/CSelect'
 import CInputText from '@/components/pane/CInputText.vue'
 
 export default {
-  name: 'cards-manager',
+  name: 'roll-call-manager',
 
   components: {
     CSelect,
-    CInputText
+    CInputText,
+    Swatches
   },
 
   data () {
     return {
-      maxCards: 9
+      presets
     }
   },
 
@@ -104,7 +87,7 @@ export default {
   },
 
   computed: {
-    cards: {
+    parties: {
       get () {
         return this.value
       },
@@ -112,46 +95,26 @@ export default {
       set (value) {
         this.$emit('input', value)
       }
-    },
-
-    cellCount () {
-      return this.cards.reduce((sum, { colspan, rowspan }) => sum + colspan * rowspan, 0)
     }
   },
 
   methods: {
     addCard () {
-      this.cards.push({
-        id: Date.now(),
-        type: 'emoji',
-        number: '',
-        textHeader: '',
-        emoji: null,
-        text: '',
-        colspan: 1,
-        rowspan: 1,
-        dark: false
+      this.parties.push({
+        party: null,
+        voted: null,
+        votes: '0'
       })
     },
 
     removeCard (i) {
-      this.cards.splice(i, 1)
+      this.parties.splice(i, 1)
     },
 
-    moveUp (i) {
-      this.cards.splice(i - 1, 0, this.cards.splice(i, 1)[0])
-    },
-
-    moveDown (i) {
-      this.cards.splice(i + 1, 0, this.cards.splice(i, 1)[0])
-    },
-
-    maxLength (card) {
-      const cells = card.colspan * card.rowspan
-      const min = 50
-      const max = 450
-      const maxCells = 9
-      return Math.round(min + (cells - 1) * ((max - min) / (maxCells - 1)))
+    notInList (thisParty, selected) {
+      const selectedPartyId = selected.party ? selected.party.id : 'custom'
+      if (thisParty.id === selectedPartyId) return true
+      return this.parties.filter(party => party.party && party.party.id === thisParty.id).length === 0
     }
   }
 }
@@ -163,57 +126,55 @@ export default {
   $border-color: $gray-300;
   $border-radius: .5rem;
 
-  .card {
+  .party {
     display: grid;
-    grid-template-columns: repeat(12, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     border: 1px $border-color solid;
     box-shadow: none;
     border-radius: $border-radius;
     margin: 1rem;
     padding: 0;
 
-    &-type-emoji {
-      .card-text {
-        grid-column: span 9 / span 9;
-        border-left: 1px $border-color solid;
-      }
+    &-select {
+      grid-column: span 2 / span 2;
     }
 
-    &-type-number {
-      .card-text {
-        border-bottom-left-radius: $border-radius;
-      }
-    }
-
-    &-type {
-      grid-column: span 4 / span 4;
-      border-top-left-radius: $border-radius;
-    }
-
-    &-colspan {
-      grid-column: span 4 / span 4;
-      border-left: 1px $border-color solid;
-    }
-
-    &-rowspan {
-      grid-column: span 4 / span 4;
-      border-left: 1px $border-color solid;
-      border-top-right-radius: $border-radius;
-    }
-
-    &-emoji {
-      grid-column: span 3 / span 3;
+    &-voted {
+      grid-column: span 1 / span 1;
       border-bottom: 0;
+      border-right: 1px $border-color solid;
     }
 
-    &-number {
-      grid-column: span 12 / span 12;
+    &-custom {
+      grid-column: span 2 / span 2;
+      display: flex;
     }
 
-    &-text {
-      grid-column: span 12 / span 12;
+    &-votes {
+      grid-column: span 1 / span 1;
       border-bottom: 0;
       border-bottom-right-radius: $border-radius;
+    }
+
+    &-name {
+      flex-grow: 1;
+    }
+
+    &-color {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1.5rem;
+      padding: .5rem;
+      border-bottom: 1px $border-color solid;
+      border-right: 1px $border-color solid;
+      flex-shrink: 0;
+
+      &::v-deep .vue-swatches__trigger {
+        max-height: 2rem !important;
+        width: 2rem !important;
+        height: 2rem !important;
+      }
     }
 
     &-actions {
@@ -228,10 +189,10 @@ export default {
     }
   }
 
-  .cards li {
+  .parties li {
     position: relative;
 
-    &:hover .card-actions {
+    &:hover .party-actions {
       display: block;
     }
   }

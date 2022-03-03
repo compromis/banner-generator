@@ -12,6 +12,19 @@
     <!-- Cards manager -->
     <roll-call-manager v-model="properties.parties" />
 
+    <!-- Abstain column -->
+    <c-select label="Abstenció en columna de..." name="abstainCol" v-model="properties.abstainColumn">
+      <option value="for">🟢 A favor</option>
+      <option value="against">🔴 En contra</option>
+    </c-select>
+
+    <!-- Invert -->
+    <c-field>
+      <b-switch v-model="properties.invert">
+          Invertir columnes
+      </b-switch>
+    </c-field>
+
     <!-- Emoji picker -->
     <emoji-picker v-model="properties.emojis" />
 
@@ -34,37 +47,11 @@
 
     <!-- Frame color -->
     <color-selector v-model="properties.color" :colors="availableColors[properties.theme]" label="Color" is-rounded />
-
-    <!-- Hashtag -->
-    <transition name="slide">
-      <c-input-text
-        v-if="aspect === '11'"
-        label="Hashtag"
-        name="hashtag"
-        placeholder="#"
-        @input="updateHashtag"
-        :value="properties.hashtag"
-        :maxlength="properties.localLabel ? 22 : 32"
-        :message="setFieldMessage('hashtag')" />
-    </transition>
-
-    <!-- Logo -->
-    <logo-selector v-model="properties.logo" />
-
-    <!-- Local label -->
-    <transition name="slide">
-      <c-input-text
-        v-if="aspect !== '916'"
-        label="Text logo"
-        name="localLabel"
-        placeholder="Alacant"
-        v-model="properties.localLabel"
-        :maxlength="48" />
-    </transition>
   </div>
 </template>
 
 <script>
+import parties from './parties.js'
 import PaneMixin from '@/mixins/pane-mixin'
 import EmojiPicker from '@/components/pane/EmojiPicker'
 import RollCallManager from './RollCallManager'
@@ -84,12 +71,19 @@ export default {
       properties: {
         title: '',
         parties: [
-          { id: 'compromis', voted: 'for', votes: 3 }
-          // { id: 'custom', voted: 'against', votes: 2, custom: { name: '', color: '' }}
+          { party: parties[0], voted: 'for', votes: '3' }
         ],
+        inverted: false,
+        abstainColumn: 'against',
         emojis: [],
         color: 'orange'
       }
+    }
+  },
+
+  methods: {
+    validate () {
+      return true
     }
   }
 }

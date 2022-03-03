@@ -12,6 +12,7 @@
       v-model="computedValue"
       :id="name"
       :name="name"
+      :disabled="disabled"
       :class="{'has-value': value}">
       <option
         v-if="computedValue == null"
@@ -53,6 +54,10 @@ export default {
     message: {
       type: String,
       default: ''
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     }
   },
 
