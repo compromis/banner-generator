@@ -50,6 +50,33 @@
 
     <!-- Frame color -->
     <color-selector v-model="properties.color" :colors="availableColors[properties.theme]" label="Color" is-rounded />
+
+    <!-- Hashtag -->
+    <transition name="slide">
+      <c-input-text
+        v-if="aspect !== '916'"
+        label="Hashtag"
+        name="hashtag"
+        placeholder="#"
+        @input="updateHashtag"
+        :value="properties.hashtag"
+        :maxlength="properties.localLabel ? 22 : 32"
+        :message="setFieldMessage('hashtag')" />
+    </transition>
+
+    <!-- Logo -->
+    <logo-selector v-model="properties.logo" />
+
+    <!-- Local label -->
+    <transition name="slide">
+      <c-input-text
+        v-if="aspect !== '916'"
+        label="Text logo"
+        name="localLabel"
+        placeholder="Alacant"
+        v-model="properties.localLabel"
+        :maxlength="48" />
+    </transition>
   </div>
 </template>
 

@@ -14,19 +14,21 @@
           </c-select>
 
           <!-- Custom -->
-          <div class="party-custom" v-if="party.party === 'custom'">
-            <c-field class="party-color">
-              <swatches v-model="party.color"></swatches>
-            </c-field>
-            <c-input-text
-              type="text"
-              label="Nom"
-              :name="`partycustomname-${i}`"
-              placeholder="Nom del partit"
-              class="party-name"
-              v-model="party.name"
-              :maxlength="48" />
-          </div>
+          <transition name="slide">
+            <div class="party-custom" v-if="party.party === 'custom'">
+              <c-field label="Color" class="party-color">
+                <swatches v-model="party.color"></swatches>
+              </c-field>
+              <c-input-text
+                type="text"
+                label="Nom"
+                :name="`partycustomname-${i}`"
+                placeholder="Nom del partit"
+                class="party-name"
+                v-model="party.name"
+                :maxlength="36" />
+            </div>
+          </transition>
 
           <!-- Party -->
           <c-select label="Vot" :name="`partyvoted-${i}`" v-model="party.voted" class="party-voted">
@@ -62,6 +64,7 @@
 import presets from './parties.js'
 import Swatches from 'vue-swatches'
 import CSelect from '@/components/pane/CSelect'
+import CField from '@/components/pane/CField'
 import CInputText from '@/components/pane/CInputText.vue'
 
 export default {
@@ -70,7 +73,8 @@ export default {
   components: {
     CSelect,
     CInputText,
-    Swatches
+    Swatches,
+    CField
   },
 
   data () {
@@ -102,7 +106,7 @@ export default {
     addCard () {
       this.parties.push({
         party: null,
-        voted: null,
+        voted: 'for',
         votes: '0'
       })
     },
@@ -161,19 +165,16 @@ export default {
     }
 
     &-color {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 1.5rem;
-      padding: .5rem;
       border-bottom: 1px $border-color solid;
       border-right: 1px $border-color solid;
       flex-shrink: 0;
 
       &::v-deep .vue-swatches__trigger {
-        max-height: 2rem !important;
-        width: 2rem !important;
-        height: 2rem !important;
+        max-height: 1.75rem !important;
+        width: 1.75rem !important;
+        height: 1.75rem !important;
+        margin-top: -.5rem;
+        margin-bottom: -.25rem;
       }
     }
 
