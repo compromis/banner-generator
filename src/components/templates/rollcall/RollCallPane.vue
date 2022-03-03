@@ -20,8 +20,11 @@
 
     <!-- Invert -->
     <c-field>
-      <b-switch v-model="properties.invert">
+      <b-switch v-model="properties.inverted">
           Invertir columnes
+      </b-switch>
+      <b-switch v-model="properties.partyTotals">
+          Mostrar total de vots de partits
       </b-switch>
     </c-field>
 
@@ -74,6 +77,7 @@ export default {
           { party: parties[0], voted: 'for', votes: '3' }
         ],
         inverted: false,
+        partyTotals: false,
         abstainColumn: 'against',
         emojis: [],
         color: 'orange'

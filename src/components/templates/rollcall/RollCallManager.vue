@@ -15,9 +15,9 @@
 
           <!-- Custom -->
           <div class="party-custom" v-if="party.party === 'custom'">
-            <div class="party-color">
+            <c-field class="party-color">
               <swatches v-model="party.color"></swatches>
-            </div>
+            </c-field>
             <c-input-text
               type="text"
               label="Nom"
@@ -45,7 +45,7 @@
             class="party-votes" />
         </div>
 
-        <div class="party-actions">
+        <div class="party-actions" v-if="i !== 0">
           <button class="c-button-circle remove" @click="removeCard(i)">-</button>
         </div>
       </li>
