@@ -26,6 +26,12 @@
       <b-switch v-model="properties.partyTotals">
           Mostrar total de vots de partits
       </b-switch>
+      <b-switch v-model="properties.highlightWinner">
+          Resaltar guanyador
+      </b-switch>
+      <b-switch v-model="properties.smallAbstain">
+          Abestensions en menut
+      </b-switch>
     </c-field>
 
     <!-- Emoji picker -->
@@ -106,6 +112,8 @@ export default {
         inverted: false,
         partyTotals: false,
         abstainColumn: 'against',
+        smallAbstain: true,
+        highlightWinner: false,
         emojis: [],
         color: 'orange'
       }

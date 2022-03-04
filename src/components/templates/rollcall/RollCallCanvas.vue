@@ -5,30 +5,33 @@
       'banner-canvas',
       'aspect-' + aspect,
       'banner-background-' + banner.mode,
-      'logo-' + banner.logo
+      'logo-' + banner.logo,
+      { 'inverted-background': banner.title.length > 0 }
     ]"
     v-if="banner">
     <div class="banner-content">
       <div class="banner-title" contenteditable>{{ banner.title | formatString }}</div>
       <div :class="['votes-grid', {'invert-grid' : banner.inverted}]">
-        <div :class="['card votes-card votes-card-for', { 'full-column' : banner.abstainColumn === 'against' }]">
+        <div :class="['card votes-card votes-card-for', { 'full-column' : banner.abstainColumn === 'against', 'winner': winner === 'for' && banner.highlightWinner }]">
           <div class="votes-card-parties">
             <roll-call-party v-for="party in getParties('for')" :key="party.id" :party="party" :showVotes="banner.partyTotals"/>
           </div>
           <div class="votes-card-result">
             <span class="votes-card-result-number">{{ getTotalVotes('for') }}</span>
             <span>A favor</span>
+            <font-awesome-icon :icon="['far', 'check']" class="winner-icon" v-if="winner === 'for' && banner.highlightWinner" />
           </div>
         </div>
-        <div :class="['card votes-card votes-card-against', { 'full-column' : banner.abstainColumn === 'for' }]">
+        <div :class="['card votes-card votes-card-against', { 'full-column' : banner.abstainColumn === 'for', 'winner': winner === 'against' && banner.highlightWinner }]">
           <div class="votes-card-parties">
             <roll-call-party v-for="party in getParties('against')" :key="party.id" :party="party" :showVotes="banner.partyTotals"/>
           </div>
           <div class="votes-card-result">
             <span class="votes-card-result-number">{{ getTotalVotes('against') }}</span>
             <span>En contra</span>
+            <font-awesome-icon :icon="['far', 'check']" class="winner-icon" v-if="winner === 'against' && banner.highlightWinner" />
           </div></div>
-        <div class="card votes-card votes-card-abstain">
+        <div :class="['card votes-card votes-card-abstain', { 'small-abstain': banner.smallAbstain }]">
           <div class="votes-card-parties">
             <roll-call-party v-for="party in getParties('abstain')" :key="party.id" :party="party" :showVotes="banner.partyTotals"/>
           </div>
@@ -63,6 +66,15 @@ export default {
     RollCallParty
   },
 
+  computed: {
+    winner () {
+      const votesFor = this.getTotalVotes('for')
+      const votesAgainst = this.getTotalVotes('against')
+
+      return votesFor > votesAgainst ? 'for' : 'against'
+    }
+  },
+
   methods: {
     getParties (vote) {
       return this.banner.parties.filter(party => party.voted === vote)
@@ -88,7 +100,9 @@ export default {
   .banner-content {
     display: grid;
     height: 100%;
+    flex-grow: 1;
     grid-template-rows: auto 1fr;
+    grid-template-columns: 1fr;
     padding: 32px;
     position: relative;
     z-index: 40;
@@ -110,9 +124,8 @@ export default {
     overflow: hidden;
   }
 
-  .banner-picture::v-deep .banner-gradient {
+  .inverted-background .banner-picture::v-deep .banner-gradient {
     top: 0 !important;
-    bottom: unset;
     transform: rotate(180deg);
   }
 
@@ -154,27 +167,69 @@ export default {
         border-radius: 100%;
         color: $white;
         margin-right: 12px;
+        background: var(--vote-color);
       }
     }
 
     &-for {
-      .votes-card-result-number {
-        background: $green;
-      }
+      --vote-color: #{$green};
     }
 
     &-against {
-      .votes-card-result-number {
-        background: $red;
-      }
+      --vote-color: #{$red};
     }
 
     &-abstain {
-      .votes-card-result-number {
-        background: #ffb60a;
+      --vote-color: #ffb60a;
+
+      &.small-abstain {
+        .votes-card-result {
+          font-size: 16px;
+
+          &-number {
+            font-size: 13px;
+            height: 24px;
+            width: 24px;
+            margin-right: 8px;
+          }
+        }
+
+        .votes-card-parties {
+          grid-template-columns: repeat(5, 1fr);
+          gap: 8px;
+
+          .party {
+            border-radius: 8px;
+
+            &::v-deep .party-name {
+              height: 48px;
+              width: 48px;
+              font-size: 12px !important;
+            }
+
+            &::v-deep .party-votes {
+              font-size: 10px;
+              height: 22px;
+              width: 22px;
+            }
+          }
+        }
       }
     }
   }
+
+  .winner {
+    .votes-card-result {
+      font-weight: bold;
+      color: var(--vote-color);
+    }
+
+    &-icon {
+      margin-left: auto;
+      font-size: 30px;
+    }
+  }
+
   .full-column {
     grid-row: span 2;
   }
@@ -183,6 +238,7 @@ export default {
     .votes-card-for {
       grid-column: 2;
     }
+
     .votes-card-against {
       grid-column: 1;
     }
