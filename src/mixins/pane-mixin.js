@@ -132,6 +132,12 @@ export default {
       this.customUpdateImage('', image, ratio || 1)
     },
 
+    removeImage () {
+      this.properties.picture = null
+      this.properties.picturePreview = null
+      this.properties.pictureBlob = 'blobobo'
+    },
+
     async customUpdateImage (prefix, image, ratio) {
       const { ref } = this.$store.state.bannerMeta
       const picture = prefix ? `${prefix}Picture` : 'picture'

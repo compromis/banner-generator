@@ -53,7 +53,7 @@
       :display-errors="false"
       :errors="{}"
       @upload="updateImage"
-      @delete="properties.picture = null; properties.picturePreview = null" />
+      @delete="removeImage" />
 
     <!-- Picture position -->
     <b-field label="Posició de la imatge" class="range">

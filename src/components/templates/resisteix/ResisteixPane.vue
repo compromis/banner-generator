@@ -37,7 +37,7 @@
       :display-errors="false"
       :errors="{}"
       @upload="updateImage"
-      @delete="properties.picture = null; properties.picturePreview = null">
+      @delete="removeImage">
       <range-slider
         name="points"
         :min="0"

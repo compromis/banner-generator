@@ -23,7 +23,7 @@
       :errors="errors"
       :ratio="1.86"
       @upload="updateImage"
-      @delete="properties.picture = null; properties.picturePreview = null">
+      @delete="removeImage">
         <range-slider
           name="points"
           :min="0"
