@@ -120,10 +120,10 @@ export default {
     grid-column: span 3;
     font-size: 42px;
     font-weight: bold;
-    line-height: 1.1;
+    line-height: 1.22;
     letter-spacing: -0.02em;
     margin-bottom: 32px;
-    white-space: pre;
+    white-space: pre-wrap;
     max-height: 4.5em;
     overflow: hidden;
   }
@@ -240,6 +240,61 @@ export default {
 
     .votes-card-against {
       grid-column: 1;
+    }
+  }
+
+  .aspect-916 {
+    .banner-content {
+      padding: 66px 18px;
+    }
+    .banner-title {
+      white-space: normal;
+      font-size: 28px;
+      margin-bottom: 16px;
+    }
+    .votes-grid {
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+
+    .votes-card {
+      padding: 14px;
+
+      &-parties {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        margin-bottom: 16px;
+      }
+
+      &-result {
+        font-size: 16px;
+
+        &-number {
+          font-size: 13px;
+          height: 24px;
+          width: 24px;
+          margin-right: 8px;
+        }
+      }
+    }
+
+    .full-column {
+      grid-row: span 1;
+    }
+
+  .invert-grid {
+      .votes-card-for {
+        grid-column: 1;
+        grid-row: 2;
+      }
+
+      .votes-card-against {
+        grid-column: 1;
+        grid-row: 1;
+      }
+    }
+
+    .winner-icon {
+      font-size: 20px;
     }
   }
 </style>

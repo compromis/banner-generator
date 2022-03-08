@@ -93,7 +93,7 @@ export default [
   {
     id: 'RollCall',
     name: 'Votació',
-    aspects: ['11'],
+    aspects: ['11', '916'],
     label: '✨Nou',
     icon: 'abacus',
     components: {

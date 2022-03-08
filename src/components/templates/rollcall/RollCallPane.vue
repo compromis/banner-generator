@@ -5,23 +5,25 @@
       type="textarea"
       label="Títol"
       name="title"
-      placeholder="Ajudes a empreses i autònoms"
+      placeholder="Moció a favor de..."
       v-model="properties.title"
-      :maxlength="48" />
+      :maxlength="64" />
 
     <!-- Cards manager -->
     <roll-call-manager v-model="properties.parties" />
 
     <!-- Abstain column -->
-    <c-select label="Abstenció en columna de..." name="abstainCol" v-model="properties.abstainColumn">
-      <option value="for">🟢 A favor</option>
-      <option value="against">🔴 En contra</option>
-    </c-select>
+    <transition name="slide">
+      <c-select label="Abstenció en columna de..." name="abstainCol" v-model="properties.abstainColumn" v-if="aspect === '11'">
+        <option value="for">🟢 A favor</option>
+        <option value="against">🔴 En contra</option>
+      </c-select>
+    </transition>
 
     <!-- Invert -->
     <c-field>
       <b-switch v-model="properties.inverted">
-          Invertir columnes
+          Invertir ordre
       </b-switch>
       <b-switch v-model="properties.partyTotals">
           Mostrar total de vots de partits
