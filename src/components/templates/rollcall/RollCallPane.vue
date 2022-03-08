@@ -115,7 +115,8 @@ export default {
         smallAbstain: true,
         highlightWinner: false,
         emojis: [],
-        color: 'orange'
+        color: 'orange',
+        fullGradient: true
       }
     }
   },

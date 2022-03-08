@@ -6,13 +6,13 @@
       'aspect-' + aspect,
       'banner-background-' + banner.mode,
       'logo-' + banner.logo,
-      { 'inverted-background': banner.title.length > 0 }
+      { 'inverted-background': banner.title.length > 0 && banner.picture }
     ]"
     v-if="banner">
     <div class="banner-content">
       <div class="banner-title" contenteditable>{{ banner.title | formatString }}</div>
       <div :class="['votes-grid', {'invert-grid' : banner.inverted}]">
-        <div :class="['card votes-card votes-card-for', { 'full-column' : banner.abstainColumn === 'against', 'winner': winner === 'for' && banner.highlightWinner }]">
+        <div :class="['card votes-card votes-card-for', { 'full-column' : banner.abstainColumn === 'against' || !hasAbstain, 'winner': winner === 'for' && banner.highlightWinner }]">
           <div class="votes-card-parties">
             <roll-call-party v-for="party in getParties('for')" :key="party.id" :party="party" :showVotes="banner.partyTotals"/>
           </div>
@@ -22,7 +22,7 @@
             <font-awesome-icon :icon="['far', 'check']" class="winner-icon" v-if="winner === 'for' && banner.highlightWinner" />
           </div>
         </div>
-        <div :class="['card votes-card votes-card-against', { 'full-column' : banner.abstainColumn === 'for', 'winner': winner === 'against' && banner.highlightWinner }]">
+        <div :class="['card votes-card votes-card-against', { 'full-column' : banner.abstainColumn === 'for' || !hasAbstain, 'winner': winner === 'against' && banner.highlightWinner }]">
           <div class="votes-card-parties">
             <roll-call-party v-for="party in getParties('against')" :key="party.id" :party="party" :showVotes="banner.partyTotals"/>
           </div>
@@ -31,7 +31,7 @@
             <span>En contra</span>
             <font-awesome-icon :icon="['far', 'check']" class="winner-icon" v-if="winner === 'against' && banner.highlightWinner" />
           </div></div>
-        <div :class="['card votes-card votes-card-abstain', { 'small-abstain': banner.smallAbstain }]">
+        <div v-if="hasAbstain" :class="['card votes-card votes-card-abstain', { 'small-abstain': banner.smallAbstain }]">
           <div class="votes-card-parties">
             <roll-call-party v-for="party in getParties('abstain')" :key="party.id" :party="party" :showVotes="banner.partyTotals"/>
           </div>
@@ -72,6 +72,10 @@ export default {
       const votesAgainst = this.getTotalVotes('against')
 
       return votesFor > votesAgainst ? 'for' : 'against'
+    },
+
+    hasAbstain () {
+      return this.getParties('abstain').length > 0
     }
   },
 
@@ -124,17 +128,12 @@ export default {
     overflow: hidden;
   }
 
-  .inverted-background .banner-picture::v-deep .banner-gradient {
-    top: 0 !important;
-    transform: rotate(180deg);
-  }
-
   .votes-grid {
     min-height: 350px;
     display: grid;
     align-self: center;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr auto;
+    grid-template-rows: 1fr;
     grid-auto-flow: dense;
     gap: 24px;
   }
