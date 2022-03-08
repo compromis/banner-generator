@@ -133,9 +133,7 @@ export default {
     },
 
     removeImage () {
-      this.properties.picture = null
-      this.properties.picturePreview = null
-      this.properties.pictureBlob = 'blobobo'
+      this.properties = Object.assign({}, this.properties, { picture: null, picturePreview: null, pictureBlob: null })
     },
 
     async customUpdateImage (prefix, image, ratio) {
