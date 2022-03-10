@@ -1,5 +1,8 @@
 <template>
-  <div>
+  <div :class="['pane', 'headline-pane', { 'pane-dimmed': paneDimmed }]">
+    <!-- Theme selector -->
+    <theme-selector v-model="properties.theme" :themes="availableThemes" />
+
     <!-- Party -->
     <c-select
       name="source"
@@ -147,6 +150,7 @@
 </template>
 
 <script>
+import ThemeSelector from '@/components/pane/ThemeSelector'
 import PaneMixin from '@/mixins/pane-mixin.js'
 import presets from './presets'
 import Swatches from 'vue-swatches'
@@ -155,6 +159,7 @@ export default {
   name: 'comparison-pane-party',
 
   components: {
+    ThemeSelector,
     Swatches
   },
 
@@ -178,7 +183,8 @@ export default {
         afterPicturePos: 50,
         invertOrder: false
       },
-      presets: presets
+      presets,
+      availableThemes: ['glowy', 'blobless']
     }
   },
 
