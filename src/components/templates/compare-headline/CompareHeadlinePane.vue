@@ -1,5 +1,6 @@
 <template>
   <div>
+    <theme-selector v-model="properties.theme" :themes="['glowy', 'blobless']" />
     <!-- First Headline -->
     <div class="source-input-group">
       <c-select
@@ -23,14 +24,16 @@
           Altre...
         </option>
       </c-select>
-      <div class="c-field">
-        <div class="c-field-info">
-          <label>Color</label>
+      <transition name="slide">
+        <div class="c-field" v-if="properties.theme === 'glowy' || properties.firstSource === 'other'">
+          <div class="c-field-info">
+            <label>Color</label>
+          </div>
+          <div class="c-field-content-sm">
+            <swatches v-model="properties.firstSourceCustomColor"></swatches>
+          </div>
         </div>
-        <div class="c-field-content-sm">
-          <swatches v-model="properties.firstSourceCustomColor"></swatches>
-        </div>
-      </div>
+      </transition>
     </div>
 
     <!-- Other Source -->
@@ -48,13 +51,16 @@
     </transition>
 
     <!-- First Description -->
-    <c-input-text
-      label="Descripció breu"
-      name="firstDescription"
-      type="text"
-      placeholder="2014"
-      v-model="properties.firstDescription"
-      :maxlength="30" />
+    <transition name="slide">
+      <c-input-text
+        v-if="properties.theme === 'glowy'"
+        label="Descripció breu"
+        name="firstDescription"
+        type="text"
+        placeholder="2014"
+        v-model="properties.firstDescription"
+        :maxlength="30" />
+    </transition>
 
     <!-- First Headline Text  -->
     <c-input-text
@@ -110,14 +116,16 @@
           Altre...
         </option>
       </c-select>
-      <div class="c-field">
-        <div class="c-field-info">
-          <label>Color</label>
+      <transition name="slide">
+        <div class="c-field" v-if="properties.theme === 'glowy' || properties.secondSource === 'other'">
+          <div class="c-field-info">
+            <label>Color</label>
+          </div>
+          <div class="c-field-content-sm">
+            <swatches v-model="properties.secondSourceCustomColor"></swatches>
+          </div>
         </div>
-        <div class="c-field-content-sm">
-          <swatches v-model="properties.secondSourceCustomColor"></swatches>
-        </div>
-      </div>
+      </transition>
     </div>
 
     <!-- Other Source -->
@@ -135,13 +143,16 @@
     </transition>
 
     <!-- Second Description -->
-    <c-input-text
-      label="Descripció breu"
-      name="secondDescription"
-      type="text"
-      placeholder="2020"
-      v-model="properties.secondDescription"
-      :maxlength="30" />
+    <transition name="slide">
+      <c-input-text
+        v-if="properties.theme === 'glowy'"
+        label="Descripció breu"
+        name="secondDescription"
+        type="text"
+        placeholder="2020"
+        v-model="properties.secondDescription"
+        :maxlength="30" />
+    </transition>
 
     <!-- Second Headline  -->
     <c-input-text
@@ -224,13 +235,15 @@
 </template>
 
 <script>
+import ThemeSelector from '@/components/pane/ThemeSelector'
 import PaneMixin from '@/mixins/pane-mixin.js'
 import presets from '../headline/presets'
 import Swatches from 'vue-swatches'
 
 export default {
   components: {
-    Swatches
+    Swatches,
+    ThemeSelector
   },
 
   mixins: [PaneMixin],
