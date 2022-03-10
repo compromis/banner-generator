@@ -185,7 +185,7 @@ export default {
   data () {
     return {
       properties: {
-        theme: 'glowy',
+        theme: 'blobless',
         source: null,
         customSource: '',
         customSourceColor: '#1CA085',
