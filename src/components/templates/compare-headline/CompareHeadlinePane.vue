@@ -83,7 +83,7 @@
       :errors="errors"
       :ratio="2.25"
       @upload="(image, ratio) => updateImageComparison('before', image, ratio)"
-      @delete="properties.beforePicture = null; properties.beforePicturePreview = null">
+      @delete="removeComparePicture('before')">
       <range-slider
         name="points"
         :min="0"
@@ -175,7 +175,7 @@
       :errors="errors"
       :ratio="2.25"
       @upload="(image, ratio) => updateImageComparison('after', image, ratio)"
-      @delete="properties.afterPicture = null; properties.afterPicturePreview = null">
+      @delete="removeComparePicture('after')">
       <range-slider
         name="points"
         :min="0"
@@ -307,6 +307,14 @@ export default {
 
     updateImageComparison (which, image, ratio) {
       this.customUpdateImage(which, image, ratio)
+    },
+
+    removeComparePicture (prefix) {
+      const picture = prefix ? `${prefix}Picture` : 'picture'
+      const picturePreview = prefix ? `${prefix}PicturePreview` : 'picturePreview'
+      const pictureBlob = prefix ? `${prefix}PictureBlob` : 'pictureBlob'
+
+      this.properties = Object.assign({}, this.properties, { [picture]: null, [picturePreview]: null, [pictureBlob]: null })
     }
   }
 }
