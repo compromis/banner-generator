@@ -22,7 +22,7 @@
           <span v-if="picture">{{ picture.name }}</span>
         </div>
       </b-upload>
-      <div v-if="'picture' in errors && displayErrors" class="error-text">Has d'ajuntar una foto</div>
+      <div v-if="fieldName in errors && displayErrors" class="error-text">Has d'ajuntar una foto</div>
       <b-button
         v-if="picture"
         @click="$emit('delete')"
