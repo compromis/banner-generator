@@ -17,7 +17,7 @@
           <div class="card-party card-party--custom" v-if="banner.source === 'other'" :style="{ color: banner.customSourceColor }">
             {{ banner.customSource }}
           </div>
-          <div class="card-party" v-else-if="banner.source" >
+          <div class="card-party card-party--image" v-else-if="banner.source" >
             <img :src="banner.source.logo" :alt="banner.source.name" :style="{ height: banner.source.logoHeight + 'px' }" />
           </div>
           <h1 class="card-text" :style="{ fontSize: smallestFontSize }" contenteditable>{{ banner.textBefore | formatString }}</h1>
@@ -29,7 +29,7 @@
         </div>
         <div class="card">
           <div class="compromis-logo">
-            <compromis-logo />
+            <multi-logo :type="banner.mode === 'black' ? 'auto' : 'color'" />
           </div>
           <h1 class="card-text" :style="{ fontSize: smallestFontSize }" contenteditable>{{ banner.textAfter | formatString }}</h1>
         </div>
@@ -45,15 +45,19 @@
 
 <script>
 import CanvasMixin from '@/mixins/canvas-mixin'
-import CompromisLogo from '@/components/utils/CompromisLogo'
+import MultiLogo from '@/components/canvas/MultiLogo'
 import EmojisOnCanvas from '@/components/canvas/EmojisOnCanvas'
+
 export default {
   name: 'comparison-canvas-party',
+
   mixins: [CanvasMixin],
+
   components: {
-    CompromisLogo,
+    MultiLogo,
     EmojisOnCanvas
   },
+
   computed: {
     pictureBefore () {
       return this.banner.beforePictureBlob || this.banner.beforePicturePreview
@@ -122,9 +126,13 @@ export default {
         position: absolute;
         top: var(--banner-padding);
         left: var(--banner-padding);
-        max-width: 400px;
+        max-width: 350px;
+        max-height: 200px;
         line-height: 1.25;
         z-index: 40;
+        background: var(--card-bg, #{$white});
+        color: var(--card-text, #{$gray-900});
+        overflow: hidden;
       }
     }
 
@@ -133,6 +141,11 @@ export default {
         &-party {
           margin-top: -4px;
           margin-bottom: 8px;
+
+          &--custom {
+            font-size: 20px;
+            font-weight: bold;
+          }
         }
       }
     }
@@ -202,6 +215,7 @@ export default {
       width: 120px;
       border-radius: 100%;
       font-size: 92px;
+      font-weight: bold;
 
       span {
         transform: translateY(-5px);
@@ -210,9 +224,19 @@ export default {
   }
 
   .mode-black {
+    --card-bg: #{$gray-800};
+    --card-text: #{$white};
     --circle-bg: #{$white};
     --circle-text: #{$gray-900};
 
     background: $gray-900;
+
+    .card-party--custom {
+      color: $white !important;
+    }
+
+    .card-party--image {
+      filter: grayscale(1) invert(1) brightness(100);
+    }
   }
 </style>

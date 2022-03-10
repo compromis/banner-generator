@@ -198,6 +198,10 @@ export default {
             }
           }
         }
+
+        &:active {
+          transform: rotate(2deg) scale(0.95);
+        }
       }
     }
   }

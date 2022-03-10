@@ -62,6 +62,7 @@ export default [
     name: 'Compara partits',
     aspects: ['11'],
     icon: 'columns',
+    label: '✨Nou estil',
     components: {
       pane: () => import(/* webpackChunkName: "compare-party" */ './compare-party/ComparePartyPane'),
       canvas: () => import(/* webpackChunkName: "compare-party" */ './compare-party/ComparePartyCanvas'),
@@ -73,6 +74,7 @@ export default [
     name: 'Compara titulars',
     aspects: ['11'],
     icon: 'table-rows',
+    label: '✨Nou estil',
     components: {
       pane: () => import(/* webpackChunkName: "compare-headline" */ './compare-headline/CompareHeadlinePane'),
       canvas: () => import(/* webpackChunkName: "compare-headline" */ './compare-headline/CompareHeadlineCanvas'),

@@ -210,4 +210,8 @@ export default {
       font-weight: bold;
     }
   }
+
+  .banner-background-black .before-party {
+    filter: grayscale(1) invert(1) brightness(100);
+  }
 </style>

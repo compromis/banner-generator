@@ -150,6 +150,9 @@
       label="Color de fons"
       is-rounded />
 
+    <!-- Logo -->
+    <logo-selector v-model="properties.logo" />
+
     <!-- Local label -->
      <transition name="slide">
       <c-input-text
