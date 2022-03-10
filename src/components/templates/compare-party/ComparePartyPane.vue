@@ -1,7 +1,7 @@
 <template>
   <div :class="['pane', 'headline-pane', { 'pane-dimmed': paneDimmed }]">
     <!-- Theme selector -->
-    <theme-selector v-model="properties.theme" :themes="availableThemes" />
+    <theme-selector v-model="properties.theme" :themes="['glowy', 'blobless']" />
 
     <!-- Party -->
     <c-select
@@ -65,7 +65,7 @@
       :preview="properties.beforePicturePreview"
       :display-errors="displayErrors"
       :errors="errors"
-      :ratio="0.530"
+      :ratio="properties.theme === 'glowy' ? 0.530 : 2.02"
       @upload="(image, ratio) => updateImageComparison('before', image, ratio)"
       @delete="properties.beforePicture = null; properties.beforePicturePreview = null">
       <range-slider
@@ -96,7 +96,7 @@
       :preview="properties.afterPicturePreview"
       :display-errors="displayErrors"
       :errors="errors"
-      :ratio="0.530"
+      :ratio="properties.theme === 'glowy' ? 0.530 : 2.02"
       @upload="(image, ratio) => updateImageComparison('after', image, ratio)"
       @delete="properties.afterPicture = null; properties.afterPicturePreview = null">
       <range-slider
@@ -119,12 +119,29 @@
         @touchend="$emit('dimPane', false)" />
     </c-field>
 
-    <!-- Local label -->
+    <!--Invert order -->
     <c-field>
       <b-switch v-model="properties.invertOrder">
         Invertir ordre de partits
       </b-switch>
     </c-field>
+
+    <!-- Comparison mode -->
+    <c-select
+      name="comparison-mode"
+      label="Comparació"
+      placeholder="Tipus de comparació"
+      v-model="properties.comparisonMode">
+      <option value="none">
+        Cap
+      </option>
+      <option value="vs">
+        Vs.
+      </option>
+      <option value="arrow">
+        Fletxa
+      </option>
+    </c-select>
 
     <!-- Dark mode -->
     <color-selector
@@ -132,9 +149,6 @@
       :colors="['white', 'black']"
       label="Color de fons"
       is-rounded />
-
-    <!-- Logo -->
-    <logo-selector v-model="properties.logo" />
 
     <!-- Local label -->
      <transition name="slide">
@@ -181,10 +195,10 @@ export default {
         afterPicture: null,
         afterPicturePreview: null,
         afterPicturePos: 50,
-        invertOrder: false
+        invertOrder: false,
+        comparisonMode: 'none'
       },
-      presets,
-      availableThemes: ['glowy', 'blobless']
+      presets
     }
   },
 

@@ -174,6 +174,7 @@
         @touchend="$emit('dimPane', false)" />
     </picture-upload>
 
+    <!-- Comparison mode -->
     <c-select
       name="comparison-mode"
       label="Comparació"
