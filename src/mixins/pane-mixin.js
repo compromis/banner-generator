@@ -116,7 +116,8 @@ export default {
   methods: {
     save: debounce(async (self) => {
       const { banner, bannerMeta } = self.$store.state
-      // Fix this in the future
+      if (!banner) return
+      // Remove blobs from object saved to db
       const { pictureBlob, afterPictureBlob, beforePictureBlob, ...bannerToSave } = banner
       const updated = await http.update(bannerMeta.ref, JSON.stringify(bannerToSave))
       self.$store.commit('setBannerMeta', updated)
