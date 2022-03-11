@@ -32,7 +32,7 @@
           Resaltar guanyador
       </b-switch>
       <b-switch v-model="properties.smallAbstain">
-          Abestensions en menut
+          Abstencions en menut
       </b-switch>
     </c-field>
 
