@@ -53,7 +53,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import "../../../sass/variables";
+  @import "../../../../sass/variables";
 
   .background {
     --dark-christmas: #2b2b2b;

@@ -14,7 +14,6 @@ export default [
     id: 'Generic',
     name: 'Frase',
     aspects: ['11', '916', '169'],
-    supports: ['multicolor-blobs'],
     icon: 'font',
     components: {
       pane: () => import(/* webpackChunkName: "generic" */ './generic/GenericPane'),
@@ -26,7 +25,6 @@ export default [
     id: 'Text',
     name: 'Text lliure',
     aspects: ['11', '916', '169'],
-    supports: ['multicolor-blobs'],
     icon: 'align-left',
     components: {
       pane: () => import(/* webpackChunkName: "text" */ './text/TextPane'),
@@ -38,7 +36,6 @@ export default [
     id: 'Quote',
     name: 'Cita',
     aspects: ['11', '916', '169'],
-    supports: ['multicolor-blobs'],
     icon: 'quote-left',
     components: {
       pane: () => import(/* webpackChunkName: "quote" */ './quote/QuotePane'),
@@ -153,7 +150,6 @@ export default [
     id: 'Event',
     name: 'Acte amb foto',
     aspects: ['11', '916', 'event'],
-    supports: ['multicolor-blobs'],
     icon: 'portrait',
     components: {
       pane: () => import(/* webpackChunkName: "event" */ './event/EventPane'),
@@ -165,7 +161,6 @@ export default [
     id: 'Speakers',
     name: 'Acte amb ponents',
     aspects: ['11', '916', 'event'],
-    supports: ['multicolor-blobs'],
     icon: 'keynote',
     components: {
       pane: () => import(/* webpackChunkName: "speakers" */ './speakers/SpeakersPane'),
@@ -202,9 +197,9 @@ export default [
     icon: 'portrait',
     archived: true,
     components: {
-      pane: () => import(/* webpackChunkName: "igualtat" */ './exigim-igualtat/IgualtatPane'),
-      canvas: () => import(/* webpackChunkName: "igualtat" */ './exigim-igualtat/IgualtatCanvas'),
-      help: () => import(/* webpackChunkName: "igualtat" */ './exigim-igualtat/IgualtatHelp')
+      pane: () => import(/* webpackChunkName: "igualtat" */ './archived/exigim-igualtat/IgualtatPane'),
+      canvas: () => import(/* webpackChunkName: "igualtat" */ './archived/exigim-igualtat/IgualtatCanvas'),
+      help: () => import(/* webpackChunkName: "igualtat" */ './archived/exigim-igualtat/IgualtatHelp')
     }
   },
   {
@@ -214,9 +209,9 @@ export default [
     archived: true,
     icon: 'euro-sign',
     components: {
-      pane: () => import(/* webpackChunkName: "ivace" */ './ivace/IvacePane'),
-      canvas: () => import(/* webpackChunkName: "ivace" */ './ivace/IvaceCanvas'),
-      help: () => import(/* webpackChunkName: "ivace" */ './ivace/IvaceHelp')
+      pane: () => import(/* webpackChunkName: "ivace" */ './archived/ivace/IvacePane'),
+      canvas: () => import(/* webpackChunkName: "ivace" */ './archived/ivace/IvaceCanvas'),
+      help: () => import(/* webpackChunkName: "ivace" */ './archived/ivace/IvaceHelp')
     }
   },
   {
@@ -227,9 +222,9 @@ export default [
     label: '🦠Covid-19',
     archived: true,
     components: {
-      pane: () => import(/* webpackChunkName: "resisteix" */ './resisteix/ResisteixPane'),
-      canvas: () => import(/* webpackChunkName: "resisteix" */ './resisteix/ResisteixCanvas'),
-      help: () => import(/* webpackChunkName: "resisteix" */ './resisteix/ResisteixHelp')
+      pane: () => import(/* webpackChunkName: "resisteix" */ './archived/resisteix/ResisteixPane'),
+      canvas: () => import(/* webpackChunkName: "resisteix" */ './archived/resisteix/ResisteixCanvas'),
+      help: () => import(/* webpackChunkName: "resisteix" */ './archived/resisteix/ResisteixHelp')
     }
   },
   {
@@ -266,9 +261,9 @@ export default [
     label: '🎄Festes 2021',
     archived: true,
     components: {
-      pane: () => import(/* webpackChunkName: "christmas-2021" */ './christmas-2021/Christmas2021Pane'),
-      canvas: () => import(/* webpackChunkName: "christmas-2021" */ './christmas-2021/Christmas2021Canvas'),
-      help: () => import(/* webpackChunkName: "christmas-2021" */ './christmas-2021/Christmas2021Help')
+      pane: () => import(/* webpackChunkName: "christmas-2021" */ './archived/christmas-2021/Christmas2021Pane'),
+      canvas: () => import(/* webpackChunkName: "christmas-2021" */ './archived/christmas-2021/Christmas2021Canvas'),
+      help: () => import(/* webpackChunkName: "christmas-2021" */ './archived/christmas-2021/Christmas2021Help')
     }
   },
   {
@@ -279,9 +274,9 @@ export default [
     label: '🎄Festes 2021',
     archived: true,
     components: {
-      pane: () => import(/* webpackChunkName: "christmas-2021" */ './christmas-local-2021/ChristmasLocal2021Pane'),
-      canvas: () => import(/* webpackChunkName: "christmas-2021" */ './christmas-local-2021/ChristmasLocal2021Canvas'),
-      help: () => import(/* webpackChunkName: "christmas-2021" */ './christmas-local-2021/ChristmasLocal2021Help')
+      pane: () => import(/* webpackChunkName: "christmas-2021" */ './archived/christmas-local-2021/ChristmasLocal2021Pane'),
+      canvas: () => import(/* webpackChunkName: "christmas-2021" */ './archived/christmas-local-2021/ChristmasLocal2021Canvas'),
+      help: () => import(/* webpackChunkName: "christmas-2021" */ './archived/christmas-local-2021/ChristmasLocal2021Help')
     }
   },
   {

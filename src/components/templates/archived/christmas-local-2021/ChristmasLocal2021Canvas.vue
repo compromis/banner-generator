@@ -59,7 +59,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import "../../../sass/variables";
+  @import "../../../../sass/variables";
   @import url('https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@300&display=swap');
 
   .background {
