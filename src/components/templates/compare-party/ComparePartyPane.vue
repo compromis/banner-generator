@@ -65,7 +65,7 @@
       :preview="properties.beforePicturePreview"
       :display-errors="displayErrors"
       :errors="errors"
-      :ratio="properties.theme === 'glowy' ? 0.530 : 2.02"
+      :ratio="ratios[properties.theme]"
       @upload="(image, ratio) => updateImageComparison('before', image, ratio)"
       @delete="removeComparePicture('before')">
       <range-slider
@@ -96,7 +96,7 @@
       :preview="properties.afterPicturePreview"
       :display-errors="displayErrors"
       :errors="errors"
-      :ratio="properties.theme === 'glowy' ? 0.530 : 2.02"
+      :ratio="ratios[properties.theme]"
       @upload="(image, ratio) => updateImageComparison('after', image, ratio)"
       @delete="removeComparePicture('after')">
       <range-slider
@@ -201,7 +201,8 @@ export default {
         invertOrder: false,
         comparisonMode: 'none'
       },
-      presets
+      presets,
+      ratios: { 'blobless': 2.02, 'glowy': 0.53 }
     }
   },
 
@@ -211,6 +212,15 @@ export default {
         this.$store.commit('updateBanner', this.properties)
       }
     })
+  },
+
+  watch: {
+    'properties.theme' () {
+      // Reevalute if image is vertical or horizontal
+      // according to theme ratios
+      this.refreshImageAspect('before')
+      this.refreshImageAspect('after')
+    }
   },
 
   methods: {
@@ -239,6 +249,19 @@ export default {
       const pictureBlob = prefix ? `${prefix}PictureBlob` : 'pictureBlob'
 
       this.properties = Object.assign({}, this.properties, { [picture]: null, [picturePreview]: null, [pictureBlob]: null })
+    },
+
+    refreshImageAspect (prefix) {
+      const picturePreview = prefix ? `${prefix}PicturePreview` : 'picturePreview'
+      const pictureBlob = prefix ? `${prefix}PictureBlob` : 'pictureBlob'
+      const pictureAspect = prefix ? `${prefix}PictureAspect` : 'pictureAspect'
+
+      const img = new Image()
+      img.onload = () => {
+        const { width, height } = img
+        this.properties[pictureAspect] = (width / height > this.ratios[this.properties.theme]) ? 'horizontal' : 'vertical'
+      }
+      img.src = this.properties[pictureBlob] || this.properties[picturePreview]
     }
   }
 }

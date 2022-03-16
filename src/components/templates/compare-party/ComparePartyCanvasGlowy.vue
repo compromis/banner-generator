@@ -63,7 +63,7 @@ import BannerPicture from '@/components/canvas/BannerPicture'
 import BannerFrame from '@/components/canvas/BannerFrame'
 
 export default {
-  name: 'comparison-canvas-party',
+  name: 'compare-party-canvas-glowy',
 
   mixins: [CanvasMixin],
 

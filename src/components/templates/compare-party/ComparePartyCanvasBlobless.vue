@@ -49,7 +49,7 @@ import MultiLogo from '@/components/canvas/MultiLogo'
 import EmojisOnCanvas from '@/components/canvas/EmojisOnCanvas'
 
 export default {
-  name: 'comparison-canvas-party',
+  name: 'compare-party-canvas-blobless',
 
   mixins: [CanvasMixin],
 
