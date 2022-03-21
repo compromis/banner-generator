@@ -218,8 +218,9 @@ export default {
     'properties.theme' () {
       // Reevalute if image is vertical or horizontal
       // according to theme ratios
-      this.refreshImageAspect('before')
-      this.refreshImageAspect('after')
+      const ratio = this.ratios[this.properties.theme]
+      this.refreshImageAspect({ prefix: 'before', ratio })
+      this.refreshImageAspect({ prefix: 'after', ratio })
     }
   },
 
@@ -249,19 +250,6 @@ export default {
       const pictureBlob = prefix ? `${prefix}PictureBlob` : 'pictureBlob'
 
       this.properties = Object.assign({}, this.properties, { [picture]: null, [picturePreview]: null, [pictureBlob]: null })
-    },
-
-    refreshImageAspect (prefix) {
-      const picturePreview = prefix ? `${prefix}PicturePreview` : 'picturePreview'
-      const pictureBlob = prefix ? `${prefix}PictureBlob` : 'pictureBlob'
-      const pictureAspect = prefix ? `${prefix}PictureAspect` : 'pictureAspect'
-
-      const img = new Image()
-      img.onload = () => {
-        const { width, height } = img
-        this.properties[pictureAspect] = (width / height > this.ratios[this.properties.theme]) ? 'horizontal' : 'vertical'
-      }
-      img.src = this.properties[pictureBlob] || this.properties[picturePreview]
     }
   }
 }

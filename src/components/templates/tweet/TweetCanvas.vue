@@ -9,7 +9,12 @@
       `logo-${banner.logo}`
     ]"
     v-if="banner">
-    <div class="background"></div>
+    <banner-picture
+      :picture-position="objectPosition"
+      :full-gradient="(banner.fullGradient && banner.style === 'card') || banner.style === 'transparent'"
+      :picture="banner.mediaAsBackground && inlinePicture"
+      :color="banner.backgroundColor"
+    />
     <div class="tweet-wrapper">
       <div class="tweet" v-if="banner.tweetEmbed">
         <div class="tweet-user">
@@ -68,17 +73,12 @@
         <img src="./images/point-down.png" alt="" />
       </div>
     </div>
-    <div class="tweet-picture-as-background" v-if="inlinePicture && banner.mediaAsBackground">
-      <img
-        :src="inlinePicture"
-        alt="Imatge"
-        :style="objectPosition" />
-    </div>
     <banner-frame :logo-type="banner.backgroundColor === 'white' ? 'color' : 'auto'" />
   </div>
 </template>
 
 <script>
+import BannerPicture from '@/components/canvas/BannerPicture.vue'
 import BannerFrame from '@/components/canvas/BannerFrame.vue'
 import moment from 'moment'
 import CanvasMixin from '@/mixins/canvas-mixin.js'
@@ -89,7 +89,8 @@ export default {
   mixins: [CanvasMixin],
 
   components: {
-    BannerFrame
+    BannerFrame,
+    BannerPicture
   },
 
   computed: {

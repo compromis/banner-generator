@@ -97,10 +97,10 @@
   }
 
   #iconGradient stop[offset='0'] {
-    stop-color: #38B34A !important;
+    stop-color: $green-start !important;
   }
 
   #iconGradient stop[offset='1'] {
-    stop-color: #8CC949 !important;
+    stop-color: $green-end !important;
   }
 }

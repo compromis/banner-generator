@@ -165,6 +165,19 @@ export default {
       img.src = this.properties[pictureBlob]
     },
 
+    refreshImageAspect ({ prefix, ratio, image }) {
+      const picturePreview = prefix ? `${prefix}PicturePreview` : 'picturePreview'
+      const pictureBlob = prefix ? `${prefix}PictureBlob` : 'pictureBlob'
+      const pictureAspect = prefix ? `${prefix}PictureAspect` : 'pictureAspect'
+
+      const img = new Image()
+      img.onload = () => {
+        const { width, height } = img
+        this.properties[pictureAspect] = (width / height > ratio) ? 'horizontal' : 'vertical'
+      }
+      img.src = image || this.properties[pictureBlob] || this.properties[picturePreview]
+    },
+
     updateHashtag (hashtag) {
       if (!hashtag) {
         this.properties.hashtag = ''

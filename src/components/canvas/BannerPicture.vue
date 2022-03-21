@@ -15,8 +15,8 @@
         'banner-gradient',
         `gradient-${computedColor}`,
         {
-          'gradient-partial': !banner.fullGradient,
-          'gradient-full': banner.fullGradient,
+          'gradient-partial': !computedFullGradient,
+          'gradient-full': computedFullGradient,
           'gradient-background': !computedPicture
         }
       ]"></div>
@@ -45,6 +45,10 @@ export default {
     color: {
       type: String,
       default: null
+    },
+    fullGradient: {
+      type: Boolean,
+      default: null
     }
   },
 
@@ -54,11 +58,16 @@ export default {
     },
 
     computedPicture () {
+      if (this.picture === false) return
       return this.picture || this.banner.pictureBlob || this.banner.picturePreview
     },
 
     computedColor () {
       return this.color || this.banner.color
+    },
+
+    computedFullGradient () {
+      return this.fullGradient === null ? this.banner.fullGradient : this.fullGradient
     },
 
     transparentMode () {
@@ -155,9 +164,17 @@ export default {
         &.gradient-black {
           background: rgba($gray-800, .65);
         }
+
+        &.gradient-white {
+          background: rgba($white, .65);
+        }
         &.gradient-feminism {
           background: url(../../assets/gradients/feminism-full.png);
           background-size: 100% 100%; // this seems redundant but is needed, otherwise chrome sizes according to overriden bg
+        }
+
+        &.gradient-green {
+          background: linear-gradient(-10deg, rgba($green-start, .9), rgba($green-end, .8), rgba($green-end, .3));
         }
       }
 
@@ -169,8 +186,17 @@ export default {
           top: 0;
           background: linear-gradient(-38deg, $gradient-start 0%, $gradient-end 90%, $gradient-end 100%);
         }
+
+        &.gradient-green {
+          --gradient-orientation: -30deg;
+          background: $gradient-green;
+        }
         &.gradient-black {
           background: rgba($gray-800, 1);
+        }
+
+        &.gradient-white {
+          background: rgba($white, 1);
         }
         &.gradient-lgbt {
           --gradient-orientation: 153.5deg;

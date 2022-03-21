@@ -87,7 +87,7 @@
               <option
                 value="uploaded"
                 :selected="properties.mediaType === 'uploaded'">
-                Putja una foto
+                Puja una foto
               </option>
               <option
                 value="none"
@@ -115,6 +115,11 @@
                   <b-switch v-model="properties.mediaAsBackground">
                     Imatge de fons
                   </b-switch>
+                  <transition name="slide">
+                    <b-switch v-model="properties.fullGradient" v-if="properties.style === 'card' && properties.mediaAsBackground" class="mt-1">
+                      Degradat en tota la imatge
+                    </b-switch>
+                  </transition>
                 </div>
               </div>
             </transition>
@@ -130,7 +135,9 @@
           :display-errors="displayErrors"
           :errors="errors"
           @upload="updateImage"
-          @delete="properties.picture = null; properties.picturePreview = ''">
+          @delete="removeImage"
+          :ratio="properties.mediaAsBackground ? ratios.background : ratios.inline"
+          >
           <range-slider
             name="points"
             :min="0"
@@ -141,6 +148,11 @@
           <b-switch v-model="properties.mediaAsBackground">
             Imatge de fons
           </b-switch>
+          <transition name="slide">
+            <b-switch v-model="properties.fullGradient" v-if="properties.style === 'card' && properties.mediaAsBackground" class="mt-1">
+              Degradat en tota la imatge
+            </b-switch>
+          </transition>
         </picture-upload>
 
         <c-field>
@@ -214,25 +226,30 @@ export default {
         style: 'transparent',
         cta: 'Passa-ho!'
       },
-      fetching: false
+      fetching: false,
+      ratios: { inline: 2.09, background: 1 }
     }
   },
 
   watch: {
     'properties.tweetUrl' (url) {
       this.fetchTweet(url)
+    },
+
+    'properties.mediaAsBackground' (value) {
+      const ratio = value ? this.ratios.background : this.ratios.inline
+      this.reevaluateImages(ratio)
+    },
+
+    'properties.mediaType' () {
+      const ratio = this.properties.mediaAsBackground ? this.ratios.background : this.ratios.inline
+      this.reevaluateImages(ratio)
     }
   },
 
   computed: {
     availableColors () {
-      const colors = ['black', 'white', 'orange', 'lgbt', 'feminism', 'green']
-
-      if (this.tweetHasImage && this.showImage && this.properties.mediaAsBackground) {
-        colors.push('transparent')
-      }
-
-      return colors
+      return ['black', 'white', 'orange', 'lgbt', 'feminism', 'green']
     },
 
     showImage () {
@@ -317,6 +334,17 @@ export default {
         this.properties.pictureAspect = (naturalWidth / naturalHeight > 1) ? 'horizontal' : 'vertical'
       })
       img.src = url
+    },
+
+    reevaluateImages (ratio) {
+      let image
+      const { properties } = this
+
+      if (properties.mediaType === 'tweetimage' && properties.tweetEmbed.entities.media) {
+        image = properties.tweetEmbed && properties.tweetEmbed.entities['media'] && properties.tweetEmbed.entities['media'][0].media_url_https
+      }
+
+      this.refreshImageAspect({ ratio, image })
     }
   }
 }
