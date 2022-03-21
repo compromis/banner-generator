@@ -272,7 +272,7 @@ export default {
             this.properties.tweetEmbed = response
 
             // Set pictureAspect
-            if (response.entities.media[0]) {
+            if (response.entities.media) {
               this.setMediaAspect(response.entities.media[0].media_url_https)
             }
 

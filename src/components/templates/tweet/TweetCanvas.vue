@@ -111,7 +111,7 @@ export default {
         return ''
       }
 
-      if (banner.mediaType === 'tweetimage') {
+      if (banner.mediaType === 'tweetimage' && banner.tweetEmbed.entities.media) {
         return banner.tweetEmbed && banner.tweetEmbed.entities['media'] && banner.tweetEmbed.entities['media'][0].media_url_https
       }
 
