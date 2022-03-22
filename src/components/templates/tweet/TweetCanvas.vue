@@ -109,7 +109,7 @@ export default {
       const { banner } = this
 
       if (banner.mediaType === 'none') {
-        return ''
+        return false
       }
 
       if (banner.mediaType === 'tweetimage' && banner.tweetEmbed.entities.media) {
