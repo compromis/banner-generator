@@ -23,6 +23,9 @@
         </div>
       </b-upload>
       <div v-if="fieldName in errors && displayErrors" class="error-text">Has d'ajuntar una foto</div>
+      <b-message v-if="advice" type="is-warning" size="is-small">
+        {{ advice }}
+      </b-message>
       <b-button
         v-if="picture"
         @click="$emit('delete')"
@@ -75,6 +78,21 @@ export default {
     this.$root.$on('pictureFinishedUploading', (state) => {
       this.loading = !state
     })
+  },
+
+  computed: {
+    advice () {
+      const { banner } = this.$store.state
+      const fieldName = `${this.fieldName}Dimensions`
+
+      if (!banner || !banner[fieldName]) return false
+
+      const { height, width } = banner[fieldName]
+
+      return height < 800 || width < 800
+        ? 'Aquesta foto es veurà pixelada. Recomanem utilitzar fotos amb una resolució de 800x800 com a mínim.'
+        : false
+    }
   },
 
   methods: {

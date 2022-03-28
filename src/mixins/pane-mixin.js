@@ -133,8 +133,19 @@ export default {
       this.customUpdateImage('', image, ratio || 1)
     },
 
-    removeImage () {
-      this.properties = Object.assign({}, this.properties, { picture: null, picturePreview: null, pictureBlob: null })
+    removeImage (prefix) {
+      const picture = prefix ? `${prefix}Picture` : 'picture'
+      const picturePreview = prefix ? `${prefix}PicturePreview` : 'picturePreview'
+      const pictureBlob = prefix ? `${prefix}PictureBlob` : 'pictureBlob'
+      const pictureDimensions = prefix ? `${prefix}PictureDimensions` : 'pictureDimensions'
+
+      this.properties = Object.assign({}, this.properties, {
+        [picture]: null,
+        [picturePreview]: null,
+        [pictureBlob]: null,
+        [pictureDimensions]: null
+      })
+      this.$store.commit('removeAdvice', picture)
     },
 
     async customUpdateImage (prefix, image, ratio) {

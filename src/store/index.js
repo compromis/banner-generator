@@ -58,8 +58,7 @@ export default new Vuex.Store({
       state.errors = errors
     },
 
-    addError (state, error) {
-      const { field, message } = error
+    addError (state, { field, message }) {
       if (field in state.errors) {
         state.errors[field].push(message)
       } else {
