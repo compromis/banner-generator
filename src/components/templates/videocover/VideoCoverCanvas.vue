@@ -99,10 +99,7 @@ export default {
     },
 
     pitAgainstObjectPosition () {
-      const objectPosition = (this.banner.pitAgainstPictureAspect === 'vertical')
-        ? '0% ' + (100 - this.banner.pitAgainstPicturePos) + '%'
-        : (100 - this.banner.pitAgainstPicturePos) + '% 0%'
-      return { objectPosition }
+      return this.computeObjectPosition('pitAgainst')
     }
   }
 }

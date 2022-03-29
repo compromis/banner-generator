@@ -74,6 +74,24 @@
         v-model="properties.picturePos"
         @touchstart="dimPane(true)"
         @touchend="dimPane(false)" />
+      <range-slider
+        v-if="advancedImageCropping"
+        label="Eix 2"
+        name="picturePosAlt"
+        :min="-25"
+        :max="25"
+        v-model="properties.picturePosAlt"
+        @touchstart="dimPane(true)"
+        @touchend="dimPane(false)" />
+      <range-slider
+        v-if="advancedImageCropping"
+        name="pictureZoom"
+        label="Escala"
+        :min="100"
+        :max="300"
+        v-model="properties.pictureZoom"
+        @touchstart="dimPane(true)"
+        @touchend="dimPane(false)" />
     </picture-upload>
 
     <!-- Pit against -->
@@ -94,13 +112,32 @@
         :preview="properties.pitAgainstPicturePreview"
         :display-errors="displayErrors"
         :errors="errors"
-        @upload="(image) => customUpdateImage('pitAgainst', image)"
-        @delete="properties.pitAgainstPicture = null; properties.pitAgainstPicturePreview = null">
+        :ratio="0.65"
+        @upload="(image, ratio) => customUpdateImage('pitAgainst', image, ratio)"
+        @delete="removeImage('pitAgainst')">
         <range-slider
           name="points"
           :min="0"
           :max="100"
           v-model="properties.pitAgainstPicturePos"
+          @touchstart="dimPane(true)"
+          @touchend="dimPane(false)" />
+        <range-slider
+          v-if="advancedImageCropping"
+          label="Eix 2"
+          name="picturePosAlt"
+          :min="-25"
+          :max="25"
+          v-model="properties.pitAgainstPicturePosAlt"
+          @touchstart="dimPane(true)"
+          @touchend="dimPane(false)" />
+        <range-slider
+          v-if="advancedImageCropping"
+          name="pictureZoom"
+          label="Escala"
+          :min="100"
+          :max="300"
+          v-model="properties.pitAgainstPictureZoom"
           @touchstart="dimPane(true)"
           @touchend="dimPane(false)" />
       </picture-upload>
@@ -165,6 +202,8 @@ export default {
         pitAgainstPicture: null,
         pitAgainstPicturePreview: null,
         pitAgainstPicturePos: 50,
+        pitAgainstPictureZoom: 100,
+        pitAgainstPicturePosAlt: 0,
         pitAgainstPictureAspect: 'horizontal',
         pitAgainstPictureDimensions: null,
         fontStyle: 'regular',
