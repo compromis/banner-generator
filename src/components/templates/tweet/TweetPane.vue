@@ -62,7 +62,7 @@
         </div>
 
         <!-- Text size -->
-        <c-field label="Tamany del text" compact>
+        <c-field label="Tamany del text" compact class="range-field">
           <range-slider
             name="points"
             :min="75"
@@ -97,7 +97,7 @@
             </c-select>
 
             <transition name="slide">
-              <div class="c-field" v-if="properties.mediaType === 'tweetimage'">
+              <div class="c-field range-field" v-if="properties.mediaType === 'tweetimage'">
                 <!-- Pictures -->
                 <div class="twitter-media c-field c-field-content">
                   <div v-for="(media, i) in properties.tweetEmbed.entities.media" :key="i" class="twitter-media-item">

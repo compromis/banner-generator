@@ -285,7 +285,8 @@
       .field,
       .c-field,
       .emoji-picker,
-      .tabs {
+      .tabs,
+      .button {
         opacity: 0;
 
         &.image-upload-field,
@@ -300,8 +301,12 @@
           }
 
           .range-slider {
-            background: white;
+            background: $white;
             box-shadow: $default-shadow;
+
+            label {
+              opacity: 1;
+            }
           }
         }
       }

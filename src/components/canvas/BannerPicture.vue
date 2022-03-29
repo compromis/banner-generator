@@ -35,7 +35,7 @@ export default {
 
   props: {
     picture: {
-      type: String,
+      type: [String, Boolean],
       default: null
     },
     picturePosition: {

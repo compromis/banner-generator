@@ -73,7 +73,7 @@
       :display-errors="displayErrors"
       :errors="errors"
       @upload="updateImage"
-      @delete="properties.picture = null; properties.picturePreview = ''">
+      @delete="removeImage">
       <range-slider
         name="picturePos"
         :label="advancedImageCropping ? 'Eix 1' : ''"
