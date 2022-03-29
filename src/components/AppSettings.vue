@@ -15,6 +15,7 @@
           <li><b-switch v-model="showArchive">Mostrar plantilles arxivades</b-switch></li>
           <li><b-switch v-model="showLogoSelector">Mostrar logos de partits</b-switch></li>
           <li><b-switch v-model="transparentMode">Descarrega amb fons transparent</b-switch></li>
+          <li><b-switch v-model="advancedImageCropping">Mode avançat de posicionament d'imatges</b-switch></li>
         </ul>
         <b-button @click="modalOpen = false">Tanca</b-button>
       </div>
@@ -62,6 +63,16 @@ export default {
 
       set (value) {
         this.$store.commit('updateSettings', { prop: 'transparentMode', value })
+      }
+    },
+
+    advancedImageCropping: {
+      get () {
+        return this.$store.state.settings.advancedImageCropping
+      },
+
+      set (value) {
+        this.$store.commit('updateSettings', { prop: 'advancedImageCropping', value })
       }
     },
 

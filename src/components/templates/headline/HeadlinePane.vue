@@ -75,10 +75,29 @@
       @upload="updateImage"
       @delete="properties.picture = null; properties.picturePreview = ''">
       <range-slider
-        name="points"
+        name="picturePos"
+        :label="advancedImageCropping ? 'Eix 1' : ''"
         :min="0"
         :max="100"
         v-model="properties.picturePos"
+        @touchstart="dimPane(true)"
+        @touchend="dimPane(false)" />
+      <range-slider
+        v-if="advancedImageCropping"
+        label="Eix 2"
+        name="picturePosAlt"
+        :min="-25"
+        :max="25"
+        v-model="properties.picturePosAlt"
+        @touchstart="dimPane(true)"
+        @touchend="dimPane(false)" />
+      <range-slider
+        v-if="advancedImageCropping"
+        name="pictureZoom"
+        label="Escala"
+        :min="100"
+        :max="300"
+        v-model="properties.pictureZoom"
         @touchstart="dimPane(true)"
         @touchend="dimPane(false)" />
       <transition name="slide">

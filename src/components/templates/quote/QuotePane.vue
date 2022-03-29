@@ -52,6 +52,24 @@
         v-model="properties.picturePos"
         @touchstart="dimPane(true)"
         @touchend="dimPane(false)" />
+      <range-slider
+        v-if="advancedImageCropping"
+        label="Eix 2"
+        name="picturePosAlt"
+        :min="-25"
+        :max="25"
+        v-model="properties.picturePosAlt"
+        @touchstart="dimPane(true)"
+        @touchend="dimPane(false)" />
+      <range-slider
+        v-if="advancedImageCropping"
+        name="pictureZoom"
+        label="Escala"
+        :min="100"
+        :max="300"
+        v-model="properties.pictureZoom"
+        @touchstart="dimPane(true)"
+        @touchend="dimPane(false)" />
       <transition name="slide">
         <b-switch v-model="properties.fullGradient" v-if="properties.theme === 'blobless'">
           Degradat sobre tota la imatge

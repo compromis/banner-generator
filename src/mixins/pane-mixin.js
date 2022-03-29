@@ -29,6 +29,8 @@ export default {
         picture: null,
         picturePreview: '',
         picturePos: 50,
+        picturePosAlt: 0,
+        pictureZoom: 100,
         pictureAspect: 'horizontal',
         pictureDimensions: null,
         hashtag: '',
@@ -65,6 +67,10 @@ export default {
 
     isInTransparentMode () {
       return this.$store.state.settings.transparentMode
+    },
+
+    advancedImageCropping () {
+      return this.$store.state.settings.advancedImageCropping
     }
   },
 

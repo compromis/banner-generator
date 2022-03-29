@@ -11,10 +11,7 @@ export default {
     },
 
     objectPosition () {
-      const objectPosition = (this.banner.pictureAspect === 'vertical')
-        ? '0% ' + (100 - this.banner.picturePos) + '%'
-        : (100 - this.banner.picturePos) + '% 0%'
-      return { objectPosition }
+      return this.computeObjectPosition()
     }
   },
 
@@ -72,6 +69,31 @@ export default {
     formatDateLocale (date, lang = 'val') {
       const locales = { cas: 'es', val: 'ca' }
       return moment(date).locale(locales[lang]).format('dddd, D MMMM')
+    },
+
+    computeObjectPosition (prefix) {
+      const pictureAspect = prefix ? `${prefix}PictureAspect` : 'pictureAspect'
+      const picturePos = prefix ? `${prefix}PicturePos` : 'picturePos'
+      const pictureZoom = prefix ? `${prefix}PictureZoom` : 'pictureZoom'
+      const picturePosAlt = prefix ? `${prefix}PicturePosAlt` : 'picturePosAlt'
+
+      const objectPosition = (this.banner[pictureAspect] === 'vertical')
+        ? '0% ' + (100 - this.banner[picturePos]) + '%'
+        : (100 - this.banner[picturePos]) + '% 0%'
+      const scale = this.banner[pictureZoom] / 100
+
+      if (!this.banner[pictureZoom] || scale === 1) {
+        return { objectPosition }
+      }
+
+      const translante = (this.banner[pictureAspect] === 'vertical')
+        ? this.banner[picturePosAlt] + '%, 0'
+        : '0, ' + this.banner[picturePosAlt] + '%'
+
+      return {
+        objectPosition,
+        transform: `scale(${scale}) translate(${translante})`
+      }
     }
   }
 }

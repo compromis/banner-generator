@@ -1,5 +1,6 @@
 <template>
   <div class="range-slider">
+    <label v-if="label">{{ label }}</label>
     <input
       class="slider"
       type="range"
@@ -18,6 +19,7 @@ export default {
   name: 'range-slider',
 
   props: {
+    label: String,
     min: Number,
     max: Number,
     value: Number,

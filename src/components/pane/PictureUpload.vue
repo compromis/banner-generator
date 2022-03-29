@@ -42,7 +42,6 @@
 <script>
 export default {
   name: 'picture-upload',
-
   props: {
     picture: {
       type: [Object, File],
