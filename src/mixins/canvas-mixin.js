@@ -74,15 +74,15 @@ export default {
     computeObjectPosition (prefix) {
       const pictureAspect = prefix ? `${prefix}PictureAspect` : 'pictureAspect'
       const picturePos = prefix ? `${prefix}PicturePos` : 'picturePos'
-      const pictureZoom = prefix ? `${prefix}PictureZoom` : 'pictureZoom'
+      const pictureScale = prefix ? `${prefix}PictureScale` : 'pictureScale'
       const picturePosAlt = prefix ? `${prefix}PicturePosAlt` : 'picturePosAlt'
 
       const objectPosition = (this.banner[pictureAspect] === 'vertical')
         ? '0% ' + (100 - this.banner[picturePos]) + '%'
         : (100 - this.banner[picturePos]) + '% 0%'
-      const scale = this.banner[pictureZoom] / 100
+      const scale = this.banner[pictureScale] / 100
 
-      if (!this.banner[pictureZoom] || scale === 1) {
+      if (!this.banner[pictureScale] || scale === 1) {
         return { objectPosition }
       }
 

@@ -32,7 +32,7 @@ export default {
         picturePreview: '',
         picturePos: 50,
         picturePosAlt: 0,
-        pictureZoom: 100,
+        pictureScale: 100,
         pictureAspect: 'horizontal',
         pictureDimensions: null,
         hashtag: '',
@@ -73,12 +73,6 @@ export default {
 
     advancedImageCropping () {
       return this.$store.state.settings.advancedImageCropping
-    },
-
-    noImageCropping () {
-      const { pictureDimensions } = this.properties
-      if (!pictureDimensions) return true
-      return pictureDimensions.width === pictureDimensions.height
     }
   },
 
@@ -203,8 +197,23 @@ export default {
       img.src = image || this.properties[pictureBlob] || this.properties[picturePreview]
     },
 
-    updateImageCrop ({ scale, posX, posY, prefix }) {
-      console.log(scale, posX, posY, prefix)
+    updateImageCrop ({ scale, x, y, prefix }) {
+      const pictureScale = prefix ? `${prefix}PictureScale` : 'pictureScale'
+      const picturePos = prefix ? `${prefix}PicturePos` : 'picturePos'
+      const picturePosAlt = prefix ? `${prefix}PicturePosAlt` : 'picturePosAlt'
+
+      this.properties[pictureScale] = scale
+      this.properties[picturePos] = x
+      this.properties[picturePosAlt] = y
+    },
+
+    noImageCropping (prefix) {
+      const pictureDimensions = prefix ? `${prefix}PictureDimensions` : 'pictureDimensions'
+      if (!this.properties[pictureDimensions]) return true
+
+      const { width, height } = this.properties[pictureDimensions]
+
+      return width === height
     },
 
     updateHashtag (hashtag) {
