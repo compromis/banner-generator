@@ -1,17 +1,19 @@
 <template>
-  <div class="range-slider">
-    <label v-if="label">{{ label }}</label>
-    <input
-      class="slider"
-      type="range"
-      :name="name"
-      :min="min"
-      :max="max"
-      :value="value"
-      @input="updateValue"
-      @touchstart="$emit('touchstart')"
-      @touchend="$emit('touchend')" />
-  </div>
+  <transition name="slide">
+    <div class="range-slider" v-if="!hidden">
+      <label v-if="label">{{ label }}</label>
+      <input
+        class="slider"
+        type="range"
+        :name="name"
+        :min="min"
+        :max="max"
+        :value="value"
+        @input="updateValue"
+        @touchstart="$emit('touchstart')"
+        @touchend="$emit('touchend')" />
+    </div>
+  </transition>
 </template>
 
 <script>
@@ -23,7 +25,8 @@ export default {
     min: Number,
     max: Number,
     value: Number,
-    name: String
+    name: String,
+    hidden: Boolean
   },
 
   methods: {

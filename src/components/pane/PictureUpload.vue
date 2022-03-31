@@ -23,7 +23,7 @@
         </div>
       </b-upload>
       <div v-if="fieldName in errors && displayErrors" class="error-text">Has d'ajuntar una foto</div>
-      <b-message v-if="advice" type="is-warning" size="is-small">
+      <b-message v-if="advice" type="is-warning" size="is-small" class="resolution-warning">
         {{ advice }}
       </b-message>
       <b-button
@@ -115,6 +115,10 @@ export default {
     min-height: 4.65rem;
   }
 
+  .upload {
+    margin-bottom: .5rem;
+  }
+
   .c-field-content {
     position: relative;
   }
@@ -166,6 +170,10 @@ export default {
   &.has-addons {
     flex-direction: column;
     width: 100%;
+  }
+
+  .resolution-warning {
+    margin: 0;
   }
 }
 

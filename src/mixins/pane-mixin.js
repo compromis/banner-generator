@@ -7,6 +7,7 @@ import CSelect from '@/components/pane/CSelect'
 import CField from '@/components/pane/CField'
 import ColorSelector from '@/components/pane/ColorSelector'
 import LogoSelector from '@/components/pane/LogoSelector'
+import AdvancedCropping from '@/components/pane/AdvancedCropping'
 
 export default {
   // Shared components across templates
@@ -17,7 +18,8 @@ export default {
     CSelect,
     CField,
     ColorSelector,
-    LogoSelector
+    LogoSelector,
+    AdvancedCropping
   },
 
   // Shared data across templates
@@ -71,6 +73,12 @@ export default {
 
     advancedImageCropping () {
       return this.$store.state.settings.advancedImageCropping
+    },
+
+    noImageCropping () {
+      const { pictureDimensions } = this.properties
+      if (!pictureDimensions) return true
+      return pictureDimensions.width === pictureDimensions.height
     }
   },
 
@@ -193,6 +201,10 @@ export default {
         this.properties[pictureAspect] = (width / height > ratio) ? 'horizontal' : 'vertical'
       }
       img.src = image || this.properties[pictureBlob] || this.properties[picturePreview]
+    },
+
+    updateImageCrop ({ scale, posX, posY, prefix }) {
+      console.log(scale, posX, posY, prefix)
     },
 
     updateHashtag (hashtag) {

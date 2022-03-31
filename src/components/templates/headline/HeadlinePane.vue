@@ -74,34 +74,20 @@
       :errors="errors"
       @upload="updateImage"
       @delete="removeImage">
+      <advanced-cropping
+        @update="updateImageCrop"
+        v-if="advancedImageCropping" />
       <range-slider
+        v-else
         name="picturePos"
-        :label="advancedImageCropping ? 'Eix 1' : ''"
         :min="0"
         :max="100"
+        :hidden="noImageCropping"
         v-model="properties.picturePos"
         @touchstart="dimPane(true)"
         @touchend="dimPane(false)" />
-      <range-slider
-        v-if="advancedImageCropping"
-        label="Eix 2"
-        name="picturePosAlt"
-        :min="-25"
-        :max="25"
-        v-model="properties.picturePosAlt"
-        @touchstart="dimPane(true)"
-        @touchend="dimPane(false)" />
-      <range-slider
-        v-if="advancedImageCropping"
-        name="pictureZoom"
-        label="Escala"
-        :min="100"
-        :max="300"
-        v-model="properties.pictureZoom"
-        @touchstart="dimPane(true)"
-        @touchend="dimPane(false)" />
       <transition name="slide">
-        <b-switch v-model="properties.fullGradient" v-if="properties.theme === 'blobless'">
+        <b-switch v-model="properties.fullGradient" v-if="properties.theme === 'blobless' && properties.picture">
           Degradat sobre tota la imatge
         </b-switch>
       </transition>
