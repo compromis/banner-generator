@@ -83,11 +83,16 @@
       :errors="errors"
       :ratio="2.25"
       @upload="(image, ratio) => updateImageComparison('before', image, ratio)"
-      @delete="removePicture('before')">
+      @delete="removeImage('before')">
+      <advanced-cropping
+        v-model="properties.beforeAdvancedCrop"
+        v-if="advancedImageCropping" />
       <range-slider
+        v-else
         name="points"
         :min="0"
         :max="100"
+        :hidden="noImageCropping('before', 2.25)"
         v-model="properties.beforePicturePos"
         @touchstart="$emit('dimPane', true)"
         @touchend="$emit('dimPane', false)" />
@@ -175,11 +180,16 @@
       :errors="errors"
       :ratio="2.25"
       @upload="(image, ratio) => updateImageComparison('after', image, ratio)"
-      @delete="removePicture('after')">
+      @delete="removeImage('after')">
+      <advanced-cropping
+        v-model="properties.afterAdvancedCrop"
+        v-if="advancedImageCropping" />
       <range-slider
+        v-else
         name="points"
         :min="0"
         :max="100"
+        :hidden="noImageCropping('after', 2.25)"
         v-model="properties.afterPicturePos"
         @touchstart="$emit('dimPane', true)"
         @touchend="$emit('dimPane', false)" />
@@ -269,6 +279,8 @@ export default {
         afterPicture: null,
         afterPicturePreview: null,
         afterPicturePos: 50,
+        beforeAdvancedCrop: { x: 0, y: 0, scale: 100 },
+        afterAdvancedCrop: { x: 0, y: 0, scale: 100 },
         comparisonMode: 'none'
       },
       presets

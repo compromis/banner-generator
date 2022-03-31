@@ -74,25 +74,23 @@ export default {
     computeObjectPosition (prefix) {
       const pictureAspect = prefix ? `${prefix}PictureAspect` : 'pictureAspect'
       const picturePos = prefix ? `${prefix}PicturePos` : 'picturePos'
-      const pictureScale = prefix ? `${prefix}PictureScale` : 'pictureScale'
-      const picturePosAlt = prefix ? `${prefix}PicturePosAlt` : 'picturePosAlt'
+      const advancedCrop = prefix ? `${prefix}AdvancedCrop` : 'advancedCrop'
 
+      // Simple Cropping
       const objectPosition = (this.banner[pictureAspect] === 'vertical')
         ? '0% ' + (100 - this.banner[picturePos]) + '%'
         : (100 - this.banner[picturePos]) + '% 0%'
-      const scale = this.banner[pictureScale] / 100
 
-      if (!this.banner[pictureScale] || scale === 1) {
+      if (!this.$store.state.settings.advancedImageCropping) {
         return { objectPosition }
       }
 
-      const translante = (this.banner[pictureAspect] === 'vertical')
-        ? this.banner[picturePosAlt] + '%, 0'
-        : '0, ' + this.banner[picturePosAlt] + '%'
+      // Advanced Cropping
+      const { scale, x, y } = this.banner[advancedCrop]
+      const translate = `${x}%, ${y}%`
 
       return {
-        objectPosition,
-        transform: `scale(${scale}) translate(${translante})`
+        transform: `scale(${scale / 100}) translate(${translate})`
       }
     }
   }

@@ -32,7 +32,11 @@ export default {
         picturePreview: '',
         picturePos: 50,
         picturePosAlt: 0,
-        pictureScale: 100,
+        advancedCrop: {
+          scale: 100,
+          x: 0,
+          y: 0
+        },
         pictureAspect: 'horizontal',
         pictureDimensions: null,
         hashtag: '',
@@ -153,7 +157,6 @@ export default {
         [pictureBlob]: null,
         [pictureDimensions]: null
       })
-      this.$store.commit('removeAdvice', picture)
     },
 
     async customUpdateImage (prefix, image, ratio) {
@@ -197,23 +200,15 @@ export default {
       img.src = image || this.properties[pictureBlob] || this.properties[picturePreview]
     },
 
-    updateImageCrop ({ scale, x, y, prefix }) {
-      const pictureScale = prefix ? `${prefix}PictureScale` : 'pictureScale'
-      const picturePos = prefix ? `${prefix}PicturePos` : 'picturePos'
-      const picturePosAlt = prefix ? `${prefix}PicturePosAlt` : 'picturePosAlt'
-
-      this.properties[pictureScale] = scale
-      this.properties[picturePos] = x
-      this.properties[picturePosAlt] = y
-    },
-
-    noImageCropping (prefix) {
+    noImageCropping (prefix, ratio = 1) {
       const pictureDimensions = prefix ? `${prefix}PictureDimensions` : 'pictureDimensions'
       if (!this.properties[pictureDimensions]) return true
 
       const { width, height } = this.properties[pictureDimensions]
-
-      return width === height
+      const imageRatio = parseFloat(width / height).toFixed(2)
+      const templateRatio = parseFloat(ratio).toFixed(2)
+      console.log(imageRatio)
+      return imageRatio === templateRatio
     },
 
     updateHashtag (hashtag) {

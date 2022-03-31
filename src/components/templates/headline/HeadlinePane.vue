@@ -75,14 +75,14 @@
       @upload="updateImage"
       @delete="removeImage">
       <advanced-cropping
-        @update="updateImageCrop"
+        v-model="properties.advancedCrop"
         v-if="advancedImageCropping" />
       <range-slider
         v-else
         name="picturePos"
         :min="0"
         :max="100"
-        :hidden="noImageCropping"
+        :hidden="noImageCropping()"
         v-model="properties.picturePos"
         @touchstart="dimPane(true)"
         @touchend="dimPane(false)" />

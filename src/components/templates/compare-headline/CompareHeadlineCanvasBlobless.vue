@@ -69,16 +69,10 @@ export default {
       return this.banner.afterPictureBlob || this.banner.afterPicturePreview
     },
     objectPositionAfter () {
-      const objectPosition = (this.banner.afterPictureAspect === 'vertical')
-        ? '0% ' + (100 - this.banner.afterPicturePos) + '%'
-        : (100 - this.banner.afterPicturePos) + '% 0%'
-      return { objectPosition }
+      return this.computeObjectPosition('after')
     },
     objectPositionBefore () {
-      const objectPosition = (this.banner.beforePictureAspect === 'vertical')
-        ? '0% ' + (100 - this.banner.beforePicturePos) + '%'
-        : (100 - this.banner.beforePicturePos) + '% 0%'
-      return { objectPosition }
+      return this.computeObjectPosition('before')
     },
     smallestFontSize () {
       const before = this.fontSize(this.banner.textBefore, 40, 25, 160, this.banner.textSize)
