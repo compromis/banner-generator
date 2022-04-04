@@ -92,7 +92,6 @@
         name="points"
         :min="0"
         :max="100"
-        :hidden="noImageCropping('before', 2.25)"
         v-model="properties.beforePicturePos"
         @touchstart="$emit('dimPane', true)"
         @touchend="$emit('dimPane', false)" />
@@ -189,7 +188,6 @@
         name="points"
         :min="0"
         :max="100"
-        :hidden="noImageCropping('after', 2.25)"
         v-model="properties.afterPicturePos"
         @touchstart="$emit('dimPane', true)"
         @touchend="$emit('dimPane', false)" />

@@ -11,9 +11,7 @@
     v-if="banner">
     <div class="comparison">
       <div class="comparison-item comparison-before" :style="beforeGradientColor">
-        <div class="background">
-          <img v-if="pictureBefore" :src="pictureBefore" alt="" :style="objectPositionBefore" />
-        </div>
+        <div v-if="pictureBefore" :style="{backgroundImage: `url(${pictureBefore})`, ...backgroundPositionBefore}" class="background" />
         <div class="card">
         <div :class="['first-source', 'first-source--custom']" v-if="banner.firstSource === 'other'" :style="{color: banner.firstSourceCustomColor}">
           {{ banner.customFirstSource }}
@@ -25,9 +23,7 @@
         </div>
       </div>
       <div class="comparison-item comparison-after">
-        <div class="background">
-          <img v-if="pictureAfter" :src="pictureAfter" alt="" :style="objectPositionAfter" />
-        </div>
+        <div v-if="pictureAfter" :style="{backgroundImage: `url(${pictureAfter})`, ...backgroundPositionAfter}" class="background" />
         <div class="card">
           <div :class="['second-source', 'second-source--custom']" v-if="banner.secondSource === 'other'" :style="{color: banner.secondSourceCustomColor}">
           {{ banner.customSecondSource }}
@@ -68,11 +64,11 @@ export default {
     pictureAfter () {
       return this.banner.afterPictureBlob || this.banner.afterPicturePreview
     },
-    objectPositionAfter () {
-      return this.computeObjectPosition('after')
+    backgroundPositionAfter () {
+      return this.computeBackgroundPosition('after')
     },
-    objectPositionBefore () {
-      return this.computeObjectPosition('before')
+    backgroundPositionBefore () {
+      return this.computeBackgroundPosition('before')
     },
     smallestFontSize () {
       const before = this.fontSize(this.banner.textBefore, 40, 25, 160, this.banner.textSize)
@@ -107,11 +103,10 @@ export default {
         position: absolute;
         inset: 0;
         display: flex;
-        img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+
         &::before {
           content: '';
           position: absolute;

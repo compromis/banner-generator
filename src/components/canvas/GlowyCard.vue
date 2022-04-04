@@ -130,7 +130,7 @@ export default {
         min-width: 350px;
         display: block;
         margin: 0;
-        object-fit: cover;
+        background-size: cover;
       }
 
       @at-root .edge {
