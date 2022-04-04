@@ -57,6 +57,10 @@ export default {
       return this.$store.state.aspect
     },
 
+    aspectProperties () {
+      return this.$store.state.aspects[this.aspect]
+    },
+
     displayErrors: {
       get () {
         return this.$store.state.displayErrors
@@ -121,6 +125,10 @@ export default {
       if (this.availableThemes && !this.availableThemes.includes(this.properties.theme)) {
         this.properties.theme = this.availableThemes[0]
       }
+
+      // update default ratio
+      const { ratio } = this.aspectProperties
+      this.refreshImageAspect({ ratio })
     }
   },
 

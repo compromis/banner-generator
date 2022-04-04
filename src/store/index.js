@@ -13,7 +13,6 @@ export default new Vuex.Store({
     aspects,
     template: null,
     aspect: '11',
-    defaultRatio: 1,
     banner: null,
     bannerMeta: null,
     errors: {},

@@ -9,7 +9,8 @@ export default {
     minScale: 0.35,
     maxScale: 1,
     minMargin: -230,
-    maxMargin: 0
+    maxMargin: 0,
+    ratio: 1
   },
   '916': {
     name: '9:16',
@@ -21,7 +22,8 @@ export default {
     minScale: 0.35,
     maxScale: 1,
     minMargin: -230,
-    maxMargin: 0
+    maxMargin: 0,
+    ratio: 9 / 16
   },
   '169': {
     name: '16:9',
@@ -33,7 +35,8 @@ export default {
     minScale: 0.35,
     maxScale: 1,
     minMargin: -130,
-    maxMargin: 0
+    maxMargin: 0,
+    ratio: 16 / 9
   },
   'event': {
     name: '16:9',
@@ -45,6 +48,7 @@ export default {
     minScale: 0.35,
     maxScale: 1,
     minMargin: -130,
-    maxMargin: 0
+    maxMargin: 0,
+    ratio: 16 / 9
   }
 }
