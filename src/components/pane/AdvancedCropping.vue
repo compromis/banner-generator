@@ -10,15 +10,15 @@
     <range-slider
       name="xpos"
       label="Posició X"
-      :min="-25"
-      :max="25"
+      :min="0"
+      :max="100"
       v-model="picture.x"
     />
     <range-slider
       name="ypos"
       label="Posició Y"
-      :min="-25"
-      :max="25"
+      :min="0"
+      :max="100"
       v-model="picture.y"
     />
   </div>

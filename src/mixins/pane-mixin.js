@@ -34,8 +34,8 @@ export default {
         picturePosAlt: 0,
         advancedCrop: {
           scale: 100,
-          x: 0,
-          y: 0
+          x: 50,
+          y: 50
         },
         pictureAspect: 'horizontal',
         pictureDimensions: null,

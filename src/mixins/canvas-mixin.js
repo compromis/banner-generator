@@ -12,6 +12,10 @@ export default {
 
     objectPosition () {
       return this.computeObjectPosition()
+    },
+
+    backgroundPosition () {
+      return this.computeBackgroundPosition()
     }
   },
 
@@ -74,24 +78,38 @@ export default {
     computeObjectPosition (prefix) {
       const pictureAspect = prefix ? `${prefix}PictureAspect` : 'pictureAspect'
       const picturePos = prefix ? `${prefix}PicturePos` : 'picturePos'
-      const advancedCrop = prefix ? `${prefix}AdvancedCrop` : 'advancedCrop'
 
-      // Simple Cropping
       const objectPosition = (this.banner[pictureAspect] === 'vertical')
         ? '0% ' + (100 - this.banner[picturePos]) + '%'
         : (100 - this.banner[picturePos]) + '% 0%'
 
-      if (!this.$store.state.settings.advancedImageCropping) {
-        return { objectPosition }
-      }
-
-      // Advanced Cropping
-      const { scale, x, y } = this.banner[advancedCrop]
-      const translate = `${x}%, ${y}%`
-
       return {
-        transform: `scale(${scale / 100}) translate(${translate})`
+        objectPosition
       }
+    },
+
+    computeBackgroundPosition (prefix) {
+      const pictureAspect = prefix ? `${prefix}PictureAspect` : 'pictureAspect'
+      const picturePos = prefix ? `${prefix}PicturePos` : 'picturePos'
+      const advancedCrop = prefix ? `${prefix}AdvancedCrop` : 'advancedCrop'
+
+      // Simple Cropping
+      let backgroundPosition = (this.banner[pictureAspect] === 'vertical')
+        ? '0% ' + (100 - this.banner[picturePos]) + '%'
+        : (100 - this.banner[picturePos]) + '% 0%'
+
+      if (!this.$store.state.settings.advancedImageCropping) {
+        return { backgroundPosition }
+      }
+
+      // Adavanced Cropping
+      const { scale, x, y } = this.banner[advancedCrop]
+      const backgroundSize = (this.banner[pictureAspect] === 'vertical')
+        ? `${scale}% auto`
+        : `auto ${scale}%`
+      backgroundPosition = `${x}% ${y}%`
+
+      return { backgroundSize, backgroundPosition }
     }
   }
 }

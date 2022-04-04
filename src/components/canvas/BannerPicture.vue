@@ -6,9 +6,10 @@
       :picture-position="picturePosition"
       :color="computedColor"
       v-bind="$attrs" />
-    <div v-else class="background-picture">
-      <img v-if="computedPicture" :src="computedPicture" :style="picturePosition" />
-    </div>
+    <template v-else>
+      <div class="background-picture" v-if="computedPicture" :style="{ backgroundImage: `url(${computedPicture})`, ...picturePosition}">
+      </div>
+    </template>
     <div
       v-if="banner.theme === 'blobless'"
       :class="[
@@ -89,13 +90,8 @@ export default {
     z-index: 1;
     height: 100%;
     width: 100%;
-    background: $gray-200;
-
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+    background-color: $gray-200;
+    background-size: cover;
   }
 
   .banner-gradient {

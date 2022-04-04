@@ -11,7 +11,7 @@
       'logo-' + banner.logo
     ]">
     <banner-picture
-      :picture-position="objectPosition"
+      :picture-position="backgroundPosition"
       :height="aspect === '11' ? 500 : 730"
       :edge="aspect === '916'" />
     <headline-card

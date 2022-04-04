@@ -13,15 +13,15 @@
       '--height': proportionalHeight
     }">
     <div class="glowy-subject">
-      <img v-if="picture" :src="picture" :style="picturePosition" />
+      <div v-if="picture" class="picture" :style="{ backgroundImage: `url(${picture})`, ...picturePosition}" />
       <div v-else class="placeholder"></div>
     </div>
     <div class="glowy-ghost first">
-      <img v-if="picture" :src="picture" :style="picturePosition" />
+      <div v-if="picture" class="picture" :style="{ backgroundImage: `url(${picture})`, ...picturePosition}" />
       <div v-else class="placeholder"></div>
     </div>
     <div class="glowy-ghost second">
-      <img v-if="picture" :src="picture" :style="picturePosition" />
+      <div v-if="picture" class="picture" :style="{ backgroundImage: `url(${picture})`, ...picturePosition}" />
       <div v-else class="placeholder"></div>
     </div>
   </div>
@@ -122,7 +122,7 @@ export default {
       min-height: 350px;
       min-width: 350px;
 
-      img {
+      .picture {
         width: var(--width, 100%);
         height: var(--height);
         max-width: 100%;
@@ -150,7 +150,7 @@ export default {
           right: 0;
           transform: none;
 
-          img {
+          .picture {
             width: 100%;
           }
         }
