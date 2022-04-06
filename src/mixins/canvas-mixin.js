@@ -91,7 +91,7 @@ export default {
     computeBackgroundPosition (prefix) {
       const pictureAspect = prefix ? `${prefix}PictureAspect` : 'pictureAspect'
       const picturePos = prefix ? `${prefix}PicturePos` : 'picturePos'
-      const advancedCrop = prefix ? `${prefix}AdvancedCrop` : 'advancedCrop'
+      const pictureCrop = prefix ? `${prefix}PictureCrop` : 'pictureCrop'
 
       // Simple Cropping
       let backgroundPosition = (this.banner[pictureAspect] === 'vertical')
@@ -103,7 +103,7 @@ export default {
       }
 
       // Adavanced Cropping
-      const { scale, x, y } = this.banner[advancedCrop]
+      const { scale, x, y } = this.banner[pictureCrop]
       const backgroundSize = (this.banner[pictureAspect] === 'vertical')
         ? `${scale}% auto`
         : `auto ${scale}%`

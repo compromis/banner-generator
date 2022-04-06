@@ -1,25 +1,25 @@
 <template>
-  <div>
+  <div class="advanced-cropping">
+    <div
+      ref="area"
+      class="crop-area"
+      :style="{
+        '--aspect': ratio,
+        backgroundImage: `url(${preview})`,
+        ...backgroundPosition
+      }"
+      @mousedown="startDrag"
+      @mousemove="onDrag"
+      @mouseup="endDrag"
+      @scroll="onScroll"
+    >
+      <div class="handler" :style="{ left: `${handler.x}px`, top: `${handler.y}px` }"></div>
+    </div>
     <range-slider
       name="scale"
-      label="Zoom"
       :min="100"
       :max="300"
-      v-model="picture.scale"
-    />
-    <range-slider
-      name="xpos"
-      label="Posició X"
-      :min="0"
-      :max="100"
-      v-model="picture.x"
-    />
-    <range-slider
-      name="ypos"
-      label="Posició Y"
-      :min="0"
-      :max="100"
-      v-model="picture.y"
+      v-model="pos.scale"
     />
   </div>
 </template>
@@ -31,7 +31,29 @@ export default {
   props: {
     value: {
       type: Object,
+      default: () => ({
+        x: 0,
+        y: 0,
+        scale: 100
+      })
+    },
+    ratio: {
+      type: Number,
+      default: 1
+    },
+    preview: {
+      type: String,
       required: true
+    }
+  },
+
+  data () {
+    return {
+      handler: {
+        x: 50,
+        y: 50
+      },
+      dragging: false
     }
   },
 
@@ -40,19 +62,78 @@ export default {
   },
 
   computed: {
-    picture: {
+    pos: {
       get () {
         return this.value
       },
 
-      set (value) {
-        this.$emit('input', value)
+      set (pos) {
+        this.$emit('input', pos)
       }
+    },
+
+    backgroundPosition () {
+      const { x, y, scale } = this.pos
+      return {
+        backgroundPosition: `${x}% ${y}%`,
+        backgroundSize: `auto ${scale}%`
+      }
+    }
+  },
+
+  methods: {
+    startDrag (e) {
+      this.dragging = true
+      this.computePosition(e)
+    },
+
+    onDrag (e) {
+      if (this.dragging) {
+        this.computePosition(e)
+      }
+    },
+
+    endDrag () {
+      this.dragging = false
+    },
+
+    onScroll (e) {
+      console.log(e)
+    },
+
+    computePosition ({ offsetX, offsetY }) {
+      this.pos.x = 100 - (offsetX / this.$refs.area.offsetWidth * 100)
+      this.pos.y = 100 - (offsetY / this.$refs.area.offsetHeight * 100)
+      this.handler.x = offsetX - 10
+      this.handler.y = offsetY - 10
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+.advanced-cropping {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
 
+.crop-area {
+  aspect-ratio: var(--aspect, 1);
+  width: 100%;
+  position: relative;
+  border-radius: .25rem;
+  padding: .25rem;
+
+  .handler {
+    width: 1.5em;
+    height: 1.5em;
+    border-radius: 100%;
+    background: white;
+    position: absolute;
+    pointer-events: none;
+    border: 2px black solid;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  }
+}
 </style>

@@ -7,19 +7,19 @@ import CSelect from '@/components/pane/CSelect'
 import CField from '@/components/pane/CField'
 import ColorSelector from '@/components/pane/ColorSelector'
 import LogoSelector from '@/components/pane/LogoSelector'
-import AdvancedCropping from '@/components/pane/AdvancedCropping'
+import AdvancedPictureUpload from '@/components/pane/AdvancedPictureUpload'
 
 export default {
   // Shared components across templates
   components: {
     RangeSlider,
     PictureUpload,
+    AdvancedPictureUpload,
     CInputText,
     CSelect,
     CField,
     ColorSelector,
-    LogoSelector,
-    AdvancedCropping
+    LogoSelector
   },
 
   // Shared data across templates
@@ -31,8 +31,7 @@ export default {
         picture: null,
         picturePreview: '',
         picturePos: 50,
-        picturePosAlt: 0,
-        advancedCrop: {
+        pictureCrop: {
           scale: 100,
           x: 50,
           y: 50
@@ -217,6 +216,11 @@ export default {
       const templateRatio = parseFloat(ratio).toFixed(2)
       console.log(imageRatio)
       return imageRatio === templateRatio
+    },
+
+    updateCrop (crop, prefix) {
+      const pictureCrop = prefix ? `${prefix}PictureCrop` : 'pictureCrop'
+      this.properties[pictureCrop] = crop
     },
 
     updateHashtag (hashtag) {

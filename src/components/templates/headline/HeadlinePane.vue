@@ -66,32 +66,21 @@
     <emoji-picker v-model="properties.emojis" />
 
     <!-- Picture -->
-    <picture-upload
-      id="picture-field"
+    <advanced-picture-upload
       :picture="properties.picture"
+      :crop="properties.pictureCrop"
       :preview="properties.picturePreview"
       :display-errors="displayErrors"
       :errors="errors"
       @upload="updateImage"
+      @crop="updateCrop"
       @delete="removeImage">
-      <advanced-cropping
-        v-model="properties.advancedCrop"
-        v-if="advancedImageCropping" />
-      <range-slider
-        v-else
-        name="picturePos"
-        :min="0"
-        :max="100"
-        :hidden="noImageCropping()"
-        v-model="properties.picturePos"
-        @touchstart="dimPane(true)"
-        @touchend="dimPane(false)" />
       <transition name="slide">
         <b-switch v-model="properties.fullGradient" v-if="properties.theme === 'blobless' && properties.picture">
           Degradat sobre tota la imatge
         </b-switch>
       </transition>
-    </picture-upload>
+    </advanced-picture-upload>
 
     <!-- Frame color  -->
     <color-selector

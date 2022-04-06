@@ -1,6 +1,6 @@
 <template>
   <transition name="slide">
-    <div class="range-slider" v-if="!hidden">
+    <div :class="['range-slider', { vertical }]" v-if="!hidden">
       <label v-if="label">{{ label }}</label>
       <input
         class="slider"
@@ -26,7 +26,8 @@ export default {
     max: Number,
     value: Number,
     name: String,
-    hidden: Boolean
+    hidden: Boolean,
+    vertical: Boolean
   },
 
   methods: {
@@ -56,6 +57,18 @@ export default {
   opacity: 1;
   transition: opacity .2s;
   margin: 1.75rem 0 1rem;
+}
+
+.vertical {
+  padding: 20px;
+  .slider {
+    width: 5px;
+    height: 100%;
+  }
+
+  label {
+    display: none;
+  }
 }
 
 .slider::-webkit-slider-thumb {
