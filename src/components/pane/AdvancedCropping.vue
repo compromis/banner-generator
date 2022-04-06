@@ -44,6 +44,10 @@ export default {
     preview: {
       type: String,
       required: true
+    },
+    pictureAspect: {
+      type: String,
+      default: ''
     }
   },
 
@@ -76,7 +80,7 @@ export default {
       const { x, y, scale } = this.pos
       return {
         backgroundPosition: `${x}% ${y}%`,
-        backgroundSize: `auto ${scale}%`
+        backgroundSize: this.pictureAspect === 'horizontal' ? `auto ${scale}%` : `${scale}% auto`
       }
     }
   },

@@ -68,10 +68,12 @@
     <!-- Picture -->
     <advanced-picture-upload
       :picture="properties.picture"
+      :picture-aspect="properties.pictureAspect"
       :crop="properties.pictureCrop"
       :preview="properties.picturePreview"
       :display-errors="displayErrors"
       :errors="errors"
+      :ratio="aspectProperties.ratio"
       @upload="updateImage"
       @crop="updateCrop"
       @delete="removeImage">

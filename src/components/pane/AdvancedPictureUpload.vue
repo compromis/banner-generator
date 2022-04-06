@@ -17,7 +17,7 @@
           <font-awesome-icon :icon="['far', 'circle-notch']" class="icon icon-loading" spin />
           <p>Carregant...</p>
         </div>
-        <AdvancedCropping :preview="preview" :ratio="ratio" v-model="pos" v-else />
+        <AdvancedCropping :preview="preview" :ratio="ratio" :picture-aspect="pictureAspect" v-model="pos" v-else />
       </b-upload>
       <div v-if="fieldName in errors && displayErrors" class="error-text">Has d'ajuntar una foto</div>
       <b-message v-if="advice" type="is-warning" size="is-small" class="resolution-warning">
@@ -74,6 +74,10 @@ export default {
       default: 1
     },
     preview: {
+      type: String,
+      default: ''
+    },
+    pictureAspect: {
       type: String,
       default: ''
     }
