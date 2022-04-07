@@ -143,6 +143,10 @@ export default {
 
   .upload {
     margin-bottom: .5rem;
+
+    &-draggable {
+      padding: 1.25rem;
+    }
   }
 
   .c-field-content {

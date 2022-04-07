@@ -214,7 +214,7 @@ export default {
       const { width, height } = this.properties[pictureDimensions]
       const imageRatio = parseFloat(width / height).toFixed(2)
       const templateRatio = parseFloat(ratio).toFixed(2)
-      console.log(imageRatio)
+
       return imageRatio === templateRatio
     },
 
