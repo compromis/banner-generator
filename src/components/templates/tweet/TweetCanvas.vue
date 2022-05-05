@@ -10,7 +10,7 @@
     ]"
     v-if="banner">
     <banner-picture
-      :picture-position="objectPosition"
+      :picture-position="backgroundPosition"
       :full-gradient="(banner.fullGradient && banner.style === 'card') || banner.style === 'transparent'"
       :picture="banner.mediaAsBackground && inlinePicture"
       :color="banner.backgroundColor"

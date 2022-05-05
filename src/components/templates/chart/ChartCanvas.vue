@@ -11,7 +11,7 @@
     ]"
     v-if="banner">
     <div class="grid">
-      <banner-picture :picture-position="objectPosition" edge />
+      <banner-picture :picture-position="backgroundPosition" edge />
       <div class="chart">
         <h1 v-if="aspect === '11'" :style="{ fontSize: fontSize(banner.title, 40, 28, 120) }">
           {{ banner.title }}

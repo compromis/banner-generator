@@ -30,7 +30,7 @@
     </div>
     <banner-frame />
     <banner-picture
-      :picture-position="objectPosition"
+      :picture-position="backgroundPosition"
       :height="aspect === '11' ? 570 : 730"
       :edge="aspect === '916'" />
   </div>

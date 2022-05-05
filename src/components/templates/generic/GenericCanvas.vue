@@ -35,7 +35,7 @@
     <emojis-on-canvas v-model="banner.emojis" />
     <banner-frame />
     <banner-picture
-      :picture-position="objectPosition"
+      :picture-position="backgroundPosition"
       :height="aspect === '11' ? 500 : aspect === '169' ? 285 : null"
       :width="aspect === '916' ? 405 : null" />
   </div>

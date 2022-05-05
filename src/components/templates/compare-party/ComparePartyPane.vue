@@ -57,25 +57,24 @@
       :message="setFieldMessage('textBefore')" />
 
     <!-- Before Picture -->
-    <picture-upload
-      id="picture-field"
+    <advanced-picture-upload
       field-name="beforePicture"
-      label="Foto de l'altre partit"
       :picture="properties.beforePicture"
+      :picture-aspect="properties.beforePictureAspect"
+      :crop="properties.beforePictureCrop"
       :preview="properties.beforePicturePreview"
       :display-errors="displayErrors"
       :errors="errors"
-      :ratio="ratios[properties.theme]"
-      @upload="(image, ratio) => updateImageComparison('before', image, ratio)"
-      @delete="removePicture('before')">
-      <range-slider
-        name="points"
-        :min="0"
-        :max="100"
-        v-model="properties.beforePicturePos"
-        @touchstart="$emit('dimPane', true)"
-        @touchend="$emit('dimPane', false)" />
-    </picture-upload>
+      :ratio="aspectProperties.ratio"
+      @upload="(image, ratio) => customUpdateImage('before', image, ratio)"
+      @crop="(crop) => updateCrop(crop, 'before')"
+      @delete="removeImage('before')">
+      <transition name="slide">
+        <b-switch v-model="properties.fullGradient" v-if="properties.theme === 'blobless' && properties.beforePicture">
+          Degradat sobre tota la imatge
+        </b-switch>
+      </transition>
+    </advanced-picture-upload>
 
     <!-- After Text  -->
     <c-input-text
@@ -88,25 +87,24 @@
       :message="setFieldMessage('textAfter')" />
 
     <!-- After Picture -->
-    <picture-upload
-      id="picture-field"
+    <advanced-picture-upload
       field-name="afterPicture"
-      label="Foto de Compromís"
       :picture="properties.afterPicture"
+      :picture-aspect="properties.afterPictureAspect"
+      :crop="properties.afterPictureCrop"
       :preview="properties.afterPicturePreview"
       :display-errors="displayErrors"
       :errors="errors"
-      :ratio="ratios[properties.theme]"
-      @upload="(image, ratio) => updateImageComparison('after', image, ratio)"
-      @delete="removePicture('after')">
-      <range-slider
-        name="points"
-        :min="0"
-        :max="100"
-        v-model="properties.afterPicturePos"
-        @touchstart="$emit('dimPane', true)"
-        @touchend="$emit('dimPane', false)" />
-    </picture-upload>
+      :ratio="aspectProperties.ratio"
+      @upload="(image, ratio) => customUpdateImage('after', image, ratio)"
+      @crop="(crop) => updateCrop(crop, 'after')"
+      @delete="removeImage('after')">
+      <transition name="slide">
+        <b-switch v-model="properties.fullGradient" v-if="properties.theme === 'blobless' && properties.afterPicture">
+          Degradat sobre tota la imatge
+        </b-switch>
+      </transition>
+    </advanced-picture-upload>
 
     <!-- Text size -->
     <c-field label="Tamany del text" class="range-field" compact>
@@ -154,7 +152,7 @@
     <logo-selector v-model="properties.logo" />
 
     <!-- Local label -->
-     <transition name="slide">
+    <transition name="slide">
       <c-input-text
         v-if="aspect === '11'"
         label="Text logo"
@@ -173,7 +171,7 @@ import presets from './presets'
 import Swatches from 'vue-swatches'
 
 export default {
-  name: 'comparison-pane-party',
+  name: 'compare-party-pane',
 
   components: {
     ThemeSelector,
@@ -199,7 +197,17 @@ export default {
         afterPicturePreview: null,
         afterPicturePos: 50,
         invertOrder: false,
-        comparisonMode: 'none'
+        comparisonMode: 'none',
+        beforePictureCrop: {
+          scale: 100,
+          x: 50,
+          y: 50
+        },
+        afterPictureCrop: {
+          scale: 100,
+          x: 50,
+          y: 50
+        }
       },
       presets,
       ratios: { 'blobless': 2.02, 'glowy': 0.53 }

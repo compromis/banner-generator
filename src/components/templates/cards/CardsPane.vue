@@ -16,26 +16,23 @@
     <emoji-picker v-model="properties.emojis" />
 
     <!-- Picture -->
-    <picture-upload
+    <advanced-picture-upload
       :picture="properties.picture"
+      :picture-aspect="properties.pictureAspect"
+      :crop="properties.pictureCrop"
       :preview="properties.picturePreview"
       :display-errors="displayErrors"
       :errors="errors"
+      :ratio="aspectProperties.ratio"
       @upload="updateImage"
-      @delete="removeImage">
-      <range-slider
-        name="points"
-        :min="0"
-        :max="100"
-        v-model="properties.picturePos"
-        @touchstart="dimPane(true)"
-        @touchend="dimPane(false)" />
+      @crop="updateCrop"
+      @delete="removeImage"> 
       <transition name="slide">
-        <b-switch v-if="properties.theme === 'blobless' && properties.picture" v-model="properties.fullGradient">
+        <b-switch v-model="properties.fullGradient" v-if="properties.theme === 'blobless' && properties.picture">
           Degradat sobre tota la imatge
         </b-switch>
       </transition>
-    </picture-upload>
+    </advanced-picture-upload>
 
     <!-- Frame color -->
     <color-selector v-model="properties.color" :colors="availableColors[properties.theme]" label="Color" is-rounded />

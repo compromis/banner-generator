@@ -38,44 +38,23 @@
       :message="setFieldMessage('author')" />
 
     <!-- Picture -->
-    <picture-upload
+    <advanced-picture-upload
       :picture="properties.picture"
+      :picture-aspect="properties.pictureAspect"
+      :crop="properties.pictureCrop"
       :preview="properties.picturePreview"
       :display-errors="displayErrors"
       :errors="errors"
+      :ratio="aspectProperties.ratio"
       @upload="updateImage"
+      @crop="updateCrop"
       @delete="removeImage">
-      <range-slider
-        name="points"
-        :min="0"
-        :max="100"
-        v-model="properties.picturePos"
-        @touchstart="dimPane(true)"
-        @touchend="dimPane(false)" />
-      <range-slider
-        v-if="advancedImageCropping"
-        label="Eix 2"
-        name="picturePosAlt"
-        :min="-25"
-        :max="25"
-        v-model="properties.picturePosAlt"
-        @touchstart="dimPane(true)"
-        @touchend="dimPane(false)" />
-      <range-slider
-        v-if="advancedImageCropping"
-        name="pictureZoom"
-        label="Escala"
-        :min="100"
-        :max="300"
-        v-model="properties.pictureZoom"
-        @touchstart="dimPane(true)"
-        @touchend="dimPane(false)" />
       <transition name="slide">
-        <b-switch v-model="properties.fullGradient" v-if="properties.theme === 'blobless'">
+        <b-switch v-model="properties.fullGradient" v-if="properties.theme === 'blobless' && properties.picture">
           Degradat sobre tota la imatge
         </b-switch>
       </transition>
-    </picture-upload>
+    </advanced-picture-upload>
 
     <!-- Frame color  -->
     <color-selector v-model="properties.color" :colors="availableColors[properties.theme]" label="Color" is-rounded />

@@ -12,7 +12,7 @@
     <div :class="['comparison-images', banner.invertOrder ? 'comparison-images--inverted' : '']">
       <banner-picture
         :picture="banner.beforePictureBlob || banner.beforePicturePreview"
-        :picture-position="objectPositionBefore"
+        :picture-position="beforeBackgroundPosition"
         :style="beforeGradientColor"
         :height="600"
         color="custom"
@@ -20,7 +20,7 @@
         glow-size="sm" />
       <banner-picture
         :picture="banner.afterPictureBlob || banner.afterPicturePreview"
-        :picture-position="objectPositionAfter"
+        :picture-position="afterBackgroundPosition"
         :style="{'--gradient-orientation' : '0deg'}"
         :height="600"
         color="orange"

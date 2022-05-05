@@ -43,7 +43,7 @@
     </div>
     <emojis-on-canvas v-model="banner.emojis" />
     <banner-frame />
-    <banner-picture :picture-position="objectPosition" />
+    <banner-picture :picture-position="backgroundPosition" />
   </div>
 </template>
 

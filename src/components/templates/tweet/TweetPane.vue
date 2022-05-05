@@ -127,24 +127,19 @@
         </transition>
 
         <!-- Image -->
-        <picture-upload
+        <advanced-picture-upload
           v-if="properties.mediaType === 'uploaded' || !tweetHasImage"
           id="picture-field"
           :picture="properties.picture"
+          :picture-aspect="properties.pictureAspect"
+          :crop="properties.pictureCrop"
           :preview="properties.picturePreview"
           :display-errors="displayErrors"
           :errors="errors"
+          :ratio="aspectProperties.ratio"
           @upload="updateImage"
-          @delete="removeImage"
-          :ratio="properties.mediaAsBackground ? ratios.background : ratios.inline"
-          >
-          <range-slider
-            name="points"
-            :min="0"
-            :max="100"
-            v-model="properties.picturePos"
-            @touchstart="dimPane(true)"
-            @touchend="dimPane(false)" />
+          @crop="updateCrop"
+          @delete="removeImage">
           <b-switch v-model="properties.mediaAsBackground">
             Imatge de fons
           </b-switch>
@@ -153,7 +148,7 @@
               Degradat en tota la imatge
             </b-switch>
           </transition>
-        </picture-upload>
+        </advanced-picture-upload>
 
         <c-field>
           <b-switch v-model="properties.showCounts">

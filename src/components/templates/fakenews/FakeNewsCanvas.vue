@@ -13,7 +13,7 @@
     <div class="blob-image">
       <span class="stamp">{{ banner.stamp }}</span>
       <span class="stamp stamp-over">{{ banner.stamp }}</span>
-      <img :src="banner.picturePreview" alt="Imatge" v-if="banner.picturePreview" :style="objectPosition" />
+      <div class="picture" v-if="banner.picturePreview" :style="{backgroundImage: `url(${banner.picturePreview})`, ...backgroundPosition}" />
     </div>
     <div class="text" v-if="banner.text">
       <div class="text-holder" contenteditable>
@@ -82,10 +82,9 @@ export default {
         z-index: 30;
       }
 
-      img {
+      .picture {
         width: 100%;
         height: 100%;
-        object-fit: cover;
         transform: rotate(0);
       }
     }

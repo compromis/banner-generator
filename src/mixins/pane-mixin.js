@@ -172,10 +172,12 @@ export default {
       const picturePreview = prefix ? `${prefix}PicturePreview` : 'picturePreview'
       const pictureBlob = prefix ? `${prefix}PictureBlob` : 'pictureBlob'
       const pictureAspect = prefix ? `${prefix}PictureAspect` : 'pictureAspect'
+      const pictureCrop = prefix ? `${prefix}PictureCrop` : 'pictureCrop'
       const pictureDimensions = prefix ? `${prefix}PictureDimensions` : 'pictureDimensions'
 
       // Upload to AWS
       const formData = new FormData()
+      console.log(image)
       formData.append('picture', image, image.name)
       const uploaded = await http.uploadPicture(ref, formData, picture)
       this.$root.$emit('pictureFinishedUploading', true)
@@ -190,6 +192,7 @@ export default {
         const { width, height } = img
         this.properties[pictureAspect] = (width / height > ratio) ? 'horizontal' : 'vertical'
         this.properties[pictureDimensions] = { width, height }
+        this.properties[pictureCrop] = { scale: 100, x: 50, y: 50 }
       }
       img.src = this.properties[pictureBlob]
     },

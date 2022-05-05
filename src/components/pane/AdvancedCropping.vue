@@ -12,7 +12,6 @@
       @mousemove="onDrag"
       @mouseup="endDrag"
       @mouseleave="endDrag"
-      @scroll="onScroll"
     >
       <div class="handler" :style="{ left: `${handler.x}px`, top: `${handler.y}px` }"></div>
     </div>

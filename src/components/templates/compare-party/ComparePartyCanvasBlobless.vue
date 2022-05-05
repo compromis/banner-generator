@@ -10,9 +10,7 @@
     v-if="banner">
     <div class="comparison">
       <div class="comparison-item comparison-before" :style="beforeGradientColor">
-        <div class="background">
-          <img v-if="pictureBefore" :src="pictureBefore" alt="" :style="objectPositionBefore" />
-        </div>
+        <div class="background" v-if="pictureBefore" :style="{ backgroundImage: `url(${pictureBefore})`, ...backgroundPositionBefore}" />
         <div class="card">
           <div class="card-party card-party--custom" v-if="banner.source === 'other'" :style="{ color: banner.customSourceColor }">
             {{ banner.customSource }}
@@ -24,9 +22,7 @@
         </div>
       </div>
       <div class="comparison-item comparison-after">
-        <div class="background">
-          <img v-if="pictureAfter" :src="pictureAfter" alt="" :style="objectPositionAfter" />
-        </div>
+        <div class="background" v-if="pictureAfter" :style="{ backgroundImage: `url(${pictureAfter})`, ...backgroundPositionAfter}" />
         <div class="card">
           <div class="compromis-logo">
             <multi-logo :type="banner.mode === 'black' ? 'auto' : 'color'" />
@@ -65,17 +61,11 @@ export default {
     pictureAfter () {
       return this.banner.afterPictureBlob || this.banner.afterPicturePreview
     },
-    objectPositionAfter () {
-      const objectPosition = (this.banner.afterPictureAspect === 'vertical')
-        ? '0% ' + (100 - this.banner.afterPicturePos) + '%'
-        : (100 - this.banner.afterPicturePos) + '% 0%'
-      return { objectPosition }
+    backgroundPositionAfter () {
+      return this.computeBackgroundPosition('after')
     },
-    objectPositionBefore () {
-      const objectPosition = (this.banner.beforePictureAspect === 'vertical')
-        ? '0% ' + (100 - this.banner.beforePicturePos) + '%'
-        : (100 - this.banner.beforePicturePos) + '% 0%'
-      return { objectPosition }
+    backgroundPositionBefore () {
+      return this.computeBackgroundPosition('before')
     },
     smallestFontSize () {
       const before = this.fontSize(this.banner.textBefore, 40, 25, 160, this.banner.textSize)
@@ -104,17 +94,19 @@ export default {
     grid-template-rows: 1fr 1fr;
     gap: 6px;
     --banner-padding: 24px;
+
     &-item {
       position: relative;
       .background {
         position: absolute;
-        inset: 0;
-        display: flex;
-        img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+        height: 100%;
+        width: 100%;
+
         &::before {
           content: '';
           position: absolute;

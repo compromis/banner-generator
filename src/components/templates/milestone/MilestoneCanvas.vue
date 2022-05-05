@@ -22,7 +22,7 @@
     </div>
     <banner-frame />
     <banner-picture
-      :picture-position="objectPosition"
+      :picture-position="backgroundPosition"
       :height="aspect === '11' ? 500 : null"
       :width="aspect === '916' ? 405 : null" />
   </div>

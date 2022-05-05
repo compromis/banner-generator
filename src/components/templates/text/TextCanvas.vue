@@ -12,7 +12,7 @@
     v-if="banner">
     <div class="grid">
       <banner-picture
-        :picture-position="objectPosition"
+        :picture-position="backgroundPosition"
         edge />
       <div class="text text-wysiwyg" v-if="banner.text">
         <div v-html="banner.text"></div>

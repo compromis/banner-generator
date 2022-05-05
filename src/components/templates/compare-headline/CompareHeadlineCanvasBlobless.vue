@@ -51,7 +51,7 @@ import EmojisOnCanvas from '@/components/canvas/EmojisOnCanvas'
 import BannerFrame from '@/components/canvas/BannerFrame'
 
 export default {
-  name: 'comparison-canvas-party',
+  name: 'compare-headline-canvas-blobless',
   mixins: [CanvasMixin],
   components: {
     EmojisOnCanvas,
