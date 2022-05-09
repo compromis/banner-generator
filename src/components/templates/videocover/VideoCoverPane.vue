@@ -60,39 +60,17 @@
     <emoji-picker v-model="properties.emojis" />
 
     <!-- Picture -->
-    <picture-upload
+    <advanced-picture-upload
       :picture="properties.picture"
+      :picture-aspect="properties.pictureAspect"
+      :crop="properties.pictureCrop"
       :preview="properties.picturePreview"
       :display-errors="displayErrors"
       :errors="errors"
+      :ratio="aspectProperties.ratio"
       @upload="updateImage"
-      @delete="removeImage">
-      <range-slider
-        name="points"
-        :min="0"
-        :max="100"
-        v-model="properties.picturePos"
-        @touchstart="dimPane(true)"
-        @touchend="dimPane(false)" />
-      <range-slider
-        v-if="advancedImageCropping"
-        label="Eix 2"
-        name="picturePosAlt"
-        :min="-25"
-        :max="25"
-        v-model="properties.picturePosAlt"
-        @touchstart="dimPane(true)"
-        @touchend="dimPane(false)" />
-      <range-slider
-        v-if="advancedImageCropping"
-        name="pictureZoom"
-        label="Escala"
-        :min="100"
-        :max="300"
-        v-model="properties.pictureZoom"
-        @touchstart="dimPane(true)"
-        @touchend="dimPane(false)" />
-    </picture-upload>
+      @crop="updateCrop"
+      @delete="removeImage" />
 
     <!-- Pit against -->
     <c-field>
@@ -103,44 +81,19 @@
 
     <!-- Picture to pit against -->
     <transition name="slide">
-      <picture-upload
-        id="pit-against-picture"
-        field-name="pitAgainstPicture"
-        label="Segona foto"
+      <advanced-picture-upload
         v-if="properties.pitAgainst"
+        field-name="pitAgainstPicture"
         :picture="properties.pitAgainstPicture"
+        :picture-aspect="properties.pitAgainstPictureAspect"
+        :crop="properties.pitAgainstPictureCrop"
         :preview="properties.pitAgainstPicturePreview"
         :display-errors="displayErrors"
         :errors="errors"
-        :ratio="0.65"
+        :ratio="aspectProperties.ratio"
         @upload="(image, ratio) => customUpdateImage('pitAgainst', image, ratio)"
-        @delete="removeImage('pitAgainst')">
-        <range-slider
-          name="points"
-          :min="0"
-          :max="100"
-          v-model="properties.pitAgainstPicturePos"
-          @touchstart="dimPane(true)"
-          @touchend="dimPane(false)" />
-        <range-slider
-          v-if="advancedImageCropping"
-          label="Eix 2"
-          name="picturePosAlt"
-          :min="-25"
-          :max="25"
-          v-model="properties.pitAgainstPicturePosAlt"
-          @touchstart="dimPane(true)"
-          @touchend="dimPane(false)" />
-        <range-slider
-          v-if="advancedImageCropping"
-          name="pictureZoom"
-          label="Escala"
-          :min="100"
-          :max="300"
-          v-model="properties.pitAgainstPictureZoom"
-          @touchstart="dimPane(true)"
-          @touchend="dimPane(false)" />
-      </picture-upload>
+        @crop="(crop) => updateCrop(crop, 'pitAgainst')"
+        @delete="removeImage('pitAgainst')" />
     </transition>
 
     <!-- Hide frame -->
@@ -201,11 +154,9 @@ export default {
         pitAgainst: false,
         pitAgainstPicture: null,
         pitAgainstPicturePreview: null,
-        pitAgainstPicturePos: 50,
-        pitAgainstPictureZoom: 100,
-        pitAgainstPicturePosAlt: 0,
         pitAgainstPictureAspect: 'horizontal',
         pitAgainstPictureDimensions: null,
+        pitAgainstCrop: { x: 0, y: 0, scale: 100 },
         fontStyle: 'regular',
         showLogo: true
       }

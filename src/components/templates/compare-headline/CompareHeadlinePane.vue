@@ -73,29 +73,24 @@
       :message="setFieldMessage('textBefore')" />
 
     <!-- First Headline Picture -->
-    <picture-upload
-      id="picture-field"
+    <advanced-picture-upload
       field-name="beforePicture"
-      label="Foto del primer titular"
       :picture="properties.beforePicture"
+      :picture-aspect="properties.beforePictureAspect"
+      :crop="properties.beforePictureCrop"
       :preview="properties.beforePicturePreview"
       :display-errors="displayErrors"
       :errors="errors"
-      :ratio="2.25"
-      @upload="(image, ratio) => updateImageComparison('before', image, ratio)"
+      :ratio="aspectProperties.ratio"
+      @upload="(image, ratio) => customUpdateImage('before', image, ratio)"
+      @crop="(crop) => updateCrop(crop, 'before')"
       @delete="removeImage('before')">
-      <advanced-cropping
-        v-model="properties.beforeAdvancedCrop"
-        v-if="advancedImageCropping" />
-      <range-slider
-        v-else
-        name="points"
-        :min="0"
-        :max="100"
-        v-model="properties.beforePicturePos"
-        @touchstart="$emit('dimPane', true)"
-        @touchend="$emit('dimPane', false)" />
-    </picture-upload>
+      <transition name="slide">
+        <b-switch v-model="properties.fullGradient" v-if="properties.theme === 'blobless' && properties.beforePicture">
+          Degradat sobre tota la imatge
+        </b-switch>
+      </transition>
+    </advanced-picture-upload>
 
     <!-- Second Headline Source -->
     <div class="source-input-group">
@@ -169,29 +164,24 @@
       :message="setFieldMessage('textAfter')" />
 
     <!-- After Picture -->
-    <picture-upload
-      id="picture-field"
+    <advanced-picture-upload
       field-name="afterPicture"
-      label="Foto del segon titular"
       :picture="properties.afterPicture"
+      :picture-aspect="properties.afterPictureAspect"
+      :crop="properties.afterPictureCrop"
       :preview="properties.afterPicturePreview"
       :display-errors="displayErrors"
       :errors="errors"
-      :ratio="2.25"
-      @upload="(image, ratio) => updateImageComparison('after', image, ratio)"
+      :ratio="aspectProperties.ratio"
+      @upload="(image, ratio) => customUpdateImage('after', image, ratio)"
+      @crop="(crop) => updateCrop(crop, 'after')"
       @delete="removeImage('after')">
-      <advanced-cropping
-        v-model="properties.afterAdvancedCrop"
-        v-if="advancedImageCropping" />
-      <range-slider
-        v-else
-        name="points"
-        :min="0"
-        :max="100"
-        v-model="properties.afterPicturePos"
-        @touchstart="$emit('dimPane', true)"
-        @touchend="$emit('dimPane', false)" />
-    </picture-upload>
+      <transition name="slide">
+        <b-switch v-model="properties.fullGradient" v-if="properties.theme === 'blobless' && properties.afterPicture">
+          Degradat sobre tota la imatge
+        </b-switch>
+      </transition>
+    </advanced-picture-upload>
 
     <!-- Comparison mode -->
     <c-select
@@ -273,12 +263,8 @@ export default {
         textSize: null,
         beforePicture: null,
         beforePicturePreview: null,
-        beforePicturePos: 50,
         afterPicture: null,
         afterPicturePreview: null,
-        afterPicturePos: 50,
-        beforeAdvancedCrop: { x: 0, y: 0, scale: 100 },
-        afterAdvancedCrop: { x: 0, y: 0, scale: 100 },
         comparisonMode: 'none'
       },
       presets

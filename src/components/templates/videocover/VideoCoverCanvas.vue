@@ -10,16 +10,10 @@
     ]"
     v-if="banner">
     <div class="background-image images-pitted-against" v-if="banner.pitAgainst">
-      <div class="image-left">
-        <img :src="banner.picturePreview" alt="Imatge 1" v-if="banner.picturePreview" :style="objectPosition" />
-      </div>
-      <div class="image-right">
-        <img :src="banner.pitAgainstPicturePreview" alt="Imatge 2" v-if="banner.pitAgainstPicturePreview" :style="pitAgainstObjectPosition" />
-      </div>
+      <div class="image-left" :style="{ backgroundImage: `url(${mainPicture})`, ...backgroundPosition }" />
+      <div class="image-right" :style="{ backgroundImage: `url(${pitAgainstPicture})`, ...pitAgainstBackgroundPosition }" />
     </div>
-    <div class="background-image" v-else>
-      <img :src="banner.picturePreview" alt="Imatge" v-if="banner.picturePreview" :style="objectPosition" />
-    </div>
+    <div class="background-image" v-else :style="{ backgroundImage: `url(${mainPicture})`, ...backgroundPosition }" />
     <div class="text" :style="{ alignItems: banner.textPos, justifyContent, textAlign: banner.textAlign }">
       <div v-if="banner.fontStyle === 'regular'" class="text-wrapper" :style="{ fontSize: fontSizeSecondary }">
         <text-in-pills
@@ -98,8 +92,16 @@ export default {
       return values[this.banner.textAlign]
     },
 
-    pitAgainstObjectPosition () {
-      return this.computeObjectPosition('pitAgainst')
+    mainPicture () {
+      return this.banner.pictureBlob || this.banner.picturePreview
+    },
+
+    pitAgainstPicture () {
+      return this.banner.pitAgainstPictureBlob || this.banner.pitAgainstPicturePreview
+    },
+
+    pitAgainstBackgroundPosition () {
+      return this.computeBackgroundPosition('pitAgainst')
     }
   }
 }
@@ -108,13 +110,7 @@ export default {
 
 <style lang="scss" scoped>
   @import "../../../sass/variables";
-
-  @font-face {
-    font-family: 'Fixture';
-    font-style: normal;
-    font-weight: 800;
-    src: url(./fixture-cdn-bd.ttf) format('truetype');
-  }
+  @import url("https://use.typekit.net/tvd3fqx.css");
 
   .text {
     display: flex;
@@ -131,10 +127,12 @@ export default {
       max-width: 80%;
 
       &-condensed {
-        font-family: 'Fixture';
+        font-family: obviously-narrow, sans-serif;
+        font-weight: 700;
+        font-style: normal;
         letter-spacing: -0.01em;
         text-transform: uppercase;
-        //text-shadow: 0px 0px 20px rgba(53,57,73,0.5), 0px 0px 2px rgba(53,57,73,0.3);
+        text-shadow: 0px 0px 20px rgba(53,57,73,0.5), 0px 0px 2px rgba(53,57,73,0.3);
 
         .text-primary {
           line-height: 0.92;
@@ -192,7 +190,6 @@ export default {
     pointer-events: none;
     border-radius: 20px;
     overflow: hidden;
-    transition: .15s ease-in-out;
 
     img {
       width: 100%;

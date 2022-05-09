@@ -12,7 +12,7 @@
     v-if="banner">
     <div class="media-grid">
       <banner-picture
-        :picture-position="objectPosition"
+        :picture-position="backgroundPosition"
         :edge="banner.theme !== 'glowy' ? false : true" />
       <div :class="['medium', `medium-${banner.disposition}`, {'card': banner.theme !== 'glowy'}]">
         <div class="medium-overtitle">

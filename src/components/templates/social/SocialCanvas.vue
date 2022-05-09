@@ -3,8 +3,8 @@
     :id="'bannerCanvas' + aspect"
     class='banner-canvas'
     v-if="banner">
-     <img class="picture" :src="banner.picturePreview" alt="Imatge" v-if="banner.picturePreview" :style="objectPosition" />
-     <careta class="careta" :logo-style="banner.logoStyle"></careta>
+      <div class="picture" v-if="computedPicture" :style="{ backgroundImage: `url(${computedPicture})`, ...backgroundPosition }" />
+      <careta class="careta" :logo-style="banner.logoStyle"></careta>
   </div>
 </template>
 
@@ -19,6 +19,12 @@ export default {
 
   components: {
     Careta
+  },
+
+  computed: {
+    computedPicture () {
+      return this.banner.pictureBlob || this.banner.picturePreview
+    }
   }
 }
 </script>
@@ -30,6 +36,7 @@ export default {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    background-color: #ddd;
   }
 
   .careta {

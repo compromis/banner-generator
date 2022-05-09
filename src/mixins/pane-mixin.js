@@ -137,7 +137,7 @@ export default {
       const { banner, bannerMeta } = self.$store.state
       if (!banner) return
       // Remove blobs from object saved to db
-      const { pictureBlob, afterPictureBlob, beforePictureBlob, ...bannerToSave } = banner
+      const { pictureBlob, afterPictureBlob, beforePictureBlob, pitAgainstPictureBlob, ...bannerToSave } = banner
       const updated = await http.update(bannerMeta.ref, JSON.stringify(bannerToSave))
       self.$store.commit('setBannerMeta', updated)
     }, 1000),
@@ -177,7 +177,6 @@ export default {
 
       // Upload to AWS
       const formData = new FormData()
-      console.log(image)
       formData.append('picture', image, image.name)
       const uploaded = await http.uploadPicture(ref, formData, picture)
       this.$root.$emit('pictureFinishedUploading', true)

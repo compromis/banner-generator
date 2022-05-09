@@ -12,7 +12,7 @@
     v-if="banner">
     <div class="event-grid">
       <banner-picture
-        :picture-position="objectPosition"
+        :picture-position="backgroundPosition"
         :edge="banner.theme !== 'glowy' ? false : true"
         :height="aspect === 'event' ? 420 : null" />
       <div :class="['event', `event-${banner.disposition}`, {'card': banner.theme !== 'glowy'}]">

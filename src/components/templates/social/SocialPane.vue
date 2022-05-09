@@ -1,21 +1,17 @@
 <template>
   <div :class="{ 'pane': true, 'pane-dimmed': paneDimmed }">
     <!-- Picture -->
-    <picture-upload
+    <advanced-picture-upload
       :picture="properties.picture"
+      :picture-aspect="properties.pictureAspect"
+      :crop="properties.pictureCrop"
       :preview="properties.picturePreview"
       :display-errors="displayErrors"
       :errors="errors"
+      :ratio="aspectProperties.ratio"
       @upload="updateImage"
-      @delete="removeImage" >
-      <range-slider
-        name="points"
-        :min="0"
-        :max="100"
-        v-model="properties.picturePos"
-        @touchstart="dimPane(true)"
-        @touchend="dimPane(false)" />
-    </picture-upload>
+      @crop="updateCrop"
+      @delete="removeImage" />
 
     <!-- Logo Style -->
     <c-field label="Logo">
