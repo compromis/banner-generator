@@ -231,7 +231,7 @@ export default {
       }
 
       &-image {
-        width: 70px;
+        width: var(--image-size, 75px);
         border-radius: 100%;
         margin-right: 16px;
       }
