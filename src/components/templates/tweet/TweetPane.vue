@@ -99,19 +99,14 @@
             <transition name="slide">
               <div class="c-field range-field" v-if="properties.mediaType === 'tweetimage'">
                 <!-- Pictures -->
-                <div class="twitter-media c-field c-field-content">
-                  <div v-for="(media, i) in properties.tweetEmbed.entities.media" :key="i" class="twitter-media-item">
-                    <img :src="media.media_url_https" />
-                  </div>
-                </div>
-                <div class="media-as-background">
-                  <range-slider
-                    name="points"
-                    :min="0"
-                    :max="100"
-                    v-model="properties.picturePos"
-                    @touchstart="dimPane(true)"
-                    @touchend="dimPane(false)" />
+                <div class="media-as-background" v-for="(media, i) in properties.tweetEmbed.entities.media" :key="i">
+                  <advanced-cropping
+                    class="advanced-cropping"
+                    :preview="media.media_url_https"
+                    :ratio="properties.mediaAsBackground ? 1 : 1.87"
+                    :picture-aspect="pictureAspect"
+                    v-model="properties.pictureCrop" />
+
                   <b-switch v-model="properties.mediaAsBackground">
                     Imatge de fons
                   </b-switch>
@@ -136,7 +131,7 @@
           :preview="properties.picturePreview"
           :display-errors="displayErrors"
           :errors="errors"
-          :ratio="aspectProperties.ratio"
+          :ratio="properties.mediaAsBackground ? 1 : 1.87"
           @upload="updateImage"
           @crop="updateCrop"
           @delete="removeImage">
@@ -145,7 +140,7 @@
           </b-switch>
           <transition name="slide">
             <b-switch v-model="properties.fullGradient" v-if="properties.style === 'card' && properties.mediaAsBackground" class="mt-1">
-              Degradat en tota la imatge
+              Degradat sobre tota la imatge
             </b-switch>
           </transition>
         </advanced-picture-upload>
@@ -195,6 +190,7 @@ import API from '@/api'
 import PaneMixin from '@/mixins/pane-mixin.js'
 import CTabGroup from '@/components/pane/CTabGroup'
 import CTab from '@/components/pane/CTab'
+import AdvancedCropping from '@/components/pane/AdvancedCropping'
 
 export default {
   name: 'tweet-pane',
@@ -203,7 +199,8 @@ export default {
 
   components: {
     CTabGroup,
-    CTab
+    CTab,
+    AdvancedCropping
   },
 
   data () {
@@ -219,7 +216,8 @@ export default {
         showCta: false,
         backgroundColor: 'black',
         style: 'transparent',
-        cta: 'Passa-ho!'
+        cta: 'Passa-ho!',
+        pictureCrop: null
       },
       fetching: false,
       ratios: { inline: 2.09, background: 1 }
@@ -421,11 +419,9 @@ export default {
 
   .media-as-background {
     padding: 1rem;
-    padding-top: 0;
-    margin-top: -1rem;
 
-    .range-slider {
-      margin-bottom: .5rem;
+    .advanced-cropping {
+      margin-bottom: 1rem;
     }
   }
 </style>

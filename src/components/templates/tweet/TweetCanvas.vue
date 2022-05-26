@@ -37,11 +37,9 @@
           </div>
         </div>
         <div class="tweet-text" :style="{ fontSize: textFontSize }" contenteditable v-html="tweetText"></div>
-        <div class="tweet-picture" v-if="inlinePicture && !banner.mediaAsBackground">
-          <img
-            :src="inlinePicture"
-            alt="Imatge"
-            :style="objectPosition" />
+        <div class="tweet-picture"
+          v-if="inlinePicture && !banner.mediaAsBackground"
+          :style="{ backgroundImage: `url(${inlinePicture})`, ...backgroundPosition }">
         </div>
         <div class="tweet-quote" v-if="banner.tweetEmbed.is_quote_status">
           <div class="tweet-quote-user">
@@ -242,14 +240,10 @@ export default {
 
     &-picture {
       margin-top: 16px;
-
-      img {
-        border-radius: 6px;
-        border: 1px $gray-300 solid;
-        width: 100%;
-        max-height: 250px;
-        object-fit: cover;
-      }
+      background-size: cover;
+      border-radius: 6px;
+      border: 1px $gray-300 solid;
+      height: 250px;
 
       &-as-background {
         position: absolute;
