@@ -21,8 +21,10 @@
             color="none"
             glow-size="sm" />
         </div>
-        <div class="speakers-name">{{ speaker.name }}</div>
-        <div class="speakers-description">{{ speaker.description }}</div>
+        <div class="speakers-details">
+          <div class="speakers-name">{{ speaker.name }}</div>
+          <div class="speakers-description">{{ speaker.description }}</div>
+        </div>
       </div>
     </div>
     <div class="speakers">
@@ -210,31 +212,28 @@ export default {
       }
 
       &-item {
-        display: grid;
-        grid-template-columns: var(--image-size, 75px) auto;
-        grid-template-rows: 1fr 1fr;
-        grid-template-areas:
-          "image name"
-          "image description";
-        grid-column-gap: 16px;
-        grid-row-gap: 5px;
+        display: flex;
+      }
+
+      &-details {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
       }
 
       &-name {
-        grid-area: name;
-        align-self: end;
         padding-top: 0;
+        margin-bottom: 5px;
       }
 
       &-description {
-        grid-area: description;
-        align-self: start;
         padding-top: 0;
       }
 
       &-image {
-        grid-area: image;
+        width: 70px;
         border-radius: 100%;
+        margin-right: 16px;
       }
 
       &-details-wrapper {
