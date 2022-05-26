@@ -16,7 +16,7 @@
       <div v-for="(speaker, i) in banner.speakers" :key="i" class="speakers-item">
         <div class="speakers-image">
           <glowy-card
-            :picture="speaker.picture"
+            :picture="speaker.uploadedPicture || speaker.picture"
             :height="cardSize"
             color="none"
             glow-size="sm" />

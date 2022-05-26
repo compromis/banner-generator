@@ -62,6 +62,7 @@
 <script>
 import CField from '@/components/pane/CField.vue'
 import CInputText from '@/components/pane/CInputText'
+import http from '@/http'
 
 export default {
   name: 'speaker-list',
@@ -148,10 +149,18 @@ export default {
       this.speakers.splice(i, 1)
     },
 
-    updateSpeakerPicture (image, i) {
+    async updateSpeakerPicture (image, i) {
+      const { ref } = this.$store.state.bannerMeta
       const img = new Image()
       this.speakers[i].picture = URL.createObjectURL(image)
       img.src = this.speakers[i].picture
+
+      // Upload to AWS
+      const formData = new FormData()
+      formData.append('picture', image, image.name)
+      const uploaded = await http.uploadPicture(ref, formData, 'speaker-' + i)
+      this.$root.$emit('pictureFinishedUploading', true)
+      this.speakers[i].uploadedPicture = uploaded.picture
     }
   }
 }
