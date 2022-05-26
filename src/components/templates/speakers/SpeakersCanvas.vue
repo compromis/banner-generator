@@ -234,6 +234,7 @@ export default {
         width: var(--image-size, 75px);
         border-radius: 100%;
         margin-right: 16px;
+        flex-shrink: 0;
       }
 
       &-details-wrapper {
