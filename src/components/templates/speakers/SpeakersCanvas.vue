@@ -195,7 +195,7 @@ export default {
       left: 30px;
       right: 30px;
 
-      &-overtitle{
+      &-overtitle {
         font-size: 20px;
       }
 

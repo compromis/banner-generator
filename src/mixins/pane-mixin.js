@@ -76,10 +76,6 @@ export default {
 
     isInTransparentMode () {
       return this.$store.state.settings.transparentMode
-    },
-
-    advancedImageCropping () {
-      return this.$store.state.settings.advancedImageCropping
     }
   },
 
