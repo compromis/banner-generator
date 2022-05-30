@@ -67,7 +67,7 @@
       :preview="properties.picturePreview"
       :display-errors="displayErrors"
       :errors="errors"
-      :ratio="aspectProperties.ratio"
+      :ratio="imageRatio"
       @upload="updateImage"
       @crop="updateCrop"
       @delete="removeImage" />
@@ -90,7 +90,7 @@
         :preview="properties.pitAgainstPicturePreview"
         :display-errors="displayErrors"
         :errors="errors"
-        :ratio="aspectProperties.ratio"
+        :ratio="imageRatio"
         @upload="(image, ratio) => customUpdateImage('pitAgainst', image, ratio)"
         @crop="(crop) => updateCrop(crop, 'pitAgainst')"
         @delete="removeImage('pitAgainst')" />
@@ -156,10 +156,36 @@ export default {
         pitAgainstPicturePreview: null,
         pitAgainstPictureAspect: 'horizontal',
         pitAgainstPictureDimensions: null,
-        pitAgainstCrop: { x: 0, y: 0, scale: 100 },
+        pitAgainstPictureCrop: { x: 0, y: 0, scale: 100 },
         fontStyle: 'regular',
         showLogo: true
       }
+    }
+  },
+
+  watch: {
+    'properties.showFrame' () {
+      const ratio = this.calcRatio()
+      this.refreshImageAspect({ ratio })
+      this.refreshImageAspect({ prefix: 'pitAgainst', ratio })
+    },
+
+    'properties.pitAgainst' () {
+      const ratio = this.calcRatio()
+      this.refreshImageAspect({ ratio })
+      this.refreshImageAspect({ prefix: 'pitAgainst', ratio })
+    },
+
+    aspect () {
+      const ratio = this.calcRatio()
+      this.refreshImageAspect({ ratio })
+      this.refreshImageAspect({ prefix: 'pitAgainst', ratio })
+    }
+  },
+
+  computed: {
+    imageRatio () {
+      return this.calcRatio()
     }
   },
 
@@ -172,6 +198,27 @@ export default {
           pitAgainstPicture: 'Has de seleccionar una foto'
         })
       }
+    },
+
+    calcRatio () {
+      const { showFrame } = this.properties
+      const imageMode = this.properties.pitAgainst ? 'pitAgainst' : 'normal'
+      const ratios = {
+        '11': {
+          normal: 1,
+          pitAgainst: 0.625
+        },
+        '916': {
+          normal: showFrame ? 1 : 0.56,
+          pitAgainst: showFrame ? 0.625 : 0.355
+        },
+        'event': {
+          normal: 1.77,
+          pitAgainst: 1.14
+        }
+      }
+
+      return ratios[this.aspect][imageMode]
     }
   }
 }

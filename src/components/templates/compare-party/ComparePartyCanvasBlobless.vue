@@ -158,8 +158,10 @@ export default {
       .compromis-logo {
         margin-top: 0;
         margin-bottom: 8px;
+
         svg {
           height: 30px;
+          margin-left: auto;
         }
       }
     }
