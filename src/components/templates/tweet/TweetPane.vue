@@ -104,7 +104,7 @@
                     class="advanced-cropping"
                     :preview="media.media_url_https"
                     :ratio="properties.mediaAsBackground ? 1 : 1.87"
-                    :picture-aspect="pictureAspect"
+                    :picture-aspect="properties.pictureAspect"
                     v-model="properties.pictureCrop" />
 
                   <b-switch v-model="properties.mediaAsBackground">
@@ -216,8 +216,7 @@ export default {
         showCta: false,
         backgroundColor: 'black',
         style: 'transparent',
-        cta: 'Passa-ho!',
-        pictureCrop: null
+        cta: 'Passa-ho!'
       },
       fetching: false,
       ratios: { inline: 2.09, background: 1 }

@@ -125,7 +125,10 @@ export default {
 
   filters: {
     formatFullDate (date) {
-      return moment(date).locale('ca').format('LLL')
+      const validDate = new Date(
+        date.replace(/^\w+ (\w+) (\d+) ([\d:]+) \+0000 (\d+)$/,
+          '$1 $2 $4 $3 UTC'))
+      return moment(validDate).locale('ca').format('LLL')
     }
   }
 }

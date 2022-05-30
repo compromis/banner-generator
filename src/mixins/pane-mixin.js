@@ -85,6 +85,12 @@ export default {
     if (content) { // Set props from database
       const properties = JSON.parse(content)
       this.properties = properties
+
+      // For backwards compatibility, set default pictureCrop if not present
+      if (!this.properties.pictureCrop) {
+        this.properties.pictureCrop = { scale: 100, x: 50, y: 50 }
+      }
+
       this.$store.commit('updateBanner', properties)
     } else { // Set default props for tempate
       this.$store.commit('updateBanner', this.properties)
