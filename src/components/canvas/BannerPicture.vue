@@ -7,7 +7,7 @@
       :color="computedColor"
       v-bind="$attrs" />
     <template v-else>
-      <div class="background-picture" v-if="computedPicture" :style="{ backgroundImage: `url(${computedPicture})`, ...picturePosition}" />
+      <div class="background-picture" v-if="computedPicture" :style="{ backgroundImage: `url(${computedPicture})`, ...picturePosition }" />
     </template>
     <div
       v-if="banner.theme === 'blobless'"

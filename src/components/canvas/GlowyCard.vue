@@ -126,8 +126,8 @@ export default {
         width: var(--width, 100%);
         height: var(--height);
         max-width: 100%;
-        min-height: 350px;
-        min-width: 350px;
+        min-height: var(--min-height, 350px);
+        min-width: var(--min-width, 350px);
         display: block;
         margin: 0;
         background-size: cover;

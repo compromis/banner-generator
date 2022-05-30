@@ -83,9 +83,7 @@ export default {
         ? '0% ' + (100 - this.banner[picturePos]) + '%'
         : (100 - this.banner[picturePos]) + '% 0%'
 
-      return {
-        objectPosition
-      }
+      return { objectPosition }
     },
 
     computeBackgroundPosition (prefix) {

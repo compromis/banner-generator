@@ -140,6 +140,9 @@ export default {
     }
 
     &-image {
+      --min-width: 0;
+      --min-height: 0;
+
       .glowy-card {
         width: var(--width);
         height: var(--height);
@@ -152,6 +155,10 @@ export default {
       &::v-deep .glowy-ghost img {
         min-height: unset;
         min-width: unset;
+      }
+
+      &::v-deep .picture {
+        background-position: center;
       }
     }
 
