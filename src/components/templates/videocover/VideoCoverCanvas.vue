@@ -110,7 +110,17 @@ export default {
 
 <style lang="scss" scoped>
   @import "../../../sass/variables";
-  @import url("https://use.typekit.net/tvd3fqx.css");
+
+  @font-face {
+    font-family:"obviously-narrow";
+    src: url("./fonts/obviously-narrow.woff2") format("woff2"),
+      url("./fonts/obviously-narrow.woff") format("woff"),
+      url("./fonts/obviously-narrow.otf") format("opentype");
+    font-display: auto;
+    font-style: normal;
+    font-weight: 700;
+    font-stretch:normal;
+  }
 
   .text {
     display: flex;

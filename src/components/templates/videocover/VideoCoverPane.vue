@@ -44,9 +44,9 @@
 
     <!-- Text align -->
     <c-tab-group>
-      <c-tab name="text-align" v-model="properties.textAlign" value="left" icon="align-left"></c-tab>
-      <c-tab name="text-align" v-model="properties.textAlign" value="center" icon="align-center"></c-tab>
-      <c-tab name="text-align" v-model="properties.textAlign" value="right" icon="align-right"></c-tab>
+      <c-tab name="text-align" v-model="properties.textAlign" value="left" icon="align-left" />
+      <c-tab name="text-align" v-model="properties.textAlign" value="center" icon="align-center" />
+      <c-tab name="text-align" v-model="properties.textAlign" value="right" icon="align-right" />
     </c-tab-group>
 
     <!-- Text position -->
