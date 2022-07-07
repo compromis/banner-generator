@@ -1,5 +1,17 @@
 export default [
   {
+    id: 'GranissatGeneric',
+    name: 'Frase',
+    aspects: ['11', '916', '169'],
+    icon: 'newspaper',
+    label: 'Som molt de',
+    components: {
+      pane: () => import(/* webpackChunkName: "granissat-generic" */ './granissat/generic/GranissatGenericPane'),
+      canvas: () => import(/* webpackChunkName: "granissat-generic" */ './granissat/generic/GranissatGenericCanvas'),
+      help: () => import(/* webpackChunkName: "granissat-generic" */ './granissat/generic/GranissatGenericHelp')
+    }
+  },
+  {
     id: 'Headline',
     name: 'Titular de premsa',
     aspects: ['11', '916', '169'],
@@ -59,7 +71,6 @@ export default [
     name: 'Compara partits',
     aspects: ['11'],
     icon: 'columns',
-    label: '✨Nou estil',
     components: {
       pane: () => import(/* webpackChunkName: "compare-party" */ './compare-party/ComparePartyPane'),
       canvas: () => import(/* webpackChunkName: "compare-party" */ './compare-party/ComparePartyCanvas'),
@@ -71,7 +82,6 @@ export default [
     name: 'Compara titulars',
     aspects: ['11'],
     icon: 'table-rows',
-    label: '✨Nou estil',
     components: {
       pane: () => import(/* webpackChunkName: "compare-headline" */ './compare-headline/CompareHeadlinePane'),
       canvas: () => import(/* webpackChunkName: "compare-headline" */ './compare-headline/CompareHeadlineCanvas'),
@@ -93,7 +103,6 @@ export default [
     id: 'RollCall',
     name: 'Votació',
     aspects: ['11', '916'],
-    label: '✨Nou',
     icon: 'abacus',
     components: {
       pane: () => import(/* webpackChunkName: "rollcall" */ './rollcall/RollCallPane'),

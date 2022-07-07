@@ -129,6 +129,22 @@ export default {
     background: $gradient-green;
   }
 
+  .yellow-bg {
+    background: $granissat-yellow;
+  }
+
+  .red-bg {
+    background: $granissat-red;
+  }
+
+  .blue-bg {
+    background: $granissat-blue;
+  }
+
+  .pink-bg {
+    background: $granissat-pink;
+  }
+
   .transparent-bg {
     position: relative;
 

@@ -1,0 +1,121 @@
+<template>
+  <div :class="['pane', 'som-molt-generic-pane', { 'pane-dimmed': paneDimmed, 'pane-916': aspect === 1 }, `logo-${properties.logo}`]">
+    <!-- Layout -->
+    <layout-selector v-model="properties.layout" :layouts="availableLayouts" />
+
+    <!-- Text -->
+    <c-input-text
+      type="textarea"
+      label="Text"
+      name="text"
+      placeholder="Som molt de tu. Som molt d'ací."
+      v-model="properties.text"
+      :maxlength="70"
+      :message="setFieldMessage('text')"
+      class="source-input-name" />
+
+    <!-- Picture -->
+    <advanced-picture-upload
+      :picture="properties.picture"
+      :picture-aspect="properties.pictureAspect"
+      :crop="properties.pictureCrop"
+      :preview="properties.picturePreview"
+      :display-errors="displayErrors"
+      :errors="errors"
+      :ratio="ratio"
+      @upload="updateImage"
+      @crop="updateCrop"
+      @delete="removeImage">
+    </advanced-picture-upload>
+
+    <!-- Background color  -->
+    <color-selector v-model="properties.bgColor" :colors="somMoltColors" label="Color" is-rounded />
+
+    <!-- Local label -->
+    <transition name="slide">
+      <c-input-text
+        v-if="aspect !== '916'"
+        label="Text logo"
+        name="localLabel"
+        placeholder="Alacant"
+        v-model="properties.localLabel"
+        :maxlength="48" />
+    </transition>
+  </div>
+</template>
+
+<script>
+import PaneMixin from '@/mixins/pane-mixin'
+import SomMoltMixin from '@/mixins/sommolt-mixin'
+import LayoutSelector from './LayoutSelector'
+
+export default {
+  name: 'generic-pane',
+
+  mixins: [PaneMixin, SomMoltMixin],
+
+  components: {
+    LayoutSelector
+  },
+
+  data () {
+    return {
+      properties: {
+        layout: 'right',
+        text: '',
+        bgColor: 'red'
+      }
+    }
+  },
+
+  computed: {
+    somMoltColors () {
+      return ['red', 'yellow', 'blue', 'pink']
+    },
+
+    ratio () {
+      const ratios = {
+        right: 0.42,
+        bottom: 2,
+        top: 2
+      }
+
+      return ratios[this.properties.layout]
+    },
+
+    availableLayouts () {
+      const aspects = {
+        11: ['right', 'top', 'bottom'],
+        916: ['top', 'bottom'],
+        169: ['right']
+      }
+      console.log(this.aspect)
+      return aspects[this.aspect]
+    }
+  },
+
+  watch: {
+    ratio (ratio) {
+      this.refreshImageAspect({ ratio })
+    }
+  },
+
+  mounted () {
+    this.setRandomColor()
+  },
+
+  methods: {
+    setRandomColor () {
+      const max = this.somMoltColors.length - 1
+      const index = Math.floor(Math.random() * max)
+      this.properties.bgColor = this.somMoltColors[index]
+      console.log('setting', this.properties.color, this.somMoltColors, index)
+    },
+
+    validate () {
+      this.pictureRequired()
+      this.fieldIsSomMolt('text')
+    }
+  }
+}
+</script>

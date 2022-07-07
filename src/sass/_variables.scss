@@ -5,9 +5,24 @@
 $family-primary: 'Compromis', sans-serif;
 
 // Colors
+$white: #fff;
 $primary: #ff6600;
 $primary-invert: findColorInvert($primary);
 $iniciativa: #AF243C;
+
+// Granissat colors
+$granissat-yellow: #f7b229;
+$granissat-red: #de5412;
+$granissat-blue: #3db5b0;
+$granissat-pink: #fc9ea3;
+$granissat-lightblue: #cefee1;
+$granissat-colors: (
+    'red': ('bg': $granissat-red, 'text': $granissat-lightblue),
+    'yellow': ('bg': $granissat-yellow, 'text': $white),
+    'blue': ('bg': $granissat-blue, 'text': $granissat-lightblue),
+    'pink': ('bg': $granissat-pink, 'text': $white)
+);
+$granissat-font: 'Fig Grotesk', sans-serif;
 
 $gray-darkest: #353949;
 $gray-lightest: #f8faff;
