@@ -13,6 +13,7 @@
       :maxlength="70"
       :message="setFieldMessage('text')"
       class="source-input-name" />
+    <granissat-text-advisor />
 
     <!-- Picture -->
     <advanced-picture-upload
@@ -27,6 +28,7 @@
       @crop="updateCrop"
       @delete="removeImage">
     </advanced-picture-upload>
+    <granissat-photo-advisor />
 
     <!-- Background color  -->
     <color-selector v-model="properties.bgColor" :colors="somMoltColors" label="Color" is-rounded />
@@ -48,12 +50,16 @@
 import PaneMixin from '@/mixins/pane-mixin'
 import GranissatMixin from '../granissat-mixin'
 import LayoutSelector from './LayoutSelector'
+import GranissatTextAdvisor from '../GranissatTextAdvisor'
+import GranissatPhotoAdvisor from '../GranissatPhotoAdvisor'
 
 export default {
   mixins: [PaneMixin, GranissatMixin],
 
   components: {
-    LayoutSelector
+    LayoutSelector,
+    GranissatTextAdvisor,
+    GranissatPhotoAdvisor
   },
 
   data () {
