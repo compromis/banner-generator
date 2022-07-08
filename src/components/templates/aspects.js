@@ -12,6 +12,19 @@ export default {
     maxMargin: 0,
     ratio: 1
   },
+  '45': {
+    name: '4:5',
+    icon: 'square',
+    description: 'Instagram',
+    width: 576,
+    height: 720,
+    downloadScale: 2.5,
+    minScale: 0.35,
+    maxScale: 1,
+    minMargin: -230,
+    maxMargin: 0,
+    ratio: 4 / 5
+  },
   '916': {
     name: '9:16',
     icon: 'mobile-android',

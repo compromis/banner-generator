@@ -221,6 +221,11 @@ export default {
     margin-bottom: 0 !important;
   }
 
+  .banner-aspect-45 .banner-canvas {
+    width: 576px;
+    height: 720px;
+  }
+
   .banner-aspect-916 .banner-canvas {
     width: 405px;
   }

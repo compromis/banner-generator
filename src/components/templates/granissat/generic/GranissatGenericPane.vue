@@ -31,7 +31,7 @@
     <granissat-photo-advisor />
 
     <!-- Background color  -->
-    <color-selector v-model="properties.bgColor" :colors="somMoltColors" label="Color" is-rounded />
+    <color-selector v-model="properties.bgColor" :colors="granissatColors" label="Color" is-rounded />
 
     <!-- Local label -->
     <transition name="slide">
@@ -69,8 +69,10 @@ export default {
         text: '',
         bgColor: 'red'
       },
+      granissatColors: ['red', 'yellow', 'blue', 'pink'],
       aspects: {
         11: ['right', 'top', 'bottom'],
+        45: ['top', 'bottom'],
         916: ['top', 'bottom'],
         169: ['right']
       },
@@ -79,6 +81,10 @@ export default {
           right: 0.42,
           bottom: 2,
           top: 2
+        },
+        45: {
+          top: 1.6,
+          bottom: 1.6
         },
         916: {
           top: 1.11,
@@ -92,10 +98,6 @@ export default {
   },
 
   computed: {
-    somMoltColors () {
-      return ['red', 'yellow', 'blue', 'pink']
-    },
-
     ratio () {
       return this.ratios[this.aspect][this.properties.layout]
     },
@@ -123,9 +125,9 @@ export default {
 
   methods: {
     setRandomColor () {
-      const max = this.somMoltColors.length - 1
+      const max = this.granissatColors.length - 1
       const index = Math.floor(Math.random() * max)
-      this.properties.bgColor = this.somMoltColors[index]
+      this.properties.bgColor = this.granissatColors[index]
     },
 
     validate () {

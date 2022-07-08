@@ -2,8 +2,8 @@ export default [
   {
     id: 'GranissatGeneric',
     name: 'Frase',
-    aspects: ['11', '916', '169'],
-    icon: 'newspaper',
+    aspects: ['11', '45', '916', '169'],
+    icon: 'font',
     label: 'Som molt de',
     components: {
       pane: () => import(/* webpackChunkName: "granissat-generic" */ './granissat/generic/GranissatGenericPane'),

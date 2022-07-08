@@ -33,6 +33,7 @@ export default {
       const { aspect, banner, fontSize } = this
       const sizes = {
         11: { min: 55, max: 100 },
+        45: { min: 45, max: 90 },
         916: { min: 25, max: 50 },
         169: { min: 30, max: 55 }
       }
@@ -96,6 +97,7 @@ export default {
 
   .picture {
     grid-area: picture;
+    background-color: $gray-300;
   }
 
   @each $name, $props in $granissat-colors {
@@ -113,7 +115,8 @@ export default {
     }
   }
 
-  .banner-aspect-916 {
+  .banner-aspect-916,
+  .banner-aspect-45 {
     .grid {
       grid-template-columns: 1fr;
       grid-template-rows: 1fr 1fr;
