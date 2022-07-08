@@ -46,13 +46,11 @@
 
 <script>
 import PaneMixin from '@/mixins/pane-mixin'
-import SomMoltMixin from '@/mixins/sommolt-mixin'
+import GranissatMixin from '../granissat-mixin'
 import LayoutSelector from './LayoutSelector'
 
 export default {
-  name: 'generic-pane',
-
-  mixins: [PaneMixin, SomMoltMixin],
+  mixins: [PaneMixin, GranissatMixin],
 
   components: {
     LayoutSelector
@@ -64,6 +62,25 @@ export default {
         layout: 'right',
         text: '',
         bgColor: 'red'
+      },
+      aspects: {
+        11: ['right', 'top', 'bottom'],
+        916: ['top', 'bottom'],
+        169: ['right']
+      },
+      ratios: {
+        11: {
+          right: 0.42,
+          bottom: 2,
+          top: 2
+        },
+        916: {
+          top: 1.11,
+          bottom: 1.11
+        },
+        169: {
+          right: 0.8
+        }
       }
     }
   },
@@ -74,28 +91,22 @@ export default {
     },
 
     ratio () {
-      const ratios = {
-        right: 0.42,
-        bottom: 2,
-        top: 2
-      }
-
-      return ratios[this.properties.layout]
+      return this.ratios[this.aspect][this.properties.layout]
     },
 
     availableLayouts () {
-      const aspects = {
-        11: ['right', 'top', 'bottom'],
-        916: ['top', 'bottom'],
-        169: ['right']
-      }
-      console.log(this.aspect)
-      return aspects[this.aspect]
+      return this.aspects[this.aspect]
     }
   },
 
   watch: {
     ratio (ratio) {
+      this.refreshImageAspect({ ratio })
+    },
+
+    aspect (aspect) {
+      this.properties.layout = this.aspects[aspect][0]
+      const ratio = this.ratios[aspect][this.properties.layout]
       this.refreshImageAspect({ ratio })
     }
   },
@@ -109,7 +120,6 @@ export default {
       const max = this.somMoltColors.length - 1
       const index = Math.floor(Math.random() * max)
       this.properties.bgColor = this.somMoltColors[index]
-      console.log('setting', this.properties.color, this.somMoltColors, index)
     },
 
     validate () {

@@ -18,8 +18,6 @@ import CanvasMixin from '@/mixins/canvas-mixin'
 import MultiLogo from '@/components/canvas/MultiLogo'
 
 export default {
-  name: 'som-molt-generic-canvas',
-
   mixins: [CanvasMixin],
 
   components: {
