@@ -4,11 +4,23 @@ export default [
     name: 'Frase',
     aspects: ['11', '45', '916', '169'],
     icon: 'font',
-    label: 'Som molt de',
+    label: 'Som molt de...',
     components: {
       pane: () => import(/* webpackChunkName: "granissat-generic" */ './granissat/generic/GranissatGenericPane'),
       canvas: () => import(/* webpackChunkName: "granissat-generic" */ './granissat/generic/GranissatGenericCanvas'),
       help: () => import(/* webpackChunkName: "granissat-generic" */ './granissat/generic/GranissatGenericHelp')
+    }
+  },
+  {
+    id: 'GranissatText',
+    name: 'Text lliure',
+    aspects: ['11', '45', '916'],
+    icon: 'align-left',
+    label: 'Som molt de...',
+    components: {
+      pane: () => import(/* webpackChunkName: "granissat-text" */ './granissat/text/GranissatTextPane'),
+      canvas: () => import(/* webpackChunkName: "granissat-text" */ './granissat/text/GranissatTextCanvas'),
+      help: () => import(/* webpackChunkName: "granissat-text" */ './granissat/text/GranissatTextHelp')
     }
   },
   {

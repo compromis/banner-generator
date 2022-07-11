@@ -1,19 +1,11 @@
 <template>
-  <div :class="['pane', 'som-molt-generic-pane', `pane-${aspect}`, { 'pane-dimmed': paneDimmed }, `logo-${properties.logo}`]">
-    <!-- Layout -->
+  <div :class="['pane', 'text-pane', { 'pane-dimmed': paneDimmed, 'pane-916': aspect === 1 }, `logo-${properties.logo}`]">
+    <!-- Theme selector -->
     <layout-selector v-model="properties.layout" :layouts="availableLayouts" />
 
-    <!-- Text -->
-    <c-input-text
-      type="textarea"
-      label="Text"
-      name="text"
-      placeholder="Som molt de tu. Som molt d'ací."
-      v-model="properties.text"
-      :maxlength="70"
-      :message="setFieldMessage('text')"
-      class="source-input-name" />
-    <granissat-text-advisor />
+    <c-field label="Contingut" edge>
+      <vue-editor v-model="properties.text" :editor-toolbar="customToolbar" />
+    </c-field>
 
     <!-- Picture -->
     <advanced-picture-upload
@@ -36,7 +28,7 @@
     <!-- Local label -->
     <transition name="slide">
       <c-input-text
-        v-if="aspect !== '916'"
+        v-if="aspect != '916'"
         label="Text logo"
         name="localLabel"
         placeholder="Alacant"
@@ -47,63 +39,58 @@
 </template>
 
 <script>
-import PaneMixin from '@/mixins/pane-mixin'
-import GranissatMixin from '../granissat-mixin'
+import { VueEditor } from 'vue2-editor'
+import PaneMixin from '@/mixins/pane-mixin.js'
 import LayoutSelector from './LayoutSelector'
-import GranissatTextAdvisor from '../GranissatTextAdvisor'
 import GranissatPhotoAdvisor from '../GranissatPhotoAdvisor'
 
 export default {
-  mixins: [PaneMixin, GranissatMixin],
+  mixins: [PaneMixin],
 
   components: {
+    VueEditor,
     LayoutSelector,
-    GranissatTextAdvisor,
     GranissatPhotoAdvisor
   },
 
   data () {
     return {
       properties: {
-        layout: 'right',
         text: '',
+        layout: 'top',
         bgColor: 'initial'
       },
       granissatColors: ['red', 'yellow', 'blue', 'pink'],
-      aspects: {
-        11: ['right', 'top', 'bottom'],
-        45: ['top', 'bottom'],
-        916: ['top', 'bottom'],
-        169: ['right']
-      },
+      availableLayouts: ['top', 'bottom'],
+      customToolbar: [
+        [{ header: 1 }],
+        ['bold'],
+        [{ list: 'bullet' }, { list: 'ordered' }]
+      ],
       ratios: {
         11: {
-          right: 0.42,
-          bottom: 2,
-          top: 2
+          top: 1.87,
+          bottom: 1.07
         },
         45: {
-          top: 1.6,
-          bottom: 1.6
+          top: 1.49,
+          bottom: 0.85
         },
         916: {
-          top: 1.11,
-          bottom: 1.11
-        },
-        169: {
-          right: 0.8
+          top: 1.13,
+          bottom: 1.13
         }
       }
     }
   },
 
+  mounted () {
+    this.setRandomColor()
+  },
+
   computed: {
     ratio () {
       return this.ratios[this.aspect][this.properties.layout]
-    },
-
-    availableLayouts () {
-      return this.aspects[this.aspect]
     }
   },
 
@@ -113,16 +100,9 @@ export default {
     },
 
     aspect (aspect) {
-      if (!this.aspects[aspect].includes(this.properties.layout)) {
-        this.properties.layout = this.aspects[aspect][0]
-      }
       const ratio = this.ratios[aspect][this.properties.layout]
       this.refreshImageAspect({ ratio })
     }
-  },
-
-  mounted () {
-    this.setRandomColor()
   },
 
   methods: {
@@ -132,11 +112,24 @@ export default {
       const index = Math.floor(Math.random() * max)
       this.properties.bgColor = this.granissatColors[index]
     },
-
     validate () {
       this.pictureRequired()
-      this.fieldIsSomMolt('text')
     }
   }
 }
 </script>
+
+<style lang="scss">
+  @import "../../../../sass/variables";
+
+  .pane {
+    .ql-toolbar.ql-snow,
+    .ql-container.ql-snow {
+      border: 0;
+    }
+
+    .ql-editor {
+      border-top: 1px solid $gray-200;
+    }
+  }
+</style>
