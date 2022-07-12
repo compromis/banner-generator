@@ -1,4 +1,10 @@
 export default {
+  data () {
+    return {
+      granissatColors: ['red', 'yellow', 'blue', 'pink']
+    }
+  },
+
   methods: {
     fieldIsSomMolt (field) {
       if (!this.properties[field].startsWith('Som molt d') && !this.properties[field].startsWith('Somos muy de')) {

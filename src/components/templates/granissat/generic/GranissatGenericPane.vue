@@ -69,7 +69,6 @@ export default {
         text: '',
         bgColor: 'initial'
       },
-      granissatColors: ['red', 'yellow', 'blue', 'pink'],
       aspects: {
         11: ['right', 'top', 'bottom'],
         45: ['top', 'bottom'],

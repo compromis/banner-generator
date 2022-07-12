@@ -5,9 +5,9 @@
     </div>
     <div class="headline-source" v-else-if="source">
       <img
-      :src="mode === 'black' && 'logoCard' in source ? source.logoCard : source.logo"
-      :alt="source.name"
-      :style="{ height: source.logoHeight + 'px' }" />
+        :src="mode === 'black' && 'logoCard' in source ? source.logoCard : source.logo"
+        :alt="source.name"
+        :style="{ height: source.logoHeight + 'px' }" />
     </div>
     <div class="headline-text"
       :style="source && source !== 'other' ? {

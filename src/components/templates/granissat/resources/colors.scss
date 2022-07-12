@@ -1,0 +1,10 @@
+@each $name, $props in $granissat-colors {
+  .bg-#{$name} {
+    background: map-get($props, 'bg');
+  }
+
+  .bg-txt-#{$name} {
+    background: map-get($props, 'bg');
+    color: map-get($props, 'text');
+  }
+}

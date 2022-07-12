@@ -12,6 +12,18 @@ export default [
     }
   },
   {
+    id: 'GranissatHeadline',
+    name: 'Titular de premsa',
+    aspects: ['11', '45', '916', '169'],
+    icon: 'newspaper',
+    label: 'Som molt de...',
+    components: {
+      pane: () => import(/* webpackChunkName: "granissat-headline" */ './granissat/headline/GranissatHeadlinePane'),
+      canvas: () => import(/* webpackChunkName: "granissat-headline" */ './granissat/headline/GranissatHeadlineCanvas'),
+      help: () => import(/* webpackChunkName: "granissat-headline" */ './granissat/headline/GranissatHeadlineHelp')
+    }
+  },
+  {
     id: 'GranissatText',
     name: 'Text lliure',
     aspects: ['11', '45', '916'],

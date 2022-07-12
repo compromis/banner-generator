@@ -3,7 +3,7 @@
     :id="'bannerCanvas' + aspect"
     :class="['banner-canvas', 'aspect-' + aspect]"
     v-if="banner">
-    <div :class="['grid', 'layout-' + banner.layout, 'bg-' + banner.bgColor]">
+    <div :class="['grid', 'layout-' + banner.layout, 'bg-txt-' + banner.bgColor]">
       <div class="text">
         <h1 :style="{ fontSize: fontSizePrimary }">{{ banner.text }}</h1>
         <multi-logo class="logo" v-if="aspect !== '916'" />
@@ -47,6 +47,7 @@ export default {
 <style lang="scss" scoped>
   @import "../../../../sass/variables";
   @import "../resources/fonts";
+  @import "../resources/colors";
 
   .grid {
     position: absolute;
@@ -98,13 +99,6 @@ export default {
   .picture {
     grid-area: picture;
     background-color: $gray-300;
-  }
-
-  @each $name, $props in $granissat-colors {
-    .bg-#{$name} {
-      background: map-get($props, 'bg');
-      color: map-get($props, 'text');
-    }
   }
 
   .banner-aspect-169 {

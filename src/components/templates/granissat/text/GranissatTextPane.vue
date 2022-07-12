@@ -41,11 +41,12 @@
 <script>
 import { VueEditor } from 'vue2-editor'
 import PaneMixin from '@/mixins/pane-mixin.js'
+import GranissatMixin from '../granissat-mixin'
 import LayoutSelector from './LayoutSelector'
 import GranissatPhotoAdvisor from '../GranissatPhotoAdvisor'
 
 export default {
-  mixins: [PaneMixin],
+  mixins: [PaneMixin, GranissatMixin],
 
   components: {
     VueEditor,
@@ -60,7 +61,6 @@ export default {
         layout: 'top',
         bgColor: 'initial'
       },
-      granissatColors: ['red', 'yellow', 'blue', 'pink'],
       availableLayouts: ['top', 'bottom'],
       customToolbar: [
         [{ header: 1 }],

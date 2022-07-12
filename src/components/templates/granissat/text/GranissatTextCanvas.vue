@@ -4,7 +4,7 @@
     :class="['banner-canvas', 'aspect-' + aspect, 'layout-' + banner.layout, 'bg-' + banner.bgColor]"
     v-if="banner">
     <div class="grid">
-      <div class="picture" :style="{ backgroundImage: `url(${bannerPicture})`, ...backgroundPosition }"></div>
+      <div class="picture" :style="{ backgroundImage: `url(${bannerPicture})`, ...backgroundPosition }" />
       <div class="text">
         <div v-html="banner.text" class="text-wysiwyg"></div>
       </div>
@@ -40,6 +40,7 @@ export default {
 <style lang="scss" scoped>
   @import "../../../../sass/variables";
   @import "../resources/fonts";
+  @import "../resources/colors";
 
   .grid {
     position: absolute;
@@ -108,12 +109,6 @@ export default {
     font-size: 24px;
     padding: 24px;
     line-height: 1;
-  }
-
-  @each $name, $props in $granissat-colors {
-    .bg-#{$name} {
-      background: map-get($props, 'bg');
-    }
   }
 
   .aspect-916 {
