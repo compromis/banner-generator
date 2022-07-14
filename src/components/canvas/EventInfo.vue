@@ -23,7 +23,7 @@ export default {
       type: String,
       default: 'gradient',
       validator (value) {
-        return ['gradient', 'gray'].indexOf(value) !== -1
+        return ['gradient', 'gray', 'current'].indexOf(value) !== -1
       }
     }
   }

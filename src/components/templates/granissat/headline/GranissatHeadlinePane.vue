@@ -131,13 +131,6 @@ export default {
   },
 
   methods: {
-    setRandomColor () {
-      if (this.properties.bgColor !== 'initial') return
-      const max = this.granissatColors.length - 1
-      const index = Math.floor(Math.random() * max)
-      this.properties.bgColor = this.granissatColors[index]
-    },
-
     validate () {
       const sourceField = this.properties.source === 'other'
         ? { customSource: "Has d'esciure una font" }

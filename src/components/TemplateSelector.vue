@@ -254,4 +254,40 @@ export default {
       }
     }
   }
+
+  .template-item[class*='granissat'] {
+    .template-item-icon {
+      color: $white;
+    }
+
+    &:hover {
+      .template-item-icon .icon svg * {
+        fill: $white !important;
+      }
+    }
+  }
+
+  .template-item-granissatgeneric {
+    .template-item-icon {
+      background-color: $granissat-red;
+    }
+  }
+
+  .template-item-granissatheadline {
+    .template-item-icon {
+      background-color: $granissat-yellow;
+    }
+  }
+
+  .template-item-granissattext {
+    .template-item-icon {
+      background-color: $granissat-blue;
+    }
+  }
+
+  .template-item-granissatevent {
+    .template-item-icon {
+      background-color: $granissat-pink;
+    }
+  }
 </style>

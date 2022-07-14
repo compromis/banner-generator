@@ -3,8 +3,8 @@
     <h2>Més ferramentes</h2>
     <div class="psas">
       <a href="https://somriure.compromis.net" target="_blank" class="psa card elsomriure">
-        <h4>Generador d'<img src="../../assets/elsomriure.svg" alt="El Somriure" class="elsomriure-logo" /></h4>
-        <p>Genera edicions impreses d'El Somriure del teu col·lectiu local per a repartir pel poble.</p>
+        <h4>Generador de Revistes</h4>
+        <p>Genera revistes impreses per al teu col·lectiu local de forma senzilla i ràpida.</p>
       </a>
       <a href="https://comprom.is/crea" target="_blank" class="psa card shorturls">
         <h4>comprom.is/crea</h4>
