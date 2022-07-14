@@ -2,7 +2,7 @@
   <div class="tools">
     <h2>Més ferramentes</h2>
     <div class="psas">
-      <a href="https://somriure.compromis.net" target="_blank" class="psa card elsomriure">
+      <a href="https://revistes.compromis.net" target="_blank" class="psa card elsomriure">
         <h4>Generador de Revistes</h4>
         <p>Genera revistes impreses per al teu col·lectiu local de forma senzilla i ràpida.</p>
       </a>
