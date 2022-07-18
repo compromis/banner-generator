@@ -8,7 +8,7 @@
         :picture-position="backgroundPosition"
         :height="aspect === 'event' ? 420 : null" />
       <div :class="['event', `event-${banner.disposition}`]">
-        <div class="event-overtitle">
+        <div class="event-overtitle" v-if="banner.overtitle">
           {{ banner.overtitle | formatString }}
         </div>
         <div class="event-title" :style="{ fontSize: fontSize(banner.title, 55, 35, 60) }">
@@ -90,7 +90,7 @@ export default {
       word-wrap: break-word;
       font-family: $family-primary;
       font-weight: bold;
-      margin: 10px 0;
+      padding-bottom: 25px;
     }
 
     &-subtitle {
@@ -201,6 +201,10 @@ export default {
       letter-spacing: -0.02em;
       margin-top: 6px;
     }
+  }
+
+  .banner-picture {
+    background: $gray-300;
   }
 
   .disposition-right, .disposition-left, .aspect-916 {
