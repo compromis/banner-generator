@@ -265,7 +265,17 @@ export default {
         beforePicturePreview: null,
         afterPicture: null,
         afterPicturePreview: null,
-        comparisonMode: 'none'
+        comparisonMode: 'none',
+        beforePictureCrop: {
+          scale: 100,
+          x: 50,
+          y: 50
+        },
+        afterPictureCrop: {
+          scale: 100,
+          x: 50,
+          y: 50
+        }
       },
       presets
     }
