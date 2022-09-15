@@ -2,7 +2,7 @@
   <div
     v-if="banner"
     :id="'bannerCanvas' + aspect"
-    :class="['banner-canvas', 'aspect-' + aspect, 'bg-' + banner.bgColor, { 'has-picture': !!bannerPicture }]">
+    :class="['banner-canvas', 'aspect-' + aspect, { 'has-picture': !!bannerPicture }]">
     <div class="grid">
       <div class="headline">
         <div class="headline-text" :style="{ fontSize: headlineFontSize }">
@@ -26,6 +26,7 @@
       </div>
     </div>
     <div v-if="bannerPicture" class="picture" :style="{ backgroundImage: `url(${bannerPicture})`, ...backgroundPosition }" />
+    <div :class="['background', 'bg-' + banner.bgColor]" />
   </div>
 </template>
 
@@ -146,6 +147,15 @@ export default {
       object-fit: contain;
       object-position: top left;
     }
+  }
+
+  .background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
   }
 
   .aspect-916 {
