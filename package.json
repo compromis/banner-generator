@@ -15,7 +15,7 @@
     "@fortawesome/vue-fontawesome": "^2.0.2",
     "@kevinfaguiar/vue-twemoji-picker": "^5.7.4",
     "@minogin/vue-drag-resize-rotate": "^1.0.5",
-    "axios": "^0.21.1",
+    "axios": "^0.21.2",
     "browser-detect": "^0.2.28",
     "buefy": "^0.9.6",
     "chart.js": "^2.9.4",
