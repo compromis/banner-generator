@@ -210,6 +210,7 @@ export default {
       border-radius: 100%;
       font-size: 92px;
       font-weight: bold;
+      z-index: 10;
 
       span {
         transform: translateY(-5px);
