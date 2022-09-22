@@ -1,9 +1,9 @@
 <template>
   <div
     :id="'bannerCanvas' + aspect"
-    :class="['banner-canvas', 'aspect-' + aspect, 'layout-' + banner.layout, 'bg-' + banner.bgColor]"
+    :class="['banner-canvas', 'aspect-' + aspect, 'layout-' + banner.layout]"
     v-if="banner">
-    <div class="grid">
+    <div :class="['grid', 'bg-' + banner.bgColor]">
       <div class="picture" :style="{ backgroundImage: `url(${bannerPicture})`, ...backgroundPosition }" />
       <div class="text">
         <div v-html="banner.text" class="text-wysiwyg"></div>

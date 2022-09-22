@@ -26,7 +26,7 @@
       :ratio="aspectProperties.ratio"
       @upload="updateImage"
       @crop="updateCrop"
-      @delete="removeImage"> 
+      @delete="removeImage">
       <transition name="slide">
         <b-switch v-model="properties.fullGradient" v-if="properties.theme === 'blobless' && properties.picture">
           Degradat sobre tota la imatge
