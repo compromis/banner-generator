@@ -127,7 +127,6 @@ export default {
   methods: {
     validate () {
       this.pictureRequired()
-      this.fieldIsSomMolt('text')
     }
   }
 }
