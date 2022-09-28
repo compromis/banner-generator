@@ -34,8 +34,8 @@ export default {
       const sizes = {
         11: { min: 55, max: 100 },
         45: { min: 45, max: 90 },
-        916: { min: 25, max: 50 },
-        169: { min: 30, max: 55 }
+        916: { min: 45, max: 70 },
+        169: { min: 45, max: 60 }
       }
 
       return fontSize(banner.text, sizes[aspect].max, sizes[aspect].min, 70, banner.textSize)
@@ -106,6 +106,20 @@ export default {
       grid-template-columns: 1.25fr 1fr;
       grid-template-rows: 1fr;
       grid-template-areas: "text picture";
+    }
+  }
+
+  .banner-aspect-916 {
+    .layout-bottom {
+      .text {
+        padding-top: 70px;
+      }
+    }
+
+    .layout-top {
+      .text {
+        padding-bottom: 66px;
+      }
     }
   }
 

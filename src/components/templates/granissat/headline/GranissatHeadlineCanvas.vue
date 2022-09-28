@@ -5,9 +5,7 @@
     :class="['banner-canvas', 'aspect-' + aspect, { 'has-picture': !!bannerPicture }]">
     <div class="grid">
       <div class="headline">
-        <div class="headline-text" :style="{ fontSize: headlineFontSize }">
-          {{ banner.headline | formatString }}
-        </div>
+        <div class="headline-text" :style="{ fontSize: headlineFontSize }">{{ banner.headline | formatString }}</div>
         <div class="headline-source headline-source--custom" v-if="banner.source === 'other'">
           {{ banner.customSource }}
         </div>
@@ -25,7 +23,7 @@
         <multi-logo v-if="aspect !== '916'" />
       </div>
     </div>
-    <div v-if="bannerPicture" class="picture" :style="{ backgroundImage: `url(${bannerPicture})`, ...backgroundPosition }" />
+    <div v-if="bannerPicture" class="picture" :style="{ backgroundImage: `url(${bannerPicture})`, ...backgroundPosition, '--frame-crop': `${banner.pictureFrameCrop}px` }" />
     <div :class="['background', 'bg-' + banner.bgColor]" />
   </div>
 </template>
@@ -100,7 +98,7 @@ export default {
     bottom: 0;
     right: 0;
     width: 70%;
-    height: 420px;
+    height: calc(420px - var(--frame-crop));
   }
 
   .headline {
@@ -111,6 +109,8 @@ export default {
       font-family: $granissat-font;
       line-height: 1;
       padding-right: 40px;
+      word-wrap: break-word;
+      white-space: pre-wrap;
     }
   }
 
@@ -130,7 +130,7 @@ export default {
   }
 
   .headline-source {
-    margin-top: 10px;
+    margin-top: 26px;
     width: 30%;
     line-height: 1.1;
     padding-right: 8px;
@@ -161,7 +161,7 @@ export default {
   .aspect-916 {
     .picture {
       width: auto;
-      height: 50%;
+      height: calc(50% - var(--frame-crop));
       left: 0;
     }
 
@@ -171,7 +171,11 @@ export default {
     }
 
     .headline {
-      padding-top: 12px;
+      padding-top: 30px;
+
+      &-text {
+        padding-right: 0;
+      }
 
       &-source {
         width: auto;

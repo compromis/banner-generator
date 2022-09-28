@@ -1,17 +1,5 @@
 export default [
   {
-    id: 'GranissatGeneric',
-    name: 'Frase',
-    aspects: ['11', '45', '916', '169'],
-    icon: 'font',
-    label: 'Tot el que som',
-    components: {
-      pane: () => import(/* webpackChunkName: "granissat-generic" */ './granissat/generic/GranissatGenericPane'),
-      canvas: () => import(/* webpackChunkName: "granissat-generic" */ './granissat/generic/GranissatGenericCanvas'),
-      help: () => import(/* webpackChunkName: "granissat-generic" */ './granissat/generic/GranissatGenericHelp')
-    }
-  },
-  {
     id: 'GranissatHeadline',
     name: 'Titular de premsa',
     aspects: ['11', '45', '916', '169'],
@@ -21,6 +9,18 @@ export default [
       pane: () => import(/* webpackChunkName: "granissat-headline" */ './granissat/headline/GranissatHeadlinePane'),
       canvas: () => import(/* webpackChunkName: "granissat-headline" */ './granissat/headline/GranissatHeadlineCanvas'),
       help: () => import(/* webpackChunkName: "granissat-headline" */ './granissat/headline/GranissatHeadlineHelp')
+    }
+  },
+  {
+    id: 'GranissatGeneric',
+    name: 'Frase',
+    aspects: ['11', '45', '916', '169'],
+    icon: 'font',
+    label: 'Tot el que som',
+    components: {
+      pane: () => import(/* webpackChunkName: "granissat-generic" */ './granissat/generic/GranissatGenericPane'),
+      canvas: () => import(/* webpackChunkName: "granissat-generic" */ './granissat/generic/GranissatGenericCanvas'),
+      help: () => import(/* webpackChunkName: "granissat-generic" */ './granissat/generic/GranissatGenericHelp')
     }
   },
   {

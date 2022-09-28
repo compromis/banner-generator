@@ -59,6 +59,19 @@
       @delete="removeImage">
     </advanced-picture-upload>
 
+    <!-- Photo crop -->
+    <transition name="slide">
+      <c-field v-if="aspect != '169'" label="Ajustar foto al text">
+        <range-slider
+          name="points"
+          :min="0"
+          :max="100"
+          v-model="properties.pictureFrameCrop"
+          @touchstart="dimPane(true)"
+          @touchend="dimPane(false)" />
+      </c-field>
+    </transition>
+
     <!-- Background color  -->
     <color-selector v-model="properties.bgColor" :colors="granissatColors" label="Color" is-rounded />
 
@@ -90,7 +103,8 @@ export default {
         source: null,
         customSource: '',
         customSourceColor: '#1CA085',
-        bgColor: 'initial'
+        bgColor: 'initial',
+        pictureFrameCrop: 0
       },
       presets,
       ratios: {
