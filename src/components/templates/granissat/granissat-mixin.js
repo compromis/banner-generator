@@ -1,7 +1,7 @@
 export default {
   data () {
     return {
-      granissatColors: ['red', 'yellow', 'blue', 'pink']
+      granissatColors: ['red', 'yellow', 'blue', 'pink', 'indigo']
     }
   },
 

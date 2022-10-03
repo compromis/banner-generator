@@ -290,4 +290,10 @@ export default {
       background-color: $granissat-pink;
     }
   }
+
+  .template-item-granissatcover {
+    .template-item-icon {
+      background-color: $granissat-indigo;
+    }
+  }
 </style>

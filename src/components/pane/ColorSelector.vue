@@ -129,20 +129,11 @@ export default {
     background: $gradient-green;
   }
 
-  .yellow-bg {
-    background: $granissat-yellow;
-  }
-
-  .red-bg {
-    background: $granissat-red;
-  }
-
-  .blue-bg {
-    background: $granissat-blue;
-  }
-
-  .pink-bg {
-    background: $granissat-pink;
+  /* Granissat colors */
+  @each $name, $props in $granissat-colors {
+    .#{$name}-bg {
+      background: map-get($props, 'bg');
+    }
   }
 
   .transparent-bg {

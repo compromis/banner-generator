@@ -236,6 +236,18 @@ export default [
     }
   },
   {
+    id: 'GranissatCover',
+    name: 'Miniatura de vídeo',
+    aspects: ['11', '916', 'event'],
+    icon: 'play',
+    label: 'Tot el que som',
+    components: {
+      pane: () => import(/* webpackChunkName: "granissat-cover" */ './granissat/cover/GranissatCoverPane'),
+      canvas: () => import(/* webpackChunkName: "granissat-cover" */ './granissat/cover/GranissatCoverCanvas'),
+      help: () => import(/* webpackChunkName: "granissat-cover" */ './granissat/cover/GranissatCoverHelp')
+    }
+  },
+  {
     id: 'Igualtat',
     name: 'Exigim Igualtat',
     aspects: ['11'],

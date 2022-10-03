@@ -28,17 +28,5 @@
       <li><strong>9:16</strong>: model per a stories (Instagram, Facebook, Whatsapp). Aquest model no inclou el logo de Comporomís perquè ja és mostra a la part superior esquerra quan es comparteix en l'aplicació. Per favor, no l'afegiu.</li>
       <li><strong>Portada</strong>: model per a la portada de l'esdeveniment de l'acte a Facebook. Nota: certa informació no està present en aquest format perquè facebook ja l'afegeix al costat de la portada l'hora de crear l'esdeveniment. No l'afegiu també a la imatge, per favor. </li>
     </ul>
-
-    <div class="help-examples">
-      <img src="./examples/11.png" alt="Exemple 1:1" />
-      <img src="./examples/916.png" alt="Exemple 9:16" />
-      <img src="./examples/event.png" alt="Exemple Portada" />
-    </div>
   </div>
 </template>
-
-<script>
-export default {
-  name: 'event-help'
-}
-</script>

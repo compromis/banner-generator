@@ -21,16 +21,5 @@
       <li><strong>9:16</strong>: model per a stories (Instagram, Facebook, Whatsapp). Aquest model no inclou el logo de Comporomís perquè ja és mostra a la part superior esquerra quan es comparteix en l'aplicació.</li>
       <li><strong>16:9</strong>: model per a Twitter.</li>
     </ul>
-
-    <div class="help-examples">
-      <img src="./examples/11.png" alt="Exemple 1:1" />
-      <img src="./examples/916.png" alt="Exemple 9:16" />
-    </div>
   </div>
 </template>
-
-<script>
-export default {
-  name: 'event-help'
-}
-</script>
