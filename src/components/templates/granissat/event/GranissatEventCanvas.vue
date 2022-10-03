@@ -37,7 +37,7 @@
     </div>
     <banner-frame />
     <div class="claim">
-      Som molt<br />de tu.<br />Som molt<br />d'aci.
+      Som molt<br />de tu.<br />Som molt<br />d'ací.
     </div>
   </div>
 </template>
