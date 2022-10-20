@@ -36,15 +36,15 @@ export default [
     }
   },
   {
-    id: 'GranissatEvent',
-    name: 'Acte',
-    aspects: ['11'],
-    icon: 'portrait',
+    id: 'GranissatQuote',
+    name: 'Cita',
+    aspects: ['11', '45', '916', '169'],
+    icon: 'quote-left',
     label: 'Tot el que som',
     components: {
-      pane: () => import(/* webpackChunkName: "granissat-event" */ './granissat/event/GranissatEventPane'),
-      canvas: () => import(/* webpackChunkName: "granissat-event" */ './granissat/event/GranissatEventCanvas'),
-      help: () => import(/* webpackChunkName: "granissat-event" */ './granissat/event/GranissatEventHelp')
+      pane: () => import(/* webpackChunkName: "granissat-quote" */ './granissat/quote/GranissatQuotePane'),
+      canvas: () => import(/* webpackChunkName: "granissat-quote" */ './granissat/quote/GranissatQuoteCanvas'),
+      help: () => import(/* webpackChunkName: "granissat-quote" */ './granissat/quote/GranissatQuoteHelp')
     }
   },
   {
@@ -181,14 +181,27 @@ export default [
     }
   },
   {
-    id: 'Media',
-    name: 'Mitjans',
-    aspects: ['11', '916'],
-    icon: 'broadcast-tower',
+    id: 'GranissatEvent',
+    name: 'Acte amb foto',
+    aspects: ['11'],
+    icon: 'portrait',
+    label: 'Tot el que som',
     components: {
-      pane: () => import(/* webpackChunkName: "media" */ './media/MediaPane'),
-      canvas: () => import(/* webpackChunkName: "media" */ './media/MediaCanvas'),
-      help: () => import(/* webpackChunkName: "media" */ './media/MediaHelp')
+      pane: () => import(/* webpackChunkName: "granissat-event" */ './granissat/event/GranissatEventPane'),
+      canvas: () => import(/* webpackChunkName: "granissat-event" */ './granissat/event/GranissatEventCanvas'),
+      help: () => import(/* webpackChunkName: "granissat-event" */ './granissat/event/GranissatEventHelp')
+    }
+  },
+  {
+    id: 'GranissatSpeakers',
+    name: 'Acte amb ponents',
+    aspects: ['11'],
+    icon: 'keynote',
+    label: 'Tot el que som',
+    components: {
+      pane: () => import(/* webpackChunkName: "granissat-speakers" */ './granissat/speakers/GranissatSpeakersPane'),
+      canvas: () => import(/* webpackChunkName: "granissat-speakers" */ './granissat/speakers/GranissatSpeakersCanvas'),
+      help: () => import(/* webpackChunkName: "granissat-speakers" */ './granissat/speakers/GranissatSpeakersHelp')
     }
   },
   {
@@ -211,6 +224,17 @@ export default [
       pane: () => import(/* webpackChunkName: "speakers" */ './speakers/SpeakersPane'),
       canvas: () => import(/* webpackChunkName: "speakers" */ './speakers/SpeakersCanvas'),
       help: () => import(/* webpackChunkName: "speakers" */ './speakers/SpeakersHelp')
+    }
+  },
+  {
+    id: 'Media',
+    name: 'Mitjans',
+    aspects: ['11', '916'],
+    icon: 'broadcast-tower',
+    components: {
+      pane: () => import(/* webpackChunkName: "media" */ './media/MediaPane'),
+      canvas: () => import(/* webpackChunkName: "media" */ './media/MediaCanvas'),
+      help: () => import(/* webpackChunkName: "media" */ './media/MediaHelp')
     }
   },
   {

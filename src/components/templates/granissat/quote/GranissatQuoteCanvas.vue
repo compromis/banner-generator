@@ -5,7 +5,9 @@
     v-if="banner">
     <div :class="['grid', 'layout-' + banner.layout, 'bg-txt-' + banner.bgColor]">
       <div class="text">
-        <h1 :style="{ fontSize: fontSizePrimary }">{{ $options.filters.formatString($options.filters.formatSentence(banner.text)) }}</h1>
+        <div class="quote-glyph">“</div>
+        <h1 :style="{ fontSize: fontSizePrimary }">{{ $options.filters.formatString($options.filters.formatQuote(banner.text)) }}</h1>
+        <div class="author">{{ banner.author }}</div>
         <multi-logo class="logo" v-if="aspect !== '916'" />
       </div>
       <div class="picture" :style="{ backgroundImage: `url(${bannerPicture})`, ...backgroundPosition }" />
@@ -33,9 +35,9 @@ export default {
       const { aspect, banner, fontSize } = this
       const sizes = {
         11: { min: 55, max: 100 },
-        45: { min: 45, max: 90 },
-        916: { min: 45, max: 70 },
-        169: { min: 45, max: 60 }
+        45: { min: 30, max: 70 },
+        916: { min: 30, max: 60 },
+        169: { min: 30, max: 50 }
       }
 
       return fontSize(banner.text, sizes[aspect].max, sizes[aspect].min, 70, banner.textSize)
@@ -92,6 +94,19 @@ export default {
     }
   }
 
+  .author {
+    font-size: 22px;
+    font-weight: 900;
+    margin-top: 14px;
+  }
+
+  .quote-glyph {
+    font-size: 100px;
+    font-family: $granissat-font;
+    line-height: 0.25;
+    margin-top: 30px;
+  }
+
   .logo {
     margin-top: auto;
   }
@@ -106,6 +121,14 @@ export default {
       grid-template-columns: 1.25fr 1fr;
       grid-template-rows: 1fr;
       grid-template-areas: "text picture";
+    }
+
+    .quote-glyph {
+      font-size: 80px;
+    }
+
+    .author {
+      font-size: 18px;
     }
   }
 
@@ -128,6 +151,14 @@ export default {
     .grid {
       grid-template-columns: 1fr;
       grid-template-rows: 1fr 1fr;
+    }
+
+    .quote-glyph {
+      font-size: 80px;
+    }
+
+    .author {
+      font-size: 18px;
     }
   }
 </style>

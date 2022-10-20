@@ -36,6 +36,10 @@ export default {
       }
     },
 
+    formatSentence (sentence) {
+      return sentence + '.'
+    },
+
     formatString (string) {
       if (string.includes('graphic design is my passion')) {
         const body = document.getElementsByTagName('body')[0]
