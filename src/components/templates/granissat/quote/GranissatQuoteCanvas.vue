@@ -4,11 +4,9 @@
     :class="['banner-canvas', 'aspect-' + aspect]"
     v-if="banner">
     <div :class="['grid', 'layout-' + banner.layout, 'bg-txt-' + banner.bgColor]">
-      <div class="text">
-        <div :style="{ fontSize: fontSizePrimary }">
-          <div class="quote-glyph">“</div>
-          <h1>{{ $options.filters.formatString($options.filters.formatQuote(banner.text)) }}</h1>
-        </div>
+      <div class="text" :style="{ fontSize: fontSizePrimary }">
+        <div class="quote-glyph">“</div>
+        <h1 class="quote-text">{{ $options.filters.formatString($options.filters.formatSentence(banner.text)) }}</h1>
         <div class="author">{{ banner.author }}</div>
         <multi-logo class="logo" v-if="aspect !== '916'" />
       </div>
@@ -36,13 +34,13 @@ export default {
     fontSizePrimary () {
       const { aspect, banner, fontSize } = this
       const sizes = {
-        11: { min: 48, max: 70 },
-        45: { min: 30, max: 70 },
+        11: { min: 48, max: 65 },
+        45: { min: 38, max: 70 },
         916: { min: 30, max: 60 },
         169: { min: 30, max: 50 }
       }
 
-      return fontSize(banner.text, sizes[aspect].max, sizes[aspect].min, 120, banner.textSize)
+      return fontSize(banner.text, sizes[aspect].max, sizes[aspect].min, 100, banner.textSize)
     }
   }
 }
@@ -72,6 +70,18 @@ export default {
     &-bottom {
       grid-template-columns: 1fr;
       grid-template-rows: 1fr 1fr;
+
+      .author {
+        font-size: 18px;
+      }
+
+      .quote-text {
+        font-size: 0.9em;
+      }
+
+      .quote-glyph {
+        font-size: 2em;
+      }
     }
 
     &-top {
@@ -114,6 +124,7 @@ export default {
 
   .logo {
     margin-top: auto;
+    padding-top: 28px;
   }
 
   .picture {
@@ -156,14 +167,6 @@ export default {
     .grid {
       grid-template-columns: 1fr;
       grid-template-rows: 1fr 1fr;
-    }
-
-    .quote-glyph {
-      font-size: 80px;
-    }
-
-    .author {
-      font-size: 18px;
     }
   }
 </style>

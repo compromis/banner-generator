@@ -10,7 +10,7 @@
       name="text"
       placeholder="Som molt de tu. Som molt d'ací."
       v-model="properties.text"
-      :maxlength="120"
+      :maxlength="100"
       :message="setFieldMessage('text')"
       class="source-input-name" />
 
