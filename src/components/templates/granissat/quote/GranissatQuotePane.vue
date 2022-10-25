@@ -10,7 +10,7 @@
       name="text"
       placeholder="Som molt de tu. Som molt d'ací."
       v-model="properties.text"
-      :maxlength="70"
+      :maxlength="120"
       :message="setFieldMessage('text')"
       class="source-input-name" />
 
@@ -24,6 +24,17 @@
       v-model="properties.author"
       :maxlength="70"
       :message="setFieldMessage('author')" />
+
+    <!-- Text size -->
+    <c-field label="Tamany del text" class="range-field" compact>
+      <range-slider
+        name="points"
+        :min="75"
+        :max="125"
+        v-model="properties.textSize"
+        @touchstart="$emit('dimPane', true)"
+        @touchend="$emit('dimPane', false)" />
+    </c-field>
 
     <!-- Picture -->
     <advanced-picture-upload

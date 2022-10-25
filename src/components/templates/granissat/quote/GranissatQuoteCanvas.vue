@@ -5,8 +5,10 @@
     v-if="banner">
     <div :class="['grid', 'layout-' + banner.layout, 'bg-txt-' + banner.bgColor]">
       <div class="text">
-        <div class="quote-glyph">“</div>
-        <h1 :style="{ fontSize: fontSizePrimary }">{{ $options.filters.formatString($options.filters.formatQuote(banner.text)) }}</h1>
+        <div :style="{ fontSize: fontSizePrimary }">
+          <div class="quote-glyph">“</div>
+          <h1>{{ $options.filters.formatString($options.filters.formatQuote(banner.text)) }}</h1>
+        </div>
         <div class="author">{{ banner.author }}</div>
         <multi-logo class="logo" v-if="aspect !== '916'" />
       </div>
@@ -34,13 +36,13 @@ export default {
     fontSizePrimary () {
       const { aspect, banner, fontSize } = this
       const sizes = {
-        11: { min: 55, max: 100 },
+        11: { min: 48, max: 70 },
         45: { min: 30, max: 70 },
         916: { min: 30, max: 60 },
         169: { min: 30, max: 50 }
       }
 
-      return fontSize(banner.text, sizes[aspect].max, sizes[aspect].min, 70, banner.textSize)
+      return fontSize(banner.text, sizes[aspect].max, sizes[aspect].min, 120, banner.textSize)
     }
   }
 }
@@ -62,7 +64,7 @@ export default {
 
   .layout {
     &-right {
-      grid-template-columns: 1.4fr 1fr;
+      grid-template-columns: 1.2fr 1fr;
       grid-template-areas: "text picture";
     }
 
@@ -91,6 +93,7 @@ export default {
       font-family: $granissat-font;
       line-height: 1;
       white-space: pre-wrap;
+      font-size: inherit;
     }
   }
 
@@ -98,10 +101,12 @@ export default {
     font-size: 22px;
     font-weight: 900;
     margin-top: 14px;
+    white-space: pre-wrap;
+    color: $white;
   }
 
   .quote-glyph {
-    font-size: 100px;
+    font-size: 2.5em;
     font-family: $granissat-font;
     line-height: 0.25;
     margin-top: 30px;

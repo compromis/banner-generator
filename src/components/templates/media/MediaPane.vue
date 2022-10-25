@@ -8,7 +8,7 @@
       label="Títol"
       name="title"
       :message="setFieldMessage('title')"
-      placeholder="Mónica Oltra"
+      placeholder="Joan Baldoví"
       v-model="properties.title"
       :maxlength="30" />
 

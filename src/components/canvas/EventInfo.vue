@@ -39,7 +39,6 @@ export default {
   font-size: 18px;
   letter-spacing: -1px;
   width: auto;
-  color: $gray-700;
   padding-right: 20px;
   line-height: 1.1;
 
@@ -55,6 +54,13 @@ export default {
       * {
         fill: url(#iconGradient) !important;
       }
+    }
+  }
+
+  &-gradient,
+  &-gray {
+    &.event-info {
+      color: $gray-700;
     }
   }
 }

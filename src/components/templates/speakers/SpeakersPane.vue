@@ -138,13 +138,13 @@ export default {
         videochat: '',
         speakers: [
           {
-            name: 'Mónica Oltra',
+            name: 'Aitana Mas',
             description: 'Vicepresidenta',
             picture: null
           },
           {
-            name: 'Fran Ferri',
-            description: 'Síndic',
+            name: 'Papi Robles',
+            description: 'Síndica',
             picture: null
           }
         ]

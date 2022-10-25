@@ -67,7 +67,7 @@
         key="stream"
         v-if="aspect !== 'event' && properties.eventType === 'stream'"
         v-model="properties.social" />
-
+        B4(RdGV+&tU{
       <!-- Videochat -->
       <c-input-text
         key="videochat"
@@ -79,6 +79,12 @@
         v-model="properties.videochat"
         max-length="60" />
     </transition-group>
+
+    <!-- Background color  -->
+    <color-selector v-model="properties.bgColor" :colors="granissatColors" label="Color" is-rounded />
+
+    <!-- Background color  -->
+    <color-selector v-model="properties.secondaryColor" :colors="secondaryColors" label="Color secundari" is-rounded />
 
     <!-- Local label -->
     <transition name="slide">
@@ -100,11 +106,12 @@ import SpeakerList from '@/components/pane/SpeakerList'
 import CTab from '@/components/pane/CTab'
 import CTabGroup from '@/components/pane/CTabGroup'
 import SocialSelector from '@/components/pane/SocialSelector'
+import GranissatMixin from '../granissat-mixin'
 
 export default {
   name: 'speakers-pane',
 
-  mixins: [PaneMixin],
+  mixins: [PaneMixin, GranissatMixin],
 
   components: {
     DatePicker,
@@ -117,7 +124,8 @@ export default {
   data () {
     return {
       properties: {
-        theme: 'glowy',
+        bgColor: 'initial',
+        secondaryColor: 'initial',
         title: '',
         overtitle: '',
         date: new Date(),
@@ -128,13 +136,13 @@ export default {
         videochat: '',
         speakers: [
           {
-            name: 'Mónica Oltra',
+            name: 'Aitana Mas',
             description: 'Vicepresidenta',
             picture: null
           },
           {
-            name: 'Fran Ferri',
-            description: 'Síndic',
+            name: 'Papi Robles',
+            description: 'Síndica',
             picture: null
           }
         ]
@@ -163,6 +171,19 @@ export default {
       set (value) {
         this.properties.time = value
       }
+    },
+
+    secondaryColors () {
+      const combos = {
+        initial: ['initial'],
+        red: ['blue', 'yellow'],
+        yellow: ['blue', 'red', 'pink', 'indigo'],
+        blue: ['yellow', 'red'],
+        pink: ['yellow'],
+        indigo: ['yellow']
+      }
+
+      return combos[this.properties.bgColor]
     }
   },
 
@@ -170,6 +191,18 @@ export default {
     // Set a default time
     this.properties.time.setHours(10)
     this.properties.time.setMinutes(0)
+
+    // Set a random granissat color
+    this.setRandomColor()
+
+    // Set secondary color
+    this.properties.secondaryColor = this.secondaryColors[0]
+  },
+
+  watch: {
+    'properties.bgColor' () {
+      this.properties.secondaryColor = this.secondaryColors[0]
+    }
   },
 
   methods: {
