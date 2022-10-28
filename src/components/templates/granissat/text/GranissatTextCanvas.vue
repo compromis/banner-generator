@@ -93,7 +93,7 @@ export default {
     grid-area: text;
     padding: 24px;
     color: $white;
-    font-size: 18px;
+    font-size: 24px;
     line-height: 1.25;
   }
 

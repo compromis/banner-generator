@@ -37,7 +37,11 @@ export default {
     },
 
     formatSentence (sentence) {
-      return sentence + '.'
+      if (sentence.substr(sentence.length - 1) !== '.') {
+        return sentence + '.'
+      }
+
+      return sentence
     },
 
     formatString (string) {
