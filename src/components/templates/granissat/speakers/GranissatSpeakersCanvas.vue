@@ -87,7 +87,6 @@ export default {
 
     .secondary-#{$name} {
       --secondary-bg: #{map-get($props, 'bg')};
-      --secondary-text: #{map-get($props, 'text')};
     }
   }
 
@@ -130,7 +129,7 @@ export default {
         }
 
         &-details {
-          color: var(--primary-text);
+          color: $white;
           font-size: 20px;
           line-height: 1.1;
         }
@@ -149,7 +148,7 @@ export default {
     &-details {
       background: var(--secondary-bg);
       padding: var(--banner-padding);
-      color: var(--secondary-text);
+      color: $white;
 
       .event-info {
         font-size: 20px;
