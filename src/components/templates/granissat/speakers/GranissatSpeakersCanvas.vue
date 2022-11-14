@@ -126,6 +126,11 @@ export default {
 
         &-image {
           background: $gray-300;
+          display: flex;
+
+          img {
+            object-fit: cover;
+          }
         }
 
         &-details {
