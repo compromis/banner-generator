@@ -73,7 +73,7 @@ const sources = [
     id: 'lasprovincias',
     name: 'Las Provincias',
     logo: require('./logos/lasprovincias.svg'),
-    logoHeight: 18,
+    logoHeight: 20,
     font: fonts.roboto,
     color: '#000'
   },
@@ -81,7 +81,7 @@ const sources = [
     id: 'levante',
     name: 'Levante',
     logo: require('./logos/levante.svg'),
-    logoHeight: 20,
+    logoHeight: 22,
     font: fonts.gotham,
     color: '#386998'
   },
@@ -309,6 +309,14 @@ const sources = [
     logoHeight: 28,
     font: fonts.roboto,
     color: '#679c27'
+  },
+  {
+    id: 'huffpost',
+    name: 'Huffington Post',
+    logo: require('./logos/huffpost.svg'),
+    logoHeight: 20,
+    font: fonts.roboto,
+    color: '#0dbe98'
   }
 ]
 

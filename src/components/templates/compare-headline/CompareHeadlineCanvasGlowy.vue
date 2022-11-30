@@ -90,8 +90,8 @@ export default {
       return this.computeBackgroundPosition('before')
     },
     smallestFontSize () {
-      const before = this.fontSize(this.banner.textBefore, 35, 18, 160, this.banner.textSize)
-      const after = this.fontSize(this.banner.textAfter, 35, 18, 160, this.banner.textSize)
+      const before = this.fontSize(this.banner.textBefore, 40, 22, 160, this.banner.textSize)
+      const after = this.fontSize(this.banner.textAfter, 40, 22, 160, this.banner.textSize)
       return before < after ? before : after
     }
   }
@@ -206,6 +206,7 @@ export default {
   .first-source, .second-source {
     z-index: 20;
     filter: grayscale(1) invert(1) brightness(100);
+    margin-bottom: 10px;
 
     &--custom {
       margin-bottom: 4px;

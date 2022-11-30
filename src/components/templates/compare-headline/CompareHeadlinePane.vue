@@ -12,7 +12,7 @@
         class="source-input-name"
         >
         <option
-          v-for="source in presets"
+          v-for="source in presetsByName"
           :value="source"
           :key="source.id"
           :selected="properties.firstSource && properties.firstSource === source.id">
@@ -81,15 +81,10 @@
       :preview="properties.beforePicturePreview"
       :display-errors="displayErrors"
       :errors="errors"
-      :ratio="aspectProperties.ratio"
+      :ratio="2"
       @upload="(image, ratio) => customUpdateImage('before', image, ratio)"
       @crop="(crop) => updateCrop(crop, 'before')"
       @delete="removeImage('before')">
-      <transition name="slide">
-        <b-switch v-model="properties.fullGradient" v-if="properties.theme === 'blobless' && properties.beforePicture">
-          Degradat sobre tota la imatge
-        </b-switch>
-      </transition>
     </advanced-picture-upload>
 
     <!-- Second Headline Source -->
@@ -172,15 +167,10 @@
       :preview="properties.afterPicturePreview"
       :display-errors="displayErrors"
       :errors="errors"
-      :ratio="aspectProperties.ratio"
+      :ratio="2"
       @upload="(image, ratio) => customUpdateImage('after', image, ratio)"
       @crop="(crop) => updateCrop(crop, 'after')"
       @delete="removeImage('after')">
-      <transition name="slide">
-        <b-switch v-model="properties.fullGradient" v-if="properties.theme === 'blobless' && properties.afterPicture">
-          Degradat sobre tota la imatge
-        </b-switch>
-      </transition>
     </advanced-picture-upload>
 
     <!-- Comparison mode -->
@@ -254,8 +244,8 @@ export default {
         secondSource: null,
         customFirstSource: '',
         customSecondSource: '',
-        firstSourceCustomColor: '#1CA085',
-        secondSourceCustomColor: '#1CA085',
+        firstSourceCustomColor: '#222F3D',
+        secondSourceCustomColor: '#222F3D',
         textAfter: '',
         textBefore: '',
         firstDescription: '',
@@ -278,6 +268,25 @@ export default {
         }
       },
       presets
+    }
+  },
+
+  watch: {
+    'properties.firstSource' (source) {
+      this.properties.firstSourceCustomColor = source.color
+    },
+
+    'properties.secondSource' (source) {
+      this.properties.secondSourceCustomColor = source.color
+    }
+  },
+
+  computed: {
+    presetsByName () {
+      const presetsByName = [...this.presets]
+      return presetsByName.sort((a, b) => {
+        return a.name.localeCompare(b.name)
+      })
     }
   },
 
