@@ -65,15 +65,10 @@
       :preview="properties.beforePicturePreview"
       :display-errors="displayErrors"
       :errors="errors"
-      :ratio="aspectProperties.ratio"
+      :ratio="pictureAspect"
       @upload="(image, ratio) => customUpdateImage('before', image, ratio)"
       @crop="(crop) => updateCrop(crop, 'before')"
       @delete="removeImage('before')">
-      <transition name="slide">
-        <b-switch v-model="properties.fullGradient" v-if="properties.theme === 'blobless' && properties.beforePicture">
-          Degradat sobre tota la imatge
-        </b-switch>
-      </transition>
     </advanced-picture-upload>
 
     <!-- After Text  -->
@@ -95,15 +90,10 @@
       :preview="properties.afterPicturePreview"
       :display-errors="displayErrors"
       :errors="errors"
-      :ratio="aspectProperties.ratio"
+      :ratio="pictureAspect"
       @upload="(image, ratio) => customUpdateImage('after', image, ratio)"
       @crop="(crop) => updateCrop(crop, 'after')"
       @delete="removeImage('after')">
-      <transition name="slide">
-        <b-switch v-model="properties.fullGradient" v-if="properties.theme === 'blobless' && properties.afterPicture">
-          Degradat sobre tota la imatge
-        </b-switch>
-      </transition>
     </advanced-picture-upload>
 
     <!-- Text size -->
@@ -229,6 +219,16 @@ export default {
       const ratio = this.ratios[this.properties.theme]
       this.refreshImageAspect({ prefix: 'before', ratio })
       this.refreshImageAspect({ prefix: 'after', ratio })
+    }
+  },
+
+  computed: {
+    pictureAspect () {
+      const aspects = {
+        blobless: 2,
+        glowy: 0.5
+      }
+      return aspects[this.properties.theme]
     }
   },
 

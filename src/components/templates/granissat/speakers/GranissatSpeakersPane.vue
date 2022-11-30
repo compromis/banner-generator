@@ -15,7 +15,7 @@
       name="overtitle"
       :message="setFieldMessage('overtitle')"
       placeholder="Debat"
-      :maxlength="30"
+      :maxlength="60"
       v-model="properties.overtitle" />
 
     <!-- Speakers -->

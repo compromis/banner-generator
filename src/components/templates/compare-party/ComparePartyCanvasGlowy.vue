@@ -12,7 +12,7 @@
     <div :class="['comparison-images', banner.invertOrder ? 'comparison-images--inverted' : '']">
       <banner-picture
         :picture="banner.beforePictureBlob || banner.beforePicturePreview"
-        :picture-position="beforeBackgroundPosition"
+        :picture-position="backgroundPositionBefore"
         :style="beforeGradientColor"
         :height="600"
         color="custom"
@@ -20,7 +20,7 @@
         glow-size="sm" />
       <banner-picture
         :picture="banner.afterPictureBlob || banner.afterPicturePreview"
-        :picture-position="afterBackgroundPosition"
+        :picture-position="backgroundPositionAfter"
         :style="{'--gradient-orientation' : '0deg'}"
         :height="600"
         color="orange"
@@ -73,17 +73,11 @@ export default {
   },
 
   computed: {
-    objectPositionAfter: function () {
-      const objectPosition = (this.banner.afterPictureAspect === 'vertical')
-        ? '0% ' + (100 - this.banner.afterPicturePos) + '%'
-        : (100 - this.banner.afterPicturePos) + '% 0%'
-      return { objectPosition }
+    backgroundPositionAfter () {
+      return this.computeBackgroundPosition('after')
     },
-    objectPositionBefore: function () {
-      const objectPosition = (this.banner.beforePictureAspect === 'vertical')
-        ? '0% ' + (100 - this.banner.beforePicturePos) + '%'
-        : (100 - this.banner.beforePicturePos) + '% 0%'
-      return { objectPosition }
+    backgroundPositionBefore () {
+      return this.computeBackgroundPosition('before')
     },
     smallestFontSize () {
       const before = this.fontSize(this.banner.textBefore, 40, 25, 160, this.banner.textSize)

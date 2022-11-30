@@ -141,10 +141,11 @@ export default {
 
         &-name {
           font-weight: 900;
+          font-size: 22px;
         }
 
         &-description {
-          font-size: 16px;
+          font-size: 18px;
           margin-top: 6px;
         }
       }
@@ -156,15 +157,16 @@ export default {
       color: $white;
 
       .event-info {
-        font-size: 20px;
+        font-size: 22px;
       }
     }
 
     &-overtitle {
       font-weight: 900;
       margin-bottom: calc(var(--banner-padding) / 2);
-      font-size: 24px;
+      font-size: 28px;
       letter-spacing: -0.03em;
+      line-height: 1.1;
     }
 
     &-date {
