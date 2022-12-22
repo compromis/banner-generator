@@ -286,4 +286,9 @@ export default {
   --primary-bg: #{$granissat-pink};
   --secondary-bg: #{$granissat-yellow};
 }
+
+.color-indigo {
+  --primary-bg: #{$granissat-indigo};
+  --secondary-bg: #{$granissat-yellow};
+}
 </style>
