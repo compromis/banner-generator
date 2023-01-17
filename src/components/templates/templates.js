@@ -1,17 +1,5 @@
 export default [
   {
-    id: 'Christmas2022',
-    name: 'Felicitació Festes',
-    aspects: ['11'],
-    icon: 'hat-santa',
-    label: '🎄Festes 2022',
-    components: {
-      pane: () => import(/* webpackChunkName: "christmas-2022" */ './christmas-2022/Christmas2022Pane'),
-      canvas: () => import(/* webpackChunkName: "christmas-2022" */ './christmas-2022/Christmas2022Canvas'),
-      help: () => import(/* webpackChunkName: "christmas-2022" */ './christmas-2022/Christmas2022Help')
-    }
-  },
-  {
     id: 'GranissatHeadline',
     name: 'Titular de premsa',
     aspects: ['11', '45', '916', '169'],
