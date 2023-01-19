@@ -6,7 +6,7 @@
     <div :class="['grid', 'bg-' + banner.bgColor]">
       <div class="picture" :style="{ backgroundImage: `url(${bannerPicture})`, ...backgroundPosition }" />
       <div class="text">
-        <div v-html="banner.text" class="text-wysiwyg"></div>
+        <div v-html="banner.text" class="text-wysiwyg-granissat"></div>
       </div>
       <div class="claim">
         Som molt<br>de tu.<br>Som molt<br>d'ací.
@@ -141,7 +141,7 @@ export default {
 <style lang="scss">
   @import "../../../../sass/variables";
 
-  .text-wysiwyg {
+  .text-wysiwyg-granissat {
     h1 {
       font-size: 1.5em;
       font-weight: 900;
