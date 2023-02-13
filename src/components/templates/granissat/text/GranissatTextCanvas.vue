@@ -152,8 +152,8 @@ export default {
       }
     }
 
-    strong {
-      color: $white;
+    strong, em {
+      color: $white !important;
     }
 
     ul, ol {
