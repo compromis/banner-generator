@@ -18,10 +18,12 @@
           <div class="speaker-image">
             <img :src="speaker.uploadedPicture || speaker.picture" alt="" />
           </div>
-          <div class="speaker-details">
-            <div class="speaker-name">{{ speaker.name }}</div>
-            <div class="speaker-description">{{ speaker.description }}</div>
-          </div>
+        </div>
+      </div>
+      <div class="speakers-names">
+        <div v-for="(speaker, i) in banner.speakers" :key="i" class="speaker">
+          <div class="speaker-name">{{ speaker.name }}</div>
+          <div class="speaker-description">{{ speaker.description }}</div>
         </div>
       </div>
       <div class="speakers-details">
@@ -99,7 +101,7 @@ export default {
     background: var(--primary-bg);
     z-index: 1;
     display: grid;
-    grid-template-rows: auto 1fr auto;
+    grid-template-rows: auto 1fr auto auto;
     --banner-padding: 24px;
   }
 
@@ -113,31 +115,41 @@ export default {
 
     &-items {
       display: flex;
-      padding: var(--banner-padding);
-      padding-top: 0;
+      padding: 0 var(--banner-padding);
       gap: var(--banner-padding);
 
       .speaker {
         flex-grow: 1;
         width: 100%;
-        display: grid;
-        grid-template-rows: 1fr auto;
-        gap: calc(var(--banner-padding) / 2);
+        position: relative;
 
         &-image {
           background: $gray-300;
           display: flex;
+          position: absolute;
+          inset: 0;
 
           img {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
           }
         }
+      }
+    }
 
-        &-details {
-          color: $white;
-          font-size: 20px;
-          line-height: 1.1;
-        }
+    &-names {
+      display: flex;
+      gap: var(--banner-padding);
+      color: $white;
+      font-size: 20px;
+      line-height: 1.1;
+      padding: var(--banner-padding);
+      padding-top: calc(var(--banner-padding) / 2);
+
+      .speaker {
+        flex-grow: 1;
+        width: 100%;
 
         &-name {
           font-weight: 900;
