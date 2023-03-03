@@ -86,6 +86,8 @@
     <!-- Background color  -->
     <color-selector v-model="properties.secondaryColor" :colors="secondaryColors" label="Color secundari" is-rounded />
 
+    <granissat-color-advisor :color="properties.bgColor" />
+
     <!-- Local label -->
     <transition name="slide">
       <c-input-text
@@ -106,6 +108,7 @@ import SpeakerList from '@/components/pane/SpeakerList'
 import CTab from '@/components/pane/CTab'
 import CTabGroup from '@/components/pane/CTabGroup'
 import SocialSelector from '@/components/pane/SocialSelector'
+import GranissatColorAdvisor from '../GranissatColorAdvisor'
 import GranissatMixin from '../granissat-mixin'
 
 export default {
@@ -118,7 +121,8 @@ export default {
     SpeakerList,
     CTab,
     CTabGroup,
-    SocialSelector
+    SocialSelector,
+    GranissatColorAdvisor
   },
 
   data () {
@@ -180,7 +184,8 @@ export default {
         yellow: ['blue', 'red', 'pink', 'indigo'],
         blue: ['yellow', 'red'],
         pink: ['yellow'],
-        indigo: ['yellow']
+        indigo: ['yellow'],
+        feminist: ['yellow','red','blue','pink','indigo']
       }
 
       return combos[this.properties.bgColor]

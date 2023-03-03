@@ -17,12 +17,14 @@ $granissat-blue: #3db5b0;
 $granissat-pink: #fc9ea3;
 $granissat-lightblue: #cefee1;
 $granissat-indigo: #859ce5;
+$granissat-feminist: #6f5f93;
 $granissat-colors: (
     'red': ('bg': $granissat-red, 'text': $granissat-lightblue),
     'yellow': ('bg': $granissat-yellow, 'text': $white),
     'blue': ('bg': $granissat-blue, 'text': $granissat-lightblue),
     'pink': ('bg': $granissat-pink, 'text': $white),
-    'indigo': ('bg': $granissat-indigo, 'text': $white)
+    'indigo': ('bg': $granissat-indigo, 'text': $white),
+    'feminist': ('bg': $granissat-feminist, 'text': $white)
 );
 $granissat-font: 'Fig Grotesk', sans-serif;
 
