@@ -110,6 +110,7 @@
 
     <!-- Frame color  -->
     <color-selector v-model="properties.bgColor" :colors="granissatColors" label="Color" is-rounded />
+    <granissat-color-advisor :color="properties.bgColor" />
 
     <!-- Local label -->
     <transition name="slide">
@@ -132,6 +133,7 @@ import SpeakerList from '@/components/pane/SpeakerList'
 import CTab from '@/components/pane/CTab'
 import CTabGroup from '@/components/pane/CTabGroup'
 import SocialSelector from '@/components/pane/SocialSelector'
+import GranissatColorAdvisor from '../GranissatColorAdvisor'
 
 export default {
   mixins: [PaneMixin, GranissatMixin],
@@ -141,7 +143,8 @@ export default {
     SpeakerList,
     CTab,
     CTabGroup,
-    SocialSelector
+    SocialSelector,
+    GranissatColorAdvisor
   },
 
   data () {

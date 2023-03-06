@@ -185,7 +185,7 @@ export default {
         blue: ['yellow', 'red'],
         pink: ['yellow'],
         indigo: ['yellow'],
-        feminist: ['yellow','red','blue','pink','indigo']
+        feminist: ['yellow', 'red', 'blue', 'pink', 'indigo']
       }
 
       return combos[this.properties.bgColor]

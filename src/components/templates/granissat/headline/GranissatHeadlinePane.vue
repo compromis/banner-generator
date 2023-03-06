@@ -74,6 +74,7 @@
 
     <!-- Background color  -->
     <color-selector v-model="properties.bgColor" :colors="granissatColors" label="Color" is-rounded />
+    <granissat-color-advisor :color="properties.bgColor" />
 
     <!-- Local label -->
     <transition name="slide">
@@ -92,9 +93,14 @@
 import PaneMixin from '@/mixins/pane-mixin.js'
 import GranissatMixin from '../granissat-mixin'
 import presets from '@/components/templates/headline/presets'
+import GranissatColorAdvisor from '../GranissatColorAdvisor'
 
 export default {
   mixins: [PaneMixin, GranissatMixin],
+
+  components: {
+    GranissatColorAdvisor
+  },
 
   data () {
     return {

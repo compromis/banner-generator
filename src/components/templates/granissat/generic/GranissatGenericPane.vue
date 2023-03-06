@@ -32,6 +32,7 @@
 
     <!-- Background color  -->
     <color-selector v-model="properties.bgColor" :colors="granissatColors" label="Color" is-rounded />
+    <granissat-color-advisor :color="properties.bgColor" />
 
     <!-- Local label -->
     <transition name="slide">
@@ -52,6 +53,7 @@ import GranissatMixin from '../granissat-mixin'
 import LayoutSelector from './LayoutSelector'
 import GranissatTextAdvisor from '../GranissatTextAdvisor'
 import GranissatPhotoAdvisor from '../GranissatPhotoAdvisor'
+import GranissatColorAdvisor from '../GranissatColorAdvisor'
 
 export default {
   mixins: [PaneMixin, GranissatMixin],
@@ -59,7 +61,8 @@ export default {
   components: {
     LayoutSelector,
     GranissatTextAdvisor,
-    GranissatPhotoAdvisor
+    GranissatPhotoAdvisor,
+    GranissatColorAdvisor
   },
 
   data () {

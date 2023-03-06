@@ -24,6 +24,7 @@
 
     <!-- Background color  -->
     <color-selector v-model="properties.bgColor" :colors="granissatColors" label="Color" is-rounded />
+    <granissat-color-advisor :color="properties.bgColor" />
 
     <!-- Local label -->
     <transition name="slide">
@@ -44,6 +45,7 @@ import PaneMixin from '@/mixins/pane-mixin.js'
 import GranissatMixin from '../granissat-mixin'
 import LayoutSelector from './LayoutSelector'
 import GranissatPhotoAdvisor from '../GranissatPhotoAdvisor'
+import GranissatColorAdvisor from '../GranissatColorAdvisor'
 
 export default {
   mixins: [PaneMixin, GranissatMixin],
@@ -51,7 +53,8 @@ export default {
   components: {
     VueEditor,
     LayoutSelector,
-    GranissatPhotoAdvisor
+    GranissatPhotoAdvisor,
+    GranissatColorAdvisor
   },
 
   data () {
