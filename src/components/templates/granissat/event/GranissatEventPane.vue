@@ -122,6 +122,24 @@
         v-model="properties.localLabel"
         :maxlength="48" />
     </transition>
+
+    <!-- Tagline -->
+    <c-field>
+      <b-switch v-model="properties.hasOwnTagline">
+        Lema personalitzat
+      </b-switch>
+    </c-field>
+    <transition name="slide">
+      <c-input-text
+        v-if="properties.hasOwnTagline"
+        label="Lema"
+        name="tagline"
+        type="textarea"
+        placeholder="Som molt de tu. Som molt d'ací."
+        v-model="properties.tagline"
+        :maxlength="60"
+        :message="setFieldMessage('tagline')" />
+    </transition>
   </div>
 </template>
 
@@ -160,7 +178,9 @@ export default {
         disposition: 'full',
         social: [],
         eventType: 'inperson',
-        videochat: ''
+        videochat: '',
+        hasOwnTagline: false,
+        tagline: ''
       }
     }
   },

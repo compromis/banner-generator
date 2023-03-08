@@ -16,7 +16,8 @@
             :style="{ height: banner.source.logoHeight + 'px' }" />
         </div>
       </div>
-      <div class="claim">
+      <div class="claim claim--custom" v-if="banner.hasOwnTagline">{{ banner.tagline }}</div>
+      <div class="claim" v-else>
         Som molt<br />de tu.<br />Som molt<br />d'ací.
       </div>
       <div class="bottom">
@@ -121,6 +122,11 @@ export default {
     font-weight: 900;
     font-size: 24px;
     line-height: 1;
+
+    &--custom {
+      word-wrap: break-word;
+      white-space: pre-wrap;
+    }
   }
 
   .bottom {
