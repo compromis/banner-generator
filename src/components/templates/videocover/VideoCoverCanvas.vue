@@ -92,6 +92,10 @@ export default {
       return values[this.banner.textAlign]
     },
 
+    mainPicture () {
+      return this.banner.pictureBlob || this.banner.picturePreview
+    },
+
     pitAgainstPicture () {
       return this.banner.pitAgainstPictureBlob || this.banner.pitAgainstPicturePreview
     },

@@ -7,7 +7,7 @@
       <div class="text">
         <h1 :style="{ fontSize: fontSizePrimary }">{{ banner.text }}</h1>
       </div>
-      <div class="picture" :style="{ backgroundImage: `url(${mainPicture})`, ...backgroundPosition }" />
+      <div class="picture" :style="{ backgroundImage: `url(${bannerPicture})`, ...backgroundPosition }" />
     </div>
   </div>
 </template>
@@ -19,6 +19,10 @@ export default {
   mixins: [CanvasMixin],
 
   computed: {
+    bannerPicture () {
+      return this.banner.pictureBlob || this.banner.picturePreview
+    },
+
     fontSizePrimary () {
       const { aspect, banner, fontSize } = this
       const sizes = {

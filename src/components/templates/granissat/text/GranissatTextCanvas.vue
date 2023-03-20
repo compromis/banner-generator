@@ -4,7 +4,7 @@
     :class="['banner-canvas', 'aspect-' + aspect, 'layout-' + banner.layout]"
     v-if="banner">
     <div :class="['grid', 'bg-' + banner.bgColor]">
-      <div class="picture" :style="{ backgroundImage: `url(${mainPicture})`, ...backgroundPosition }" />
+      <div class="picture" :style="{ backgroundImage: `url(${bannerPicture})`, ...backgroundPosition }" />
       <div class="text">
         <div v-html="banner.text" class="text-wysiwyg-granissat"></div>
       </div>
@@ -28,6 +28,12 @@ export default {
 
   components: {
     MultiLogo
+  },
+
+  computed: {
+    bannerPicture () {
+      return this.banner.pictureBlob || this.banner.picturePreview
+    }
   }
 }
 </script>

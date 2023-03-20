@@ -59,8 +59,7 @@ export default {
 
     computedPicture () {
       if (this.picture === false) return
-      const time = new Date().getTime()
-      return this.picture || this.banner.pictureBlob || `${this.banner.picturePreview}?t=${time}`
+      return this.picture || this.banner.pictureBlob || this.banner.picturePreview
     },
 
     computedColor () {
