@@ -16,6 +16,11 @@ export default {
 
     backgroundPosition () {
       return this.computeBackgroundPosition()
+    },
+
+    mainPicture () {
+      const time = new Date().getTime()
+      return this.banner.pictureBlob || `${this.banner.picturePreview}?t=${time}`
     }
   },
 

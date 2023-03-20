@@ -114,7 +114,7 @@ export default {
         return banner.tweetEmbed && banner.tweetEmbed.entities['media'] && banner.tweetEmbed.entities['media'][0].media_url_https
       }
 
-      return banner.pictureBlob || banner.picturePreview
+      return this.mainPicture
     },
 
     textFontSize () {

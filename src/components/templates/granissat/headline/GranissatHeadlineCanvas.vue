@@ -2,7 +2,7 @@
   <div
     v-if="banner"
     :id="'bannerCanvas' + aspect"
-    :class="['banner-canvas', 'aspect-' + aspect, { 'has-picture': !!bannerPicture }]">
+    :class="['banner-canvas', 'aspect-' + aspect, { 'has-picture': !!mainPicture }]">
     <div class="grid">
       <div class="headline">
         <div class="headline-text" :style="{ fontSize: headlineFontSize }">{{ banner.headline | formatString }}</div>
@@ -24,7 +24,7 @@
         <multi-logo v-if="aspect !== '916'" />
       </div>
     </div>
-    <div v-if="bannerPicture" class="picture" :style="{ backgroundImage: `url(${bannerPicture})`, ...backgroundPosition, '--frame-crop': `${banner.pictureFrameCrop}px` }" />
+    <div v-if="mainPicture" class="picture" :style="{ backgroundImage: `url(${mainPicture})`, ...backgroundPosition, '--frame-crop': `${banner.pictureFrameCrop}px` }" />
     <div :class="['background', 'bg-' + banner.bgColor]" />
   </div>
 </template>
@@ -41,10 +41,6 @@ export default {
   mixins: [CanvasMixin],
 
   computed: {
-    bannerPicture () {
-      return this.banner.pictureBlob || this.banner.picturePreview
-    },
-
     headlineFontSize () {
       const sizes = {
         11: { min: 50, max: 80 },

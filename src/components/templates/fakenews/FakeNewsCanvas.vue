@@ -13,7 +13,7 @@
     <div class="blob-image">
       <span class="stamp">{{ banner.stamp }}</span>
       <span class="stamp stamp-over">{{ banner.stamp }}</span>
-      <div class="picture" v-if="banner.picturePreview" :style="{backgroundImage: `url(${banner.picturePreview})`, ...backgroundPosition}" />
+      <div class="picture" v-if="mainPicture" :style="{backgroundImage: `url(${mainPicture})`, ...backgroundPosition}" />
     </div>
     <div class="text" v-if="banner.text">
       <div class="text-holder" contenteditable>

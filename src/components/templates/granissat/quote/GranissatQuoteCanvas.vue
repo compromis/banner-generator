@@ -10,7 +10,7 @@
         <div class="author">{{ banner.author }}</div>
         <multi-logo class="logo" v-if="aspect !== '916'" />
       </div>
-      <div class="picture" :style="{ backgroundImage: `url(${bannerPicture})`, ...backgroundPosition }" />
+      <div class="picture" :style="{ backgroundImage: `url(${mainPicture})`, ...backgroundPosition }" />
     </div>
   </div>
 </template>
@@ -27,10 +27,6 @@ export default {
   },
 
   computed: {
-    bannerPicture () {
-      return this.banner.pictureBlob || this.banner.picturePreview
-    },
-
     fontSizePrimary () {
       const { aspect, banner, fontSize } = this
       const sizes = {
