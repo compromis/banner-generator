@@ -3,7 +3,7 @@
     :id="'bannerCanvas' + aspect"
     class='banner-canvas'
     v-if="banner">
-      <div class="picture" v-if="computedPicture" :style="{ backgroundImage: `url(${computedPicture})`, ...backgroundPosition }" />
+      <div class="picture" v-if="mainPicture" :style="{ backgroundImage: `url(${mainPicture})`, ...backgroundPosition }" />
       <careta class="careta" :logo-style="banner.logoStyle"></careta>
   </div>
 </template>
@@ -19,12 +19,6 @@ export default {
 
   components: {
     Careta
-  },
-
-  computed: {
-    computedPicture () {
-      return this.banner.pictureBlob || this.banner.picturePreview
-    }
   }
 }
 </script>

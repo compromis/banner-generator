@@ -264,6 +264,10 @@
   border: 1px solid $gray-300;
 }
 
+.svg-inline--fa {
+  width: 1em !important;
+}
+
 @media (max-width: $xs-breakpoint) {
   .pane {
     transition: background .25s ease-in-out;

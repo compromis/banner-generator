@@ -83,18 +83,16 @@ export default {
     const { content } = this.$store.state.bannerMeta
 
     if (content) { // Set props from database
-      const properties = JSON.parse(content)
-      this.properties = properties
+      // const properties = JSON.parse(content)
+      this.properties = content
 
       // For backwards compatibility, set default pictureCrop if not present
       if (!this.properties.pictureCrop) {
         this.properties.pictureCrop = { scale: 100, x: 50, y: 50 }
       }
-
-      this.$store.commit('updateBanner', properties)
-    } else { // Set default props for tempate
-      this.$store.commit('updateBanner', this.properties)
     }
+
+    this.$store.commit('updateBanner', this.properties)
 
     this.$root.$on('checkForErrors', () => {
       this.checkForErrors()
@@ -185,7 +183,7 @@ export default {
 
       // Set picture and calc dimensions
       this.properties[picture] = image
-      this.properties[picturePreview] = uploaded.picture + '?t=' + new Date().getTime()
+      this.properties[picturePreview] = uploaded.picture
       this.properties[pictureBlob] = URL.createObjectURL(image)
 
       const img = new Image()

@@ -1,6 +1,6 @@
 {
   "name": "banner-generator",
-  "version": "0.1.0",
+  "version": "3.1.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -8,16 +8,16 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.33-beta1",
-    "@fortawesome/free-brands-svg-icons": "^5.15.0",
-    "@fortawesome/pro-regular-svg-icons": "^6.0.0-beta1",
-    "@fortawesome/pro-solid-svg-icons": "^6.0.0-beta1",
+    "@fortawesome/fontawesome-svg-core": "^6.3.0",
+    "@fortawesome/free-brands-svg-icons": "^6.3.0",
+    "@fortawesome/pro-regular-svg-icons": "^6.3.0",
+    "@fortawesome/pro-solid-svg-icons": "^6.3.0",
     "@fortawesome/vue-fontawesome": "^2.0.2",
     "@kevinfaguiar/vue-twemoji-picker": "^5.7.4",
     "@minogin/vue-drag-resize-rotate": "^1.0.5",
     "axios": "^0.21.2",
     "browser-detect": "^0.2.28",
-    "buefy": "^0.9.6",
+    "buefy": "^0.9.23",
     "chart.js": "^2.9.4",
     "chartjs-plugin-datalabels": "^0.7.0",
     "core-js": "^2.6.5",
@@ -25,7 +25,7 @@
     "dom-to-image": "^2.6.0",
     "file-saver": "^2.0.2",
     "moment": "^2.29.4",
-    "node-vibrant": "3.1.5",
+    "node-vibrant": "^3.1.6",
     "parallax-js": "^3.1.0",
     "portal-vue": "^2.1.7",
     "vue": "^2.6.10",
