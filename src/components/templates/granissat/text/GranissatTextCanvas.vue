@@ -10,7 +10,7 @@
       </div>
       <div class="claim claim--custom" v-if="banner.hasOwnTagline">{{ banner.tagline }}</div>
       <div class="claim" v-else>
-        Som molt<br>de tu.<br>Som molt<br>d'ací.
+        Per tot<br />el que<br />importa
       </div>
       <div class="bottom">
         <multi-logo />

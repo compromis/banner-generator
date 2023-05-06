@@ -19,14 +19,14 @@ $granissat-lightblue: #cefee1;
 $granissat-indigo: #859ce5;
 $granissat-feminist: #6f5f93;
 $granissat-colors: (
-    'red': ('bg': $granissat-red, 'text': $granissat-lightblue),
+    'red': ('bg': $granissat-red, 'text': $white),
     'yellow': ('bg': $granissat-yellow, 'text': $white),
-    'blue': ('bg': $granissat-blue, 'text': $granissat-lightblue),
+    'blue': ('bg': $granissat-blue, 'text': $white),
     'pink': ('bg': $granissat-pink, 'text': $white),
     'indigo': ('bg': $granissat-indigo, 'text': $white),
     'feminist': ('bg': $granissat-feminist, 'text': $white)
 );
-$granissat-font: 'Fig Grotesk', sans-serif;
+$granissat-font: 'Roobert', sans-serif;
 
 $gray-darkest: #353949;
 $gray-lightest: #f8faff;

@@ -4,7 +4,7 @@ export default [
     name: 'Titular de premsa',
     aspects: ['11', '45', '916', '169'],
     icon: 'newspaper',
-    label: 'Tot el que som',
+    label: 'Campanya',
     components: {
       pane: () => import(/* webpackChunkName: "granissat-headline" */ './granissat/headline/GranissatHeadlinePane'),
       canvas: () => import(/* webpackChunkName: "granissat-headline" */ './granissat/headline/GranissatHeadlineCanvas'),
@@ -16,7 +16,7 @@ export default [
     name: 'Frase',
     aspects: ['11', '45', '916', '169'],
     icon: 'font',
-    label: 'Tot el que som',
+    label: 'Campanya',
     components: {
       pane: () => import(/* webpackChunkName: "granissat-generic" */ './granissat/generic/GranissatGenericPane'),
       canvas: () => import(/* webpackChunkName: "granissat-generic" */ './granissat/generic/GranissatGenericCanvas'),
@@ -28,7 +28,7 @@ export default [
     name: 'Text lliure',
     aspects: ['11', '45', '916'],
     icon: 'align-left',
-    label: 'Tot el que som',
+    label: 'Campanya',
     components: {
       pane: () => import(/* webpackChunkName: "granissat-text" */ './granissat/text/GranissatTextPane'),
       canvas: () => import(/* webpackChunkName: "granissat-text" */ './granissat/text/GranissatTextCanvas'),
@@ -40,7 +40,7 @@ export default [
     name: 'Cita',
     aspects: ['11', '45', '916', '169'],
     icon: 'quote-left',
-    label: 'Tot el que som',
+    label: 'Campanya',
     components: {
       pane: () => import(/* webpackChunkName: "granissat-quote" */ './granissat/quote/GranissatQuotePane'),
       canvas: () => import(/* webpackChunkName: "granissat-quote" */ './granissat/quote/GranissatQuoteCanvas'),
@@ -185,7 +185,7 @@ export default [
     name: 'Acte amb foto',
     aspects: ['11'],
     icon: 'portrait',
-    label: 'Tot el que som',
+    label: 'Campanya',
     components: {
       pane: () => import(/* webpackChunkName: "granissat-event" */ './granissat/event/GranissatEventPane'),
       canvas: () => import(/* webpackChunkName: "granissat-event" */ './granissat/event/GranissatEventCanvas'),
@@ -197,7 +197,7 @@ export default [
     name: 'Acte amb ponents',
     aspects: ['11'],
     icon: 'keynote',
-    label: 'Tot el que som',
+    label: 'Campanya',
     components: {
       pane: () => import(/* webpackChunkName: "granissat-speakers" */ './granissat/speakers/GranissatSpeakersPane'),
       canvas: () => import(/* webpackChunkName: "granissat-speakers" */ './granissat/speakers/GranissatSpeakersCanvas'),
@@ -264,7 +264,7 @@ export default [
     name: 'Miniatura de vídeo',
     aspects: ['11', '916', 'event'],
     icon: 'play',
-    label: 'Tot el que som',
+    label: 'Campanya',
     components: {
       pane: () => import(/* webpackChunkName: "granissat-cover" */ './granissat/cover/GranissatCoverPane'),
       canvas: () => import(/* webpackChunkName: "granissat-cover" */ './granissat/cover/GranissatCoverCanvas'),
