@@ -267,8 +267,8 @@ export default {
     }
   }
 
-  .template-item-granissatspeakers,
-  .template-item-granissatproposal {
+  .template-item-granissatproposal,
+  .template-item-granissatquote {
     .template-item-icon {
       background-color: $granissat-red;
     }
@@ -281,15 +281,10 @@ export default {
     }
   }
 
-  .template-item-granissatgeneric {
+  .template-item-granissatgeneric,
+  .template-item-granissatspeakers {
     .template-item-icon {
       background-color: $granissat-blue;
-    }
-  }
-
-  .template-item-granissatquote {
-    .template-item-icon {
-      background-color: $granissat-pink;
     }
   }
 

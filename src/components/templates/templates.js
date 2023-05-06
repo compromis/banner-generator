@@ -60,6 +60,42 @@ export default [
     }
   },
   {
+    id: 'GranissatEvent',
+    name: 'Acte amb foto',
+    aspects: ['11'],
+    icon: 'portrait',
+    label: 'Campanya',
+    components: {
+      pane: () => import(/* webpackChunkName: "granissat-event" */ './granissat/event/GranissatEventPane'),
+      canvas: () => import(/* webpackChunkName: "granissat-event" */ './granissat/event/GranissatEventCanvas'),
+      help: () => import(/* webpackChunkName: "granissat-event" */ './granissat/event/GranissatEventHelp')
+    }
+  },
+  {
+    id: 'GranissatSpeakers',
+    name: 'Acte amb ponents',
+    aspects: ['11'],
+    icon: 'keynote',
+    label: 'Campanya',
+    components: {
+      pane: () => import(/* webpackChunkName: "granissat-speakers" */ './granissat/speakers/GranissatSpeakersPane'),
+      canvas: () => import(/* webpackChunkName: "granissat-speakers" */ './granissat/speakers/GranissatSpeakersCanvas'),
+      help: () => import(/* webpackChunkName: "granissat-speakers" */ './granissat/speakers/GranissatSpeakersHelp')
+    }
+  },
+  {
+    id: 'GranissatCover',
+    name: 'Miniatura de vídeo',
+    aspects: ['11', '916', 'event'],
+    icon: 'play',
+    label: 'Campanya',
+    components: {
+      pane: () => import(/* webpackChunkName: "granissat-cover" */ './granissat/cover/GranissatCoverPane'),
+      canvas: () => import(/* webpackChunkName: "granissat-cover" */ './granissat/cover/GranissatCoverCanvas'),
+      help: () => import(/* webpackChunkName: "granissat-cover" */ './granissat/cover/GranissatCoverHelp')
+    }
+  },
+  {
     id: 'Headline',
     name: 'Titular de premsa',
     aspects: ['11', '916', '169'],
@@ -193,30 +229,6 @@ export default [
     }
   },
   {
-    id: 'GranissatEvent',
-    name: 'Acte amb foto',
-    aspects: ['11'],
-    icon: 'portrait',
-    label: 'Campanya',
-    components: {
-      pane: () => import(/* webpackChunkName: "granissat-event" */ './granissat/event/GranissatEventPane'),
-      canvas: () => import(/* webpackChunkName: "granissat-event" */ './granissat/event/GranissatEventCanvas'),
-      help: () => import(/* webpackChunkName: "granissat-event" */ './granissat/event/GranissatEventHelp')
-    }
-  },
-  {
-    id: 'GranissatSpeakers',
-    name: 'Acte amb ponents',
-    aspects: ['11'],
-    icon: 'keynote',
-    label: 'Campanya',
-    components: {
-      pane: () => import(/* webpackChunkName: "granissat-speakers" */ './granissat/speakers/GranissatSpeakersPane'),
-      canvas: () => import(/* webpackChunkName: "granissat-speakers" */ './granissat/speakers/GranissatSpeakersCanvas'),
-      help: () => import(/* webpackChunkName: "granissat-speakers" */ './granissat/speakers/GranissatSpeakersHelp')
-    }
-  },
-  {
     id: 'Event',
     name: 'Acte amb foto',
     aspects: ['11', '916', 'event'],
@@ -269,18 +281,6 @@ export default [
       pane: () => import(/* webpackChunkName: "videocover" */ './videocover/VideoCoverPane'),
       canvas: () => import(/* webpackChunkName: "videocover" */ './videocover/VideoCoverCanvas'),
       help: () => import(/* webpackChunkName: "videocover" */ './videocover/VideoCoverHelp')
-    }
-  },
-  {
-    id: 'GranissatCover',
-    name: 'Miniatura de vídeo',
-    aspects: ['11', '916', 'event'],
-    icon: 'play',
-    label: 'Campanya',
-    components: {
-      pane: () => import(/* webpackChunkName: "granissat-cover" */ './granissat/cover/GranissatCoverPane'),
-      canvas: () => import(/* webpackChunkName: "granissat-cover" */ './granissat/cover/GranissatCoverCanvas'),
-      help: () => import(/* webpackChunkName: "granissat-cover" */ './granissat/cover/GranissatCoverHelp')
     }
   },
   {
