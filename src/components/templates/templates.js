@@ -1,5 +1,17 @@
 export default [
   {
+    id: 'GranissatProposal',
+    name: 'Proposta',
+    aspects: ['11', '45', '916', '169'],
+    icon: 'file-alt',
+    label: 'Campanya',
+    components: {
+      pane: () => import(/* webpackChunkName: "granissat-proposal" */ './granissat/proposal/GranissatProposalPane'),
+      canvas: () => import(/* webpackChunkName: "granissat-proposal" */ './granissat/proposal/GranissatProposalCanvas'),
+      help: () => import(/* webpackChunkName: "granissat-proposal" */ './granissat/proposal/GranissatProposalHelp')
+    }
+  },
+  {
     id: 'GranissatHeadline',
     name: 'Titular de premsa',
     aspects: ['11', '45', '916', '169'],

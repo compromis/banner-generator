@@ -5,7 +5,7 @@
     v-if="banner">
     <div :class="['grid', 'layout-' + banner.layout, 'bg-txt-' + banner.bgColor]">
       <div class="text">
-        <h1 :style="{ fontSize: fontSizePrimary }">{{ $options.filters.formatString($options.filters.formatSentence(banner.text)) }}</h1>
+        <h1 :style="{ fontSize: fontSizePrimary }">{{ $options.filters.formatString(banner.text) }}</h1>
         <multi-logo class="logo" v-if="aspect !== '916'" />
       </div>
       <div class="picture" :style="{ backgroundImage: `url(${bannerPicture})`, ...backgroundPosition }" />

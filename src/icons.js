@@ -7,7 +7,8 @@ import {
   faArrowToTop, faGripLines, faBroadcastTower, faFont, faQuoteLeft, faNewspaper, faPortrait, faUserCircle,
   faQuestionCircle, faCheckCircle, faColumns, faCircleNotch, faBan, faBringForward, faSendBackward,
   faEuroSign, faHandPointRight, faPlay, faRetweet, faHeart, faPaste, faCheck, faGifts, faHatSanta, faAbacus,
-  faChartBar, faHighlighter, faCog, faGripHorizontal, faDesktop, faTrash, faSave, faPen, faSignOutAlt, faSync, faTableRows, faClone, faLink, faDiceD20
+  faChartBar, faHighlighter, faCog, faGripHorizontal, faDesktop, faTrash, faSave, faPen, faSignOutAlt, faSync,
+  faTableRows, faClone, faLink, faDiceD20, faFileAlt
 } from '@fortawesome/pro-regular-svg-icons'
 import {
   faBadgeCheck
@@ -25,5 +26,6 @@ library.add(
   faQuestionCircle, faCheckCircle, faColumns, faCircleNotch, faBan, faBringForward, faSendBackward,
   faEuroSign, faHandPointRight, faPlay, faTwitter, faRetweet, faHeart, faBadgeCheck, faPaste, faCheck,
   faGifts, faHatSanta, faChartBar, faHighlighter, faCog, faGripHorizontal, faFacebook, faInstagram, faTwitch,
-  faYoutube, faDesktop, faTrash, faSave, faPen, faSignOutAlt, faSync, faTableRows, faClone, faLink, faDiceD20, faAbacus
+  faYoutube, faDesktop, faTrash, faSave, faPen, faSignOutAlt, faSync, faTableRows, faClone, faLink, faDiceD20,
+  faAbacus, faFileAlt
 )

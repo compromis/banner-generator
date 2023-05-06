@@ -267,8 +267,8 @@ export default {
     }
   }
 
-  .template-item-granissatgeneric,
-  .template-item-granissatspeakers {
+  .template-item-granissatspeakers,
+  .template-item-granissatproposal {
     .template-item-icon {
       background-color: $granissat-red;
     }
@@ -281,7 +281,7 @@ export default {
     }
   }
 
-  .template-item-granissattext {
+  .template-item-granissatgeneric {
     .template-item-icon {
       background-color: $granissat-blue;
     }
@@ -293,7 +293,8 @@ export default {
     }
   }
 
-  .template-item-granissatcover {
+  .template-item-granissatcover,
+  .template-item-granissattext {
     .template-item-icon {
       background-color: $granissat-indigo;
     }
