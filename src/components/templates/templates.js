@@ -1,10 +1,23 @@
 export default [
   {
+    id: 'SumarSpeakers',
+    name: 'Acte de campanya',
+    aspects: ['11'],
+    icon: 'keynote',
+    label: 'Compromís-Sumar',
+    components: {
+      pane: () => import(/* webpackChunkName: "sumar-speakers" */ './sumar-speakers/SumarSpeakersPane'),
+      canvas: () => import(/* webpackChunkName: "sumar-speakers" */ './sumar-speakers/SumarSpeakersCanvas'),
+      help: () => import(/* webpackChunkName: "sumar-speakers" */ './sumar-speakers/SumarSpeakersHelp')
+    }
+  },
+  {
     id: 'GranissatProposal',
     name: 'Proposta',
     aspects: ['11', '45', '916', '169'],
     icon: 'file-alt',
     label: 'Campanya',
+    archived: true,
     components: {
       pane: () => import(/* webpackChunkName: "granissat-proposal" */ './granissat/proposal/GranissatProposalPane'),
       canvas: () => import(/* webpackChunkName: "granissat-proposal" */ './granissat/proposal/GranissatProposalCanvas'),
@@ -17,6 +30,7 @@ export default [
     aspects: ['11', '45', '916', '169'],
     icon: 'newspaper',
     label: 'Campanya',
+    archived: true,
     components: {
       pane: () => import(/* webpackChunkName: "granissat-headline" */ './granissat/headline/GranissatHeadlinePane'),
       canvas: () => import(/* webpackChunkName: "granissat-headline" */ './granissat/headline/GranissatHeadlineCanvas'),
@@ -29,6 +43,7 @@ export default [
     aspects: ['11', '45', '916', '169'],
     icon: 'font',
     label: 'Campanya',
+    archived: true,
     components: {
       pane: () => import(/* webpackChunkName: "granissat-generic" */ './granissat/generic/GranissatGenericPane'),
       canvas: () => import(/* webpackChunkName: "granissat-generic" */ './granissat/generic/GranissatGenericCanvas'),
@@ -41,6 +56,7 @@ export default [
     aspects: ['11', '45', '916'],
     icon: 'align-left',
     label: 'Campanya',
+    archived: true,
     components: {
       pane: () => import(/* webpackChunkName: "granissat-text" */ './granissat/text/GranissatTextPane'),
       canvas: () => import(/* webpackChunkName: "granissat-text" */ './granissat/text/GranissatTextCanvas'),
@@ -53,6 +69,7 @@ export default [
     aspects: ['11', '45', '916', '169'],
     icon: 'quote-left',
     label: 'Campanya',
+    archived: true,
     components: {
       pane: () => import(/* webpackChunkName: "granissat-quote" */ './granissat/quote/GranissatQuotePane'),
       canvas: () => import(/* webpackChunkName: "granissat-quote" */ './granissat/quote/GranissatQuoteCanvas'),
@@ -65,6 +82,7 @@ export default [
     aspects: ['11'],
     icon: 'portrait',
     label: 'Campanya',
+    archived: true,
     components: {
       pane: () => import(/* webpackChunkName: "granissat-event" */ './granissat/event/GranissatEventPane'),
       canvas: () => import(/* webpackChunkName: "granissat-event" */ './granissat/event/GranissatEventCanvas'),
@@ -77,6 +95,7 @@ export default [
     aspects: ['11'],
     icon: 'keynote',
     label: 'Campanya',
+    archived: true,
     components: {
       pane: () => import(/* webpackChunkName: "granissat-speakers" */ './granissat/speakers/GranissatSpeakersPane'),
       canvas: () => import(/* webpackChunkName: "granissat-speakers" */ './granissat/speakers/GranissatSpeakersCanvas'),
@@ -89,6 +108,7 @@ export default [
     aspects: ['11', '916', 'event'],
     icon: 'play',
     label: 'Campanya',
+    archived: true,
     components: {
       pane: () => import(/* webpackChunkName: "granissat-cover" */ './granissat/cover/GranissatCoverPane'),
       canvas: () => import(/* webpackChunkName: "granissat-cover" */ './granissat/cover/GranissatCoverCanvas'),

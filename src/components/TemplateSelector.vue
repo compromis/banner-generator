@@ -255,7 +255,8 @@ export default {
     }
   }
 
-  .template-item[class*='granissat'] {
+  .template-item[class*='granissat'],
+  .template-item[class*='sumar'] {
     .template-item-icon {
       color: $white;
     }
@@ -292,6 +293,23 @@ export default {
   .template-item-granissattext {
     .template-item-icon {
       background-color: $granissat-indigo;
+    }
+  }
+
+  .template-item-sumarspeakers {
+    .template-item-label {
+      background-color: #f37037;
+    }
+
+    .template-item-icon {
+      background-color: #e82a5a;
+      color: $white;
+    }
+
+    &:hover {
+      .template-item-icon .icon svg * {
+        fill: $white !important;
+      }
     }
   }
 </style>
