@@ -159,11 +159,11 @@ export default {
       line-height: 1;
 
       &:nth-child(odd) {
-        background: var(--fuchsia);
+        background: var(--orange);
       }
 
       &:nth-child(even) {
-        background: var(--orange);
+        background: var(--fuchsia);
       }
 
       &-name {
