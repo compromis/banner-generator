@@ -23,7 +23,7 @@
       v-model="properties.speakers"
       :display-errors="displayErrors"
       :errors="errors"
-      :min-speakers="2"
+      :min-speakers="1"
       :max-speakers="4" />
 
     <!-- Date and time -->
@@ -43,14 +43,14 @@
       </div>
     </transition>
 
-      <!-- Venue -->
-      <c-input-text
-        label="Lloc"
-        name="venue"
-        :message="setFieldMessage('place')"
-        placeholder="Riu Túria"
-        v-model="properties.place"
-        max-length="60" />
+    <!-- Venue -->
+    <c-input-text
+      label="Lloc"
+      name="venue"
+      :message="setFieldMessage('place')"
+      placeholder="Riu Túria"
+      v-model="properties.place"
+      max-length="60" />
   </div>
 </template>
 
