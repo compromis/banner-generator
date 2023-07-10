@@ -7,7 +7,8 @@
       'aspect-' + aspect,
       `has-${banner.speakers.length}-speakers`,
       'banner-background-' + banner.mode,
-      'logo-' + banner.logo
+      'logo-' + banner.logo,
+      'first-color-' + banner.firstColor
     ]"
     :style="{
       '--speakers': banner.speakers.length
@@ -15,12 +16,12 @@
     v-if="banner">
     <div class="event-header">
       <div class="event-overtitle">
-        {{ banner.overtitle | formatString }}
+        {{ banner.title | formatString }}
       </div>
       <div
         class="event-title"
         :style="{ fontSize: titleSize }">
-        {{ banner.title | formatString }}
+        {{ banner.overtitle | formatString }}
       </div>
     </div>
     <div class="speaker-pictures">
@@ -71,7 +72,7 @@ export default {
         916: { min: 27, max: 40 }
       }
 
-      return fontSize(banner.title, sizes[aspect].max, sizes[aspect].min, 60)
+      return fontSize(banner.overtitle, sizes[aspect].max, sizes[aspect].min, 60)
     }
   }
 }
@@ -101,8 +102,8 @@ export default {
   .banner-speakers {
     --spacer: 16px;
     --radius: 10px;
-    --fuchsia: #e82a5a;
-    --orange: #f37037;
+    --fuchsia: #{$sumar-fuchsia};
+    --orange: #{$sumar-orange};
     font-family: Roobert, sans-serif;
   }
 
@@ -196,6 +197,16 @@ export default {
     & > .event-info::v-deep {
       font-size: 20px;
 
+    }
+  }
+
+  .first-color-sumar-fuchsia .speaker-details .speaker {
+    &:nth-child(odd) {
+      background: var(--fuchsia);
+    }
+
+    &:nth-child(even) {
+      background: var(--orange);
     }
   }
 

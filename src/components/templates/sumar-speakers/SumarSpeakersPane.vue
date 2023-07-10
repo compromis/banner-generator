@@ -51,11 +51,15 @@
       placeholder="Riu Túria"
       v-model="properties.place"
       max-length="60" />
+
+    <!-- Color predominance -->
+    <color-selector label="Primer color" v-model="properties.firstColor" :colors="['sumar-orange','sumar-fuchsia']" is-rounded />
   </div>
 </template>
 
 <script>
 import PaneMixin from '@/mixins/pane-mixin'
+import ColorSelector from '@/components/pane/ColorSelector'
 import DatePicker from '@/components/pane/DatePicker'
 import SpeakerList from '@/components/pane/SpeakerList'
 
@@ -66,7 +70,8 @@ export default {
 
   components: {
     DatePicker,
-    SpeakerList
+    SpeakerList,
+    ColorSelector
   },
 
   data () {
@@ -77,6 +82,7 @@ export default {
         date: new Date(),
         time: new Date(),
         place: '',
+        firstColor: 'sumar-orange',
         speakers: [
           {
             name: 'Yolanda Díaz',

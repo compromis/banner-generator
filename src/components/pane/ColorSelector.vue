@@ -129,6 +129,14 @@ export default {
     background: $gradient-green;
   }
 
+  .sumar-orange-bg {
+    background: $sumar-orange;
+  }
+
+  .sumar-fuchsia-bg {
+    background: $sumar-fuchsia;
+  }
+
   /* Granissat colors */
   @each $name, $props in $granissat-colors {
     .#{$name}-bg {
