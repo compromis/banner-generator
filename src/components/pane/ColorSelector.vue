@@ -131,10 +131,12 @@ export default {
 
   .sumar-orange-bg {
     background: $sumar-orange;
+    color: $white;
   }
 
   .sumar-fuchsia-bg {
     background: $sumar-fuchsia;
+    color: $white;
   }
 
   /* Granissat colors */

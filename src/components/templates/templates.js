@@ -12,6 +12,18 @@ export default [
     }
   },
   {
+    id: 'SumarGeneric',
+    name: 'Frase',
+    aspects: ['11'],
+    icon: 'font',
+    label: 'Compromís-Sumar',
+    components: {
+      pane: () => import(/* webpackChunkName: "sumar-generic" */ './sumar-generic/SumarGenericPane'),
+      canvas: () => import(/* webpackChunkName: "sumar-generic" */ './sumar-generic/SumarGenericCanvas'),
+      help: () => import(/* webpackChunkName: "sumar-generic" */ './sumar-generic/SumarGenericHelp')
+    }
+  },
+  {
     id: 'GranissatProposal',
     name: 'Proposta',
     aspects: ['11', '45', '916', '169'],

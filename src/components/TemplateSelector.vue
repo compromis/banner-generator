@@ -296,7 +296,8 @@ export default {
     }
   }
 
-  .template-item-sumarspeakers {
+  .template-item-sumarspeakers,
+  .template-item-sumargeneric {
     .template-item-label {
       background-color: #f37037;
     }
