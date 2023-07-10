@@ -49,8 +49,8 @@ export default {
 
   computed: {
     computedPicture () {
-      if (!this.picture) return 'none'
-      return `url(${this.picture || this.banner.pictureBlob || this.banner.picturePreview}`
+      if (this.banner.picture === null) return 'none'
+      return `url(${this.banner.pictureBlob || this.banner.picturePreview}`
     },
     fontSizePrimary () {
       const { aspect, banner, fontSize } = this
