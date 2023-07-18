@@ -227,4 +227,18 @@ export default {
       margin-left: auto;
     }
   }
+
+  .has-4-speakers {
+    .speaker-details {
+      height: 140px;
+
+      .speaker-description {
+        font-size: 16px;
+      }
+    }
+
+    .speaker-pictures {
+      height: 220px;
+    }
+  }
 </style>
