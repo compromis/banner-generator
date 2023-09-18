@@ -10,57 +10,45 @@
     ]"
     v-if="banner">
     <banner-picture
-      :picture-position="backgroundPosition"
+      :picture-position="backgroundPicturePosition"
       :full-gradient="(banner.fullGradient && banner.style === 'card') || banner.style === 'transparent'"
-      :picture="banner.mediaAsBackground && inlinePicture"
+      :picture="backgroundPicture"
       :color="banner.backgroundColor"
     />
     <div class="tweet-wrapper">
-      <div class="tweet" v-if="banner.tweetEmbed">
+      <div class="tweet">
         <div class="tweet-user">
           <div class="tweet-user-pic">
-            <img :src="banner.tweetEmbed.user.profile_image_url_https" />
+            <img v-if="profilePicture" :src="profilePicture" :style="profilePicturePosition" />
           </div>
           <div class="tweet-user-name">
             <div class="tweet-user-full_name">
-              {{ banner.tweetEmbed.user.name }}
-              <span v-if="banner.tweetEmbed.user.verified" class="verified">
+              {{ banner.name }}
+              <span v-if="banner.verified" class="verified">
                 <b-icon icon="badge-check" pack="fas" size="is-small" />
               </span>
             </div>
             <div class="tweet-user-screen_name">
-              @{{ banner.tweetEmbed.user.screen_name }}
+              @{{ banner.username }}
             </div>
           </div>
           <div class="tweet-icon">
-            <b-icon icon="twitter" pack="fab" />
+            <x-icon />
           </div>
         </div>
-        <div class="tweet-text" :style="{ fontSize: textFontSize }" contenteditable v-html="tweetText"></div>
+        <div class="tweet-text" :style="{ fontSize: textFontSize }" contenteditable>{{ banner.text }}</div>
         <div class="tweet-picture"
-          v-if="inlinePicture && !banner.mediaAsBackground"
-          :style="{ backgroundImage: `url(${inlinePicture})`, ...backgroundPosition }">
-        </div>
-        <div class="tweet-quote" v-if="banner.tweetEmbed.is_quote_status">
-          <div class="tweet-quote-user">
-            <img :src="banner.tweetEmbed.quoted_status.user.profile_image_url_https" />
-            <strong>{{ banner.tweetEmbed.quoted_status.user.name }}</strong>
-            <b-icon icon="badge-check" pack="fas" size="is-small" v-if="banner.tweetEmbed.quoted_status.user.verified" class="verified" />
-            <span class="tweet-quote-user-screen_name">@{{ banner.tweetEmbed.quoted_status.user.screen_name }}</span>
-          </div>
-          <div class="tweet-quote-text">{{ banner.tweetEmbed.quoted_status.full_text }}</div>
-        </div>
-        <div class="tweet-date">
-          {{ banner.tweetEmbed.created_at | formatFullDate }}
+          v-if="postPicture"
+          :style="{ backgroundImage: `url(${postPicture})`, ...postPicturePosition }">
         </div>
         <div class="tweet-counts">
           <div class="tweet-counts-rts">
             <b-icon icon="retweet" />
-            <span v-if="banner.showCounts">{{ banner.tweetEmbed.retweet_count | formatNumber }}</span>
+            <span v-if="banner.showCounts">{{ banner.reposts | formatNumber }}</span>
           </div>
           <div class="tweet-counts-faves">
             <b-icon icon="heart" />
-            <span v-if="banner.showCounts">{{ banner.tweetEmbed.favorite_count | formatNumber }}</span>
+            <span v-if="banner.showCounts">{{ banner.likes | formatNumber }}</span>
           </div>
         </div>
       </div>
@@ -78,8 +66,8 @@
 <script>
 import BannerPicture from '@/components/canvas/BannerPicture.vue'
 import BannerFrame from '@/components/canvas/BannerFrame.vue'
-import moment from 'moment'
 import CanvasMixin from '@/mixins/canvas-mixin.js'
+import XIcon from './XIcon'
 
 export default {
   name: 'tweet-canvas',
@@ -88,47 +76,44 @@ export default {
 
   components: {
     BannerFrame,
-    BannerPicture
+    BannerPicture,
+    XIcon
   },
 
   computed: {
-    tweetText () {
-      const text = this.banner.tweetEmbed.full_text
-      const urlRegex = /(https?:\/\/[^\s]+)/g
-      const hashtagRegex = /(^|\B)#(?![0-9_]+\b)([A-Za-zÀ-ÖØ-öø-ÿñ0-9_]{1,30})(\b|\r)/g
-      const mentionRegex = /@[A-Za-z0-9_-]*/g
-      return text
-        .replace(urlRegex, '')
-        .replace(hashtagRegex, (text) => `<span class="ht">${text}</span>`)
-        .replace(mentionRegex, (text) => `<span class="ht">${text}</span>`)
-    },
-
-    inlinePicture () {
-      const { banner } = this
-
-      if (banner.mediaType === 'none') {
-        return false
-      }
-
-      if (banner.mediaType === 'tweetimage' && banner.tweetEmbed.entities.media) {
-        return banner.tweetEmbed && banner.tweetEmbed.entities['media'] && banner.tweetEmbed.entities['media'][0].media_url_https
-      }
-
-      return banner.pictureBlob || banner.picturePreview
-    },
-
     textFontSize () {
-      const fontSize = this.fontSize(this.banner.tweetEmbed.full_text, 40, 24, 280, this.banner.textSize, true)
-      return (this.inlinePicture && !this.banner.mediaAsBackground) ? `${fontSize * 0.6}px` : `${fontSize}px`
+      const fontSize = this.fontSize(this.banner.text, 40, 24, 280, this.banner.textSize, true)
+      return `${fontSize}px`
+    },
+
+    backgroundPicture () {
+      return this.getPicture('background')
+    },
+
+    backgroundPicturePosition () {
+      return this.computeBackgroundPosition('background')
+    },
+
+    profilePicture () {
+      return this.getPicture('profile')
+    },
+
+    profilePicturePosition () {
+      return this.computeObjectPosition('profile')
+    },
+
+    postPicture () {
+      return this.getPicture('post')
+    },
+
+    postPicturePosition () {
+      return this.computeBackgroundPosition('post')
     }
   },
 
-  filters: {
-    formatFullDate (date) {
-      const validDate = new Date(
-        date.replace(/^\w+ (\w+) (\d+) ([\d:]+) \+0000 (\d+)$/,
-          '$1 $2 $4 $3 UTC'))
-      return moment(validDate).locale('ca').format('LLL')
+  methods: {
+    getPicture (prefix) {
+      return this.banner[`${prefix}PictureBlob`] || this.banner[`${prefix}PicturePreview`]
     }
   }
 }
@@ -142,6 +127,7 @@ export default {
     --base-color: #{$white};
     --quote-border-color: #{rgba($white, .75)};
     --twitter-color: #{$white};
+    --x-color: #{$white};
     --link-color: #{$primary};
     --card-background: transparent;
 
@@ -154,6 +140,7 @@ export default {
       --base-color: #{$gray-900};
       --quote-border-color: #{rgba($gray-900, .5)};
       --twitter-color: #1DA1F2;
+      --x-color: #000;
     }
 
     &.background-orange {
@@ -187,6 +174,7 @@ export default {
     &.style-card {
       --base-color: #{$gray-900};
       --twitter-color: #1DA1F2;
+      --x-color: #000;
       --quote-border-color: #{$gray-300};
       --link-color: #{$primary};
       --link-decoration: none;
@@ -280,6 +268,7 @@ export default {
       &-pic img {
         border-radius: 50%;
         margin-right: 12px;
+        object-fit: cover;
       }
 
       &-name {
@@ -310,52 +299,14 @@ export default {
 
     &-text {
       font-size: 28px;
-      line-height: 1.25;
+      line-height: 1.2;
       white-space: pre-wrap;
-    }
-
-    &-quote {
-      border: 1px var(--quote-border-color) solid;
-      border-radius: .5rem;
-      margin-top: 16px;
-      padding: 12px;
-
-      &-user {
-        display: flex;
-        align-items: center;
-        margin-bottom: 6px;
-
-        img {
-          border-radius: 50%;
-          width: 25px;
-          height: 25px;
-          margin-right: 8px;
-        }
-
-        strong {
-          color: var(--base-color);
-          margin-right: 6px;
-        }
-
-        &-screen_name {
-          margin-left: 8px;
-          opacity: .5;
-        }
-
-        .verified {
-          color: var(--twitter-color);
-        }
-      }
-    }
-
-    &-date {
-      margin: 13px 0;
-      opacity: .5;
+      margin-bottom: 14px;
     }
 
     &-icon {
       margin-left: auto;
-      color: var(--twitter-color);
+      color: var(--x-color);
     }
 
     &-counts {
