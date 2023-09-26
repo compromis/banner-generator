@@ -81,14 +81,14 @@
     <!-- User name -->
     <c-input-text
       label="Nom"
-      name="localLabel"
+      name="name"
       placeholder="Joan Baldoví"
       v-model="properties.name"
       :maxlength="48" />
 
     <c-input-text
       label="Nom d'usuari"
-      name="localLabel"
+      name="username"
       placeholder="joanbaldovi"
       v-model="properties.username"
       :maxlength="48" />

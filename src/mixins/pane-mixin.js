@@ -83,8 +83,13 @@ export default {
     const { content } = this.$store.state.bannerMeta
 
     if (content) { // Set props from database
-      const properties = JSON.parse(content)
-      this.properties = properties
+      let properties
+      if (typeof content === 'object') {
+        this.properties = { ...content }
+      } else {
+        properties = JSON.parse(content)
+        this.properties = properties
+      }
 
       // For backwards compatibility, set default pictureCrop if not present
       if (!this.properties.pictureCrop) {
@@ -138,8 +143,14 @@ export default {
     save: debounce(async (self) => {
       const { banner, bannerMeta } = self.$store.state
       if (!banner) return
+
       // Remove blobs from object saved to db
-      const { pictureBlob, afterPictureBlob, beforePictureBlob, pitAgainstPictureBlob, ...bannerToSave } = banner
+      const keys = Object.keys(banner)
+      const keysToRemove = keys.filter((key) => key.includes('Blob'))
+      const bannerToSave = { ...banner }
+      for (const keyToRemove of keysToRemove) {
+        delete bannerToSave[keyToRemove]
+      }
       const updated = await http.update(bannerMeta.ref, JSON.stringify(bannerToSave))
       self.$store.commit('setBannerMeta', updated)
     }, 1000),

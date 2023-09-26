@@ -204,14 +204,6 @@ export default {
     }
   },
 
-  mounted () {
-    this.$root.$on('refreshPane', (pane) => {
-      if (pane === 'party') {
-        this.$store.commit('updateBanner', this.properties)
-      }
-    })
-  },
-
   watch: {
     'properties.theme' () {
       // Reevalute if image is vertical or horizontal
@@ -246,10 +238,6 @@ export default {
         ...sourceField
       })
       this.allCapsDisallowed('textBefore', 'textAfter')
-    },
-
-    updateImageComparison (which, image, ratio) {
-      this.customUpdateImage(which, image, ratio)
     }
   }
 }

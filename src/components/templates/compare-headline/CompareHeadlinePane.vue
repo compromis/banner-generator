@@ -290,14 +290,6 @@ export default {
     }
   },
 
-  mounted () {
-    this.$root.$on('refreshPane', (pane) => {
-      if (pane === 'headline') {
-        this.$store.commit('updateBanner', this.properties)
-      }
-    })
-  },
-
   methods: {
     validate () {
       const firstSourceField = (this.properties.firstSource === 'other')

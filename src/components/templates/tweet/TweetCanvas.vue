@@ -12,14 +12,14 @@
     <banner-picture
       :picture-position="backgroundPicturePosition"
       :full-gradient="(banner.fullGradient && banner.style === 'card') || banner.style === 'transparent'"
-      :picture="backgroundPicture"
+      :picture="banner.backgroundPictureBlob || banner.backgroundPicturePreview"
       :color="banner.backgroundColor"
     />
     <div class="tweet-wrapper">
       <div class="tweet">
         <div class="tweet-user">
           <div class="tweet-user-pic">
-            <img v-if="profilePicture" :src="profilePicture" :style="profilePicturePosition" />
+            <img v-if="banner.profilePicture" :src="banner.profilePictureBlob || banner.profilePicturePreview" :style="profilePicturePosition" />
           </div>
           <div class="tweet-user-name">
             <div class="tweet-user-full_name">
@@ -38,17 +38,17 @@
         </div>
         <div class="tweet-text" :style="{ fontSize: textFontSize }" contenteditable>{{ banner.text }}</div>
         <div class="tweet-picture"
-          v-if="postPicture"
-          :style="{ backgroundImage: `url(${postPicture})`, ...postPicturePosition }">
+          v-if="banner.postPicture"
+          :style="{ backgroundImage: `url(${banner.postPictureBlob || banner.postPicturePreview})`, ...postPicturePosition }">
         </div>
-        <div class="tweet-counts">
+        <div class="tweet-counts" v-if="banner.showCounts">
           <div class="tweet-counts-rts">
             <b-icon icon="retweet" />
-            <span v-if="banner.showCounts">{{ banner.reposts | formatNumber }}</span>
+            <span>{{ banner.reposts | formatNumber }}</span>
           </div>
           <div class="tweet-counts-faves">
             <b-icon icon="heart" />
-            <span v-if="banner.showCounts">{{ banner.likes | formatNumber }}</span>
+            <span>{{ banner.likes | formatNumber }}</span>
           </div>
         </div>
       </div>
@@ -60,6 +60,9 @@
       </div>
     </div>
     <banner-frame :logo-type="banner.backgroundColor === 'white' ? 'color' : 'auto'" />
+    <div style="display: none;">
+      {{ banner }}
+    </div>
   </div>
 </template>
 
@@ -113,6 +116,8 @@ export default {
 
   methods: {
     getPicture (prefix) {
+      const pic = this.banner[`${prefix}PictureBlob`] || this.banner[`${prefix}PicturePreview`]
+      console.log('getting', prefix, pic)
       return this.banner[`${prefix}PictureBlob`] || this.banner[`${prefix}PicturePreview`]
     }
   }
@@ -269,6 +274,8 @@ export default {
         border-radius: 50%;
         margin-right: 12px;
         object-fit: cover;
+        height: 50px;
+        width: 50px;
       }
 
       &-name {
@@ -301,7 +308,6 @@ export default {
       font-size: 28px;
       line-height: 1.2;
       white-space: pre-wrap;
-      margin-bottom: 14px;
     }
 
     &-icon {
@@ -311,6 +317,7 @@ export default {
 
     &-counts {
       display: flex;
+      margin-top: 14px;
 
       &-rts,
       &-faves {
