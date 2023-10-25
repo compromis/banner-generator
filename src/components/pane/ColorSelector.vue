@@ -16,6 +16,9 @@
         <b-message v-if="value === 'feminism'" type="is-warning" size="is-small">
           El color morat s'ha d'utilitzar únicament en targes relacionades amb el feminisme.
         </b-message>
+        <b-message v-if="value === 'transparent'" type="is-warning" size="is-small">
+          Comprova que el text i logo es poden veure i llegir bé sobre la imatge de fons. Si no, recomanem seleccionar fons negre o taronja.
+        </b-message>
       </div>
     </transition>
   </div>

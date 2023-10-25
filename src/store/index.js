@@ -19,9 +19,9 @@ export default new Vuex.Store({
     displayErrors: false,
     isDownloadable: true,
     availableColors: {
-      glowy: ['none', 'orange', 'lgbt', 'feminism'],
-      blobs: ['orange', 'lgbt', 'feminism'],
-      blobless: ['orange', 'black', 'lgbt', 'feminism']
+      glowy: ['none', 'orange', 'lgbt', 'feminism', 'transparent'],
+      blobs: ['orange', 'lgbt', 'feminism', 'transparent'],
+      blobless: ['orange', 'black', 'lgbt', 'feminism', 'transparent']
     },
     settings: {
       showArchive: false,

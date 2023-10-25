@@ -82,6 +82,11 @@
           Degradat sobre tota la imatge
         </b-switch>
       </transition>
+      <transition name="slide">
+        <b-switch v-model="properties.blackAndWhite" v-if="properties.picture" class="mt-2">
+          Foto en blanc i negre
+        </b-switch>
+      </transition>
     </advanced-picture-upload>
 
     <!-- Frame color  -->
@@ -159,7 +164,8 @@ export default {
         customSourceColor: '#1CA085',
         emojis: [],
         color: 'orange',
-        fullGradient: false
+        fullGradient: false,
+        blackAndWhite: false
       },
       presets: presets
     }

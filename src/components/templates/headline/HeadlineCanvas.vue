@@ -8,7 +8,8 @@
       'disposition-' + banner.disposition,
       'theme-' + banner.theme,
       'banner-background-' + banner.mode,
-      'logo-' + banner.logo
+      'logo-' + banner.logo,
+      { 'desaturate': banner.blackAndWhite && banner.picture }
     ]">
     <banner-picture
       :picture-position="backgroundPosition"
@@ -69,6 +70,15 @@ export default {
   .aspect-916 .headline {
       left: 10px;
       right: 10px;
+  }
+
+  .desaturate {
+    background: $gray-900;
+
+    &::v-deep .background-picture {
+      filter: saturate(0);
+      mix-blend-mode: luminosity;
+    }
   }
 
   /* Blobs theme */
