@@ -218,7 +218,11 @@ export default {
 
   methods: {
     validate () {
-      //
+      this.fieldRequired({
+        text: "Has d'escirure un text",
+        name: "Has d'escirure un nom",
+        username: "Has d'escirure un nom d'usuari"
+      })
     }
   }
 }

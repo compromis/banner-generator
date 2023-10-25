@@ -1,5 +1,5 @@
 <template>
-  <div :class="['headline', {'headline--pills': theme !== 'blobs', 'headline--dark': mode === 'black'}]">
+  <div :class="['headline', {'headline--pills': theme === 'glowy', 'headline--dark': mode === 'black'}]">
     <div class="headline-source headline-source--custom" v-if="source === 'other'">
       <span :style="{ color: customSourceColor }">{{ customSource }}</span>
     </div>
@@ -15,11 +15,8 @@
         fontSize,
         letterSpacing: source.font['letterSpacing']
       } : { fontSize }">
-      <template v-if="theme === 'blobs'">
-        {{ headline }}
-      </template>
       <text-in-pills
-        v-else
+        v-if="theme === 'glowy'"
         shadow
         :text="headline"
         :font-size="fontSize"
@@ -27,6 +24,9 @@
         :padding="source && source !== 'other' ? source.font.padding : '15px 12px 6px'"
         :width="720"
         :pill-style="mode" />
+      <template v-else>
+        {{ headline }}
+      </template>
     </div>
   </div>
 </template>
