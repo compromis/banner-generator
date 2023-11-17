@@ -26,7 +26,7 @@
       name="text"
       placeholder="Text del post"
       v-model="properties.text"
-      :maxlength="100"
+      :maxlength="250"
       :message="setFieldMessage('text')"
       class="source-input-name" />
 
@@ -84,14 +84,14 @@
       name="name"
       placeholder="Joan Baldoví"
       v-model="properties.name"
-      :maxlength="48" />
+      :maxlength="70" />
 
     <c-input-text
       label="Nom d'usuari"
       name="username"
       placeholder="joanbaldovi"
       v-model="properties.username"
-      :maxlength="48" />
+      :maxlength="70" />
 
     <!-- Profile picture -->
     <advanced-picture-upload
