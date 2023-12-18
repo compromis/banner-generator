@@ -25,7 +25,6 @@
       </div>
       <div class="text">
         <div v-if="banner.hasCustomMessage && banner.customMessage" class="text-default">{{ banner.customMessage }}</div>
-        <div v-else class="text-default">{{ textDefault }}</div>
         <div class="compromis-logo">
           <compromis-logo mono />
           <span :class="['municipality', {'municipality--long': banner.municipality.length > 18 }]">{{ banner.municipality }}</span>
@@ -82,16 +81,6 @@ export default {
     vibrant () {
       const [r, g, b] = this.palette && this.banner.hasCustomPicture && this.banner.picture ? this.palette['Vibrant'].rgb : [224, 181, 45]
       return `rgb(${r}, ${g}, ${b})`
-    },
-
-    textDefault () {
-      const { lang } = this.banner
-      const texts = {
-        val: `T’estime tant que enguany em quede a casa.`,
-        cas: `Te quiero tanto que este año me quedo en casa.`
-      }
-
-      return texts[lang]
     }
   },
 

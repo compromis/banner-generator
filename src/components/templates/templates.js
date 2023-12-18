@@ -1,5 +1,29 @@
 export default [
   {
+    id: 'ChristmasGreetings',
+    name: 'Felicitació',
+    aspects: ['11', '916'],
+    icon: 'hat-santa',
+    label: '🎄Festes 2023',
+    components: {
+      pane: () => import(/* webpackChunkName: "christmas" */ './archived/christmas-greetings/ChristmasGreetingsPane'),
+      canvas: () => import(/* webpackChunkName: "christmas" */ './archived/christmas-greetings/ChristmasGreetingsCanvas'),
+      help: () => import(/* webpackChunkName: "christmas" */ './archived/christmas-greetings/ChristmasGreetingsHelp')
+    }
+  },
+  {
+    id: 'Christmas',
+    name: 'Comerç Local',
+    aspects: ['11', '916'],
+    icon: 'gifts',
+    label: '🎄Festes 2023',
+    components: {
+      pane: () => import(/* webpackChunkName: "christmas" */ './archived/christmas/ChristmasPane'),
+      canvas: () => import(/* webpackChunkName: "christmas" */ './archived/christmas/ChristmasCanvas'),
+      help: () => import(/* webpackChunkName: "christmas" */ './archived/christmas/ChristmasHelp')
+    }
+  },
+  {
     id: 'Headline',
     name: 'Titular de premsa',
     aspects: ['11', '916', '169'],
@@ -401,32 +425,6 @@ export default [
       pane: () => import(/* webpackChunkName: "christmas-2021" */ './archived/christmas-local-2021/ChristmasLocal2021Pane'),
       canvas: () => import(/* webpackChunkName: "christmas-2021" */ './archived/christmas-local-2021/ChristmasLocal2021Canvas'),
       help: () => import(/* webpackChunkName: "christmas-2021" */ './archived/christmas-local-2021/ChristmasLocal2021Help')
-    }
-  },
-  {
-    id: 'ChristmasGreetings',
-    name: 'Felicitació',
-    aspects: ['11', '916'],
-    icon: 'hat-santa',
-    label: '🎄Festes 2020',
-    archived: true,
-    components: {
-      pane: () => import(/* webpackChunkName: "christmas" */ './archived/christmas-greetings/ChristmasGreetingsPane'),
-      canvas: () => import(/* webpackChunkName: "christmas" */ './archived/christmas-greetings/ChristmasGreetingsCanvas'),
-      help: () => import(/* webpackChunkName: "christmas" */ './archived/christmas-greetings/ChristmasGreetingsHelp')
-    }
-  },
-  {
-    id: 'Christmas',
-    name: 'Comerç Local',
-    aspects: ['11', '916'],
-    icon: 'gifts',
-    label: '🎄Festes 2020',
-    archived: true,
-    components: {
-      pane: () => import(/* webpackChunkName: "christmas" */ './archived/christmas/ChristmasPane'),
-      canvas: () => import(/* webpackChunkName: "christmas" */ './archived/christmas/ChristmasCanvas'),
-      help: () => import(/* webpackChunkName: "christmas" */ './archived/christmas/ChristmasHelp')
     }
   }
 ]
