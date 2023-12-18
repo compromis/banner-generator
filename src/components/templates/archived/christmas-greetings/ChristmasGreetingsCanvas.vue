@@ -9,14 +9,11 @@
     v-if="banner">
     <div class="background" :style="{ '--light-vibrant': lightVibrant, '--dark-vibrant': darkVibrant, '--dark-muted': darkMuted, '--vibrant': vibrant }">
       <div class="picture">
-        <div class="title" v-if="banner.lang === 'val'">
-          <span class="top">Bones festes!</span>
+        <div class="title">
+          <span class="top">{{ banner.text }}</span>
         </div>
-        <div class="title" v-if="banner.lang === 'cas'">
-          <span class="top">¡Felices fiestas!</span>
-        </div>
-        <div class="picture-holder" v-if="banner.picture && banner.hasCustomPicture" key="picture">
-          <img v-if="banner.picture" :src="banner.picturePreview" :style="objectPosition" />
+        <div class="picture-holder" v-if="banner.pictureBlob || banner.picturePreview" key="picture">
+          <img v-if="banner.picture" :src="banner.pictureBlob || banner.picturePreview" :style="objectPosition" />
         </div>
         <div v-else class="smiley-santa" key="santa">
           <careta class="careta" />
@@ -24,7 +21,7 @@
         </div>
       </div>
       <div class="text">
-        <div v-if="banner.hasCustomMessage && banner.customMessage" class="text-default">{{ banner.customMessage }}</div>
+        <div v-if="banner.customMessage" class="text-default">{{ banner.customMessage }}</div>
         <div class="compromis-logo">
           <compromis-logo mono />
           <span :class="['municipality', {'municipality--long': banner.municipality.length > 18 }]">{{ banner.municipality }}</span>
@@ -64,22 +61,22 @@ export default {
 
   computed: {
     lightVibrant () {
-      const [r, g, b] = this.palette && this.banner.hasCustomPicture && this.banner.picture ? this.palette['LightVibrant'].rgb : [255, 230, 181]
+      const [r, g, b] = this.palette && this.banner.colorsFromPicture && this.banner.picture ? this.palette['LightVibrant'].rgb : [246, 178, 37]
       return `rgb(${r}, ${g}, ${b})`
     },
 
     darkVibrant () {
-      const [r, g, b] = this.palette && this.banner.hasCustomPicture && this.banner.picture ? this.palette['DarkVibrant'].rgb : [177, 32, 36]
+      const [r, g, b] = this.palette && this.banner.colorsFromPicture && this.banner.picture ? this.palette['DarkVibrant'].rgb : [255, 255, 255]
       return `rgb(${r}, ${g}, ${b})`
     },
 
     darkMuted () {
-      const [r, g, b] = this.palette && this.banner.hasCustomPicture && this.banner.picture ? this.palette['DarkMuted'].rgb : [84, 59, 47]
+      const [r, g, b] = this.palette && this.banner.colorsFromPicture && this.banner.picture ? this.palette['DarkMuted'].rgb : [84, 59, 47]
       return `rgb(${r}, ${g}, ${b})`
     },
 
     vibrant () {
-      const [r, g, b] = this.palette && this.banner.hasCustomPicture && this.banner.picture ? this.palette['Vibrant'].rgb : [224, 181, 45]
+      const [r, g, b] = this.palette && this.banner.colorsFromPicture && this.banner.picture ? this.palette['Vibrant'].rgb : [220, 86, 38]
       return `rgb(${r}, ${g}, ${b})`
     }
   },
@@ -97,8 +94,7 @@ export default {
   methods: {
     getPalette () {
       const img = document.createElement('img')
-      img.setAttribute('src', this.banner.picturePreview)
-
+      img.setAttribute('src', this.banner.pictureBlob)
       img.addEventListener('load', () => {
         Vibrant.from(img).maxColorCount(200).getPalette().then((palette) => {
           this.palette = palette
@@ -113,10 +109,10 @@ export default {
   @import "../../../../sass/variables";
 
   @font-face {
-    font-family: 'Texturina';
+    font-family: 'Mochi';
     font-style: normal;
     font-weight: 900;
-    src: url(./Texturina.ttf) format('truetype');
+    src: url(./mochi-bold-webfont.woff2) format('truetype');
   }
 
   .background {
@@ -186,11 +182,13 @@ export default {
   .title {
     position: absolute;
     top: -136px;
-    left: 10px;
-    font-size: 101px;
-    font-family: Texturina, serif;
+    left: -30px;
+    right: -30px;
+    font-size: 100px;
+    font-family: Mochi, serif;
     font-weight: 900;
     line-height: .9;
+    text-align: center;
     color: var(--dark-vibrant);
     z-index: 20;
   }
