@@ -1,17 +1,5 @@
 export default [
   {
-    id: 'ChristmasGreetings',
-    name: 'Felicitació',
-    aspects: ['11', '916'],
-    icon: 'hat-santa',
-    label: '🎄Festes 2023',
-    components: {
-      pane: () => import(/* webpackChunkName: "christmas" */ './archived/christmas-greetings/ChristmasGreetingsPane'),
-      canvas: () => import(/* webpackChunkName: "christmas" */ './archived/christmas-greetings/ChristmasGreetingsCanvas'),
-      help: () => import(/* webpackChunkName: "christmas" */ './archived/christmas-greetings/ChristmasGreetingsHelp')
-    }
-  },
-  {
     id: 'Headline',
     name: 'Titular de premsa',
     aspects: ['11', '916', '169'],
@@ -387,6 +375,19 @@ export default [
       pane: () => import(/* webpackChunkName: "archived" */ './archived/superavit/SuperavitPane'),
       canvas: () => import(/* webpackChunkName: "archived" */ './archived/superavit/SuperavitCanvas'),
       help: () => import(/* webpackChunkName: "archived" */ './archived/superavit/SuperavitHelp')
+    }
+  },
+  {
+    id: 'ChristmasGreetings',
+    name: 'Felicitació',
+    aspects: ['11', '916'],
+    icon: 'hat-santa',
+    archived: true,
+    label: '🎄Festes 2023',
+    components: {
+      pane: () => import(/* webpackChunkName: "christmas" */ './archived/christmas-greetings/ChristmasGreetingsPane'),
+      canvas: () => import(/* webpackChunkName: "christmas" */ './archived/christmas-greetings/ChristmasGreetingsCanvas'),
+      help: () => import(/* webpackChunkName: "christmas" */ './archived/christmas-greetings/ChristmasGreetingsHelp')
     }
   },
   {
