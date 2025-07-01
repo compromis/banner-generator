@@ -46,6 +46,14 @@ const sources = [
     color: '#235690'
   },
   {
+    id: 'elsalto',
+    name: 'El Salto',
+    logo: require('./logos/elsalto.svg'),
+    logoHeight: 18,
+    font: fonts.tiemposHeadline,
+    color: '#000'
+  },
+  {
     id: 'lavanguardia',
     name: 'La Vanguardia',
     logo: require('./logos/lavanguardia.svg'),
