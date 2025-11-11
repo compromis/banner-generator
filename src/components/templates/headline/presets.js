@@ -48,7 +48,7 @@ const sources = [
   {
     id: 'elsalto',
     name: 'El Salto',
-    logo: require('./logos/elsalto.svg'),
+    logo: require('./logos/elsalto.png'),
     logoHeight: 18,
     font: fonts.tiemposHeadline,
     color: '#000'
