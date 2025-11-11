@@ -193,6 +193,7 @@ export default [
     aspects: ['11'],
     icon: 'keynote',
     label: 'Compromís-Sumar',
+    archived: true,
     components: {
       pane: () => import(/* webpackChunkName: "sumar-speakers" */ './sumar-speakers/SumarSpeakersPane'),
       canvas: () => import(/* webpackChunkName: "sumar-speakers" */ './sumar-speakers/SumarSpeakersCanvas'),
@@ -205,6 +206,7 @@ export default [
     aspects: ['11'],
     icon: 'font',
     label: 'Compromís-Sumar',
+    archived: true,
     components: {
       pane: () => import(/* webpackChunkName: "sumar-generic" */ './sumar-generic/SumarGenericPane'),
       canvas: () => import(/* webpackChunkName: "sumar-generic" */ './sumar-generic/SumarGenericCanvas'),
