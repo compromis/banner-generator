@@ -35,7 +35,7 @@
       type="textarea"
       label="Missatge"
       name="text"
-      placeholder="Us destigem molt bones festes i bon 2024"
+      placeholder="Us destigem molt bones festes i bon 2025"
       v-model="properties.customMessage"
       :maxlength="60"
       :message="setFieldMessage('customMessage')" />
